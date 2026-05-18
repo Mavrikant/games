@@ -26,10 +26,13 @@ const gamesData = games.map((g) => ({
 
 const buildDate = new Date();
 const buildDateIso = buildDate.toISOString();
-const buildDateLabel = buildDate.toLocaleDateString('tr-TR', {
+const buildDateLabel = buildDate.toLocaleString('tr-TR', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: 'Europe/Istanbul',
 });
 
 const SITE_TITLE = 'Tarayıcı Oyunları — ücretsiz, indirmesiz, anında oyna';
