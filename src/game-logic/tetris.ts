@@ -226,7 +226,7 @@ let holdLocked = false;
 let score = 0;
 let lines = 0;
 let level = 1;
-let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+let best = readBest();
 let alive = false;
 let paused = false;
 let started = false;
@@ -238,6 +238,14 @@ function createGrid(): Cell[][] {
   return Array.from({ length: TOTAL_ROWS }, () =>
     Array.from({ length: COLS }, () => null as Cell),
   );
+}
+
+function readBest(): number {
+  try {
+    return Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+  } catch {
+    return 0;
+  }
 }
 
 function refillBag(): void {
@@ -268,12 +276,24 @@ function spawn(kind?: PieceKind): void {
   ensureQueue();
   const shape = SHAPES[k][0]!;
   const w = shape[0]!.length;
+  // Find topmost filled row of the spawn shape so the piece appears at the
+  // top of the visible playfield instead of being hidden inside the buffer.
+  let topFilledRow = 0;
+  for (let r = 0; r < shape.length; r++) {
+    if (shape[r]!.some((v) => v === 1)) {
+      topFilledRow = r;
+      break;
+    }
+  }
   const piece: ActivePiece = {
     kind: k,
     rot: 0,
     x: Math.floor((COLS - w) / 2),
-    y: 0, // top of hidden buffer
+    y: HIDDEN_ROWS - topFilledRow,
   };
+  // Reset gravity accumulator so the freshly spawned piece doesn't drop a
+  // row immediately because of leftover time from the previous piece.
+  dropAccum = 0;
   if (collides(piece, grid)) {
     // Game over
     active = piece;
