@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Can<span id="lives">3</span></div>
+  <div class="hud__stat">Seviye<span id="level">1</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Breakout oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Breakout</h2>
+      <p id="overlay-msg">Başlamak için boşluk tuşuna bas veya tıkla.</p>
+    </div>
+  </div>
+</div>
+<p class="bo-hint">← → ile paddle · Boşluk: topu fırlat · P: duraklat · R: yeniden başla</p>
