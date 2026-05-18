@@ -9,9 +9,14 @@
   --flappy-bird-dark: #d88f1c;
 }
 
+.hud {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
 .hud__score,
 .hud__best {
-  flex: 1;
+  flex: 1 1 110px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -36,15 +41,31 @@
   color: var(--flappy-bird);
 }
 
+/* Tap target: WCAG 2.5.5 + Apple HIG recommend a 44x44 minimum touch
+   target. The shared .hud__btn collapses to ~40px tall, so bump the min
+   here for the restart button which lives at the top of the screen on
+   mobile and is easy to mis-tap into a HUD card otherwise. */
+#restart.hud__btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: 16px;
+  touch-action: manipulation;
+}
+
 .board-wrap {
   position: relative;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  /* Reserve the canvas slot via aspect-ratio so layout doesn't shift while
+     the JS DPR resize is running on first paint. */
+  aspect-ratio: 480 / 640;
 }
 
 #board {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   background: linear-gradient(
     180deg,
     var(--flappy-sky-top) 0%,
@@ -52,8 +73,17 @@
   );
   border: 1px solid var(--border);
   border-radius: 14px;
+  /* manipulation: allow taps + swipes, block double-tap zoom and most
+     other touch gestures so the page doesn't pan while flapping. */
   touch-action: manipulation;
   cursor: pointer;
+  /* Prevent text/element selection callout on long-press (iOS). */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  /* Crisp scaling when the canvas backing-store is at a different ratio
+     than the CSS box (DPR fallback for browsers that ignore ctx scaling). */
+  image-rendering: auto;
 }
 
 .overlay {
@@ -95,4 +125,45 @@
   font-size: 12px;
   color: var(--text-dim);
   letter-spacing: 0.04em;
+  /* Respect the iPhone home-indicator inset so the hint isn't clipped by
+     the system gesture bar. */
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Landscape phones: the shared .stage has max-width: 520px which would
+   make the 480-square canvas push the HUD off-screen vertically. Cap the
+   board's height to the viewport (minus HUD + hint headroom) and let the
+   aspect-ratio keep it square instead. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage {
+    padding-block: 12px;
+    gap: 10px;
+  }
+  .hud {
+    gap: 8px;
+  }
+  .hud__score,
+  .hud__best {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  .hud__score span,
+  .hud__best span {
+    font-size: 16px;
+  }
+  #restart.hud__btn {
+    padding-block: 8px;
+  }
+  .board-wrap {
+    /* Cap by viewport height so the canvas + HUD always fit on screen.
+       Height budget: ~64px HUD + ~32px hint + 24px chrome ≈ 120px. */
+    max-height: calc(100dvh - 120px);
+    /* Letterbox horizontally to keep aspect ratio. */
+    width: auto;
+    aspect-ratio: 480 / 640;
+  }
+  .flappy-hint {
+    margin-top: 6px;
+    font-size: 11px;
+  }
 }

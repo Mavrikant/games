@@ -15,8 +15,11 @@ const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
 const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
 const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-const W = canvas.width;
-const H = canvas.height;
+// Logical playfield dimensions (kept stable so all physics constants below are
+// resolution-independent). The canvas backing store is rescaled to match
+// devicePixelRatio for crispness on mobile; CSS handles the on-screen size.
+const W = 480;
+const H = 640;
 const GROUND_H = 80;
 const PLAY_H = H - GROUND_H;
 
@@ -34,6 +37,12 @@ const PIPE_GAP_MARGIN = 60; // distance from top/ground to gap edge
 const PIPE_CAP_H = 22; // visual cap height (must match drawPipe)
 const PIPE_CAP_OVER = 6; // visual cap overhang on each side (must match drawPipe)
 
+// Fixed-timestep physics keeps the game speed identical regardless of
+// display refresh rate (mobile devices throttle to 30/45/60/90/120 Hz). The
+// renderer still runs every frame; only the simulation is locked.
+const FIXED_DT = 1 / 120; // 120 Hz simulation
+const MAX_FRAME_TIME = 0.1; // clamp huge gaps (tab refocus etc.)
+
 type State = 'ready' | 'playing' | 'gameover';
 
 let state: State = 'ready';
@@ -45,7 +54,22 @@ let groundOffset = 0;
 let score = 0;
 let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
 let lastTime = 0;
+let physicsAccumulator = 0;
 let rafHandle = 0;
+let dpr = 1;
+
+function resizeCanvas(): void {
+  const next = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  if (next === dpr && canvas.width === W * dpr) return;
+  dpr = next;
+  canvas.width = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  // Draw using logical coordinates; backing store is scaled by DPR.
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // Crisp pixels on resize.
+  ctx.imageSmoothingEnabled = false;
+  draw();
+}
 
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
@@ -81,6 +105,8 @@ function reset(): void {
   bestEl.textContent = String(best);
   spawnInitialPipes();
   showOverlay('Flappy', "Başlamak için Boşluk'a bas, tıkla ya da dokun.");
+  physicsAccumulator = 0;
+  lastTime = 0;
   draw();
 }
 
@@ -93,6 +119,7 @@ function flap(): void {
     state = 'playing';
     hideOverlay();
     lastTime = performance.now();
+    physicsAccumulator = 0;
   }
   birdVy = FLAP_VY;
 }
@@ -108,7 +135,7 @@ function gameOver(): void {
     }
     bestEl.textContent = String(best);
   }
-  showOverlay('Çarptın!', `Skor: ${score} · En iyi: ${best}. Tekrar denemek için tıkla.`);
+  showOverlay('Çarptın!', `Skor: ${score} · En iyi: ${best}. Tekrar denemek için dokun.`);
 }
 
 function circleRectHit(
@@ -184,7 +211,7 @@ function collides(): boolean {
   return false;
 }
 
-function update(dt: number): void {
+function step(dt: number): void {
   if (state !== 'playing') return;
 
   birdVy = Math.min(MAX_VY, birdVy + GRAVITY * dt);
@@ -341,14 +368,27 @@ function draw(): void {
 
 function loop(t: number): void {
   if (!lastTime) lastTime = t;
-  const dt = Math.min(0.05, (t - lastTime) / 1000);
+  const frameTime = Math.min(MAX_FRAME_TIME, (t - lastTime) / 1000);
   lastTime = t;
-  update(dt);
+
+  if (state === 'playing') {
+    physicsAccumulator += frameTime;
+    // Cap accumulator so a tab-resume doesn't burn through hundreds of steps.
+    if (physicsAccumulator > MAX_FRAME_TIME) {
+      physicsAccumulator = MAX_FRAME_TIME;
+    }
+    while (physicsAccumulator >= FIXED_DT) {
+      step(FIXED_DT);
+      physicsAccumulator -= FIXED_DT;
+      if (state !== 'playing') break;
+    }
+  }
+
   draw();
   rafHandle = requestAnimationFrame(loop);
 }
 
-// inputs
+// inputs --------------------------------------------------------------------
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.key === ' ' || e.key === 'ArrowUp') {
     e.preventDefault();
@@ -359,20 +399,42 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-canvas.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  flap();
-});
+// pointerdown is the modern unified event for mouse / pen / touch and is
+// well-supported on all target browsers. Using only pointerdown avoids
+// double-flap from devices that fire both touchstart and mousedown.
+// preventDefault stops the synthetic click + iOS double-tap zoom;
+// touch-action: manipulation on the canvas blocks browser gestures from
+// scrolling/zooming the page on touch input.
+canvas.addEventListener(
+  'pointerdown',
+  (e) => {
+    e.preventDefault();
+    flap();
+  },
+  { passive: false },
+);
 
-canvas.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  flap();
-}, { passive: false });
+// Also intercept touchstart to suppress the browser's default behaviors
+// (text-selection callout, scroll, double-tap zoom) on iOS even if a
+// non-pointer-aware browser is used.
+canvas.addEventListener(
+  'touchstart',
+  (e) => {
+    e.preventDefault();
+  },
+  { passive: false },
+);
 
-restartBtn.addEventListener('click', () => {
+restartBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   reset();
+  // After a tap-reset, immediately start a fresh run on the next interaction.
 });
 
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', resizeCanvas);
+
+resizeCanvas();
 reset();
 cancelAnimationFrame(rafHandle);
 lastTime = 0;
