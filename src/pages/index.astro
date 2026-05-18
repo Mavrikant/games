@@ -12,6 +12,8 @@ const games = all.sort((a, b) =>
 );
 
 const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+
 const gamesData = games.map((g) => ({
   slug: g.id,
   title: g.data.title,
@@ -21,13 +23,67 @@ const gamesData = games.map((g) => ({
   controls: g.data.controls ?? '',
   url: `${base}${g.id}/`,
 }));
-const year = new Date().getFullYear();
+
+const buildDate = new Date();
+const buildDateIso = buildDate.toISOString();
+const buildDateLabel = buildDate.toLocaleDateString('tr-TR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const SITE_TITLE = 'Tarayıcı Oyunları — ücretsiz, indirmesiz, anında oyna';
+const SITE_DESCRIPTION =
+  'Tarayıcıda oynanan ücretsiz oyun arşivi. Snake, XOX ve daha fazlası — indirme yok, hesap yok, reklam yok. Her gün yeni oyun.';
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Tarayıcı Oyunları',
+  alternateName: 'karaman.dev/games',
+  url: new URL(base, site).href,
+  inLanguage: 'tr',
+  description: SITE_DESCRIPTION,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${new URL(base, site).href}?q={query}`,
+    },
+    'query-input': 'required name=query',
+  },
+};
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: games.map((g, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: new URL(`${base}${g.id}/`, site).href,
+    name: g.data.title,
+  })),
+};
 ---
 
 <BaseLayout
-  title="Oyunlar — karaman.dev"
-  description="Tarayıcı üzerinde çalışan, tamamen statik oyun arşivi. Her gün yeni oyun."
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  ogTitle="Tarayıcı Oyunları"
 >
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(websiteSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(itemListSchema)}
+    />
+  </Fragment>
+
   <Nav count={games.length} />
   <main id="app" class="app">
     <section class="hero">
@@ -39,9 +95,9 @@ const year = new Date().getFullYear();
       </span>
       <h1 class="hero__title">Tarayıcıda oyna,<br />indirme yok.</h1>
       <p class="hero__subtitle">
-        Tamamen statik bir oyun arşivi. Her oyun doğrudan tarayıcıda çalışır;
-        server yok, hesap yok. Klasiklerden deneysel mini-oyunlara açık
-        kaynak bir koleksiyon.
+        Tek tıkla başlayan bir oyun arşivi. Her oyun doğrudan tarayıcıda
+        çalışır — kayıt yok, reklam yok, beklemek yok. Klasiklerden deneysel
+        mini-oyunlara her gün büyüyen bir koleksiyon.
       </p>
     </section>
 
@@ -81,11 +137,8 @@ const year = new Date().getFullYear();
 
     <footer class="footer">
       <span>
-        &copy; {year} M. Serdar Karaman · Statik &amp; açık kaynak
+        Son güncelleme: <time datetime={buildDateIso}>{buildDateLabel}</time>
       </span>
-      <a href="https://github.com/Mavrikant/games" target="_blank" rel="noopener">
-        github.com/Mavrikant/games ↗
-      </a>
     </footer>
   </main>
 

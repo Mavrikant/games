@@ -1,0 +1,20 @@
+{
+  "name": "Tarayıcı Oyunları",
+  "short_name": "Oyunlar",
+  "description": "Tarayıcıda oynanan ücretsiz oyun arşivi.",
+  "start_url": "/games/",
+  "scope": "/games/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0b0e",
+  "theme_color": "#0a0b0e",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "/games/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -3,10 +3,11 @@ interface Props {
   count: number;
 }
 const { count } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="nav">
-  <a class="brand" href={import.meta.env.BASE_URL}>
+  <a class="brand" href={base}>
     <span class="brand__logo" aria-hidden="true">K</span>
     <span>karaman.dev</span>
     <span class="brand__sep">/</span>
@@ -14,11 +15,5 @@ const { count } = Astro.props;
   </a>
   <nav class="nav__meta">
     <span class="nav__count">{count} oyun</span>
-    <a
-      class="nav__link"
-      href="https://github.com/Mavrikant/games"
-      target="_blank"
-      rel="noopener">GitHub</a
-    >
   </nav>
 </header>

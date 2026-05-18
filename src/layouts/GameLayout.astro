@@ -4,13 +4,21 @@ import '@styles/game-shell.css';
 
 interface Props {
   title: string;
+  description?: string;
   controls?: string;
+  ogImage?: string;
 }
 
-const { title, controls } = Astro.props;
+const { title, description, controls, ogImage } = Astro.props;
 ---
 
-<BaseLayout title={title}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={ogImage}
+>
+  <slot name="head" slot="head" />
   <main class="stage">
     <slot />
     {controls && <p class="hint">{controls}</p>}
