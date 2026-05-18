@@ -1,0 +1,159 @@
+:root {
+  --bg: #0a0a14;
+  --bg-elev: #14141e;
+  --border: #2a2a3a;
+  --text: #e4e4ed;
+  --text-dim: #8a8aa0;
+  --accent: #7c3aed;
+  --snake: #06b6d4;
+  --snake-head: #22d3ee;
+  --food: #f43f5e;
+  --grid: #1c1c2a;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.stage {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.hud__score,
+.hud__best {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+.hud__score span,
+.hud__best span {
+  color: var(--snake-head);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud__btn {
+  margin-left: auto;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hud__btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  image-rendering: pixelated;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 20, 0.78);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.2s;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+}
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+.touch {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.touch__row {
+  display: flex;
+  gap: 6px;
+}
+.touch__btn {
+  width: 56px;
+  height: 56px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.touch__btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: flex;
+  }
+}

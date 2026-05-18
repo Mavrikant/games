@@ -1,0 +1,8 @@
+{
+  "slug": "_template",
+  "title": "Yeni Oyun Şablonu",
+  "description": "Bu klasörü kopyalayıp yeni oyun başlat. `_` prefix nedeniyle bu şablon arşivde ve build'de görünmez.",
+  "dateAdded": "2026-05-18",
+  "tags": ["template"],
+  "controls": "—"
+}

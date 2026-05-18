@@ -1,0 +1,9 @@
+{
+  "slug": "snake",
+  "title": "Snake",
+  "description": "Klasik yılan oyunu — yemi ye, büyü, kuyruğuna veya duvara çarpma.",
+  "dateAdded": "2026-05-18",
+  "tags": ["arcade", "klasik", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD · Boşluk: duraklat · R: yeniden başla",
+  "thumbnail": "thumb.svg"
+}

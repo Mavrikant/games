@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Tarayıcı üzerinde çalışan, tamamen statik oyun arşivi. Her gün yeni oyun." />
+    <title>Oyunlar</title>
+  </head>
+  <body>
+    <main id="app" class="app">
+      <header class="header">
+        <h1 class="header__title">
+          <span class="header__title-accent">Tarayıcı</span> Oyunları
+        </h1>
+        <p class="header__subtitle">
+          Server yok, indirme yok &mdash; <span id="count" class="header__count">0</span> oyun, doğrudan tarayıcıda. Her gün yeni eklenir.
+        </p>
+      </header>
+
+      <div class="controls">
+        <input
+          id="search"
+          class="search"
+          type="search"
+          placeholder="Oyun ara&hellip;"
+          aria-label="Oyun ara"
+        />
+        <select id="sort" class="sort" aria-label="Sırala">
+          <option value="newest">En yeni</option>
+          <option value="oldest">En eski</option>
+          <option value="alpha">Alfabetik</option>
+        </select>
+      </div>
+
+      <div id="tags" class="tags"></div>
+      <div id="grid" class="grid"></div>
+
+      <footer class="footer">
+        Kaynak kodu için
+        <a href="https://github.com/Mavrikant/games" target="_blank" rel="noopener">GitHub</a>.
+      </footer>
+    </main>
+
+    <section id="player" class="player" aria-hidden="false">
+      <div class="player__bar">
+        <button id="player-back" class="player__back" type="button">&larr; Arşive Dön</button>
+        <strong id="player-title" class="player__title"></strong>
+        <span id="player-controls" class="player__controls"></span>
+        <a id="player-open" class="player__open" href="#" target="_blank" rel="noopener">Yeni sekme &#8599;</a>
+      </div>
+      <iframe
+        id="player-frame"
+        class="player__frame"
+        title="Oyun"
+        allow="fullscreen; gamepad; autoplay"
+      ></iframe>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

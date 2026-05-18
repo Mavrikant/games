@@ -1,0 +1,131 @@
+:root {
+  --bg: #0a0a14;
+  --bg-elev: #14141e;
+  --bg-elev-2: #1c1c2a;
+  --border: #2a2a3a;
+  --text: #e4e4ed;
+  --text-dim: #8a8aa0;
+  --accent: #7c3aed;
+  --x: #06b6d4;
+  --o: #f43f5e;
+  --win: rgba(124, 58, 237, 0.25);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.stage {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hud {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud__status {
+  flex: 1;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 15px;
+}
+
+.hud__btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hud__btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.cell {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  padding: 0;
+  font-family: inherit;
+}
+.cell:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--bg-elev-2);
+}
+.cell:disabled {
+  cursor: default;
+}
+.cell--x {
+  color: var(--x);
+}
+.cell--o {
+  color: var(--o);
+}
+.cell--win {
+  background: var(--win);
+  border-color: var(--accent);
+}
+
+.score {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.score > div {
+  flex: 1;
+  text-align: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 8px;
+}
+.score span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
