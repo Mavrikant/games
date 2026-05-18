@@ -7,7 +7,7 @@
 - Astro 4.x (`.astro` template + frontmatter)
 - TypeScript 5.x (`astro/tsconfigs/strict`, `moduleDetection: force`)
 - ES2022 hedefi (top-level await OK, `Array.at()` OK)
-- Node ≥ 20 (CI ve lokal)
+- Node ≥ 22.12 (Astro 6 zorunlu, CI ve lokal)
 
 ## TypeScript
 
