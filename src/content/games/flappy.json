@@ -1,0 +1,8 @@
+{
+  "title": "Flappy",
+  "description": "Kuşu zıplat, borular arasından geç. Tek tuşla bağımlılık yapan refleks oyunu.",
+  "dateAdded": "2026-05-18",
+  "tags": ["arcade", "refleks", "tek-oyunculu"],
+  "controls": "Boşluk / tıkla / dokun: zıpla · R: yeniden başla",
+  "thumbnail": "flappy.svg"
+}
