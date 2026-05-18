@@ -1,0 +1,38 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Satır<span id="lines">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="tetris">
+  <div class="board-wrap">
+    <canvas id="board" width="300" height="600" aria-label="Tetris oyun alanı"></canvas>
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Tetris</h2>
+        <p id="overlay-msg">Başlamak için bir yön tuşuna bas.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="side">
+    <div class="side__panel">
+      <div class="side__label">Sıradaki</div>
+      <canvas id="next" width="120" height="120" aria-label="Sıradaki parça"></canvas>
+    </div>
+    <div class="side__panel">
+      <div class="side__label">Tutulan</div>
+      <canvas id="hold" width="120" height="120" aria-label="Tutulan parça"></canvas>
+    </div>
+  </aside>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-act="left" type="button">◀</button>
+  <button class="touch__btn" data-act="rotate" type="button">⟳</button>
+  <button class="touch__btn" data-act="down" type="button">▼</button>
+  <button class="touch__btn" data-act="drop" type="button">⤓</button>
+  <button class="touch__btn" data-act="right" type="button">▶</button>
+</div>

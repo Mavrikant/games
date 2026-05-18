@@ -1,0 +1,8 @@
+{
+  "title": "Tetris",
+  "description": "Klasik blok düşürme bulmacası — satır temizle, hızlan, en yüksek skoru yap.",
+  "dateAdded": "2026-05-18",
+  "tags": ["arcade", "klasik", "puzzle", "tek-oyunculu"],
+  "controls": "← → hareket · ↓ yumuşak düşür · Boşluk sert düşür · Z / X döndür · P duraklat · R yeniden başla",
+  "thumbnail": "tetris.svg"
+}
