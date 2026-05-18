@@ -144,10 +144,14 @@ function tileClass(v: number): string {
 }
 
 function posTransform(row: number, col: number): string {
-  // tiles container has 4 cells with 10px gap; tile width = (100% - 30px) / 4
-  const x = `calc((100% - 30px) / 4 * ${col} + 10px * ${col})`;
-  const y = `calc((100% - 30px) / 4 * ${row} + 10px * ${row})`;
-  return `translate(${x}, ${y})`;
+  // tiles container is square; layout = 4 tiles + 3×10px gaps.
+  // NOTE: percentages inside `translate()` are resolved against the tile's
+  // OWN size, not the container — so we must compute the offset in pixels
+  // from the live container width instead of using `100%`.
+  const cw = tilesEl.clientWidth || 0;
+  const tileSize = Math.max(0, (cw - 30) / 4);
+  const step = tileSize + 10;
+  return `translate(${col * step}px, ${row * step}px)`;
 }
 
 function setPos(el: HTMLDivElement, row: number, col: number): void {
@@ -399,6 +403,26 @@ boardEl.addEventListener('touchend', (e) => {
 boardEl.addEventListener('touchcancel', () => {
   touchActive = false;
 });
+
+// Recompute tile positions when the board resizes (orientation change,
+// window resize, mobile keyboard, etc.). Transform is pixel-based, so a
+// stale value would leave tiles misaligned with the background grid.
+let resizeRaf = 0;
+const repositionAll = () => {
+  for (const tile of tilesAll) {
+    if (tile.el) setPos(tile.el, tile.row, tile.col);
+  }
+};
+window.addEventListener('resize', () => {
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(() => {
+    resizeRaf = 0;
+    repositionAll();
+  });
+});
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(() => repositionAll()).observe(boardEl);
+}
 
 // Init
 if (loadState()) {
