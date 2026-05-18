@@ -1,0 +1,8 @@
+{
+  "title": "Key Fall",
+  "description": "Düşen harflere hızlıca bas — her harf puan, her kaçırma can!",
+  "dateAdded": "2026-05-18",
+  "tags": ["arcade", "yazarlık", "tek-oyunculu"],
+  "controls": "Klavye: ilgili harfe bas · R: yeniden başla",
+  "thumbnail": "key-fall.svg"
+}
