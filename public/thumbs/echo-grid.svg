@@ -1,0 +1,31 @@
+<svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" rx="24" fill="#0A0B0E"/>
+  <rect x="1" y="1" width="318" height="198" rx="23" stroke="#171A21"/>
+  <g opacity="0.9">
+    <rect x="56" y="36" width="56" height="56" rx="14" fill="url(#tile)"/>
+    <rect x="132" y="36" width="56" height="56" rx="14" fill="url(#tile)"/>
+    <rect x="208" y="36" width="56" height="56" rx="14" fill="url(#tile)"/>
+    <rect x="56" y="108" width="56" height="56" rx="14" fill="url(#tile)"/>
+    <rect x="132" y="108" width="56" height="56" rx="14" fill="url(#tile)"/>
+    <rect x="208" y="108" width="56" height="56" rx="14" fill="url(#tile)"/>
+  </g>
+  <rect x="132" y="108" width="56" height="56" rx="14" fill="url(#active)"/>
+  <rect x="208" y="36" width="56" height="56" rx="14" fill="url(#ghost)"/>
+  <path d="M173.5 108L173.5 95.5L221 95.5L221 84" stroke="#E2D6FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M211 86L221 76L231 86" stroke="#E2D6FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="160" y="184" text-anchor="middle" fill="#C7B8FF" font-family="system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="0.04em">REVERSE THE PATTERN</text>
+  <defs>
+    <linearGradient id="tile" x1="160" y1="36" x2="160" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B2030"/>
+      <stop offset="1" stop-color="#121621"/>
+    </linearGradient>
+    <linearGradient id="active" x1="160" y1="108" x2="160" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#5B2CCF"/>
+    </linearGradient>
+    <linearGradient id="ghost" x1="236" y1="36" x2="236" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D3550"/>
+      <stop offset="1" stop-color="#1B2131"/>
+    </linearGradient>
+  </defs>
+</svg>

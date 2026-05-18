@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+
+<section class="panel">
+  <p id="status" class="status" aria-live="polite">
+    Deseni izle, sonra aynı kareleri ters sırayla seç.
+  </p>
+
+  <div id="board" class="board" role="grid" aria-label="Echo Grid tahtası">
+    {Array.from({ length: 9 }, (_, i) => (
+      <button class="cell" data-index={i} type="button" aria-label={`${i + 1}. kare`}>
+        <span class="cell__key">{i + 1}</span>
+      </button>
+    ))}
+  </div>
+
+  <button id="action" class="action" type="button">Başlat</button>
+</section>
