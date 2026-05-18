@@ -1,0 +1,8 @@
+{
+  "title": "Breakout",
+  "description": "Topu zıplat, tüm tuğlaları kır. Klasik arcade refleks oyunu.",
+  "dateAdded": "2026-05-18",
+  "tags": ["arcade", "klasik", "tek-oyunculu"],
+  "controls": "← → veya A/D · Fare/dokunma: paddle · Boşluk: başlat/topu fırlat · P: duraklat · R: yeniden başla",
+  "thumbnail": "breakout.svg"
+}
