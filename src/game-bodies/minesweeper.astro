@@ -1,0 +1,46 @@
+---
+---
+
+<header class="hud">
+  <div class="ms-meta">
+    <div class="ms-meta__item" title="Kalan bayrak">
+      <span class="ms-meta__icon" aria-hidden="true">🚩</span>
+      <span id="mines-left">0</span>
+    </div>
+    <div class="ms-meta__item" title="Süre">
+      <span class="ms-meta__icon" aria-hidden="true">⏱</span>
+      <span id="timer">0</span>
+    </div>
+    <div class="ms-meta__item" title="En iyi süre">
+      <span class="ms-meta__icon" aria-hidden="true">🏆</span>
+      <span id="best">—</span>
+    </div>
+  </div>
+  <div class="ms-actions">
+    <label class="ms-diff">
+      <span class="ms-diff__label">Zorluk</span>
+      <select id="difficulty" class="hud__btn">
+        <option value="easy">Kolay (9x9, 10)</option>
+        <option value="medium" selected>Orta (16x16, 40)</option>
+        <option value="hard">Zor (16x30, 99)</option>
+      </select>
+    </label>
+    <button id="restart" class="hud__btn" type="button">
+      <span id="restart-face" aria-hidden="true">🙂</span>
+      <span>Yeni Oyun</span>
+    </button>
+  </div>
+</header>
+
+<div id="status" class="ms-status" role="status" aria-live="polite">
+  İlk hücreye tıkla — ilk tık asla mayına denk gelmez.
+</div>
+
+<div class="ms-board-wrap">
+  <div
+    id="board"
+    class="ms-board"
+    role="grid"
+    aria-label="Mayın tarlası tahtası"
+  ></div>
+</div>

@@ -1,0 +1,8 @@
+{
+  "title": "Minesweeper",
+  "description": "Mayınları açma! Sayıların ipucuyla güvenli hücreleri keşfet.",
+  "dateAdded": "2026-05-18",
+  "tags": ["klasik", "tek-oyunculu", "puzzle"],
+  "controls": "Sol tık: aç · Sağ tık: bayrak · Çift tık: chord · R: yeniden başla",
+  "thumbnail": "minesweeper.svg"
+}
