@@ -62,27 +62,24 @@ npm run preview   # build'i lokal test et
 
 ## Yeni oyun ekleme
 
-Sadece 3 dosya:
+```sh
+npm run new-game my-game -- \
+  --title "My Game" \
+  --description "Kısa açıklama" \
+  --tags "arcade,klasik"
+```
 
-1. **Meta** — `src/content/games/<slug>.json`
-   ```json
-   {
-     "title": "Oyun Adı",
-     "description": "Kısa açıklama.",
-     "dateAdded": "YYYY-MM-DD",
-     "tags": ["arcade"],
-     "controls": "Ok tuşları",
-     "thumbnail": "<slug>.svg"
-   }
-   ```
-2. **DOM** — `src/game-bodies/<slug>.astro` (sadece oyuna özel markup; head/body/stage zaten layout'tan)
-3. **Mantık** — `src/game-logic/<slug>.ts` (DOM event listener'ları)
+Bu, gereken 4 dosyayı şablondan üretir:
+- `src/content/games/my-game.json` (meta; tag/title doldurulmuş)
+- `src/game-bodies/my-game.astro` (DOM markup placeholder)
+- `src/game-logic/my-game.ts` (logic placeholder)
+- `src/styles/games/my-game.css` (oyuna özel CSS)
 
-Opsiyonel:
-- `src/styles/games/<slug>.css` — oyuna özel CSS (otomatik scope edilir, sadece kendi sayfasında yüklenir)
-- `public/thumbs/<slug>.svg` — kart önizleme görseli
+Dosyaları gerçek içerikle doldur, `npm run build && npm run dev` ile doğrula,
+commit + PR aç. Arşiv `getCollection('games')` ile otomatik keşfeder; merkezi
+liste güncelleme yok.
 
-Commit + push → GitHub Actions ~30 saniyede deploy eder. Arşiv `getCollection('games')` ile auto-discover.
+Adım adım: [docs/ADDING_A_GAME.md](docs/ADDING_A_GAME.md).
 
 ## Mimari notlar
 
@@ -98,3 +95,18 @@ Commit + push → GitHub Actions ~30 saniyede deploy eder. Arşiv `getCollection
 `main` branch'e push → Actions tetiklenir → `astro build` → `dist/` GitHub Pages'e deploy.
 
 Domain: `Mavrikant.github.io` kullanıcı sitesi `karaman.dev`'e CNAME ile bağlı olduğundan `Mavrikant/games` project repo'su `karaman.dev/games/`'e maplenir.
+
+## AI ajan ile katkı
+
+Bu repo paralel AI ajan üretimine göre tasarlandı. Eğer bir ajan tarafından
+çalıştırılıyorsan **ilk önce** şunları oku:
+
+1. [CLAUDE.md](CLAUDE.md) — repo girişi, neyi yapabilirsin/yapamazsın
+2. [AGENTS.md](AGENTS.md) — paralel çalışma kuralları, çakışma kaçınma
+3. [docs/ADDING_A_GAME.md](docs/ADDING_A_GAME.md) — yeni oyun akışı
+4. [docs/GAME_CONTRACT.md](docs/GAME_CONTRACT.md) — DOM/lifecycle kontratı
+5. [docs/CONVENTIONS.md](docs/CONVENTIONS.md) — kod & stil
+6. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — derin yapı / build pipeline
+
+PR'lar `.github/workflows/pr-check.yml` ile otomatik kontrol edilir
+(astro check + build + her oyun route'unun üretildiğini doğrulama).

@@ -1,0 +1,7 @@
+{
+  "title": "__TITLE__",
+  "description": "__DESCRIPTION__",
+  "dateAdded": "__DATE__",
+  "tags": __TAGS_JSON__,
+  "controls": "__CONTROLS__"
+}

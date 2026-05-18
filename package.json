@@ -7,6 +7,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "new-game": "node scripts/new-game.mjs",
     "astro": "astro"
   },
   "dependencies": {

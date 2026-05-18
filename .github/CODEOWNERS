@@ -1,0 +1,26 @@
+# Shared layer — değişiklik human review gerektirir.
+# Her şey @Mavrikant'a düşer; alt path'ler default'u override eder.
+*                                       @Mavrikant
+
+# Shared layer (özellikle dikkat)
+/src/layouts/                           @Mavrikant
+/src/components/                        @Mavrikant
+/src/pages/                             @Mavrikant
+/src/styles/tokens.css                  @Mavrikant
+/src/styles/base.css                    @Mavrikant
+/src/styles/game-shell.css              @Mavrikant
+/src/styles/archive.css                 @Mavrikant
+/src/content/config.ts                  @Mavrikant
+/src/archive/                           @Mavrikant
+/astro.config.mjs                       @Mavrikant
+/tsconfig.json                          @Mavrikant
+/package.json                           @Mavrikant
+/package-lock.json                      @Mavrikant
+/.github/                               @Mavrikant
+/scripts/                               @Mavrikant
+/CLAUDE.md                              @Mavrikant
+/AGENTS.md                              @Mavrikant
+/docs/                                  @Mavrikant
+
+# Per-game dosyaları herhangi bir ajan ekleyebilir; default owner CODEOWNERS
+# tarafından zaten review için işaretlenir, ama kurallar gevşek.

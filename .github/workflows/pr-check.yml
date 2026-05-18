@@ -1,0 +1,53 @@
+name: PR check
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+
+  smoke:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Verify every game route built
+        run: |
+          set -euo pipefail
+          missing=0
+          for json in src/content/games/*.json; do
+            slug=$(basename "$json" .json)
+            if [ ! -f "dist/$slug/index.html" ]; then
+              echo "::error file=$json::No dist/$slug/index.html generated for slug '$slug'"
+              missing=$((missing + 1))
+            fi
+          done
+          if [ "$missing" -gt 0 ]; then
+            echo "Missing $missing route(s)."
+            exit 1
+          fi
+          echo "All game routes generated."
