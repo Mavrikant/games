@@ -31,6 +31,8 @@ const PIPE_GAP = 160;
 const PIPE_SPACING = 230; // px between pipes
 const PIPE_SPEED = 170; // px/sec
 const PIPE_GAP_MARGIN = 60; // distance from top/ground to gap edge
+const PIPE_CAP_H = 22; // visual cap height (must match drawPipe)
+const PIPE_CAP_OVER = 6; // visual cap overhang on each side (must match drawPipe)
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -85,7 +87,7 @@ function reset(): void {
 function flap(): void {
   if (state === 'gameover') {
     reset();
-    return;
+    // fall through: immediately start a new run with the same input
   }
   if (state === 'ready') {
     state = 'playing';
@@ -109,31 +111,74 @@ function gameOver(): void {
   showOverlay('Çarptın!', `Skor: ${score} · En iyi: ${best}. Tekrar denemek için tıkla.`);
 }
 
+function circleRectHit(
+  cx: number,
+  cy: number,
+  r: number,
+  rx: number,
+  ry: number,
+  rw: number,
+  rh: number,
+): boolean {
+  const closestX = Math.max(rx, Math.min(cx, rx + rw));
+  const closestY = Math.max(ry, Math.min(cy, ry + rh));
+  const dx = cx - closestX;
+  const dy = cy - closestY;
+  return dx * dx + dy * dy <= r * r;
+}
+
 function collides(): boolean {
   // ground
   if (birdY + BIRD_R >= PLAY_H) return true;
   // ceiling
   if (birdY - BIRD_R <= 0) return true;
-  // pipes
+  // pipes — check both the shaft and the slightly-wider cap rects so the
+  // collision matches what's drawn (caps overhang the shaft by PIPE_CAP_OVER).
   for (const p of pipes) {
-    if (p.x + PIPE_W < BIRD_X - BIRD_R) continue;
-    if (p.x > BIRD_X + BIRD_R) continue;
+    const capLeft = p.x - PIPE_CAP_OVER;
+    const capRight = p.x + PIPE_W + PIPE_CAP_OVER;
+    // broad-phase cull using the widest extent (the caps)
+    if (capRight < BIRD_X - BIRD_R) continue;
+    if (capLeft > BIRD_X + BIRD_R) continue;
     const gapTop = p.gapY - PIPE_GAP / 2;
     const gapBot = p.gapY + PIPE_GAP / 2;
-    // circle vs vertical strip: check if bird outside the gap rect
-    if (birdY - BIRD_R < gapTop || birdY + BIRD_R > gapBot) {
-      // rectangular AABB approximation against circle bounding box
-      const closestX = Math.max(p.x, Math.min(BIRD_X, p.x + PIPE_W));
-      // top pipe vertical from 0..gapTop, bottom pipe from gapBot..PLAY_H
-      const dxSq = (BIRD_X - closestX) ** 2;
-      if (birdY - BIRD_R < gapTop) {
-        const closestY = Math.max(0, Math.min(birdY, gapTop));
-        if (dxSq + (birdY - closestY) ** 2 <= BIRD_R * BIRD_R) return true;
-      }
-      if (birdY + BIRD_R > gapBot) {
-        const closestY = Math.max(gapBot, Math.min(birdY, PLAY_H));
-        if (dxSq + (birdY - closestY) ** 2 <= BIRD_R * BIRD_R) return true;
-      }
+    // Top pipe: shaft + top cap
+    if (
+      circleRectHit(BIRD_X, birdY, BIRD_R, p.x, 0, PIPE_W, gapTop) ||
+      circleRectHit(
+        BIRD_X,
+        birdY,
+        BIRD_R,
+        capLeft,
+        gapTop - PIPE_CAP_H,
+        PIPE_W + PIPE_CAP_OVER * 2,
+        PIPE_CAP_H,
+      )
+    ) {
+      return true;
+    }
+    // Bottom pipe: shaft + bottom cap
+    if (
+      circleRectHit(
+        BIRD_X,
+        birdY,
+        BIRD_R,
+        p.x,
+        gapBot,
+        PIPE_W,
+        PLAY_H - gapBot,
+      ) ||
+      circleRectHit(
+        BIRD_X,
+        birdY,
+        BIRD_R,
+        capLeft,
+        gapBot,
+        PIPE_W + PIPE_CAP_OVER * 2,
+        PIPE_CAP_H,
+      )
+    ) {
+      return true;
     }
   }
   return false;
@@ -184,14 +229,32 @@ function drawPipe(x: number, gapY: number): void {
   ctx.fillRect(x, gapBot, 4, PLAY_H - gapBot);
   ctx.fillRect(x + PIPE_W - 4, gapBot, 4, PLAY_H - gapBot);
   // caps
-  const capH = 22;
-  const capOver = 6;
   ctx.fillStyle = '#5dbf3f';
-  ctx.fillRect(x - capOver, gapTop - capH, PIPE_W + capOver * 2, capH);
-  ctx.fillRect(x - capOver, gapBot, PIPE_W + capOver * 2, capH);
+  ctx.fillRect(
+    x - PIPE_CAP_OVER,
+    gapTop - PIPE_CAP_H,
+    PIPE_W + PIPE_CAP_OVER * 2,
+    PIPE_CAP_H,
+  );
+  ctx.fillRect(
+    x - PIPE_CAP_OVER,
+    gapBot,
+    PIPE_W + PIPE_CAP_OVER * 2,
+    PIPE_CAP_H,
+  );
   ctx.fillStyle = '#2f7a1f';
-  ctx.fillRect(x - capOver, gapTop - capH, PIPE_W + capOver * 2, 4);
-  ctx.fillRect(x - capOver, gapBot + capH - 4, PIPE_W + capOver * 2, 4);
+  ctx.fillRect(
+    x - PIPE_CAP_OVER,
+    gapTop - PIPE_CAP_H,
+    PIPE_W + PIPE_CAP_OVER * 2,
+    4,
+  );
+  ctx.fillRect(
+    x - PIPE_CAP_OVER,
+    gapBot + PIPE_CAP_H - 4,
+    PIPE_W + PIPE_CAP_OVER * 2,
+    4,
+  );
 }
 
 function drawBird(): void {
