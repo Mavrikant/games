@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  game: CollectionEntry<'games'>;
+}
+
+const { game } = Astro.props;
+const { title, description, dateAdded, tags, thumbnail } = game.data;
+const thumbUrl = thumbnail
+  ? `${import.meta.env.BASE_URL}thumbs/${thumbnail}`
+  : null;
+const placeholder = title.charAt(0).toUpperCase();
+---
+
+<button
+  class="card"
+  data-slug={game.id}
+  data-title={title}
+  data-tags={tags.join(',')}
+  data-desc={description}
+  data-date={dateAdded}
+  type="button"
+  aria-label={`${title} oyna`}
+>
+  <div class="card__thumb">
+    {
+      thumbUrl ? (
+        <img src={thumbUrl} alt="" loading="lazy" />
+      ) : (
+        <span class="card__thumb-placeholder" aria-hidden="true">
+          {placeholder}
+        </span>
+      )
+    }
+  </div>
+  <div class="card__body">
+    <h2 class="card__title">{title}</h2>
+    <p class="card__desc">{description}</p>
+    <div class="card__meta">
+      <span class="card__date" data-date-iso={dateAdded}>{dateAdded}</span>
+      <span class="card__tags">
+        {tags.slice(0, 2).map((t) => <span class="card__tag">{t}</span>)}
+      </span>
+    </div>
+  </div>
+</button>

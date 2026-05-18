@@ -1,19 +1,16 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "moduleDetection": "force",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "node"],
-    "noEmit": true
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@game-logic/*": ["src/game-logic/*"],
+      "@game-bodies/*": ["src/game-bodies/*"]
+    }
   },
-  "include": ["games", "vite.config.ts"]
+  "include": ["src", ".astro"],
+  "exclude": ["dist"]
 }

@@ -6,33 +6,48 @@ Production: [karaman.dev/games/](https://karaman.dev/games/)
 
 ## Stack
 
-- Vite + TypeScript (multi-page)
-- Vanilla TS oyun kodu (Canvas / DOM)
+- **Astro 4** (file-based routing, content collections, type-safe meta)
+- TypeScript (vanilla TS oyun mantığı, Canvas / DOM)
 - GitHub Pages + GitHub Actions ile deploy
 
 ## Yapı
 
 ```
 .
-├── vite.config.ts              # root: games/, base: /games/
+├── astro.config.mjs              # site, base: '/games/', trailingSlash
 ├── package.json
-├── tsconfig.json
-├── scripts/
-│   └── copy-game-assets.mjs    # postbuild: thumb.* dosyalarını dist'e kopyalar
-├── games/                      # Vite root
-│   ├── index.html              # Arşiv anasayfası
-│   ├── src/                    # Arşiv UI (kart grid, arama, iframe player)
-│   │   ├── main.ts
-│   │   ├── styles.css
-│   │   ├── types.ts
-│   │   └── games-loader.ts     # meta.json auto-discovery
-│   ├── _template/              # Yeni oyun şablonu (build'e dahil değil)
-│   └── <slug>/                 # Her oyun bağımsız bir Vite entry
-│       ├── index.html
-│       ├── game.ts
-│       ├── style.css
-│       ├── meta.json
-│       └── thumb.svg
+├── tsconfig.json                 # extends astro/tsconfigs/strict
+├── public/
+│   └── thumbs/                   # oyun thumbnail SVG/PNG
+├── src/
+│   ├── layouts/
+│   │   ├── BaseLayout.astro      # html + head + font + body (tüm sayfalar)
+│   │   └── GameLayout.astro      # stage + hint wrapper (oyun sayfaları)
+│   ├── pages/
+│   │   ├── index.astro           # arşiv (kart grid, filtre, iframe player)
+│   │   └── [slug].astro          # dinamik oyun route (getStaticPaths)
+│   ├── content/
+│   │   ├── config.ts             # zod schema (title, desc, tags, controls, …)
+│   │   └── games/                # her oyun = bir .json
+│   │       ├── snake.json
+│   │       └── tic-tac-toe.json
+│   ├── game-bodies/              # oyuna özel DOM (Astro markup)
+│   │   ├── snake.astro
+│   │   └── tic-tac-toe.astro
+│   ├── game-logic/               # oyun TS modülü (mantık)
+│   │   ├── snake.ts
+│   │   └── tic-tac-toe.ts
+│   ├── components/               # Nav, Card, PlayerOverlay
+│   ├── styles/
+│   │   ├── tokens.css            # CSS değişkenleri (renk, radius, font)
+│   │   ├── base.css              # reset
+│   │   ├── game-shell.css        # stage, hud, hud__btn
+│   │   ├── archive.css           # anasayfa
+│   │   └── games/                # oyuna özel stiller (her sayfada sadece kendi yüklenir)
+│   │       ├── snake.css
+│   │       └── tic-tac-toe.css
+│   └── archive/
+│       └── main.ts               # arşiv runtime (search, filter, sort, iframe nav)
 └── .github/workflows/deploy.yml
 ```
 
@@ -40,44 +55,46 @@ Production: [karaman.dev/games/](https://karaman.dev/games/)
 
 ```sh
 npm install
-npm run dev       # http://localhost:5173/games/
-npm run build     # ../dist/ (vite build + thumbnail copy)
-npm run preview   # build'i lokal test et: http://localhost:4173/games/
+npm run dev       # http://localhost:4321/games/
+npm run build     # astro check + astro build → dist/
+npm run preview   # build'i lokal test et
 ```
 
 ## Yeni oyun ekleme
 
-1. Şablonu kopyala:
-   ```sh
-   cp -r games/_template games/<slug>
-   ```
-2. `games/<slug>/meta.json`'ı doldur:
+Sadece 3 dosya:
+
+1. **Meta** — `src/content/games/<slug>.json`
    ```json
    {
-     "slug": "<slug>",
      "title": "Oyun Adı",
      "description": "Kısa açıklama.",
      "dateAdded": "YYYY-MM-DD",
      "tags": ["arcade"],
      "controls": "Ok tuşları",
-     "thumbnail": "thumb.svg"
+     "thumbnail": "<slug>.svg"
    }
    ```
-3. `game.ts` içinde oyun mantığını yaz. `index.html` ve `style.css`'i ihtiyaca göre düzenle.
-4. (Opsiyonel) `thumb.svg` / `thumb.png` / `thumb.jpg` / `thumb.webp` ekle (postbuild otomatik kopyalar).
-5. Commit + push → GitHub Actions otomatik deploy eder. Arşiv `meta.json`'ları auto-discover eder, manuel kayıt gerekmez.
+2. **DOM** — `src/game-bodies/<slug>.astro` (sadece oyuna özel markup; head/body/stage zaten layout'tan)
+3. **Mantık** — `src/game-logic/<slug>.ts` (DOM event listener'ları)
 
-`_` ile başlayan klasörler (örn. `_template`) build'e dahil edilmez ve arşivde görünmez.
+Opsiyonel:
+- `src/styles/games/<slug>.css` — oyuna özel CSS (otomatik scope edilir, sadece kendi sayfasında yüklenir)
+- `public/thumbs/<slug>.svg` — kart önizleme görseli
+
+Commit + push → GitHub Actions ~30 saniyede deploy eder. Arşiv `getCollection('games')` ile auto-discover.
 
 ## Mimari notlar
 
-- **İzolasyon**: Anasayfa karta tıkladığında oyun bir `<iframe>` içinde açılır. Her oyun ayrıca direkt URL'den (`/games/<slug>/`) tek başına da açılabilir.
-- **Auto-discovery**: `games/src/games-loader.ts` `import.meta.glob('/*/meta.json')` ile tüm oyun metalarını build-time'da toplar.
-- **Multi-page**: `vite.config.ts` `games/` altındaki her klasörü ayrı bir rollup entry olarak tanımlar. Vite root'u `games/` olduğundan dist çıktısı `dist/<slug>/index.html` olur ve prod URL `karaman.dev/games/<slug>/`'e maplenir.
-- **Hash routing**: Anasayfada seçili oyun için `#/play/<slug>` hash kullanılır; oyunlar zaten gerçek bir HTML dosyası olduğundan SPA fallback gerekmez.
+- **Tek HTML kaynağı**: `BaseLayout.astro` head/font/meta tek yer; `GameLayout.astro` stage wrapper'ı tek yer. Yeni oyun eklerken HTML boilerplate yazılmaz.
+- **CSS scope**: `[slug].astro` glob ile sadece o oyunun CSS'ini inline `<style is:global>` olarak yükler. Cascade order: tokens → base → game-shell → per-game.
+- **Type-safe meta**: `src/content/config.ts`'deki zod schema her `games/*.json`'ı build-time'da doğrular.
+- **Dinamik route**: `pages/[slug].astro` + `getStaticPaths` her oyun için ayrı static HTML (`/games/snake/`, `/games/tic-tac-toe/`).
+- **İzolasyon**: Arşiv `<iframe>` ile oyunu gömer; her oyun ayrıca direkt URL'inde de tek başına çalışır.
+- **Tema**: tek `tokens.css` — palet/font değişikliği tüm site için tek yerden.
 
 ## Deploy
 
-`main` branch'e push → Actions tetiklenir → `dist/` build edilir → GitHub Pages'e deploy. İlk kurulumdan sonra repo Settings → Pages → Source: **GitHub Actions** seçilmeli.
+`main` branch'e push → Actions tetiklenir → `astro build` → `dist/` GitHub Pages'e deploy.
 
-Domain: `Mavrikant.github.io` kullanıcı sitesi `karaman.dev`'e CNAME ile bağlıysa, `Mavrikant/games` project repo'su otomatik `karaman.dev/games/`'e maplenir. Bu repo'da ayrı bir `CNAME` dosyası gerekmez.
+Domain: `Mavrikant.github.io` kullanıcı sitesi `karaman.dev`'e CNAME ile bağlı olduğundan `Mavrikant/games` project repo'su `karaman.dev/games/`'e maplenir.

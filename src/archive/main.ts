@@ -1,8 +1,14 @@
-import './styles.css';
-import { games, allTags } from './games-loader';
-import type { ResolvedGame } from './games-loader';
-
 type SortKey = 'newest' | 'oldest' | 'alpha';
+
+interface GameInfo {
+  slug: string;
+  title: string;
+  description: string;
+  dateAdded: string;
+  tags: string[];
+  controls: string;
+  url: string;
+}
 
 interface State {
   query: string;
@@ -29,25 +35,12 @@ const grid = document.querySelector<HTMLElement>('#grid')!;
 const tagsEl = document.querySelector<HTMLElement>('#tags')!;
 const searchEl = document.querySelector<HTMLInputElement>('#search')!;
 const sortEl = document.querySelector<HTMLSelectElement>('#sort')!;
-const countEl = document.querySelector<HTMLElement>('#count')!;
-const yearEl = document.querySelector<HTMLElement>('#year');
+const sortLabelEl = document.querySelector<HTMLElement>('#count');
 
-function escapeHtml(s: string): string {
-  return s.replace(/[&<>"']/g, (c) => {
-    switch (c) {
-      case '&':
-        return '&amp;';
-      case '<':
-        return '&lt;';
-      case '>':
-        return '&gt;';
-      case '"':
-        return '&quot;';
-      default:
-        return '&#39;';
-    }
-  });
-}
+const dataEl = document.querySelector<HTMLElement>('#games-data')!;
+const games: GameInfo[] = JSON.parse(dataEl.textContent || '[]');
+const gameMap = new Map(games.map((g) => [g.slug, g]));
+const originalCards = Array.from(grid.querySelectorAll<HTMLElement>('.card'));
 
 function relativeDate(iso: string): string {
   const then = new Date(iso + 'T00:00:00Z').getTime();
@@ -61,17 +54,14 @@ function relativeDate(iso: string): string {
   return `${Math.floor(days / 365)} yıl önce`;
 }
 
-function thumbHtml(game: ResolvedGame): string {
-  if (game.thumbnailUrl) {
-    return `<img src="${escapeHtml(game.thumbnailUrl)}" alt="" loading="lazy" />`;
-  }
-  const letter = game.title.charAt(0).toUpperCase();
-  return `<span class="card__thumb-placeholder" aria-hidden="true">${escapeHtml(letter)}</span>`;
-}
+document.querySelectorAll<HTMLElement>('[data-date-iso]').forEach((el) => {
+  const iso = el.dataset.dateIso;
+  if (iso) el.textContent = relativeDate(iso);
+});
 
-function filtered(): ResolvedGame[] {
+function applyFilters(): void {
   const q = state.query.trim().toLowerCase();
-  let list = games.filter((g) => {
+  const visible = games.filter((g) => {
     if (state.activeTag && !g.tags.includes(state.activeTag)) return false;
     if (!q) return true;
     return (
@@ -80,57 +70,58 @@ function filtered(): ResolvedGame[] {
       g.tags.some((t) => t.toLowerCase().includes(q))
     );
   });
+
+  const sorted = [...visible];
   if (state.sort === 'oldest') {
-    list = [...list].sort((a, b) => a.dateAdded.localeCompare(b.dateAdded));
+    sorted.sort((a, b) => a.dateAdded.localeCompare(b.dateAdded));
   } else if (state.sort === 'alpha') {
-    list = [...list].sort((a, b) =>
+    sorted.sort((a, b) =>
       a.title.localeCompare(b.title, 'tr', { sensitivity: 'base' }),
     );
   }
-  return list;
-}
 
-const EMPTY_HTML = `
-  <div class="empty">
-    <div class="empty__icon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <circle cx="7" cy="7" r="5"/><path d="m11 11 3 3"/>
-      </svg>
-    </div>
-    <p class="empty__text">Bu kriterlere uyan oyun yok.</p>
-  </div>
-`;
+  const cardBySlug = new Map<string, HTMLElement>();
+  originalCards.forEach((card) => {
+    const slug = card.dataset.slug;
+    if (slug) cardBySlug.set(slug, card);
+  });
 
-function renderGrid(): void {
-  const list = filtered();
-  countEl.textContent = `${list.length} oyun`;
-  if (list.length === 0) {
-    grid.innerHTML = EMPTY_HTML;
+  originalCards.forEach((card) => {
+    card.style.display = 'none';
+  });
+
+  if (sorted.length === 0) {
+    let empty = grid.querySelector<HTMLElement>('.empty');
+    if (!empty) {
+      empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.innerHTML = `
+        <div class="empty__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="7" cy="7" r="5"/><path d="m11 11 3 3"/>
+          </svg>
+        </div>
+        <p class="empty__text">Bu kriterlere uyan oyun yok.</p>
+      `;
+      grid.appendChild(empty);
+    }
+    empty.style.display = '';
     return;
   }
-  grid.innerHTML = list
-    .map(
-      (g) => `
-        <button class="card" data-slug="${escapeHtml(g.slug)}" type="button" aria-label="${escapeHtml(g.title)} oyna">
-          <div class="card__thumb">${thumbHtml(g)}</div>
-          <div class="card__body">
-            <h2 class="card__title">${escapeHtml(g.title)}</h2>
-            <p class="card__desc">${escapeHtml(g.description)}</p>
-            <div class="card__meta">
-              <span class="card__date">${escapeHtml(relativeDate(g.dateAdded))}</span>
-              <span class="card__tags">${g.tags
-                .slice(0, 2)
-                .map((t) => `<span class="card__tag">${escapeHtml(t)}</span>`)
-                .join('')}</span>
-            </div>
-          </div>
-        </button>
-      `,
-    )
-    .join('');
+  const empty = grid.querySelector<HTMLElement>('.empty');
+  if (empty) empty.style.display = 'none';
+
+  sorted.forEach((g) => {
+    const card = cardBySlug.get(g.slug);
+    if (card) {
+      card.style.display = '';
+      grid.appendChild(card);
+    }
+  });
 }
 
 function renderTags(): void {
+  const allTags = [...new Set(games.flatMap((g) => g.tags))].sort();
   if (allTags.length === 0) {
     tagsEl.innerHTML = '';
     return;
@@ -139,20 +130,19 @@ function renderTags(): void {
     `<button class="tag${state.activeTag === null ? ' tag--active' : ''}" data-tag="" type="button">Tümü</button>`,
     ...allTags.map(
       (t) =>
-        `<button class="tag${state.activeTag === t ? ' tag--active' : ''}" data-tag="${escapeHtml(t)}" type="button">${escapeHtml(t)}</button>`,
+        `<button class="tag${state.activeTag === t ? ' tag--active' : ''}" data-tag="${t}" type="button">${t}</button>`,
     ),
   ].join('');
 }
 
 function openGame(slug: string): void {
-  const game = games.find((g) => g.slug === slug);
+  const game = gameMap.get(slug);
   if (!game) {
     closeGame();
     return;
   }
   state.playingSlug = slug;
-  const url = game.url;
-  playerFrame.src = url;
+  playerFrame.src = game.url;
   playerTitle.textContent = game.title;
   if (game.controls) {
     playerControls.textContent = game.controls;
@@ -161,7 +151,7 @@ function openGame(slug: string): void {
     playerControls.textContent = '';
     playerControls.style.display = 'none';
   }
-  playerOpen.href = url;
+  playerOpen.href = game.url;
   player.classList.add('player--open');
   app.classList.add('app--hidden');
   document.title = `${game.title} · Oyunlar`;
@@ -204,17 +194,17 @@ tagsEl.addEventListener('click', (e) => {
   const tag = btn.dataset.tag ?? '';
   state.activeTag = tag === '' ? null : tag;
   renderTags();
-  renderGrid();
+  applyFilters();
 });
 
 searchEl.addEventListener('input', () => {
   state.query = searchEl.value;
-  renderGrid();
+  applyFilters();
 });
 
 sortEl.addEventListener('change', () => {
   state.sort = sortEl.value as SortKey;
-  renderGrid();
+  applyFilters();
 });
 
 playerBack.addEventListener('click', closeGame);
@@ -225,7 +215,8 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('popstate', syncFromHash);
 
-if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+void sortLabelEl;
+
 renderTags();
-renderGrid();
+applyFilters();
 syncFromHash();

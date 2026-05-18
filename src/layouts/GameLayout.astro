@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import '@styles/game-shell.css';
+
+interface Props {
+  title: string;
+  controls?: string;
+}
+
+const { title, controls } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <main class="stage">
+    <slot />
+    {controls && <p class="hint">{controls}</p>}
+  </main>
+</BaseLayout>

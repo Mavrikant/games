@@ -1,0 +1,17 @@
+---
+---
+
+<header class="hud">
+  <div id="status" class="hud__status">Sıra: Sen (X)</div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div id="board" class="board" role="grid" aria-label="Tic-tac-toe tahtası">
+  {Array.from({ length: 9 }, (_, i) => (
+    <button class="cell" data-i={i} type="button" aria-label={`${i + 1}. kare`}></button>
+  ))}
+</div>
+<div class="score">
+  <div>Sen <span id="score-x">0</span></div>
+  <div>Berabere <span id="score-d">0</span></div>
+  <div>Bilgisayar <span id="score-o">0</span></div>
+</div>

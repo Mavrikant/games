@@ -1,9 +1,8 @@
 {
-  "slug": "tic-tac-toe",
   "title": "XOX",
   "description": "Klasik 3x3 XOX (tic-tac-toe). Bilgisayara karşı oyna.",
   "dateAdded": "2026-05-18",
   "tags": ["klasik", "tek-oyunculu", "strateji"],
   "controls": "Hücreye tıkla · R: yeniden başla",
-  "thumbnail": "thumb.svg"
+  "thumbnail": "tic-tac-toe.svg"
 }
