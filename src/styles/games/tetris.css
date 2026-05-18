@@ -45,18 +45,20 @@
 
 .board-wrap {
   position: relative;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   max-width: 360px;
 }
 
 #board {
   display: block;
   width: 100%;
+  /* Lock the 1:2 aspect ratio so the canvas-element size matches the
+     drawing surface ratio even before JS resizes the bitmap. */
+  aspect-ratio: 1 / 2;
   height: auto;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  image-rendering: pixelated;
 }
 
 .side {
@@ -87,6 +89,7 @@
 #hold {
   display: block;
   width: 100%;
+  aspect-ratio: 1 / 1;
   height: auto;
   background: var(--surface-2);
   border-radius: 8px;
@@ -125,47 +128,236 @@
   font-size: 14px;
 }
 
+/* Touch buttons: 4-column 2-row grid that fills the available width.
+   Top row holds utility actions (hold/rotate/drop); bottom row holds
+   the movement triad (left/down/right) where thumbs naturally rest.
+   Hidden by default; revealed on touch-capable devices. */
 .touch {
   display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(56px, auto);
   gap: 6px;
-  justify-content: center;
   margin-top: 4px;
+  /* Pad past the iOS home indicator so the bottom row stays tappable. */
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .touch__btn {
-  width: 56px;
-  height: 56px;
+  /* min-height guarantees the 44px Apple HIG / 48dp Android target even
+     when the viewport is narrow and the grid cells shrink. */
+  min-height: 56px;
+  min-width: 44px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
   color: var(--text);
   font-size: 22px;
+  line-height: 1;
   cursor: pointer;
   touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
-.touch__btn:active {
+.touch__btn:active,
+.touch__btn--pressed {
   background: var(--accent);
   border-color: var(--accent);
   color: white;
 }
+.touch__btn--wide {
+  grid-column: span 2;
+}
+.touch__btn[data-act='down'] {
+  /* The soft-drop button doubles up as a thumb-friendly target between
+     left and right; spanning two columns gives it the same visual weight
+     as the gap between movement keys on classic D-pad controllers. */
+  grid-column: span 2;
+}
+.touch__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent-strong);
+  color: var(--text);
+}
 
+/* Show touch row whenever the primary input device lacks hover OR is
+   coarse — covers phones, tablets, and convertible laptops in tablet mode. */
+@media (hover: none), (pointer: coarse) {
+  .touch {
+    display: grid;
+  }
+}
+
+/* Narrow viewports: stack board + side panels vertically and shrink the
+   side panels into a compact row above the board so the playfield stays
+   the biggest thing on screen. */
 @media (max-width: 560px) {
   .tetris {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
   }
   .side {
     flex-direction: row;
     width: 100%;
     flex: 0 0 auto;
+    gap: 8px;
   }
   .side__panel {
-    flex: 1;
+    flex: 1 1 0;
+    padding: 6px 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .side__label {
+    flex: 0 0 auto;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 9px;
+  }
+  #next,
+  #hold {
+    /* Compact square mini-canvas; the flex row puts the label on the
+       left, the canvas takes the rest. Width auto + fixed height keeps
+       the 1:1 aspect ratio without distortion. */
+    height: 60px;
+    width: 60px;
+    flex: 0 0 60px;
+    aspect-ratio: 1 / 1;
+  }
+  .board-wrap {
+    max-width: 100%;
+    margin: 0 auto;
+    /* Reserve ~395px for HUD + side-row + touch-row + paddings, so the
+       board fills the rest. 100svh tracks the small viewport, i.e.
+       excludes dynamic mobile browser chrome. */
+    max-height: calc(100svh - 400px);
+    display: flex;
+    justify-content: center;
+  }
+  #board {
+    /* Match the wrap cap, preserve 1:2 ratio via aspect-ratio. */
+    max-height: calc(100svh - 400px);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .hint {
+    /* Hide the keyboard-shortcut hint on phones; touch users don't need
+       it and it eats vertical real estate. */
+    display: none;
+  }
+  .hud {
+    gap: 6px;
+  }
+  .hud__score {
+    flex: 1 1 70px;
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+  .hud__score span {
+    font-size: 17px;
+  }
+  .hud__btn {
+    padding: 9px 11px;
+    font-size: 12px;
   }
 }
 
-@media (hover: none) and (pointer: coarse) {
+/* Landscape phones: the viewport is wide but short, so the playfield,
+   side panels, and on-screen controls all share the horizontal space.
+   The compact HUD stays at the top as a single row. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hud {
+    /* Single tight row — no wrapping so it doesn't eat the playfield. */
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+  .hud__score {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 4px 8px;
+    font-size: 8px;
+  }
+  .hud__score span {
+    font-size: 14px;
+    margin-top: 0;
+  }
+  .hud__btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .tetris {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .side {
+    flex-direction: column;
+    width: auto;
+    flex: 0 0 70px;
+    gap: 6px;
+  }
+  .side__panel {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 6px;
+    gap: 4px;
+  }
+  .side__label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 8px;
+  }
+  #next,
+  #hold {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-height: 56px;
+    flex: 0 0 auto;
+  }
+  .board-wrap {
+    max-width: none;
+    flex: 0 1 auto;
+    /* Reserve room for HUD (~50) + touch row (~120) + paddings/gaps (~50)
+       so the board fills what's left. */
+    max-height: calc(100svh - 180px);
+  }
+  #board {
+    max-height: calc(100svh - 180px);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  /* In landscape the touch row stays at the bottom but compresses to a
+     single row of all 7 controls — there isn't vertical room for the
+     two-row layout used in portrait. */
   .touch {
-    display: flex;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: minmax(48px, 1fr);
+    gap: 4px;
+  }
+  .touch__btn[data-act='down'] {
+    grid-column: span 1;
+  }
+  .touch__btn {
+    min-height: 48px;
+    font-size: 18px;
+  }
+  .hint {
+    /* Touch users in landscape are already shown all controls visually;
+       hide the keyboard-shortcut text so it doesn't overflow. */
+    display: none;
   }
 }
