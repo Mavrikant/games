@@ -363,6 +363,8 @@ window.addEventListener('keydown', (e) => {
 let touchStartX = 0;
 let touchStartY = 0;
 let touchActive = false;
+// ~20px is the empirical "intentional swipe" threshold on small phones
+const SWIPE_THRESHOLD = 20;
 
 boardEl.addEventListener(
   'touchstart',
@@ -376,6 +378,10 @@ boardEl.addEventListener(
   { passive: true },
 );
 
+// touchmove is intentionally a no-op handler: `touch-action: none` on the
+// board element already blocks the browser's default scroll/zoom gestures.
+// We don't need preventDefault here.
+
 boardEl.addEventListener('touchend', (e) => {
   if (!touchActive) return;
   touchActive = false;
@@ -385,9 +391,13 @@ boardEl.addEventListener('touchend', (e) => {
   const dy = t.clientY - touchStartY;
   const absX = Math.abs(dx);
   const absY = Math.abs(dy);
-  if (Math.max(absX, absY) < 24) return;
+  if (Math.max(absX, absY) < SWIPE_THRESHOLD) return;
   if (absX > absY) move(dx > 0 ? 'right' : 'left');
   else move(dy > 0 ? 'down' : 'up');
+});
+
+boardEl.addEventListener('touchcancel', () => {
+  touchActive = false;
 });
 
 // Init
