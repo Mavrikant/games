@@ -33,6 +33,8 @@ let won = false;
 let keepGoing = false;
 let dead = false;
 let animating = false;
+// Increments every reset so any in-flight animation can detect a stale callback.
+let moveToken = 0;
 
 try {
   best = Number(localStorage.getItem(STORAGE_BEST) ?? '0') || 0;
@@ -71,6 +73,7 @@ function spawnRandom(): void {
 }
 
 function reset(persist = true): void {
+  moveToken++;
   grid = emptyGrid();
   tilesAll = [];
   score = 0;
@@ -217,7 +220,9 @@ function findFarthest(
 }
 
 function move(dir: Dir): boolean {
-  if (dead || animating) return false;
+  // Block input while the game is over, animating, or the win overlay is up
+  // and the player hasn't acknowledged it yet.
+  if (dead || animating || (won && !keepGoing)) return false;
   prepareTiles();
   const vec = getVector(dir);
   const { rows, cols } = buildTraversals(dir);
@@ -259,6 +264,7 @@ function move(dir: Dir): boolean {
 
   if (moved) {
     animating = true;
+    const token = moveToken;
     // animate existing tiles to new positions
     for (const tile of tilesAll) {
       if (tile.el && !toRemove.includes(tile) && !tile.mergedFrom) {
@@ -266,6 +272,8 @@ function move(dir: Dir): boolean {
       }
     }
     window.setTimeout(() => {
+      // If a reset happened during the animation, abandon this stale callback.
+      if (token !== moveToken) return;
       tilesAll = tilesAll.filter((t) => !toRemove.includes(t));
       spawnRandom();
       scoreEl.textContent = String(score);
