@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="2048">
+  <defs>
+    <linearGradient id="bg2048" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg2048)" />
+  <g font-family="ui-sans-serif, system-ui" font-weight="800" text-anchor="middle">
+    <rect x="120" y="50" width="40" height="40" rx="6" fill="#eee4da" />
+    <text x="140" y="76" font-size="16" fill="#776e65">2</text>
+    <rect x="164" y="50" width="40" height="40" rx="6" fill="#f2b179" />
+    <text x="184" y="76" font-size="16" fill="#f9f6f2">8</text>
+    <rect x="120" y="94" width="40" height="40" rx="6" fill="#f65e3b" />
+    <text x="140" y="120" font-size="14" fill="#f9f6f2">64</text>
+    <rect x="164" y="94" width="40" height="40" rx="6" fill="#edc22e" />
+    <text x="184" y="120" font-size="12" fill="#f9f6f2">2048</text>
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">2048</text>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "title": "2048",
+  "description": "Karoları birleştir, 2048'e ulaş. Klasik kaydırmalı sayı bulmacası.",
+  "dateAdded": "2026-05-18",
+  "tags": ["puzzle", "klasik", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD · Mobilde kaydır · R: yeniden başla",
+  "thumbnail": "2048.svg"
+}
