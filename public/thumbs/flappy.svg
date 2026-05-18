@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Flappy">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4ec0ff" />
+      <stop offset="100%" stop-color="#b7e7ff" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sky)" />
+  <!-- pipes -->
+  <g>
+    <rect x="180" y="0" width="46" height="60" fill="#5dbf3f" />
+    <rect x="174" y="56" width="58" height="14" fill="#5dbf3f" />
+    <rect x="174" y="56" width="58" height="4" fill="#2f7a1f" />
+    <rect x="180" y="0" width="4" height="60" fill="#2f7a1f" />
+    <rect x="222" y="0" width="4" height="60" fill="#2f7a1f" />
+
+    <rect x="180" y="130" width="46" height="40" fill="#5dbf3f" />
+    <rect x="174" y="130" width="58" height="14" fill="#5dbf3f" />
+    <rect x="174" y="140" width="58" height="4" fill="#2f7a1f" />
+    <rect x="180" y="144" width="4" height="26" fill="#2f7a1f" />
+    <rect x="222" y="144" width="4" height="26" fill="#2f7a1f" />
+  </g>
+  <!-- ground -->
+  <rect x="0" y="170" width="320" height="30" fill="#ded895" />
+  <rect x="0" y="170" width="320" height="4" fill="#c2b870" />
+  <!-- bird -->
+  <g transform="translate(96,96) rotate(-12)">
+    <circle cx="0" cy="0" r="18" fill="#ffd23f" stroke="#000" stroke-opacity="0.25" stroke-width="1.5" />
+    <ellipse cx="-3" cy="4" rx="10" ry="6" fill="#d88f1c" />
+    <polygon points="16,-2 26,1 16,6" fill="#ff7e2f" />
+    <circle cx="7" cy="-6" r="5" fill="#fff" />
+    <circle cx="8" cy="-6" r="2.5" fill="#222" />
+  </g>
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#0a2540">Flappy</text>
+</svg>
