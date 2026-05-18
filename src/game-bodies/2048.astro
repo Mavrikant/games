@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__scores">
+    <div class="score-box">
+      <span class="score-box__label">Skor</span>
+      <span id="score" class="score-box__value">0</span>
+    </div>
+    <div class="score-box">
+      <span class="score-box__label">En iyi</span>
+      <span id="best" class="score-box__value">0</span>
+    </div>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeni Oyun</button>
+</header>
+
+<div id="board" class="board" role="grid" aria-label="2048 tahtası">
+  <div class="board__bg">
+    {Array.from({ length: 16 }, () => <div class="board__cell"></div>)}
+  </div>
+  <div id="tiles" class="board__tiles"></div>
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__title" id="overlay-title">Bitti!</div>
+    <div class="overlay__msg" id="overlay-msg">Yeni oyun için tuşa bas.</div>
+    <button id="overlay-btn" class="hud__btn" type="button">Yeniden başla</button>
+  </div>
+</div>
+
+<p class="caption">Ok tuşları / WASD ile kaydır · mobilde parmağınla sürükle</p>

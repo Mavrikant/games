@@ -1,0 +1,176 @@
+:root {
+  --t-2: #eee4da;
+  --t-4: #ede0c8;
+  --t-8: #f2b179;
+  --t-16: #f59563;
+  --t-32: #f67c5f;
+  --t-64: #f65e3b;
+  --t-128: #edcf72;
+  --t-256: #edcc61;
+  --t-512: #edc850;
+  --t-1024: #edc53f;
+  --t-2048: #edc22e;
+  --t-super: #3c3a32;
+  --t-dark: #776e65;
+  --t-light: #f9f6f2;
+  --board-bg: #1f242c;
+  --cell-bg: #2a2f38;
+}
+
+.hud {
+  align-items: center;
+}
+
+.hud__scores {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.score-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  line-height: 1.1;
+}
+
+.score-box__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.score-box__value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.board {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background: var(--board-bg);
+  border-radius: var(--radius);
+  padding: 10px;
+  box-sizing: border-box;
+  touch-action: none;
+  user-select: none;
+}
+
+.board__bg {
+  position: absolute;
+  inset: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.board__cell {
+  background: var(--cell-bg);
+  border-radius: var(--radius-sm);
+}
+
+.board__tiles {
+  position: absolute;
+  inset: 10px;
+}
+
+.tile {
+  position: absolute;
+  width: calc((100% - 30px) / 4);
+  height: calc((100% - 30px) / 4);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 4.5vw, 2rem);
+  font-variant-numeric: tabular-nums;
+  color: var(--t-dark);
+  background: var(--t-2);
+  transition:
+    transform 120ms ease-in-out,
+    background-color 80ms ease;
+  will-change: transform;
+}
+
+.tile--new {
+  animation: tile-pop 160ms ease-out;
+}
+
+.tile--merged {
+  animation: tile-merge 180ms ease-out;
+  z-index: 2;
+}
+
+@keyframes tile-pop {
+  0% { transform: var(--pos) scale(0); }
+  60% { transform: var(--pos) scale(1.08); }
+  100% { transform: var(--pos) scale(1); }
+}
+
+@keyframes tile-merge {
+  0% { transform: var(--pos) scale(1); }
+  50% { transform: var(--pos) scale(1.18); }
+  100% { transform: var(--pos) scale(1); }
+}
+
+.tile-2 { background: var(--t-2); color: var(--t-dark); }
+.tile-4 { background: var(--t-4); color: var(--t-dark); }
+.tile-8 { background: var(--t-8); color: var(--t-light); }
+.tile-16 { background: var(--t-16); color: var(--t-light); }
+.tile-32 { background: var(--t-32); color: var(--t-light); }
+.tile-64 { background: var(--t-64); color: var(--t-light); }
+.tile-128 { background: var(--t-128); color: var(--t-light); font-size: clamp(1rem, 4vw, 1.8rem); }
+.tile-256 { background: var(--t-256); color: var(--t-light); font-size: clamp(1rem, 4vw, 1.8rem); }
+.tile-512 { background: var(--t-512); color: var(--t-light); font-size: clamp(1rem, 4vw, 1.8rem); }
+.tile-1024 { background: var(--t-1024); color: var(--t-light); font-size: clamp(0.85rem, 3.4vw, 1.5rem); }
+.tile-2048 { background: var(--t-2048); color: var(--t-light); font-size: clamp(0.85rem, 3.4vw, 1.5rem); box-shadow: 0 0 24px rgba(237, 194, 46, 0.4); }
+.tile-super { background: var(--t-super); color: var(--t-light); font-size: clamp(0.85rem, 3.4vw, 1.5rem); }
+
+.overlay {
+  position: absolute;
+  inset: 10px;
+  background: rgba(20, 23, 28, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  z-index: 3;
+  text-align: center;
+  padding: 1rem;
+}
+
+.overlay--hidden {
+  display: none;
+}
+
+.overlay__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.overlay__msg {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.caption {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+}
