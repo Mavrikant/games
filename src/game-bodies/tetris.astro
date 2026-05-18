@@ -6,6 +6,7 @@
   <div class="hud__score">Satır<span id="lines">0</span></div>
   <div class="hud__score">Seviye<span id="level">1</span></div>
   <div class="hud__score">En iyi<span id="best">0</span></div>
+  <button id="pause" class="hud__btn" type="button" aria-pressed="false">Duraklat</button>
   <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
 </header>
 <div class="tetris">
@@ -29,10 +30,12 @@
     </div>
   </aside>
 </div>
-<div class="touch" aria-hidden="true">
-  <button class="touch__btn" data-act="left" type="button">◀</button>
-  <button class="touch__btn" data-act="rotate" type="button">⟳</button>
-  <button class="touch__btn" data-act="down" type="button">▼</button>
-  <button class="touch__btn" data-act="drop" type="button">⤓</button>
-  <button class="touch__btn" data-act="right" type="button">▶</button>
+<div class="touch" aria-label="Dokunmatik kontroller">
+  <button class="touch__btn" data-act="hold" type="button" aria-label="Tut">⇪</button>
+  <button class="touch__btn" data-act="rotate-ccw" type="button" aria-label="Sola döndür">⟲</button>
+  <button class="touch__btn" data-act="rotate" type="button" aria-label="Sağa döndür">⟳</button>
+  <button class="touch__btn touch__btn--accent" data-act="drop" type="button" aria-label="Sert düşür">⤓</button>
+  <button class="touch__btn" data-act="left" type="button" aria-label="Sol">◀</button>
+  <button class="touch__btn" data-act="down" type="button" aria-label="Aşağı (yumuşak)">▼</button>
+  <button class="touch__btn" data-act="right" type="button" aria-label="Sağ">▶</button>
 </div>

@@ -26,8 +26,15 @@ const overlay = document.querySelector<HTMLElement>('#overlay')!;
 const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
 const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
 const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+const pauseBtn = document.querySelector<HTMLButtonElement>('#pause')!;
 
-const CELL = canvas.width / COLS; // 30px
+// Logical (game-space) cell size. The drawing surface is rescaled to the
+// element's CSS size times devicePixelRatio in `resizeCanvases`, so this
+// remains the right unit for game-space math.
+const CELL = canvas.width / COLS; // 30 logical px
+// Mini-canvas logical sizes (used by drawMini to compute cell size).
+const NEXT_LOGICAL = nextCanvas.width;
+const HOLD_LOGICAL = holdCanvas.width;
 
 // --- Piece definitions (SRS canonical shapes, rotation index 0) ---
 const SHAPES: Record<PieceKind, Matrix[]> = {
@@ -487,14 +494,39 @@ function reset(): void {
   paused = false;
   started = false;
   dropAccum = 0;
+  updatePauseBtn();
+  resizeAllCanvases();
   ensureQueue();
   spawn();
   updateHud();
   draw();
   drawNext();
   drawHold();
-  showOverlay('Tetris', 'Başlamak için bir tuşa bas (← → ↓ Z X Boşluk).');
+  showOverlay('Tetris', 'Başlamak için bir tuşa bas (mobilde dokunmatik kontrolleri kullan).');
   stopLoop();
+}
+
+function updatePauseBtn(): void {
+  if (!started || !alive) {
+    pauseBtn.textContent = 'Duraklat';
+    pauseBtn.setAttribute('aria-pressed', 'false');
+    pauseBtn.disabled = !alive;
+    return;
+  }
+  pauseBtn.disabled = false;
+  pauseBtn.textContent = paused ? 'Devam et' : 'Duraklat';
+  pauseBtn.setAttribute('aria-pressed', String(paused));
+}
+
+function togglePause(): void {
+  if (!alive || !started) return;
+  paused = !paused;
+  if (paused) showOverlay('Duraklatıldı', 'Devam için Duraklat düğmesine veya P tuşuna bas.');
+  else {
+    hideOverlay();
+    lastTime = performance.now();
+  }
+  updatePauseBtn();
 }
 
 function updateHud(): void {
@@ -569,8 +601,12 @@ function drawBlock(
 }
 
 function draw(): void {
+  // Draw in logical pixels — `resizeCanvases` has applied a DPR transform
+  // so canvas.width/height in raw pixels are larger than the COLS*CELL grid.
+  const W = COLS * CELL;
+  const H = ROWS * CELL + HIDDEN_ROWS * CELL - HIDDEN_ROWS * CELL; // = ROWS*CELL
   ctx.fillStyle = getCss('--surface');
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, W, H);
 
   // grid lines
   ctx.strokeStyle = getCss('--t-grid');
@@ -578,13 +614,13 @@ function draw(): void {
   for (let i = 1; i < COLS; i++) {
     ctx.beginPath();
     ctx.moveTo(i * CELL, 0);
-    ctx.lineTo(i * CELL, canvas.height);
+    ctx.lineTo(i * CELL, H);
     ctx.stroke();
   }
   for (let i = 1; i < ROWS; i++) {
     ctx.beginPath();
     ctx.moveTo(0, i * CELL);
-    ctx.lineTo(canvas.width, i * CELL);
+    ctx.lineTo(W, i * CELL);
     ctx.stroke();
   }
 
@@ -645,11 +681,14 @@ function draw(): void {
 
 function drawMini(
   c: CanvasRenderingContext2D,
-  cv: HTMLCanvasElement,
+  logicalSize: number,
   kind: PieceKind | null,
 ): void {
+  // Mini canvases are square. `logicalSize` is the logical width/height
+  // (300 for board, 120 for next/hold) — the actual pixel dims may be
+  // larger due to DPR but `resizeCanvases` has set up the transform.
   c.fillStyle = getCss('--surface-2');
-  c.fillRect(0, 0, cv.width, cv.height);
+  c.fillRect(0, 0, logicalSize, logicalSize);
   if (!kind) return;
   const shape = SHAPES[kind][0]!;
   // Find bounding box
@@ -669,9 +708,9 @@ function drawMini(
   }
   const w = maxC - minC + 1;
   const h = maxR - minR + 1;
-  const size = Math.min(cv.width / 5, cv.height / 5);
-  const offX = (cv.width - w * size) / 2;
-  const offY = (cv.height - h * size) / 2;
+  const size = Math.min(logicalSize / 5, logicalSize / 5);
+  const offX = (logicalSize - w * size) / 2;
+  const offY = (logicalSize - h * size) / 2;
   const color = colorFor(kind);
   for (let r = minR; r <= maxR; r++) {
     for (let cc = minC; cc <= maxC; cc++) {
@@ -689,11 +728,47 @@ function drawMini(
 }
 
 function drawNext(): void {
-  drawMini(nextCtx, nextCanvas, nextQueue[0] ?? null);
+  drawMini(nextCtx, NEXT_LOGICAL, nextQueue[0] ?? null);
 }
 
 function drawHold(): void {
-  drawMini(holdCtx, holdCanvas, hold);
+  drawMini(holdCtx, HOLD_LOGICAL, hold);
+}
+
+// --- DPR-aware canvas sizing ---
+// Without this the canvas would be drawn at its 300x600 bitmap and
+// stretched/squashed by CSS, producing a blurry, soft picture on
+// retina-class mobile screens. Resize the backing store to CSS pixels
+// times DPR and scale the context so all game math stays in logical units.
+function resizeCanvas(
+  cv: HTMLCanvasElement,
+  c: CanvasRenderingContext2D,
+  logicalW: number,
+  logicalH: number,
+): void {
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  const rect = cv.getBoundingClientRect();
+  // Fall back to the logical size when CSS-driven sizing hasn't kicked in
+  // yet (e.g. element hidden offscreen during early init).
+  const cssW = Math.max(1, Math.round(rect.width || logicalW));
+  const cssH = Math.max(1, Math.round(rect.height || logicalH));
+  const targetW = Math.round(cssW * dpr);
+  const targetH = Math.round(cssH * dpr);
+  if (cv.width !== targetW || cv.height !== targetH) {
+    cv.width = targetW;
+    cv.height = targetH;
+  }
+  // Scale so 1 unit in the context = 1 logical game pixel regardless of CSS.
+  const scaleX = targetW / logicalW;
+  const scaleY = targetH / logicalH;
+  c.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+  c.imageSmoothingEnabled = false;
+}
+
+function resizeAllCanvases(): void {
+  resizeCanvas(canvas, ctx, COLS * CELL, ROWS * CELL);
+  resizeCanvas(nextCanvas, nextCtx, NEXT_LOGICAL, NEXT_LOGICAL);
+  resizeCanvas(holdCanvas, holdCtx, HOLD_LOGICAL, HOLD_LOGICAL);
 }
 
 // --- Loop ---
@@ -741,6 +816,7 @@ function startIfNeeded(): void {
     started = true;
     hideOverlay();
     startLoop();
+    updatePauseBtn();
   }
 }
 
@@ -753,14 +829,7 @@ window.addEventListener('keydown', (e) => {
     return;
   }
   if (k === 'p') {
-    if (alive && started) {
-      paused = !paused;
-      if (paused) showOverlay('Duraklatıldı', 'Devam için P tuşuna bas.');
-      else {
-        hideOverlay();
-        lastTime = performance.now();
-      }
-    }
+    togglePause();
     e.preventDefault();
     return;
   }
@@ -820,25 +889,142 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-// Touch buttons
+// --- Touch / pointer controls ---
+// Tetris is fundamentally an auto-repeat game: holding ←/→ should keep
+// shifting the piece. We use pointerdown/up so the same handlers cover
+// touch, mouse, and pen, and we kick off a DAS-like repeat for the
+// directional actions. preventDefault stops iOS Safari from intercepting
+// the gesture as a scroll, double-tap zoom, or text selection.
+const REPEAT_INITIAL_MS = 170;
+const REPEAT_INTERVAL_MS = 60;
+const SOFT_DROP_INTERVAL_MS = 45;
+const REPEATABLE = new Set<string>(['left', 'right', 'down']);
+
+interface RepeatState {
+  initialTimer: number;
+  intervalTimer: number;
+}
+const activeRepeats = new Map<HTMLButtonElement, RepeatState>();
+
+function performAct(act: string | undefined): void {
+  if (!act || !alive || paused) return;
+  if (act === 'left') tryMove(-1, 0);
+  else if (act === 'right') tryMove(1, 0);
+  else if (act === 'down') softDrop();
+  else if (act === 'rotate') tryRotate(1);
+  else if (act === 'rotate-ccw') tryRotate(-1);
+  else if (act === 'drop') hardDrop();
+  else if (act === 'hold') holdPiece();
+  draw();
+  drawNext();
+}
+
+function stopRepeat(btn: HTMLButtonElement): void {
+  const r = activeRepeats.get(btn);
+  if (!r) return;
+  window.clearTimeout(r.initialTimer);
+  window.clearInterval(r.intervalTimer);
+  activeRepeats.delete(btn);
+  btn.classList.remove('touch__btn--pressed');
+}
+
+function stopAllRepeats(): void {
+  for (const btn of Array.from(activeRepeats.keys())) stopRepeat(btn);
+}
+
 document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    if (!alive) return;
-    startIfNeeded();
-    if (paused) return;
-    const act = btn.dataset.act;
-    if (act === 'left') tryMove(-1, 0);
-    else if (act === 'right') tryMove(1, 0);
-    else if (act === 'down') softDrop();
-    else if (act === 'rotate') tryRotate(1);
-    else if (act === 'drop') hardDrop();
-    draw();
-    drawNext();
-  });
+  const act: string | undefined = btn.dataset.act;
+  // pointerdown gives us a single event for touch+mouse+pen and fires
+  // immediately (no 300ms click delay on iOS).
+  btn.addEventListener(
+    'pointerdown',
+    (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+      e.preventDefault();
+      // Trigger button visual feedback even if held.
+      btn.classList.add('touch__btn--pressed');
+      if (!alive) return;
+      startIfNeeded();
+      performAct(act);
+      if (act && REPEATABLE.has(act)) {
+        // DAS-style: hold the button → after a short delay, start repeating
+        // until release. Soft drop repeats faster for that "rain" feel.
+        const intervalMs = act === 'down' ? SOFT_DROP_INTERVAL_MS : REPEAT_INTERVAL_MS;
+        const initialTimer = window.setTimeout(() => {
+          const intervalTimer = window.setInterval(() => {
+            performAct(act);
+          }, intervalMs);
+          const prev = activeRepeats.get(btn);
+          if (prev) {
+            window.clearTimeout(prev.initialTimer);
+            window.clearInterval(prev.intervalTimer);
+          }
+          activeRepeats.set(btn, { initialTimer: 0, intervalTimer });
+        }, REPEAT_INITIAL_MS);
+        activeRepeats.set(btn, { initialTimer, intervalTimer: 0 });
+      }
+      // Try to capture the pointer so pointerup fires reliably even if
+      // the finger drifts off the button.
+      try {
+        btn.setPointerCapture(e.pointerId);
+      } catch {
+        /* unsupported, ignore */
+      }
+    },
+    { passive: false },
+  );
+  const release = (e: Event) => {
+    e.preventDefault();
+    stopRepeat(btn);
+  };
+  btn.addEventListener('pointerup', release);
+  btn.addEventListener('pointercancel', release);
+  btn.addEventListener('pointerleave', () => stopRepeat(btn));
+  // Suppress the legacy click event so we don't fire actions twice on
+  // browsers that synthesize click after pointerup.
+  btn.addEventListener('click', (e) => e.preventDefault());
+  // Prevent context menu on long-press (iOS / Android).
+  btn.addEventListener('contextmenu', (e) => e.preventDefault());
 });
 
+// If the page loses focus / user switches tabs / pointer leaves the
+// window, stop any auto-repeat to avoid surprise inputs on return.
+window.addEventListener('blur', stopAllRepeats);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopAllRepeats();
+});
+
+// --- Resize handling ---
+// Re-DPR the canvases whenever layout changes (orientation, browser
+// chrome show/hide, viewport resize). Keep the call cheap because
+// browsers fire resize while the user drags the address bar.
+let resizeRafHandle = 0;
+function onResize(): void {
+  if (resizeRafHandle) return;
+  resizeRafHandle = requestAnimationFrame(() => {
+    resizeRafHandle = 0;
+    resizeAllCanvases();
+    draw();
+    drawNext();
+    drawHold();
+  });
+}
+window.addEventListener('resize', onResize);
+window.addEventListener('orientationchange', onResize);
+
 restartBtn.addEventListener('click', () => {
+  stopAllRepeats();
   reset();
+});
+
+pauseBtn.addEventListener('click', () => {
+  if (!alive) return;
+  if (!started) {
+    startIfNeeded();
+    togglePause();
+    return;
+  }
+  togglePause();
 });
 
 reset();
