@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tetris">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Tetris</text>
+  <g>
+    <!-- I piece (cyan) -->
+    <rect x="40"  y="150" width="20" height="20" rx="3" fill="#22d3ee" />
+    <rect x="60"  y="150" width="20" height="20" rx="3" fill="#22d3ee" />
+    <rect x="80"  y="150" width="20" height="20" rx="3" fill="#22d3ee" />
+    <rect x="100" y="150" width="20" height="20" rx="3" fill="#22d3ee" />
+    <!-- O piece (yellow) -->
+    <rect x="130" y="130" width="20" height="20" rx="3" fill="#facc15" />
+    <rect x="150" y="130" width="20" height="20" rx="3" fill="#facc15" />
+    <rect x="130" y="150" width="20" height="20" rx="3" fill="#facc15" />
+    <rect x="150" y="150" width="20" height="20" rx="3" fill="#facc15" />
+    <!-- T piece (purple) -->
+    <rect x="180" y="150" width="20" height="20" rx="3" fill="#c084fc" />
+    <rect x="200" y="150" width="20" height="20" rx="3" fill="#c084fc" />
+    <rect x="220" y="150" width="20" height="20" rx="3" fill="#c084fc" />
+    <rect x="200" y="130" width="20" height="20" rx="3" fill="#c084fc" />
+    <!-- L piece (orange) -->
+    <rect x="250" y="150" width="20" height="20" rx="3" fill="#fb923c" />
+    <rect x="270" y="150" width="20" height="20" rx="3" fill="#fb923c" />
+    <rect x="290" y="150" width="20" height="20" rx="3" fill="#fb923c" />
+    <rect x="290" y="130" width="20" height="20" rx="3" fill="#fb923c" />
+    <!-- floating S -->
+    <rect x="200" y="80" width="20" height="20" rx="3" fill="#34d399" />
+    <rect x="220" y="80" width="20" height="20" rx="3" fill="#34d399" />
+    <rect x="180" y="100" width="20" height="20" rx="3" fill="#34d399" />
+    <rect x="200" y="100" width="20" height="20" rx="3" fill="#34d399" />
+  </g>
+</svg>
