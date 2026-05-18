@@ -115,15 +115,30 @@ public/thumbs/            ← kart görselleri
 
 ```sh
 npm run build          # type check + build, kırılırsa düzelt
-npm run dev            # tarayıcıda /games/<slug>/ aç, oyna
+npm run dev            # tarayıcıda /games/<slug>/ aç, [docs/PLAYTEST.md] uygula
 ```
 
 CI otomatik olarak build + check çalıştırır; ama lokalde önce dene.
+**Curl-based smoke test artık geçersiz** — geçmiş 4 fix PR'ı curl ile
+yakalanamazdı. [docs/PLAYTEST.md](docs/PLAYTEST.md) checklist'i zorunlu.
+
+## Öğrenme döngüsü
+
+Bu repoda iki yönlü hafıza var; her ikisini de besle:
+
+- **Yazmadan önce oku**: [docs/PITFALLS.md](docs/PITFALLS.md) (geçmiş hata
+  pattern'leri) ve [docs/CREATIVITY.md](docs/CREATIVITY.md) (klon yasak,
+  twist veya orijinal).
+- **PR-sonrası yaz**: Fix landlediğinde PITFALLS.md'ye entry ekle veya
+  mevcut entry'ye PR# yapıştır. Bu olmadan sonraki ajan aynı bug'ı yazar.
 
 ## Daha fazla
 
 - [README.md](README.md) — insan okuyucu için kısa giriş
 - [AGENTS.md](AGENTS.md) — paralel ajan workflow'u, çakışma kuralları
+- [docs/PITFALLS.md](docs/PITFALLS.md) — geçmiş ajan hatalarından dersler (kod yazmadan önce zorunlu)
+- [docs/PLAYTEST.md](docs/PLAYTEST.md) — PR-öncesi oynanış protokolü (curl smoke test artık geçersiz)
+- [docs/CREATIVITY.md](docs/CREATIVITY.md) — yeni oyun: klon yasak, twist veya orijinal mekanik
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — build pipeline, layout flow
 - [docs/ADDING_A_GAME.md](docs/ADDING_A_GAME.md) — step-by-step yeni oyun
 - [docs/GAME_CONTRACT.md](docs/GAME_CONTRACT.md) — DOM/lifecycle kontratı

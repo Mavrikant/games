@@ -4,6 +4,22 @@
 > üretim yapacağı varsayımıyla tasarlandı. Aşağıdaki kurallara uy → merge
 > çakışması yaşamazsın; uyma → işin başka ajanın işini bozar.
 
+## Kod yazmadan önce zorunlu okuma
+
+Sıraladığın türden ne olursa olsun **önce** bu üç dosyayı oku — geçmiş
+ajanların aynı hatayı tekrarlamamasına ve sıkıcı klon üretmemesine bunlar
+yarıyor:
+
+1. [docs/PITFALLS.md](docs/PITFALLS.md) — geçmiş 4 fix'ten damıtılmış somut
+   tuzaklar. Buradaki her pattern bir önceki ajanı kestirdi; senin görevin
+   tekrarlamamak.
+2. [docs/PLAYTEST.md](docs/PLAYTEST.md) — PR öncesi zorunlu oynanış protokolü.
+   Eski `curl /games/<slug>/ → 200` smoke test'i **yeterli değil**, atlanırsa
+   fix PR'ı sıraya girer.
+3. [docs/CREATIVITY.md](docs/CREATIVITY.md) — yeni oyun yazıyorsan: 7 oyunun
+   7'si de kanonik klon, sıradaki kabul edilmez. Twist veya orijinal mekanik
+   zorunlu.
+
 ## Tek cümle: ne yapabilirsin, ne yapamazsın
 
 - **Yapabilirsin**: Kendi `<slug>` adına ait yeni dosyalar oluşturmak (oyun
@@ -68,23 +84,29 @@ Asla `main`'e doğrudan push etme. Her zaman PR aç.
 Tipik bir ajan turuyla:
 
 ```
-1.  Konu/oyun fikrini al
+0.  CREATIVITY.md, PITFALLS.md, PLAYTEST.md oku (zorunlu)
+1.  Fikir üret: CREATIVITY.md karar ağacından geç. Klon ise reddet,
+    twist/orijinal mekanik üret.
 2.  git checkout -b add-<slug>
 3.  npm run new-game <slug> -- --title "..." --description "..."
 4.  Dosyaları doldur:
       - game-bodies/<slug>.astro  → minimal markup
-      - game-logic/<slug>.ts      → oyun mantığı
+      - game-logic/<slug>.ts      → oyun mantığı (PITFALLS pattern'lerinden
+                                    kaçınarak: visual=hitbox tek const,
+                                    state enum, generation token, vb.)
       - styles/games/<slug>.css   → (gerekiyorsa) görsel
       - public/thumbs/<slug>.svg  → (opsiyonel) kart görseli
       - content/games/<slug>.json → meta zaten dolu, son rötuş
 5.  npm run build                 → hata varsa düzelt, döngüye gir
-6.  npm run dev → DOM'da çalış, smoke test yap
-7.  git add <kendi dosyaların>    → git add -A YASAK (başka ajanın
+6.  PLAYTEST.md checklist'ini baştan sona uygula (curl YETERLİ DEĞİL)
+7.  Bulduğun her bug için: fix → ilgili PITFALLS entry'sine link ver
+    veya yeni entry aç → checklist'e dön
+8.  git add <kendi dosyaların>    → git add -A YASAK (başka ajanın
                                     geçici dosyasını yutmasın)
-8.  git commit -m "Add <Title>"
-9.  git push -u origin add-<slug>
-10. gh pr create --fill
-11. CI yeşil olunca insan/auto-merge devralır
+9.  git commit -m "Add <Title>"
+10. git push -u origin add-<slug>
+11. gh pr create --fill → PR description'a "## Playtest" bölümü ekle
+12. CI yeşil olunca insan/auto-merge devralır
 ```
 
 **8. adımdaki `git add -A` kısıtı önemli**: Diğer ajanların branch'leri
@@ -99,19 +121,29 @@ git add \
   public/thumbs/<slug>.svg
 ```
 
-## Smoke test (PR öncesi)
+## Playtest (PR öncesi — zorunlu)
 
-```sh
-# Dev server zaten açıksa skip
-npm run dev &
-DEV_PID=$!
-sleep 4
-curl -sf http://localhost:4321/games/                  > /dev/null || exit 1
-curl -sf http://localhost:4321/games/<slug>/           > /dev/null || exit 1
-kill $DEV_PID
-```
+`curl /games/<slug>/ → 200` smoke test'i **artık geçerli değil**. Geçmiş
+4 fix PR'ı ([#9](https://github.com/Mavrikant/browser-games/pull/9),
+[#10](https://github.com/Mavrikant/browser-games/pull/10),
+[#11](https://github.com/Mavrikant/browser-games/pull/11),
+[#12](https://github.com/Mavrikant/browser-games/pull/12)) curl ile
+yakalanamazdı; hepsi 30 saniyelik gerçek oynayarak-test ile yakalanırdı.
 
-CI bunu farklı şekilde yapar; sen sadece `npm run build` ile yetinebilirsin.
+`npm run dev` (veya `preview_start`) çalıştır, sonra
+[docs/PLAYTEST.md](docs/PLAYTEST.md)'deki tüm checklist'i tek tek geç:
+
+- Cold boot (konsol temiz, ilk feedback <250ms, localStorage off-OK)
+- Input matrisi (controls JSON'daki her tuş)
+- State machine (Ready/Playing/Paused/GameOver/WinOverlay her overlay'de
+  underlying state mutasyona uğramıyor)
+- Async / restart yarışları (animasyon sırasında spam restart)
+- Görsel ≠ hitbox
+- Shared layer duplication
+- Persistence + resize
+
+PR description'a `## Playtest` bölümü ekle (PLAYTEST.md'de şablon var).
+Test edemediğin bir maddeyi atlama — "edemedim, sebep: …" yaz.
 
 ## Hangi durumda human review istersin?
 
@@ -154,9 +186,28 @@ issue tag'le:
 | Build kırıldı? | `npm run check` ile detay; kendi dosyalarını düzelt |
 | Eski oyunlar çalışıyor mu? | `npm run build` geçiyorsa evet (regression test) |
 
+## PR-sonrası ritüel (öğrenme döngüsü)
+
+Fix PR'ın merge olduktan sonra **5 dakika** ayır:
+
+1. [docs/PITFALLS.md](docs/PITFALLS.md)'yi aç.
+2. Fix'inin altında yatan soyut pattern var mı?
+   - **Varsa**: o entry'nin "Vaka" satırına PR# ekle (`#13 vb.`). Aynı
+     pattern'in tekrar geldiğine işaret eder; başka ajanların güvenmesi
+     için sinyal güçlü olsun.
+   - **Yoksa**: yeni bir entry aç (kısa pattern adı, Vaka, Pattern, Tespit,
+     Önlem dört satırı). Sonraki ajan senin bug'ını tekrar yazmasın.
+3. Aynı pattern 3. kez geldiyse entry yetersiz demektir — yeniden yaz veya
+   önleme adımını sertleştir.
+
+Bu adım atlanırsa öğrenme döngüsü çalışmaz; PITFALLS.md tutar ama gelişmez.
+
 ## Daha fazla okuma
 
 - [CLAUDE.md](CLAUDE.md) — proje girişi
+- [docs/PITFALLS.md](docs/PITFALLS.md) — geçmiş hata pattern'leri (zorunlu)
+- [docs/PLAYTEST.md](docs/PLAYTEST.md) — PR-öncesi oynanış protokolü (zorunlu)
+- [docs/CREATIVITY.md](docs/CREATIVITY.md) — yeni oyun: klon yasak, twist veya orijinal
 - [docs/ADDING_A_GAME.md](docs/ADDING_A_GAME.md) — adım adım yeni oyun
 - [docs/GAME_CONTRACT.md](docs/GAME_CONTRACT.md) — oyun DOM/lifecycle kontratı
 - [docs/CONVENTIONS.md](docs/CONVENTIONS.md) — code style
