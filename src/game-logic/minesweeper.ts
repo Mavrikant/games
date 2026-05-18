@@ -107,7 +107,8 @@ function neighbors(r: number, c: number): number[] {
 
 function buildBoard(): void {
   boardEl.innerHTML = '';
-  boardEl.style.gridTemplateColumns = `repeat(${config.cols}, var(--ms-cell-size))`;
+  // CSS reads --ms-cols to compute cell size with clamp(); see styles/games/minesweeper.css.
+  boardEl.style.setProperty('--ms-cols', String(config.cols));
   cells = [];
   for (let r = 0; r < config.rows; r++) {
     for (let c = 0; c < config.cols; c++) {
@@ -348,12 +349,24 @@ function cellIndexFromEvent(e: Event): number | null {
 }
 
 function attachBoardListeners(): void {
+  // Tracks whether the next synthetic click should be ignored (e.g., after a long-press
+  // flag, or after a touch-driven double-tap that we already handled as chord).
+  let suppressNextClick = false;
+
   boardEl.addEventListener('click', (e) => {
+    if (suppressNextClick) {
+      suppressNextClick = false;
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
     const i = cellIndexFromEvent(e);
     if (i === null) return;
     openCell(i);
   });
   boardEl.addEventListener('contextmenu', (e) => {
+    // Always block the context menu on the board — long-press on touch devices
+    // dispatches contextmenu and we don't want a system menu popping over the game.
     e.preventDefault();
     const i = cellIndexFromEvent(e);
     if (i === null) return;
@@ -378,48 +391,125 @@ function attachBoardListeners(): void {
     if (!gameOver) setFace('🙂');
   });
 
-  // Touch: long-press to flag (since right-click is not available on touch).
+  // Touch: long-press to flag, double-tap on an opened number to chord.
+  // Single-finger only; multi-touch is treated as a scroll/zoom gesture and ignored.
   let touchTimer: number | null = null;
   let touchTarget: HTMLElement | null = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
   let touchLongPress = false;
+  let lastTapTime = 0;
+  let lastTapIndex = -1;
   const TOUCH_FLAG_MS = 400;
-  const clearTouch = (): void => {
+  const TAP_MOVE_TOLERANCE = 10; // px — finger jitter allowance for long-press
+  const DOUBLE_TAP_MS = 280;
+
+  const clearTouchTimer = (): void => {
     if (touchTimer !== null) {
       clearTimeout(touchTimer);
       touchTimer = null;
     }
+  };
+  const resetTouch = (): void => {
+    clearTouchTimer();
     touchTarget = null;
   };
+
   boardEl.addEventListener(
     'touchstart',
     (e) => {
+      // Ignore multi-touch (pinch-zoom on the wrapper, etc.).
+      if (e.touches.length !== 1) {
+        resetTouch();
+        return;
+      }
       const raw = e.target as HTMLElement | null;
       const target = raw?.closest<HTMLElement>('.ms-cell') ?? null;
       if (!target) return;
+      const touch = e.touches[0]!;
       touchTarget = target;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
       touchLongPress = false;
+      clearTouchTimer();
       touchTimer = window.setTimeout(() => {
-        if (touchTarget) {
-          const i = Number(touchTarget.dataset.r) * config.cols + Number(touchTarget.dataset.c);
-          if (Number.isFinite(i)) {
-            touchLongPress = true;
-            toggleFlag(i);
-          }
-        }
         touchTimer = null;
+        if (!touchTarget) return;
+        const r = Number(touchTarget.dataset.r);
+        const c = Number(touchTarget.dataset.c);
+        if (!Number.isFinite(r) || !Number.isFinite(c)) return;
+        const i = idx(r, c);
+        touchLongPress = true;
+        suppressNextClick = true;
+        const cell = cells[i];
+        // Long-press on an opened number cell triggers chord; on an unopened cell,
+        // toggle the flag. This gives mobile users an explicit chord alternative
+        // to double-tap.
+        if (cell && cell.open && cell.adj > 0) {
+          chord(i);
+        } else {
+          toggleFlag(i);
+        }
       }, TOUCH_FLAG_MS);
     },
     { passive: true },
   );
+
+  boardEl.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!touchTarget || touchTimer === null) return;
+      const touch = e.touches[0];
+      if (!touch) {
+        resetTouch();
+        return;
+      }
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+      if (Math.abs(dx) > TAP_MOVE_TOLERANCE || Math.abs(dy) > TAP_MOVE_TOLERANCE) {
+        // Finger moved enough that we treat this as a scroll, not a tap.
+        resetTouch();
+      }
+    },
+    { passive: true },
+  );
+
   boardEl.addEventListener('touchend', (e) => {
+    // If long-press already fired, suppress the synthetic click that follows.
     if (touchLongPress) {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       touchLongPress = false;
+      resetTouch();
+      return;
     }
-    clearTouch();
+    // Short tap — check for double-tap to chord.
+    const target = touchTarget;
+    resetTouch();
+    if (!target) return;
+    const r = Number(target.dataset.r);
+    const c = Number(target.dataset.c);
+    if (!Number.isFinite(r) || !Number.isFinite(c)) return;
+    const i = idx(r, c);
+    const now = Date.now();
+    if (i === lastTapIndex && now - lastTapTime < DOUBLE_TAP_MS) {
+      // Second tap of a double-tap on the same cell → chord.
+      const cell = cells[i];
+      if (cell && cell.open && cell.adj > 0) {
+        if (e.cancelable) e.preventDefault();
+        suppressNextClick = true;
+        chord(i);
+      }
+      lastTapIndex = -1;
+      lastTapTime = 0;
+      return;
+    }
+    lastTapIndex = i;
+    lastTapTime = now;
   });
-  boardEl.addEventListener('touchmove', clearTouch, { passive: true });
-  boardEl.addEventListener('touchcancel', clearTouch);
+
+  boardEl.addEventListener('touchcancel', () => {
+    resetTouch();
+  });
 }
 
 function reset(): void {

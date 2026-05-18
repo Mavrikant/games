@@ -1,5 +1,10 @@
+/* Minesweeper boards are much wider than the default game shell allows; widen
+   the stage here so Medium fits and Hard only needs minimal horizontal scroll. */
+.stage {
+  max-width: min(1000px, 100%);
+}
+
 :root {
-  --ms-cell-size: 30px;
   --ms-cell-bg: #1f2230;
   --ms-cell-bg-hover: #2a2e40;
   --ms-cell-open: #11131c;
@@ -18,10 +23,19 @@
   --ms-n8: #e4e4ed;
 }
 
+/* HUD overrides for minesweeper: allow wrapping on narrow viewports. */
+.hud {
+  flex-wrap: wrap;
+  row-gap: 10px;
+  justify-content: center;
+}
+
 .ms-meta {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   font-variant-numeric: tabular-nums;
 }
 
@@ -29,12 +43,13 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   background: var(--ms-cell-open);
   border: 1px solid var(--ms-cell-border);
   border-radius: 10px;
   font-weight: 700;
   min-width: 64px;
+  min-height: 36px;
   justify-content: center;
 }
 
@@ -48,6 +63,7 @@
   gap: 10px;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ms-diff {
@@ -64,12 +80,17 @@
 #difficulty {
   cursor: pointer;
   font: inherit;
+  /* 16px prevents iOS Safari from auto-zooming on focus. */
+  font-size: 16px;
+  min-height: 44px;
+  padding-block: 0;
 }
 
 #restart {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 44px;
 }
 
 .ms-status {
@@ -92,30 +113,57 @@
 
 .ms-board-wrap {
   display: flex;
-  justify-content: center;
-  overflow: auto;
+  /* "safe center" keeps the board centred when it fits, but pins it to the start
+     edge (so the first column stays visible) when the board overflows. */
+  justify-content: safe center;
+  /* Horizontal scroll only when board exceeds viewport (Hard mode on mobile). */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   padding: 4px;
+  /* Respect iOS notch / home indicator on landscape. */
+  padding-inline: max(4px, env(safe-area-inset-left, 0px))
+    max(4px, env(safe-area-inset-right, 0px));
 }
 
 .ms-board {
+  /* JS sets --ms-cols per difficulty (9, 16, 30). */
+  --ms-cols: 9;
+  --ms-gap: 2px;
+  --ms-pad: 2px;
+  /* Pool of horizontal space available: clamp by viewport so we never assume more than the screen.
+     Cap is generous (1200px) so wide-desktop Hard mode keeps comfortably large cells. */
+  --ms-avail: min(calc(100vw - 24px), 1200px);
+  /* What each cell would be if the entire row had to fit --ms-avail. */
+  --ms-ideal:
+    calc(
+      (var(--ms-avail) - var(--ms-pad) * 2 - var(--ms-gap) * (var(--ms-cols) - 1))
+      / var(--ms-cols)
+    );
+  /* Clamp keeps cells tap-friendly (~24px min) yet not absurdly large on desktop. */
+  --ms-cell: clamp(24px, var(--ms-ideal), 36px);
   display: grid;
-  gap: 2px;
+  grid-template-columns: repeat(var(--ms-cols), var(--ms-cell));
+  gap: var(--ms-gap);
   user-select: none;
+  -webkit-user-select: none;
   touch-action: manipulation;
   background: var(--ms-cell-border);
-  padding: 2px;
+  padding: var(--ms-pad);
   border-radius: 10px;
 }
 
 .ms-cell {
-  width: var(--ms-cell-size);
-  height: var(--ms-cell-size);
+  width: var(--ms-cell);
+  height: var(--ms-cell);
   background: var(--ms-cell-bg);
   border: 1px solid var(--ms-cell-border);
   border-radius: 4px;
   font-family: inherit;
   font-weight: 800;
-  font-size: 0.95em;
+  /* Scale text with cell size so digits stay legible on small mobile cells. */
+  font-size: clamp(11px, calc(var(--ms-cell) * 0.55), 18px);
   color: var(--ms-n8);
   cursor: pointer;
   display: inline-flex;
@@ -123,10 +171,17 @@
   justify-content: center;
   padding: 0;
   line-height: 1;
+  /* Avoid Safari blue/grey tap flash; we have our own hover state. */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: background 60ms ease;
 }
 
 .ms-cell:hover:not(.ms-cell--open):not(:disabled) {
+  background: var(--ms-cell-bg-hover);
+}
+
+.ms-cell:active:not(.ms-cell--open):not(:disabled) {
   background: var(--ms-cell-bg-hover);
 }
 
@@ -175,17 +230,28 @@
 .ms-cell--n7 { color: var(--ms-n7); }
 .ms-cell--n8 { color: var(--ms-n8); }
 
-@media (max-width: 720px) {
-  :root {
-    --ms-cell-size: 26px;
+/* Narrow phones: keep cells comfortably tappable and let board scroll if needed. */
+@media (max-width: 480px) {
+  .ms-board {
+    --ms-cell: clamp(26px, var(--ms-ideal), 32px);
   }
-  .ms-cell {
-    font-size: 0.85em;
+  .ms-meta {
+    gap: 6px;
+  }
+  .ms-meta__item {
+    padding: 6px 10px;
+    min-width: 56px;
   }
 }
 
-@media (max-width: 480px) {
-  :root {
-    --ms-cell-size: 22px;
+/* Tall narrow phones (e.g., iPhone SE portrait): trim cell ceiling so Easy still
+   fits one viewport, and shrink labels a touch to keep HUD on one row when possible. */
+@media (max-width: 380px) {
+  .ms-meta__item {
+    min-width: 50px;
+    padding: 5px 8px;
+  }
+  .ms-diff__label {
+    display: none;
   }
 }
