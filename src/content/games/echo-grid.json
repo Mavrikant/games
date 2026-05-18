@@ -1,0 +1,8 @@
+{
+  "title": "Echo Grid",
+  "description": "Deseni izle, sonra aynı kareleri ters sırayla geri çal. Her turda dizi biraz daha uzar.",
+  "dateAdded": "2026-05-18",
+  "tags": ["puzzle", "hafıza", "tek-oyunculu"],
+  "controls": "Başlat düğmesi / Boşluk / Enter: turu başlat · 1-9 veya tıkla: kare seç · R: sıfırla",
+  "thumbnail": "echo-grid.svg"
+}
