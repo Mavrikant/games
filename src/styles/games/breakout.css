@@ -10,17 +10,27 @@
   --bo-bg: #0a0b0e;
 }
 
+/* Prevent the page from scrolling/zooming when the player swipes on the
+ * canvas. .stage is the shared wrapper so we only neutralise the touch
+ * interactions on our subtree, keeping scroll usable for the footer. */
+.stage {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
 .hud {
   flex-wrap: wrap;
+  gap: 8px;
 }
 
 .hud__stat {
-  flex: 1 1 80px;
+  flex: 1 1 70px;
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 11px;
+  padding: clamp(6px, 1.8vw, 10px) clamp(8px, 2.6vw, 14px);
+  font-size: clamp(10px, 2.4vw, 11px);
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--text-dim);
@@ -28,7 +38,7 @@
 
 .hud__stat span {
   display: block;
-  font-size: 22px;
+  font-size: clamp(16px, 4.6vw, 22px);
   font-weight: 700;
   color: var(--text);
   font-variant-numeric: tabular-nums;
@@ -36,22 +46,38 @@
   letter-spacing: -0.01em;
 }
 
+/* Make the restart button comfortably tappable on mobile (>= 44 px). */
+.hud .hud__btn {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
 .board-wrap {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  /* Board is 480x600 (4:5). Cap by both width and remaining viewport
+   * height so portrait mobile, landscape mobile, and desktop all keep
+   * the entire play-field on-screen without scrolling. */
+  max-width: min(480px, calc((100svh - 220px) * 0.8));
   margin: 0 auto;
+  aspect-ratio: 480 / 600;
 }
 
 #board {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   background: var(--bo-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
+  /* Disable browser touch gestures (scroll/zoom) over the play field so
+   * paddle drags don't scroll the page. */
   touch-action: none;
   cursor: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .overlay {
@@ -65,6 +91,9 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   transition: opacity 0.2s;
+  /* Tapping anywhere on the overlay should launch the ball, so let
+   * clicks/touches pass through to the canvas underneath. */
+  pointer-events: none;
 }
 
 .overlay--hidden {
@@ -74,12 +103,12 @@
 
 .overlay__inner {
   text-align: center;
-  padding: 24px;
+  padding: clamp(12px, 4vw, 24px);
 }
 
 .overlay__inner h2 {
   margin: 0 0 6px;
-  font-size: 26px;
+  font-size: clamp(20px, 5.5vw, 26px);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -87,6 +116,33 @@
 .overlay__inner p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: clamp(13px, 3.4vw, 14px);
 }
 
+/* Landscape phones: shrink the HUD chrome and let the canvas drive the
+ * height so both fit without scrolling. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    gap: 8px;
+  }
+  .hud__stat {
+    padding: 4px 10px;
+    font-size: 9px;
+  }
+  .hud__stat span {
+    font-size: 14px;
+  }
+  .hud .hud__btn {
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .board-wrap {
+    /* In landscape height is the binding dimension; let the aspect ratio
+     * (4:5) pick the width. Reserve ~120 px for the HUD, stage padding,
+     * and the shared shell's footer hint. */
+    max-width: min(480px, calc((100svh - 120px) * 0.8));
+  }
+}
