@@ -23,8 +23,30 @@ const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
 
 const STORAGE_KEY = 'breakout.highScore';
 
-const W = canvas.width;
-const H = canvas.height;
+// Logical play-field dimensions; canvas backing store is scaled to match
+// CSS-rendered size * devicePixelRatio for crisp output on HiDPI/mobile,
+// but all game logic uses these constant coordinates.
+const W = 480;
+const H = 600;
+
+// Set up the canvas backing store for HiDPI rendering. The canvas is
+// rendered at CSS width via the stylesheet; we resize the backing store
+// to match the rendered pixel size and apply a transform so the game
+// continues to draw in logical 480x600 coordinates.
+function resizeCanvas(): void {
+  const dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  const rect = canvas.getBoundingClientRect();
+  const cssW = rect.width || W;
+  const cssH = (cssW * H) / W;
+  const targetW = Math.round(cssW * dpr);
+  const targetH = Math.round(cssH * dpr);
+  if (canvas.width !== targetW || canvas.height !== targetH) {
+    canvas.width = targetW;
+    canvas.height = targetH;
+  }
+  // Map logical coordinate space (W x H) to backing store.
+  ctx.setTransform(targetW / W, 0, 0, targetH / H, 0, 0);
+}
 
 const PADDLE_W_BASE = 86;
 const PADDLE_H = 12;
@@ -64,7 +86,10 @@ let ballX = W / 2;
 let ballY = PADDLE_Y - BALL_R - 1;
 let ballVX = 0;
 let ballVY = 0;
-let ballSpeed = 5.0;
+// Ball speed is stored in pixels-per-second so frame-rate drops
+// don't slow the game down (delta-time integration in step()).
+// 5.0 px/frame at 60fps == 300 px/s.
+let ballSpeed = 300;
 
 let bricks: Brick[] = [];
 let score = 0;
@@ -148,7 +173,8 @@ function launchBall(): void {
 
 function nextLevel(): void {
   level++;
-  ballSpeed = Math.min(8.5, 5.0 + (level - 1) * 0.45);
+  // px/sec (60fps-equivalent: 5.0..8.5 px/frame == 300..510 px/s)
+  ballSpeed = Math.min(510, 300 + (level - 1) * 27);
   paddleW = Math.max(60, PADDLE_W_BASE - (level - 1) * 4);
   buildLevel(level);
   resetBallToPaddle();
@@ -161,7 +187,7 @@ function resetGame(): void {
   score = 0;
   lives = 3;
   level = 1;
-  ballSpeed = 5.0;
+  ballSpeed = 300;
   paddleW = PADDLE_W_BASE;
   paddleX = (W - paddleW) / 2;
   buildLevel(level);
@@ -218,11 +244,15 @@ function step(dt: number): void {
 
   if (!running || paused || gameOver || won) return;
 
-  // Substep for high speeds
-  const speed = Math.hypot(ballVX, ballVY);
-  const steps = Math.max(1, Math.ceil(speed / 4));
-  const stepVX = ballVX / steps;
-  const stepVY = ballVY / steps;
+  // Substep for high speeds. ballVX/ballVY are in px/sec; total movement
+  // this frame is (vx * dt, vy * dt). Sub-step so each sub-step moves at
+  // most ~4 px, preventing tunneling through bricks/paddle.
+  const dx = ballVX * dt;
+  const dy = ballVY * dt;
+  const moveLen = Math.hypot(dx, dy);
+  const steps = Math.max(1, Math.ceil(moveLen / 4));
+  const stepVX = dx / steps;
+  const stepVY = dy / steps;
 
   for (let s = 0; s < steps; s++) {
     ballX += stepVX;
@@ -241,11 +271,14 @@ function step(dt: number): void {
       ballVY = Math.abs(ballVY);
     }
 
-    // Paddle
+    // Paddle. Vertical tolerance is one substep's downward travel; this
+    // catches the ball at any sub-step where it has just entered the
+    // paddle's band, without admitting false positives when the ball is
+    // already well past the paddle.
     if (
       ballVY > 0 &&
       ballY + BALL_R >= PADDLE_Y &&
-      ballY + BALL_R <= PADDLE_Y + PADDLE_H + Math.abs(ballVY) &&
+      ballY + BALL_R <= PADDLE_Y + PADDLE_H + Math.abs(stepVY) &&
       ballX >= paddleX - BALL_R &&
       ballX <= paddleX + paddleW + BALL_R
     ) {
@@ -472,5 +505,18 @@ canvas.addEventListener('click', () => {
 
 restartBtn.addEventListener('click', resetGame);
 
+window.addEventListener('resize', resizeCanvas);
+// Some mobile browsers fire orientationchange after a delayed layout pass.
+window.addEventListener('orientationchange', () => {
+  // Re-measure on the next frame so the CSS rect has settled.
+  requestAnimationFrame(resizeCanvas);
+});
+// ResizeObserver catches layout changes the resize event misses (e.g.
+// CSS-driven changes when the address bar collapses on mobile).
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(resizeCanvas).observe(canvas);
+}
+
+resizeCanvas();
 resetGame();
 requestAnimationFrame(frame);
