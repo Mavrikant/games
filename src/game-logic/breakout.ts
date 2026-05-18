@@ -269,21 +269,35 @@ function step(dt: number): void {
         ballY + BALL_R > b.y &&
         ballY - BALL_R < b.y + b.h
       ) {
-        // Determine collision side via previous position
-        const prevX = ballX - stepVX;
-        const prevY = ballY - stepVY;
-        const fromLeft = prevX + BALL_R <= b.x;
-        const fromRight = prevX - BALL_R >= b.x + b.w;
-        const fromTop = prevY + BALL_R <= b.y;
-        const fromBottom = prevY - BALL_R >= b.y + b.h;
+        // Determine collision side via minimum penetration depth.
+        // The axis with smaller overlap is the side the ball entered from,
+        // so we reflect along that axis and push the ball out to avoid
+        // tunneling/oscillation on multi-hit bricks.
+        const overlapLeft = ballX + BALL_R - b.x;          // ball right past brick left
+        const overlapRight = b.x + b.w - (ballX - BALL_R); // brick right past ball left
+        const overlapTop = ballY + BALL_R - b.y;           // ball bottom past brick top
+        const overlapBottom = b.y + b.h - (ballY - BALL_R); // brick bottom past ball top
+        const minX = Math.min(overlapLeft, overlapRight);
+        const minY = Math.min(overlapTop, overlapBottom);
 
-        if (fromLeft || fromRight) {
-          ballVX = -ballVX;
-        } else if (fromTop || fromBottom) {
-          ballVY = -ballVY;
+        if (minX < minY) {
+          // Horizontal collision (ball came from left or right side)
+          if (overlapLeft < overlapRight) {
+            ballX = b.x - BALL_R;
+            if (ballVX > 0) ballVX = -ballVX;
+          } else {
+            ballX = b.x + b.w + BALL_R;
+            if (ballVX < 0) ballVX = -ballVX;
+          }
         } else {
-          // corner / overlap fallback
-          ballVY = -ballVY;
+          // Vertical collision (ball came from top or bottom)
+          if (overlapTop < overlapBottom) {
+            ballY = b.y - BALL_R;
+            if (ballVY > 0) ballVY = -ballVY;
+          } else {
+            ballY = b.y + b.h + BALL_R;
+            if (ballVY < 0) ballVY = -ballVY;
+          }
         }
         b.hp--;
         if (b.hp <= 0) {
