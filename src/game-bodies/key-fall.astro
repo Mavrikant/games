@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <div class="hud__lives" aria-label="Canlar">
+    <span class="life" id="life-1">♥</span>
+    <span class="life" id="life-2">♥</span>
+    <span class="life" id="life-3">♥</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Key Fall oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Key Fall</h2>
+      <p id="overlay-msg">Düşen harflere klavyeden bas.<br>Başlamak için boşluk tuşuna bas.</p>
+    </div>
+  </div>
+</div>
