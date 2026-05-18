@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'zod';
 
 const games = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/games' }),
