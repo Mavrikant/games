@@ -63,9 +63,9 @@ function saveDifficulty(): void {
 function loadBest(d: Difficulty): number | null {
   try {
     const raw = localStorage.getItem(bestKey(d));
-    if (!raw) return null;
+    if (raw === null) return null;
     const n = Number(raw);
-    return Number.isFinite(n) && n > 0 ? n : null;
+    return Number.isFinite(n) && n >= 0 ? n : null;
   } catch {
     return null;
   }
@@ -362,10 +362,14 @@ function attachBoardListeners(): void {
   boardEl.addEventListener('dblclick', (e) => {
     const i = cellIndexFromEvent(e);
     if (i === null) return;
+    e.preventDefault();
     chord(i);
   });
   boardEl.addEventListener('mousedown', (e) => {
-    if ((e as MouseEvent).button === 0 && !gameOver) setFace('😮');
+    const me = e as MouseEvent;
+    if (me.button !== 0 || gameOver) return;
+    if (cellIndexFromEvent(e) === null) return;
+    setFace('😮');
   });
   boardEl.addEventListener('mouseup', () => {
     if (!gameOver) setFace('🙂');
@@ -373,6 +377,49 @@ function attachBoardListeners(): void {
   boardEl.addEventListener('mouseleave', () => {
     if (!gameOver) setFace('🙂');
   });
+
+  // Touch: long-press to flag (since right-click is not available on touch).
+  let touchTimer: number | null = null;
+  let touchTarget: HTMLElement | null = null;
+  let touchLongPress = false;
+  const TOUCH_FLAG_MS = 400;
+  const clearTouch = (): void => {
+    if (touchTimer !== null) {
+      clearTimeout(touchTimer);
+      touchTimer = null;
+    }
+    touchTarget = null;
+  };
+  boardEl.addEventListener(
+    'touchstart',
+    (e) => {
+      const raw = e.target as HTMLElement | null;
+      const target = raw?.closest<HTMLElement>('.ms-cell') ?? null;
+      if (!target) return;
+      touchTarget = target;
+      touchLongPress = false;
+      touchTimer = window.setTimeout(() => {
+        if (touchTarget) {
+          const i = Number(touchTarget.dataset.r) * config.cols + Number(touchTarget.dataset.c);
+          if (Number.isFinite(i)) {
+            touchLongPress = true;
+            toggleFlag(i);
+          }
+        }
+        touchTimer = null;
+      }, TOUCH_FLAG_MS);
+    },
+    { passive: true },
+  );
+  boardEl.addEventListener('touchend', (e) => {
+    if (touchLongPress) {
+      e.preventDefault();
+      touchLongPress = false;
+    }
+    clearTouch();
+  });
+  boardEl.addEventListener('touchmove', clearTouch, { passive: true });
+  boardEl.addEventListener('touchcancel', clearTouch);
 }
 
 function reset(): void {
@@ -401,7 +448,16 @@ difficultySel.addEventListener('change', () => {
   }
 });
 window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'r') reset();
+  if (e.key.toLowerCase() !== 'r') return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const target = e.target as HTMLElement | null;
+  if (target) {
+    const tag = target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable) {
+      return;
+    }
+  }
+  reset();
 });
 
 difficulty = loadDifficulty();
