@@ -30,6 +30,7 @@ const tagsEl = document.querySelector<HTMLElement>('#tags')!;
 const searchEl = document.querySelector<HTMLInputElement>('#search')!;
 const sortEl = document.querySelector<HTMLSelectElement>('#sort')!;
 const countEl = document.querySelector<HTMLElement>('#count')!;
+const yearEl = document.querySelector<HTMLElement>('#year');
 
 function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => {
@@ -65,7 +66,7 @@ function thumbHtml(game: ResolvedGame): string {
     return `<img src="${escapeHtml(game.thumbnailUrl)}" alt="" loading="lazy" />`;
   }
   const letter = game.title.charAt(0).toUpperCase();
-  return `<span aria-hidden="true">${escapeHtml(letter)}</span>`;
+  return `<span class="card__thumb-placeholder" aria-hidden="true">${escapeHtml(letter)}</span>`;
 }
 
 function filtered(): ResolvedGame[] {
@@ -89,11 +90,22 @@ function filtered(): ResolvedGame[] {
   return list;
 }
 
+const EMPTY_HTML = `
+  <div class="empty">
+    <div class="empty__icon" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="7" cy="7" r="5"/><path d="m11 11 3 3"/>
+      </svg>
+    </div>
+    <p class="empty__text">Bu kriterlere uyan oyun yok.</p>
+  </div>
+`;
+
 function renderGrid(): void {
   const list = filtered();
-  countEl.textContent = String(list.length);
+  countEl.textContent = `${list.length} oyun`;
   if (list.length === 0) {
-    grid.innerHTML = `<div class="empty">Bu kriterlere uyan oyun yok.</div>`;
+    grid.innerHTML = EMPTY_HTML;
     return;
   }
   grid.innerHTML = list
@@ -105,9 +117,9 @@ function renderGrid(): void {
             <h2 class="card__title">${escapeHtml(g.title)}</h2>
             <p class="card__desc">${escapeHtml(g.description)}</p>
             <div class="card__meta">
-              <span>${escapeHtml(relativeDate(g.dateAdded))}</span>
+              <span class="card__date">${escapeHtml(relativeDate(g.dateAdded))}</span>
               <span class="card__tags">${g.tags
-                .slice(0, 3)
+                .slice(0, 2)
                 .map((t) => `<span class="card__tag">${escapeHtml(t)}</span>`)
                 .join('')}</span>
             </div>
@@ -142,7 +154,13 @@ function openGame(slug: string): void {
   const url = game.url;
   playerFrame.src = url;
   playerTitle.textContent = game.title;
-  playerControls.textContent = game.controls ?? '';
+  if (game.controls) {
+    playerControls.textContent = game.controls;
+    playerControls.style.display = '';
+  } else {
+    playerControls.textContent = '';
+    playerControls.style.display = 'none';
+  }
   playerOpen.href = url;
   player.classList.add('player--open');
   app.classList.add('app--hidden');
@@ -158,7 +176,7 @@ function closeGame(): void {
   playerFrame.src = 'about:blank';
   player.classList.remove('player--open');
   app.classList.remove('app--hidden');
-  document.title = 'Oyunlar';
+  document.title = 'Oyunlar — karaman.dev';
   if (location.hash.startsWith('#/play/')) {
     history.pushState(null, '', location.pathname + location.search);
   }
@@ -207,6 +225,7 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('popstate', syncFromHash);
 
+if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 renderTags();
 renderGrid();
 syncFromHash();

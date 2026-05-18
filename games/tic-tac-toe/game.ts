@@ -121,6 +121,7 @@ function render(): void {
 
 function endGame(result: 'x' | 'o' | 'd', line?: readonly number[]): void {
   gameOver = true;
+  render();
   if (line) {
     for (const i of line) {
       cellEls[i]?.classList.add('cell--win');

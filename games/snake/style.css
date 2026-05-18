@@ -1,15 +1,20 @@
 :root {
-  --bg: #0a0a14;
-  --bg-elev: #14141e;
-  --border: #2a2a3a;
-  --text: #e4e4ed;
-  --text-dim: #8a8aa0;
-  --accent: #7c3aed;
-  --snake: #06b6d4;
-  --snake-head: #22d3ee;
-  --food: #f43f5e;
-  --grid: #1c1c2a;
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --bg: #0a0b0e;
+  --surface: #14171c;
+  --surface-2: #1c2027;
+  --border: #232830;
+  --border-strong: #2f3540;
+  --text: #f5f6f8;
+  --text-muted: #98a0ad;
+  --text-dim: #5a6473;
+  --accent: #818cf8;
+  --snake: #34d399;
+  --snake-head: #6ee7b7;
+  --food: #fb7185;
+  --grid: #1a1e25;
+  font-family:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
 }
 
 * {
@@ -22,70 +27,82 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .stage {
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
 }
 
 .hud {
   display: flex;
-  width: 100%;
   align-items: center;
-  gap: 16px;
-  font-size: 15px;
+  gap: 10px;
 }
 
 .hud__score,
 .hud__best {
-  background: var(--bg-elev);
+  flex: 1;
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
 }
 
 .hud__score span,
 .hud__best span {
-  color: var(--snake-head);
+  display: block;
+  font-size: 22px;
   font-weight: 700;
+  color: var(--text);
   font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+.hud__score span {
+  color: var(--snake-head);
 }
 
 .hud__btn {
-  margin-left: auto;
   background: transparent;
-  color: var(--text);
+  color: var(--text-muted);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 10px;
+  padding: 11px 14px;
   font: inherit;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s;
 }
 .hud__btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface);
 }
 
 .board-wrap {
   position: relative;
   width: 100%;
-  max-width: 480px;
 }
 
 #board {
   display: block;
   width: 100%;
   height: auto;
-  background: var(--bg-elev);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   image-rendering: pixelated;
 }
 
@@ -95,9 +112,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(10, 10, 20, 0.78);
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   transition: opacity 0.2s;
 }
 .overlay--hidden {
@@ -110,19 +128,23 @@ body {
   padding: 24px;
 }
 .overlay__inner h2 {
-  margin: 0 0 8px;
-  font-size: 28px;
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 .overlay__inner p {
   margin: 0;
-  color: var(--text-dim);
+  color: var(--text-muted);
+  font-size: 14px;
 }
 
 .hint {
   margin: 0;
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 12.5px;
   text-align: center;
+  letter-spacing: 0.01em;
 }
 
 .touch {
@@ -131,6 +153,7 @@ body {
   align-items: center;
   gap: 6px;
   user-select: none;
+  margin-top: 4px;
 }
 .touch__row {
   display: flex;
@@ -139,7 +162,7 @@ body {
 .touch__btn {
   width: 56px;
   height: 56px;
-  background: var(--bg-elev);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
   color: var(--text);
@@ -150,6 +173,7 @@ body {
 .touch__btn:active {
   background: var(--accent);
   border-color: var(--accent);
+  color: white;
 }
 
 @media (hover: none) and (pointer: coarse) {

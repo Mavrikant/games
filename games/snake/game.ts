@@ -145,7 +145,7 @@ function die(): void {
 }
 
 function draw(): void {
-  ctx.fillStyle = getCss('--bg-elev');
+  ctx.fillStyle = getCss('--surface');
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.strokeStyle = getCss('--grid');
