@@ -1,0 +1,8 @@
+{
+  "title": "Maze Run",
+  "description": "Prosedürel labirentten çıkışa ulaş — süre bittiğinde labirent yeniden çiziliyor.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "maze", "tek-oyunculu"],
+  "controls": "Ok tuşları / WASD veya swipe · R: yeniden başla · Boşluk: duraklat",
+  "thumbnail": "maze-run.svg"
+}

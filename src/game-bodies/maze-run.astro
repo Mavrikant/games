@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__chip hud__chip--level">Seviye<span id="level">1</span></div>
+  <div class="hud__chip hud__chip--time">Süre<span id="time">60</span></div>
+  <div class="hud__chip hud__chip--best">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni oyun</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="480"
+    aria-label="Maze Run labirent alanı"
+    tabindex="0"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Maze Run</h2>
+      <p id="overlay-msg">Başlamak için bir yön tuşuna bas veya ekranı kaydır.</p>
+      <button id="overlay-action" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-dir="up" type="button" aria-label="Yukarı">▲</button>
+  <div class="touch__row">
+    <button class="touch__btn" data-dir="left" type="button" aria-label="Sol">◀</button>
+    <button class="touch__btn" data-dir="down" type="button" aria-label="Aşağı">▼</button>
+    <button class="touch__btn" data-dir="right" type="button" aria-label="Sağ">▶</button>
+  </div>
+</div>
