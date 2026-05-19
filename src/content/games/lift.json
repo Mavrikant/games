@@ -1,0 +1,8 @@
+{
+  "title": "Lift",
+  "description": "Asansörü doğru kata yönlendir — yolcular sabırsızlanmadan teslim et.",
+  "dateAdded": "2026-05-19",
+  "tags": ["arcade", "yönetim", "mobil", "tek-oyunculu"],
+  "controls": "1-5: kata git · ↑/↓: bir kat · Tıkla/dokun: kat seç · Boşluk: başla · R: yeniden başla",
+  "thumbnail": "lift.svg"
+}
