@@ -1,0 +1,19 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <div class="hud__stat" aria-label="Kat">Kat<span id="floor">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="640" aria-label="Lift oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Lift</h2>
+      <p id="overlay-msg">Yolcuyu katından al, hedef katına bırak. Boşluk veya bir kata dokun ile başla.</p>
+    </div>
+  </div>
+</div>
