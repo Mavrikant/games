@@ -1,0 +1,193 @@
+:root {
+  --maze-bg: #0f1218;
+  --maze-wall: #cbd5f5;
+  --maze-exit: #fde68a;
+  --maze-player: #a5b4fc;
+  --maze-player-glow: rgba(129, 140, 248, 0.4);
+  --maze-chip-level: #c4b5fd;
+  --maze-chip-time: #fde68a;
+  --maze-chip-best: #6ee7b7;
+}
+
+.hud {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.hud__chip {
+  flex: 1 1 0;
+  min-width: 84px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__chip span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__chip--level span { color: var(--maze-chip-level); }
+.hud__chip--time span { color: var(--maze-chip-time); }
+.hud__chip--best span { color: var(--maze-chip-best); }
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  /* Cap board to the viewport on tall screens; clamp also lets it stay
+     fully visible in portrait at 12x12+ since cellSize derives from
+     canvas CSS width / mazeSize at draw time. */
+  max-width: min(100%, calc(100svh - 240px));
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--maze-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  /* Prevent iOS swipe-scroll / pinch-zoom inside the maze. */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+#board:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px 20px;
+  max-width: 80%;
+}
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.overlay__inner p {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.overlay__btn {
+  appearance: none;
+  background: var(--accent-strong);
+  color: white;
+  border: 1px solid var(--accent-strong);
+  border-radius: 10px;
+  padding: 11px 22px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.overlay__btn:hover,
+.overlay__btn:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* On-screen direction pad — only visible on coarse-pointer devices. */
+.touch {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  margin-top: 4px;
+}
+.touch__row {
+  display: flex;
+  gap: 6px;
+}
+.touch__btn {
+  width: 56px;
+  height: 56px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s, border-color 0.1s;
+}
+.touch__btn--pressed,
+.touch__btn:active {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: white;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: flex;
+  }
+}
+
+/* Landscape on small screens: keep the maze visible while the touch pad
+   sits to the right so the user can swipe with one thumb and tap with
+   the other. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .stage {
+    max-width: 100vw;
+    padding: 12px;
+  }
+  .hud {
+    gap: 6px;
+  }
+  .hud__chip {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .hud__chip span {
+    font-size: 16px;
+  }
+  .board-wrap {
+    max-width: min(calc(100svh - 80px), 80vw);
+  }
+}

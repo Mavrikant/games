@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Maze Run">
+  <defs>
+    <linearGradient id="mr-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101521" />
+      <stop offset="100%" stop-color="#080a12" />
+    </linearGradient>
+    <radialGradient id="mr-player" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0%" stop-color="#c7d2fe" />
+      <stop offset="60%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </radialGradient>
+    <radialGradient id="mr-exit" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#fef3c7" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" rx="20" fill="url(#mr-bg)" />
+  <rect x="0.5" y="0.5" width="319" height="199" rx="19.5" fill="none" stroke="#1f242c" />
+
+  <!-- Maze walls (stylised 7x4 grid) -->
+  <g stroke="#cbd5f5" stroke-width="3" stroke-linecap="square" fill="none">
+    <!-- outer frame -->
+    <rect x="40" y="34" width="240" height="132" rx="6" />
+    <!-- vertical interior -->
+    <path d="M80 34 L80 100" />
+    <path d="M120 70 L120 166" />
+    <path d="M160 34 L160 70" />
+    <path d="M160 100 L160 166" />
+    <path d="M200 34 L200 134" />
+    <path d="M240 60 L240 166" />
+    <!-- horizontal interior -->
+    <path d="M40 70 L120 70" />
+    <path d="M160 70 L200 70" />
+    <path d="M80 100 L160 100" />
+    <path d="M200 100 L240 100" />
+    <path d="M40 134 L120 134" />
+    <path d="M200 134 L280 134" />
+  </g>
+
+  <!-- Exit cell (top-right) -->
+  <rect x="244" y="38" width="32" height="18" rx="3" fill="url(#mr-exit)" opacity="0.85" />
+  <rect x="248" y="40" width="24" height="14" rx="2" fill="none" stroke="#fde68a" stroke-width="2" />
+
+  <!-- Player token (bottom-left area) -->
+  <circle cx="60" cy="148" r="11" fill="url(#mr-player)" />
+  <circle cx="56.5" cy="144.5" r="3" fill="rgba(255,255,255,0.7)" />
+
+  <!-- Movement trail -->
+  <path d="M60 148 L100 148 L100 116 L132 116" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.55" stroke-dasharray="4 6" />
+
+  <!-- Title -->
+  <text x="20" y="24" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e2e8f0" letter-spacing="0.06em">MAZE RUN</text>
+  <text x="300" y="190" text-anchor="end" font-family="ui-sans-serif, system-ui" font-size="9" font-weight="500" fill="#5a6473" letter-spacing="0.1em">PROCEDURAL · TIMED</text>
+</svg>
