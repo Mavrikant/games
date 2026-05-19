@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "zeka", "sıralama"],
   "controls": "Tüpe dokun → seç · ikinciye dokun → dök · Z: geri al · R: yeniden başla · N: sonraki seviye",
+  "howToPlay": "Bir tüpe dokunup seç, ikinci tüpe dokun → üstteki renk diğer tüpe akar (sadece aynı renge ya da tamamen boş tüpe dökebilirsin). Her tüpün tek renkten oluşması bölümü çözer.",
   "thumbnail": "water-sort.svg"
 }

@@ -10,6 +10,7 @@ const games = defineCollection({
     dateAdded: z.string(),
     tags: z.array(z.string()).default([]),
     controls: z.string().optional(),
+    howToPlay: z.string().optional(),
     thumbnail: z.string().optional(),
   }),
 });

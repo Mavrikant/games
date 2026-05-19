@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle","refleks","fizik"],
   "controls": "← / → veya A / D: sol-sağ kefe · R: yeniden başla · Mobil: tahtanın sol/sağ yarısına dokun",
+  "howToPlay": "Yukarıda beliren ağırlıklı (1–5) taşı sol veya sağ kefeye bırak; tork farkı terazinin eğimini belirler. Eğim 45°'yi aşıp devrilirse oyun biter — fuse dolarsa taş ağır kefeye otomatik düşer ve dengeyi bozar.",
   "thumbnail": "terazi.svg"
 }

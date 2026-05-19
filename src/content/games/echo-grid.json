@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["puzzle", "hafıza", "tek-oyunculu"],
   "controls": "Başlat düğmesi / Boşluk / Enter: turu başlat · 1-9 veya tıkla: kare seç · R: sıfırla",
+  "howToPlay": "Önce ızgaradaki kareler sırayla yanıp söner; sen aynı kareleri tıkla — ama gösterilenin tam **tersi sırayla**. Her başarılı turda dizi bir kare daha uzar; ilk hatada oyun biter.",
   "thumbnail": "echo-grid.svg"
 }

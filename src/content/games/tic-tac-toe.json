@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["klasik", "tek-oyunculu", "strateji"],
   "controls": "Hücreye tıkla · R: yeniden başla",
+  "howToPlay": "Boş bir hücreye tıklayarak X'ini koy; ardından bilgisayar O işaretini koyar. Yatay, dikey ya da çapraz olarak üç X'i yan yana getirirsen kazanır, hiç boş hücre kalmazsa beraberlik olur.",
   "thumbnail": "tic-tac-toe.svg"
 }

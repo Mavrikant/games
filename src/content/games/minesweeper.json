@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["klasik", "tek-oyunculu", "puzzle"],
   "controls": "Sol tık: aç · Sağ tık / uzun bas: bayrak · Çift tık: chord · R: yeniden başla",
+  "howToPlay": "Hücreleri açtıkça gördüğün sayı, o hücrenin etrafında kaç mayın olduğunu gösterir; mantık yürüterek güvenli hücreleri aç ve şüphelilere bayrak koy. Tek bir mayına bile dokunursan oyun anında biter.",
   "thumbnail": "minesweeper.svg"
 }

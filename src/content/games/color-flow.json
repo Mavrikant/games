@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "tek-oyunculu", "mobil"],
   "controls": "Sürükle: yol çiz · Aynı renge tekrar dokun: yolu sil · R: yeniden başla · N: yeni puzzle",
+  "howToPlay": "Aynı renkteki iki ucu birbirine bağlayan kesintisiz bir yol çiz; yollar birbirini kesemez. Tüm renkler bağlandığında ve hücreler tamamen dolduğunda bölümü çözmüş olursun.",
   "thumbnail": "color-flow.svg"
 }

@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "platform", "tek-oyunculu", "mobil"],
   "controls": "Sol/Sağ ok veya A/D: hareket · Mobil: ekranın sol/sağ yarısına dokun · R: yeniden başla",
+  "howToPlay": "Karakter otomatik zıplıyor; senin işin sadece sağa veya sola hareket ettirip onu bir sonraki platforma denk getirmek. Boşluğa düşersen oyun biter — durmadan yukarı tırman.",
   "thumbnail": "sky-jump.svg"
 }

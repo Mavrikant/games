@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "refleks", "desen", "özgün"],
   "controls": "↑/W/Z: üst · ↓/S/X: alt · Boşluk/Enter: başla · R: yeniden başla · Mobil: alanın üst/alt yarısına dokun",
+  "howToPlay": "Mekik soldan sağa kolon kolon ilerler; her kolonda 'üst' veya 'alt' seçerek ipliği o tarafa geçirirsin. Üstteki hedef örüntüye uyan ipliği dokursan puan kazanır, hata yaparsan canın azalır.",
   "thumbnail": "dokuma.svg"
 }
