@@ -1,0 +1,138 @@
+:root {
+  --dokuma-warp: #d6c89a;
+  --dokuma-weft-a: #f59e0b;
+  --dokuma-weft-b: #6ee7b7;
+  --dokuma-shuttle: #f5f6f8;
+  --dokuma-shadow: rgba(0, 0, 0, 0.4);
+  --dokuma-target: #818cf8;
+  --dokuma-wrong: #f87171;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__stat {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+.overlay--hidden {
+  opacity: 0;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 320px;
+}
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.dokuma-touch {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.dokuma-touch__btn {
+  flex: 1;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.12s;
+  touch-action: manipulation;
+}
+
+.dokuma-touch__btn:hover,
+.dokuma-touch__btn:active {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.dokuma-touch__btn:first-child {
+  border-top: 2px solid var(--accent);
+}
+.dokuma-touch__btn:last-child {
+  border-bottom: 2px solid var(--accent);
+}
+
+@media (max-width: 420px) {
+  .hud__stat {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .hud__stat span {
+    font-size: 18px;
+  }
+  .dokuma-touch__btn {
+    font-size: 13px;
+    padding: 14px;
+  }
+}

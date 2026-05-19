@@ -1,0 +1,8 @@
+{
+  "title": "Dokuma",
+  "description": "Mekik kolondan kolona ilerlerken üst/alt seç — yukarıdaki örüntüyü ipliğe dök.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "refleks", "desen", "özgün"],
+  "controls": "↑/W/Z: üst · ↓/S/X: alt · Boşluk/Enter: başla · R: yeniden başla · Mobil: alanın üst/alt yarısına dokun",
+  "thumbnail": "dokuma.svg"
+}

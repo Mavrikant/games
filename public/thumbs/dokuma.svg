@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Dokuma">
+  <rect width="320" height="200" fill="#0a0b0e"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#141821"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <!-- warp threads (vertical) -->
+  <g stroke="#d6c89a" stroke-width="3" opacity="0.85">
+    <line x1="40" y1="30" x2="40" y2="170"/>
+    <line x1="80" y1="30" x2="80" y2="170"/>
+    <line x1="120" y1="30" x2="120" y2="170"/>
+    <line x1="160" y1="30" x2="160" y2="170"/>
+    <line x1="200" y1="30" x2="200" y2="170"/>
+    <line x1="240" y1="30" x2="240" y2="170"/>
+    <line x1="280" y1="30" x2="280" y2="170"/>
+  </g>
+  <!-- weft rows alternating over/under -->
+  <!-- row 1 (over the odd warps) -->
+  <g fill="#f59e0b">
+    <rect x="20"  y="44" width="40" height="14" rx="2"/>
+    <rect x="100" y="44" width="40" height="14" rx="2"/>
+    <rect x="180" y="44" width="40" height="14" rx="2"/>
+    <rect x="260" y="44" width="40" height="14" rx="2"/>
+  </g>
+  <g fill="#6ee7b7">
+    <rect x="60"  y="48" width="40" height="6" rx="2"/>
+    <rect x="140" y="48" width="40" height="6" rx="2"/>
+    <rect x="220" y="48" width="40" height="6" rx="2"/>
+  </g>
+  <!-- row 2 (offset) -->
+  <g fill="#6ee7b7">
+    <rect x="20"  y="78" width="40" height="6" rx="2"/>
+    <rect x="100" y="78" width="40" height="6" rx="2"/>
+    <rect x="180" y="78" width="40" height="6" rx="2"/>
+    <rect x="260" y="78" width="40" height="6" rx="2"/>
+  </g>
+  <g fill="#f59e0b">
+    <rect x="60"  y="74" width="40" height="14" rx="2"/>
+    <rect x="140" y="74" width="40" height="14" rx="2"/>
+    <rect x="220" y="74" width="40" height="14" rx="2"/>
+  </g>
+  <!-- row 3 (active row with shuttle) -->
+  <g fill="#f59e0b">
+    <rect x="20"  y="104" width="40" height="14" rx="2"/>
+    <rect x="100" y="104" width="40" height="14" rx="2"/>
+  </g>
+  <!-- shuttle -->
+  <g>
+    <polygon points="148,111 156,103 200,103 208,111 200,119 156,119" fill="#f5f6f8" stroke="#6366f1" stroke-width="1.5"/>
+    <polygon points="200,111 194,107 194,115" fill="#6366f1"/>
+  </g>
+  <!-- title -->
+  <text x="160" y="186" text-anchor="middle" fill="#98a0ad" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="0.08em">DOKUMA</text>
+</svg>
