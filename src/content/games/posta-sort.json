@@ -1,0 +1,8 @@
+{
+  "title": "Posta Sort",
+  "description": "Düşen paketleri doğru posta gözüne yönlendir — şehir-göz eşlemesi her seviyede karışıyor.",
+  "dateAdded": "2026-05-19",
+  "tags": ["arcade", "sıralama", "refleks", "tek-oyunculu"],
+  "controls": "1-5: göze yolla · Tıkla/dokun: gözü seç · Boşluk: başla · R: yeniden başla",
+  "thumbnail": "posta-sort.svg"
+}

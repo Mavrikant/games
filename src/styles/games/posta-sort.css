@@ -1,0 +1,152 @@
+:root {
+  --ps-accent: #fbbf24;
+  --ps-bay-1: #fb7185;
+  --ps-bay-2: #34d399;
+  --ps-bay-3: #60a5fa;
+  --ps-bay-4: #c084fc;
+  --ps-bay-5: #f59e0b;
+  --ps-good: #34d399;
+  --ps-bad: #ef4444;
+  --ps-belt: #1c2027;
+  --ps-belt-edge: #2f3540;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__score,
+.hud__best {
+  flex: 1 1 80px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__score span {
+  color: var(--ps-accent);
+}
+
+.hud__lives {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+}
+
+.strike {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ps-bad);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ps-bad);
+  border-radius: 6px;
+  transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+  user-select: none;
+  opacity: 0.25;
+}
+
+.strike--used {
+  opacity: 1;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+
+.overlay--hidden {
+  opacity: 0;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 320px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ps-accent);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.overlay__inner small {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+@media (max-width: 420px) {
+  .hud__score,
+  .hud__best {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .hud__score span,
+  .hud__best span {
+    font-size: 18px;
+  }
+  .strike {
+    font-size: 13px;
+    width: 18px;
+    height: 18px;
+  }
+}
