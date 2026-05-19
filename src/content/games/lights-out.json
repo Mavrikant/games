@@ -1,0 +1,8 @@
+{
+  "title": "Lights Out",
+  "description": "Tüm ışıkları kapatmaya çalış — bir hücreye dokunduğunda kendisi ve 4 komşusu durum değiştirir.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "klasik", "mantık"],
+  "controls": "Tap / tıkla · R: yeniden başla",
+  "thumbnail": "lights-out.svg"
+}
