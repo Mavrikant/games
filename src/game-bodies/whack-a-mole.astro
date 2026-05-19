@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Süre<span id="time">60</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <div
+    id="board"
+    class="board"
+    role="grid"
+    aria-label="Whack-a-Mole tahtası"
+  ></div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Whack-a-Mole</h2>
+      <p id="overlay-msg">
+        Köstebekleri yakala. Altın köstebek bonus, bombaya
+        dokunma!<br /><small>Başlamak için "Başla" tuşuna bas.</small>
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--primary" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>
