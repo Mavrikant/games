@@ -1,0 +1,8 @@
+{
+  "title": "Water Sort",
+  "description": "Renkli sıvıları tüpler arasında dökerek her tüpün tek renk olmasını sağla.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "zeka", "sıralama"],
+  "controls": "Tüpe dokun → seç · ikinciye dokun → dök · Z: geri al · R: yeniden başla · N: sonraki seviye",
+  "thumbnail": "water-sort.svg"
+}
