@@ -1,0 +1,8 @@
+{
+  "title": "Sky Jump",
+  "description": "Platformdan platforma zıpla, yükseğe tırman — düşme yok, sadece yukarı.",
+  "dateAdded": "2026-05-19",
+  "tags": ["arcade", "platform", "tek-oyunculu", "mobil"],
+  "controls": "Sol/Sağ ok veya A/D: hareket · Mobil: ekranın sol/sağ yarısına dokun · R: yeniden başla",
+  "thumbnail": "sky-jump.svg"
+}
