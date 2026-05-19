@@ -1,0 +1,319 @@
+:root {
+  --pc-cell-bg: #15191f;
+  --pc-cell-bg-hover: #1c2128;
+  --pc-cell-border: #232a33;
+  --pc-cell-border-strong: #2f3744;
+  --pc-pipe: #475569;
+  --pc-pipe-edge: #64748b;
+  --pc-flow-empty: #1f2937;
+  --pc-flow-fill: #38bdf8;
+  --pc-flow-glow: rgba(56, 189, 248, 0.55);
+  --pc-source: #38bdf8;
+  --pc-source-edge: #0ea5e9;
+  --pc-end: #f59e0b;
+  --pc-end-edge: #b45309;
+  --pc-end-lit: #22d3ee;
+}
+
+/* HUD stat tile (shared shape with memory.css; tutarlılık için kopyalandı). */
+.hud {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+#restart {
+  min-height: 44px;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* Grid — JS değerleri --pc-cols / --pc-rows içine yazıyor (default 6).
+   Hücre boyutu viewport'a göre clamp; portrait modda min ~44px touch target,
+   geniş ekranda en fazla ~72px (oyun aşırı büyük görünmesin). */
+.pc-board {
+  --pc-cols: 6;
+  --pc-rows: 6;
+  --pc-gap: 4px;
+  --pc-pad: 6px;
+  /* Mevcut yatay alan: max-width 520px stage'i takip ediyor; viewport'tan başla,
+     sayfa padding'i çıkar (32px), board padding & gap çıkar — fakat clamp ile
+     bağla. */
+  --pc-avail: min(calc(100vw - 56px), 460px);
+  --pc-ideal: calc(
+    (var(--pc-avail) - var(--pc-pad) * 2 - var(--pc-gap) * (var(--pc-cols) - 1))
+      / var(--pc-cols)
+  );
+  --pc-cell: clamp(44px, var(--pc-ideal), 72px);
+
+  display: grid;
+  grid-template-columns: repeat(var(--pc-cols), var(--pc-cell));
+  grid-template-rows: repeat(var(--pc-rows), var(--pc-cell));
+  gap: var(--pc-gap);
+  padding: var(--pc-pad);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 0 auto;
+  width: max-content;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.pc-cell {
+  appearance: none;
+  background: var(--pc-cell-bg);
+  border: 1px solid var(--pc-cell-border);
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  width: var(--pc-cell);
+  height: var(--pc-cell);
+  cursor: pointer;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  /* Mobile: yumuşak hissi koru — Safari blue/grey tap flash kapat. */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.pc-cell:hover:not(.pc-cell--fixed):not(.pc-cell--empty) {
+  background: var(--pc-cell-bg-hover);
+  border-color: var(--pc-cell-border-strong);
+}
+
+.pc-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.pc-cell--fixed {
+  cursor: default;
+}
+
+.pc-cell--empty {
+  cursor: default;
+  background: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+/* Bağlı hücreler: yumuşak vurgulu glow. */
+.pc-cell--connected {
+  border-color: var(--pc-flow-fill);
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.07),
+    rgba(56, 189, 248, 0.02)
+  );
+}
+
+.pc-cell--end-lit {
+  border-color: var(--pc-end-lit);
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.16),
+    rgba(34, 211, 238, 0.04)
+  );
+  animation: pc-cell-pop 0.45s ease-out;
+}
+
+@keyframes pc-cell-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Pipe görsel container — rotation burada uygulanıyor. Transform-origin merkez. */
+.pc-piece {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.pc-piece--empty {
+  /* Görünmez — boş hücre. */
+}
+
+.pc-piece svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Pipe gövdesi: koyu gri (akmıyor). */
+.pc-svg-pipe {
+  fill: var(--pc-pipe);
+  stroke: var(--pc-pipe-edge);
+  stroke-width: 0;
+}
+
+/* İç kanal (flow) — bağlı değilse gri, bağlıysa parlak mavi. */
+.pc-svg-flow {
+  fill: var(--pc-flow-empty);
+  transition: fill 180ms ease;
+}
+
+/* Bağlı hücredeki flow rengini parlat. */
+.pc-cell--connected .pc-svg-flow {
+  fill: var(--pc-flow-fill);
+  filter: drop-shadow(0 0 4px var(--pc-flow-glow));
+}
+
+/* Source: mavi kutu + parlak damla. */
+.pc-cell--source {
+  background: rgba(56, 189, 248, 0.05);
+  border-color: var(--pc-source-edge);
+}
+
+.pc-svg-src {
+  fill: var(--pc-source);
+  stroke: var(--pc-source-edge);
+  stroke-width: 2;
+}
+
+.pc-svg-drop {
+  fill: #e0f2fe;
+  opacity: 0.9;
+}
+
+/* End: turuncu hedef halkası — bağlandığında cyan'a döner. */
+.pc-cell--end {
+  background: rgba(245, 158, 11, 0.04);
+  border-color: var(--pc-end-edge);
+}
+
+.pc-svg-end-outer {
+  fill: none;
+  stroke: var(--pc-end);
+  stroke-width: 6;
+}
+
+.pc-svg-end-inner {
+  fill: var(--pc-end);
+}
+
+.pc-cell--end.pc-cell--end-lit .pc-svg-end-outer {
+  stroke: var(--pc-end-lit);
+}
+
+.pc-cell--end.pc-cell--end-lit .pc-svg-end-inner {
+  fill: var(--pc-end-lit);
+}
+
+/* Endpoint piece kapsayıcısı — döndürmeden sabit tutuluyor (fixed); ama transform
+   inline'da rotate(0) ile geliyor, hareketsiz görünür. */
+.pc-piece--endpoint {
+  transition: none;
+}
+
+/* Overlay — kazanma ekranı. */
+.pc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.pc-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pc-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 320px;
+}
+
+.pc-overlay__inner h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.pc-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.pc-overlay__btn {
+  min-height: 44px;
+  padding-inline: 18px;
+}
+
+/* Dar mobil: hücreler en alta düşmesin, HUD wrap. */
+@media (max-width: 420px) {
+  .pc-board {
+    --pc-pad: 4px;
+    --pc-gap: 3px;
+    --pc-avail: min(calc(100vw - 32px), 460px);
+  }
+}
+
+/* Çok dar (ör. iPhone SE portrait, 320-360px): touch target en az 40px tutmaya devam et. */
+@media (max-width: 360px) {
+  .pc-board {
+    --pc-cell: clamp(40px, var(--pc-ideal), 56px);
+  }
+}
+
+/* Landscape: stage tek satırda akabilsin diye max-height kontrol. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .pc-board {
+    --pc-avail: min(calc(100vh - 180px), 360px);
+  }
+}

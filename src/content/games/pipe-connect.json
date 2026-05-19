@@ -1,0 +1,8 @@
+{
+  "title": "Pipe Connect",
+  "description": "Boru parçalarını döndürerek kaynak ile çıkış arasında akışı tamamla.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "rotasyon", "akış"],
+  "controls": "Dokun / tıkla: 90° döndür · R: yeni puzzle",
+  "thumbnail": "pipe-connect.svg"
+}
