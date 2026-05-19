@@ -1,0 +1,8 @@
+{
+  "title": "Terazi",
+  "description": "Düşen taşları doğru tarafa bırak — kefeleri dengede tut, eğim 45°'yi aşmasın.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle","refleks","fizik"],
+  "controls": "← / → veya A / D: sol-sağ kefe · R: yeniden başla · Mobil: tahtanın sol/sağ yarısına dokun",
+  "thumbnail": "terazi.svg"
+}
