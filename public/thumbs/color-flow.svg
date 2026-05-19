@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Color Flow">
+  <defs>
+    <linearGradient id="cf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1d28" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <filter id="cf-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#cf-bg)" />
+
+  <!-- 5x5 grid (centered ~ x:90..230, y:20..180, cell 32) -->
+  <g stroke="#1f242c" stroke-width="1">
+    <!-- horizontal lines -->
+    <line x1="80"  y1="20"  x2="240" y2="20" />
+    <line x1="80"  y1="52"  x2="240" y2="52" />
+    <line x1="80"  y1="84"  x2="240" y2="84" />
+    <line x1="80"  y1="116" x2="240" y2="116" />
+    <line x1="80"  y1="148" x2="240" y2="148" />
+    <line x1="80"  y1="180" x2="240" y2="180" />
+    <!-- vertical lines -->
+    <line x1="80"  y1="20"  x2="80"  y2="180" />
+    <line x1="112" y1="20"  x2="112" y2="180" />
+    <line x1="144" y1="20"  x2="144" y2="180" />
+    <line x1="176" y1="20"  x2="176" y2="180" />
+    <line x1="208" y1="20"  x2="208" y2="180" />
+    <line x1="240" y1="20"  x2="240" y2="180" />
+  </g>
+
+  <!-- Paths drawn as wide rounded strokes. Centers at 96, 128, 160, 192, 224 (x) and 36, 68, 100, 132, 164 (y). -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="14" filter="url(#cf-glow)" opacity="0.95">
+    <!-- Red: (0,0) → (0,1) → (1,1) → (1,0) -->
+    <polyline points="96,36 128,36 128,68 96,68" stroke="#ef4444" />
+    <!-- Blue: (0,2) → (0,3) → (0,4) → (1,4) → (1,3) → (1,2) → (2,2) -->
+    <polyline points="160,36 192,36 224,36 224,68 192,68 160,68 160,100" stroke="#3b82f6" />
+    <!-- Amber: (2,0) → (2,1) → (3,1) → (3,0) → (4,0) → (4,1) → (4,2) -->
+    <polyline points="96,100 128,100 128,132 96,132 96,164 128,164 160,164" stroke="#f59e0b" />
+    <!-- Cyan: (2,3) → (2,4) → (3,4) → (3,3) → (3,2) → (4,3) → (4,4) -->
+    <polyline points="192,100 224,100 224,132 192,132 192,164 224,164" stroke="#22d3ee" />
+  </g>
+
+  <!-- Endpoints (dots) -->
+  <g>
+    <!-- Red endpoints -->
+    <circle cx="96"  cy="36"  r="8" fill="#ef4444" />
+    <circle cx="96"  cy="68"  r="8" fill="#ef4444" />
+    <!-- Blue endpoints -->
+    <circle cx="160" cy="36"  r="8" fill="#3b82f6" />
+    <circle cx="160" cy="100" r="8" fill="#3b82f6" />
+    <!-- Amber endpoints -->
+    <circle cx="96"  cy="100" r="8" fill="#f59e0b" />
+    <circle cx="160" cy="164" r="8" fill="#f59e0b" />
+    <!-- Cyan endpoints -->
+    <circle cx="192" cy="100" r="8" fill="#22d3ee" />
+    <circle cx="224" cy="164" r="8" fill="#22d3ee" />
+    <!-- Inner highlights -->
+    <g fill="rgba(255,255,255,0.4)">
+      <circle cx="93"  cy="33"  r="2.5" />
+      <circle cx="93"  cy="65"  r="2.5" />
+      <circle cx="157" cy="33"  r="2.5" />
+      <circle cx="157" cy="97"  r="2.5" />
+      <circle cx="93"  cy="97"  r="2.5" />
+      <circle cx="157" cy="161" r="2.5" />
+      <circle cx="189" cy="97"  r="2.5" />
+      <circle cx="221" cy="161" r="2.5" />
+    </g>
+  </g>
+
+  <text x="20" y="30" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e4e4ed">
+    Color Flow
+  </text>
+  <text x="20" y="50" font-family="ui-sans-serif, system-ui" font-size="11" fill="#98a0ad">
+    Drag · Connect · Fill
+  </text>
+</svg>
