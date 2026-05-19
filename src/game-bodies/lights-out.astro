@@ -1,0 +1,18 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div id="board" class="board" role="grid" aria-label="Lights Out 5×5 grid"></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tüm ışıklar kapandı!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-restart" class="hud__btn hud__btn--accent" type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
