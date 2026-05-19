@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Pong">
+  <defs>
+    <linearGradient id="pong-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15171f" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#pong-bg)" />
+  <g stroke="rgba(228, 228, 237, 0.22)" stroke-width="2" stroke-dasharray="6 8">
+    <line x1="160" y1="14" x2="160" y2="186" />
+  </g>
+  <rect x="22" y="70" width="8" height="56" rx="3" fill="#38bdf8" />
+  <rect x="290" y="92" width="8" height="56" rx="3" fill="#f43f5e" />
+  <circle cx="186" cy="108" r="7" fill="#fde68a" />
+  <text x="84" y="48" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="700" fill="#38bdf8" text-anchor="middle">3</text>
+  <text x="236" y="48" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="700" fill="#f43f5e" text-anchor="middle">2</text>
+  <text x="20" y="194" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Pong</text>
+</svg>
