@@ -1,0 +1,8 @@
+{
+  "title": "Pong",
+  "description": "Klasik raket oyunu — bilgisayara karşı topu kaçırma, ilk 7 sayı kazanır.",
+  "dateAdded": "2026-05-19",
+  "tags": ["arcade", "klasik", "refleks"],
+  "controls": "↑ ↓ veya W/S · Fare/dokunma: raket · Boşluk: servis · P: duraklat · R: yeniden başla",
+  "thumbnail": "pong.svg"
+}
