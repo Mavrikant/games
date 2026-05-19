@@ -1,0 +1,8 @@
+{
+  "title": "Color Flow",
+  "description": "Aynı renk noktaları sürükleyerek birleştir — yolları çaprazlama, tüm gridi doldur.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "tek-oyunculu", "mobil"],
+  "controls": "Sürükle: yol çiz · Aynı renge tekrar dokun: yolu sil · R: yeniden başla · N: yeni puzzle",
+  "thumbnail": "color-flow.svg"
+}

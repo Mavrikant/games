@@ -1,0 +1,50 @@
+---
+---
+
+<header class="hud cf-hud">
+  <div class="cf-meta">
+    <div class="cf-meta__item" title="Seviye">
+      <span class="cf-meta__label">Lvl</span>
+      <span id="cf-level">1</span>
+    </div>
+    <div class="cf-meta__item" title="Hamle">
+      <span class="cf-meta__label">Hamle</span>
+      <span id="cf-moves">0</span>
+    </div>
+    <div class="cf-meta__item" title="En az hamle">
+      <span class="cf-meta__label">Rekor</span>
+      <span id="cf-best">—</span>
+    </div>
+    <div class="cf-meta__item" title="Grid">
+      <span class="cf-meta__label">Boyut</span>
+      <span id="cf-size">5×5</span>
+    </div>
+  </div>
+  <div class="cf-actions">
+    <button id="cf-new" class="hud__btn" type="button">Yeni puzzle</button>
+    <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+  </div>
+</header>
+
+<div id="cf-status" class="cf-status" role="status" aria-live="polite">
+  Aynı renk noktaları sürükleyerek birleştir.
+</div>
+
+<div class="cf-stage">
+  <canvas
+    id="cf-board"
+    class="cf-board"
+    aria-label="Color Flow oyun tahtası"
+  ></canvas>
+  <div id="cf-overlay" class="cf-overlay cf-overlay--hidden" role="dialog" aria-live="polite">
+    <div class="cf-overlay__panel">
+      <h2 id="cf-overlay-title" class="cf-overlay__title">Seviye tamam!</h2>
+      <p id="cf-overlay-msg" class="cf-overlay__msg">Tüm yollar bağlandı.</p>
+      <div class="cf-overlay__actions">
+        <button id="cf-overlay-next" class="hud__btn cf-overlay__btn" type="button">
+          Sonraki seviye
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
