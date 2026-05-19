@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Tap / tıkla · R: yeniden başla",
+  "howToPlay": "Bir hücreye dokunduğunda kendisi ve dört yan komşusu (üst-alt-sağ-sol) aç/kapa durumunu değiştirir. Hedef tahtadaki bütün ışıkları kapatmak — bunu en az hamlede yapmaya çalış.",
   "thumbnail": "lights-out.svg"
 }

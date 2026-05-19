@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "hafıza", "klasik"],
   "controls": "Mouse / dokunma · 1-2-3: zorluk · R: yeniden başla",
+  "howToPlay": "Kartlara tek tek dokun; her seferinde iki kart açabilirsin. Eşleşirlerse açık kalır, eşleşmezlerse tekrar kapanır — tüm çiftleri en az hamleyle bul.",
   "thumbnail": "memory.svg"
 }

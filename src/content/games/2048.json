@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["puzzle", "klasik", "tek-oyunculu"],
   "controls": "Ok tuşları veya WASD · Mobilde kaydır · R: yeniden başla",
+  "howToPlay": "Tahtayı yönlere kaydırınca tüm karolar o yöne kayar; aynı sayıdaki iki karo birleşip değerini ikiye katlar. Hedef 2048 karosuna ulaşmak — tahta dolar ve hamle kalmazsa oyun biter.",
   "thumbnail": "2048.svg"
 }

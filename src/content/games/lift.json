@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "yönetim", "mobil", "tek-oyunculu"],
   "controls": "1-5: kata git · ↑/↓: bir kat · Tıkla/dokun: kat seç · Boşluk: başla · R: yeniden başla",
+  "howToPlay": "Yolcular katlardan asansörü çağırır; sen kat numarasına tıklayıp asansörü oraya yönlendir. Kapı açılınca yolcu biner, hedef kata vardığında iner — beklemekten sabrı tükenen yolcular puanını düşürür.",
   "thumbnail": "lift.svg"
 }

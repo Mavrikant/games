@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["arcade", "klasik", "tek-oyunculu"],
   "controls": "Ok tuşları veya WASD · Boşluk: duraklat · R: yeniden başla",
+  "howToPlay": "Yılanı yön tuşlarıyla idare ederek yemleri ye; her yemde bir boy uzar. Kendi kuyruğuna ya da duvara çarptığın anda oyun biter.",
   "thumbnail": "snake.svg"
 }

@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "klasik", "refleks"],
   "controls": "↑ ↓ veya W/S · Fare/dokunma: raket · Boşluk: servis · P: duraklat · R: yeniden başla",
+  "howToPlay": "Soldaki raketi yukarı-aşağı oynatarak topu rakibin yarısına geri sek. Top senin tarafından çıkarsa rakip puan alır; ilk 7 sayıya ulaşan oyunu kazanır.",
   "thumbnail": "pong.svg"
 }

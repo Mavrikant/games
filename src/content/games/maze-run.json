@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "maze", "tek-oyunculu"],
   "controls": "Ok tuşları / WASD veya swipe · R: yeniden başla · Boşluk: duraklat",
+  "howToPlay": "Karakterini ok tuşları ya da kaydırma ile labirentte gezdir, kırmızı çıkışa ulaş. Süre bittiğinde labirent yeniden çiziliyor — duraklamadan rota bulmak gerek.",
   "thumbnail": "maze-run.svg"
 }

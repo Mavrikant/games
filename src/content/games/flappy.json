@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["arcade", "refleks", "tek-oyunculu"],
   "controls": "Boşluk / tıkla / dokun: zıpla · R: yeniden başla",
+  "howToPlay": "Tek tuşla (boşluk, tıklama veya dokunma) kuş kanat çırpar ve havada yükselir; bırakırsan yer çekimiyle düşer. Aşağıdaki ve yukarıdaki borulara çarpmadan aralarından geç; geçtiğin her boru bir puan.",
   "thumbnail": "flappy.svg"
 }

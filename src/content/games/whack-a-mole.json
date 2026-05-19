@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "refleks", "tek-oyunculu"],
   "controls": "Tıkla veya dokun: köstebeği yakala · Bombadan kaç · R: yeniden başla",
+  "howToPlay": "Yuvalardan beliren köstebeklere kaybolmadan dokun — her köstebek puan. Bombaya dokunursan can kaybedersin; nadiren çıkan altın köstebek ekstra bonus verir.",
   "thumbnail": "whack-a-mole.svg"
 }

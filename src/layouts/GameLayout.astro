@@ -6,10 +6,11 @@ interface Props {
   title: string;
   description?: string;
   controls?: string;
+  howToPlay?: string;
   ogImage?: string;
 }
 
-const { title, description, controls, ogImage } = Astro.props;
+const { title, description, controls, howToPlay, ogImage } = Astro.props;
 ---
 
 <BaseLayout
@@ -22,5 +23,11 @@ const { title, description, controls, ogImage } = Astro.props;
   <main class="stage">
     <slot />
     {controls && <p class="hint">{controls}</p>}
+    {howToPlay && (
+      <details class="howto">
+        <summary>Nasıl oynanır?</summary>
+        <p>{howToPlay}</p>
+      </details>
+    )}
   </main>
 </BaseLayout>

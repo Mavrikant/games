@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "sıralama", "refleks", "tek-oyunculu"],
   "controls": "1-5: göze yolla · Tıkla/dokun: gözü seç · Boşluk: başla · R: yeniden başla",
+  "howToPlay": "Yukarıdan düşen her paketin üzerindeki şehir adına bak, doğru posta gözünü seç. Yanlış göze atılan ya da kaçırılan paket can götürür — her seviyede şehir-göz eşlemesi karışır.",
   "thumbnail": "posta-sort.svg"
 }

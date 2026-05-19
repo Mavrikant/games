@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "rotasyon", "akış"],
   "controls": "Dokun / tıkla: 90° döndür · R: yeni puzzle",
+  "howToPlay": "Her boru parçasına dokunarak 90° döndür ve kaynağı çıkışa bağlayan kesintisiz bir akış yolu kur. Bütün borular bağlandığında bölüm tamamlanır.",
   "thumbnail": "pipe-connect.svg"
 }

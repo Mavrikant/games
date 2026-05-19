@@ -4,5 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["arcade", "klasik", "tek-oyunculu"],
   "controls": "← → veya A/D · Fare/dokunma: paddle · Boşluk: başlat/topu fırlat · P: duraklat · R: yeniden başla",
+  "howToPlay": "Alttaki paddle'ı sağa-sola hareket ettir, topu sektirerek yukarıdaki tüm tuğlaları kır. Top alta düşmeden bütün tuğlaları temizlersen bölümü kazanırsın.",
   "thumbnail": "breakout.svg"
 }
