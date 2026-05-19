@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <div class="hud__stat" aria-label="Eğim">Eğim<span id="tilt">0°</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="640" aria-label="Terazi oyun alanı"></canvas>
+  <button class="zone zone--left" id="zone-left" type="button" aria-label="Sol kefeye bırak"></button>
+  <button class="zone zone--right" id="zone-right" type="button" aria-label="Sağ kefeye bırak"></button>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Terazi</h2>
+      <p id="overlay-msg">Başlamak için sol veya sağ tarafa dokun.</p>
+    </div>
+  </div>
+</div>
