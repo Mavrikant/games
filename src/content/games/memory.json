@@ -1,0 +1,8 @@
+{
+  "title": "Memory",
+  "description": "Eşit kartları bul, en az hamlede tamamla.",
+  "dateAdded": "2026-05-19",
+  "tags": ["puzzle", "hafıza", "klasik"],
+  "controls": "Mouse / dokunma · 1-2-3: zorluk · R: yeniden başla",
+  "thumbnail": "memory.svg"
+}
