@@ -1,0 +1,19 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Seviye<span id="level">1</span></div>
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni puzzle</button>
+</header>
+<div class="board-wrap">
+  <div id="board" class="pc-board" role="grid" aria-label="Boru ızgarası"></div>
+  <div id="overlay" class="pc-overlay pc-overlay--hidden">
+    <div class="pc-overlay__inner">
+      <h2 id="overlay-title">Akış tamamlandı!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-next" class="hud__btn pc-overlay__btn" type="button">Sıradaki seviye</button>
+    </div>
+  </div>
+</div>
