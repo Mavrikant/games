@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Memory">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <pattern id="back" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#1c2027" />
+      <rect width="2" height="10" fill="rgba(129,140,248,0.18)" />
+    </pattern>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g>
+    <rect x="100" y="68" width="44" height="56" rx="7" fill="url(#back)" stroke="#2f3540" />
+    <rect x="152" y="68" width="44" height="56" rx="7" fill="rgba(129,140,248,0.16)" stroke="#818cf8" />
+    <text x="174" y="105" font-size="26" text-anchor="middle">🍒</text>
+    <rect x="204" y="68" width="44" height="56" rx="7" fill="url(#back)" stroke="#2f3540" />
+    <rect x="100" y="130" width="44" height="56" rx="7" fill="rgba(129,140,248,0.16)" stroke="#818cf8" />
+    <text x="122" y="167" font-size="26" text-anchor="middle">🍒</text>
+    <rect x="152" y="130" width="44" height="56" rx="7" fill="url(#back)" stroke="#2f3540" />
+    <rect x="204" y="130" width="44" height="56" rx="7" fill="url(#back)" stroke="#2f3540" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Memory</text>
+</svg>

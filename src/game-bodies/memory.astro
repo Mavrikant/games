@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">Süre<span id="time">0:00</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="diff" role="group" aria-label="Zorluk">
+  <button class="diff__btn" data-diff="easy" type="button">Kolay · 4×3</button>
+  <button class="diff__btn" data-diff="medium" type="button">Orta · 4×4</button>
+  <button class="diff__btn" data-diff="hard" type="button">Zor · 6×4</button>
+</div>
+<div class="board-wrap">
+  <div id="board" class="board" role="grid" aria-label="Memory kartları"></div>
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tebrikler!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-restart" class="hud__btn" type="button">Tekrar oyna</button>
+    </div>
+  </div>
+</div>
