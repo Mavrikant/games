@@ -1,0 +1,319 @@
+/* Water Sort — sıvı renk sıralama puzzle */
+
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.ws-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ws-actions__btn {
+  flex: 1;
+  padding: 11px 8px;
+  font-size: 13px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.ws-actions__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ws-stage {
+  position: relative;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: clamp(16px, 4vw, 28px) clamp(8px, 3vw, 20px);
+  min-height: 320px;
+  overflow: hidden;
+  /* Bottom glow that suggests a watery surface beneath the tubes */
+  background-image:
+    radial-gradient(
+      ellipse 80% 50% at 50% 100%,
+      rgba(99, 102, 241, 0.06),
+      transparent 70%
+    );
+}
+
+.ws-board {
+  display: grid;
+  /* Up to 6 per row; auto-wraps for higher levels */
+  grid-template-columns: repeat(
+    var(--cols, 6),
+    minmax(0, 1fr)
+  );
+  gap: clamp(10px, 2.5vw, 18px) clamp(8px, 2vw, 14px);
+  justify-items: center;
+  align-items: end;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .ws-board {
+    grid-template-columns: repeat(var(--cols-sm, 4), minmax(0, 1fr));
+  }
+}
+
+.ws-tube {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  max-width: 64px;
+  min-width: 44px;
+  aspect-ratio: 1 / 2.3;
+  display: block;
+  font: inherit;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    transform 0.22s cubic-bezier(0.4, 0.0, 0.2, 1),
+    filter 0.2s;
+  transform-origin: 50% 100%;
+}
+
+.ws-tube:hover {
+  filter: brightness(1.06);
+}
+
+.ws-tube__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 22px 22px / 0 0 28px 28px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(0, 0, 0, 0.18) 100%
+    ),
+    rgba(255, 255, 255, 0.02);
+  border: 1.5px solid var(--border-strong);
+  border-top: none;
+  box-shadow:
+    inset 0 -8px 14px -6px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.ws-tube__rim {
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: 0;
+  height: 6px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(
+    180deg,
+    var(--border-strong) 0%,
+    var(--border) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.ws-tube__liquid {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.ws-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  /* Liquid shine — subtle gradient overlay on top of base color */
+  box-shadow:
+    inset 0 4px 6px -4px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 6px -3px rgba(0, 0, 0, 0.35);
+  transition:
+    height 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    bottom 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.2s;
+}
+
+/* The topmost layer gets a glossy "meniscus" curve via a pseudo-element. */
+.ws-layer:last-child::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Selected tube — gentle lift + accent ring + soft glow under */
+.ws-tube--selected {
+  transform: translateY(-14px);
+  filter: drop-shadow(0 6px 12px rgba(129, 140, 248, 0.4));
+}
+
+.ws-tube--selected .ws-tube__inner {
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 -8px 14px -6px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(129, 140, 248, 0.25),
+    0 0 0 1.5px var(--accent),
+    0 8px 18px -8px rgba(129, 140, 248, 0.5);
+}
+
+.ws-tube--selected .ws-tube__rim {
+  background: linear-gradient(
+    180deg,
+    var(--accent) 0%,
+    var(--accent-strong) 60%,
+    transparent 100%
+  );
+}
+
+/* Completed tube — subtle green ring + faint pulse */
+.ws-tube--complete .ws-tube__inner {
+  border-color: var(--success);
+  box-shadow:
+    inset 0 -8px 14px -6px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(52, 211, 153, 0.25),
+    0 0 0 1.5px rgba(52, 211, 153, 0.7),
+    0 0 18px -4px rgba(52, 211, 153, 0.4);
+}
+
+.ws-tube--complete .ws-tube__rim {
+  background: linear-gradient(
+    180deg,
+    var(--success) 0%,
+    rgba(52, 211, 153, 0.6) 60%,
+    transparent 100%
+  );
+}
+
+/* Pour animation: tilt the source tube toward the target.
+   When tilt=left, rotate -30deg; when tilt=right, rotate 30deg.
+   transform-origin already set to bottom-center. */
+.ws-tube--pouring {
+  z-index: 2;
+}
+.ws-tube--pouring[data-tilt='left'] {
+  transform: translateY(-22px) translateX(-6px) rotate(-32deg);
+}
+.ws-tube--pouring[data-tilt='right'] {
+  transform: translateY(-22px) translateX(6px) rotate(32deg);
+}
+
+/* Receiving tube — slight bounce up so user notices */
+.ws-tube--receiving {
+  transform: translateY(-4px);
+  z-index: 1;
+}
+
+/* Pour animation duration must match POUR_MS (360ms) — keep this in sync. */
+.ws-tube--pouring,
+.ws-tube--receiving {
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay (win) */
+.ws-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.ws-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ws-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.ws-overlay__inner h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.ws-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.ws-overlay__btn {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ws-overlay__btn:hover {
+  background: rgba(129, 140, 248, 0.22);
+  color: var(--text);
+}
+
+/* Responsive — phones in portrait need bigger tubes & fewer per row */
+@media (max-width: 380px) {
+  .ws-tube {
+    min-width: 40px;
+  }
+}
+
+/* Tubes-per-row adapter via JS-set CSS var */
+.ws-board {
+  /* Default: try to fit count, but clamp to 6 wide for desktop and 4 for mobile */
+}

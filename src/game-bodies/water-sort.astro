@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Seviye<span id="level">1</span></div>
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+</header>
+<div class="ws-actions" role="group" aria-label="Aksiyonlar">
+  <button id="undo" class="hud__btn ws-actions__btn" type="button" aria-label="Son hamleyi geri al">
+    <span aria-hidden="true">↶</span> Geri al
+  </button>
+  <button id="restart" class="hud__btn ws-actions__btn" type="button" aria-label="Seviyeyi sıfırla">
+    Sıfırla
+  </button>
+  <button id="new-game" class="hud__btn ws-actions__btn" type="button" aria-label="Yeni puzzle üret">
+    Yeni puzzle
+  </button>
+</div>
+<div class="ws-stage">
+  <div id="board" class="ws-board" role="group" aria-label="Tüpler"></div>
+  <div id="overlay" class="ws-overlay ws-overlay--hidden" aria-hidden="true">
+    <div class="ws-overlay__inner">
+      <h2 id="overlay-title">Tebrikler!</h2>
+      <p id="overlay-msg">Seviye tamamlandı</p>
+      <button id="overlay-next" class="hud__btn ws-overlay__btn" type="button">Sonraki seviye</button>
+    </div>
+  </div>
+</div>
