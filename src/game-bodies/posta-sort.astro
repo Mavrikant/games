@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <div class="hud__lives" aria-label="Hatalar">
+    <span class="strike" id="strike-1">✕</span>
+    <span class="strike" id="strike-2">✕</span>
+    <span class="strike" id="strike-3">✕</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="640"
+    aria-label="Posta Sort oyun alanı"
+  ></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Posta Sort</h2>
+      <p id="overlay-msg">
+        Düşen pakedi doğru şehir gözüne yolla.<br />
+        Boşluk veya 1-5 ile başla.
+      </p>
+    </div>
+  </div>
+</div>
