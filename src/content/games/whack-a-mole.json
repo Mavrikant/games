@@ -1,0 +1,8 @@
+{
+  "title": "Whack-a-Mole",
+  "description": "Köstebekleri yakala — ama bombadan kaç ve altın köstebeği kaçırma.",
+  "dateAdded": "2026-05-19",
+  "tags": ["arcade", "refleks", "tek-oyunculu"],
+  "controls": "Tıkla veya dokun: köstebeği yakala · Bombadan kaç · R: yeniden başla",
+  "thumbnail": "whack-a-mole.svg"
+}

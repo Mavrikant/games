@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Whack-a-Mole">
+  <defs>
+    <radialGradient id="grass" cx="0.5" cy="0.2" r="0.9">
+      <stop offset="0%" stop-color="#2a4f3c" />
+      <stop offset="60%" stop-color="#1f3b2c" />
+      <stop offset="100%" stop-color="#13261d" />
+    </radialGradient>
+    <radialGradient id="hole" cx="0.5" cy="0.2" r="0.7">
+      <stop offset="0%" stop-color="#110a04" />
+      <stop offset="55%" stop-color="#110a04" />
+      <stop offset="75%" stop-color="#3a2a1a" />
+      <stop offset="100%" stop-color="#4a3624" />
+    </radialGradient>
+    <radialGradient id="gold-grad" cx="0.5" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="60%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b88508" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="#0a0b0e" />
+  <rect x="14" y="14" width="292" height="172" rx="14" fill="url(#grass)" />
+
+  <!-- Three holes (top row) -->
+  <g>
+    <!-- left hole with bomb peeking -->
+    <ellipse cx="74" cy="100" rx="40" ry="22" fill="url(#hole)" />
+    <g transform="translate(74,90)">
+      <!-- bomb body -->
+      <circle cx="0" cy="6" r="20" fill="#0a0d12" stroke="#2a2f3a" stroke-width="1.5" />
+      <ellipse cx="-7" cy="-1" rx="5" ry="3" fill="#3a3f4a" opacity="0.6" transform="rotate(-25)" />
+      <!-- fuse -->
+      <path d="M 6 -10 Q 12 -16 8 -22" stroke="#fb923c" stroke-width="2" fill="none" stroke-linecap="round" />
+      <circle cx="8" cy="-23" r="2.5" fill="#fef3c7" />
+      <text x="0" y="11" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">!</text>
+    </g>
+
+    <!-- middle hole with gold mole -->
+    <ellipse cx="160" cy="100" rx="40" ry="22" fill="url(#hole)" />
+    <g transform="translate(160,82)">
+      <ellipse cx="0" cy="14" rx="24" ry="20" fill="#b88508" />
+      <ellipse cx="0" cy="9" rx="22" ry="18" fill="url(#gold-grad)" />
+      <ellipse cx="0" cy="19" rx="13" ry="9" fill="#fef3c7" opacity="0.9" />
+      <circle cx="-8" cy="2" r="3" fill="#1a0f08" />
+      <circle cx="8" cy="2" r="3" fill="#1a0f08" />
+      <circle cx="-7.5" cy="1" r="1" fill="#fff" />
+      <circle cx="8.5" cy="1" r="1" fill="#fff" />
+      <ellipse cx="0" cy="9" rx="2.5" ry="2" fill="#1a0f08" />
+      <text x="-14" y="-8" font-size="8" font-weight="700" fill="#fff" opacity="0.9">★</text>
+      <text x="13" y="22" font-size="7" font-weight="700" fill="#fff" opacity="0.75">✦</text>
+    </g>
+
+    <!-- right hole with normal mole -->
+    <ellipse cx="246" cy="100" rx="40" ry="22" fill="url(#hole)" />
+    <g transform="translate(246,82)">
+      <ellipse cx="0" cy="14" rx="24" ry="20" fill="#6f4a26" />
+      <ellipse cx="0" cy="9" rx="22" ry="18" fill="#b97a3f" />
+      <ellipse cx="0" cy="19" rx="13" ry="9" fill="#d29459" opacity="0.85" />
+      <circle cx="-8" cy="2" r="3" fill="#1a0f08" />
+      <circle cx="8" cy="2" r="3" fill="#1a0f08" />
+      <circle cx="-7.5" cy="1" r="1" fill="#fff" />
+      <circle cx="8.5" cy="1" r="1" fill="#fff" />
+      <ellipse cx="0" cy="9" rx="2.5" ry="2" fill="#1a0f08" />
+      <rect x="-3" y="11" width="2.5" height="3" rx="0.6" fill="#fff" />
+      <rect x="0.5" y="11" width="2.5" height="3" rx="0.6" fill="#fff" />
+    </g>
+  </g>
+
+  <!-- bottom row of empty holes -->
+  <g>
+    <ellipse cx="74" cy="158" rx="40" ry="20" fill="url(#hole)" opacity="0.95" />
+    <ellipse cx="160" cy="158" rx="40" ry="20" fill="url(#hole)" opacity="0.95" />
+    <ellipse cx="246" cy="158" rx="40" ry="20" fill="url(#hole)" opacity="0.95" />
+  </g>
+
+  <text x="22" y="42" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Whack-a-Mole</text>
+</svg>
