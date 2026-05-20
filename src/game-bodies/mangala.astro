@@ -1,0 +1,54 @@
+---
+---
+
+<header class="hud">
+  <div class="mg-meta">
+    <div class="mg-meta__item" title="Senin haznendeki taş sayısı">
+      <span class="mg-meta__icon mg-meta__icon--you" aria-hidden="true">●</span>
+      <span><span id="mg-you-store">0</span></span>
+    </div>
+    <div class="mg-meta__item" title="AI haznesindeki taş sayısı">
+      <span class="mg-meta__icon mg-meta__icon--ai" aria-hidden="true">●</span>
+      <span><span id="mg-ai-store">0</span></span>
+    </div>
+    <div class="mg-meta__item" title="Galibiyet–mağlubiyet">
+      <span class="mg-meta__icon" aria-hidden="true">★</span>
+      <span><span id="mg-wins">0</span>–<span id="mg-losses">0</span></span>
+    </div>
+  </div>
+  <button id="mg-restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="mg-status" class="mg-status" role="status" aria-live="polite">
+  Sıra sende — bir çukura tıkla.
+</div>
+
+<div class="mg-board-wrap">
+  <div class="mg-board" aria-label="Mangala tahtası">
+    <div class="mg-store mg-store--ai" title="AI haznesi">
+      <span class="mg-store__label">AI</span>
+      <span id="mg-store-ai" class="mg-store__count">0</span>
+    </div>
+
+    <div class="mg-rows">
+      <div id="mg-row-ai" class="mg-row mg-row--ai" role="list" aria-label="AI çukurları"></div>
+      <div id="mg-row-you" class="mg-row mg-row--you" role="list" aria-label="Senin çukurların"></div>
+    </div>
+
+    <div class="mg-store mg-store--you" title="Senin haznen">
+      <span class="mg-store__label">SEN</span>
+      <span id="mg-store-you" class="mg-store__count">0</span>
+    </div>
+  </div>
+
+  <div id="mg-overlay" class="mg-overlay mg-overlay--hidden" aria-hidden="true">
+    <div class="mg-overlay__inner">
+      <h2 id="mg-overlay-title">Oyun bitti</h2>
+      <p id="mg-overlay-msg">—</p>
+      <button
+        id="mg-overlay-restart"
+        class="hud__btn hud__btn--accent"
+        type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
