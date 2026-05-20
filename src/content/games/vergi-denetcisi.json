@@ -1,0 +1,9 @@
+{
+  "title": "Vergi Denetçisi",
+  "description": "Faturalardaki anomalileri bul — toplam tutmuyor mu, tarih garip mi, dublike mi.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "özgün", "mantık", "gözlem"],
+  "controls": "Tıkla: satırı şüpheli işaretle · Sonraki: turu bitir · R: yeniden başla",
+  "howToPlay": "Her turda 8 satırlık bir fatura tablosu açılır. Bazı satırlarda anomali vardır: tutar + KDV ≠ toplam, gelecekte bir tarih, aynı fatura numarasının iki kez görünmesi, anormal yüksek tutar veya %18 dışında garip bir KDV oranı. Şüphelendiğin satıra tıkla. Doğru tespit puan, yanlış işaret hata getirir. 3 yanlış işaret ile müfettişlikten alınırsın. Hızlı doğru tespitler bonus puan kazandırır.",
+  "thumbnail": "vergi-denetcisi.svg"
+}

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Vergi Denetçisi">
+  <defs>
+    <linearGradient id="vd-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1d24" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#vd-bg)" />
+
+  <!-- Title -->
+  <text x="16" y="24" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#f5f6f8">Vergi Denetçisi</text>
+
+  <!-- Table header -->
+  <rect x="20" y="40" width="280" height="18" fill="#1c2027" stroke="#2f3540" />
+  <text x="30"  y="53" font-family="ui-monospace, monospace" font-size="8" fill="#98a0ad">FATURA</text>
+  <text x="92"  y="53" font-family="ui-monospace, monospace" font-size="8" fill="#98a0ad">TARİH</text>
+  <text x="160" y="53" font-family="ui-monospace, monospace" font-size="8" fill="#98a0ad">TUTAR</text>
+  <text x="220" y="53" font-family="ui-monospace, monospace" font-size="8" fill="#98a0ad">KDV</text>
+  <text x="270" y="53" font-family="ui-monospace, monospace" font-size="8" fill="#98a0ad">TOPLAM</text>
+
+  <!-- Row 1: clean -->
+  <rect x="20" y="60" width="280" height="20" fill="#14171c" stroke="#1f242c" />
+  <text x="30"  y="74" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8">F-1024</text>
+  <text x="92"  y="74" font-family="ui-monospace, monospace" font-size="9" fill="#98a0ad">12.04.2026</text>
+  <text x="190" y="74" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">450,00</text>
+  <text x="250" y="74" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">81,00</text>
+  <text x="300" y="74" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">531,00</text>
+
+  <!-- Row 2: anomaly (math) marked red -->
+  <rect x="20" y="82" width="280" height="20" fill="#3a1a1c" stroke="#f87171" stroke-width="1.5" />
+  <text x="30"  y="96" font-family="ui-monospace, monospace" font-size="9" fill="#fca5a5">F-1037</text>
+  <text x="92"  y="96" font-family="ui-monospace, monospace" font-size="9" fill="#fca5a5">04.05.2026</text>
+  <text x="190" y="96" font-family="ui-monospace, monospace" font-size="9" fill="#fca5a5" text-anchor="end">280,00</text>
+  <text x="250" y="96" font-family="ui-monospace, monospace" font-size="9" fill="#fca5a5" text-anchor="end">50,40</text>
+  <text x="300" y="96" font-family="ui-monospace, monospace" font-size="9" fill="#fca5a5" text-anchor="end">412,00</text>
+
+  <!-- Row 3: clean -->
+  <rect x="20" y="104" width="280" height="20" fill="#14171c" stroke="#1f242c" />
+  <text x="30"  y="118" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8">F-1041</text>
+  <text x="92"  y="118" font-family="ui-monospace, monospace" font-size="9" fill="#98a0ad">28.02.2026</text>
+  <text x="190" y="118" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">120,00</text>
+  <text x="250" y="118" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">21,60</text>
+  <text x="300" y="118" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">141,60</text>
+
+  <!-- Row 4: anomaly (future date) -->
+  <rect x="20" y="126" width="280" height="20" fill="#1c2a1c" stroke="#34d399" stroke-width="1.5" />
+  <text x="30"  y="140" font-family="ui-monospace, monospace" font-size="9" fill="#a7f3d0">F-1052</text>
+  <text x="92"  y="140" font-family="ui-monospace, monospace" font-size="9" fill="#a7f3d0">31.12.2029</text>
+  <text x="190" y="140" font-family="ui-monospace, monospace" font-size="9" fill="#a7f3d0" text-anchor="end">760,00</text>
+  <text x="250" y="140" font-family="ui-monospace, monospace" font-size="9" fill="#a7f3d0" text-anchor="end">136,80</text>
+  <text x="300" y="140" font-family="ui-monospace, monospace" font-size="9" fill="#a7f3d0" text-anchor="end">896,80</text>
+
+  <!-- Row 5: clean -->
+  <rect x="20" y="148" width="280" height="20" fill="#14171c" stroke="#1f242c" />
+  <text x="30"  y="162" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8">F-1063</text>
+  <text x="92"  y="162" font-family="ui-monospace, monospace" font-size="9" fill="#98a0ad">19.03.2026</text>
+  <text x="190" y="162" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">300,00</text>
+  <text x="250" y="162" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">54,00</text>
+  <text x="300" y="162" font-family="ui-monospace, monospace" font-size="9" fill="#f5f6f8" text-anchor="end">354,00</text>
+
+  <!-- Magnifying glass icon over the anomaly row -->
+  <g transform="translate(248, 80)">
+    <circle cx="0" cy="0" r="11" fill="none" stroke="#fbbf24" stroke-width="2" />
+    <line x1="7" y1="7" x2="15" y2="15" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- Bottom hint -->
+  <text x="160" y="188" font-family="ui-sans-serif, system-ui" font-size="9" fill="#5a6473" text-anchor="middle">anomalileri yakala — toplam, tarih, dublike</text>
+</svg>
