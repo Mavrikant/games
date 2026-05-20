@@ -1,0 +1,362 @@
+:root {
+  --bc-soil: #6b4a2b;
+  --bc-soil-deep: #4a3320;
+  --bc-soil-dim: #836144;
+  --bc-grass: #1f3b2c;
+  --bc-grass-shine: #2a4f3c;
+  --bc-stem: #4d8b3a;
+  --bc-stem-dark: #2f5d24;
+  --bc-leaf: #4ea03a;
+  --bc-leaf-light: #75c45b;
+  --bc-apple: #ef4444;
+  --bc-apple-light: #fca5a5;
+  --bc-apple-dark: #991b1b;
+  --bc-gold: #fbbf24;
+  --bc-gold-dark: #b88508;
+  --bc-weed: #a3a04a;
+  --bc-weed-light: #cdc966;
+  --bc-weed-dark: #6c6a2a;
+  --bc-water: #38bdf8;
+  --bc-water-low: #f97316;
+  --bc-water-dry: #b91c1c;
+}
+
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__btn--primary {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--primary:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.garden-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.garden {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(8px, 2vw, 14px);
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  padding: clamp(10px, 2.8vw, 18px);
+  background:
+    radial-gradient(
+      ellipse at top,
+      var(--bc-grass-shine) 0%,
+      var(--bc-grass) 65%
+    );
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.plot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 64px;
+  min-height: 64px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+  font: inherit;
+  display: block;
+}
+
+.plot__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      ellipse at top,
+      var(--bc-soil-dim) 0%,
+      var(--bc-soil) 45%,
+      var(--bc-soil-deep) 100%
+    );
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.55),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+.plot:hover .plot__ring {
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.55),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.06),
+    0 0 0 2px var(--accent-soft);
+}
+
+.plot:focus-visible .plot__ring {
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.55),
+    0 0 0 3px var(--accent);
+}
+
+.plot__sprite {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.plot__sprite svg {
+  width: 70%;
+  height: 70%;
+  display: block;
+  overflow: visible;
+}
+
+.plot__bar {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 6px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.plot__bar-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--bc-water);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.12s linear;
+}
+
+.plot--thirsty .plot__bar-fill {
+  background: linear-gradient(90deg, var(--bc-water-dry), var(--bc-water-low));
+}
+
+.plot__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.plot--empty .plot__label {
+  opacity: 0.5;
+}
+
+.plot--thirsty .plot__label {
+  color: #fcd34d;
+  opacity: 1;
+}
+
+.plot--harvest .plot__label {
+  color: #86efac;
+  opacity: 1;
+}
+
+.plot--ripe-gold .plot__label {
+  color: var(--bc-gold);
+}
+
+/* Pulse animation when interacted */
+.plot--pulse .plot__ring {
+  animation: bc-pulse 0.28s ease-out;
+}
+
+@keyframes bc-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Dried shake */
+.plot--dried .plot__ring {
+  animation: bc-dried 0.45s ease-out;
+}
+
+@keyframes bc-dried {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3px, 1px);
+  }
+  40% {
+    transform: translate(3px, -1px);
+  }
+  60% {
+    transform: translate(-2px, 1px);
+  }
+  80% {
+    transform: translate(2px, 0);
+  }
+}
+
+/* Floating score popup */
+.plot__float {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  font-weight: 800;
+  font-size: clamp(14px, 4vw, 20px);
+  pointer-events: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.02em;
+  animation: bc-float 0.75s ease-out forwards;
+}
+
+.plot__float--weed {
+  color: var(--bc-weed-light);
+}
+.plot__float--apple {
+  color: #fca5a5;
+}
+.plot__float--gold {
+  color: var(--bc-gold);
+}
+
+@keyframes bc-float {
+  0% {
+    transform: translate(-50%, 10%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -110%);
+    opacity: 0;
+  }
+}
+
+/* Harvest cell gentle glow */
+.plot--harvest .plot__ring {
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.55),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.04),
+    0 0 0 2px rgba(134, 239, 172, 0.4);
+}
+
+.plot--ripe-gold .plot__ring {
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.55),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.06),
+    0 0 0 2px rgba(251, 191, 36, 0.55),
+    0 0 16px rgba(251, 191, 36, 0.25);
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  z-index: 5;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 92%;
+}
+
+.overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(22px, 6vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.overlay__inner small {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+@media (max-width: 380px) {
+  .hud {
+    flex-wrap: wrap;
+  }
+  .hud__stat {
+    min-width: 28%;
+  }
+}

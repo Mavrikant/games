@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Bahçevan">
+  <defs>
+    <radialGradient id="bc-grass" cx="0.5" cy="0.2" r="0.9">
+      <stop offset="0%" stop-color="#2a4f3c" />
+      <stop offset="60%" stop-color="#1f3b2c" />
+      <stop offset="100%" stop-color="#13261d" />
+    </radialGradient>
+    <radialGradient id="bc-soil" cx="0.5" cy="0.2" r="0.7">
+      <stop offset="0%" stop-color="#836144" />
+      <stop offset="45%" stop-color="#6b4a2b" />
+      <stop offset="100%" stop-color="#4a3320" />
+    </radialGradient>
+    <radialGradient id="bc-gold-grad" cx="0.4" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#fff8d6" />
+      <stop offset="60%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b88508" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="#0a0b0e" />
+  <rect x="14" y="14" width="292" height="172" rx="14" fill="url(#bc-grass)" />
+
+  <!-- 6 plots in 3x2 grid -->
+  <!-- top row -->
+  <!-- Plot 1: empty -->
+  <rect x="30" y="74" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+
+  <!-- Plot 2: growing (no fruit) -->
+  <rect x="122" y="74" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+  <g transform="translate(160,114)">
+    <ellipse cx="0" cy="0" rx="14" ry="2" fill="#4a3320" />
+    <path d="M0 0 L0 -26" stroke="#4d8b3a" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="-7" cy="-15" rx="6" ry="3.5" fill="#4ea03a" transform="rotate(-25 -7 -15)" />
+    <ellipse cx="7" cy="-13" rx="6" ry="3.5" fill="#75c45b" transform="rotate(28 7 -13)" />
+    <ellipse cx="0" cy="-22" rx="5" ry="3" fill="#75c45b" />
+  </g>
+  <!-- thirst bar -->
+  <rect x="132" y="112" width="56" height="3.5" rx="1.5" fill="#000" fill-opacity="0.5" />
+  <rect x="132" y="112" width="36" height="3.5" rx="1.5" fill="#38bdf8" />
+
+  <!-- Plot 3: harvest apple -->
+  <rect x="214" y="74" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+  <g transform="translate(252,114)">
+    <ellipse cx="0" cy="0" rx="16" ry="2" fill="#4a3320" />
+    <path d="M0 0 L0 -26" stroke="#4d8b3a" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="-8" cy="-12" rx="7" ry="3.5" fill="#4ea03a" transform="rotate(-25 -8 -12)" />
+    <ellipse cx="8" cy="-12" rx="7" ry="3.5" fill="#75c45b" transform="rotate(28 8 -12)" />
+    <circle cx="0" cy="-24" r="8" fill="#ef4444" />
+    <ellipse cx="-2" cy="-26" rx="2.5" ry="1.4" fill="#fca5a5" opacity="0.85" />
+    <path d="M2 -30 Q5 -33 7 -30" stroke="#2f5d24" stroke-width="1.2" fill="none" stroke-linecap="round" />
+  </g>
+
+  <!-- bottom row -->
+  <!-- Plot 4: seedling -->
+  <rect x="30" y="132" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+  <g transform="translate(68,172)">
+    <ellipse cx="0" cy="0" rx="10" ry="2" fill="#4a3320" />
+    <path d="M0 0 L0 -14" stroke="#4d8b3a" stroke-width="2" stroke-linecap="round" />
+    <ellipse cx="-3" cy="-10" rx="4" ry="2" fill="#4ea03a" transform="rotate(-25 -3 -10)" />
+    <ellipse cx="4" cy="-12" rx="4" ry="2" fill="#75c45b" transform="rotate(28 4 -12)" />
+  </g>
+  <!-- thirst bar (low) -->
+  <rect x="40" y="170" width="56" height="3.5" rx="1.5" fill="#000" fill-opacity="0.5" />
+  <rect x="40" y="170" width="14" height="3.5" rx="1.5" fill="#f97316" />
+
+  <!-- Plot 5: harvest gold flower -->
+  <rect x="122" y="132" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+  <g transform="translate(160,172)">
+    <ellipse cx="0" cy="0" rx="16" ry="2" fill="#4a3320" />
+    <path d="M0 0 L0 -26" stroke="#4d8b3a" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="-8" cy="-14" rx="7" ry="3.5" fill="#4ea03a" transform="rotate(-25 -8 -14)" />
+    <ellipse cx="8" cy="-14" rx="7" ry="3.5" fill="#75c45b" transform="rotate(28 8 -14)" />
+    <g transform="translate(0,-26)">
+      <path d="M0 -10 L3 -3 L10 -3 L4.5 1 L6 9 L0 4 L-6 9 L-4.5 1 L-10 -3 L-3 -3 Z"
+            fill="url(#bc-gold-grad)" stroke="#b88508" stroke-width="0.8" />
+      <circle cx="0" cy="0" r="2" fill="#fff8d6" opacity="0.9" />
+    </g>
+  </g>
+
+  <!-- Plot 6: empty -->
+  <rect x="214" y="132" width="76" height="46" rx="10" fill="url(#bc-soil)" stroke="#000" stroke-opacity="0.3" />
+  <g opacity="0.4">
+    <circle cx="252" cy="155" r="6" fill="none" stroke="#836144" stroke-width="1.5" stroke-dasharray="2 2" />
+    <path d="M252 152 L252 158 M249 155 L255 155" stroke="#836144" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <text x="22" y="42" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Bahçevan</text>
+</svg>
