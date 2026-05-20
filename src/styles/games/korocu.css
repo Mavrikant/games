@@ -1,0 +1,191 @@
+:root {
+  --korocu-accent: #f472b6;
+  --korocu-pad-1: #f472b6;
+  --korocu-pad-2: #fbbf24;
+  --korocu-pad-3: #34d399;
+  --korocu-pad-4: #60a5fa;
+}
+
+.hud__score,
+.hud__best,
+.hud__combo,
+.hud__fouls {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span,
+.hud__combo span,
+.hud__fouls span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__score span {
+  color: var(--korocu-accent);
+}
+
+.hud__combo span {
+  color: #fde047;
+}
+
+.hud__fouls span {
+  color: #f87171;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.8);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--korocu-accent);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.overlay__inner small {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.overlay__inner b {
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0 2px;
+}
+
+.korocu-pads {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.korocu-pad {
+  appearance: none;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 8px;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.05s ease, border-color 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.korocu-pad:hover {
+  border-color: var(--text-muted);
+}
+
+.korocu-pad:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.korocu-pad__key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.korocu-pad__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.korocu-pad--0 { border-color: var(--korocu-pad-1); }
+.korocu-pad--1 { border-color: var(--korocu-pad-2); }
+.korocu-pad--2 { border-color: var(--korocu-pad-3); }
+.korocu-pad--3 { border-color: var(--korocu-pad-4); }
+
+.korocu-pad--0 .korocu-pad__key { color: var(--korocu-pad-1); }
+.korocu-pad--1 .korocu-pad__key { color: var(--korocu-pad-2); }
+.korocu-pad--2 .korocu-pad__key { color: var(--korocu-pad-3); }
+.korocu-pad--3 .korocu-pad__key { color: var(--korocu-pad-4); }
+
+.korocu-pad--0:active { background: color-mix(in srgb, var(--korocu-pad-1) 18%, var(--surface)); }
+.korocu-pad--1:active { background: color-mix(in srgb, var(--korocu-pad-2) 18%, var(--surface)); }
+.korocu-pad--2:active { background: color-mix(in srgb, var(--korocu-pad-3) 18%, var(--surface)); }
+.korocu-pad--3:active { background: color-mix(in srgb, var(--korocu-pad-4) 18%, var(--surface)); }
+
+@media (max-width: 480px) {
+  .korocu-pad {
+    padding: 12px 4px;
+  }
+  .korocu-pad__label {
+    font-size: 10px;
+  }
+}

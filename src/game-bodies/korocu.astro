@@ -1,0 +1,46 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <div class="hud__combo">Kombo<span id="combo">0</span></div>
+  <div class="hud__fouls">Yanlış<span id="fouls">0/5</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="540"
+    aria-label="Korocu sahnesi — 4 koro şeridi"
+  ></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Korocu</h2>
+      <p id="overlay-msg">
+        Düşen notalar zon çizgisine gelince ilgili tuşa bas.<br />
+        <b>A S D F</b> veya <b>1 2 3 4</b> · 5 yanlış = konser biter.<br />
+        <small>Başlatmak için boşluk / Enter</small>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="korocu-pads" aria-label="Dokunmatik koro grup tuşları">
+  <button class="korocu-pad korocu-pad--0" data-lane="0" type="button">
+    <span class="korocu-pad__key">A</span>
+    <span class="korocu-pad__label">Soprano</span>
+  </button>
+  <button class="korocu-pad korocu-pad--1" data-lane="1" type="button">
+    <span class="korocu-pad__key">S</span>
+    <span class="korocu-pad__label">Alto</span>
+  </button>
+  <button class="korocu-pad korocu-pad--2" data-lane="2" type="button">
+    <span class="korocu-pad__key">D</span>
+    <span class="korocu-pad__label">Tenor</span>
+  </button>
+  <button class="korocu-pad korocu-pad--3" data-lane="3" type="button">
+    <span class="korocu-pad__key">F</span>
+    <span class="korocu-pad__label">Bas</span>
+  </button>
+</div>

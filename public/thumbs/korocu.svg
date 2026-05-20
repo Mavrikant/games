@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <rect width="320" height="200" fill="#0a0b0e"/>
+  <!-- 4 lane backgrounds (soft tint) -->
+  <rect x="2" y="0" width="76" height="200" fill="#f472b6" opacity="0.09"/>
+  <rect x="82" y="0" width="76" height="200" fill="#fbbf24" opacity="0.09"/>
+  <rect x="162" y="0" width="76" height="200" fill="#34d399" opacity="0.09"/>
+  <rect x="242" y="0" width="76" height="200" fill="#60a5fa" opacity="0.09"/>
+  <!-- Top strips -->
+  <rect x="2" y="0" width="76" height="5" fill="#f472b6" opacity="0.8"/>
+  <rect x="82" y="0" width="76" height="5" fill="#fbbf24" opacity="0.8"/>
+  <rect x="162" y="0" width="76" height="5" fill="#34d399" opacity="0.8"/>
+  <rect x="242" y="0" width="76" height="5" fill="#60a5fa" opacity="0.8"/>
+  <!-- Hit zone bands -->
+  <rect x="0" y="135" width="320" height="35" fill="#ffffff" opacity="0.05"/>
+  <rect x="0" y="143" width="320" height="20" fill="#ffffff" opacity="0.06"/>
+  <line x1="0" y1="153" x2="320" y2="153" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  <!-- Lane dividers -->
+  <line x1="80" y1="0" x2="80" y2="200" stroke="#2a2f3a" stroke-width="1"/>
+  <line x1="160" y1="0" x2="160" y2="200" stroke="#2a2f3a" stroke-width="1"/>
+  <line x1="240" y1="0" x2="240" y2="200" stroke="#2a2f3a" stroke-width="1"/>
+  <!-- Falling markers (different y positions, varied lanes) -->
+  <circle cx="40" cy="60" r="22" fill="#f472b6" opacity="0.93"/>
+  <circle cx="40" cy="60" r="16" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+  <circle cx="200" cy="40" r="22" fill="#34d399" opacity="0.93"/>
+  <circle cx="200" cy="40" r="16" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+  <circle cx="120" cy="100" r="22" fill="#fbbf24" opacity="0.93"/>
+  <circle cx="120" cy="100" r="16" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+  <!-- Marker right at the perfect line (about to hit) -->
+  <circle cx="280" cy="153" r="22" fill="#60a5fa" opacity="0.95"/>
+  <circle cx="280" cy="153" r="30" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5"/>
+  <!-- Lane labels -->
+  <text x="40" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#f472b6" opacity="0.85" font-weight="700">S</text>
+  <text x="120" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#fbbf24" opacity="0.85" font-weight="700">A</text>
+  <text x="200" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#34d399" opacity="0.85" font-weight="700">T</text>
+  <text x="280" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#60a5fa" opacity="0.85" font-weight="700">B</text>
+</svg>
