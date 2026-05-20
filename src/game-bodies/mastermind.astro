@@ -1,0 +1,37 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Deneme<span id="attempt">1/10</span></div>
+  <div class="hud__stat">Kazanma<span id="wins">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="diff" role="group" aria-label="Zorluk">
+  <button class="diff__btn" data-diff="easy" type="button" aria-pressed="false">Kolay · 4 peg · 6 renk</button>
+  <button class="diff__btn" data-diff="hard" type="button" aria-pressed="false">Zor · 4 peg · 8 renk</button>
+</div>
+
+<div class="board-wrap">
+  <div id="board" class="board" role="grid" aria-label="Mastermind tahta — 10 deneme satırı"></div>
+
+  <div id="palette" class="palette palette--hidden" role="dialog" aria-label="Renk paleti" aria-hidden="true">
+    <div class="palette__inner" id="palette-inner"></div>
+    <button id="palette-close" class="palette__close" type="button" aria-label="Kapat">×</button>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">—</h2>
+      <p id="overlay-msg">—</p>
+      <div id="overlay-code" class="overlay__code" aria-label="Gizli kod"></div>
+      <button id="overlay-restart" class="hud__btn hud__btn--accent" type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button id="submit" class="hud__btn hud__btn--accent" type="button" disabled>Kontrol Et</button>
+  <button id="clear" class="hud__btn" type="button" disabled>Satırı Temizle</button>
+</div>
