@@ -1,0 +1,290 @@
+:root {
+  /* Local palette — pull from shared tokens where possible. */
+  --ob-tile-bg: #2a2f38;
+  --ob-tile-edge: #353a44;
+  --ob-tile-text: #f4ecd6;
+  --ob-tile-hover-bg: #353c47;
+  --ob-tile-active-bg: #404853;
+  --ob-board-bg: #15181e;
+  --ob-board-edge: #2a2f38;
+  --ob-gap: clamp(4px, 1.4vw, 10px);
+}
+
+.hud {
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+/* Stat cards: same visual language as Memory / Lights Out. */
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud > .hud__btn {
+  min-height: 44px;
+  padding: 11px 16px;
+  margin-left: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+/* Difficulty selector — three pills. */
+.diff {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.diff__btn {
+  flex: 1;
+  max-width: 120px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-variant-numeric: tabular-nums;
+  min-height: 40px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.diff__btn:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+.diff__btn--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Board: a square card; tiles are absolutely positioned children whose
+   transform is computed from the live width via percentages so resizes
+   stay correct without any pixel arithmetic in TS. */
+.board-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.board {
+  --size: 4;
+  position: relative;
+  width: 100%;
+  max-width: min(100%, calc(100svh - 240px), 480px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background: var(--ob-board-bg);
+  border: 1px solid var(--ob-board-edge);
+  border-radius: 16px;
+  padding: var(--ob-gap);
+  box-sizing: border-box;
+  box-shadow: var(--shadow-card);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Background grid (visible blank cells). Drawn with CSS grid behind the
+   absolutely-positioned tiles so the empty slot has a faint inset look. */
+.board::before {
+  content: '';
+  position: absolute;
+  inset: var(--ob-gap);
+  display: grid;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
+  gap: var(--ob-gap);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.025),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 10px;
+  /* Single-layer faint cell tiling using repeating gradients would be
+     fragile; instead we just give the board a darker tone and let tiles
+     visually dominate. */
+  pointer-events: none;
+}
+
+/* Tile: lives in the board's padding-inset coordinate system. Width is
+   `(100% - gap*(size-1)) / size` of the inset (the .board content box
+   minus padding). We position with transform: translate(c*100%, r*100%)
+   computed against the TILE's own size — so the step is automatically
+   100% + gap-adjusted via the calc below. */
+.tile {
+  position: absolute;
+  /* Inset by gap: the tile's parent (the .board) has padding === --ob-gap;
+     we treat the board's CONTENT box as the layout area. */
+  top: var(--ob-gap);
+  left: var(--ob-gap);
+  /* Width/height computed against the containing block (the .board, which
+     is padding-box). board has padding === gap on every side, so the
+     "content area" available for tiles is `100% - 2*gap`. Within that
+     we need N tiles and (N-1) gaps:
+       tile = (100% - 2*gap - (size-1)*gap) / size
+     JS mirrors this exact formula when computing pixel transforms
+     (pitfall: visual-vs-hitbox). */
+  width: calc(
+    (100% - 2 * var(--ob-gap) - (var(--size) - 1) * var(--ob-gap)) / var(--size)
+  );
+  height: calc(
+    (100% - 2 * var(--ob-gap) - (var(--size) - 1) * var(--ob-gap)) / var(--size)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    var(--ob-tile-hover-bg),
+    var(--ob-tile-bg)
+  );
+  border: 1px solid var(--ob-tile-edge);
+  border-radius: 10px;
+  color: var(--ob-tile-text);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: clamp(20px, 6.5vw, 36px);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    transform 130ms cubic-bezier(0.25, 0.5, 0.25, 1),
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+  will-change: transform;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tile:hover {
+  background: var(--ob-tile-hover-bg);
+}
+
+.tile:active {
+  background: var(--ob-tile-active-bg);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Smaller tiles for 5×5 readability. */
+.board[data-size='5'] .tile {
+  font-size: clamp(16px, 5vw, 28px);
+  border-radius: 8px;
+}
+.board[data-size='3'] .tile {
+  font-size: clamp(24px, 8vw, 44px);
+  border-radius: 12px;
+}
+
+/* Solved overlay. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 80%;
+}
+
+.overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 380px) {
+  .board {
+    padding: 6px;
+    --ob-gap: 5px;
+  }
+  .hud__stat {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .hud__stat span {
+    font-size: 16px;
+  }
+}

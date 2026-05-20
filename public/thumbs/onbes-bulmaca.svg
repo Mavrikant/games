@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Onbeş Bulmaca">
+  <defs>
+    <linearGradient id="ob-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="ob-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#353c47" />
+      <stop offset="100%" stop-color="#2a2f38" />
+    </linearGradient>
+    <linearGradient id="ob-tile-hot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a5360" />
+      <stop offset="100%" stop-color="#3a414c" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ob-bg)" />
+
+  <!-- 4x4 board, top-right area. Tile = 28px with 4px gap, total board 124px. -->
+  <g transform="translate(168, 18)" font-family="ui-sans-serif, system-ui" font-weight="800" text-anchor="middle">
+    <!-- Board surround -->
+    <rect x="-4" y="-4" width="132" height="132" rx="10" fill="#15181e" stroke="#2a2f38" />
+
+    <!-- Row 1 -->
+    <g>
+      <rect x="0"  y="0"  width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="14" y="20" font-size="15" fill="#f4ecd6">1</text>
+      <rect x="32" y="0"  width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="46" y="20" font-size="15" fill="#f4ecd6">2</text>
+      <rect x="64" y="0"  width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="78" y="20" font-size="15" fill="#f4ecd6">3</text>
+      <rect x="96" y="0"  width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="110" y="20" font-size="15" fill="#f4ecd6">4</text>
+    </g>
+    <!-- Row 2 -->
+    <g>
+      <rect x="0"  y="32" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="14" y="52" font-size="15" fill="#f4ecd6">5</text>
+      <rect x="32" y="32" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="46" y="52" font-size="15" fill="#f4ecd6">6</text>
+      <rect x="64" y="32" width="28" height="28" rx="5" fill="url(#ob-tile-hot)" stroke="#475262" />
+      <text x="78" y="52" font-size="15" fill="#fff2a8">7</text>
+      <rect x="96" y="32" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="110" y="52" font-size="15" fill="#f4ecd6">8</text>
+    </g>
+    <!-- Row 3 -->
+    <g>
+      <rect x="0"  y="64" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="14" y="84" font-size="15" fill="#f4ecd6">9</text>
+      <rect x="32" y="64" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="46" y="84" font-size="14" fill="#f4ecd6">10</text>
+      <!-- blank slot at (col=2, row=2) -->
+      <rect x="96" y="64" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="110" y="84" font-size="14" fill="#f4ecd6">11</text>
+    </g>
+    <!-- Row 4 -->
+    <g>
+      <rect x="0"   y="96" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="14"  y="116" font-size="14" fill="#f4ecd6">13</text>
+      <rect x="32"  y="96" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="46"  y="116" font-size="14" fill="#f4ecd6">14</text>
+      <rect x="64"  y="96" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="78"  y="116" font-size="14" fill="#f4ecd6">15</text>
+      <rect x="96"  y="96" width="28" height="28" rx="5" fill="url(#ob-tile)" stroke="#353a44" />
+      <text x="110" y="116" font-size="15" fill="#f4ecd6">12</text>
+    </g>
+
+    <!-- Sliding arrow hint: showing 7 about to slide into empty (col=2, row=2) -->
+    <g opacity="0.85">
+      <path d="M 78 64 L 78 60 L 84 66 L 80 66 L 80 76 L 76 76 L 76 66 L 72 66 Z"
+            fill="#f0c557" />
+    </g>
+  </g>
+
+  <text x="20" y="40" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">Onbeş</text>
+  <text x="20" y="68" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">Bulmaca</text>
+  <text x="20" y="92" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" fill="#98a0ad" letter-spacing="0.06em">15-PUZZLE</text>
+  <text x="20" y="178" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" fill="#98a0ad" letter-spacing="0.06em">SLIDE TILES INTO ORDER</text>
+</svg>
