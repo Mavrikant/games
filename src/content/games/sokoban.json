@@ -1,0 +1,8 @@
+{
+  "title": "Sokoban",
+  "description": "Kutuları hedef noktalarına it — klasik mantık bulmacası.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "mantık"],
+  "controls": "Ok tuşları / WASD: hareket · Z: geri al · R: level reset · N: sonraki level",
+  "thumbnail": "sokoban.svg"
+}
