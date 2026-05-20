@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <div class="hud__stat">Frame<span id="frame">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="320" height="520" aria-label="Bowling alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Bowling</h2>
+      <p id="overlay-msg">Açı için boşluğa bas, sonra güç için tekrar bas.</p>
+    </div>
+  </div>
+</div>
+
+<div id="frames" class="bw-frames" aria-label="Skor tablosu"></div>
+
+<div class="bw-status" id="bw-status">Açı belirle: hareketli çubuk dururken boşluğa bas.</div>
