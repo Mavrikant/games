@@ -1,0 +1,330 @@
+:root {
+  --ab-water: #0e3a5c;
+  --ab-water-deep: #08243d;
+  --ab-water-line: rgba(255, 255, 255, 0.08);
+  --ab-ship: #6b7280;
+  --ab-ship-edge: #95a0ad;
+  --ab-hit: #ef4444;
+  --ab-hit-edge: #b91c1c;
+  --ab-miss: #cfe9f5;
+  --ab-miss-edge: #7faec7;
+  --ab-sunk: #111418;
+  --ab-sunk-edge: #ef4444;
+}
+
+.stage {
+  gap: 14px;
+}
+
+.ab-meta {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ab-meta__item {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ab-meta__item span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.ab-meta__icon {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.ab-meta__icon--enemy {
+  color: var(--ab-hit);
+}
+
+.ab-meta__icon--you {
+  color: #5ab8e6;
+}
+
+.ab-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ab-status {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 500;
+  min-height: 22px;
+}
+
+.ab-arena {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  align-items: start;
+  position: relative;
+  isolation: isolate;
+}
+
+.ab-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ab-side__label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.ab-grid-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ab-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 100%;
+  padding: 6px;
+  background: var(--ab-water-deep);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.ab-cell {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--ab-water);
+  border: 1px solid var(--ab-water-line);
+  border-radius: 3px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.08s ease;
+}
+
+.ab-grid--enemy .ab-cell:hover:not(:disabled) {
+  background: #155a85;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.ab-grid--enemy .ab-cell:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.ab-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.ab-cell:disabled {
+  cursor: default;
+}
+
+/* Own ship — only visible on the player's grid. */
+.ab-cell--ship {
+  background: linear-gradient(
+    180deg,
+    #7b8693 0%,
+    var(--ab-ship) 100%
+  );
+  border-color: var(--ab-ship-edge);
+}
+
+/* Miss — small light dot. */
+.ab-cell--miss {
+  background: var(--ab-water);
+}
+.ab-cell--miss::after {
+  content: '';
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: var(--ab-miss);
+  border: 1px solid var(--ab-miss-edge);
+  box-shadow: 0 0 4px rgba(207, 233, 245, 0.4);
+}
+
+/* Hit — red fill with white cross. */
+.ab-cell--hit {
+  background: linear-gradient(
+    180deg,
+    #f87171 0%,
+    var(--ab-hit) 100%
+  );
+  border-color: var(--ab-hit-edge);
+}
+.ab-cell--hit::before {
+  content: '';
+  position: absolute;
+  inset: 24%;
+  border-radius: 2px;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 42%,
+      rgba(255, 255, 255, 0.85) 47%,
+      rgba(255, 255, 255, 0.85) 53%,
+      transparent 58%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 42%,
+      rgba(255, 255, 255, 0.85) 47%,
+      rgba(255, 255, 255, 0.85) 53%,
+      transparent 58%
+    );
+}
+
+/* Sunk — dark fill with red cross. */
+.ab-cell--sunk {
+  background: var(--ab-sunk);
+  border-color: var(--ab-sunk-edge);
+}
+.ab-cell--sunk::before {
+  content: '';
+  position: absolute;
+  inset: 22%;
+  border-radius: 2px;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 42%,
+      var(--ab-hit) 47%,
+      var(--ab-hit) 53%,
+      transparent 58%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 42%,
+      var(--ab-hit) 47%,
+      var(--ab-hit) 53%,
+      transparent 58%
+    );
+}
+
+/* Win / lose overlay. */
+.ab-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+.ab-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.ab-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 80%;
+}
+.ab-overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.ab-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .ab-arena {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .ab-meta {
+    flex-wrap: wrap;
+  }
+  .ab-meta__item {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .ab-meta__item span:last-child {
+    font-size: 16px;
+  }
+  .ab-actions {
+    flex-shrink: 0;
+  }
+  .ab-grid {
+    padding: 4px;
+    gap: 1px;
+  }
+}

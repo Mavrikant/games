@@ -1,0 +1,9 @@
+{
+  "title": "Amiral Battı",
+  "description": "10×10 denizde gemileri yerleştir, rakibinin filosunu batır.",
+  "dateAdded": "2026-05-20",
+  "tags": ["strateji", "klasik", "savaş", "masa-oyunu"],
+  "controls": "Tıkla: rakip karesine ateş et · Karıştır: rastgele yerleşim · R: yeni oyun",
+  "howToPlay": "Standart filo (Taşıyıcı 5, Savaş gemisi 4, Kruvazör 3, Denizaltı 3, Destroyer 2) iki tarafa rastgele yerleşir. Karıştır ile kendi filonu yeniden dizebilirsin. Sırayla rakip grid'inde bir kareye ateş ediyorsun: vuruş kırmızı, ıska mavi, batırılan gemi siyah çerçeveli olur. AI hücreyi rastgele seçer; bir vuruş yaptığında komşu kareleri akıllı şekilde dener. Tüm 17 düşman hücresini ilk vuran kazanır.",
+  "thumbnail": "amiral-batti.svg"
+}

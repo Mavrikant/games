@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Amiral Battı">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1224" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#155a85" />
+      <stop offset="100%" stop-color="#08243d" />
+    </linearGradient>
+    <linearGradient id="ship" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9aa4b0" />
+      <stop offset="100%" stop-color="#52606f" />
+    </linearGradient>
+    <radialGradient id="hit" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffd0d0" />
+      <stop offset="40%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- Two 10x10 grids, side-by-side, smaller -->
+  <g>
+    <!-- Left grid (enemy) -->
+    <rect x="92" y="32" width="100" height="100" rx="6" fill="url(#water)" stroke="#000" stroke-opacity="0.5" />
+    <g stroke="rgba(255,255,255,0.06)" stroke-width="0.5">
+      <line x1="102" y1="32" x2="102" y2="132" />
+      <line x1="112" y1="32" x2="112" y2="132" />
+      <line x1="122" y1="32" x2="122" y2="132" />
+      <line x1="132" y1="32" x2="132" y2="132" />
+      <line x1="142" y1="32" x2="142" y2="132" />
+      <line x1="152" y1="32" x2="152" y2="132" />
+      <line x1="162" y1="32" x2="162" y2="132" />
+      <line x1="172" y1="32" x2="172" y2="132" />
+      <line x1="182" y1="32" x2="182" y2="132" />
+      <line x1="92" y1="42" x2="192" y2="42" />
+      <line x1="92" y1="52" x2="192" y2="52" />
+      <line x1="92" y1="62" x2="192" y2="62" />
+      <line x1="92" y1="72" x2="192" y2="72" />
+      <line x1="92" y1="82" x2="192" y2="82" />
+      <line x1="92" y1="92" x2="192" y2="92" />
+      <line x1="92" y1="102" x2="192" y2="102" />
+      <line x1="92" y1="112" x2="192" y2="112" />
+      <line x1="92" y1="122" x2="192" y2="122" />
+    </g>
+    <!-- Hits on enemy -->
+    <circle cx="117" cy="57" r="3.2" fill="url(#hit)" />
+    <circle cx="127" cy="57" r="3.2" fill="url(#hit)" />
+    <!-- Miss dots -->
+    <circle cx="147" cy="77" r="1.5" fill="#cfe9f5" />
+    <circle cx="167" cy="107" r="1.5" fill="#cfe9f5" />
+    <circle cx="107" cy="97" r="1.5" fill="#cfe9f5" />
+    <circle cx="172" cy="62" r="1.5" fill="#cfe9f5" />
+
+    <!-- Right grid (own) -->
+    <rect x="216" y="32" width="100" height="100" rx="6" fill="url(#water)" stroke="#000" stroke-opacity="0.5" />
+    <g stroke="rgba(255,255,255,0.06)" stroke-width="0.5">
+      <line x1="226" y1="32" x2="226" y2="132" />
+      <line x1="236" y1="32" x2="236" y2="132" />
+      <line x1="246" y1="32" x2="246" y2="132" />
+      <line x1="256" y1="32" x2="256" y2="132" />
+      <line x1="266" y1="32" x2="266" y2="132" />
+      <line x1="276" y1="32" x2="276" y2="132" />
+      <line x1="286" y1="32" x2="286" y2="132" />
+      <line x1="296" y1="32" x2="296" y2="132" />
+      <line x1="306" y1="32" x2="306" y2="132" />
+      <line x1="216" y1="42" x2="316" y2="42" />
+      <line x1="216" y1="52" x2="316" y2="52" />
+      <line x1="216" y1="62" x2="316" y2="62" />
+      <line x1="216" y1="72" x2="316" y2="72" />
+      <line x1="216" y1="82" x2="316" y2="82" />
+      <line x1="216" y1="92" x2="316" y2="92" />
+      <line x1="216" y1="102" x2="316" y2="102" />
+      <line x1="216" y1="112" x2="316" y2="112" />
+      <line x1="216" y1="122" x2="316" y2="122" />
+    </g>
+    <!-- Player ships -->
+    <rect x="222" y="38" width="48" height="8" rx="2" fill="url(#ship)" stroke="#2a323d" stroke-width="0.5" />
+    <rect x="284" y="58" width="8" height="28" rx="2" fill="url(#ship)" stroke="#2a323d" stroke-width="0.5" />
+    <rect x="232" y="98" width="28" height="8" rx="2" fill="url(#ship)" stroke="#2a323d" stroke-width="0.5" />
+    <rect x="252" y="118" width="28" height="8" rx="2" fill="url(#ship)" stroke="#2a323d" stroke-width="0.5" />
+    <rect x="304" y="98" width="8" height="18" rx="2" fill="url(#ship)" stroke="#2a323d" stroke-width="0.5" />
+    <!-- A hit on player's grid -->
+    <circle cx="246" cy="42" r="3.2" fill="url(#hit)" />
+  </g>
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Amiral Battı</text>
+  <text x="20" y="56" font-family="ui-sans-serif, system-ui" font-size="11" fill="#98a0ad">Filonu batır, savaşı kazan</text>
+  <text x="20" y="170" font-family="ui-sans-serif, system-ui" font-size="9" fill="#7a8290">Düşman ←     → Sen</text>
+</svg>

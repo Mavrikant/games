@@ -1,0 +1,64 @@
+---
+---
+
+<header class="hud">
+  <div class="ab-meta">
+    <div class="ab-meta__item" title="Galibiyet">
+      <span class="ab-meta__icon" aria-hidden="true">★</span>
+      <span><span id="ab-wins">0</span>–<span id="ab-losses">0</span></span>
+    </div>
+    <div class="ab-meta__item" title="Kalan düşman gemi hücresi">
+      <span class="ab-meta__icon ab-meta__icon--enemy" aria-hidden="true">◎</span>
+      <span id="ab-enemy-left">17</span>
+    </div>
+    <div class="ab-meta__item" title="Kalan kendi gemi hücresi">
+      <span class="ab-meta__icon ab-meta__icon--you" aria-hidden="true">⚓</span>
+      <span id="ab-you-left">17</span>
+    </div>
+  </div>
+  <div class="ab-actions">
+    <button id="ab-shuffle" class="hud__btn" type="button">Karıştır</button>
+    <button id="ab-restart" class="hud__btn" type="button">Yeniden başla</button>
+  </div>
+</header>
+
+<div id="ab-status" class="ab-status" role="status" aria-live="polite">
+  Sıra sende — düşman gridine ateş et.
+</div>
+
+<div class="ab-arena">
+  <section class="ab-side ab-side--enemy" aria-labelledby="ab-enemy-label">
+    <h2 id="ab-enemy-label" class="ab-side__label">Düşman filosu</h2>
+    <div class="ab-grid-wrap">
+      <div
+        id="ab-enemy-grid"
+        class="ab-grid ab-grid--enemy"
+        role="grid"
+        aria-label="Düşman 10x10 grid"
+      ></div>
+    </div>
+  </section>
+
+  <section class="ab-side ab-side--you" aria-labelledby="ab-you-label">
+    <h2 id="ab-you-label" class="ab-side__label">Senin filon</h2>
+    <div class="ab-grid-wrap">
+      <div
+        id="ab-you-grid"
+        class="ab-grid ab-grid--you"
+        role="grid"
+        aria-label="Senin 10x10 grid'in"
+      ></div>
+    </div>
+  </section>
+
+  <div id="ab-overlay" class="ab-overlay ab-overlay--hidden" aria-hidden="true">
+    <div class="ab-overlay__inner">
+      <h2 id="ab-overlay-title">Oyun bitti</h2>
+      <p id="ab-overlay-msg">—</p>
+      <button
+        id="ab-overlay-restart"
+        class="hud__btn hud__btn--accent"
+        type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
