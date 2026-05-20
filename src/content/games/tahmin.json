@@ -1,0 +1,9 @@
+{
+  "title": "Tahmin",
+  "description": "Desenin devamını seç — sayı, renk, şekil veya kombinasyon.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "özgün", "mantık", "desen"],
+  "controls": "Tıkla: cevap seç · 1-4: cevap seç · R: yeniden başla",
+  "howToPlay": "Üstteki 4 görsel bir desen oluşturuyor — sayı dizisi (2,4,6,?), alternating renk (kırmızı,mavi,kırmızı,?), şekil dönüşü (üçgen 0°,90°,180°,?) veya bunların kombinasyonu. Aşağıdaki 4 seçenekten doğru devamı bul. Doğru → +1 skor; yanlış veya 12 saniye dolması → 1 can. 3 canın da bitince oyun biter. R ile yeniden başla.",
+  "thumbnail": "tahmin.svg"
+}

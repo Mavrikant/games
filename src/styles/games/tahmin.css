@@ -1,0 +1,328 @@
+:root {
+  /* Tahmin renk paleti — pattern üretimi ile aynı isimleri kullanır.
+     Tek const set: hem sequence cell hem option button bunlardan beslenir. */
+  --tahmin-red: #ef4444;
+  --tahmin-blue: #3b82f6;
+  --tahmin-green: #22c55e;
+  --tahmin-yellow: #facc15;
+  --tahmin-purple: #a855f7;
+  --tahmin-orange: #f59e0b;
+
+  --tahmin-correct: #22c55e;
+  --tahmin-wrong: #f43f5e;
+  --tahmin-warn: #f59e0b;
+
+  /* TEK boyut sabiti — sequence ve option aynı size, hitbox = görsel. */
+  --tahmin-cell-size: clamp(56px, 16vw, 84px);
+  --tahmin-cell-radius: 14px;
+}
+
+/* HUD durum kartları */
+.hud {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hud__stat {
+  flex: 1;
+  min-width: 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+.hud__stat span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+.hud__stat--lives span {
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+/* Board container */
+.board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Timer */
+.timer {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.timer__bar {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent));
+  transform-origin: left;
+  transform: scaleX(1);
+  border-radius: 999px;
+  transition: transform 0.12s linear;
+}
+.timer__bar--warn {
+  background: linear-gradient(90deg, var(--tahmin-warn), var(--tahmin-wrong));
+}
+
+/* Prompt */
+.prompt {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Sequence layout — 5 hücre yatayda, gap eşit */
+.sequence {
+  display: grid;
+  grid-template-columns: repeat(5, var(--tahmin-cell-size));
+  gap: clamp(4px, 1.4vw, 10px);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Options layout — 4 buton 2x2 (mobile) veya 1x4 (desktop) */
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, var(--tahmin-cell-size));
+  gap: clamp(8px, 2vw, 14px);
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+/* TEK cell stili — hem sequence hem options'da kullanılır.
+   Bu sayede görsel = hitbox. */
+.cell {
+  position: relative;
+  width: var(--tahmin-cell-size);
+  height: var(--tahmin-cell-size);
+  border-radius: var(--tahmin-cell-radius);
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  font: inherit;
+  color: var(--text);
+  padding: 0;
+  overflow: hidden;
+  transition:
+    transform 0.12s,
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background 0.15s;
+}
+
+/* option buton özelleştirmeleri */
+.option {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.option:not(:disabled):hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.option:not(:disabled):active {
+  transform: scale(0.96);
+}
+.option:disabled {
+  cursor: default;
+}
+
+.option__key {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: rgba(10, 11, 14, 0.55);
+  border-radius: 5px;
+  padding: 1px 5px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* Unknown slot (?) */
+.sequence__cell--unknown {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--surface-2) 0,
+      var(--surface-2) 6px,
+      var(--surface) 6px,
+      var(--surface) 12px
+    );
+  border-style: dashed;
+}
+.cell__q {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 800;
+  color: var(--text-dim);
+}
+
+/* Number overlay (arithmetic / combo) */
+.cell__num {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+/* SVG figür — cell içinde mutlak konum, tüm cell'i kaplar */
+.cell__svg {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  z-index: 1;
+  pointer-events: none;
+}
+.cell__fig {
+  fill: var(--cell-fill, rgba(255, 255, 255, 0.65));
+  stroke: rgba(0, 0, 0, 0.2);
+  stroke-width: 1;
+}
+
+/* Renk varyantları — fill ve background birlikte değişir */
+.cell--color-red {
+  --cell-fill: var(--tahmin-red);
+}
+.cell--color-blue {
+  --cell-fill: var(--tahmin-blue);
+}
+.cell--color-green {
+  --cell-fill: var(--tahmin-green);
+}
+.cell--color-yellow {
+  --cell-fill: var(--tahmin-yellow);
+}
+.cell--color-purple {
+  --cell-fill: var(--tahmin-purple);
+}
+.cell--color-orange {
+  --cell-fill: var(--tahmin-orange);
+}
+
+/* Feedback states */
+.option--correct {
+  border-color: var(--tahmin-correct);
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.36),
+    0 0 18px rgba(34, 197, 94, 0.28);
+}
+.option--wrong {
+  border-color: var(--tahmin-wrong);
+  box-shadow:
+    0 0 0 2px rgba(244, 63, 94, 0.36),
+    0 0 18px rgba(244, 63, 94, 0.24);
+}
+.option--reveal {
+  border-color: var(--tahmin-correct);
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.42),
+    0 0 18px rgba(34, 197, 94, 0.32);
+}
+
+/* Overlay — game over */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.86);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s,
+    transform 0.22s;
+  z-index: 4;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+.overlay__inner {
+  text-align: center;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 90%;
+}
+.overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.overlay__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--accent);
+  color: #0a0b0e;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    background 0.15s;
+}
+.overlay__btn:hover {
+  transform: translateY(-1px);
+}
+.overlay__btn:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 420px) {
+  .options {
+    grid-template-columns: repeat(2, var(--tahmin-cell-size));
+    grid-template-rows: repeat(2, var(--tahmin-cell-size));
+  }
+}

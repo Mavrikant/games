@@ -1,0 +1,43 @@
+<svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" rx="24" fill="#0A0B0E"/>
+  <rect x="1" y="1" width="318" height="198" rx="23" stroke="#171A21"/>
+  <g>
+    <!-- Sequence of 4 items + ? -->
+    <rect x="28" y="62" width="44" height="44" rx="10" fill="#3B82F6"/>
+    <text x="50" y="93" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="20" font-weight="800" fill="#0A0B0E">2</text>
+
+    <rect x="80" y="62" width="44" height="44" rx="10" fill="#3B82F6"/>
+    <text x="102" y="93" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="20" font-weight="800" fill="#0A0B0E">4</text>
+
+    <rect x="132" y="62" width="44" height="44" rx="10" fill="#3B82F6"/>
+    <text x="154" y="93" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="20" font-weight="800" fill="#0A0B0E">6</text>
+
+    <rect x="184" y="62" width="44" height="44" rx="10" fill="#3B82F6"/>
+    <text x="206" y="93" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="20" font-weight="800" fill="#0A0B0E">8</text>
+
+    <!-- unknown -->
+    <rect x="236" y="62" width="44" height="44" rx="10" fill="url(#unknown)" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4"/>
+    <text x="258" y="96" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="26" font-weight="800" fill="#E2D6FF">?</text>
+  </g>
+  <g>
+    <!-- Options row -->
+    <rect x="48" y="130" width="36" height="36" rx="8" fill="#171A21" stroke="#2A2F38"/>
+    <text x="66" y="155" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="16" font-weight="700" fill="#9CA3AF">9</text>
+
+    <rect x="108" y="130" width="36" height="36" rx="8" fill="#171A21" stroke="#22C55E" stroke-width="2"/>
+    <text x="126" y="155" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="16" font-weight="700" fill="#22C55E">10</text>
+
+    <rect x="170" y="130" width="36" height="36" rx="8" fill="#171A21" stroke="#2A2F38"/>
+    <text x="188" y="155" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="16" font-weight="700" fill="#9CA3AF">11</text>
+
+    <rect x="232" y="130" width="36" height="36" rx="8" fill="#171A21" stroke="#2A2F38"/>
+    <text x="250" y="155" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="16" font-weight="700" fill="#9CA3AF">12</text>
+  </g>
+  <text x="160" y="36" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="13" font-weight="700" fill="#E2D6FF" letter-spacing="2">DESEN  TAHMIN</text>
+  <defs>
+    <linearGradient id="unknown" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#171A21"/>
+      <stop offset="1" stop-color="#0A0B0E"/>
+    </linearGradient>
+  </defs>
+</svg>
