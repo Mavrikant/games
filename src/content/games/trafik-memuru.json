@@ -1,0 +1,9 @@
+{
+  "title": "Trafik Memuru",
+  "description": "Sinyalleri zamanla değiştir — arabaları çarptırmadan geçir, kuyruk birikmesin.",
+  "dateAdded": "2026-05-20",
+  "tags": ["arcade", "yönetim", "özgün", "akış"],
+  "controls": "Boşluk veya tıkla: sinyal değiştir · R: yeniden başla",
+  "howToPlay": "Dört yönlü bir kavşakta sinyalleri yönetiyorsun. Kuzey-güney veya doğu-batı yönlerinden biri yeşil olur. Yeşil yönündeki arabalar kavşaktan geçer; kırmızı yönündekiler kuyrukta bekler. Sinyali değiştirdiğinde kısa bir sarı geçiş olur — bu sırada kimse geçmez. Her arabanın bir sabır göstergesi vardır; biri tükenirse oyun biter. Kırmızı şeritli ambulansları öncelikle geçir.",
+  "thumbnail": "trafik-memuru.svg"
+}
