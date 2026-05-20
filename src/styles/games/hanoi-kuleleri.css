@@ -1,0 +1,210 @@
+:root {
+  --hk-bg: #0e1117;
+  --hk-base: #3a4150;
+  --hk-base-shadow: #262b34;
+  --hk-rod: #4a5260;
+  --hk-slot-hi: rgba(129, 140, 248, 0.10);
+  --hk-slot-hi-edge: rgba(129, 140, 248, 0.55);
+  --hk-disk-sel: #f5f6f8;
+}
+
+/* Reusable stat card visual language (same as lights-out / memory). */
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+/* Disk count picker */
+.hk-disk-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 12px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.hk-disk-bar__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.hk-disk-bar__btns {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.hk-disk-bar__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 0 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.1s ease;
+}
+
+.hk-disk-bar__btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.hk-disk-bar__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hk-disk-bar__btn:active {
+  transform: scale(0.94);
+}
+
+.hk-disk-bar__btn--active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hk-disk-bar__btn--active:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Stage / canvas */
+.hk-stage {
+  position: relative;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(10px, 2vw, 16px);
+  box-shadow: var(--shadow-card);
+}
+
+.hk-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* aspect-ratio matches canvas 720x420 = 12:7 */
+  aspect-ratio: 720 / 420;
+  border-radius: 12px;
+  background: var(--hk-bg);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.hk-canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Overlay (solved) */
+.hk-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+
+.hk-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.hk-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 80%;
+}
+
+.hk-overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.hk-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 420px) {
+  .hk-disk-bar {
+    gap: 8px;
+    padding: 6px 8px;
+  }
+  .hk-disk-bar__btn {
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 14px;
+    padding: 0 8px;
+  }
+}
