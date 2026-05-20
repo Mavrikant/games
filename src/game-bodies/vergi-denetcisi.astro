@@ -1,0 +1,34 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__chip">Skor<span id="score">0</span></div>
+  <div class="hud__chip">En İyi<span id="best">0</span></div>
+  <div class="hud__chip">Tur<span id="round">1</span></div>
+  <div class="hud__chip">Hata<span id="strikes">0/3</span></div>
+  <button id="next" class="hud__btn" type="button">Sonraki tur</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="vd-status" id="status" role="status" aria-live="polite">
+  Anomalili satırlara tıkla. Temiz satıra tıklarsan hata sayılır.
+</div>
+
+<div class="vd-table" id="table" role="table" aria-label="Fatura tablosu">
+  <div class="vd-table__head" role="row">
+    <div role="columnheader">Fatura No</div>
+    <div role="columnheader">Tarih</div>
+    <div role="columnheader">Tutar</div>
+    <div role="columnheader">KDV</div>
+    <div role="columnheader">Toplam</div>
+  </div>
+  <div class="vd-table__body" id="rows" role="rowgroup"></div>
+</div>
+
+<div class="vd-overlay" id="overlay" hidden aria-hidden="true">
+  <div class="vd-overlay__panel" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+    <h2 id="overlay-title" class="vd-overlay__title">Denetim sonu</h2>
+    <p id="overlay-msg" class="vd-overlay__msg">3 yanlış işaret. Müfettişlikten alındın.</p>
+    <button id="overlay-restart" class="hud__btn vd-overlay__btn" type="button">Yeniden başla</button>
+  </div>
+</div>
