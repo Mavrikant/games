@@ -1,0 +1,60 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">
+    Skor<span id="score">0</span>
+  </div>
+  <div class="hud__stat">
+    En iyi<span id="best">0</span>
+  </div>
+  <div class="hud__stat hud__stat--lives">
+    Can<span id="lives" aria-label="Kalan can sayısı">3</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<section class="board" aria-label="Tahmin tahtası">
+  <div class="timer" aria-hidden="true">
+    <div id="timer-bar" class="timer__bar"></div>
+  </div>
+
+  <p id="prompt" class="prompt" aria-live="polite">
+    Aşağıdaki desenin devamı hangisi?
+  </p>
+
+  <div id="sequence" class="sequence" aria-label="Desen — son kutu cevabını arıyor">
+    <div class="cell sequence__cell" data-slot="0"></div>
+    <div class="cell sequence__cell" data-slot="1"></div>
+    <div class="cell sequence__cell" data-slot="2"></div>
+    <div class="cell sequence__cell" data-slot="3"></div>
+    <div class="cell sequence__cell sequence__cell--unknown" data-slot="q">
+      <span class="cell__q">?</span>
+    </div>
+  </div>
+
+  <div id="options" class="options" role="group" aria-label="Seçenekler">
+    <button class="cell option" type="button" data-option="0">
+      <span class="option__key">1</span>
+    </button>
+    <button class="cell option" type="button" data-option="1">
+      <span class="option__key">2</span>
+    </button>
+    <button class="cell option" type="button" data-option="2">
+      <span class="option__key">3</span>
+    </button>
+    <button class="cell option" type="button" data-option="3">
+      <span class="option__key">4</span>
+    </button>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Oyun bitti</h2>
+      <p id="overlay-msg">Skor: 0</p>
+      <button id="overlay-restart" class="overlay__btn" type="button">
+        Tekrar oyna
+      </button>
+    </div>
+  </div>
+</section>
