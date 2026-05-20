@@ -1,0 +1,9 @@
+{
+  "title": "Onbeş Bulmaca",
+  "description": "Plakaları kaydırarak 1-15'i doğru sıraya diz — klasik kaydırmalı bulmaca.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "mantık"],
+  "controls": "Tıkla: boşluğa komşu plakayı kaydır · Ok tuşları: boşluğu hareket ettir · R: yeniden karıştır",
+  "howToPlay": "Klasik 15-puzzle. 4×4 ızgarada 1-15 numaralı plakalar karışık durur; bir hücre boştur. Boşluğa yatay/dikey komşu olan bir plakayı tıklayarak (veya ok tuşları ile boşluğu hareket ettirerek) plakayı boşluğa kaydırırsın. Hedef plakaları sol-üstten sağ-alta 1-15 sırasıyla dizmek, boş hücrenin sağ-altta kalmasıdır. 3×3, 4×4 ve 5×5 zorluk seçenekleri var; her boyut için en az hamle ve en kısa süre rekorları ayrı tutulur.",
+  "thumbnail": "onbes-bulmaca.svg"
+}
