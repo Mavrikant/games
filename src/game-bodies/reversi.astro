@@ -1,0 +1,43 @@
+---
+---
+
+<header class="hud">
+  <div class="rv-meta">
+    <div class="rv-meta__item rv-meta__item--black" title="Siyah taşların (sen)">
+      <span class="rv-disc rv-disc--black" aria-hidden="true"></span>
+      <span id="rv-black-count">2</span>
+    </div>
+    <div class="rv-meta__item rv-meta__item--white" title="Beyaz taşlar (AI)">
+      <span class="rv-disc rv-disc--white" aria-hidden="true"></span>
+      <span id="rv-white-count">2</span>
+    </div>
+    <div class="rv-meta__item" title="Galibiyet–mağlubiyet">
+      <span class="rv-meta__icon" aria-hidden="true">★</span>
+      <span><span id="rv-wins">0</span>–<span id="rv-losses">0</span></span>
+    </div>
+  </div>
+  <button id="rv-restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="rv-status" class="rv-status" role="status" aria-live="polite">
+  Sıra sende — yasal hamleler vurgulandı.
+</div>
+
+<div class="rv-board-wrap">
+  <div
+    id="rv-board"
+    class="rv-board"
+    role="grid"
+    aria-label="Reversi 8x8 tahtası"
+  ></div>
+  <div id="rv-overlay" class="rv-overlay rv-overlay--hidden" aria-hidden="true">
+    <div class="rv-overlay__inner">
+      <h2 id="rv-overlay-title">Oyun bitti</h2>
+      <p id="rv-overlay-msg">—</p>
+      <button
+        id="rv-overlay-restart"
+        class="hud__btn hud__btn--accent"
+        type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>

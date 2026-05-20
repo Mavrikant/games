@@ -1,0 +1,303 @@
+:root {
+  --rv-felt: #1f6b3e;
+  --rv-felt-deep: #14502d;
+  --rv-grid: rgba(0, 0, 0, 0.42);
+  --rv-disc-black: #111418;
+  --rv-disc-black-edge: #2a2f37;
+  --rv-disc-white: #f4f6f9;
+  --rv-disc-white-edge: #c5cad3;
+  --rv-legal: rgba(244, 246, 249, 0.55);
+  --rv-legal-bg: rgba(244, 246, 249, 0.08);
+}
+
+.stage {
+  gap: 16px;
+}
+
+.rv-meta {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rv-meta__item {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rv-meta__item span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.rv-meta__icon {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* HUD-sized disc badge (next to score numbers). */
+.rv-disc {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.35);
+}
+.rv-disc--black {
+  background: radial-gradient(
+    circle at 35% 30%,
+    #3a414b 0%,
+    var(--rv-disc-black) 70%
+  );
+  border: 1px solid var(--rv-disc-black-edge);
+}
+.rv-disc--white {
+  background: radial-gradient(
+    circle at 35% 30%,
+    #ffffff 0%,
+    var(--rv-disc-white) 70%
+  );
+  border: 1px solid var(--rv-disc-white-edge);
+}
+
+.rv-status {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 500;
+  min-height: 22px;
+}
+
+.rv-board-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.rv-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 2px;
+  width: 100%;
+  /* Square + capped so portrait fits without scroll (HUD ~94, status ~46,
+     hint ~30 → reserve ~190px). */
+  aspect-ratio: 1;
+  max-width: min(100%, calc(100svh - 200px));
+  padding: 8px;
+  background: var(--rv-felt-deep);
+  border: 1px solid var(--rv-grid);
+  border-radius: 14px;
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+.rv-cell {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--rv-felt);
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.rv-cell::before {
+  /* The disc itself, painted via state classes. Default = invisible. */
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.18s ease,
+    transform 0.22s ease,
+    background 0.18s ease;
+  background: var(--rv-felt);
+  box-shadow: none;
+}
+
+.rv-cell--black::before {
+  opacity: 1;
+  transform: scale(1);
+  background: radial-gradient(
+    circle at 35% 28%,
+    #4a525d 0%,
+    var(--rv-disc-black) 70%
+  );
+  box-shadow:
+    inset 0 -3px 5px rgba(0, 0, 0, 0.45),
+    inset 0 2px 3px rgba(255, 255, 255, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.rv-cell--white::before {
+  opacity: 1;
+  transform: scale(1);
+  background: radial-gradient(
+    circle at 35% 28%,
+    #ffffff 0%,
+    var(--rv-disc-white) 70%
+  );
+  box-shadow:
+    inset 0 -3px 5px rgba(170, 175, 185, 0.45),
+    inset 0 2px 3px rgba(255, 255, 255, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Legal-move hint: small ring drawn via ::after. */
+.rv-cell--legal {
+  cursor: pointer;
+  background: linear-gradient(
+    var(--rv-felt),
+    var(--rv-felt)
+  ) padding-box;
+}
+.rv-cell--legal::after {
+  content: '';
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background: var(--rv-legal-bg);
+  border: 2px dashed var(--rv-legal);
+  pointer-events: none;
+  animation: rv-pulse 1.6s ease-in-out infinite;
+}
+.rv-cell--legal:hover {
+  background: rgba(244, 246, 249, 0.12);
+}
+.rv-cell--legal:active {
+  transform: scale(0.97);
+}
+
+@keyframes rv-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.rv-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.rv-cell:disabled {
+  cursor: default;
+}
+
+/* Win/loss/draw overlay. */
+.rv-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+.rv-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.rv-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 80%;
+}
+.rv-overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.rv-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+@media (max-width: 420px) {
+  .rv-meta {
+    flex-wrap: wrap;
+  }
+  .rv-meta__item {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .rv-meta__item span:last-child {
+    font-size: 16px;
+  }
+  .rv-disc {
+    width: 16px;
+    height: 16px;
+  }
+  .rv-board {
+    padding: 6px;
+    gap: 1px;
+  }
+}

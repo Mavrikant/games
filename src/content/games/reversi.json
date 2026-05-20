@@ -1,0 +1,9 @@
+{
+  "title": "Reversi",
+  "description": "Klasik strateji — rakibin taşlarını çevirerek tahtaya hakim ol.",
+  "dateAdded": "2026-05-20",
+  "tags": ["strateji", "klasik", "masa-oyunu"],
+  "controls": "Tıkla / dokun: hücreye taş koy · R: yeniden başla",
+  "howToPlay": "Siyah taşlarla oynarsın; her hamle bir hatta (yatay, dikey veya çapraz) en az bir beyaz taşı kendi taşlarınla kapatmak zorundadır. Arada kalan beyaz taşlar siyaha çevrilir. Yasal hamlen yoksa pas; iki taraf da pas geçerse veya tahta dolarsa çok taşı olan kazanır. Köşeler çevrilemez — kıymetlidir.",
+  "thumbnail": "reversi.svg"
+}
