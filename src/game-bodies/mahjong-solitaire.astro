@@ -1,0 +1,28 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Kalan<span id="remaining">0</span></div>
+  <div class="hud__stat">İpucu<span id="hints">3</span></div>
+  <div class="hud__stat">Süre<span id="timer">0:00</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni karışım</button>
+</header>
+
+<section class="mj">
+  <div class="board-wrap">
+    <div id="board" class="mj__board" aria-label="Mahjong tahtası"></div>
+    <div id="overlay" class="overlay overlay--hidden">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Tebrikler!</h2>
+        <p id="overlay-msg">Tüm taşları temizledin.</p>
+        <button id="overlay-action" class="mj__action" type="button">Yeni karışım</button>
+      </div>
+    </div>
+  </div>
+  <div class="mj__controls">
+    <button id="hint-btn" class="mj__action" type="button">İpucu</button>
+    <button id="undo-btn" class="mj__action" type="button">Geri al</button>
+    <button id="new-btn" class="mj__action" type="button">Yeni karışım</button>
+  </div>
+  <div id="status" class="mj__status" aria-live="polite">İki eşleşen taşı seç. Üstü ve sol/sağ kenarı açık olmalı.</div>
+</section>
