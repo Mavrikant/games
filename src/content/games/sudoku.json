@@ -1,0 +1,9 @@
+{
+  "title": "Sudoku",
+  "description": "Klasik sayı bulmacası — her satır, sütun ve 3×3 bloğa 1-9'u yerleştir.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "mantık", "sayı"],
+  "controls": "Tıkla: hücre seç · 1-9: doldur · 0/Backspace: sil · Ok tuşları: cursor · H: ipucu · R: yeniden başla · N: yeni tahta",
+  "howToPlay": "9×9 tahtayı 1-9 rakamlarıyla doldur. Her satır, her sütun ve her 3×3 blok bütün rakamları tam bir kez içermeli. Verilen (kalın) hücreleri değiştiremezsin; aynı satır, sütun veya blokta tekrar eden rakamlar kırmızı vurgulanır. Sıkıştığında 'İpucu' bir boş hücreye doğru rakamı koyar — her tahta için 3 hakkın var.",
+  "thumbnail": "sudoku.svg"
+}

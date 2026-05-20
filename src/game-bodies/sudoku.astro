@@ -1,0 +1,73 @@
+---
+---
+
+<header class="hud">
+  <div class="sk-meta">
+    <div class="sk-meta__item" title="Süre">
+      <span class="sk-meta__icon" aria-hidden="true">⏱</span>
+      <span id="timer">0:00</span>
+    </div>
+    <div class="sk-meta__item" title="En iyi süre">
+      <span class="sk-meta__icon" aria-hidden="true">🏆</span>
+      <span id="best">—</span>
+    </div>
+    <div class="sk-meta__item" title="Kalan ipucu">
+      <span class="sk-meta__icon" aria-hidden="true">💡</span>
+      <span id="hints-left">3</span>
+    </div>
+  </div>
+  <div class="sk-actions">
+    <label class="sk-diff">
+      <span class="sk-diff__label">Zorluk</span>
+      <select id="difficulty" class="hud__btn">
+        <option value="easy">Kolay</option>
+        <option value="medium" selected>Orta</option>
+        <option value="hard">Zor</option>
+      </select>
+    </label>
+    <button id="hint-btn" class="hud__btn" type="button" title="Bir hücreye doğru rakamı koy (H)">İpucu</button>
+    <button id="restart" class="hud__btn" type="button" title="Yeniden başla (R)">Yeniden başla</button>
+    <button id="new-board" class="hud__btn" type="button" title="Yeni tahta (N)">Yeni tahta</button>
+  </div>
+</header>
+
+<div id="status" class="sk-status" role="status" aria-live="polite">
+  Bir hücre seç, ardından 1-9 ile doldur. 0 veya Backspace siler.
+</div>
+
+<div class="sk-board-wrap">
+  <div
+    id="board"
+    class="sk-board"
+    role="grid"
+    aria-label="Sudoku 9 çarpı 9 tahtası"
+    tabindex="0"
+  ></div>
+  <div id="overlay" class="sk-overlay sk-overlay--hidden" aria-hidden="true">
+    <div class="sk-overlay__inner">
+      <h2 id="overlay-title">Tebrikler!</h2>
+      <p id="overlay-msg">—</p>
+      <button
+        id="overlay-new"
+        class="hud__btn hud__btn--accent"
+        type="button"
+      >
+        Yeni tahta
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="sk-pad" aria-label="Rakam paneli">
+  {Array.from({ length: 9 }, (_, i) => (
+    <button
+      class="sk-pad__btn"
+      data-num={i + 1}
+      type="button"
+      aria-label={`${i + 1} koy`}
+    >
+      {i + 1}
+    </button>
+  ))}
+  <button class="sk-pad__btn sk-pad__btn--erase" data-num="0" type="button" aria-label="Sil">⌫</button>
+</div>
