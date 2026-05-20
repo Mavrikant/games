@@ -1,0 +1,9 @@
+{
+  "title": "Mastermind",
+  "description": "Gizli renk kodunu çöz — her tahminden sonra ipuçları seni yönlendirir.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "mantık", "kod-kırma"],
+  "controls": "Slot tıkla: renk seç · Kontrol Et: tahmin gönder · R: yeniden başla",
+  "howToPlay": "Bilgisayar gizli bir kod üretir (4 peg, 6 farklı renk; aynı renk birden fazla peg'de olabilir). 10 tahmin hakkın var. Aktif satırdaki bir slot'a tıkla, palette'ten bir renk seç. Tüm slotlar dolduğunda \"Kontrol Et\"e bas. Geri bildirim: dolu siyah peg = doğru renk + doğru pozisyon; içi boş peg = doğru renk fakat yanlış pozisyon.",
+  "thumbnail": "mastermind.svg"
+}

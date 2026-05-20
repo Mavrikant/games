@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mastermind">
+  <defs>
+    <linearGradient id="mm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <radialGradient id="mm-red" cx="30%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </radialGradient>
+    <radialGradient id="mm-amber" cx="30%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </radialGradient>
+    <radialGradient id="mm-green" cx="30%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#22c55e" />
+    </radialGradient>
+    <radialGradient id="mm-blue" cx="30%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </radialGradient>
+    <radialGradient id="mm-violet" cx="30%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#mm-bg)" />
+
+  <!-- Three guess rows: each a row card with 4 pegs + 2x2 feedback dots. -->
+  <!-- Layout: card at x=130 y=44, width=160, height=36; gap 6 between rows. -->
+  <g>
+    <!-- Row 1 (top) — 2 black, 1 white feedback -->
+    <rect x="130" y="38" width="160" height="36" rx="8" fill="#14171c" stroke="#1f242c" />
+    <circle cx="150" cy="56" r="10" fill="url(#mm-red)" />
+    <circle cx="174" cy="56" r="10" fill="url(#mm-green)" />
+    <circle cx="198" cy="56" r="10" fill="url(#mm-blue)" />
+    <circle cx="222" cy="56" r="10" fill="url(#mm-amber)" />
+    <!-- feedback 2x2 -->
+    <circle cx="260" cy="50" r="4" fill="#0a0b0e" stroke="#4b5566" />
+    <circle cx="272" cy="50" r="4" fill="#0a0b0e" stroke="#4b5566" />
+    <circle cx="260" cy="62" r="4" fill="#e5e7eb" />
+    <circle cx="272" cy="62" r="4" fill="#2a2f38" />
+
+    <!-- Row 2 — 1 black, 2 white -->
+    <rect x="130" y="82" width="160" height="36" rx="8" fill="#14171c" stroke="#1f242c" />
+    <circle cx="150" cy="100" r="10" fill="url(#mm-violet)" />
+    <circle cx="174" cy="100" r="10" fill="url(#mm-amber)" />
+    <circle cx="198" cy="100" r="10" fill="url(#mm-red)" />
+    <circle cx="222" cy="100" r="10" fill="url(#mm-green)" />
+    <circle cx="260" cy="94" r="4" fill="#0a0b0e" stroke="#4b5566" />
+    <circle cx="272" cy="94" r="4" fill="#e5e7eb" />
+    <circle cx="260" cy="106" r="4" fill="#e5e7eb" />
+    <circle cx="272" cy="106" r="4" fill="#2a2f38" />
+
+    <!-- Row 3 (active) — empty + accent -->
+    <rect x="130" y="126" width="160" height="36" rx="8" fill="rgba(129,140,248,0.08)" stroke="#818cf8" stroke-opacity="0.5" />
+    <circle cx="150" cy="144" r="10" fill="#1a1d24" stroke="#818cf8" stroke-width="1.5" />
+    <circle cx="174" cy="144" r="10" fill="#1a1d24" stroke="#2a2f38" stroke-width="1.5" />
+    <circle cx="198" cy="144" r="10" fill="#1a1d24" stroke="#2a2f38" stroke-width="1.5" />
+    <circle cx="222" cy="144" r="10" fill="#1a1d24" stroke="#2a2f38" stroke-width="1.5" />
+    <circle cx="260" cy="138" r="4" fill="#2a2f38" />
+    <circle cx="272" cy="138" r="4" fill="#2a2f38" />
+    <circle cx="260" cy="150" r="4" fill="#2a2f38" />
+    <circle cx="272" cy="150" r="4" fill="#2a2f38" />
+  </g>
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e4e4ed">Mastermind</text>
+  <text x="20" y="58" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" fill="#98a0ad" letter-spacing="0.06em">KOD KIRMA</text>
+  <text x="20" y="184" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" fill="#5a6473" letter-spacing="0.06em">4 PEG · 6 RENK · 10 DENEME</text>
+</svg>
