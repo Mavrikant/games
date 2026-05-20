@@ -119,6 +119,12 @@ oku. Body **sadece** oyun-spesifik canvas/grid'i içerir; HUD, hint, title
 zaten layout'tadır. Şüphedeysen mevcut bir basit oyunun (`snake.astro`,
 `tic-tac-toe.astro`) body'sine bak.
 
+### stale-dom-from-prev-state
+**Vaka**: Vardiya PR — `fullReset()` ve `next()` fonksiyonları çocukları bu sırayla işliyordu: önce `clearAssignments()` (içinde `renderAssignments()`) → sonra `renderGrid()` + `renderWorkers()`. Level 5'ten level 1'e dönerken, `renderAssignments()` hâlâ ekranda olan eski level 5 worker chip'lerini (w5, w6) okuyup `workerById(wid)` çağırıyor — yeni level'da o id'ler olmadığı için undefined dönüyor ve `.maxShifts` erişiminde crash.
+**Pattern**: State transition'da yeni veriye geç ama eski DOM hâlâ ekranda. Yeni-state render'ı eski-DOM'u tarayan helper'lar `undefined` lookup yapıp patlar. Sık görülen senaryo: level/round değişiminde önce mevcut DOM'u güncelle, sonra yeni DOM oluştur.
+**Tespit**: Çok-level/çok-aşama oyunlarda en son level'den restart yap. Crash veya boş render olur mu? Headless harness'da `reset()` çağrısını level değiştirme sonrası tekrar et.
+**Önlem**: State transition'da sıra: (1) state alanlarını güncelle, (2) eski DOM'u temizle (`element.innerHTML = ''` veya kendi `renderGrid/Workers`'i çağır), (3) yeni DOM'u kur, (4) sonra `renderAssignments`/cross-element render. Bonus: yardımcı render fonksiyonlarında `if (!w) return;` defensive guard ekle — DOM'da hayalet element olabilir.
+
 ### untested-edge-state
 **Vaka**: Yukarıdaki 4 PR'ın **hepsi**. Her bug 30 saniyelik gerçek oynayarak-test ile yakalanırdı:
 restart, win, overlay'de input, ilk frame. Ajan `curl /games/<slug>/` 200

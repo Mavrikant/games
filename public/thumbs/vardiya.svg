@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Vardiya">
+  <defs>
+    <linearGradient id="vd-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1d24" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#vd-bg)" />
+
+  <text x="16" y="24" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#f5f6f8">Vardiya</text>
+  <text x="16" y="40" font-family="ui-sans-serif, system-ui" font-size="9" fill="#98a0ad">Yetenek talebini karşıla, kimseyi yıpratma.</text>
+
+  <!-- Day headers -->
+  <g font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#98a0ad" text-anchor="middle">
+    <rect x="58"  y="50" width="42" height="14" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="79"  y="60">PZT</text>
+    <rect x="104" y="50" width="42" height="14" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="125" y="60">SAL</text>
+    <rect x="150" y="50" width="42" height="14" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="171" y="60">ÇAR</text>
+    <rect x="196" y="50" width="42" height="14" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="217" y="60">PER</text>
+    <rect x="242" y="50" width="42" height="14" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="263" y="60">CUM</text>
+  </g>
+
+  <!-- Shift labels -->
+  <g font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#98a0ad">
+    <rect x="12" y="68" width="42" height="40" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="33" y="92" text-anchor="middle">GÜN</text>
+    <rect x="12" y="112" width="42" height="40" fill="#1c2027" stroke="#2f3540" rx="3" />
+    <text x="33" y="136" text-anchor="middle">AKŞ</text>
+  </g>
+
+  <!-- Cells with skill pills -->
+  <g font-family="ui-monospace, monospace" font-size="7" font-weight="700">
+    <!-- Row 1: Gündüz -->
+    <rect x="58"  y="68" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="62"  y="72" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="69" y="79" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="78"  y="72" width="14" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="85" y="79" fill="#fbbf24" text-anchor="middle">1B</text>
+    <!-- chip Ali (A) -->
+    <rect x="62"  y="85" width="34" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="79" y="92" fill="#38bdf8" text-anchor="middle">Ali</text>
+    <!-- chip Ayşe (B) -->
+    <rect x="62"  y="96" width="34" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="79" y="103" fill="#fbbf24" text-anchor="middle">Ayşe</text>
+
+    <rect x="104" y="68" width="42" height="40" fill="rgba(129,140,248,0.16)" stroke="#818cf8" stroke-width="1.4" rx="3" />
+    <rect x="108" y="72" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="115" y="79" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="124" y="72" width="14" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="131" y="79" fill="#fbbf24" text-anchor="middle">1B</text>
+    <rect x="108" y="85" width="34" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="125" y="92" fill="#38bdf8" text-anchor="middle">Burak</text>
+
+    <rect x="150" y="68" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="154" y="72" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="161" y="79" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="170" y="72" width="14" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="177" y="79" fill="#fbbf24" text-anchor="middle">1B</text>
+
+    <rect x="196" y="68" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="200" y="72" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="207" y="79" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="216" y="72" width="14" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="223" y="79" fill="#fbbf24" text-anchor="middle">1B</text>
+
+    <rect x="242" y="68" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="246" y="72" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="253" y="79" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="262" y="72" width="14" height="9" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" stroke-opacity="0.5" rx="2" />
+    <text x="269" y="79" fill="#fbbf24" text-anchor="middle">1B</text>
+
+    <!-- Row 2: Akşam -->
+    <rect x="58"  y="112" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="62"  y="116" width="14" height="9" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-opacity="0.5" rx="2" />
+    <text x="69"  y="123" fill="#38bdf8" text-anchor="middle">1A</text>
+    <rect x="78"  y="116" width="14" height="9" fill="rgba(192,132,252,0.20)" stroke="#c084fc" stroke-opacity="0.6" rx="2" />
+    <text x="85"  y="123" fill="#c084fc" text-anchor="middle">★</text>
+
+    <rect x="104" y="112" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="150" y="112" width="42" height="40" fill="#3a1a1c" stroke="#f87171" stroke-width="1.4" rx="3" />
+    <text x="171" y="135" fill="#f87171" text-anchor="middle" font-size="10">!</text>
+    <rect x="196" y="112" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+    <rect x="242" y="112" width="42" height="40" fill="#14171c" stroke="#1f242c" rx="3" />
+  </g>
+
+  <!-- Footer caption -->
+  <g font-family="ui-sans-serif, system-ui" font-size="9" fill="#98a0ad">
+    <text x="16" y="174">Sosyo-teknik planlama bulmacası</text>
+    <rect x="240" y="162" width="64" height="20" fill="#1c2027" stroke="#2f3540" rx="6" />
+    <text x="272" y="176" font-weight="700" fill="#34d399" text-anchor="middle" font-size="11">100/100</text>
+  </g>
+</svg>
