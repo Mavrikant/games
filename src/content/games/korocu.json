@@ -1,0 +1,9 @@
+{
+  "title": "Korocu",
+  "description": "Düşen ritm işaretlerini doğru anda doğru gruba yönlendir — koro şefi gibi senkronize et.",
+  "dateAdded": "2026-05-20",
+  "tags": ["ritm", "özgün", "müzik", "refleks"],
+  "controls": "A/S/D/F veya 1-4: grup hit · Dokun: alt buton · R: yeniden başla",
+  "howToPlay": "Soprano, Alto, Tenor ve Bas — sol→sağ dört koro grubun var. Üstten her gruba ait notalar düşüyor; nota alttaki zon çizgisine girdiğinde o grubun tuşuna (A/S/D/F veya 1-4) bas. Tam ortada perfect (100), yakın great (60), sınırda good (30) puan getirir. Kombo arttıkça tempo hızlanır ve bonus puan kazanırsın; her yanlış ya da kaçan nota kombomu sıfırlar. 5 yanlışta konser biter — en yüksek skoru aşmaya çalış.",
+  "thumbnail": "korocu.svg"
+}
