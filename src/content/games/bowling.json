@@ -1,0 +1,9 @@
+{
+  "title": "Bowling",
+  "description": "10 frame'de en yüksek skoru hedefle — strike ve spare ile bonus topla.",
+  "dateAdded": "2026-05-20",
+  "tags": ["arcade", "klasik", "spor", "skor"],
+  "controls": "Boşluk / tıkla: açı sabitle → güç sabitle · R: yeniden başla",
+  "howToPlay": "Açı çubuğu sağa-sola gidip gelir; istediğin pozisyonda boşluğa bas. Sonra güç çubuğu yukarı-aşağı gider; istediğin yükseklikte tekrar bas. Top bırakılır, pinlere çarpar. 10 frame oyna; strike (10 pin tek atışta) ve spare (10 pin iki atışta) bonus ekler. Maksimum skor 300.",
+  "thumbnail": "bowling.svg"
+}

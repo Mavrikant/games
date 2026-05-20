@@ -1,0 +1,129 @@
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__stat {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 0.18s;
+}
+.overlay--hidden {
+  opacity: 0;
+}
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 260px;
+}
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.bw-frames {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr) 1.3fr;
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.bw-frame {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  background: var(--surface);
+  text-align: center;
+  font-size: 11px;
+}
+.bw-frame__head {
+  background: var(--surface-2);
+  padding: 2px 0;
+  color: var(--text-dim);
+  font-size: 10px;
+}
+.bw-frame__rolls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.bw-frame--tenth .bw-frame__rolls {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.bw-roll {
+  border-left: 1px solid var(--border);
+  padding: 4px 0;
+  color: var(--text);
+  min-height: 22px;
+}
+.bw-roll:first-child {
+  border-left: 0;
+}
+.bw-frame__total {
+  font-weight: 700;
+  color: var(--text);
+  padding: 4px 0;
+}
+
+.bw-status {
+  margin-top: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 13px;
+}

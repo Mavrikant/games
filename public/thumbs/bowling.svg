@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Bowling">
+  <defs>
+    <linearGradient id="bw-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15171f" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bw-bg)" />
+  <polygon points="120,30 200,30 240,180 80,180" fill="#b9824a" stroke="#2f3540" />
+  <line x1="135" y1="50" x2="105" y2="170" stroke="rgba(0,0,0,0.18)" />
+  <line x1="160" y1="50" x2="160" y2="170" stroke="rgba(0,0,0,0.18)" />
+  <line x1="185" y1="50" x2="215" y2="170" stroke="rgba(0,0,0,0.18)" />
+  <g>
+    <circle cx="160" cy="68" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="160" cy="64" r="3" fill="#d32f2f" />
+  </g>
+  <g>
+    <circle cx="148" cy="86" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="148" cy="82" r="3" fill="#d32f2f" />
+    <circle cx="172" cy="86" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="172" cy="82" r="3" fill="#d32f2f" />
+  </g>
+  <g>
+    <circle cx="135" cy="106" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="135" cy="102" r="3" fill="#d32f2f" />
+    <circle cx="160" cy="106" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="160" cy="102" r="3" fill="#d32f2f" />
+    <circle cx="185" cy="106" r="9" fill="#fdfdfd" stroke="rgba(0,0,0,0.4)" />
+    <circle cx="185" cy="102" r="3" fill="#d32f2f" />
+  </g>
+  <circle cx="155" cy="160" r="14" fill="#6366f1" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="151" cy="156" r="2" fill="rgba(0,0,0,0.35)" />
+  <circle cx="159" cy="156" r="2" fill="rgba(0,0,0,0.35)" />
+  <text x="20" y="194" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Bowling</text>
+</svg>
