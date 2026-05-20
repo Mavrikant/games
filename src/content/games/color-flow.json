@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "tek-oyunculu", "mobil"],
   "controls": "Sürükle: yol çiz · Aynı renge tekrar dokun: yolu sil · R: yeniden başla · N: yeni puzzle",
-  "howToPlay": "Aynı renkteki iki ucu birbirine bağlayan kesintisiz bir yol çiz; yollar birbirini kesemez. Tüm renkler bağlandığında ve hücreler tamamen dolduğunda bölümü çözmüş olursun.",
+  "howToPlay": "Amaç, gridin üzerindeki her renk çiftini bir uçtan diğerine kesintisiz bir yolla bağlamak ve aynı zamanda tüm hücreleri doldurmaktır — boş kare kalmamalı, yollar kesişmemeli. Bir uca parmağını ya da fareyi basılı tutup komşu hücrelere doğru sürükleyerek yolu uzat; yanlışlıkla başka renge çarparsan onun yolu o noktadan otomatik kesilir, kendi yolunun üzerine geri sürüklersen son kısmı geri alırsın. Aynı renge yeniden dokunup başlangıçtan çekerek bir yolu tamamen silebilir, R ile mevcut bölümü sıfırlayabilir, N ile yepyeni bir puzzle açabilirsin. Tüm renkler doğru uçlara ulaşıp grid tamamen dolduğunda seviye biter ve hamle sayın rekoruna işlenir. İpucu: önce köşe ve kenarlara yakın renkleri bağla, çünkü ortadaki renkler için daha esnek alan kalır; ayrıca uzun renkleri kısa renklerin etrafından dolaştırarak izole boş hücre bırakmamaya dikkat et.",
   "thumbnail": "color-flow.svg"
 }

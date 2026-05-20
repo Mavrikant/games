@@ -126,8 +126,12 @@ zaten layout'tadır. Şüphedeysen mevcut bir basit oyunun (`snake.astro`,
 **Önlem**: State transition'da sıra: (1) state alanlarını güncelle, (2) eski DOM'u temizle (`element.innerHTML = ''` veya kendi `renderGrid/Workers`'i çağır), (3) yeni DOM'u kur, (4) sonra `renderAssignments`/cross-element render. Bonus: yardımcı render fonksiyonlarında `if (!w) return;` defensive guard ekle — DOM'da hayalet element olabilir.
 
 ### untested-edge-state
-**Vaka**: Yukarıdaki 4 PR'ın **hepsi**. Her bug 30 saniyelik gerçek oynayarak-test ile yakalanırdı:
-restart, win, overlay'de input, ilk frame. Ajan `curl /games/<slug>/` 200
+**Vaka**: Yukarıdaki 4 PR'ın **hepsi** + trafik-memuru: sinyal NS yeşilken kavşağa girmiş
+araç, kullanıcı sinyali toggle'larsa **kavşak ortasında kilitleniyordu**; karşı eksen
+yeşile dönünce diğer araçlar üzerinden geçiyordu (görsel çarpışma + sabır da drain
+olmuyordu çünkü `isWaiting` testi `pos < APPROACH_LEN + 5` ile sınırlıydı). Her bug 30
+saniyelik gerçek oynayarak-test ile yakalanırdı: restart, win, overlay'de input, ilk
+frame, **sinyal değişimi sırasında kavşaktaki araç**. Ajan `curl /games/<slug>/` 200
 gördü, "smoke test passed" dedi, mergeledi.
 **Pattern**: "Sayfa yüklendi" ≠ "oyun çalışıyor". HTTP 200 hiçbir oynanış
 bug'ını yakalamaz. Type-check ve build hiçbir runtime/UX bug'ını yakalamaz.

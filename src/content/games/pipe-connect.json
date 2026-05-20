@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "rotasyon", "akış"],
   "controls": "Dokun / tıkla: 90° döndür · R: yeni puzzle",
-  "howToPlay": "Her boru parçasına dokunarak 90° döndür ve kaynağı çıkışa bağlayan kesintisiz bir akış yolu kur. Bütün borular bağlandığında bölüm tamamlanır.",
+  "howToPlay": "Amacın, ızgaranın sol kenarındaki kaynak ile sağ kenardaki çıkış arasında kesintisiz bir boru hattı kurmak. Her boru hücresine tıkla ya da dokun; parça 90 derece saat yönünde döner. Düz borular, dirsekler ve T parçaları farklı yön kombinasyonlarına sahiptir; iki komşu hücrenin bağlanması için bakışan kenarlarının ikisinin de açık olması gerekir. Kaynak ve çıkış sabittir, döndürülemez. Akışın ulaştığı borular renk değiştirerek aydınlanır; bu görsel ipucu, hangi parçanın doğru bağlandığını anında gösterir. Çıkış hücresi aydınlandığında bölüm tamamlanır ve bir sonraki seviye açılır. Her seviyede en az hamle rekorun kaydedilir, klavyeden R tuşu yeni puzzle üretir. İpucu: önce kaynaktan başlayarak yolu adım adım kur, yola dahil olmayan çöp boruları görmezden gel; T parçaları üç yönlü olduğu için akışı bölmek yerine birleştirmek için kullan.",
   "thumbnail": "pipe-connect.svg"
 }

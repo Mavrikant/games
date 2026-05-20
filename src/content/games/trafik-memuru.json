@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-20",
   "tags": ["arcade", "yönetim", "özgün", "akış"],
   "controls": "Boşluk veya tıkla: sinyal değiştir · R: yeniden başla",
-  "howToPlay": "Dört yönlü bir kavşakta sinyalleri yönetiyorsun. Kuzey-güney veya doğu-batı yönlerinden biri yeşil olur. Yeşil yönündeki arabalar kavşaktan geçer; kırmızı yönündekiler kuyrukta bekler. Sinyali değiştirdiğinde kısa bir sarı geçiş olur — bu sırada kimse geçmez. Her arabanın bir sabır göstergesi vardır; biri tükenirse oyun biter. Kırmızı şeritli ambulansları öncelikle geçir.",
+  "howToPlay": "Dört yönlü bir kavşakta trafik memurusun: amacın arabaları çarptırmadan ve kuyrukları tıkamadan mümkün olduğunca çok aracı geçirip skoru yükseltmek. Kavşakta iki sinyal var; kuzey-güney (NS) ekseni veya doğu-batı (EW) ekseni yeşil olur, diğeri kırmızı bekler. Sinyali değiştirmek için boşluğa bas, kavşağa tıkla ya da Sinyali değiştir düğmesini kullan; her geçişte yarım saniyelik sarı faz olur ve bu sırada kimse ilerleyemez. Her aracın üzerinde yeşilden kırmızıya inen bir sabır çubuğu vardır; bir sürücünün sabrı tükenirse oyun biter, R ile yeniden başlarsın. Skor arttıkça araçlar daha sık spawn olur, sabır süreleri kısalır ve kırmızı şeritli ambulanslar belirir — ambulanslar kırmızıyı tanımaz ama sarıda yine durur, bu yüzden onlar kuyruğa girmeden ekseni çevirmeye çalış. İpucu: sinyali sırf bir araba geldi diye değiştirme; ikinci eksende en az iki-üç araç birikene veya bir sabır çubuğu kırmızıya dönmeye yaklaşana kadar bekle, sarı geçişin lüks olmadığını unutma.",
   "thumbnail": "trafik-memuru.svg"
 }

@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "sıralama", "refleks", "tek-oyunculu"],
   "controls": "1-5: göze yolla · Tıkla/dokun: gözü seç · Boşluk: başla · R: yeniden başla",
-  "howToPlay": "Yukarıdan düşen her paketin üzerindeki şehir adına bak, doğru posta gözünü seç. Yanlış göze atılan ya da kaçırılan paket can götürür — her seviyede şehir-göz eşlemesi karışır.",
+  "howToPlay": "Bir posta dağıtım merkezinin başındasın: konveyörden tek tek paketler düşüyor ve her birinin üzerinde gideceği şehrin üç harfli kodu (IST, ANK, IZM, BUR, ADA) yazılı. Görevin, paket yere değmeden onu doğru posta gözüne yönlendirmek. Ekranın altındaki beş gözü 1-5 tuşlarıyla seçebilir ya da doğrudan üstüne tıklayıp dokunabilirsin; Boşluk tuşu oyunu başlatır, R tuşu yeniden başlatır. Doğru göze her isabet skoru bir artırır ve paketlerin düşüş hızını kademeli olarak yükseltir; yanlış göz veya kaçırılan paket bir hata yazar ve üç hatada posta günü kapanır. İşin püf noktası şu: her 8 doğru sıralamadan sonra iki gözün şehir ataması yer değiştirir, yani ezberlediğin diziye körü körüne güvenemezsin — kısayol tuşuna basmadan önce gözlerin üstündeki güncel şehir koduna mutlaka bir kez daha bak ve hızlanan ritimde sakin kalmaya çalış.",
   "thumbnail": "posta-sort.svg"
 }

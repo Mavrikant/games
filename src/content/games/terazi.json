@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle","refleks","fizik"],
   "controls": "← / → veya A / D: sol-sağ kefe · R: yeniden başla · Mobil: tahtanın sol/sağ yarısına dokun",
-  "howToPlay": "Yukarıda beliren ağırlıklı (1–5) taşı sol veya sağ kefeye bırak; tork farkı terazinin eğimini belirler. Eğim 45°'yi aşıp devrilirse oyun biter — fuse dolarsa taş ağır kefeye otomatik düşer ve dengeyi bozar.",
+  "howToPlay": "Amacın, ekranın üstünde beliren ağırlığı (1–5 arası) doğru kefeye bırakarak teraziyi mümkün olduğunca uzun süre dengede tutmak ve skoru yükseltmek. Sol ok / A tuşu veya tahtanın sol yarısına dokunmak taşı sol kefeye, sağ ok / D tuşu veya sağ yarıya dokunmak ise sağ kefeye düşürür; R tuşu oyunu sıfırlar. Her taşın ağırlığı kefedeki toplam torku artırır ve iki taraf arasındaki fark teraziyi eğer; eğim ±45°'yi aşıp koruma süresi (yaklaşık yarım saniye) dolarsa terazi devrilir ve oyun biter. Önizleme altındaki fitil çubuğu boşalmadan karar vermelisin: süre dolarsa taş otomatik olarak ağır tarafa düşer ve dengeyi iyice bozar. Strateji olarak hafif taşları (1–2) eğimi ince ayarlamak için saklayıp ağır taşları (4–5) hemen hafif kalan kefeye yönlendir; skor arttıkça hem ağırlık aralığı genişler hem fitil kısalır, bu yüzden iki kefenin toplamlarını HUD'dan kollayıp küçük farkları erken telafi etmek hayatta kalmanın anahtarıdır.",
   "thumbnail": "terazi.svg"
 }
