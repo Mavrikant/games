@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "klasik", "refleks"],
   "controls": "↑ ↓ veya W/S · Fare/dokunma: raket · Boşluk: servis · P: duraklat · R: yeniden başla",
-  "howToPlay": "Soldaki raketi yukarı-aşağı oynatarak topu rakibin yarısına geri sek. Top senin tarafından çıkarsa rakip puan alır; ilk 7 sayıya ulaşan oyunu kazanır.",
+  "howToPlay": "Amacın klasik pong düellosunda CPU'yu yenmek: soldaki mavi raketi ok tuşları, W/S veya fare/dokunmatik ile yukarı-aşağı oynatarak topu sağdaki rakibe geri sekmektir. Servis için boşluğa bas ya da alana tıkla; top senin tarafından dışarı çıkarsa CPU, rakip tarafından çıkarsa sen sayı kazanırsın ve ilk 7 sayıya ulaşan maçı alır. Top rakete her çarptığında biraz hızlanır ve sekme açısı raketin neresine değdiğine bağlıdır — kenara yakın vuruşlar dik, ortaya yakın vuruşlar düz dönüş üretir, bu da rakibi köşelere çekmek için en etkili silahındır. Topu sadece beklemek yerine raket merkezini topun tahmini geliş noktasına önceden götür; CPU'nun ortaya doğru sürüklenme eğilimini kullanarak servisi köşeye yolla, P ile duraklat, R ile yeniden başla.",
   "thumbnail": "pong.svg"
 }

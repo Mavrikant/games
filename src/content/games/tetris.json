@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["arcade", "klasik", "puzzle", "tek-oyunculu"],
   "controls": "← → hareket · ↓ yumuşak düşür · Boşluk sert düşür · Z / X döndür · P duraklat · R yeniden başla",
-  "howToPlay": "Yukarıdan düşen blokları döndürüp kaydırarak satırları tamamen doldur; dolu satırlar silinir ve puan kazanırsın. Bloklar üst kenara kadar yığıldığında oyun biter — seviye yükseldikçe hız artar.",
+  "howToPlay": "Amaç, yukarıdan düşen yedi farklı tetromino parçasını oyun alanının tabanında yatay satırları eksiksiz dolduracak şekilde yerleştirmek; dolu her satır temizlenir ve sana puan kazandırır. Parçayı sola/sağa kaydırmak için ← ve → tuşlarını, saat yönünde döndürmek için X (veya ↑), tersi yönde döndürmek için Z tuşunu kullan; ↓ ile yumuşak düşürerek hızı kontrol eder, Boşluk ile sert düşürerek parçayı anında en alta kilitlersin. C veya Shift ile aktif parçayı kenarda tutup yedektekiyle değiştirebilirsin; P duraklatır, R sıfırdan başlatır. Her 10 satırda seviye atlarsın ve yerçekimi hızlanır, puan da seviyeyle çarpılarak büyür — tek seferde dört satır (Tetris) en yüksek ödülü verir. Bloklar tepeye kadar yığılıp yeni parçaya yer kalmadığında oyun biter. İpucu: sağ sütunu boş bırakıp dikey I parçasıyla dört katlı temizlik için biriktir; hayalet gölgeyi rehber alıp parçaları düz tabanla yerleştir.",
   "thumbnail": "tetris.svg"
 }

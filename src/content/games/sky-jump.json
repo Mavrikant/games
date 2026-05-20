@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["arcade", "platform", "tek-oyunculu", "mobil"],
   "controls": "Sol/Sağ ok veya A/D: hareket · Mobil: ekranın sol/sağ yarısına dokun · R: yeniden başla",
-  "howToPlay": "Karakter otomatik zıplıyor; senin işin sadece sağa veya sola hareket ettirip onu bir sonraki platforma denk getirmek. Boşluğa düşersen oyun biter — durmadan yukarı tırman.",
+  "howToPlay": "Amacın gökyüzünde olabildiğince yükseğe tırmanmak: karakter her platforma değdiğinde otomatik olarak yukarı zıplar, senin tek görevin onu yatayda doğru noktaya yönlendirmek. Masaüstünde sol/sağ ok veya A/D tuşlarıyla, mobilde ekranın sol ya da sağ yarısına basılı tutarak hareket edersin; sol kenardan çıkarsan sağdan girersin, bu wrap kuralını kestirme olarak kullanabilirsin. Üç platform tipi var: gri normal platformlar güvenli, mavi platformlar yatay olarak hareket eder, kahverengi çatlak platformlar ise bir kez zıpladıktan kısa süre sonra kırılıp kaybolur — üstünde oyalanma. Yükseldikçe hareketli ve kırılgan platformların oranı artar, zorluk kademeli yükselir. Skor, ulaştığın metre cinsinden yüksekliktir ve en iyi skorun kaydedilir; ekranın altından düşersen oyun biter. R tuşu veya Yeniden başla düğmesiyle her an sıfırlayabilirsin. İpucu: bir sonraki platformu önceden gözle, ivmen birikmeden yön değiştir; kırılgan platformlardan hemen sıçrayıp uzaklaş, hareketli platformlara ise üzerlerine inmeden önce vardıkları yöne doğru yaklaş.",
   "thumbnail": "sky-jump.svg"
 }

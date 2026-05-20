@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["arcade", "yazarlık", "tek-oyunculu"],
   "controls": "Klavye: ilgili harfe bas · R: yeniden başla",
-  "howToPlay": "Yukarıdan rastgele harfler düşer; her harf zemine değmeden klavyede o harfe basman gerekir. Doğru basışlar puan getirir, kaçırılan harf bir can götürür — canlar bitince oyun sona erer.",
+  "howToPlay": "Amacın, beş şeritli oyun alanında yukarıdan düşen harfleri zemin çizgisine ulaşmadan klavyeden tuşlayarak yok etmek. Başlamak için Boşluk veya Enter'a bas; ardından ekrana inen her harf için klavyede karşılığı olan tuşa (A-Z) bas — aynı harfin birden fazla kopyası varsa sistem otomatik olarak en alttaki, yani en acil olanı vurur. Her isabet 1 puan kazandırır ve sekiz harfte bir seviye atlarsın; her seviyede harfler daha hızlı düşer ve daha sık doğar. Zemini geçen her harf bir can götürür, üç can da bitince oyun sona erer ve en iyi skorun tarayıcında saklanır. R tuşuyla istediğin an sıfırlayabilirsin. İpucu: gözünü en alttaki harfe odakla ve şeritlerin renklerini hızlı tarama için referans al; panikleyip yanlış tuşa basmak ceza vermez ama dikkati dağıtır, bu yüzden bir harfi bıraktıysan hemen bir sonrakine geç.",
   "thumbnail": "key-fall.svg"
 }

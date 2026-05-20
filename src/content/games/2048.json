@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-18",
   "tags": ["puzzle", "klasik", "tek-oyunculu"],
   "controls": "Ok tuşları veya WASD · Mobilde kaydır · R: yeniden başla",
-  "howToPlay": "Tahtayı yönlere kaydırınca tüm karolar o yöne kayar; aynı sayıdaki iki karo birleşip değerini ikiye katlar. Hedef 2048 karosuna ulaşmak — tahta dolar ve hamle kalmazsa oyun biter.",
+  "howToPlay": "Amacın 4x4 tahtadaki karoları birleştirerek 2048 değerine ulaşmak. Masaüstünde ok tuşları veya WASD ile, mobilde tahta üzerinde parmağını sürükleyerek yön ver; R tuşu ya da Yeni Oyun düğmesi tahtayı sıfırlar. Bir yöne kaydırdığında tüm karolar o yöne hareket eder ve aynı sayıyı taşıyan iki karo çarpıştığında birleşip değerini ikiye katlar; her hamle sonunda boş bir hücreye yeni bir 2 (bazen 4) karosu eklenir, kazanılan birleşme değeri skoruna yazılır ve en iyi skorun tarayıcında saklanır. 2048 karosunu oluşturduğunda kazanma ekranı çıkar ama dilersen devam edip daha yüksek karolar (4096, 8192) hedefleyebilirsin; tahta tamamen dolar ve hiçbir komşu eşleşme kalmazsa oyun biter. İpucu: en büyük karonu bir köşeye sabitle ve her hamlede o köşeyi koru, ayrıca hamlelerini tek bir baskın eksene (örneğin yalnız sol ve aşağı) yaslayarak büyük karoları yan yana toplamayı kolaylaştır.",
   "thumbnail": "2048.svg"
 }

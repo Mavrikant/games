@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "zeka", "sıralama"],
   "controls": "Tüpe dokun → seç · ikinciye dokun → dök · Z: geri al · R: yeniden başla · N: sonraki seviye",
-  "howToPlay": "Bir tüpe dokunup seç, ikinci tüpe dokun → üstteki renk diğer tüpe akar (sadece aynı renge ya da tamamen boş tüpe dökebilirsin). Her tüpün tek renkten oluşması bölümü çözer.",
+  "howToPlay": "Amaç: ekrandaki her tüpü ya tamamen boş bırakmak ya da tek bir renkle doldurarak puzzle'ı çözmek. Önce kaynak tüpe tıkla (seçildiğini hafifçe yukarı kalkmasından anlarsın), ardından hedef tüpe tıkla; üstteki sıvı katmanı oraya akar. Döküm yalnızca iki durumda mümkündür: hedef tüp boştur ya da hedefin en üst rengi kaynağın en üst rengiyle aynıdır. Üst üste duran aynı renkli ardışık katmanlar tek hamlede birlikte akar, ama hedefte yer kalmadıysa sadece sığacak kadarı dökülür; her tüp en fazla 4 katman alır. Yanlış seçim yaptıysan aynı tüpe tekrar tıklayarak ya da Esc ile bırakabilirsin. Hata yaparsan Z (veya Geri al) ile son hamleyi geri çevir, R ile bölümü sıfırdan başlat, çözünce N ile sonraki seviyeye geç. İpucu: boş tüpleri acele harcama, onları geçici depo olarak kullan; ayrıca dökmeden önce o rengin altındaki katmanın hangi tüpte bittiğine bak, böylece tıkanmadan zincirleme hamleler kurabilirsin.",
   "thumbnail": "water-sort.svg"
 }

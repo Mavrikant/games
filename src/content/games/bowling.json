@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-20",
   "tags": ["arcade", "klasik", "spor", "skor"],
   "controls": "Boşluk / tıkla: açı sabitle → güç sabitle · R: yeniden başla",
-  "howToPlay": "Açı çubuğu sağa-sola gidip gelir; istediğin pozisyonda boşluğa bas. Sonra güç çubuğu yukarı-aşağı gider; istediğin yükseklikte tekrar bas. Top bırakılır, pinlere çarpar. 10 frame oyna; strike (10 pin tek atışta) ve spare (10 pin iki atışta) bonus ekler. Maksimum skor 300.",
+  "howToPlay": "Amacın 10 frame boyunca pinleri devirip mümkün olan en yüksek skoru toplamak. Her atış iki aşamalı bir zamanlama oyunudur: önce pistin altındaki yatay açı çubuğu sağa-sola süzülür, doğru hizaya geldiğinde boşluğa (veya kanvasa tıklayarak) bas; ardından sağdaki dikey güç çubuğu yukarı-aşağı hareket etmeye başlar, istediğin güçte yine boşluğa basarak topu bırak. R tuşu oyunu yeniden başlatır. Bir frame'de iki atış hakkın var; ilk atışta 10 pini birden devirirsen strike olur, frame tek atışta biter ve sonraki iki atışın puanı bonus eklenir. İki atışta 10 pini tamamlarsan spare olur, sonraki atışın puanı bonus eklenir. 10. frame özeldir: strike veya spare yaparsan bir ya da iki bonus atış kazanırsın. Maksimum skor 300'dür. İpucu: açıyı pistin tam ortasına değil, ön pinin biraz sağına ya da soluna nişanla — köşeden giren toplar daha çok pin deviren zincirleme tepki yaratır. Gücü her zaman maksimuma çekmek yerine orta-üst seviyede tutmak, kontrolü korurken yeterli vuruşu sağlar.",
   "thumbnail": "bowling.svg"
 }

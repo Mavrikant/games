@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-20",
   "tags": ["strateji", "klasik", "masa-oyunu"],
   "controls": "Tıkla / dokun: hücreye taş koy · R: yeniden başla",
-  "howToPlay": "Siyah taşlarla oynarsın; her hamle bir hatta (yatay, dikey veya çapraz) en az bir beyaz taşı kendi taşlarınla kapatmak zorundadır. Arada kalan beyaz taşlar siyaha çevrilir. Yasal hamlen yoksa pas; iki taraf da pas geçerse veya tahta dolarsa çok taşı olan kazanır. Köşeler çevrilemez — kıymetlidir.",
+  "howToPlay": "8x8 tahtada siyah taşlarla oynarsın, beyazları yapay zekâ kontrol eder; amacın oyun sonunda tahtada kendi renginden daha çok taş bırakmaktır. Sırası gelen hücreye tıkla ya da dokun — yasal hamleler önceden vurgulanır, R tuşu oyunu sıfırlar. Bir hamlenin geçerli olması için yatay, dikey veya çapraz bir hatta en az bir rakip taşını kendi iki taşının arasına sıkıştırman gerekir; sıkışan tüm beyaz taşlar anında siyaha döner ve aynı hamlede birden çok yön tetiklenebilir. Yasal hamlen yoksa pas geçilir; iki taraf da üst üste pas geçerse veya tahta dolarsa çok taşı olan kazanır. İpucu: köşeler çevrilemediği için altın değerindedir, köşeye komşu kareleri (X ve C noktaları) erken vermek rakibe köşeyi armağan eder; ayrıca açılışta az taş çevirip rakibin hamle seçeneklerini daraltmak çoğunlukla çok taş kapmaktan daha güçlüdür.",
   "thumbnail": "reversi.svg"
 }

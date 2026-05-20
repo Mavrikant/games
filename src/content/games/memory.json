@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "hafıza", "klasik"],
   "controls": "Mouse / dokunma · 1-2-3: zorluk · R: yeniden başla",
-  "howToPlay": "Kartlara tek tek dokun; her seferinde iki kart açabilirsin. Eşleşirlerse açık kalır, eşleşmezlerse tekrar kapanır — tüm çiftleri en az hamleyle bul.",
+  "howToPlay": "Amacın, kapalı duran tüm kart çiftlerini olabildiğince az hamleyle ve kısa sürede bulup tahtayı temizlemek. Mouse veya dokunmayla bir karta basınca o kart açılır ve altındaki meyve sembolü görünür; ikinci kartı da açtığında bir hamle sayılır. İki sembol aynıysa kartlar açık ve eşleşmiş olarak kalır, farklıysa kısa bir süre sonra tekrar kapanır ve yerlerini hatırlaman gerekir. Üstteki butonlardan veya 1-2-3 tuşlarından zorluk seç (Kolay 4×3, Orta 4×4, Zor 6×4); R tuşu ya da Yeniden başla ile her an yeni dağılımla başlayabilirsin. Tüm çiftler eşleştiğinde oyun biter ve hamle sayın ile süren rekor olarak kaydedilir. İpucu: ilk turlarda kartları rastgele değil, sistemli (örneğin satır satır) aç ki yerleri zihnine yerleşsin; eşini gördüğün bir sembolü hatırlıyorsan, başka bir kart açıp şansa bırakmak yerine doğrudan o çifti tamamla — gereksiz açış rekor hamleni şişirir.",
   "thumbnail": "memory.svg"
 }

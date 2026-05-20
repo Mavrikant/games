@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-20",
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Tıkla: boşluğa komşu plakayı kaydır · Ok tuşları: boşluğu hareket ettir · R: yeniden karıştır",
-  "howToPlay": "Klasik 15-puzzle. 4×4 ızgarada 1-15 numaralı plakalar karışık durur; bir hücre boştur. Boşluğa yatay/dikey komşu olan bir plakayı tıklayarak (veya ok tuşları ile boşluğu hareket ettirerek) plakayı boşluğa kaydırırsın. Hedef plakaları sol-üstten sağ-alta 1-15 sırasıyla dizmek, boş hücrenin sağ-altta kalmasıdır. 3×3, 4×4 ve 5×5 zorluk seçenekleri var; her boyut için en az hamle ve en kısa süre rekorları ayrı tutulur.",
+  "howToPlay": "Amacın, karışık duran numaralı plakaları sol-üstten sağ-alta doğru artan sırayla dizmek ve boş hücreyi sağ-alt köşeye getirmek. Varsayılan 4×4 tahtada 1'den 15'e kadar plakalar ve tek bir boşluk vardır; üstteki düğmelerle 3×3 (kolay) veya 5×5 (zor) boyutuna da geçebilirsin. Hamle yapmak için boşluğa yatay ya da dikey komşu olan bir plakaya tıkla — plaka boşluğa kayar, boşluk plakanın yerine geçer; çapraz hareket veya uzak plaka seçimi yoktur. Klavyede ok tuşları boşluğu hareket ettirir (alttaki plaka ters yönde kayar), R tuşu tahtayı yeniden karıştırır. İlk hamleyle birlikte süre ve hamle sayacı başlar; her boyut için en az hamle ve en kısa süreden oluşan rekorun ayrı saklanır. Strateji: üst satırı ve sol sütunu sırayla sabitleyip kalan küçük alanda çalış; bir köşeyi yerleştirirken son iki plakayı önce ters sırada hizalayıp ardından döndürerek yerine oturtmak klasik kilitlenmeyi önler.",
   "thumbnail": "onbes-bulmaca.svg"
 }

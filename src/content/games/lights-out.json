@@ -4,6 +4,6 @@
   "dateAdded": "2026-05-19",
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Tap / tıkla · R: yeniden başla",
-  "howToPlay": "Bir hücreye dokunduğunda kendisi ve dört yan komşusu (üst-alt-sağ-sol) aç/kapa durumunu değiştirir. Hedef tahtadaki bütün ışıkları kapatmak — bunu en az hamlede yapmaya çalış.",
+  "howToPlay": "Amacın 5×5 tahtadaki bütün ışıkları söndürmek. Başlangıçta tahta rastgele bir desenle karışık gelir ve her zaman çözülebilir bir durumdadır. Bir hücreye tıkladığında ya da dokunduğunda yalnızca o hücre değil; üstündeki, altındaki, sağındaki ve solundaki hücreler de aç/kapa durumunu değiştirir (köşegen komşular etkilenmez). Tahta kenarındaki hücrelerde eksik komşular doğal olarak atlanır. Tüm ışıklar kapandığı anda oyun biter; hamle sayın kaydedilir ve daha azıyla bitirirsen en iyi skorun güncellenir. R tuşuyla ya da Yeniden başla butonuyla istediğin an yeni bir bulmacayla başlayabilirsin. Strateji ipucu: aynı hücreye iki kez basmak hamleyi geri alır, bu yüzden her tıklamayı düşünerek yap; deneyimli oyuncular önce en üst satırı doğrudan çözer, sonra alt satırların kalıbına göre bir sonraki satırın altındaki ışıkları söndürmeye odaklanır (\"chase the lights\" yöntemi).",
   "thumbnail": "lights-out.svg"
 }
