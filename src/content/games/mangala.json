@@ -1,0 +1,9 @@
+{
+  "title": "Mangala",
+  "description": "Türk Mancala — çukurlarındaki taşları dağıt, haznene en çoğunu topla.",
+  "dateAdded": "2026-05-20",
+  "tags": ["strateji", "klasik", "masa-oyunu", "türk"],
+  "controls": "Çukura tıkla: taşları dağıt · R: yeni oyun",
+  "howToPlay": "Klasik Türk Mangala. Tahtanın altındaki 6 çukur senin, üstündeki 6 çukur AI'nın; sağdaki büyük hazne senin puan kumbaranr, soldaki AI'nın. Her küçük çukurda 4 taş ile başlanır. Çukura tıkladığında tüm taşları alırsın; başlangıç çukurunda bir taş bırakırsın (Türk varyantı; klasik mancala'da ilk taş atlanır), kalanları saat yönünün tersine teker teker dağıtırsın. Kendi haznene 1 taş, rakibinkine 0 taş bırakırsın. Son taş: (1) kendi haznene düşerse → ekstra tur, (2) kendi tarafında boş çukura düşerse → o taş + tam karşıdaki rakip çukurun tüm taşları senin hazneye gider, (3) rakip tarafında bir çukura düşer ve toplam taş sayısı çift olursa (2,4,6…) → o çukurun tamamı senin hazneye gider. Bir tarafın 6 küçük çukuru tamamen boşaldığında oyun biter; karşı taraftaki geri kalan tüm taşlar son oynayan oyuncunun haznesine eklenir. Çok taşı olan kazanır. AI greedy + 2-derinlik minimax kullanır.",
+  "thumbnail": "mangala.svg"
+}

@@ -1,0 +1,321 @@
+:root {
+  --mg-wood: #6f3b1a;
+  --mg-wood-deep: #4a2410;
+  --mg-pit-bg: #8a4b22;
+  --mg-pit-shadow: rgba(0, 0, 0, 0.55);
+  --mg-stone: #f4ead9;
+  --mg-stone-edge: #b9a986;
+  --mg-you: #ffb86b;
+  --mg-ai: #6ec1ff;
+  --mg-legal: rgba(255, 184, 107, 0.55);
+}
+
+.stage {
+  gap: 16px;
+}
+
+.mg-meta {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mg-meta__item {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mg-meta__item span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.mg-meta__icon {
+  font-size: 14px;
+}
+.mg-meta__icon--you {
+  color: var(--mg-you);
+}
+.mg-meta__icon--ai {
+  color: var(--mg-ai);
+}
+
+.mg-status {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 500;
+  min-height: 22px;
+}
+
+.mg-board-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mg-board {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  width: 100%;
+  max-width: 720px;
+  padding: 14px;
+  background: linear-gradient(140deg, var(--mg-wood) 0%, var(--mg-wood-deep) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.18),
+    inset 0 0 22px rgba(0, 0, 0, 0.35);
+  align-items: stretch;
+}
+
+.mg-store {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 72px;
+  padding: 12px 10px;
+  background: radial-gradient(
+    circle at 40% 30%,
+    var(--mg-pit-bg),
+    var(--mg-wood-deep) 78%
+  );
+  border-radius: 100px / 56px;
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  box-shadow:
+    inset 0 3px 10px var(--mg-pit-shadow),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.06);
+  color: var(--mg-stone);
+}
+
+.mg-store__label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.mg-store__count {
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--mg-stone);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.mg-store--you .mg-store__count {
+  color: var(--mg-you);
+}
+.mg-store--ai .mg-store__count {
+  color: var(--mg-ai);
+}
+
+.mg-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mg-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  min-width: 0;
+}
+
+.mg-pit {
+  appearance: none;
+  -webkit-appearance: none;
+  background: radial-gradient(
+    circle at 40% 30%,
+    var(--mg-pit-bg),
+    var(--mg-wood-deep) 78%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mg-stone);
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  box-shadow:
+    inset 0 4px 10px var(--mg-pit-shadow),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mg-pit__count {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mg-pit--empty {
+  color: rgba(244, 234, 217, 0.35);
+}
+
+.mg-pit--you {
+  border-color: rgba(255, 184, 107, 0.18);
+}
+.mg-pit--ai {
+  border-color: rgba(110, 193, 255, 0.18);
+}
+
+.mg-pit--legal {
+  cursor: pointer;
+  border-color: var(--mg-legal);
+  box-shadow:
+    inset 0 4px 10px var(--mg-pit-shadow),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.08),
+    0 0 0 2px var(--mg-legal);
+}
+
+.mg-pit--legal:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 4px 10px var(--mg-pit-shadow),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.08),
+    0 0 0 3px var(--mg-legal),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.mg-pit--legal:active {
+  transform: translateY(0);
+}
+
+.mg-pit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.mg-pit:disabled {
+  cursor: default;
+}
+
+/* Overlay (game-over). */
+.mg-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+.mg-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.mg-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 80%;
+}
+.mg-overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.mg-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+@media (max-width: 540px) {
+  .mg-board {
+    padding: 10px;
+    gap: 6px;
+  }
+  .mg-store {
+    min-width: 54px;
+    padding: 10px 6px;
+  }
+  .mg-store__count {
+    font-size: 22px;
+  }
+  .mg-row {
+    gap: 4px;
+  }
+  .mg-pit {
+    font-size: clamp(14px, 4.4vw, 18px);
+  }
+  .mg-meta {
+    flex-wrap: wrap;
+  }
+  .mg-meta__item {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .mg-meta__item span:last-child {
+    font-size: 16px;
+  }
+}
