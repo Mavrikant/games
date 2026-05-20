@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mahjong Solitaire">
+  <defs>
+    <linearGradient id="mj-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a3d2a" />
+      <stop offset="100%" stop-color="#0a1f15" />
+    </linearGradient>
+    <linearGradient id="mj-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef9e6" />
+      <stop offset="100%" stop-color="#f0e2b6" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#mj-bg)" />
+  <g>
+    <rect x="32" y="70" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="50" y="103" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀇</text>
+  </g>
+  <g>
+    <rect x="78" y="70" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="96" y="103" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀈</text>
+  </g>
+  <g>
+    <rect x="124" y="64" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="142" y="97" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀉</text>
+  </g>
+  <g>
+    <rect x="170" y="64" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="188" y="97" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀐</text>
+  </g>
+  <g>
+    <rect x="216" y="70" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="234" y="103" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀇</text>
+  </g>
+  <g>
+    <rect x="100" y="40" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="118" y="73" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀒</text>
+  </g>
+  <g>
+    <rect x="146" y="40" width="36" height="48" rx="5" fill="url(#mj-tile)" stroke="#c9a25a" />
+    <text x="164" y="73" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="22" fill="#1a1a1a">🀒</text>
+  </g>
+  <text x="20" y="194" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Mahjong Solitaire</text>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "title": "Mahjong Solitaire",
+  "description": "Eşleşen mahjong taşlarını kaldır — yığını çöz, alttakileri açığa çıkar.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "eşleştirme", "sabır"],
+  "controls": "Tıkla: taş seç · İkinciye tıkla: eşleştir + kaldır · U: geri al · H: ipucu · N: yeni karışım · R: yeni oyun",
+  "howToPlay": "60 taş 4 katmanlı bir piramide dizilir. Bir taş 'serbest' sayılır: üstünde başka taş olmamalı VE sol veya sağ kenarı açık olmalı. İki serbest taşı eşleştirip kaldırırsın. Tüm taşları temizle. İpucu hakkın 3; Undo ile son hamleyi geri al. Karışım her zaman çözülebilir (solved-state'ten geriye doğru üretilir).",
+  "thumbnail": "mahjong-solitaire.svg"
+}
