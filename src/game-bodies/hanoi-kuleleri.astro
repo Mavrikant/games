@@ -1,0 +1,33 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">En az<span id="optimal">7</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button" aria-keyshortcuts="R">Yeniden başla</button>
+</header>
+
+<div class="hk-disk-bar" role="group" aria-label="Disk sayısı">
+  <span class="hk-disk-bar__label">Disk</span>
+  <div class="hk-disk-bar__btns" id="disk-bar"></div>
+</div>
+
+<div class="hk-stage">
+  <canvas
+    id="board"
+    class="hk-canvas"
+    width="720"
+    height="420"
+    aria-label="Hanoi Kuleleri oyun alanı — 3 kule ve diskler"></canvas>
+  <div
+    id="overlay"
+    class="hk-overlay hk-overlay--hidden"
+    aria-hidden="true">
+    <div class="hk-overlay__inner">
+      <h2 id="overlay-title">Çözüldü!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-restart" class="hud__btn hud__btn--accent" type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>

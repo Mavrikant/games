@@ -1,0 +1,8 @@
+{
+  "title": "Hanoi Kuleleri",
+  "description": "3 kule arasında diskleri taşı — daima küçük büyüğün üstünde kalmalı.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "klasik", "mantık", "strateji"],
+  "controls": "Tıkla/dokun: kule seç → kule seç (taşı) · 3-8: disk sayısı · R: yeniden başla",
+  "thumbnail": "hanoi-kuleleri.svg"
+}
