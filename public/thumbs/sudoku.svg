@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sudoku">
+  <defs>
+    <linearGradient id="sk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15192a" />
+      <stop offset="100%" stop-color="#0a0b14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sk-bg)" />
+
+  <!-- 9x9 grid centred at right side. cell=14px, board=126px -->
+  <g transform="translate(170,30)">
+    <!-- Thin cell lines -->
+    <g stroke="#26304a" stroke-width="0.8" fill="none">
+      <path d="M0 14 H126 M0 28 H126 M0 42 H126 M0 56 H126 M0 70 H126 M0 84 H126 M0 98 H126 M0 112 H126" />
+      <path d="M14 0 V126 M28 0 V126 M42 0 V126 M56 0 V126 M70 0 V126 M84 0 V126 M98 0 V126 M112 0 V126" />
+    </g>
+    <!-- Thick block boundaries -->
+    <g stroke="#5b6890" stroke-width="1.6" fill="none">
+      <rect x="0" y="0" width="126" height="126" rx="3" />
+      <path d="M42 0 V126 M84 0 V126 M0 42 H126 M0 84 H126" />
+    </g>
+    <!-- A few sample digits sprinkled across the grid -->
+    <g font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">
+      <text x="7"   y="11" fill="#f5f6f8">5</text>
+      <text x="49"  y="11" fill="#f5f6f8">7</text>
+      <text x="7"   y="25" fill="#f5f6f8">6</text>
+      <text x="35"  y="25" fill="#f5f6f8">1</text>
+      <text x="49"  y="25" fill="#f5f6f8">9</text>
+      <text x="63"  y="25" fill="#f5f6f8">5</text>
+      <text x="21"  y="39" fill="#f5f6f8">9</text>
+      <text x="35"  y="39" fill="#f5f6f8">8</text>
+      <text x="91"  y="39" fill="#93b6ff">6</text>
+      <text x="7"   y="53" fill="#f5f6f8">8</text>
+      <text x="63"  y="53" fill="#93b6ff">6</text>
+      <text x="119" y="53" fill="#f5f6f8">3</text>
+      <text x="7"   y="67" fill="#f5f6f8">4</text>
+      <text x="49"  y="67" fill="#f5f6f8">8</text>
+      <text x="91"  y="67" fill="#93b6ff">3</text>
+      <text x="119" y="67" fill="#f5f6f8">1</text>
+      <text x="7"   y="81" fill="#f5f6f8">7</text>
+      <text x="63"  y="81" fill="#f5f6f8">2</text>
+      <text x="119" y="81" fill="#f5f6f8">6</text>
+      <text x="21"  y="95" fill="#f5f6f8">6</text>
+      <text x="91"  y="95" fill="#f5f6f8">2</text>
+      <text x="105" y="95" fill="#f5f6f8">8</text>
+      <text x="49"  y="109" fill="#93b6ff">4</text>
+      <text x="77"  y="109" fill="#f5f6f8">9</text>
+      <text x="119" y="109" fill="#f5f6f8">5</text>
+      <text x="49"  y="123" fill="#f5f6f8">8</text>
+      <text x="105" y="123" fill="#f5f6f8">7</text>
+      <text x="119" y="123" fill="#f5f6f8">9</text>
+    </g>
+    <!-- Highlight one selected cell for visual interest -->
+    <rect x="56" y="56" width="14" height="14" fill="#2c3553" stroke="#818cf8" stroke-width="1.2" />
+    <text x="63" y="67" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle" fill="#93b6ff">5</text>
+  </g>
+
+  <!-- Title -->
+  <g font-family="ui-sans-serif, system-ui">
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#f5f6f8">Sudoku</text>
+    <text x="20" y="64" font-size="11" font-weight="500" fill="#98a0ad">1-9 · satır · sütun · blok</text>
+    <g fill="#5a6473" font-size="9" font-weight="500">
+      <text x="20" y="160">9×9 klasik</text>
+      <text x="20" y="174">3 zorluk · ipucu sistemi</text>
+    </g>
+  </g>
+</svg>

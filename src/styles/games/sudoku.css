@@ -1,0 +1,338 @@
+/* Sudoku — DOM grid (9×9), block separators via cell-edge borders. */
+
+:root {
+  --sk-cell-bg: #14171c;
+  --sk-cell-bg-empty: #181c22;
+  --sk-cell-bg-peer: #1e2330;
+  --sk-cell-bg-selected: #2c3553;
+  --sk-cell-bg-same: #2b3447;
+  --sk-cell-fg-given: #f5f6f8;
+  --sk-cell-fg-user: #93b6ff;
+  --sk-cell-fg-conflict: #ffffff;
+  --sk-cell-bg-conflict: #7f1d24;
+  --sk-border: #1f242c;
+  --sk-border-block: #3a4555;
+  --sk-accent: var(--accent, #818cf8);
+}
+
+/* Make the stage wider so HUD + 9×9 board fit nicely on tablets. */
+.stage {
+  max-width: 580px;
+}
+
+/* HUD overrides: allow wrapping on narrow viewports. */
+.hud {
+  flex-wrap: wrap;
+  row-gap: 10px;
+  justify-content: center;
+}
+
+.sk-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sk-meta__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-weight: 700;
+  min-width: 68px;
+  min-height: 36px;
+  justify-content: center;
+}
+
+.sk-meta__icon {
+  font-size: 1em;
+  line-height: 1;
+}
+
+.sk-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sk-diff {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sk-diff__label {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+#difficulty {
+  cursor: pointer;
+  font: inherit;
+  /* 16px prevents iOS Safari from auto-zooming on focus. */
+  font-size: 16px;
+  min-height: 40px;
+  padding-block: 0;
+}
+
+.sk-actions .hud__btn {
+  min-height: 40px;
+}
+
+.sk-status {
+  margin: 6px 0;
+  text-align: center;
+  font-weight: 600;
+  min-height: 1.5em;
+  opacity: 0.85;
+  font-size: 13px;
+}
+
+.sk-status--win {
+  color: var(--success, #34d399);
+  opacity: 1;
+}
+
+.sk-status--warn {
+  color: #fbbf24;
+  opacity: 1;
+}
+
+/* Board */
+.sk-board-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sk-board {
+  --sk-cell: clamp(30px, calc((min(100vw, 540px) - 24px) / 9), 56px);
+  display: grid;
+  grid-template-columns: repeat(9, var(--sk-cell));
+  grid-template-rows: repeat(9, var(--sk-cell));
+  gap: 0;
+  background: var(--surface);
+  border: 2px solid var(--sk-border-block);
+  border-radius: 10px;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  outline: none;
+}
+
+.sk-board:focus-visible {
+  box-shadow: 0 0 0 2px var(--sk-accent);
+}
+
+.sk-cell {
+  appearance: none;
+  -webkit-appearance: none;
+  width: var(--sk-cell);
+  height: var(--sk-cell);
+  background: var(--sk-cell-bg);
+  border: 1px solid var(--sk-border);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: clamp(14px, calc(var(--sk-cell) * 0.5), 26px);
+  color: var(--sk-cell-fg-user);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background 80ms ease,
+    color 80ms ease;
+}
+
+/* 3×3 block separators — thicker borders on the right/bottom of each
+   inside-block edge. Without this the 9×9 just looks like a flat 9-up grid. */
+.sk-cell--block-right {
+  border-right: 2px solid var(--sk-border-block);
+}
+
+.sk-cell--block-bottom {
+  border-bottom: 2px solid var(--sk-border-block);
+}
+
+.sk-cell--given {
+  color: var(--sk-cell-fg-given);
+  font-weight: 800;
+  cursor: default;
+}
+
+.sk-cell--user {
+  color: var(--sk-cell-fg-user);
+}
+
+.sk-cell--empty {
+  color: transparent;
+}
+
+.sk-cell--peer {
+  background: var(--sk-cell-bg-peer);
+}
+
+.sk-cell--same:not(.sk-cell--selected) {
+  background: var(--sk-cell-bg-same);
+}
+
+.sk-cell--selected {
+  background: var(--sk-cell-bg-selected);
+  box-shadow: inset 0 0 0 2px var(--sk-accent);
+}
+
+.sk-cell--conflict {
+  background: var(--sk-cell-bg-conflict);
+  color: var(--sk-cell-fg-conflict);
+}
+
+.sk-cell--conflict.sk-cell--selected {
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+/* Bump animation for attempts to overwrite a given cell. */
+@keyframes sk-bump {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+}
+.sk-cell--bump {
+  animation: sk-bump 180ms ease;
+}
+
+/* Touch hover for fingers feels weird, but mouse should still get a subtle
+   hover hint on empty cells. */
+@media (hover: hover) {
+  .sk-cell:hover:not(.sk-cell--given):not(.sk-cell--selected):not(.sk-cell--conflict) {
+    background: var(--sk-cell-bg-peer);
+  }
+}
+
+/* Number pad (mobile-friendly + keyboard alternative). */
+.sk-pad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.sk-pad__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0;
+  min-height: 44px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.sk-pad__btn:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+.sk-pad__btn:active {
+  transform: scale(0.97);
+  background: var(--surface-3);
+}
+
+.sk-pad__btn--erase {
+  color: var(--text-muted);
+  font-size: 20px;
+}
+
+/* Win overlay */
+.sk-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  z-index: 2;
+}
+
+.sk-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.sk-overlay__inner {
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  max-width: 86%;
+}
+
+.sk-overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.sk-overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+/* Narrow phones — slightly tighter cells and condensed HUD. */
+@media (max-width: 420px) {
+  .sk-meta__item {
+    min-width: 56px;
+    padding: 5px 9px;
+  }
+  .sk-diff__label {
+    display: none;
+  }
+  .sk-pad {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .sk-board {
+    --sk-cell: clamp(28px, calc((100vw - 28px) / 9), 44px);
+  }
+}
