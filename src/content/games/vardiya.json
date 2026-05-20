@@ -1,0 +1,9 @@
+{
+  "title": "Vardiya",
+  "description": "Bir haftanın vardiyalarını çalışanlara ata — yetenek talebini karşıla, kişisel kısıtları ihlal etme, kimseyi yıpratma.",
+  "dateAdded": "2026-05-20",
+  "tags": ["puzzle", "özgün", "strateji", "yönetim"],
+  "controls": "Hücre tıkla: seç · Çalışan tıkla: ekle/çıkar · Onayla: leveli denetle · Sıfırla: atamaları temizle · N: sonraki level · R: yeniden başla",
+  "howToPlay": "Sen bir vardiya planlayıcısısın. Soldaki tabloda günler ve vardiyalar var; her hücrenin yanında o vardiyanın yetenek talebi yazıyor (örn. 1A · 1B = bir A-yetenekli, bir B-yetenekli çalışan gerekli). Aşağıdaki çalışan rozetlerine bak — her birinin yeteneği (A/B), haftalık vardiya kapasitesi (örn. 4/hf) ve bazılarının kişisel kısıtları (yasak gün) var. Bir hücreye tıkla → hücre seçilir. Sonra bir çalışana tıkla → o hücreye eklenir; tekrar tıkla → çıkarılır. Atamaları bitirince Onayla'ya bas: sistem coverage (kaç hücre talebi karşıladı) × mutluluk (kişisel kısıt ihlali, art arda akşam-gündüz yorgunluğu, haftalık cap aşımı) olarak skor verir. Eşiği geçersen sonraki level açılır. 5 level, her biri yeni bir kısıt katmanı.",
+  "thumbnail": "vardiya.svg"
+}

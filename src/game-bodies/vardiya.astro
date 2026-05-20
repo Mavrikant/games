@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__chip">Level<span id="level">1/5</span></div>
+  <div class="hud__chip">Skor<span id="score">—</span></div>
+  <div class="hud__chip">En İyi<span id="best">0</span></div>
+  <button id="commit" class="hud__btn" type="button">Onayla</button>
+  <button id="clear" class="hud__btn" type="button">Sıfırla</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="vd-status" id="status" role="status" aria-live="polite">
+  Hücreye tıkla, sonra çalışan rozetine tıkla. Hazır olunca Onayla.
+</div>
+
+<div class="vd-board">
+  <div class="vd-grid" id="grid" role="grid" aria-label="Vardiya tablosu"></div>
+  <div class="vd-workers" id="workers" role="toolbar" aria-label="Çalışanlar"></div>
+</div>
+
+<div class="vd-overlay" id="overlay" hidden aria-hidden="true">
+  <div class="vd-overlay__panel" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <h2 id="overlayTitle" class="vd-overlay__title">Sonuç</h2>
+    <p id="overlayMsg" class="vd-overlay__msg"></p>
+    <ul id="overlayDetails" class="vd-overlay__details"></ul>
+    <div class="vd-overlay__actions">
+      <button id="overlayRetry" class="hud__btn" type="button">Tekrar dene</button>
+      <button id="overlayNext" class="hud__btn vd-overlay__btn--primary" type="button">Sonraki level</button>
+    </div>
+  </div>
+</div>
