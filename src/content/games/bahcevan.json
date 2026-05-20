@@ -1,0 +1,9 @@
+{
+  "title": "Bahçevan",
+  "description": "6 parselde tohum dik, sula, meyveyi topla — susuz kalanları kurutma.",
+  "dateAdded": "2026-05-20",
+  "tags": ["yönetim", "özgün", "sabır", "strateji"],
+  "controls": "Tıkla: parsel ile etkileş (dik/sula/topla) · R: yeniden başla",
+  "howToPlay": "Boş parsele tıkla → tohum dikilir. Susama bar’ı düşerken yeniden tıkla → filiz büyür. İkinci sulamadan sonra bitki olgunlaşır; meyveli parsele tıklayınca topladığın meyveye göre skor kazanırsın (ot 5, elma 15, altın çiçek 50). Susama 0’a düşerse bitki kurur — 5 kuruyan bitki sonra bahçe sona erer.",
+  "thumbnail": "bahcevan.svg"
+}
