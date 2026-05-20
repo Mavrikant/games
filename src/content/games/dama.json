@@ -1,0 +1,9 @@
+{
+  "title": "Dama",
+  "description": "8×8 dama tahtası — pulları çapraz hareketle yedir, son sırada kral ol.",
+  "dateAdded": "2026-05-20",
+  "tags": ["strateji", "klasik", "masa-oyunu"],
+  "controls": "Tıkla: pul seç → hedef hücre · R: yeni oyun",
+  "howToPlay": "Anglosakson Draughts kuralları (8×8). Her oyuncuda 12 pul. Pullar çapraz ileri 1 hücre hareket eder. Yeme: rakip pulun üstünden zıpla (zorunlu değil, görsel olarak vurgulanır). En arka sıraya ulaşan pul 'kral' olur — geri çapraz da hareket eder. Zincir yeme desteklenir. Rakibin pulu kalmadığında veya hamlesi olmadığında kazanırsın.",
+  "thumbnail": "dama.svg"
+}
