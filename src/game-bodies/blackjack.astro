@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Chip<span id="chips">1000</span></div>
+  <div class="hud__stat">Bahis<span id="bet">50</span></div>
+  <div class="hud__stat">Galibiyet<span id="wins">0</span></div>
+  <div class="hud__stat">Mağlubiyet<span id="losses">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni oyun</button>
+</header>
+
+<section class="bj">
+  <div class="bj__area">
+    <div class="bj__row">
+      <div class="bj__label">Krupiye<span id="dealer-total">—</span></div>
+      <div id="dealer-cards" class="bj__cards" aria-label="Krupiye kartları"></div>
+    </div>
+    <div class="bj__row">
+      <div class="bj__label">Sen<span id="player-total">—</span></div>
+      <div id="player-cards" class="bj__cards" aria-label="Senin kartların"></div>
+    </div>
+  </div>
+
+  <div id="status" class="bj__status" aria-live="polite">Bahis ayarla ve dağıt.</div>
+
+  <div class="bj__controls">
+    <div class="bj__bet">
+      <button id="bet-minus" class="bj__betbtn" type="button" aria-label="Bahsi azalt">−</button>
+      <span class="bj__betval"><span id="bet-display">50</span></span>
+      <button id="bet-plus" class="bj__betbtn" type="button" aria-label="Bahsi arttır">+</button>
+    </div>
+    <button id="deal" class="bj__action bj__action--primary" type="button">Dağıt</button>
+    <button id="hit" class="bj__action" type="button" disabled>Hit</button>
+    <button id="stand" class="bj__action" type="button" disabled>Stand</button>
+  </div>
+</section>

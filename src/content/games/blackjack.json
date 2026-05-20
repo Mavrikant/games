@@ -1,0 +1,9 @@
+{
+  "title": "Blackjack",
+  "description": "Krupiyeyi yenip 21'e en yakın eli yap — klasik kart oyunu.",
+  "dateAdded": "2026-05-20",
+  "tags": ["kart", "klasik", "casino", "strateji"],
+  "controls": "Hit: kart al · Stand: dur · Yeni el: dağıt · +/-: bahis ayarla · R: yeni oyun",
+  "howToPlay": "İlk dağıtımda 2 kart açık alırsın, krupiye 1 açık + 1 kapalı. As 1 veya 11 değerinde; resimli kartlar 10. Hit ile kart ekle (21'i aşma), Stand ile dur. Krupiye 16'da hit, 17+ stand. Bust → kaybetti; Blackjack (As+10) → 3:2 ödeme.",
+  "thumbnail": "blackjack.svg"
+}
