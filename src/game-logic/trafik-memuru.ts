@@ -308,7 +308,13 @@ function tick(dt: number, nowMs: number): void {
     const allowedBySignal = canDirGo(c.dir);
     // Ambulance priority: can ignore red but must respect yellow.
     const inYellow = signal === 'yellowToEW' || signal === 'yellowToNS';
-    const allowed = allowedBySignal || (c.isAmbulance && !inYellow);
+    // A car that has already crossed the stop line must finish clearing the
+    // intersection regardless of signal — stopping it mid-junction would lock
+    // it in place AND let cross-axis cars drive through it once their light
+    // turns green. Strict `>` so a car parked exactly at the stop line still
+    // respects a yellow/red turn.
+    const alreadyCrossing = c.pos > GEOM.APPROACH_LEN;
+    const allowed = allowedBySignal || (c.isAmbulance && !inYellow) || alreadyCrossing;
 
     // Determine the effective target position this frame.
     // If allowed and we're the lead (stopPos == APPROACH_LEN, no car ahead),
