@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Adam Asmaca">
+  <defs>
+    <linearGradient id="aa-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#aa-bg)" />
+
+  <!-- Gallows -->
+  <g stroke="#98a0ad" stroke-width="4" stroke-linecap="round" fill="none">
+    <line x1="40" y1="180" x2="130" y2="180" />
+    <line x1="60" y1="180" x2="60" y2="40" />
+    <line x1="58" y1="40" x2="140" y2="40" />
+  </g>
+  <line x1="140" y1="40" x2="140" y2="60" stroke="#d4a76a" stroke-width="3" />
+
+  <!-- Hangman (head only — keeps thumb readable) -->
+  <circle cx="140" cy="74" r="14" stroke="#f5f6f8" stroke-width="3" fill="none" />
+
+  <!-- Word slots -->
+  <g fill="#5a6473">
+    <rect x="180" y="120" width="22" height="3" rx="1.5" />
+    <rect x="206" y="120" width="22" height="3" rx="1.5" />
+    <rect x="232" y="120" width="22" height="3" rx="1.5" />
+    <rect x="258" y="120" width="22" height="3" rx="1.5" />
+  </g>
+  <text x="183" y="116" font-family="ui-monospace, monospace" font-size="20" font-weight="700" fill="#34d399">K</text>
+  <text x="261" y="116" font-family="ui-monospace, monospace" font-size="20" font-weight="700" fill="#34d399">P</text>
+
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e4e4ed">Adam Asmaca</text>
+</svg>
