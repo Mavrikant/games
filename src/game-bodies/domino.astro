@@ -1,0 +1,34 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Galibiyet<span id="wins">0</span></div>
+  <div class="hud__stat">Mağlubiyet<span id="losses">0</span></div>
+  <div class="hud__stat">Boneyard<span id="boneyard">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni oyun</button>
+</header>
+
+<section class="dm">
+  <div class="dm__ai">
+    <div class="dm__label">Rakip (<span id="ai-count">7</span> taş)</div>
+    <div id="ai-hand" class="dm__hand dm__hand--ai" aria-hidden="true"></div>
+  </div>
+
+  <div class="dm__chain-wrap">
+    <button id="left-end" class="dm__end" type="button" aria-label="Sola yerleştir">◀ Sol</button>
+    <div id="chain" class="dm__chain" aria-label="Zincir"></div>
+    <button id="right-end" class="dm__end" type="button" aria-label="Sağa yerleştir">Sağ ▶</button>
+  </div>
+
+  <div id="status" class="dm__status" aria-live="polite">Yüksek double ile başlıyorsun.</div>
+
+  <div class="dm__player">
+    <div class="dm__label">Sen (<span id="player-count">7</span> taş)</div>
+    <div id="player-hand" class="dm__hand" aria-label="Senin elin"></div>
+  </div>
+
+  <div class="dm__controls">
+    <button id="draw" class="dm__action" type="button">Çek</button>
+    <button id="pass" class="dm__action" type="button">Pas</button>
+  </div>
+</section>

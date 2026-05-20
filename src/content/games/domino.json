@@ -1,0 +1,9 @@
+{
+  "title": "Domino",
+  "description": "Eşleşen uçları zincirle birleştir — taşları rakipten önce bitir.",
+  "dateAdded": "2026-05-20",
+  "tags": ["strateji", "klasik", "masa-oyunu"],
+  "controls": "Tıkla: kendi elinden taş seç → Sol/Sağ uca tıkla · Çek: boneyard'tan al · Pas · R: yeni oyun",
+  "howToPlay": "Double-six set: 28 taş, her oyuncuya 7 taş, kalan 14 taş boneyard. En yüksek double ile başlanır. Sırayla zincirin uçlarına eşleşen taşları yerleştirirsin (yerleştirilen taşın bir noktası açık uçla aynı olmalı). Oynayamazsan boneyard'tan çek; boneyard boşsa pas. Tüm taşlarını ilk biten kazanır; iki taraf da bloke olursa elde en az pip toplamı kazanır.",
+  "thumbnail": "domino.svg"
+}
