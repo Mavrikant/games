@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Galibiyet<span id="wins">0</span></div>
+  <div class="hud__stat">Mağlubiyet<span id="losses">0</span></div>
+  <div class="hud__stat">Sıra<span id="turn">Sen</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni oyun</button>
+</header>
+
+<section class="dama">
+  <div class="board-wrap">
+    <div id="board" class="dama__board" aria-label="Dama tahtası" role="grid"></div>
+    <div id="overlay" class="overlay overlay--hidden">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Dama</h2>
+        <p id="overlay-msg"></p>
+        <button id="overlay-action" class="dama__action" type="button">Yeni oyun</button>
+      </div>
+    </div>
+  </div>
+  <div id="status" class="dama__status" aria-live="polite">Pul seç ve çapraz hareket et.</div>
+</section>
