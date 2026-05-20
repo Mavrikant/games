@@ -1,0 +1,77 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score" title="Toplam skor">
+    Toplam<span id="score">0</span>
+  </div>
+  <div class="hud__score" title="En iyi skor">
+    En iyi<span id="best">0</span>
+  </div>
+  <div class="hud__score" title="Tur">
+    Tur<span id="round">1/13</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button" title="Yeniden başla (R)">
+    Yeniden başla
+  </button>
+</header>
+
+<div id="status" class="yz-status" role="status" aria-live="polite">
+  Atmak için "At" butonuna bas.
+</div>
+
+<div class="yz-game">
+  <section class="yz-board" aria-label="Zar alanı">
+    <div id="dice-row" class="yz-dice" role="group" aria-label="5 zar">
+      {Array.from({ length: 5 }, (_, i) => (
+        <button
+          class="yz-die"
+          type="button"
+          data-die={i}
+          aria-label={`Zar ${i + 1}`}
+        >
+          <span class="yz-die__face" data-face="1">
+            <span class="yz-pip" data-pip="c"></span>
+          </span>
+        </button>
+      ))}
+    </div>
+    <div class="yz-controls">
+      <button id="roll" class="hud__btn hud__btn--accent" type="button" title="Kalan zarları at (Space)">
+        At
+      </button>
+      <div id="rolls-left" class="yz-rolls" aria-live="polite">Atış: 3/3</div>
+    </div>
+  </section>
+
+  <section class="yz-sheet" aria-label="Skor kartı">
+    <h3 class="yz-sheet__title">Üst Bölüm</h3>
+    <ul id="upper" class="yz-cats"></ul>
+    <div class="yz-sub">
+      <span>Üst toplam</span><span id="upper-sum">0</span>
+    </div>
+    <div class="yz-sub yz-sub--bonus">
+      <span>Bonus (63+ → 35)</span><span id="upper-bonus">0</span>
+    </div>
+
+    <h3 class="yz-sheet__title">Alt Bölüm</h3>
+    <ul id="lower" class="yz-cats"></ul>
+    <div class="yz-sub">
+      <span>Alt toplam</span><span id="lower-sum">0</span>
+    </div>
+
+    <div class="yz-grand">
+      <span>Genel toplam</span><span id="grand-sum">0</span>
+    </div>
+  </section>
+</div>
+
+<div id="overlay" class="yz-overlay yz-overlay--hidden" aria-hidden="true">
+  <div class="yz-overlay__inner">
+    <h2 id="overlay-title">Yahtzee</h2>
+    <p id="overlay-msg">—</p>
+    <button id="overlay-new" class="hud__btn hud__btn--accent" type="button">
+      Yeniden başla
+    </button>
+  </div>
+</div>
