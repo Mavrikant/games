@@ -1,0 +1,35 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score" aria-label="Galibiyet">
+    Galibiyet<span id="wins">0</span>
+  </div>
+  <div class="hud__best" aria-label="Mağlubiyet">
+    Mağlubiyet<span id="losses">0</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="aa-board">
+  <canvas
+    id="gallows"
+    width="240"
+    height="240"
+    aria-label="Darağacı"
+  ></canvas>
+  <div class="aa-info">
+    <div class="aa-category" id="category" aria-label="Kategori">Kategori</div>
+    <div class="aa-word" id="word" aria-label="Gizli kelime"></div>
+    <div class="aa-wrong" id="wrong" aria-label="Yanlış harfler"></div>
+  </div>
+</div>
+<div id="keyboard" class="aa-keyboard" aria-label="Harf klavyesi"></div>
+<div id="overlay" class="aa-overlay aa-overlay--hidden">
+  <div class="aa-overlay__inner">
+    <h2 id="overlay-title">Adam Asmaca</h2>
+    <p id="overlay-msg"></p>
+    <button id="overlay-btn" class="aa-overlay__btn" type="button">
+      Yeniden başla
+    </button>
+  </div>
+</div>

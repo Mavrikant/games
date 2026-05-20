@@ -1,0 +1,9 @@
+{
+  "title": "Adam Asmaca",
+  "description": "Türkçe kelime tahmin et — yanlış harfler darağacını tamamlamadan kelimeyi bul.",
+  "dateAdded": "2026-05-20",
+  "tags": ["kelime", "klasik", "türkçe"],
+  "controls": "Harfe tıkla veya klavyede bas · R: yeniden başla",
+  "howToPlay": "Gizli kelime bir kategoriden seçilir (hayvan, meslek, şehir, yemek, eşya). Türkçe alfabeden harf seç — doğru harfler yerine açılır, yanlış her tahminde darağacı bir adım tamamlanır. 6 yanlıştan önce kelimeyi bulursan kazanırsın.",
+  "thumbnail": "adam-asmaca.svg"
+}
