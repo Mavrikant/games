@@ -1,0 +1,9 @@
+{
+  "title": "Yahtzee",
+  "description": "5 zar at, 13 kategoride en yüksek skoru topla — klasik zar oyunu.",
+  "dateAdded": "2026-05-20",
+  "tags": ["zar", "klasik", "skor"],
+  "controls": "Zara tıkla: tut/bırak · At (veya Space): kalan zarları at · Kategori tıkla: skor kaydet · R: yeniden başla",
+  "howToPlay": "Her turda 5 zar atarsın; istediğin zarları tıklayarak tutar, kalanları yeniden atarsın (turda en fazla 3 atış). Atışları bitince veya istediğin an bir kategori seçerek skoru kaydet. 13 tur sonunda en yüksek toplama ulaşmaya çalış. Üst bölüm toplaman 63 veya üstüyse +35 bonus puan kazanırsın.",
+  "thumbnail": "yahtzee.svg"
+}
