@@ -124,24 +124,31 @@ Tipik bir ajan turuyla:
     twist/orijinal mekanik üret.
 2.  git checkout -b add-<slug>
 3.  npm run new-game <slug> -- --title "..." --description "..."
-4.  Dosyaları doldur:
+4.  Dosyaları doldur (scaffold @shared/* boilerplate'i hazır verir):
       - game-bodies/<slug>.astro  → minimal markup
-      - game-logic/<slug>.ts      → oyun mantığı (PITFALLS pattern'lerinden
-                                    kaçınarak: visual=hitbox tek const,
-                                    state enum, generation token, vb.)
+      - game-logic/<slug>.ts      → oyun mantığı; defineGame({ init, reset })
+                                    export et, tüm DOM/storage erişimi
+                                    init() içinde; PITFALLS pattern'lerine
+                                    karşı @shared/* helper'ları kullan
+                                    (storage / overlay / gen-token)
       - styles/games/<slug>.css   → (gerekiyorsa) görsel
       - public/thumbs/<slug>.svg  → (opsiyonel) kart görseli
       - content/games/<slug>.json → meta zaten dolu, son rötuş
-5.  npm run build                 → hata varsa düzelt, döngüye gir
-6.  PLAYTEST.md checklist'ini baştan sona uygula (curl YETERLİ DEĞİL)
-7.  Bulduğun her bug için: fix → ilgili PITFALLS entry'sine link ver
-    veya yeni entry aç → checklist'e dön
-8.  git add <kendi dosyaların>    → git add -A YASAK (başka ajanın
+5.  npm run build                 → hata varsa düzelt
+6.  npm run audit:games --ci      → adoption gate; module-level qS
+                                    veya unsafe localStorage varsa fail
+7.  npm run test:smoke            → headless chromium init check;
+                                    test-results/<slug>.png artifact
+8.  PLAYTEST.md checklist'ini baştan sona uygula (curl YETERLİ DEĞİL —
+    smoke runtime crash yakalar ama oynanış bug'ı insan playtest ister)
+9.  Bulduğun her bug için: fix → PITFALLS entry'sine link ver veya yeni
+    entry aç → checklist'e dön
+10. git add <kendi dosyaların>    → git add -A YASAK (başka ajanın
                                     geçici dosyasını yutmasın)
-9.  git commit -m "Add <Title>"
-10. git push -u origin add-<slug>
-11. gh pr create --fill → PR description'a "## Playtest" bölümü ekle
-12. CI yeşil olunca insan/auto-merge devralır
+11. git commit -m "Add <Title>"
+12. git push -u origin add-<slug>
+13. gh pr create --fill → PR description'a "## Playtest" bölümü ekle
+14. CI yeşil olunca insan/auto-merge devralır
 ```
 
 **8. adımdaki `git add -A` kısıtı önemli**: Diğer ajanların branch'leri
