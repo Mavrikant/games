@@ -50,6 +50,11 @@ const gameUrl = new URL(`${base}${game.id}/`, site).href;
 const thumbUrl = game.data.thumbnail
   ? new URL(`${base}thumbs/${game.data.thumbnail}`, site).href
   : undefined;
+// Twitter / Discord / Slack OG previews don't render SVG — use the
+// PNG variant emitted by scripts/gen-og-images.mjs into thumbs/og/.
+const ogImagePath = game.data.thumbnail
+  ? `${base}thumbs/og/${game.data.thumbnail.replace(/\.svg$/, '.png')}`
+  : undefined;
 
 const gameSchema = {
   '@context': 'https://schema.org',
@@ -77,7 +82,7 @@ const gameSchema = {
   description={game.data.description}
   controls={game.data.controls}
   howToPlay={game.data.howToPlay}
-  ogImage={game.data.thumbnail ? `thumbs/${game.data.thumbnail}` : undefined}
+  ogImage={ogImagePath}
 >
   <Fragment slot="head">
     <script
