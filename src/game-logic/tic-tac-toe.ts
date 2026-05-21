@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+
 type Mark = 'X' | 'O' | '';
 type Board = Mark[];
 
@@ -20,42 +24,19 @@ interface Scores {
   d: number;
 }
 
-const cellEls = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.cell'),
-);
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const scoreXEl = document.querySelector<HTMLElement>('#score-x')!;
-const scoreOEl = document.querySelector<HTMLElement>('#score-o')!;
-const scoreDEl = document.querySelector<HTMLElement>('#score-d')!;
+const gen = createGenToken();
+
+let cellEls: HTMLButtonElement[] = [];
+let statusEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let scoreXEl!: HTMLElement;
+let scoreOEl!: HTMLElement;
+let scoreDEl!: HTMLElement;
 
 let board: Board = Array(9).fill('') as Board;
-let scores: Scores = loadScores();
+let scores: Scores = { x: 0, o: 0, d: 0 };
 let humanTurn = true;
 let gameOver = false;
-
-function loadScores(): Scores {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { x: 0, o: 0, d: 0 };
-    const parsed = JSON.parse(raw) as Partial<Scores>;
-    return {
-      x: Number(parsed.x) || 0,
-      o: Number(parsed.o) || 0,
-      d: Number(parsed.d) || 0,
-    };
-  } catch {
-    return { x: 0, o: 0, d: 0 };
-  }
-}
-
-function saveScores(): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
-  } catch {
-    /* ignore */
-  }
-}
 
 function renderScores(): void {
   scoreXEl.textContent = String(scores.x);
@@ -137,7 +118,7 @@ function endGame(result: 'x' | 'o' | 'd', line?: readonly number[]): void {
     scores.d++;
     statusEl.textContent = 'Berabere.';
   }
-  saveScores();
+  safeWrite(STORAGE_KEY, scores);
   renderScores();
   cellEls.forEach((el) => {
     el.disabled = true;
@@ -158,7 +139,9 @@ function checkEndOrAdvance(): void {
   statusEl.textContent = humanTurn ? 'Sıra: Sen (X)' : 'Bilgisayar düşünüyor…';
   render();
   if (!humanTurn) {
+    const myGen = gen.current();
     setTimeout(() => {
+      if (!gen.isCurrent(myGen)) return;
       const i = aiMove();
       board[i] = 'O';
       checkEndOrAdvance();
@@ -173,6 +156,7 @@ function playHuman(i: number): void {
 }
 
 function reset(): void {
+  gen.bump();
   board = Array(9).fill('') as Board;
   humanTurn = true;
   gameOver = false;
@@ -180,13 +164,33 @@ function reset(): void {
   render();
 }
 
-cellEls.forEach((el, i) => {
-  el.addEventListener('click', () => playHuman(i));
-});
-restartBtn.addEventListener('click', reset);
-window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'r') reset();
-});
+function init(): void {
+  cellEls = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.cell'),
+  );
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  scoreXEl = document.querySelector<HTMLElement>('#score-x')!;
+  scoreOEl = document.querySelector<HTMLElement>('#score-o')!;
+  scoreDEl = document.querySelector<HTMLElement>('#score-d')!;
 
-renderScores();
-reset();
+  const raw = safeRead<Partial<Scores>>(STORAGE_KEY, {});
+  scores = {
+    x: Number(raw.x) || 0,
+    o: Number(raw.o) || 0,
+    d: Number(raw.d) || 0,
+  };
+
+  cellEls.forEach((el, i) => {
+    el.addEventListener('click', () => playHuman(i));
+  });
+  restartBtn.addEventListener('click', reset);
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'r') reset();
+  });
+
+  renderScores();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
