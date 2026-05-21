@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+
 // Mangala — Türk Mancala
 //
 // Board layout (indices in `pits` array, 14 slots):
@@ -89,21 +93,20 @@ const STORAGE_LOSSES = 'mangala.losses';
 const AI_DELAY_MS = 480;
 
 // --- DOM ---
-const youStoreEl = document.querySelector<HTMLElement>('#mg-store-you')!;
-const aiStoreEl = document.querySelector<HTMLElement>('#mg-store-ai')!;
-const youStoreHud = document.querySelector<HTMLElement>('#mg-you-store')!;
-const aiStoreHud = document.querySelector<HTMLElement>('#mg-ai-store')!;
-const winsEl = document.querySelector<HTMLElement>('#mg-wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#mg-losses')!;
-const statusEl = document.querySelector<HTMLElement>('#mg-status')!;
-const rowAiEl = document.querySelector<HTMLElement>('#mg-row-ai')!;
-const rowYouEl = document.querySelector<HTMLElement>('#mg-row-you')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#mg-restart')!;
-const overlay = document.querySelector<HTMLElement>('#mg-overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#mg-overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#mg-overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#mg-overlay-restart')!;
+let youStoreEl!: HTMLElement;
+let aiStoreEl!: HTMLElement;
+let youStoreHud!: HTMLElement;
+let aiStoreHud!: HTMLElement;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let rowAiEl!: HTMLElement;
+let rowYouEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 // --- State ---
 let pits: number[] = new Array<number>(PITS).fill(0);
@@ -112,34 +115,14 @@ let wins = 0;
 let losses = 0;
 // Generation token — any deferred AI / animation callback bails if its
 // token doesn't match. reset() bumps it.
-let gen = 0;
+const gen = createGenToken();
 
 // DOM cell handles per pit index.
 const pitEls: (HTMLButtonElement | null)[] = new Array<HTMLButtonElement | null>(
   PITS,
 ).fill(null);
 
-// ----------------------------------------------------------------------
-// Storage (try/catch — Safari private mode etc. throws).
-// ----------------------------------------------------------------------
-function safeReadNumber(key: string): number {
-  try {
-    const raw = localStorage.getItem(key);
-    if (raw === null) return 0;
-    const n = Number(raw);
-    return Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWriteNumber(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore (private mode, full disk, disabled) */
-  }
-}
+// Storage wrappers come from @shared/storage; called inline.
 
 // ----------------------------------------------------------------------
 // Pure rules engine (operates on `number[]`, no DOM).
@@ -469,12 +452,12 @@ function endGame(): void {
   let msg: string;
   if (you > ai) {
     wins++;
-    safeWriteNumber(STORAGE_WINS, wins);
+    safeWrite(STORAGE_WINS, wins);
     title = 'Kazandın!';
     msg = `Sen ${you} – AI ${ai}.`;
   } else if (ai > you) {
     losses++;
-    safeWriteNumber(STORAGE_LOSSES, losses);
+    safeWrite(STORAGE_LOSSES, losses);
     title = 'Kaybettin.';
     msg = `Sen ${you} – AI ${ai}.`;
   } else {
@@ -488,12 +471,12 @@ function endGame(): void {
 
 function startAiTurn(): void {
   if (state !== 'AiTurn') return;
-  const myGen = gen;
+  const myGen = gen.current();
   setStatus('AI düşünüyor…');
   renderPits();
   window.setTimeout(() => {
     // Generation guard: a reset during the delay invalidates this callback.
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'AiTurn') return;
     const move = chooseAiMove(pits);
     if (move === null) {
@@ -570,7 +553,7 @@ function onPitClick(e: MouseEvent): void {
 // Reset / boot.
 // ----------------------------------------------------------------------
 function reset(): void {
-  gen++; // invalidate any pending AI/animation callbacks
+  gen.bump(); // invalidate any pending AI/animation callbacks
   pits = makeInitialPits();
   state = 'PlayerTurn';
   hideOverlay();
@@ -580,26 +563,45 @@ function reset(): void {
 }
 
 // ----------------------------------------------------------------------
-// Wire up.
+// Init.
 // ----------------------------------------------------------------------
-wins = safeReadNumber(STORAGE_WINS);
-losses = safeReadNumber(STORAGE_LOSSES);
+function init(): void {
+  youStoreEl = document.querySelector<HTMLElement>('#mg-store-you')!;
+  aiStoreEl = document.querySelector<HTMLElement>('#mg-store-ai')!;
+  youStoreHud = document.querySelector<HTMLElement>('#mg-you-store')!;
+  aiStoreHud = document.querySelector<HTMLElement>('#mg-ai-store')!;
+  winsEl = document.querySelector<HTMLElement>('#mg-wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#mg-losses')!;
+  statusEl = document.querySelector<HTMLElement>('#mg-status')!;
+  rowAiEl = document.querySelector<HTMLElement>('#mg-row-ai')!;
+  rowYouEl = document.querySelector<HTMLElement>('#mg-row-you')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#mg-restart')!;
+  overlay = document.querySelector<HTMLElement>('#mg-overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#mg-overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#mg-overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#mg-overlay-restart')!;
 
-restartBtn.addEventListener('click', reset);
-overlayRestart.addEventListener('click', reset);
+  wins = safeRead<number>(STORAGE_WINS, 0);
+  losses = safeRead<number>(STORAGE_LOSSES, 0);
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    reset();
-    e.preventDefault();
-  } else if (e.key === 'Enter' && state === 'GameOver') {
-    reset();
-    e.preventDefault();
-  }
-});
+  restartBtn.addEventListener('click', reset);
+  overlayRestart.addEventListener('click', reset);
 
-buildBoard();
-reset();
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      reset();
+      e.preventDefault();
+    } else if (e.key === 'Enter' && state === 'GameOver') {
+      reset();
+      e.preventDefault();
+    }
+  });
+
+  buildBoard();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
 
 // Expose tiny test hook so the headless playtest harness can drive the
 // pure logic without DOM coupling. Not used at runtime by anything else.
