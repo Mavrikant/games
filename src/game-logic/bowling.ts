@@ -96,14 +96,6 @@ function getCss(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-function pinsKnockedThisRoll(before: boolean[], after: boolean[]): number {
-  let n = 0;
-  for (let i = 0; i < before.length; i++) {
-    if (before[i] && !after[i]) n++;
-  }
-  return n;
-}
-
 function currentFrameIndex(): number {
   return Math.min(frames.length, 9);
 }
@@ -479,7 +471,7 @@ function framePinsBefore(): boolean[] {
   // start of this roll. We track this by computing: at start of roll, we recorded pinsStanding
   // → but we don't here. Simpler: just count current standing vs full set; the diff
   // is "how many fell this roll". That matches finishRoll's intent.
-  return Array(10).fill(true).map((_, i) => true);
+  return new Array(10).fill(true);
 }
 
 function resetPinsForNewFrame(): void {
@@ -530,7 +522,6 @@ function gameOver(): void {
 function syncHud(): void {
   scoreEl.textContent = String(totalScore());
   bestEl.textContent = String(best);
-  const cf = Math.min(9, Math.max(0, frames.length - (state === 'aiming' || state === 'powering' || state === 'rolling' ? 1 : 0)));
   frameEl.textContent = String(Math.min(10, frames.length === 0 ? 1 : frames.length + (frames[frames.length - 1] && frames[frames.length - 1]!.rolls.length === 2 && frames.length < 10 ? 1 : 0)));
 }
 
