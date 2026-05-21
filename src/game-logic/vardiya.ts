@@ -407,7 +407,7 @@ function evaluate(): EvalReport {
 
 function renderGrid(): void {
   const lvl = level();
-  gridEl.style.setProperty('--vd-cols', String(lvl.days + 1));
+  gridEl.style.setProperty('--vd-cols', String(lvl.days));
   gridEl.innerHTML = '';
 
   const corner = document.createElement('div');
