@@ -1,0 +1,8 @@
+{
+  "title": "Hazine Avı",
+  "description": "Izgarada gizli hazineyi sıcaklık ipuçlarıyla bul — en az hamleyle kazan.",
+  "dateAdded": "2026-05-21",
+  "tags": ["bulmaca", "strateji", "tek-oyunculu"],
+  "controls": "Fare / dokunma: hücreye tıkla · R: yeniden başla",
+  "howToPlay": "8×8 ızgara üzerinde gizlenmiş bir hazine var. Bir hücreye tıkladığında sıcaklık rengi görürsün: parlak kırmızı hazineye yakın, koyu mavi uzak demektir. Tam üstüne basarsan altın yıldız çıkar — hazine bulundu! Her tur için maksimum 500 puandan başlar, kullandığın her hamle 60 puan düşürür, en az 50 puan kazanırsın. Toplam 5 tur oynarsın; az hamleyle bul, yüksek puan yap."
+}
