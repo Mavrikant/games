@@ -25,8 +25,11 @@ const ogImageUrl = ogImage
   : undefined;
 
 // Analytics + ads — env-driven so dev builds don't ping production endpoints.
-// Set in deploy CI: PUBLIC_PLAUSIBLE_DOMAIN=karaman.dev, PUBLIC_ADSENSE_CLIENT=ca-pub-…
-const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
+// PUBLIC_PLAUSIBLE_SCRIPT_ID is the per-site identifier from the Plausible
+// install snippet (the bit after `pa-` in the script URL, e.g.
+// `BMAxUwrIK8Icg2HpLysj2`). Empty → no analytics rendered.
+// PUBLIC_ADSENSE_CLIENT is the AdSense `ca-pub-…` id. Empty → no ads.
+const plausibleId = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '';
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 ---
 
@@ -55,21 +58,20 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     {
-      plausibleDomain && (
+      plausibleId && (
         <script
           is:inline
-          defer
-          data-domain={plausibleDomain}
-          src="https://plausible.io/js/script.outbound-links.tagged-events.js"
+          async
+          src={`https://plausible.io/js/pa-${plausibleId}.js`}
         />
       )
     }
     {
-      plausibleDomain && (
+      plausibleId && (
         <script
           is:inline
           set:html={
-            'window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }'
+            'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()'
           }
         />
       )
@@ -88,5 +90,19 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
   </head>
   <body>
     <slot />
+    <script is:inline>
+      // Register service worker (offline support + install prompt). Only
+      // runs on http(s) in production; localhost during dev sees no SW
+      // because Astro dev server doesn't serve /sw.js — that's intended.
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/games/sw.js', { scope: '/games/' })
+            .catch(() => {
+              /* registration failed; offline simply unavailable */
+            });
+        });
+      }
+    </script>
   </body>
 </html>

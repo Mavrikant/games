@@ -7,7 +7,7 @@ import '@styles/archive.css';
 
 const games = await getCollection('games');
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
-const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
+const plausibleEnabled = (import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '') !== '';
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
 ---
 
@@ -34,7 +34,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <strong>Ziyaret istatistikleri</strong>: Hangi sayfayı ziyaret
         ettiğiniz, ziyaret süresi, geldiğiniz site (referrer), tarayıcı türü,
         cihaz türü, ülke düzeyinde konum. Bu veriler{' '}
-        {plausibleDomain ? (
+        {plausibleEnabled ? (
           <span>
             <a
               href="https://plausible.io/data-policy"

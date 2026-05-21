@@ -22,7 +22,7 @@ jobs:
     # Configure in: repo > Settings > Secrets and variables > Actions >
     # Variables tab. Leaving any unset just omits that piece of the page.
     env:
-      PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PUBLIC_PLAUSIBLE_DOMAIN }}
+      PUBLIC_PLAUSIBLE_SCRIPT_ID: ${{ vars.PUBLIC_PLAUSIBLE_SCRIPT_ID }}
       PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
       PUBLIC_KOFI_URL: ${{ vars.PUBLIC_KOFI_URL }}
       PUBLIC_BMAC_URL: ${{ vars.PUBLIC_BMAC_URL }}
