@@ -88,25 +88,28 @@ const PIP_MAP: Record<DieFace, ReadonlyArray<readonly [number, number]>> = {
 };
 
 // --- DOM ---
-const root = document.querySelector<HTMLElement>('#dice-row')!;
-const dieEls = Array.from(root.querySelectorAll<HTMLButtonElement>('.yz-die'));
-const rollBtn = document.querySelector<HTMLButtonElement>('#roll')!;
-const rollsLeftEl = document.querySelector<HTMLElement>('#rolls-left')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const roundEl = document.querySelector<HTMLElement>('#round')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const upperListEl = document.querySelector<HTMLUListElement>('#upper')!;
-const lowerListEl = document.querySelector<HTMLUListElement>('#lower')!;
-const upperSumEl = document.querySelector<HTMLElement>('#upper-sum')!;
-const upperBonusEl = document.querySelector<HTMLElement>('#upper-bonus')!;
-const lowerSumEl = document.querySelector<HTMLElement>('#lower-sum')!;
-const grandSumEl = document.querySelector<HTMLElement>('#grand-sum')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayNewBtn = document.querySelector<HTMLButtonElement>('#overlay-new')!;
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
+let root!: HTMLElement;
+let dieEls: HTMLButtonElement[] = [];
+let rollBtn!: HTMLButtonElement;
+let rollsLeftEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let roundEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let upperListEl!: HTMLUListElement;
+let lowerListEl!: HTMLUListElement;
+let upperSumEl!: HTMLElement;
+let upperBonusEl!: HTMLElement;
+let lowerSumEl!: HTMLElement;
+let grandSumEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayNewBtn!: HTMLButtonElement;
 
 // --- State ---
 let dice: DieState[] = [];
@@ -115,7 +118,7 @@ let rollsLeft = MAX_ROLLS;
 let turn = 1;          // 1..13
 let state: GameState = 'choosing';  // before first roll of turn 1, user must press At
 let best = 0;
-let genToken = 0;      // bumped on reset() and on every roll to invalidate stale callbacks
+const genToken = createGenToken();
 let catCells: Partial<Record<CatKey, HTMLLIElement>> = {};
 
 // --- Storage helpers ---
@@ -398,8 +401,8 @@ function onRoll(): void {
   // so any pending tick bails out → no stale-async-callback.
   rollsLeft--;
   state = 'rolling';
-  genToken++;
-  const myGen = genToken;
+  genToken.bump();
+  const myGen = genToken.current();
   // Commit final faces NOW (only unheld dice are randomized).
   for (let i = 0; i < dice.length; i++) {
     const d = dice[i];
@@ -414,7 +417,7 @@ function onRoll(): void {
   setStatus('Zarlar atılıyor…');
 
   function finish(): void {
-    if (myGen !== genToken) return; // cancelled
+    if (!genToken.isCurrent(myGen)) return; // cancelled
     for (let i = 0; i < dice.length; i++) {
       const d = dice[i];
       if (!d) continue;
@@ -476,7 +479,7 @@ function hideOverlay(): void {
 }
 
 function reset(): void {
-  genToken++; // cancel any in-flight roll animation
+  genToken.bump(); // cancel any in-flight roll animation
   dice = [];
   for (let i = 0; i < 5; i++) {
     // Start with faces 1..5 so cold boot is deterministic (invisible-boot guard).
@@ -527,13 +530,33 @@ function attachListeners(): void {
 
 // --- Boot ---
 function init(): void {
+  root = document.querySelector<HTMLElement>('#dice-row')!;
+  dieEls = Array.from(root.querySelectorAll<HTMLButtonElement>('.yz-die'));
+  rollBtn = document.querySelector<HTMLButtonElement>('#roll')!;
+  rollsLeftEl = document.querySelector<HTMLElement>('#rolls-left')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  roundEl = document.querySelector<HTMLElement>('#round')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  upperListEl = document.querySelector<HTMLUListElement>('#upper')!;
+  lowerListEl = document.querySelector<HTMLUListElement>('#lower')!;
+  upperSumEl = document.querySelector<HTMLElement>('#upper-sum')!;
+  upperBonusEl = document.querySelector<HTMLElement>('#upper-bonus')!;
+  lowerSumEl = document.querySelector<HTMLElement>('#lower-sum')!;
+  grandSumEl = document.querySelector<HTMLElement>('#grand-sum')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayNewBtn = document.querySelector<HTMLButtonElement>('#overlay-new')!;
+
   buildSheet();
   attachListeners();
   best = loadBest();
   reset();
 }
 
-init();
+export const game = defineGame({ init, reset });
 
 // --- Test hook (headless harness only) ---
 declare global {
