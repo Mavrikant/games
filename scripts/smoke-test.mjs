@@ -117,109 +117,130 @@ try {
   console.log(`Smoke-testing ${slugs.length} games via headless chromium...`);
 
   const browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: { width: 768, height: 1024 },
-    deviceScaleFactor: 1,
-  });
 
-  // Block external (non-localhost) requests so flaky CDN/font hosts don't
-  // hang networkidle and don't pollute the console with cert errors.
-  if (BLOCK_EXTERNAL) {
-    await context.route('**/*', (route) => {
-      const url = route.request().url();
-      if (url.startsWith(BASE_URL) || url.startsWith('about:') || url.startsWith('data:')) {
-        return route.continue();
-      }
-      return route.abort();
+  // Two viewports — site is mobile-first but most desktop traffic still
+  // exists. Mobile catches layout breaks (overlap, off-screen elements);
+  // desktop catches things that hide at narrow widths. Each viewport gets
+  // its own context + page.
+  const viewports = [
+    { name: 'mobile', viewport: { width: 375, height: 667 } },
+    { name: 'desktop', viewport: { width: 1024, height: 768 } },
+  ];
+
+  async function makeContext(viewport) {
+    const context = await browser.newContext({
+      viewport,
+      deviceScaleFactor: 1,
     });
+    // Block external (non-localhost) requests so flaky CDN/font hosts don't
+    // hang networkidle and don't pollute the console with cert errors.
+    if (BLOCK_EXTERNAL) {
+      await context.route('**/*', (route) => {
+        const url = route.request().url();
+        if (url.startsWith(BASE_URL) || url.startsWith('about:') || url.startsWith('data:')) {
+          return route.continue();
+        }
+        return route.abort();
+      });
+    }
+    return context;
   }
 
   const failures = [];
-  for (const slug of slugs) {
-    const url = `${BASE_URL}/games/${slug}/`;
-    const page = await context.newPage();
-    const consoleErrors = [];
-    page.on('pageerror', (err) => {
-      consoleErrors.push(`pageerror: ${err.message}`);
-    });
-    page.on('console', (msg) => {
-      if (msg.type() !== 'error') return;
-      const text = msg.text();
-      // Filter network noise that isn't the game's fault:
-      // - cert errors from sandboxed CI runners hitting external CDNs
-      // - 404s for non-critical assets (we already check structural content)
-      if (/Failed to load resource/.test(text)) return;
-      if (/net::ERR_/.test(text)) return;
-      consoleErrors.push(`console.error: ${text}`);
-    });
 
-    try {
-      const response = await page.goto(url, {
-        waitUntil: 'load',
-        timeout: NAV_TIMEOUT_MS,
+  for (const vp of viewports) {
+    console.log(`\n[${vp.name} ${vp.viewport.width}×${vp.viewport.height}]`);
+    const context = await makeContext(vp.viewport);
+
+    for (const slug of slugs) {
+      const url = `${BASE_URL}/games/${slug}/`;
+      const page = await context.newPage();
+      const consoleErrors = [];
+      page.on('pageerror', (err) => {
+        consoleErrors.push(`pageerror: ${err.message}`);
       });
-      if (!response || !response.ok()) {
-        const status = response ? response.status() : 'no-response';
-        consoleErrors.push(`http: ${status}`);
-      }
-      // Let queueMicrotask-scheduled defineGame init run + first frame paint.
-      await page.waitForTimeout(SETTLE_MS);
-
-      // Structural sanity: at least one element with non-empty text or canvas/svg.
-      const hasContent = await page.evaluate(() => {
-        const body = document.body;
-        if (!body) return false;
-        if (body.querySelector('canvas, svg')) return true;
-        return (body.textContent ?? '').trim().length > 0;
+      page.on('console', (msg) => {
+        if (msg.type() !== 'error') return;
+        const text = msg.text();
+        if (/Failed to load resource/.test(text)) return;
+        if (/net::ERR_/.test(text)) return;
+        consoleErrors.push(`console.error: ${text}`);
       });
-      if (!hasContent) consoleErrors.push('structural: body has no visible content');
 
-      // Per-game custom scenario (opt-in).
-      const scenarioPath = resolve(scenariosDir, `${slug}.mjs`);
-      if (existsSync(scenarioPath)) {
-        try {
-          const mod = await import(pathToFileURL(scenarioPath).href);
-          if (typeof mod.default === 'function') {
-            await mod.default(page);
-          }
-        } catch (err) {
-          consoleErrors.push(`scenario: ${err instanceof Error ? err.message : String(err)}`);
+      try {
+        const response = await page.goto(url, {
+          waitUntil: 'load',
+          timeout: NAV_TIMEOUT_MS,
+        });
+        if (!response || !response.ok()) {
+          const status = response ? response.status() : 'no-response';
+          consoleErrors.push(`http: ${status}`);
         }
-      }
+        await page.waitForTimeout(SETTLE_MS);
 
-      await page.screenshot({
-        path: resolve(resultsDir, `${slug}.png`),
-        fullPage: false,
-      });
+        const hasContent = await page.evaluate(() => {
+          const body = document.body;
+          if (!body) return false;
+          if (body.querySelector('canvas, svg')) return true;
+          return (body.textContent ?? '').trim().length > 0;
+        });
+        if (!hasContent) consoleErrors.push('structural: body has no visible content');
 
-      if (consoleErrors.length > 0) {
-        failures.push({ slug, errors: consoleErrors });
+        // Per-game scenarios run on mobile viewport only — the typical
+        // play environment for karaman.dev/games. If a desktop-only
+        // assertion is needed, gate via page.viewportSize() inside it.
+        if (vp.name === 'mobile') {
+          const scenarioPath = resolve(scenariosDir, `${slug}.mjs`);
+          if (existsSync(scenarioPath)) {
+            try {
+              const mod = await import(pathToFileURL(scenarioPath).href);
+              if (typeof mod.default === 'function') {
+                await mod.default(page);
+              }
+            } catch (err) {
+              consoleErrors.push(`scenario: ${err instanceof Error ? err.message : String(err)}`);
+            }
+          }
+        }
+
+        await page.screenshot({
+          path: resolve(resultsDir, `${slug}-${vp.name}.png`),
+          fullPage: false,
+        });
+
+        if (consoleErrors.length > 0) {
+          failures.push({ slug: `${slug} (${vp.name})`, errors: consoleErrors });
+          process.stdout.write('✗');
+        } else {
+          process.stdout.write('.');
+        }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        failures.push({ slug: `${slug} (${vp.name})`, errors: [`navigation: ${message}`] });
         process.stdout.write('✗');
-      } else {
-        process.stdout.write('.');
+      } finally {
+        await page.close();
       }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      failures.push({ slug, errors: [`navigation: ${message}`] });
-      process.stdout.write('✗');
-    } finally {
-      await page.close();
     }
+    process.stdout.write('\n');
+    await context.close();
   }
-  process.stdout.write('\n');
 
-  await context.close();
   await browser.close();
 
+  const totalChecks = slugs.length * viewports.length;
   if (failures.length > 0) {
-    console.error(`\n${failures.length} / ${slugs.length} games failed smoke:\n`);
+    console.error(`\n${failures.length} / ${totalChecks} viewport-checks failed:\n`);
     for (const f of failures) {
       console.error(`  ${f.slug}:`);
       for (const e of f.errors) console.error(`    ${e}`);
     }
     process.exitCode = 1;
   } else {
-    console.log(`\nAll ${slugs.length} games passed smoke. Screenshots in test-results/.`);
+    console.log(
+      `\nAll ${slugs.length} games passed smoke across ${viewports.length} viewports.`,
+    );
+    console.log(`Screenshots: test-results/<slug>-{mobile,desktop}.png`);
   }
 } catch (err) {
   console.error('Smoke test crashed:', err);
