@@ -79,7 +79,7 @@ function reset(): void {
   bestEl.textContent = String(best);
   updateLives();
   draw();
-  showOverlay('Kör Tuş', 'Gösterge hedef bölgedeyken Boşluk\'a bas.\nBaşlamak için Boşluk\'a bas.');
+  showOverlay('Kör Tuş', 'Gösterge hedef bölgedeyken tıkla veya Boşluk\'a bas.\nBaşlamak için tıkla.');
 }
 
 function startGame(): void {
@@ -122,7 +122,7 @@ function endGame(): void {
   state = 'gameover';
   cancelAnimationFrame(rafId);
   draw();
-  showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
+  showOverlay('Bitti!', `Skor: ${score} · Tıkla veya R ile yeniden başla`);
 }
 
 function draw(): void {
@@ -230,6 +230,16 @@ function init(): void {
       reset();
     }
   });
+
+  // Mobile/touch input: tap on canvas or overlay acts as Space.
+  const handleTap = (e: Event): void => {
+    e.preventDefault();
+    if (state === 'ready') startGame();
+    else if (state === 'playing') handleStrike();
+    else if (state === 'gameover') reset();
+  };
+  canvas.addEventListener('click', handleTap);
+  overlay.addEventListener('click', handleTap);
 
   restartBtn.addEventListener('click', reset);
 
