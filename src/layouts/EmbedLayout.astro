@@ -1,0 +1,65 @@
+---
+import '@styles/tokens.css';
+import '@styles/base.css';
+import '@styles/game-shell.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  controls?: string;
+}
+
+const { title, description, controls } = Astro.props;
+const plausibleId = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '';
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0b0e" />
+    <meta name="robots" content="noindex, follow" />
+    {description && <meta name="description" content={description} />}
+    <title>{title}</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    {
+      plausibleId && (
+        <script
+          is:inline
+          async
+          src={`https://plausible.io/js/pa-${plausibleId}.js`}
+        />
+      )
+    }
+    {
+      plausibleId && (
+        <script
+          is:inline
+          set:html={
+            'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()'
+          }
+        />
+      )
+    }
+    <slot name="head" />
+  </head>
+  <body class="embed">
+    <main class="stage embed__stage">
+      <slot />
+      {controls && <p class="hint">{controls}</p>}
+    </main>
+    <style is:global>
+      body.embed {
+        background: var(--bg);
+        min-height: 100vh;
+      }
+      .embed__stage {
+        padding: 12px 12px 16px;
+        max-width: 100%;
+      }
+    </style>
+  </body>
+</html>
