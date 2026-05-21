@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
 // Sudoku — 9×9 grid, classic rules.
 //
 // Pitfalls avoided:
@@ -160,22 +163,20 @@ const DIFFICULTY_KEY = 'sudoku.difficulty';
 const bestKey = (d: Difficulty): string => `sudoku.best-${d}`;
 
 // --- DOM ---
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const timerEl = document.querySelector<HTMLElement>('#timer')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const hintsLeftEl = document.querySelector<HTMLElement>('#hints-left')!;
-const difficultySel = document.querySelector<HTMLSelectElement>('#difficulty')!;
-const hintBtn = document.querySelector<HTMLButtonElement>('#hint-btn')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const newBoardBtn = document.querySelector<HTMLButtonElement>('#new-board')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayNewBtn = document.querySelector<HTMLButtonElement>('#overlay-new')!;
-const padBtns = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.sk-pad__btn'),
-);
+let boardEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let timerEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let hintsLeftEl!: HTMLElement;
+let difficultySel!: HTMLSelectElement;
+let hintBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let newBoardBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayNewBtn!: HTMLButtonElement;
+let padBtns: HTMLButtonElement[] = [];
 
 // --- State ---
 let difficulty: Difficulty = 'medium';
@@ -189,7 +190,7 @@ let hintsRemaining = 3;
 let state: GameState = 'playing';
 let elapsedSec = 0;
 let timerInterval: number | null = null;
-let genToken = 0;             // bumped on every reset to invalidate stale ticks
+const genToken = createGenToken();
 
 // --- Storage helpers (guarded) ---
 function safeRead(key: string): string | null {
@@ -404,9 +405,9 @@ function startTimer(): void {
   stopTimer();
   elapsedSec = 0;
   timerEl.textContent = formatTime(elapsedSec);
-  const myGen = genToken;
+  const myGen = genToken.current();
   timerInterval = window.setInterval(() => {
-    if (myGen !== genToken) return; // stale tick after a reset/newBoard
+    if (!genToken.isCurrent(myGen)) return; // stale tick after a reset/newBoard
     if (state !== 'playing') return; // win pause
     elapsedSec++;
     timerEl.textContent = formatTime(elapsedSec);
@@ -532,7 +533,7 @@ function hideOverlay(): void {
 
 // Restart the current puzzle (preserves which puzzle is shown, clears user input).
 function reset(): void {
-  genToken++;            // invalidates any in-flight setInterval tick
+  genToken.bump();            // invalidates any in-flight setInterval tick
   state = 'playing';
   hintsRemaining = 3;
   user = given.slice();  // copies in given digits, leaves blanks as 0
@@ -691,13 +692,34 @@ function attachListeners(): void {
   });
 }
 
-// --- Boot ---
-verifyPuzzles();
-difficulty = loadDifficulty();
-difficultySel.value = difficulty;
-buildBoard();
-attachListeners();
-newBoard();
+// --- Init ---
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  timerEl = document.querySelector<HTMLElement>('#timer')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  hintsLeftEl = document.querySelector<HTMLElement>('#hints-left')!;
+  difficultySel = document.querySelector<HTMLSelectElement>('#difficulty')!;
+  hintBtn = document.querySelector<HTMLButtonElement>('#hint-btn')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  newBoardBtn = document.querySelector<HTMLButtonElement>('#new-board')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayNewBtn = document.querySelector<HTMLButtonElement>('#overlay-new')!;
+  padBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.sk-pad__btn'),
+  );
+
+  verifyPuzzles();
+  difficulty = loadDifficulty();
+  difficultySel.value = difficulty;
+  buildBoard();
+  attachListeners();
+  newBoard();
+}
+
+export const game = defineGame({ init, reset });
 
 // Test hook — only used by the headless harness. Production runtime never reads
 // this property; exposing it here avoids module-export gymnastics in the test
