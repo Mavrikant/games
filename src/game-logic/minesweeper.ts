@@ -1,3 +1,5 @@
+import { defineGame } from '@shared/game-module';
+
 type Difficulty = 'easy' | 'medium' | 'hard';
 
 interface DiffConfig {
@@ -15,14 +17,14 @@ const CONFIGS: Record<Difficulty, DiffConfig> = {
 const DIFFICULTY_KEY = 'minesweeper.difficulty';
 const bestKey = (d: Difficulty): string => `minesweeper.best.${d}`;
 
-const boardEl = document.querySelector<HTMLDivElement>('#board')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const minesLeftEl = document.querySelector<HTMLElement>('#mines-left')!;
-const timerEl = document.querySelector<HTMLElement>('#timer')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const restartFace = document.querySelector<HTMLElement>('#restart-face')!;
-const difficultySel = document.querySelector<HTMLSelectElement>('#difficulty')!;
+let boardEl!: HTMLDivElement;
+let statusEl!: HTMLElement;
+let minesLeftEl!: HTMLElement;
+let timerEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let restartFace!: HTMLElement;
+let difficultySel!: HTMLSelectElement;
 
 interface Cell {
   mine: boolean;
@@ -528,29 +530,43 @@ function reset(): void {
   setStatus('İlk hücreye tıkla — ilk tık asla mayına denk gelmez.');
 }
 
-restartBtn.addEventListener('click', reset);
-difficultySel.addEventListener('change', () => {
-  const v = difficultySel.value;
-  if (v === 'easy' || v === 'medium' || v === 'hard') {
-    difficulty = v;
-    saveDifficulty();
-    reset();
-  }
-});
-window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() !== 'r') return;
-  if (e.ctrlKey || e.metaKey || e.altKey) return;
-  const target = e.target as HTMLElement | null;
-  if (target) {
-    const tag = target.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable) {
-      return;
-    }
-  }
-  reset();
-});
+function init(): void {
+  boardEl = document.querySelector<HTMLDivElement>('#board')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  minesLeftEl = document.querySelector<HTMLElement>('#mines-left')!;
+  timerEl = document.querySelector<HTMLElement>('#timer')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  restartFace = document.querySelector<HTMLElement>('#restart-face')!;
+  difficultySel = document.querySelector<HTMLSelectElement>('#difficulty')!;
 
-difficulty = loadDifficulty();
-difficultySel.value = difficulty;
-attachBoardListeners();
-reset();
+  difficulty = loadDifficulty();
+  difficultySel.value = difficulty;
+  attachBoardListeners();
+
+  restartBtn.addEventListener('click', reset);
+  difficultySel.addEventListener('change', () => {
+    const v = difficultySel.value;
+    if (v === 'easy' || v === 'medium' || v === 'hard') {
+      difficulty = v;
+      saveDifficulty();
+      reset();
+    }
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() !== 'r') return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    if (target) {
+      const tag = target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable) {
+        return;
+      }
+    }
+    reset();
+  });
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
