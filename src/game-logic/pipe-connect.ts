@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
 // Pipe Connect — boru döndürme puzzle.
 // Hedef: kaynak (sol kenar) ile çıkış (sağ kenar) arasında geçerli akışı tamamla.
 // Her tıklama bir hücreyi 90° saat yönünde döndürür.
@@ -53,15 +56,15 @@ const STORAGE_LEVEL = 'pipe-connect.level';
 
 // ---------- DOM bindings ----------
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
+let boardEl!: HTMLElement;
+let levelEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlayEl!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayNextBtn!: HTMLButtonElement;
 
 // ---------- Storage helpers (Safari private-mode safe) ----------
 
@@ -563,9 +566,9 @@ function winCurrentLevel(): void {
   overlayMsg.textContent = `${state.moves} hamlede tamamladın${bestText}`;
   // Kısa bekleme: kullanıcı akışın sona ulaştığını görsün, sonra overlay.
   // Module-level generation token — restart bumps it; deferred callback bails out.
-  const myGen = generation;
+  const myGen = generation.current();
   window.setTimeout(() => {
-    if (generation !== myGen) return;
+    if (!generation.isCurrent(myGen)) return;
     overlayEl.classList.remove('pc-overlay--hidden');
   }, 350);
 }
@@ -580,14 +583,14 @@ let currentLevel = 1;
 // Module-level generation counter — her newPuzzle çağrısı bump eder.
 // Win sonrası 350ms overlay timeout'u bu generation'ı yakalar; restart
 // generation'ı değiştirdiyse overlay açılmaz (stale-async-callback önlemi).
-let generation = 0;
+const generation = createGenToken();
 
 function newPuzzle(level: number): void {
   hideOverlay();
   currentLevel = level;
   saveLevel(level);
   state = buildPuzzle(level);
-  generation++;
+  generation.bump();
   levelEl.textContent = String(level);
   movesEl.textContent = '0';
   const b = loadBest(level);
@@ -604,32 +607,44 @@ function restartCurrent(): void {
   newPuzzle(currentLevel);
 }
 
-restartBtn.addEventListener('click', restartCurrent);
-overlayNextBtn.addEventListener('click', nextLevel);
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
 
-// Klavye: R → yeni puzzle.
-window.addEventListener('keydown', (e) => {
-  if (e.ctrlKey || e.metaKey || e.altKey) return;
-  const target = e.target as HTMLElement | null;
-  if (target) {
-    const tag = target.tagName;
-    if (
-      tag === 'INPUT' ||
-      tag === 'TEXTAREA' ||
-      tag === 'SELECT' ||
-      target.isContentEditable
-    ) {
-      return;
+  restartBtn.addEventListener('click', restartCurrent);
+  overlayNextBtn.addEventListener('click', nextLevel);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    if (target) {
+      const tag = target.tagName;
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        tag === 'SELECT' ||
+        target.isContentEditable
+      ) {
+        return;
+      }
     }
-  }
-  if (e.key.toLowerCase() === 'r') {
-    e.preventDefault();
-    restartCurrent();
-  } else if (e.key === 'Enter' && state.won) {
-    e.preventDefault();
-    nextLevel();
-  }
-});
+    if (e.key.toLowerCase() === 'r') {
+      e.preventDefault();
+      restartCurrent();
+    } else if (e.key === 'Enter' && state.won) {
+      e.preventDefault();
+      nextLevel();
+    }
+  });
 
-// İlk başlangıç: kaydedilmiş level varsa onunla başla.
-newPuzzle(loadLevel());
+  newPuzzle(loadLevel());
+}
+
+export const game = defineGame({ init, reset: restartCurrent });
