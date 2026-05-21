@@ -7,9 +7,14 @@
 //
 // Pitfalls guarded:
 // - state machine (playing | won)
-// - safeRead/safeWrite
+// - @shared/storage wraps localStorage
 // - tile position is single source of truth (computed positions; CSS absolute)
 // - body has no <h1>/hint
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 
 interface Tile {
   id: number;
@@ -24,19 +29,19 @@ const SHAPES = ['🀇', '🀈', '🀉', '🀊', '🀋', '🀌', '🀍', '🀎', 
 
 const KEY_BEST = 'mahjong-solitaire.best';
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const remainingEl = document.querySelector<HTMLElement>('#remaining')!;
-const hintsEl = document.querySelector<HTMLElement>('#hints')!;
-const timerEl = document.querySelector<HTMLElement>('#timer')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayAction = document.querySelector<HTMLElement>('#overlay-action')!;
-const hintBtn = document.querySelector<HTMLButtonElement>('#hint-btn')!;
-const undoBtn = document.querySelector<HTMLButtonElement>('#undo-btn')!;
-const newBtn = document.querySelector<HTMLButtonElement>('#new-btn')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let boardEl!: HTMLElement;
+let remainingEl!: HTMLElement;
+let hintsEl!: HTMLElement;
+let timerEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayAction!: HTMLElement;
+let hintBtn!: HTMLButtonElement;
+let undoBtn!: HTMLButtonElement;
+let newBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
 
 let tiles: Tile[] = [];
 let selected: number | null = null;
@@ -46,7 +51,7 @@ let hintHighlight: [number, number] | null = null;
 let timerStart = 0;
 let timerInterval: number | null = null;
 let elapsed = 0;
-let gen = 0;
+const gen = createGenToken();
 let state: 'playing' | 'won' = 'playing';
 
 // Layout definition: 3-layer pyramid 8x4 → 6x3 → 4x2 → 2x1 (top single).
@@ -320,9 +325,9 @@ function startTimer(): void {
   stopTimer();
   timerStart = Date.now();
   elapsed = 0;
-  const myGen = gen;
+  const myGen = gen.current();
   timerInterval = window.setInterval(() => {
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     elapsed = Math.floor((Date.now() - timerStart) / 1000);
     const m = Math.floor(elapsed / 60);
     const s = elapsed % 60;
@@ -337,39 +342,29 @@ function stopTimer(): void {
   }
 }
 
-function safeRead(): number {
-  try {
-    const v = localStorage.getItem(KEY_BEST);
-    if (!v) return 0;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
-  } catch {
-    return 0;
-  }
+function loadBest(): number {
+  const v = safeRead<number>(KEY_BEST, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
-function safeWrite(n: number): void {
-  try {
-    localStorage.setItem(KEY_BEST, String(n));
-  } catch {
-    /* ignore */
-  }
+function persistBest(n: number): void {
+  safeWrite(KEY_BEST, n);
 }
 
 function showOverlay(t: string, m: string): void {
   overlayTitle.textContent = t;
   overlayMsg.textContent = m;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function win(): void {
   state = 'won';
   stopTimer();
-  const best = safeRead();
+  const best = loadBest();
   if (best === 0 || elapsed < best) {
-    safeWrite(elapsed);
+    persistBest(elapsed);
   }
   showOverlay('Tebrikler!', `Süren: ${timerEl.textContent}${best ? ' · En iyi: ' + Math.floor(best / 60) + ':' + (best % 60).toString().padStart(2, '0') : ''}`);
 }
@@ -381,7 +376,7 @@ function lose(): void {
 }
 
 function newGame(): void {
-  gen += 1;
+  gen.bump();
   selected = null;
   hintHighlight = null;
   history = [];
@@ -396,28 +391,46 @@ function newGame(): void {
   startTimer();
 }
 
-boardEl.addEventListener('click', onBoardClick);
-hintBtn.addEventListener('click', applyHint);
-undoBtn.addEventListener('click', undo);
-newBtn.addEventListener('click', newGame);
-overlayAction.addEventListener('click', newGame);
-restartBtn.addEventListener('click', newGame);
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  remainingEl = document.querySelector<HTMLElement>('#remaining')!;
+  hintsEl = document.querySelector<HTMLElement>('#hints')!;
+  timerEl = document.querySelector<HTMLElement>('#timer')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayAction = document.querySelector<HTMLElement>('#overlay-action')!;
+  hintBtn = document.querySelector<HTMLButtonElement>('#hint-btn')!;
+  undoBtn = document.querySelector<HTMLButtonElement>('#undo-btn')!;
+  newBtn = document.querySelector<HTMLButtonElement>('#new-btn')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'r' || k === 'n') {
-    newGame();
-    e.preventDefault();
-  } else if (k === 'u') {
-    undo();
-    e.preventDefault();
-  } else if (k === 'h') {
-    applyHint();
-    e.preventDefault();
-  } else if (k === 'escape') {
-    selected = null;
-    renderBoard();
-  }
-});
+  boardEl.addEventListener('click', onBoardClick);
+  hintBtn.addEventListener('click', applyHint);
+  undoBtn.addEventListener('click', undo);
+  newBtn.addEventListener('click', newGame);
+  overlayAction.addEventListener('click', newGame);
+  restartBtn.addEventListener('click', newGame);
 
-newGame();
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'r' || k === 'n') {
+      newGame();
+      e.preventDefault();
+    } else if (k === 'u') {
+      undo();
+      e.preventDefault();
+    } else if (k === 'h') {
+      applyHint();
+      e.preventDefault();
+    } else if (k === 'escape') {
+      selected = null;
+      renderBoard();
+    }
+  });
+
+  newGame();
+}
+
+export const game = defineGame({ init, reset: newGame });
