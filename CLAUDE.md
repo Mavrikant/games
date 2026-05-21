@@ -68,6 +68,7 @@ review** iste, kendi başına değiştirme.
 | `src/styles/{tokens,base,game-shell,archive}.css` | Tema, reset, ortak HUD |
 | `src/pages/{index,[slug]}.astro` | Arşiv ve dinamik oyun routing'i |
 | `src/components/*.astro` | Nav, Card, PlayerOverlay (arşiv UI) |
+| `src/shared/*.ts` | Ortak helper'lar (storage, overlay, gen-token) — import et, değiştirme |
 | `src/content.config.ts` | Zod schema + glob loader (sahanın değişimi tüm oyunları etkiler) |
 | `src/archive/main.ts` | Arşiv runtime (search/filter/iframe) |
 | `astro.config.mjs`, `tsconfig.json`, `package.json` | Build & types |

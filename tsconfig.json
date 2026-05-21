@@ -8,7 +8,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
       "@game-logic/*": ["src/game-logic/*"],
-      "@game-bodies/*": ["src/game-bodies/*"]
+      "@game-bodies/*": ["src/game-bodies/*"],
+      "@shared/*": ["src/shared/*"]
     }
   },
   "include": ["src", ".astro"],
