@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 // Trafik Memuru — kavşak sinyal yönetimi
 // Pitfalls:
 //   - visual-vs-hitbox: tek `GEOM` bloğu hem çizim hem geçiş kontrolü için.
@@ -64,16 +67,16 @@ const COLOR_VARS = [
 ];
 
 // ─── DOM ───────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const signalEl = document.querySelector<HTMLElement>('#signal')!;
-const toggleBtn = document.querySelector<HTMLButtonElement>('#toggle')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let signalEl!: HTMLElement;
+let toggleBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
 
 // ─── State ─────────────────────────────────────────────────────────
 let state: GameState = 'ready';
@@ -152,10 +155,10 @@ function ambulanceChance(s: number): number {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function updateSignalLabel(): void {
@@ -706,7 +709,7 @@ function handleRestart(): void {
   lastTransitionAt = performance.now();
 }
 
-// Click on canvas: toggle signal (or start/restart).
+function _wire(): void {
 canvas.addEventListener('pointerdown', (e) => {
   e.preventDefault();
   handleSignalAction();
@@ -734,9 +737,26 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
+}
 
-// ─── Boot ──────────────────────────────────────────────────────────
-reset();
+// ─── Init ──────────────────────────────────────────────────────────
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  signalEl = document.querySelector<HTMLElement>('#signal')!;
+  toggleBtn = document.querySelector<HTMLButtonElement>('#toggle')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+
+  _wire();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
 
 // Headless test hook: expose internals for /tmp/trafik-test.mjs.
 // In browser this is harmless; in headless DOM mock it's read by the harness.
