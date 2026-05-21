@@ -1,3 +1,8 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type Dir = 'up' | 'down' | 'left' | 'right';
 
 interface Tile {
@@ -10,19 +15,26 @@ interface Tile {
   el?: HTMLDivElement;
 }
 
+interface SavedState {
+  grid: number[][];
+  score: number;
+  won: boolean;
+  keepGoing: boolean;
+}
+
 const SIZE = 4;
 const STORAGE_BEST = '2048.best';
 const STORAGE_STATE = '2048.state';
 
-const boardEl = document.querySelector<HTMLDivElement>('#board')!;
-const tilesEl = document.querySelector<HTMLDivElement>('#tiles')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
+let boardEl!: HTMLDivElement;
+let tilesEl!: HTMLDivElement;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayBtn!: HTMLButtonElement;
 
 let grid: (Tile | null)[][] = [];
 let tilesAll: Tile[] = [];
@@ -33,14 +45,7 @@ let won = false;
 let keepGoing = false;
 let dead = false;
 let animating = false;
-// Increments every reset so any in-flight animation can detect a stale callback.
-let moveToken = 0;
-
-try {
-  best = Number(localStorage.getItem(STORAGE_BEST) ?? '0') || 0;
-} catch {
-  /* ignore */
-}
+const moveGen = createGenToken();
 
 function emptyGrid(): (Tile | null)[][] {
   return Array.from({ length: SIZE }, () => Array<Tile | null>(SIZE).fill(null));
@@ -73,7 +78,7 @@ function spawnRandom(): void {
 }
 
 function reset(persist = true): void {
-  moveToken++;
+  moveGen.bump();
   grid = emptyGrid();
   tilesAll = [];
   score = 0;
@@ -91,51 +96,34 @@ function reset(persist = true): void {
 }
 
 function saveState(): void {
-  try {
-    const flat = grid.map((row) => row.map((t) => (t ? t.value : 0)));
-    localStorage.setItem(
-      STORAGE_STATE,
-      JSON.stringify({ grid: flat, score, won, keepGoing }),
-    );
-  } catch {
-    /* ignore */
-  }
+  const flat = grid.map((row) => row.map((t) => (t ? t.value : 0)));
+  safeWrite(STORAGE_STATE, { grid: flat, score, won, keepGoing });
 }
 
 function loadState(): boolean {
-  try {
-    const raw = localStorage.getItem(STORAGE_STATE);
-    if (!raw) return false;
-    const data = JSON.parse(raw) as {
-      grid: number[][];
-      score: number;
-      won: boolean;
-      keepGoing: boolean;
-    };
-    if (!Array.isArray(data.grid) || data.grid.length !== SIZE) return false;
-    grid = emptyGrid();
-    tilesAll = [];
-    for (let r = 0; r < SIZE; r++) {
-      const row = data.grid[r];
-      if (!row || row.length !== SIZE) return false;
-      for (let c = 0; c < SIZE; c++) {
-        const v = row[c]!;
-        if (v > 0) {
-          const tile: Tile = { id: nextId++, value: v, row: r, col: c };
-          grid[r]![c] = tile;
-          tilesAll.push(tile);
-        }
+  const data = safeRead<SavedState | null>(STORAGE_STATE, null);
+  if (!data) return false;
+  if (!Array.isArray(data.grid) || data.grid.length !== SIZE) return false;
+  grid = emptyGrid();
+  tilesAll = [];
+  for (let r = 0; r < SIZE; r++) {
+    const row = data.grid[r];
+    if (!row || row.length !== SIZE) return false;
+    for (let c = 0; c < SIZE; c++) {
+      const v = row[c]!;
+      if (v > 0) {
+        const tile: Tile = { id: nextId++, value: v, row: r, col: c };
+        grid[r]![c] = tile;
+        tilesAll.push(tile);
       }
     }
-    score = data.score | 0;
-    won = !!data.won;
-    keepGoing = !!data.keepGoing;
-    scoreEl.textContent = String(score);
-    bestEl.textContent = String(best);
-    return true;
-  } catch {
-    return false;
   }
+  score = (data.score | 0) || 0;
+  won = !!data.won;
+  keepGoing = !!data.keepGoing;
+  scoreEl.textContent = String(score);
+  bestEl.textContent = String(best);
+  return true;
 }
 
 function tileClass(v: number): string {
@@ -189,10 +177,14 @@ function prepareTiles(): void {
 
 function getVector(dir: Dir): { dr: number; dc: number } {
   switch (dir) {
-    case 'up': return { dr: -1, dc: 0 };
-    case 'down': return { dr: 1, dc: 0 };
-    case 'left': return { dr: 0, dc: -1 };
-    case 'right': return { dr: 0, dc: 1 };
+    case 'up':
+      return { dr: -1, dc: 0 };
+    case 'down':
+      return { dr: 1, dc: 0 };
+    case 'left':
+      return { dr: 0, dc: -1 };
+    case 'right':
+      return { dr: 0, dc: 1 };
   }
 }
 
@@ -268,7 +260,7 @@ function move(dir: Dir): boolean {
 
   if (moved) {
     animating = true;
-    const token = moveToken;
+    const myGen = moveGen.current();
     // animate existing tiles to new positions
     for (const tile of tilesAll) {
       if (tile.el && !toRemove.includes(tile) && !tile.mergedFrom) {
@@ -277,18 +269,14 @@ function move(dir: Dir): boolean {
     }
     window.setTimeout(() => {
       // If a reset happened during the animation, abandon this stale callback.
-      if (token !== moveToken) return;
+      if (!moveGen.isCurrent(myGen)) return;
       tilesAll = tilesAll.filter((t) => !toRemove.includes(t));
       spawnRandom();
       scoreEl.textContent = String(score);
       if (score > best) {
         best = score;
         bestEl.textContent = String(best);
-        try {
-          localStorage.setItem(STORAGE_BEST, String(best));
-        } catch {
-          /* ignore */
-        }
+        safeWrite(STORAGE_BEST, best);
       }
       render();
       saveState();
@@ -327,112 +315,126 @@ function showOverlay(title: string, msg: string, btn = 'Yeniden başla'): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
   overlayBtn.textContent = btn;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
-overlayBtn.addEventListener('click', () => {
-  if (won && !keepGoing && !dead) {
-    keepGoing = true;
-    hideOverlay();
-    saveState();
+function init(): void {
+  boardEl = document.querySelector<HTMLDivElement>('#board')!;
+  tilesEl = document.querySelector<HTMLDivElement>('#tiles')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
+
+  best = safeRead<number>(STORAGE_BEST, 0);
+
+  overlayBtn.addEventListener('click', () => {
+    if (won && !keepGoing && !dead) {
+      keepGoing = true;
+      hideOverlay();
+      saveState();
+    } else {
+      reset();
+    }
+  });
+
+  restartBtn.addEventListener('click', () => reset());
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    let dir: Dir | null = null;
+    if (k === 'arrowup' || k === 'w') dir = 'up';
+    else if (k === 'arrowdown' || k === 's') dir = 'down';
+    else if (k === 'arrowleft' || k === 'a') dir = 'left';
+    else if (k === 'arrowright' || k === 'd') dir = 'right';
+    else if (k === 'r') {
+      reset();
+      e.preventDefault();
+      return;
+    }
+    if (dir) {
+      e.preventDefault();
+      move(dir);
+    }
+  });
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchActive = false;
+  // ~20px is the empirical "intentional swipe" threshold on small phones
+  const SWIPE_THRESHOLD = 20;
+
+  boardEl.addEventListener(
+    'touchstart',
+    (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchActive = true;
+    },
+    { passive: true },
+  );
+
+  // touchmove is intentionally a no-op handler: `touch-action: none` on the
+  // board element already blocks the browser's default scroll/zoom gestures.
+
+  boardEl.addEventListener('touchend', (e) => {
+    if (!touchActive) return;
+    touchActive = false;
+    const t = e.changedTouches[0];
+    if (!t) return;
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+    if (Math.max(absX, absY) < SWIPE_THRESHOLD) return;
+    if (absX > absY) move(dx > 0 ? 'right' : 'left');
+    else move(dy > 0 ? 'down' : 'up');
+  });
+
+  boardEl.addEventListener('touchcancel', () => {
+    touchActive = false;
+  });
+
+  // Recompute tile positions when the board resizes (orientation change,
+  // window resize, mobile keyboard, etc.). Transform is pixel-based, so a
+  // stale value would leave tiles misaligned with the background grid.
+  let resizeRaf = 0;
+  const repositionAll = (): void => {
+    for (const tile of tilesAll) {
+      if (tile.el) setPos(tile.el, tile.row, tile.col);
+    }
+  };
+  window.addEventListener('resize', () => {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+      repositionAll();
+    });
+  });
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => repositionAll()).observe(boardEl);
+  }
+
+  if (loadState()) {
+    render();
+    if (won && !keepGoing) {
+      showOverlay('Kazandın!', `2048'e ulaştın! Skor: ${score}`, 'Devam et');
+    } else if (!hasMoves()) {
+      dead = true;
+      showOverlay('Bitti', `Hamle kalmadı. Skor: ${score}`, 'Yeniden başla');
+    }
   } else {
     reset();
   }
-});
-
-restartBtn.addEventListener('click', () => reset());
-
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  let dir: Dir | null = null;
-  if (k === 'arrowup' || k === 'w') dir = 'up';
-  else if (k === 'arrowdown' || k === 's') dir = 'down';
-  else if (k === 'arrowleft' || k === 'a') dir = 'left';
-  else if (k === 'arrowright' || k === 'd') dir = 'right';
-  else if (k === 'r') {
-    reset();
-    e.preventDefault();
-    return;
-  }
-  if (dir) {
-    e.preventDefault();
-    move(dir);
-  }
-});
-
-let touchStartX = 0;
-let touchStartY = 0;
-let touchActive = false;
-// ~20px is the empirical "intentional swipe" threshold on small phones
-const SWIPE_THRESHOLD = 20;
-
-boardEl.addEventListener(
-  'touchstart',
-  (e) => {
-    const t = e.touches[0];
-    if (!t) return;
-    touchStartX = t.clientX;
-    touchStartY = t.clientY;
-    touchActive = true;
-  },
-  { passive: true },
-);
-
-// touchmove is intentionally a no-op handler: `touch-action: none` on the
-// board element already blocks the browser's default scroll/zoom gestures.
-// We don't need preventDefault here.
-
-boardEl.addEventListener('touchend', (e) => {
-  if (!touchActive) return;
-  touchActive = false;
-  const t = e.changedTouches[0];
-  if (!t) return;
-  const dx = t.clientX - touchStartX;
-  const dy = t.clientY - touchStartY;
-  const absX = Math.abs(dx);
-  const absY = Math.abs(dy);
-  if (Math.max(absX, absY) < SWIPE_THRESHOLD) return;
-  if (absX > absY) move(dx > 0 ? 'right' : 'left');
-  else move(dy > 0 ? 'down' : 'up');
-});
-
-boardEl.addEventListener('touchcancel', () => {
-  touchActive = false;
-});
-
-// Recompute tile positions when the board resizes (orientation change,
-// window resize, mobile keyboard, etc.). Transform is pixel-based, so a
-// stale value would leave tiles misaligned with the background grid.
-let resizeRaf = 0;
-const repositionAll = () => {
-  for (const tile of tilesAll) {
-    if (tile.el) setPos(tile.el, tile.row, tile.col);
-  }
-};
-window.addEventListener('resize', () => {
-  if (resizeRaf) cancelAnimationFrame(resizeRaf);
-  resizeRaf = requestAnimationFrame(() => {
-    resizeRaf = 0;
-    repositionAll();
-  });
-});
-if (typeof ResizeObserver !== 'undefined') {
-  new ResizeObserver(() => repositionAll()).observe(boardEl);
 }
 
-// Init
-if (loadState()) {
-  render();
-  if (won && !keepGoing) {
-    showOverlay('Kazandın!', `2048'e ulaştın! Skor: ${score}`, 'Devam et');
-  } else if (!hasMoves()) {
-    dead = true;
-    showOverlay('Bitti', `Hamle kalmadı. Skor: ${score}`, 'Yeniden başla');
-  }
-} else {
-  reset();
-}
+export const game = defineGame({ init, reset: () => reset() });
