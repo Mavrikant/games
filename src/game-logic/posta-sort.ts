@@ -17,6 +17,11 @@
 //     come from JSON via GameLayout
 // ---------------------------------------------------------------------------
 
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 type State = 'ready' | 'playing' | 'gameover';
 
 interface Parcel {
@@ -73,35 +78,21 @@ const BAY_COLOR_VARS = [
 ];
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const strike1El = document.querySelector<HTMLElement>('#strike-1')!;
-const strike2El = document.querySelector<HTMLElement>('#strike-2')!;
-const strike3El = document.querySelector<HTMLElement>('#strike-3')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let strike1El!: HTMLElement;
+let strike2El!: HTMLElement;
+let strike3El!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
-// ── Safe storage ───────────────────────────────────────────────────────────
-function safeReadBest(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    const n = raw ? Number(raw) : 0;
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWriteBest(n: number): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(n));
-  } catch {
-    /* ignore */
-  }
+function loadBest(): number {
+  const v = safeRead<number>(STORAGE_KEY, 0);
+  return Number.isFinite(v) && v > 0 ? v : 0;
 }
 
 // ── CSS var cache ──────────────────────────────────────────────────────────
@@ -130,7 +121,7 @@ let bayPulse: Array<{ frames: number; kind: 'good' | 'bad' }> = [];
 /** Tracks correct sorts since last swap. */
 let sortsSinceSwap = 0;
 /** Bumped on every reset(); guards all rAF/setTimeout callbacks. */
-let frameToken = 0;
+const frameToken = createGenToken();
 let rafId: number | null = null;
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -194,11 +185,11 @@ function updateStrikesDisplay(): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // ── Routing ────────────────────────────────────────────────────────────────
@@ -227,7 +218,7 @@ function routeToBay(bayIdx: number): void {
     if (score > best) {
       best = score;
       bestEl.textContent = String(best);
-      safeWriteBest(best);
+      safeWrite(STORAGE_KEY, best);
     }
     sortsSinceSwap++;
     if (sortsSinceSwap >= SWAP_EVERY) {
@@ -269,7 +260,7 @@ function missedParcel(): void {
 
 // ── Game loop ──────────────────────────────────────────────────────────────
 function gameLoop(token: number): void {
-  if (token !== frameToken) return; // stale guard
+  if (!frameToken.isCurrent(token)) return; // stale guard
   if (state !== 'playing') return;
   rafId = requestAnimationFrame(() => gameLoop(token));
 
@@ -549,7 +540,7 @@ function startGame(): void {
   // Ensure a parcel is on screen immediately for <250ms feedback.
   if (!parcel) spawnParcel();
   // Kick off rAF loop.
-  const t = frameToken;
+  const t = frameToken.current();
   // Initial draw so the first frame contains the parcel without waiting.
   draw();
   if (rafId !== null) cancelAnimationFrame(rafId);
@@ -572,7 +563,7 @@ function endGame(): void {
 
 function reset(): void {
   // Bump generation token to invalidate any in-flight rAF/setTimeout.
-  frameToken++;
+  frameToken.bump();
   if (rafId !== null) {
     cancelAnimationFrame(rafId);
     rafId = null;
@@ -588,7 +579,7 @@ function reset(): void {
   for (let i = 0; i < BAYS; i++) {
     bayPulse[i] = { frames: 0, kind: 'good' };
   }
-  best = safeReadBest();
+  if (best === 0) best = loadBest();
 
   scoreEl.textContent = '0';
   bestEl.textContent = String(best);
@@ -601,10 +592,26 @@ function reset(): void {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
-window.addEventListener('keydown', handleKey);
-canvas.addEventListener('pointerdown', handlePointer);
-restartBtn.addEventListener('click', () => {
-  reset();
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  strike1El = document.querySelector<HTMLElement>('#strike-1')!;
+  strike2El = document.querySelector<HTMLElement>('#strike-2')!;
+  strike3El = document.querySelector<HTMLElement>('#strike-3')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-reset();
+  window.addEventListener('keydown', handleKey);
+  canvas.addEventListener('pointerdown', handlePointer);
+  restartBtn.addEventListener('click', () => {
+    reset();
+  });
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
