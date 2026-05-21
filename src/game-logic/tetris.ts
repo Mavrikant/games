@@ -1,5 +1,9 @@
 // Tetris — vanilla TS, Canvas/DOM, SRS-lite rotation, 7-bag randomizer.
 
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type PieceKind = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
 type Cell = PieceKind | null;
 type Matrix = number[][]; // 0 = empty, 1 = block
@@ -11,30 +15,30 @@ const TOTAL_ROWS = ROWS + HIDDEN_ROWS;
 
 const STORAGE_KEY = 'tetris.highScore';
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const nextCanvas = document.querySelector<HTMLCanvasElement>('#next')!;
-const nextCtx = nextCanvas.getContext('2d')!;
-const holdCanvas = document.querySelector<HTMLCanvasElement>('#hold')!;
-const holdCtx = holdCanvas.getContext('2d')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let nextCanvas!: HTMLCanvasElement;
+let nextCtx!: CanvasRenderingContext2D;
+let holdCanvas!: HTMLCanvasElement;
+let holdCtx!: CanvasRenderingContext2D;
 
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const linesEl = document.querySelector<HTMLElement>('#lines')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const pauseBtn = document.querySelector<HTMLButtonElement>('#pause')!;
+let scoreEl!: HTMLElement;
+let linesEl!: HTMLElement;
+let levelEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let pauseBtn!: HTMLButtonElement;
 
 // Logical (game-space) cell size. The drawing surface is rescaled to the
 // element's CSS size times devicePixelRatio in `resizeCanvases`, so this
-// remains the right unit for game-space math.
-const CELL = canvas.width / COLS; // 30 logical px
-// Mini-canvas logical sizes (used by drawMini to compute cell size).
-const NEXT_LOGICAL = nextCanvas.width;
-const HOLD_LOGICAL = holdCanvas.width;
+// remains the right unit for game-space math. Filled in init() since it
+// depends on the live canvas width.
+let CELL = 0;
+let NEXT_LOGICAL = 0;
+let HOLD_LOGICAL = 0;
 
 // --- Piece definitions (SRS canonical shapes, rotation index 0) ---
 const SHAPES: Record<PieceKind, Matrix[]> = {
@@ -248,11 +252,8 @@ function createGrid(): Cell[][] {
 }
 
 function readBest(): number {
-  try {
-    return Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
-  } catch {
-    return 0;
-  }
+  const v = safeRead<number>(STORAGE_KEY, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
 
 function refillBag(): void {
@@ -470,11 +471,7 @@ function die(): void {
   stopLoop();
   if (score > best) {
     best = score;
-    try {
-      localStorage.setItem(STORAGE_KEY, String(best));
-    } catch {
-      /* ignore */
-    }
+    safeWrite(STORAGE_KEY, best);
   }
   updateHud();
   draw();
@@ -539,11 +536,11 @@ function updateHud(): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // --- Rendering ---
@@ -820,8 +817,8 @@ function startIfNeeded(): void {
   }
 }
 
-// --- Input ---
-window.addEventListener('keydown', (e) => {
+// --- Input (wired up by init()) ---
+function onKeyDown(e: KeyboardEvent): void {
   const k = e.key.toLowerCase();
   if (k === 'r') {
     reset();
@@ -887,7 +884,7 @@ window.addEventListener('keydown', (e) => {
     }
     e.preventDefault();
   }
-});
+}
 
 // --- Touch / pointer controls ---
 // Tetris is fundamentally an auto-repeat game: holding ←/→ should keep
@@ -932,7 +929,8 @@ function stopAllRepeats(): void {
   for (const btn of Array.from(activeRepeats.keys())) stopRepeat(btn);
 }
 
-document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
+function wireTouchButtons(): void {
+  document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
   const act: string | undefined = btn.dataset.act;
   // pointerdown gives us a single event for touch+mouse+pen and fires
   // immediately (no 300ms click delay on iOS).
@@ -985,14 +983,8 @@ document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
   btn.addEventListener('click', (e) => e.preventDefault());
   // Prevent context menu on long-press (iOS / Android).
   btn.addEventListener('contextmenu', (e) => e.preventDefault());
-});
-
-// If the page loses focus / user switches tabs / pointer leaves the
-// window, stop any auto-repeat to avoid surprise inputs on return.
-window.addEventListener('blur', stopAllRepeats);
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) stopAllRepeats();
-});
+  });
+}
 
 // --- Resize handling ---
 // Re-DPR the canvases whenever layout changes (orientation, browser
@@ -1009,22 +1001,58 @@ function onResize(): void {
     drawHold();
   });
 }
-window.addEventListener('resize', onResize);
-window.addEventListener('orientationchange', onResize);
 
-restartBtn.addEventListener('click', () => {
-  stopAllRepeats();
-  reset();
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  nextCanvas = document.querySelector<HTMLCanvasElement>('#next')!;
+  nextCtx = nextCanvas.getContext('2d')!;
+  holdCanvas = document.querySelector<HTMLCanvasElement>('#hold')!;
+  holdCtx = holdCanvas.getContext('2d')!;
 
-pauseBtn.addEventListener('click', () => {
-  if (!alive) return;
-  if (!started) {
-    startIfNeeded();
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  linesEl = document.querySelector<HTMLElement>('#lines')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  pauseBtn = document.querySelector<HTMLButtonElement>('#pause')!;
+
+  CELL = canvas.width / COLS;
+  NEXT_LOGICAL = nextCanvas.width;
+  HOLD_LOGICAL = holdCanvas.width;
+
+  window.addEventListener('keydown', onKeyDown);
+  wireTouchButtons();
+
+  // If the page loses focus / user switches tabs / pointer leaves the
+  // window, stop any auto-repeat to avoid surprise inputs on return.
+  window.addEventListener('blur', stopAllRepeats);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAllRepeats();
+  });
+
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
+
+  restartBtn.addEventListener('click', () => {
+    stopAllRepeats();
+    reset();
+  });
+
+  pauseBtn.addEventListener('click', () => {
+    if (!alive) return;
+    if (!started) {
+      startIfNeeded();
+      togglePause();
+      return;
+    }
     togglePause();
-    return;
-  }
-  togglePause();
-});
+  });
 
-reset();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
