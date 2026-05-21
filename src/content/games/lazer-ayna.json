@@ -1,0 +1,9 @@
+{
+  "title": "Lazer & Ayna",
+  "description": "Aynaları yerleştirerek lazeri tüm hedeflere ulaştır — optik bulmaca.",
+  "dateAdded": "2026-05-21",
+  "tags": ["bulmaca", "mantık", "strateji"],
+  "controls": "Fare: hücreye tıkla (ayna yerleştir/döndür/kaldır) · Ateşle düğmesi: lazeri çalıştır · R: seviyeyi sıfırla",
+  "howToPlay": "Lazeri tüm yıldız hedeflerine ulaştırman gerekiyor. Boş hücrelere tıklayarak ayna yerleştirirsin: ilk tıkta / aynası, ikinci tıkta \\ aynası, üçüncü tıkta ayna kalkar. Aynalar lazeri 90 derece yönlendirir: / aynası sağ→yukarı, sol→aşağı; \\ aynası sağ→aşağı, sol→yukarı. Aynaları doğru yerleştirdikten sonra 'Ateşle' düğmesine bas. Lazer yolu çizilir ve isabet eden yıldızlar yanar. Tüm yıldızları vurursan bir sonraki seviyeye geçersin. 7 seviye var.",
+  "thumbnail": "lazer-ayna.svg"
+}

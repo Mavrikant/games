@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level-display">1</span></div>
+  <div class="hud__score">Ayna<span id="mirrors-left">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Seviyeyi sıfırla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Lazer ve Ayna bulmaca alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Lazer &amp; Ayna</h2>
+      <p id="overlay-msg">Aynaları yerleştirerek lazeri tüm yıldızlara ulaştır.</p>
+    </div>
+  </div>
+</div>
+<div id="lz-controls">
+  <button id="fire-btn" type="button">🔴 Ateşle</button>
+  <button id="clear-btn" type="button">🧹 Temizle</button>
+</div>

@@ -1,0 +1,27 @@
+#lz-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+#fire-btn,
+#clear-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--grid);
+  background: var(--surface);
+  color: inherit;
+  cursor: pointer;
+}
+
+#fire-btn:hover {
+  border-color: var(--food, #f88);
+  color: var(--food, #f88);
+}
+
+#clear-btn:hover {
+  border-color: var(--grid);
+  opacity: 0.7;
+}
