@@ -1,19 +1,23 @@
+import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scorePlayerEl = document.querySelector<HTMLElement>('#score-player')!;
-const scoreCpuEl = document.querySelector<HTMLElement>('#score-cpu')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scorePlayerEl!: HTMLElement;
+let scoreCpuEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
 
 const STORAGE_KEY = 'pong.best';
 
-const W = canvas.width;
-const H = canvas.height;
+// Logical playfield dimensions (matches the canvas attribute width/height).
+// Hard-coded so geometry constants below can resolve at module load.
+const W = 640;
+const H = 360;
 
 const PADDLE_W = 10;
 const PADDLE_H = 70;
@@ -52,8 +56,7 @@ let ballSpeed = BALL_BASE_SPEED;
 
 let playerScore = 0;
 let cpuScore = 0;
-let best = safeRead<number>(STORAGE_KEY, 0);
-if (!Number.isFinite(best) || best < 0) best = 0;
+let best = 0;
 
 let serving = true;
 let serveTo: 1 | -1 = -1; // -1 = ball goes toward player (CPU serves), 1 = toward cpu
@@ -68,11 +71,11 @@ let lastTs = 0;
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function updateHud(): void {
@@ -297,6 +300,7 @@ function frame(ts: number): void {
 }
 
 // --- Input ---
+function _wire(): void {
 window.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k === 'arrowup' || k === 'w') {
@@ -377,6 +381,25 @@ canvas.addEventListener('click', () => {
 });
 
 restartBtn.addEventListener('click', resetMatch);
+}
 
-resetMatch();
-requestAnimationFrame(frame);
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scorePlayerEl = document.querySelector<HTMLElement>('#score-player')!;
+  scoreCpuEl = document.querySelector<HTMLElement>('#score-cpu')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+
+  best = safeRead<number>(STORAGE_KEY, 0);
+  if (!Number.isFinite(best) || best < 0) best = 0;
+
+  _wire();
+  resetMatch();
+  requestAnimationFrame(frame);
+}
+
+export const game = defineGame({ init, reset: resetMatch });
