@@ -1,3 +1,8 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead as sharedSafeRead, safeWrite as sharedSafeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // ---------------------------------------------------------------------------
 // Bahçevan — bitki büyüme yönetimi
 // Mekanik: 6 parselde tohum dik → sula → meyveyi topla.
@@ -65,34 +70,24 @@ const P_APPLE = 0.42;
 // remaining 0.5 weed
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
-const garden = document.querySelector<HTMLDivElement>('#garden')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const driedEl = document.querySelector<HTMLElement>('#dried')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
+let garden!: HTMLDivElement;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let driedEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayBtn!: HTMLButtonElement;
 
 // ── Safe storage ────────────────────────────────────────────────────────────
 function safeRead(key: string, fallback: number): number {
-  try {
-    const v = localStorage.getItem(key);
-    if (v === null) return fallback;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : fallback;
-  } catch {
-    return fallback;
-  }
+  const v = sharedSafeRead<number>(key, fallback);
+  return Number.isFinite(v) ? v : fallback;
 }
 
 function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore (private mode, disabled, etc.) */
-  }
+  sharedSafeWrite(key, value);
 }
 
 // ── Sprites ─────────────────────────────────────────────────────────────────
@@ -223,7 +218,7 @@ let score = 0;
 let best = 0;
 let driedCount = 0;
 let plots: Plot[] = [];
-let gen = 0; // generation token — bumped on every reset()
+const gen = createGenToken();
 let rafId = 0;
 let lastTick = 0;
 
@@ -358,12 +353,12 @@ function showOverlay(title: string, msgHtml: string, btnLabel: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msgHtml;
   overlayBtn.textContent = btnLabel;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
   overlayBtn.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // ── Plot interactions ───────────────────────────────────────────────────────
@@ -433,9 +428,9 @@ function spawnFloat(p: Plot, text: string, fruit: FruitKind): void {
   p.cell.appendChild(float);
   // remove after animation (700ms) — independent of gen token; if reset
   // happens we still want the leaf to leave the DOM.
-  const myGen = gen;
+  const myGen = gen.current();
   window.setTimeout(() => {
-    if (myGen !== gen) {
+    if (!gen.isCurrent(myGen)) {
       float.remove();
       return;
     }
@@ -477,12 +472,12 @@ function tick(dt: number): void {
 }
 
 function loop(now: number): void {
-  const myGen = gen;
+  const myGen = gen.current();
   if (lastTick === 0) lastTick = now;
   const dt = Math.min(0.1, (now - lastTick) / 1000); // clamp dt for tab-bg catch-up
   lastTick = now;
   tick(dt);
-  if (myGen !== gen) return; // stale callback guard
+  if (!gen.isCurrent(myGen)) return; // stale callback guard
   if (state === 'playing') {
     rafId = window.requestAnimationFrame(loop);
   }
@@ -490,7 +485,7 @@ function loop(now: number): void {
 
 // ── State transitions ───────────────────────────────────────────────────────
 function startGame(): void {
-  gen++; // invalidate any stale RAF/timeouts
+  gen.bump(); // invalidate any stale RAF/timeouts
   if (rafId) {
     cancelAnimationFrame(rafId);
     rafId = 0;
@@ -517,7 +512,7 @@ function startGame(): void {
 function endGame(): void {
   if (state === 'gameover') return;
   state = 'gameover';
-  gen++; // invalidate
+  gen.bump(); // invalidate
   if (rafId) {
     cancelAnimationFrame(rafId);
     rafId = 0;
@@ -531,7 +526,7 @@ function endGame(): void {
 }
 
 function resetToReady(): void {
-  gen++;
+  gen.bump();
   if (rafId) {
     cancelAnimationFrame(rafId);
     rafId = 0;
@@ -558,31 +553,43 @@ function resetToReady(): void {
   );
 }
 
-// ── Input handlers ──────────────────────────────────────────────────────────
-overlayBtn.addEventListener('click', () => {
-  startGame();
-});
+// ── Init ────────────────────────────────────────────────────────────────────
+function init(): void {
+  garden = document.querySelector<HTMLDivElement>('#garden')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  driedEl = document.querySelector<HTMLElement>('#dried')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
 
-restartBtn.addEventListener('click', () => {
-  // direct restart from any state
-  startGame();
-});
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    e.preventDefault();
+  overlayBtn.addEventListener('click', () => {
     startGame();
-    return;
-  }
-  if (state !== 'playing') {
-    if (e.key === ' ' || e.key === 'Enter') {
+  });
+
+  restartBtn.addEventListener('click', () => {
+    startGame();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
       e.preventDefault();
       startGame();
+      return;
     }
-  }
-});
+    if (state !== 'playing') {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        startGame();
+      }
+    }
+  });
 
-// ── Init ────────────────────────────────────────────────────────────────────
-best = safeRead(STORAGE_KEY, 0);
-buildGarden();
-resetToReady();
+  best = safeRead(STORAGE_KEY, 0);
+  buildGarden();
+  resetToReady();
+}
+
+export const game = defineGame({ init, reset: resetToReady });
