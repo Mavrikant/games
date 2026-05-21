@@ -46,12 +46,22 @@ const PORT = Number(process.env.SMOKE_PORT ?? 4321);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 const NAV_TIMEOUT_MS = 8_000;
-const SETTLE_MS = 400;
+const SETTLE_MS = Number(process.env.SMOKE_SETTLE_MS ?? 250);
 // Allow external resources to be blocked entirely — we only test our code.
 const BLOCK_EXTERNAL = true;
-// Concurrent page count per viewport. Chromium scales to ~12 pages on a
-// modest CI runner; 6 is conservative and brings 46 games down to ~8 batches.
-const CONCURRENCY = Number(process.env.SMOKE_CONCURRENCY ?? 6);
+// Concurrent page count per viewport. Chromium handles 12+ on a modest CI
+// runner; 12 gets 46 games into ~4 batches.
+const CONCURRENCY = Number(process.env.SMOKE_CONCURRENCY ?? 12);
+// Viewport set — "mobile" by default (the primary play context).
+// SMOKE_VIEWPORTS=mobile,desktop to run both.
+const VIEWPORT_NAMES = (process.env.SMOKE_VIEWPORTS ?? 'mobile')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+// Screenshot on success skipped by default to halve I/O; failures always
+// snap so artifacts retain debug evidence. SMOKE_SCREENSHOT=always to keep
+// the previous behavior.
+const SCREENSHOT_POLICY = process.env.SMOKE_SCREENSHOT ?? 'on-failure';
 const SERVER_READY_TIMEOUT_MS = 30_000;
 
 let chromium;
@@ -121,14 +131,17 @@ try {
 
   const browser = await chromium.launch();
 
-  // Two viewports — site is mobile-first but most desktop traffic still
-  // exists. Mobile catches layout breaks (overlap, off-screen elements);
-  // desktop catches things that hide at narrow widths. Each viewport gets
-  // its own context + page.
-  const viewports = [
-    { name: 'mobile', viewport: { width: 375, height: 667 } },
-    { name: 'desktop', viewport: { width: 1024, height: 768 } },
-  ];
+  // Available viewports — site is mobile-first; desktop is opt-in via
+  // SMOKE_VIEWPORTS env. Each gets its own context (isolated state).
+  const ALL_VIEWPORTS = {
+    mobile: { name: 'mobile', viewport: { width: 375, height: 667 } },
+    desktop: { name: 'desktop', viewport: { width: 1024, height: 768 } },
+  };
+  const viewports = VIEWPORT_NAMES.map((n) => ALL_VIEWPORTS[n]).filter(Boolean);
+  if (viewports.length === 0) {
+    console.error(`No valid viewports in SMOKE_VIEWPORTS="${VIEWPORT_NAMES.join(',')}"`);
+    process.exit(1);
+  }
 
   async function makeContext(viewport) {
     const context = await browser.newContext({
@@ -200,13 +213,27 @@ try {
         }
       }
 
-      await page.screenshot({
-        path: resolve(resultsDir, `${slug}-${vpName}.png`),
-        fullPage: false,
-      });
+      const shouldSnap =
+        SCREENSHOT_POLICY === 'always' ||
+        (SCREENSHOT_POLICY === 'on-failure' && consoleErrors.length > 0);
+      if (shouldSnap) {
+        await page.screenshot({
+          path: resolve(resultsDir, `${slug}-${vpName}.png`),
+          fullPage: false,
+        });
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       consoleErrors.push(`navigation: ${message}`);
+      // Try a failure screenshot even on nav error.
+      try {
+        await page.screenshot({
+          path: resolve(resultsDir, `${slug}-${vpName}.png`),
+          fullPage: false,
+        });
+      } catch {
+        /* page may already be torn down */
+      }
     } finally {
       await page.close();
     }
@@ -232,12 +259,15 @@ try {
     return results;
   }
 
-  // Run both viewports in parallel (separate contexts, no shared state).
+  // Run viewports in parallel (separate contexts, no shared state).
   console.log(
-    `Parallel: ${viewports.length} viewports × ${CONCURRENCY} pages = ${viewports.length * CONCURRENCY} concurrent`,
+    `Parallel: ${viewports.length} viewport(s) [${viewports.map((v) => v.name).join(',')}] × ${CONCURRENCY} pages = ${viewports.length * CONCURRENCY} concurrent · settle=${SETTLE_MS}ms · screenshot=${SCREENSHOT_POLICY}`,
   );
+  const startMs = Date.now();
   const viewportResults = await Promise.all(viewports.map((vp) => runViewport(vp)));
   process.stdout.write('\n');
+  const elapsedMs = Date.now() - startMs;
+  console.log(`Smoke completed in ${(elapsedMs / 1000).toFixed(1)}s`);
 
   for (const results of viewportResults) {
     for (const r of results) {
