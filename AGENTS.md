@@ -47,9 +47,29 @@ geçmiş bug'ların kaynağıydı.
 | `@shared/storage` | `safeRead<T>(key, fallback)`, `safeWrite(key, value)`, `safeRemove(key)` | `unguarded-storage` |
 | `@shared/overlay` | `showOverlay(el)`, `hideOverlay(el)`, `isOverlayHidden(el)` — classList + aria-hidden atomik | `overlay-input-leak` (kısmî) |
 | `@shared/gen-token` | `createGenToken()` — reset-safe async callback iptali | `stale-async-callback` |
+| `@shared/game-module` | `GameModule` interface + `defineGame({ init, reset? })` — module-level DOM access yerine init() boundary | `unguarded-storage` (yapısal) |
 
 Kural: `src/shared/` **import-only**. Buradaki dosyaları değiştirmek shared
 layer modifikasyonudur → human review zorunlu.
+
+### Önerilen pattern (yeni oyunlarda)
+
+```ts
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+
+function init(): void {
+  // Tüm DOM querySelector, localStorage erişimi, event listener burada
+  const canvas = document.querySelector<HTMLCanvasElement>('#stage')!;
+  // ...
+}
+
+export const game = defineGame({ init });
+```
+
+`defineGame()` queueMicrotask ile `init()`'i otomatik çağırır — manuel
+çağrı **gerekmez**. Module-level side-effect (top-level `document.querySelector`,
+`localStorage.getItem`) yazma; init() içine al.
 
 `<slug>` = kebab-case, sadece `[a-z0-9-]`. (`my-game` ✓, `MyGame` ✗,
 `my_game` ✗, `mygame2!` ✗.)
