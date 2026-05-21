@@ -19,18 +19,22 @@ interface Level {
 }
 
 const GRID = 8;
-const CELL = 60;                 // px per cell
-const CANVAS_SIZE = 480;
-const OFFSET = (CANVAS_SIZE - GRID * CELL) / 2;  // centering offset
+const CELL = 60;                 // grid is 8 × 60 = 480 px
+const CANVAS_SIZE = 560;         // 40 px margin all around for the laser source arrow
+const OFFSET = (CANVAS_SIZE - GRID * CELL) / 2;  // = 40
 
+// Levels designed and verified solvable by scripts/lazer-solver.local.mjs.
+// Each entry's mirrorLimit matches the known minimum (no slack), and the
+// progression introduces one mechanic at a time:
+//   L1 / mirror, L2 \ mirror, L3 two targets via one bend,
+//   L4 top entry + zigzag, L5 three targets, L6 four targets across the grid.
 const LEVELS: Level[] = [
-  { laserSide: 'left',   laserIndex: 3, targets: [{col:6, row:0}],                                        mirrorLimit: 2 },
-  { laserSide: 'left',   laserIndex: 4, targets: [{col:7, row:0}, {col:7, row:7}],                         mirrorLimit: 3 },
-  { laserSide: 'top',    laserIndex: 0, targets: [{col:7, row:2}, {col:0, row:7}],                         mirrorLimit: 3 },
-  { laserSide: 'left',   laserIndex: 0, targets: [{col:3, row:3}, {col:7, row:7}],                         mirrorLimit: 4 },
-  { laserSide: 'left',   laserIndex: 7, targets: [{col:7, row:0}, {col:3, row:7}, {col:0, row:3}],         mirrorLimit: 4 },
-  { laserSide: 'top',    laserIndex: 3, targets: [{col:0, row:0}, {col:7, row:0}, {col:0, row:7}],         mirrorLimit: 5 },
-  { laserSide: 'left',   laserIndex: 3, targets: [{col:7,row:3},{col:3,row:7},{col:0,row:0},{col:7,row:0}], mirrorLimit: 6 },
+  { laserSide: 'left', laserIndex: 3, targets: [{col:6,row:0}], mirrorLimit: 1 },
+  { laserSide: 'left', laserIndex: 2, targets: [{col:5,row:7}], mirrorLimit: 1 },
+  { laserSide: 'left', laserIndex: 0, targets: [{col:3,row:0},{col:5,row:4}], mirrorLimit: 1 },
+  { laserSide: 'top',  laserIndex: 1, targets: [{col:1,row:4},{col:6,row:4}], mirrorLimit: 2 },
+  { laserSide: 'left', laserIndex: 0, targets: [{col:3,row:0},{col:5,row:3},{col:2,row:5}], mirrorLimit: 2 },
+  { laserSide: 'left', laserIndex: 0, targets: [{col:3,row:0},{col:5,row:3},{col:2,row:5},{col:1,row:7}], mirrorLimit: 3 },
 ];
 
 let canvas!: HTMLCanvasElement;
@@ -170,14 +174,22 @@ function draw(): void {
         ctx.fillRect(x, y, CELL, CELL);
       }
 
-      // Target
+      // Target — visible halo + larger star, brighter color
       if (cell.isTarget) {
         const hit = hitTargets.has(`${c},${r}`);
-        ctx.font = `bold ${Math.floor(CELL * 0.45)}px system-ui`;
+        const cx = x + CELL / 2;
+        const cy = y + CELL / 2;
+        // halo
+        ctx.fillStyle = hit ? 'rgba(240, 192, 64, 0.32)' : 'rgba(240, 192, 64, 0.10)';
+        ctx.beginPath();
+        ctx.arc(cx, cy, CELL * 0.34, 0, Math.PI * 2);
+        ctx.fill();
+        // star
+        ctx.font = `bold ${Math.floor(CELL * 0.6)}px system-ui`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillStyle = hit ? '#f0c040' : gridColor;
-        ctx.fillText('★', x + CELL / 2, y + CELL / 2);
+        ctx.fillStyle = hit ? '#ffd76a' : '#f0c040';
+        ctx.fillText('★', cx, cy);
       }
 
       // Mirror
@@ -242,30 +254,42 @@ function draw(): void {
 
 function drawLaserSource(): void {
   const level = LEVELS[currentLevel]!;
-  ctx.fillStyle = '#ff5050';
-  ctx.font = `bold ${Math.floor(CELL * 0.35)}px system-ui`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
+  // Arrow positioned in the 40px margin band, fully inside canvas.
   let x: number;
   let y: number;
   let arrow: string;
   switch (level.laserSide) {
     case 'left':
-      x = OFFSET - CELL * 0.65; y = OFFSET + level.laserIndex * CELL + CELL / 2;
+      x = OFFSET / 2; y = OFFSET + level.laserIndex * CELL + CELL / 2;
       arrow = '▶'; break;
     case 'right':
-      x = OFFSET + GRID * CELL + CELL * 0.65; y = OFFSET + level.laserIndex * CELL + CELL / 2;
+      x = CANVAS_SIZE - OFFSET / 2; y = OFFSET + level.laserIndex * CELL + CELL / 2;
       arrow = '◀'; break;
     case 'top':
-      x = OFFSET + level.laserIndex * CELL + CELL / 2; y = OFFSET - CELL * 0.55;
+      x = OFFSET + level.laserIndex * CELL + CELL / 2; y = OFFSET / 2;
       arrow = '▼'; break;
     case 'bottom':
-      x = OFFSET + level.laserIndex * CELL + CELL / 2; y = OFFSET + GRID * CELL + CELL * 0.55;
+      x = OFFSET + level.laserIndex * CELL + CELL / 2; y = CANVAS_SIZE - OFFSET / 2;
       arrow = '▲'; break;
   }
 
+  // Glow halo behind arrow so it reads on dark backgrounds.
+  const grd = ctx.createRadialGradient(x!, y!, 2, x!, y!, 26);
+  grd.addColorStop(0, 'rgba(255,80,80,0.55)');
+  grd.addColorStop(1, 'rgba(255,80,80,0)');
+  ctx.fillStyle = grd;
+  ctx.beginPath();
+  ctx.arc(x!, y!, 26, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Arrow itself — bigger and brighter than before.
+  ctx.font = `bold 28px system-ui`;
+  ctx.fillStyle = '#ff6464';
   ctx.fillText(arrow!, x!, y!);
+
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
 }
@@ -364,6 +388,8 @@ function init(): void {
   clearBtn = document.querySelector<HTMLButtonElement>('#clear-btn')!;
   levelDisplay = document.querySelector<HTMLElement>('#level-display')!;
   mirrorsLeft = document.querySelector<HTMLElement>('#mirrors-left')!;
+  const levelTotalEl = document.querySelector<HTMLElement>('#level-total');
+  if (levelTotalEl) levelTotalEl.textContent = String(LEVELS.length);
 
   canvas.addEventListener('click', handleCellClick);
   fireBtn.addEventListener('click', fireLaser);
