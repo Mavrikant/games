@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type Dir = 'up' | 'down' | 'left' | 'right';
 type Cell = { x: number; y: number };
 
@@ -6,23 +10,22 @@ const ROWS = 20;
 const TICK_MS = 110;
 const STORAGE_KEY = 'snake.best';
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-
-const cellSize = canvas.width / COLS;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let cellSize = 0;
 
 let snake: Cell[] = [];
 let dir: Dir = 'right';
 let pendingDir: Dir = 'right';
 let food: Cell = { x: 0, y: 0 };
 let score = 0;
-let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+let best = 0;
 let alive = false;
 let paused = false;
 let started = false;
@@ -31,11 +34,11 @@ let tickHandle: number | null = null;
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function placeFood(): void {
@@ -127,7 +130,7 @@ function tick(): void {
     if (score > best) {
       best = score;
       bestEl.textContent = String(best);
-      localStorage.setItem(STORAGE_KEY, String(best));
+      safeWrite(STORAGE_KEY, best);
     }
     placeFood();
   } else {
@@ -193,38 +196,54 @@ function getCss(varName: string): string {
   return val;
 }
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'arrowup' || k === 'w') {
-    setDir('up');
-    e.preventDefault();
-  } else if (k === 'arrowdown' || k === 's') {
-    setDir('down');
-    e.preventDefault();
-  } else if (k === 'arrowleft' || k === 'a') {
-    setDir('left');
-    e.preventDefault();
-  } else if (k === 'arrowright' || k === 'd') {
-    setDir('right');
-    e.preventDefault();
-  } else if (k === ' ' && alive && started) {
-    paused = !paused;
-    if (paused) showOverlay('Duraklatıldı', 'Devam için boşluk.');
-    else hideOverlay();
-    e.preventDefault();
-  } else if (k === 'r') {
-    reset();
-    e.preventDefault();
-  }
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const d = btn.dataset.dir as Dir | undefined;
-    if (d) setDir(d);
+  cellSize = canvas.width / COLS;
+  best = safeRead<number>(STORAGE_KEY, 0);
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'arrowup' || k === 'w') {
+      setDir('up');
+      e.preventDefault();
+    } else if (k === 'arrowdown' || k === 's') {
+      setDir('down');
+      e.preventDefault();
+    } else if (k === 'arrowleft' || k === 'a') {
+      setDir('left');
+      e.preventDefault();
+    } else if (k === 'arrowright' || k === 'd') {
+      setDir('right');
+      e.preventDefault();
+    } else if (k === ' ' && alive && started) {
+      paused = !paused;
+      if (paused) showOverlay('Duraklatıldı', 'Devam için boşluk.');
+      else hideOverlay();
+      e.preventDefault();
+    } else if (k === 'r') {
+      reset();
+      e.preventDefault();
+    }
   });
-});
 
-restartBtn.addEventListener('click', reset);
+  document.querySelectorAll<HTMLButtonElement>('.touch__btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const d = btn.dataset.dir as Dir | undefined;
+      if (d) setDir(d);
+    });
+  });
 
-reset();
+  restartBtn.addEventListener('click', reset);
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
