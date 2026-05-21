@@ -1,0 +1,31 @@
+---
+---
+
+<header class="hud">
+  <div id="status" class="hud__status" role="status" aria-live="polite">Bir ada seç</div>
+  <div class="hud__group">
+    <button id="reset" class="hud__btn" type="button" title="Köprüleri sıfırla">↻ Sıfırla</button>
+    <button id="new-puzzle" class="hud__btn" type="button">Yeni puzzle</button>
+  </div>
+</header>
+<div class="diff-row" role="group" aria-label="Zorluk seçimi">
+  <button class="diff-btn diff-btn--active" data-diff="kolay" type="button">Kolay</button>
+  <button class="diff-btn" data-diff="orta" type="button">Orta</button>
+  <button class="diff-btn" data-diff="zor" type="button">Zor</button>
+  <span class="diff-stats">Hamle <span id="moves">0</span> · Rekor <span id="best">—</span></span>
+</div>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="560"
+    height="560"
+    aria-label="Köprü Adaları oyun tahtası"
+  ></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tebrikler!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-next" class="hud__btn" type="button">Yeni puzzle</button>
+    </div>
+  </div>
+</div>

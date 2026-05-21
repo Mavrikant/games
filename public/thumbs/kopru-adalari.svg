@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Köprü Adaları">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <!-- bridges (drawn first, behind islands) -->
+  <g stroke="#7a8392" stroke-width="3" stroke-linecap="round">
+    <!-- horizontal single A-B -->
+    <line x1="78" y1="62" x2="142" y2="62" />
+    <!-- horizontal double B-C -->
+    <line x1="158" y1="56" x2="232" y2="56" />
+    <line x1="158" y1="68" x2="232" y2="68" />
+    <!-- vertical double A-D -->
+    <line x1="64" y1="78" x2="64" y2="142" />
+    <line x1="76" y1="78" x2="76" y2="142" />
+    <!-- vertical single C-F -->
+    <line x1="248" y1="78" x2="248" y2="142" />
+    <!-- horizontal single D-E -->
+    <line x1="86" y1="158" x2="142" y2="158" />
+    <!-- horizontal single E-F -->
+    <line x1="166" y1="158" x2="232" y2="158" />
+  </g>
+  <!-- islands -->
+  <g font-family="ui-sans-serif, system-ui" font-weight="700" font-size="18" text-anchor="middle" dominant-baseline="central">
+    <circle cx="70" cy="62" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="70" y="63" fill="#e9ebef">3</text>
+    <circle cx="150" cy="62" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="150" y="63" fill="#e9ebef">3</text>
+    <circle cx="240" cy="62" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="240" y="63" fill="#e9ebef">3</text>
+    <circle cx="70" cy="150" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="70" y="151" fill="#e9ebef">3</text>
+    <circle cx="150" cy="150" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="150" y="151" fill="#e9ebef">2</text>
+    <circle cx="240" cy="150" r="16" fill="#11141a" stroke="#10b981" stroke-width="2.5" />
+    <text x="240" y="151" fill="#e9ebef">2</text>
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e4e4ed">Köprü Adaları</text>
+</svg>
