@@ -2,8 +2,12 @@
 // Pitfalls guarded:
 // - state machine (playerTurn | aiTurn | gameOver) gates inputs
 // - generation token bumps on reset → stale ai-setTimeout no-op
-// - safeRead/safeWrite around localStorage
+// - @shared/storage around localStorage
 // - body has no <h1>/hint (layout owns them)
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
 
 interface Tile {
   a: number;
@@ -22,20 +26,20 @@ type GameState = 'playerTurn' | 'aiTurn' | 'gameOver';
 const KEY_WINS = 'domino.wins';
 const KEY_LOSSES = 'domino.losses';
 
-const winsEl = document.querySelector<HTMLElement>('#wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#losses')!;
-const boneyardEl = document.querySelector<HTMLElement>('#boneyard')!;
-const aiCountEl = document.querySelector<HTMLElement>('#ai-count')!;
-const playerCountEl = document.querySelector<HTMLElement>('#player-count')!;
-const chainEl = document.querySelector<HTMLElement>('#chain')!;
-const aiHandEl = document.querySelector<HTMLElement>('#ai-hand')!;
-const playerHandEl = document.querySelector<HTMLElement>('#player-hand')!;
-const leftEndBtn = document.querySelector<HTMLButtonElement>('#left-end')!;
-const rightEndBtn = document.querySelector<HTMLButtonElement>('#right-end')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const drawBtn = document.querySelector<HTMLButtonElement>('#draw')!;
-const passBtn = document.querySelector<HTMLButtonElement>('#pass')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let boneyardEl!: HTMLElement;
+let aiCountEl!: HTMLElement;
+let playerCountEl!: HTMLElement;
+let chainEl!: HTMLElement;
+let aiHandEl!: HTMLElement;
+let playerHandEl!: HTMLElement;
+let leftEndBtn!: HTMLButtonElement;
+let rightEndBtn!: HTMLButtonElement;
+let statusEl!: HTMLElement;
+let drawBtn!: HTMLButtonElement;
+let passBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
 
 let deck: Tile[] = [];
 let playerHand: Tile[] = [];
@@ -45,24 +49,11 @@ let state: GameState = 'playerTurn';
 let wins = 0;
 let losses = 0;
 let selectedTileId: string | null = null;
-let gen = 0;
+const gen = createGenToken();
 
-function safeRead(key: string): number {
-  try {
-    const v = localStorage.getItem(key);
-    if (v === null) return 0;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
+function loadStat(key: string): number {
+  const v = safeRead<number>(key, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
 
 function buildDeck(): Tile[] {
@@ -143,7 +134,7 @@ function placeTile(hand: Tile[], tile: Tile, side: 'L' | 'R'): void {
 }
 
 function startGame(): void {
-  gen += 1;
+  gen.bump();
   deck = shuffle(buildDeck());
   playerHand = deck.splice(0, 7);
   aiHand = deck.splice(0, 7);
@@ -347,9 +338,9 @@ function playerPass(): void {
 }
 
 function scheduleAi(): void {
-  const myGen = gen;
+  const myGen = gen.current();
   window.setTimeout(() => {
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'aiTurn') return;
     aiPlay();
   }, 580);
@@ -437,30 +428,50 @@ function endGame(winner: 'player' | 'ai' | null): void {
   syncAll();
 }
 
-playerHandEl.addEventListener('click', (e) => {
-  const target = e.target as HTMLElement;
-  const btn = target.closest('.dm-tile-btn') as HTMLElement | null;
-  if (!btn) return;
-  const id = btn.getAttribute('data-id');
-  if (!id) return;
-  selectTile(id);
-});
+function init(): void {
+  winsEl = document.querySelector<HTMLElement>('#wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#losses')!;
+  boneyardEl = document.querySelector<HTMLElement>('#boneyard')!;
+  aiCountEl = document.querySelector<HTMLElement>('#ai-count')!;
+  playerCountEl = document.querySelector<HTMLElement>('#player-count')!;
+  chainEl = document.querySelector<HTMLElement>('#chain')!;
+  aiHandEl = document.querySelector<HTMLElement>('#ai-hand')!;
+  playerHandEl = document.querySelector<HTMLElement>('#player-hand')!;
+  leftEndBtn = document.querySelector<HTMLButtonElement>('#left-end')!;
+  rightEndBtn = document.querySelector<HTMLButtonElement>('#right-end')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  drawBtn = document.querySelector<HTMLButtonElement>('#draw')!;
+  passBtn = document.querySelector<HTMLButtonElement>('#pass')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-leftEndBtn.addEventListener('click', () => playSelected('L'));
-rightEndBtn.addEventListener('click', () => playSelected('R'));
-drawBtn.addEventListener('click', playerDraw);
-passBtn.addEventListener('click', playerPass);
-restartBtn.addEventListener('click', () => {
-  startGame();
-});
+  wins = loadStat(KEY_WINS);
+  losses = loadStat(KEY_LOSSES);
 
-window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'r') {
+  playerHandEl.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.dm-tile-btn') as HTMLElement | null;
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    if (!id) return;
+    selectTile(id);
+  });
+
+  leftEndBtn.addEventListener('click', () => playSelected('L'));
+  rightEndBtn.addEventListener('click', () => playSelected('R'));
+  drawBtn.addEventListener('click', playerDraw);
+  passBtn.addEventListener('click', playerPass);
+  restartBtn.addEventListener('click', () => {
     startGame();
-    e.preventDefault();
-  }
-});
+  });
 
-wins = safeRead(KEY_WINS);
-losses = safeRead(KEY_LOSSES);
-startGame();
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'r') {
+      startGame();
+      e.preventDefault();
+    }
+  });
+
+  startGame();
+}
+
+export const game = defineGame({ init, reset: startGame });
