@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // Onbeş Bulmaca — classic sliding-tile puzzle.
 //
 // The grid is `size × size` (3, 4 or 5). One cell is the blank (value 0).
@@ -38,22 +42,19 @@ const STORAGE_BEST_MOVES = 'onbes-bulmaca.best-moves';
 const STORAGE_BEST_TIME = 'onbes-bulmaca.best-time';
 const STORAGE_SIZE = 'onbes-bulmaca.size';
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const timeEl = document.querySelector<HTMLElement>('#time')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const diffBtns = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
-);
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let boardEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let timeEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let diffBtns: HTMLButtonElement[] = [];
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
-let size: Size = loadSize();
-const bestMap: BestMap = loadBest();
+let size: Size = 4;
+let bestMap: BestMap = {};
 
 // `tiles[i]` is the value at flat index i (0 = blank).
 let tiles: number[] = [];
@@ -64,7 +65,7 @@ let startMs = 0;
 let timerHandle: number | null = null;
 let state: GameState = 'playing';
 // Bumped on every reset; async callbacks check it before mutating state.
-let gen = 0;
+const gen = createGenToken();
 
 // One <button> per tile (incl. the blank, which is hidden via class).
 let tileEls: HTMLButtonElement[] = [];
@@ -403,14 +404,14 @@ function onSolved(): void {
 function showOverlay(isBest: boolean, m: number, t: number): void {
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Çözdün!';
   overlayMsg.textContent = `${m} hamle · ${formatTime(t)}`;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
   overlay.setAttribute('aria-hidden', 'false');
   // Move focus to the prominent button so Enter / Space restarts.
   overlayRestart.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
   overlay.setAttribute('aria-hidden', 'true');
 }
 
@@ -419,11 +420,11 @@ function hideOverlay(): void {
 function startTimer(): void {
   if (timerHandle !== null) return;
   startMs = Date.now();
-  const myGen = gen;
+  const myGen = gen.current();
   timerHandle = window.setInterval(() => {
     // Stale tick guard: if a reset bumped the generation, this interval
     // belongs to a previous game and must not mutate `elapsedSec`.
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     elapsedSec = Math.floor((Date.now() - startMs) / 1000);
     renderTime();
   }, 250);
@@ -439,7 +440,7 @@ function stopTimer(): void {
 // ─────────────────────── lifecycle ───────────────────────
 
 function startGame(): void {
-  gen++;
+  gen.bump();
   stopTimer();
   state = 'playing';
   setBoardSizeAttr();
@@ -467,19 +468,46 @@ function setSize(s: Size): void {
   startGame();
 }
 
-// ─────────────────────── wiring ───────────────────────
+// ─────────────────────── init ───────────────────────
 
-restartBtn.addEventListener('click', () => startGame());
-overlayRestart.addEventListener('click', () => startGame());
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  timeEl = document.querySelector<HTMLElement>('#time')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  diffBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
+  );
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
 
-diffBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const n = Number(btn.dataset.size);
-    if (n === 3 || n === 4 || n === 5) setSize(n);
+  size = loadSize();
+  bestMap = loadBest();
+
+  restartBtn.addEventListener('click', () => startGame());
+  overlayRestart.addEventListener('click', () => startGame());
+
+  diffBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const n = Number(btn.dataset.size);
+      if (n === 3 || n === 4 || n === 5) setSize(n);
+    });
   });
-});
 
-window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', __onKeydown);
+  window.addEventListener('resize', __onResize);
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => __repositionAll()).observe(boardEl);
+  }
+  startGame();
+}
+
+export const game = defineGame({ init, reset: startGame });
+
+function __onKeydown(e: KeyboardEvent): void {
   const k = e.key;
   // 'R' is always allowed (it's a restart, not gameplay input).
   if (k === 'r' || k === 'R') {
@@ -513,30 +541,20 @@ window.addEventListener('keydown', (e) => {
       break;
   }
   if (handled || k.startsWith('Arrow')) {
-    // Prevent the page from scrolling under our grid even when the move
-    // was a no-op (e.g. blank against the wall).
     e.preventDefault();
   }
-});
-
-// Reposition all tiles when the board size changes (orientation flip,
-// window resize, mobile keyboard pushing the viewport). The transform is
-// pixel-based, so a stale value would leave tiles misaligned.
-let resizeRaf = 0;
-const repositionAll = () => {
-  if (tileEls.length === 0) return;
-  positionTiles();
-};
-window.addEventListener('resize', () => {
-  if (resizeRaf) cancelAnimationFrame(resizeRaf);
-  resizeRaf = requestAnimationFrame(() => {
-    resizeRaf = 0;
-    repositionAll();
-  });
-});
-if (typeof ResizeObserver !== 'undefined') {
-  new ResizeObserver(() => repositionAll()).observe(boardEl);
 }
 
-// First paint — make sure the board is renderable within 250ms of load.
-startGame();
+let __resizeRaf = 0;
+function __repositionAll(): void {
+  if (tileEls.length === 0) return;
+  positionTiles();
+}
+
+function __onResize(): void {
+  if (__resizeRaf) cancelAnimationFrame(__resizeRaf);
+  __resizeRaf = requestAnimationFrame(() => {
+    __resizeRaf = 0;
+    __repositionAll();
+  });
+}
