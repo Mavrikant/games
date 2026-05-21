@@ -25,6 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: PITFALLS audit gate (no unsafe storage / module-level qS)
+        run: node scripts/audit-games.mjs --ci
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

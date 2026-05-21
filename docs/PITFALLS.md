@@ -125,6 +125,12 @@ zaten layout'tadır. Şüphedeysen mevcut bir basit oyunun (`snake.astro`,
 **Tespit**: Çok-level/çok-aşama oyunlarda en son level'den restart yap. Crash veya boş render olur mu? Headless harness'da `reset()` çağrısını level değiştirme sonrası tekrar et.
 **Önlem**: State transition'da sıra: (1) state alanlarını güncelle, (2) eski DOM'u temizle (`element.innerHTML = ''` veya kendi `renderGrid/Workers`'i çağır), (3) yeni DOM'u kur, (4) sonra `renderAssignments`/cross-element render. Bonus: yardımcı render fonksiyonlarında `if (!w) return;` defensive guard ekle — DOM'da hayalet element olabilir.
 
+### module-level-dom-access
+**Vaka**: Sprint 2 boyunca 46 oyunun 39'unda `const canvas = document.querySelector(...)` top-level çağrılıyordu. Hiçbiri **Safari private mode**'da modül yüklenirken patlamadı çünkü `querySelector` throw etmez — ama aynı dosyalardaki module-level `const best = Number(localStorage.getItem(...))` patlardı (PITFALLS#unguarded-storage). Pattern olarak ikisi aynı sınıf: "module body, init() yerine."
+**Pattern**: Modül parse edilirken çalışan kod, `init()` fonksiyonunun dışında. DOM yoksa / storage erişimi yoksa, modül yüklenmiyor → tüm oyun yüklenmiyor. Aynı sınıfta: top-level event listener'lar (DOM hazır olmadan bağlanır → listener kaybı), top-level `new ResizeObserver`, top-level RAF.
+**Tespit**: `npm run audit:games` → ModLvlQS sütunu. `--ci` flag'i CI'da fail eder. Manuel: `grep -E "^(const|let).*=.*document\." src/game-logic/*.ts` → çıktı boş olmalı.
+**Önlem**: `@shared/game-module` import et, `defineGame({ init })` export et. Tüm DOM access, event binding, storage okuma `init()` içinde. `defineGame()` queueMicrotask ile init'i otomatik çağırır — manuel çağrı gerekmez. Örnek için `docs/SHARED_HELPERS.md` ve mevcut oyunlardan herhangi biri (örn. `src/game-logic/snake.ts`).
+
 ### untested-edge-state
 **Vaka**: Yukarıdaki 4 PR'ın **hepsi** + trafik-memuru: sinyal NS yeşilken kavşağa girmiş
 araç, kullanıcı sinyali toggle'larsa **kavşak ortasında kilitleniyordu**; karşı eksen
@@ -137,7 +143,7 @@ gördü, "smoke test passed" dedi, mergeledi.
 bug'ını yakalamaz. Type-check ve build hiçbir runtime/UX bug'ını yakalamaz.
 **Tespit**: [docs/PLAYTEST.md](PLAYTEST.md) checklist'ini her PR öncesi
 uygula. Curl smoke test artık yeterli değil.
-**Önlem**: Playtest, build kadar zorunlu. Atlanamaz.
+**Önlem**: Playtest, build kadar zorunlu. Atlanamaz. CI'da `npm run test:smoke` artık her oyunu headless chromium'da açıyor; init crash, console error, blank render bu seviyede yakalanır. Ama oynanış bug'larını (yanlış skor, AI lock, restart race) hâlâ insan playtest yakalayabilir — [docs/PLAYTEST.md](PLAYTEST.md) zorunlu.
 
 ---
 

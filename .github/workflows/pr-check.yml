@@ -22,6 +22,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+      - name: PITFALLS audit gate (no unsafe storage / module-level qS)
+        run: node scripts/audit-games.mjs --ci
 
   smoke:
     needs: check

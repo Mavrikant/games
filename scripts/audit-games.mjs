@@ -131,5 +131,23 @@ console.log(`
 - **ModLvlQS**: \`const x = document.querySelector(...)\` top-level
   (PITFALLS#unguarded-storage'in DOM varyantı; Safari private mode crash riski yok ama early-access patterns kötü).
 - En düşük score'lu oyunlar önce gelir; o tarafta migration başla.
-- Bu komut ne build kırar ne CI'da fail eder — yol gösterici.
+- \`--ci\` flag ile CI'da çalışırsa unsafe storage veya module-level qS
+  görürse exit 1. Yeni oyunlar için ratchet — eklenen oyun mevcut
+  standardı bozarsa CI fail.
 `);
+
+// CI mode: exit non-zero if any regression. This locks in the current
+// post-migration state — no future agent can land a game that uses raw
+// localStorage outside try/catch or declares module-level querySelectors.
+if (process.argv.includes('--ci')) {
+  if (anyUnguarded > 0 || anyModuleLevelQs > 0) {
+    console.error(
+      `\nCI gate: ${anyUnguarded} unsafe localStorage call(s) and ${anyModuleLevelQs} module-level querySelector(s) detected.`,
+    );
+    console.error(
+      `Use @shared/storage and move DOM access into init() (see docs/SHARED_HELPERS.md).`,
+    );
+    process.exit(1);
+  }
+  console.log('CI gate: passed (0 unsafe storage, 0 module-level querySelector).');
+}
