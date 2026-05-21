@@ -46,9 +46,12 @@ const PORT = Number(process.env.SMOKE_PORT ?? 4321);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 const NAV_TIMEOUT_MS = 8_000;
-const SETTLE_MS = 600;
+const SETTLE_MS = 400;
 // Allow external resources to be blocked entirely — we only test our code.
 const BLOCK_EXTERNAL = true;
+// Concurrent page count per viewport. Chromium scales to ~12 pages on a
+// modest CI runner; 6 is conservative and brings 46 games down to ~8 batches.
+const CONCURRENCY = Number(process.env.SMOKE_CONCURRENCY ?? 6);
 const SERVER_READY_TIMEOUT_MS = 30_000;
 
 let chromium;
@@ -148,82 +151,100 @@ try {
 
   const failures = [];
 
-  for (const vp of viewports) {
-    console.log(`\n[${vp.name} ${vp.viewport.width}×${vp.viewport.height}]`);
-    const context = await makeContext(vp.viewport);
+  async function smokeOneGame(context, slug, vpName) {
+    const url = `${BASE_URL}/games/${slug}/`;
+    const page = await context.newPage();
+    const consoleErrors = [];
+    page.on('pageerror', (err) => {
+      consoleErrors.push(`pageerror: ${err.message}`);
+    });
+    page.on('console', (msg) => {
+      if (msg.type() !== 'error') return;
+      const text = msg.text();
+      if (/Failed to load resource/.test(text)) return;
+      if (/net::ERR_/.test(text)) return;
+      consoleErrors.push(`console.error: ${text}`);
+    });
 
-    for (const slug of slugs) {
-      const url = `${BASE_URL}/games/${slug}/`;
-      const page = await context.newPage();
-      const consoleErrors = [];
-      page.on('pageerror', (err) => {
-        consoleErrors.push(`pageerror: ${err.message}`);
+    try {
+      const response = await page.goto(url, {
+        waitUntil: 'load',
+        timeout: NAV_TIMEOUT_MS,
       });
-      page.on('console', (msg) => {
-        if (msg.type() !== 'error') return;
-        const text = msg.text();
-        if (/Failed to load resource/.test(text)) return;
-        if (/net::ERR_/.test(text)) return;
-        consoleErrors.push(`console.error: ${text}`);
+      if (!response || !response.ok()) {
+        const status = response ? response.status() : 'no-response';
+        consoleErrors.push(`http: ${status}`);
+      }
+      await page.waitForTimeout(SETTLE_MS);
+
+      const hasContent = await page.evaluate(() => {
+        const body = document.body;
+        if (!body) return false;
+        if (body.querySelector('canvas, svg')) return true;
+        return (body.textContent ?? '').trim().length > 0;
       });
+      if (!hasContent) consoleErrors.push('structural: body has no visible content');
 
-      try {
-        const response = await page.goto(url, {
-          waitUntil: 'load',
-          timeout: NAV_TIMEOUT_MS,
-        });
-        if (!response || !response.ok()) {
-          const status = response ? response.status() : 'no-response';
-          consoleErrors.push(`http: ${status}`);
-        }
-        await page.waitForTimeout(SETTLE_MS);
-
-        const hasContent = await page.evaluate(() => {
-          const body = document.body;
-          if (!body) return false;
-          if (body.querySelector('canvas, svg')) return true;
-          return (body.textContent ?? '').trim().length > 0;
-        });
-        if (!hasContent) consoleErrors.push('structural: body has no visible content');
-
-        // Per-game scenarios run on mobile viewport only — the typical
-        // play environment for karaman.dev/games. If a desktop-only
-        // assertion is needed, gate via page.viewportSize() inside it.
-        if (vp.name === 'mobile') {
-          const scenarioPath = resolve(scenariosDir, `${slug}.mjs`);
-          if (existsSync(scenarioPath)) {
-            try {
-              const mod = await import(pathToFileURL(scenarioPath).href);
-              if (typeof mod.default === 'function') {
-                await mod.default(page);
-              }
-            } catch (err) {
-              consoleErrors.push(`scenario: ${err instanceof Error ? err.message : String(err)}`);
+      // Per-game scenarios run on mobile viewport only.
+      if (vpName === 'mobile') {
+        const scenarioPath = resolve(scenariosDir, `${slug}.mjs`);
+        if (existsSync(scenarioPath)) {
+          try {
+            const mod = await import(pathToFileURL(scenarioPath).href);
+            if (typeof mod.default === 'function') {
+              await mod.default(page);
             }
+          } catch (err) {
+            consoleErrors.push(`scenario: ${err instanceof Error ? err.message : String(err)}`);
           }
         }
+      }
 
-        await page.screenshot({
-          path: resolve(resultsDir, `${slug}-${vp.name}.png`),
-          fullPage: false,
-        });
+      await page.screenshot({
+        path: resolve(resultsDir, `${slug}-${vpName}.png`),
+        fullPage: false,
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      consoleErrors.push(`navigation: ${message}`);
+    } finally {
+      await page.close();
+    }
 
-        if (consoleErrors.length > 0) {
-          failures.push({ slug: `${slug} (${vp.name})`, errors: consoleErrors });
-          process.stdout.write('✗');
-        } else {
-          process.stdout.write('.');
-        }
-      } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
-        failures.push({ slug: `${slug} (${vp.name})`, errors: [`navigation: ${message}`] });
-        process.stdout.write('✗');
-      } finally {
-        await page.close();
+    return { slug, vpName, errors: consoleErrors };
+  }
+
+  async function runViewport(vp) {
+    const context = await makeContext(vp.viewport);
+    const queue = [...slugs];
+    const results = [];
+    const workers = Array.from({ length: CONCURRENCY }, async () => {
+      while (queue.length > 0) {
+        const slug = queue.shift();
+        if (!slug) break;
+        const result = await smokeOneGame(context, slug, vp.name);
+        results.push(result);
+        process.stdout.write(result.errors.length === 0 ? '.' : '✗');
+      }
+    });
+    await Promise.all(workers);
+    await context.close();
+    return results;
+  }
+
+  // Run both viewports in parallel (separate contexts, no shared state).
+  console.log(
+    `Parallel: ${viewports.length} viewports × ${CONCURRENCY} pages = ${viewports.length * CONCURRENCY} concurrent`,
+  );
+  const viewportResults = await Promise.all(viewports.map((vp) => runViewport(vp)));
+  process.stdout.write('\n');
+
+  for (const results of viewportResults) {
+    for (const r of results) {
+      if (r.errors.length > 0) {
+        failures.push({ slug: `${r.slug} (${r.vpName})`, errors: r.errors });
       }
     }
-    process.stdout.write('\n');
-    await context.close();
   }
 
   await browser.close();
