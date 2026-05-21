@@ -77,7 +77,12 @@ function saveBest(): void {
 }
 
 function loadDifficulty(): Difficulty {
-  const raw = localStorage.getItem(STORAGE_DIFF);
+  let raw = '';
+  try {
+    raw = localStorage.getItem(STORAGE_DIFF) ?? '';
+  } catch {
+    /* Safari private mode etc. */
+  }
   if (raw === 'easy' || raw === 'medium' || raw === 'hard') return raw;
   return 'medium';
 }
