@@ -1,42 +1,38 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+
 type State = 'ready' | 'showing' | 'input' | 'gameover';
 type Feedback = 'correct' | 'wrong' | null;
 
 const STORAGE_KEY = 'echo-grid.best';
 
-const cellEls = Array.from(document.querySelectorAll<HTMLButtonElement>('.cell'));
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const actionBtn = document.querySelector<HTMLButtonElement>('#action')!;
+let cellEls: HTMLButtonElement[] = [];
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let actionBtn!: HTMLButtonElement;
 
 let state: State = 'ready';
 let sequence: number[] = [];
 let score = 0;
-let best = loadBest();
+let best = 0;
 let inputIndex = 0;
 let activeCell: number | null = null;
 let feedbackCell: number | null = null;
 let feedbackKind: Feedback = null;
 let statusText = '';
-let generation = 0;
+const gen = createGenToken();
 let timers: number[] = [];
 
 function loadBest(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? Math.max(0, Number(raw) || 0) : 0;
-  } catch {
-    return 0;
-  }
+  const v = safeRead<number>(STORAGE_KEY, 0);
+  return Number.isFinite(v) && v >= 0 ? Math.floor(v) : 0;
 }
 
 function saveBest(): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(best));
-  } catch {
-    /* ignore */
-  }
+  safeWrite(STORAGE_KEY, best);
 }
 
 function clearTimers(): void {
@@ -47,9 +43,9 @@ function clearTimers(): void {
 }
 
 function nextGeneration(): number {
-  generation += 1;
+  gen.bump();
   clearTimers();
-  return generation;
+  return gen.current();
 }
 
 function schedule(callback: () => void, delay: number): void {
@@ -126,20 +122,20 @@ function showSequence(): void {
     const offset = introDelay + index * stepDelay;
 
     schedule(() => {
-      if (token !== generation) return;
+      if (!gen.isCurrent(token)) return;
       activeCell = cell;
       render();
     }, offset);
 
     schedule(() => {
-      if (token !== generation) return;
+      if (!gen.isCurrent(token)) return;
       activeCell = null;
       render();
     }, offset + activeDelay);
   });
 
   schedule(() => {
-    if (token !== generation) return;
+    if (!gen.isCurrent(token)) return;
     beginInput();
   }, introDelay + sequence.length * stepDelay);
 }
@@ -169,9 +165,9 @@ function finishRound(): void {
   statusText = 'Harika! Yeni desen geliyor…';
   render();
 
-  const token = generation;
+  const token = gen.current();
   schedule(() => {
-    if (token !== generation) return;
+    if (!gen.isCurrent(token)) return;
     sequence.push(pickNextCell());
     showSequence();
   }, 460);
@@ -190,7 +186,7 @@ function handleCellInput(index: number): void {
   if (state !== 'input') return;
 
   const expected = sequence[sequence.length - 1 - inputIndex];
-  const token = generation;
+  const token = gen.current();
 
   activeCell = index;
   feedbackCell = index;
@@ -213,7 +209,7 @@ function handleCellInput(index: number): void {
   render();
 
   schedule(() => {
-    if (token !== generation) return;
+    if (!gen.isCurrent(token)) return;
     activeCell = null;
     feedbackCell = null;
     feedbackKind = null;
@@ -227,36 +223,49 @@ function maybeStartFromKeyboard(): void {
   }
 }
 
-cellEls.forEach((el, index) => {
-  el.addEventListener('click', () => handleCellInput(index));
-});
+function init(): void {
+  cellEls = Array.from(document.querySelectorAll<HTMLButtonElement>('.cell'));
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  actionBtn = document.querySelector<HTMLButtonElement>('#action')!;
 
-actionBtn.addEventListener('click', () => {
-  maybeStartFromKeyboard();
-});
+  best = loadBest();
 
-restartBtn.addEventListener('click', reset);
+  cellEls.forEach((el, index) => {
+    el.addEventListener('click', () => handleCellInput(index));
+  });
 
-window.addEventListener('keydown', (event) => {
-  const key = event.key.toLowerCase();
-
-  if (key === ' ' || key === 'enter') {
+  actionBtn.addEventListener('click', () => {
     maybeStartFromKeyboard();
+  });
+
+  restartBtn.addEventListener('click', reset);
+
+  window.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+
+    if (key === ' ' || key === 'enter') {
+      maybeStartFromKeyboard();
+      event.preventDefault();
+      return;
+    }
+
+    if (key === 'r') {
+      reset();
+      event.preventDefault();
+      return;
+    }
+
+    const match = event.code.match(/^(?:Digit|Numpad)([1-9])$/);
+    if (!match) return;
+
+    handleCellInput(Number(match[1]) - 1);
     event.preventDefault();
-    return;
-  }
+  });
 
-  if (key === 'r') {
-    reset();
-    event.preventDefault();
-    return;
-  }
+  reset();
+}
 
-  const match = event.code.match(/^(?:Digit|Numpad)([1-9])$/);
-  if (!match) return;
-
-  handleCellInput(Number(match[1]) - 1);
-  event.preventDefault();
-});
-
-reset();
+export const game = defineGame({ init, reset });
