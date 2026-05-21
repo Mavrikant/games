@@ -31,8 +31,8 @@ Entry formatı (zorunlu alanlar):
 ## Tuzaklar
 
 ### visual-vs-hitbox
-**Vaka**: [#10 breakout](https://github.com/Mavrikant/browser-games/pull/10) tuğla yan çarpışması yanlış eksene yansıyordu; çarpışan top tuğlanın
-içinde sıkışıp salınıyordu. [#11 flappy](https://github.com/Mavrikant/browser-games/pull/11) borunun çizilen "kap" dikdörtgenleri hitbox'a dahil
+**Vaka**: [#10 breakout](https://github.com/Mavrikant/games/pull/10) tuğla yan çarpışması yanlış eksene yansıyordu; çarpışan top tuğlanın
+içinde sıkışıp salınıyordu. [#11 flappy](https://github.com/Mavrikant/games/pull/11) borunun çizilen "kap" dikdörtgenleri hitbox'a dahil
 değildi; kuş kap'tan içeri girip ölmüyordu.
 **Pattern**: `draw()` ile `collide()` farklı sayılardan besleniyor.
 Görüntü doğru çıkıyor, fizik yanlış. Smoke test sırasında oyun "görsel
@@ -46,8 +46,8 @@ yarıçapı) tek bir `const` bloğunda dursun ve **hem** `draw()` **hem**
 fonksiyona ayrı ayrı yazma.
 
 ### overlay-input-leak
-**Vaka**: [#9 2048](https://github.com/Mavrikant/browser-games/pull/9) "Kazandın!" overlay'i açıkken ok tuşları arkadaki grid'i kaydırıyordu.
-[#11 flappy](https://github.com/Mavrikant/browser-games/pull/11) gameover ekranından restart için iki tıklama gerekiyordu (overlay
+**Vaka**: [#9 2048](https://github.com/Mavrikant/games/pull/9) "Kazandın!" overlay'i açıkken ok tuşları arkadaki grid'i kaydırıyordu.
+[#11 flappy](https://github.com/Mavrikant/games/pull/11) gameover ekranından restart için iki tıklama gerekiyordu (overlay
 "click to try again" diyordu ama bir tık sadece `ready` state'ine geçiriyordu).
 **Pattern**: State machine'in transition'larında boşluk var. Overlay/menü
 açıkken oyun input'unu kabul ediyor veya iki state arasında gereksiz bir
@@ -61,7 +61,7 @@ switch'i içinden geçsin; default case her zaman `return` etsin. State
 geçişlerini diagram olarak kafanda çiz.
 
 ### stale-async-callback
-**Vaka**: [#9 2048](https://github.com/Mavrikant/browser-games/pull/9) restart sırasında animasyon bitirme callback'i (eski setTimeout)
+**Vaka**: [#9 2048](https://github.com/Mavrikant/games/pull/9) restart sırasında animasyon bitirme callback'i (eski setTimeout)
 hâlâ tetikleniyor, fresh grid'e fazladan bir tile ekliyordu.
 **Pattern**: `setTimeout` / `requestAnimationFrame` / promise zinciri
 reset'i hayatta kalıyor. Reset yeni state kuruyor; eski callback bittiğinde
@@ -73,7 +73,7 @@ bump eder; deferred callback başında `if (myToken !== currentToken) return;`
 yapar. Alternatif: `clearTimeout` / `cancelAnimationFrame` el ile çağır.
 
 ### invisible-boot
-**Vaka**: [#12 tetris](https://github.com/Mavrikant/browser-games/pull/12) parça gizli buffer satırında (y=0) spawn oluyordu; level 1 gravity ile
+**Vaka**: [#12 tetris](https://github.com/Mavrikant/games/pull/12) parça gizli buffer satırında (y=0) spawn oluyordu; level 1 gravity ile
 ilk parçanın görünür alana düşmesi **1.6 saniye** sürüyordu. Kullanıcı "oyun
 başlamadı mı?" hissi yaşıyordu.
 **Pattern**: Cold start'tan sonra ilk visible frame'e kadar geçen zaman çok
@@ -89,7 +89,7 @@ combo timer 0, particle pool 0. Spawn'i hidden buffer'a koymak zorundaysan
 spawn anında bir frame görsel feedback ver.
 
 ### unguarded-storage
-**Vaka**: [#12 tetris](https://github.com/Mavrikant/browser-games/pull/12) module-init sırasında `localStorage.getItem('tetris.hi')` çağrısı
+**Vaka**: [#12 tetris](https://github.com/Mavrikant/games/pull/12) module-init sırasında `localStorage.getItem('tetris.hi')` çağrısı
 Safari private mode'da exception fırlatıyor; tüm modül import sırasında
 patlıyor; oyun hiç yüklenmiyor.
 **Pattern**: `localStorage`, `IndexedDB`, `navigator.clipboard`, `DOMRect`
@@ -104,7 +104,7 @@ exception'da fallback dön. Module-level side effect koyma — her şey
 `init()` / `start()` içinde olsun.
 
 ### duplicate-with-shared-layer
-**Vaka**: [#10 breakout](https://github.com/Mavrikant/browser-games/pull/10) body içinde `<p class="bo-hint">…</p>` ve CSS'i vardı.
+**Vaka**: [#10 breakout](https://github.com/Mavrikant/games/pull/10) body içinde `<p class="bo-hint">…</p>` ve CSS'i vardı.
 `GameLayout` zaten `controls` JSON alanından `.hint` footer'ı render
 ediyordu — kullanıcı aynı metni iki kere görüyordu.
 **Pattern**: Shared layer'ın (GameLayout, content schema, archive shell)

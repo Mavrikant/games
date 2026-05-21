@@ -1,7 +1,7 @@
 # Playtest protokolü
 
 > Eski `curl /games/<slug>/ → 200` smoke test'i **artık yeterli değil**.
-> Geçmiş 4 fix PR'ının ([#9](https://github.com/Mavrikant/browser-games/pull/9), [#10](https://github.com/Mavrikant/browser-games/pull/10), [#11](https://github.com/Mavrikant/browser-games/pull/11), [#12](https://github.com/Mavrikant/browser-games/pull/12)) hepsi 30 saniyelik gerçek oynama
+> Geçmiş 4 fix PR'ının ([#9](https://github.com/Mavrikant/games/pull/9), [#10](https://github.com/Mavrikant/games/pull/10), [#11](https://github.com/Mavrikant/games/pull/11), [#12](https://github.com/Mavrikant/games/pull/12)) hepsi 30 saniyelik gerçek oynama
 > ile yakalanırdı. Bu dosya her oyun PR'ı öncesi yapılacak minimum playtest'i
 > tanımlar. Atlanırsa fix PR'ı sıraya girer.
 >
