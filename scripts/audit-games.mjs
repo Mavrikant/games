@@ -98,7 +98,13 @@ for (const file of files) {
   // the referenced file under public/thumbs/ must actually exist. A dangling
   // reference renders as a broken <img> on the archive card (Card.astro reads
   // the field unconditionally). See pitfall: dangling-thumbnail-reference.
-  let danglingThumbnail = null; // either null or the referenced filename
+  //
+  // Inverse case (orphan-thumbnail): an SVG exists at public/thumbs/<slug>.svg
+  // but the JSON doesn't reference it, so Card falls back to the letter
+  // placeholder. The user shipped the asset but forgot to wire it. Less
+  // catastrophic than a dangling reference but still a hidden defect.
+  let danglingThumbnail = null;     // referenced filename missing
+  let orphanThumbnail = false;      // file exists but JSON doesn't reference it
   const jsonPath = resolve(contentDir, `${slug}.json`);
   if (existsSync(jsonPath)) {
     let meta;
@@ -110,6 +116,10 @@ for (const file of files) {
     if (meta && typeof meta.thumbnail === 'string' && meta.thumbnail.length > 0) {
       const thumbPath = resolve(thumbsDir, meta.thumbnail);
       if (!existsSync(thumbPath)) danglingThumbnail = meta.thumbnail;
+    } else {
+      // No thumbnail field — check if a matching SVG sits unused on disk.
+      const slugSvg = resolve(thumbsDir, `${slug}.svg`);
+      if (existsSync(slugSvg)) orphanThumbnail = true;
     }
   }
 
@@ -124,6 +134,7 @@ for (const file of files) {
     unguardedStorage,
     missingOverlayCss,
     danglingThumbnail,
+    orphanThumbnail,
     loc: lines.length,
   });
 }
@@ -145,6 +156,7 @@ const anyUnguarded = rows.filter((r) => r.unguardedStorage > 0).length;
 const anyModuleLevelQs = rows.filter((r) => r.moduleLevelQs > 0).length;
 const anyMissingOverlayCss = rows.filter((r) => r.missingOverlayCss).length;
 const anyDanglingThumbnail = rows.filter((r) => r.danglingThumbnail).length;
+const anyOrphanThumbnail = rows.filter((r) => r.orphanThumbnail).length;
 
 const banner = `
 # Game-logic audit
@@ -167,8 +179,13 @@ for (const r of rows) {
   let ovCss;
   if (!r.overlay) ovCss = '·';
   else ovCss = r.missingOverlayCss ? '✗' : '✓';
-  // Thumb column: '✗' = JSON references a file that doesn't exist.
-  const thumb = r.danglingThumbnail ? '✗' : '·';
+  // Thumb column: '✗' = JSON references a file that doesn't exist;
+  // '○' = file sits on disk but JSON doesn't reference it (Card falls back
+  // to letter placeholder); '·' = neither (no asset, no field).
+  let thumb;
+  if (r.danglingThumbnail) thumb = '✗';
+  else if (r.orphanThumbnail) thumb = '○';
+  else thumb = '·';
   console.log(
     `| ${r.slug} | ${r.score}/4 | ${mark(r.storage)} | ${mark(r.gameModule)} | ${mark(r.overlay)} | ${mark(r.genToken)} | ${r.unguardedStorage} | ${r.moduleLevelQs} | ${ovCss} | ${thumb} | ${r.loc} |`,
   );
@@ -184,9 +201,10 @@ console.log(`
 - **OvCSS**: \`@shared/overlay\` import edildi ama oyun-spesifik CSS'te
   \`.overlay--hidden\` (veya prefixli varyantı) tanımı yok →
   \`hideOverlay()\` görsel hiçbir şey yapmaz (PITFALLS#missing-overlay-css).
-- **Thumb**: JSON \`thumbnail\` alanı \`public/thumbs/\` altında olmayan
-  bir dosyaya işaret ediyor → arşiv kartında broken \`<img>\`
-  (PITFALLS#dangling-thumbnail-reference).
+- **Thumb**: \`✗\` JSON \`thumbnail\` alanı eksik bir dosyaya işaret
+  ediyor (broken \`<img>\`) — \`○\` SVG dosyası diskte var ama JSON
+  alanı yok (Card harf placeholder'a düşer). Her ikisi de
+  PITFALLS#dangling-thumbnail-reference / orphan varyantı.
 - En düşük score'lu oyunlar önce gelir; o tarafta migration başla.
 - \`--ci\` flag ile CI'da çalışırsa unsafe storage, module-level qS,
   missing overlay CSS veya dangling thumbnail görürse exit 1.
@@ -203,31 +221,40 @@ if (process.argv.includes('--ci')) {
     anyUnguarded > 0 ||
     anyModuleLevelQs > 0 ||
     anyMissingOverlayCss > 0 ||
-    anyDanglingThumbnail > 0
+    anyDanglingThumbnail > 0 ||
+    anyOrphanThumbnail > 0
   ) {
     const overlayOffenders = rows
       .filter((r) => r.missingOverlayCss)
       .map((r) => r.slug)
       .join(', ');
-    const thumbOffenders = rows
+    const danglingOffenders = rows
       .filter((r) => r.danglingThumbnail)
       .map((r) => `${r.slug} → ${r.danglingThumbnail}`)
       .join('; ');
+    const orphanOffenders = rows
+      .filter((r) => r.orphanThumbnail)
+      .map((r) => r.slug)
+      .join(', ');
     console.error(
-      `\nCI gate: ${anyUnguarded} unsafe localStorage, ${anyModuleLevelQs} module-level querySelector(s), ${anyMissingOverlayCss} missing overlay CSS, ${anyDanglingThumbnail} dangling thumbnail(s).`,
+      `\nCI gate: ${anyUnguarded} unsafe localStorage, ${anyModuleLevelQs} module-level qS, ${anyMissingOverlayCss} missing overlay CSS, ${anyDanglingThumbnail} dangling thumb(s), ${anyOrphanThumbnail} orphan thumb(s).`,
     );
     if (anyMissingOverlayCss > 0) {
       console.error(`  Missing .overlay--hidden in: ${overlayOffenders}`);
       console.error(`  Fix: add the .overlay / .overlay--hidden block from scripts/templates/style.css`);
     }
     if (anyDanglingThumbnail > 0) {
-      console.error(`  Dangling thumbnail reference(s): ${thumbOffenders}`);
+      console.error(`  Dangling thumbnail reference(s): ${danglingOffenders}`);
       console.error(`  Fix: either create the SVG at public/thumbs/<slug>.svg, or remove the "thumbnail" field from the JSON.`);
+    }
+    if (anyOrphanThumbnail > 0) {
+      console.error(`  Orphan thumbnail file(s) (SVG exists but JSON has no "thumbnail" field): ${orphanOffenders}`);
+      console.error(`  Fix: add "thumbnail": "<slug>.svg" to the JSON, or delete the unused SVG.`);
     }
     console.error(
       `See docs/SHARED_HELPERS.md and PITFALLS.md for migration steps.`,
     );
     process.exit(1);
   }
-  console.log('CI gate: passed (0 unsafe storage, 0 module-level qS, 0 missing overlay CSS, 0 dangling thumbnails).');
+  console.log('CI gate: passed (0 unsafe storage, 0 module-level qS, 0 missing overlay CSS, 0 dangling thumbnails, 0 orphan thumbnails).');
 }
