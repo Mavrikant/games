@@ -120,6 +120,13 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
           <span>
             sağ alttaki "Geri bildirim" butonundan gönderdiğiniz mesajlar
             Web3Forms üzerinden site sahibine e-posta olarak iletilir.
+            Mesaj metniyle birlikte hatayı/öneriyi anlamak için anonim
+            teknik bağlam da gönderilir: bulunduğunuz sayfa URL'si,
+            tarayıcı user-agent string'i, cihaz türü (mobil/masaüstü),
+            ekran ve görüntü alanı boyutu, dil ayarı ve saat dilimi.
+            Bu bilgiler kişisel kimliğinizi tespit etmek için
+            kullanılmaz; sadece bildirilen sorunu yeniden üretmemize
+            yarar.
           </span>
         ) : (
           <span>

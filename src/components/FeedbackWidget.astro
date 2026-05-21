@@ -185,12 +185,43 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
       submitBtn.classList.add('fb-submit--loading');
 
       const game = currentGameSlug();
+      // Device/diagnostic context — helps reproduce reported bugs.
+      // Modern UA-CH (.userAgentData.mobile) is more reliable than
+      // parsing UA string; fall back to viewport-width heuristic.
+      type UADHint = { mobile?: boolean; platform?: string };
+      const uad = (navigator as unknown as { userAgentData?: UADHint })
+        .userAgentData;
+      const isMobile =
+        typeof uad?.mobile === 'boolean'
+          ? uad.mobile
+          : window.innerWidth < 768;
+      const deviceType = isMobile ? 'mobile' : 'desktop';
+      const viewport = `${window.innerWidth}x${window.innerHeight}`;
+      const screenSize = `${screen.width}x${screen.height}`;
+      const dpr = String(window.devicePixelRatio || 1);
+      let timezone = '';
+      try {
+        timezone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? '';
+      } catch {
+        /* legacy browsers */
+      }
+      const referrer = document.referrer || '(direct)';
+
       const fd = new FormData();
       fd.append('access_key', accessKey);
       fd.append('subject', `karaman.dev/games feedback (${game})`);
       fd.append('message', message);
       fd.append('from_url', window.location.href);
       fd.append('from_game', game);
+      fd.append('device_type', deviceType);
+      fd.append('viewport', viewport);
+      fd.append('screen', screenSize);
+      fd.append('dpr', dpr);
+      fd.append('platform', uad?.platform ?? '');
+      fd.append('user_agent', navigator.userAgent);
+      fd.append('language', navigator.language || '');
+      fd.append('timezone', timezone);
+      fd.append('referrer', referrer);
       const honeypot = form.querySelector<HTMLInputElement>('.fb-honeypot');
       if (honeypot) fd.append('botcheck', honeypot.value);
 
@@ -346,7 +377,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
     font-size: 12.5px;
     line-height: 1.5;
   }
-  .fb-form {
+  .fb-form:not([hidden]) {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -432,7 +463,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
   .fb-status--error {
     color: #f87171;
   }
-  .fb-success {
+  .fb-success:not([hidden]) {
     display: flex;
     flex-direction: column;
     align-items: center;
