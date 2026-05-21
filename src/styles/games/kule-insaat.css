@@ -1,0 +1,10 @@
+#board {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 14px;
+  cursor: pointer;
+  touch-action: none;
+}
