@@ -63,16 +63,17 @@
 ## Hata yönetimi
 
 - DOM seçicide `!` OK (markup garanti). null check abuse etme.
-- `localStorage` try/catch: kullanıcı disable etmiş olabilir
+- `localStorage` `@shared/storage` üzerinden (`safeRead`/`safeWrite`); ham çağrı yasak (CI gate)
 - `JSON.parse` try/catch: corrupt veri olabilir
 - Network YOK (statik proje)
-- `console.error` tolere edilir; `console.log` build'de kalmasın
+- `console.error` **CI'da fail eder** — `npm run test:smoke` headless chromium konsol error'larını yakalar. Kontrolsüz logging yapma.
 
 ## Bağımlılıklar
 
-- **Hiçbir yeni dependency eklenmez** (paralel ajan kuralı, [AGENTS.md](../AGENTS.md))
-- Dev: TypeScript, Astro, `@astrojs/check`
+- **Hiçbir yeni runtime dependency eklenmez** (paralel ajan kuralı, [AGENTS.md](../AGENTS.md))
+- Dev: TypeScript, Astro, `@astrojs/check`, Playwright (CI smoke only)
 - Runtime: HİÇ — bundle %100 kendi kodun + Astro hoist'ları
+- Yeni dev dep ekleme: human review + AGENTS.md güncellemesi
 
 ## Performans
 
@@ -93,12 +94,21 @@
 
 ## Test stratejisi
 
-- Unit test YOK (overkill)
-- Type check (`astro check`) zorunlu
-- Build (`astro build`) zorunlu — bu zaten "smoke test"
-- Manuel oynama testi PR öncesi
-- Önemli regression olursa Playwright eklemek değerlendirilir (henüz
-  gerek yok)
+| Katman | Komut | Yakaladığı |
+|---|---|---|
+| Type check | `npm run check` | TS hataları, content schema |
+| Build | `npm run build` | Astro/Vite build sorunları |
+| Audit gate | `npm run audit:games --ci` | Module-level qS, unsafe localStorage |
+| Headless smoke | `npm run test:smoke` | Init crash, console.error, blank render |
+| Manuel playtest | `npm run dev` + [PLAYTEST.md](PLAYTEST.md) | Oynanış bug'ları (race, AI lock, vs.) |
+
+İlk 4 katman CI'da otomatik; PR öncesi lokalde de çalıştır. Son katman
+(insan oynama testi) zorunlu — runtime tetiklenen gameplay bug'larını
+sadece insan yakalar.
+
+Per-game custom smoke senaryosu yazmak isterseniz: `scripts/smoke-scenarios/<slug>.mjs`,
+`export default async function (page) { ... }` (Playwright `Page`).
+Örnek: `scripts/smoke-scenarios/vardiya.mjs`.
 
 ## Git
 
