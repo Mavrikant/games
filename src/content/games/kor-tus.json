@@ -3,7 +3,7 @@
   "description": "Hareket eden göstergeyi hedef bölgeye geldiğinde yakala — tek tuş zamanlama oyunu.",
   "dateAdded": "2026-05-21",
   "tags": ["arcade", "zamanlama", "tek-tuş"],
-  "controls": "Boşluk: vuruş · R: yeniden başla",
-  "howToPlay": "Ekranın ortasındaki yeşil hedef bölgesini gözlemle. Hareket eden sarı gösterge bu bölgeye girdiği anda Boşluk tuşuna bas. İsabet için +1 puan alırsın; bölge dışında basarsan bir canın gider. 3 can bitince oyun biter. Her 5 isabetle gösterge hızlanır. En yüksek skorunu yakala!",
+  "controls": "Boşluk veya dokun: vuruş · R: yeniden başla",
+  "howToPlay": "Ekranın ortasındaki yeşil hedef bölgesini gözlemle. Hareket eden sarı gösterge bu bölgeye girdiği anda Boşluk tuşuna bas (veya alanı dokun/tıkla). İsabet için +1 puan alırsın; bölge dışında basarsan bir canın gider. 3 can bitince oyun biter. Her 5 isabetle gösterge hızlanır. En yüksek skorunu yakala!",
   "thumbnail": "kor-tus.svg"
 }
