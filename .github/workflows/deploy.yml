@@ -17,6 +17,22 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Astro PUBLIC_* env vars need to be present at build time so the
+    # rendered HTML includes the analytics / AdSense / donation links.
+    # Configure in: repo > Settings > Secrets and variables > Actions >
+    # Variables tab. Leaving any unset just omits that piece of the page.
+    env:
+      PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PUBLIC_PLAUSIBLE_DOMAIN }}
+      PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
+      PUBLIC_KOFI_URL: ${{ vars.PUBLIC_KOFI_URL }}
+      PUBLIC_BMAC_URL: ${{ vars.PUBLIC_BMAC_URL }}
+      PUBLIC_GH_SPONSORS_URL: ${{ vars.PUBLIC_GH_SPONSORS_URL }}
+      PUBLIC_CONTACT_EMAIL: ${{ vars.PUBLIC_CONTACT_EMAIL }}
+      PUBLIC_TIKTOK_URL: ${{ vars.PUBLIC_TIKTOK_URL }}
+      PUBLIC_INSTAGRAM_URL: ${{ vars.PUBLIC_INSTAGRAM_URL }}
+      PUBLIC_TWITTER_URL: ${{ vars.PUBLIC_TWITTER_URL }}
+      PUBLIC_YOUTUBE_URL: ${{ vars.PUBLIC_YOUTUBE_URL }}
+      PUBLIC_DISCORD_URL: ${{ vars.PUBLIC_DISCORD_URL }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
