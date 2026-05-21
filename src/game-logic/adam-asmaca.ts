@@ -16,13 +16,17 @@
 //   - invisible-boot: First render paints the empty gallows, hidden-word
 //     underscores, and the full keyboard immediately on init — visible
 //     feedback < 250 ms after page load.
-//   - unguarded-storage: safeRead/safeWrite helpers; module-level code
-//     never directly touches localStorage.
+//   - unguarded-storage: @shared/storage helpers; all DOM/localStorage
+//     access happens inside init().
 //   - duplicate-with-shared-layer: Body has no <h1>, no <p class="hint">;
 //     title and controls come from JSON via GameLayout.
 //   - Türkçe case: All compares run through tr(s) = s.toLocaleLowerCase('tr-TR').
 //     'İ'→'i', 'I'→'ı'. Display uses upper case via toLocaleUpperCase('tr-TR').
 // ---------------------------------------------------------------------------
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
 
 type State = 'playing' | 'won' | 'lost';
 
@@ -139,39 +143,20 @@ const WORDS: readonly WordEntry[] = [
   { word: 'MAKAS', category: 'Eşya' },
 ];
 
-// ── DOM refs ───────────────────────────────────────────────────────────────
-const gallows = document.querySelector<HTMLCanvasElement>('#gallows')!;
-const gctx = gallows.getContext('2d')!;
-const winsEl = document.querySelector<HTMLElement>('#wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#losses')!;
-const categoryEl = document.querySelector<HTMLElement>('#category')!;
-const wordEl = document.querySelector<HTMLElement>('#word')!;
-const wrongEl = document.querySelector<HTMLElement>('#wrong')!;
-const keyboardEl = document.querySelector<HTMLElement>('#keyboard')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-
-// ── Safe storage ───────────────────────────────────────────────────────────
-function safeRead(key: string): number {
-  try {
-    const raw = localStorage.getItem(key);
-    const n = raw === null ? 0 : Number(raw);
-    return Number.isFinite(n) && n >= 0 ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
-}
+// ── DOM refs (filled in init) ──────────────────────────────────────────────
+let gallows!: HTMLCanvasElement;
+let gctx!: CanvasRenderingContext2D;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let categoryEl!: HTMLElement;
+let wordEl!: HTMLElement;
+let wrongEl!: HTMLElement;
+let keyboardEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
 
 // ── Türkçe normalize ───────────────────────────────────────────────────────
 /** Türkçe-aware lower case. 'İ' → 'i', 'I' → 'ı', diacritics preserved. */
@@ -190,8 +175,7 @@ const guessedDisplay: string[] = [];
 let wrongCount = 0;
 let wins = 0;
 let losses = 0;
-/** Generation token; bumped on reset to invalidate any deferred callback. */
-let gen = 0;
+const gen = createGenToken();
 
 // ── Picking a word ─────────────────────────────────────────────────────────
 let lastPickedIdx = -1;
@@ -422,15 +406,17 @@ function updateKeyboardState(): void {
   }
 }
 
-// ── Overlay ────────────────────────────────────────────────────────────────
+// ── Overlay (per-game class, keeps aa-overlay-- prefix; CSS unchanged) ─────
 function showOverlay(title: string, msgHtml: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msgHtml;
   overlay.classList.remove('aa-overlay--hidden');
+  overlay.setAttribute('aria-hidden', 'false');
 }
 
 function hideOverlay(): void {
   overlay.classList.add('aa-overlay--hidden');
+  overlay.setAttribute('aria-hidden', 'true');
 }
 
 // ── HUD ────────────────────────────────────────────────────────────────────
@@ -522,8 +508,7 @@ function escapeHtml(s: string): string {
 // ── Lifecycle ──────────────────────────────────────────────────────────────
 function newRound(): void {
   // Bump generation token (defensive — no async right now, but future-proof).
-  gen++;
-  void gen;
+  gen.bump();
   const entry = pickWord();
   currentWord = entry.word;
   currentWordLower = tr(entry.word);
@@ -541,50 +526,70 @@ function newRound(): void {
 }
 
 function loadStats(): void {
-  wins = safeRead(STORAGE_WINS);
-  losses = safeRead(STORAGE_LOSSES);
+  wins = safeRead<number>(STORAGE_WINS, 0);
+  losses = safeRead<number>(STORAGE_LOSSES, 0);
+  // Guard against corrupt JSON entries (number or non-finite).
+  if (!Number.isFinite(wins) || wins < 0) wins = 0;
+  if (!Number.isFinite(losses) || losses < 0) losses = 0;
   renderHud();
 }
 
-// ── Input ──────────────────────────────────────────────────────────────────
-window.addEventListener('keydown', (e) => {
-  const key = e.key;
+// ── Init ───────────────────────────────────────────────────────────────────
+function init(): void {
+  gallows = document.querySelector<HTMLCanvasElement>('#gallows')!;
+  gctx = gallows.getContext('2d')!;
+  winsEl = document.querySelector<HTMLElement>('#wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#losses')!;
+  categoryEl = document.querySelector<HTMLElement>('#category')!;
+  wordEl = document.querySelector<HTMLElement>('#word')!;
+  wrongEl = document.querySelector<HTMLElement>('#wrong')!;
+  keyboardEl = document.querySelector<HTMLElement>('#keyboard')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-  // R: always restart (even from overlay).
-  if (key && tr(key) === 'r') {
-    e.preventDefault();
+  window.addEventListener('keydown', (e) => {
+    const key = e.key;
+
+    // R: always restart (even from overlay).
+    if (key && tr(key) === 'r') {
+      e.preventDefault();
+      newRound();
+      return;
+    }
+
+    // Enter / Space on overlay restarts.
+    if (state !== 'playing' && (key === 'Enter' || key === ' ')) {
+      e.preventDefault();
+      newRound();
+      return;
+    }
+
+    // Only single-char keys are candidate letters (filters Tab/Esc/Arrow).
+    if (!key || key.length !== 1) return;
+
+    // Ignore modified shortcuts (Cmd+R, Ctrl+T, ...).
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    // Only respond to letters while playing.
+    if (state !== 'playing') return;
+
+    guessLetter(key);
+  });
+
+  restartBtn.addEventListener('click', () => {
     newRound();
-    return;
-  }
+  });
 
-  // Enter / Space on overlay restarts.
-  if (state !== 'playing' && (key === 'Enter' || key === ' ')) {
-    e.preventDefault();
+  overlayBtn.addEventListener('click', () => {
     newRound();
-    return;
-  }
+  });
 
-  // Only single-char keys are candidate letters (filters Tab/Esc/Arrow).
-  if (!key || key.length !== 1) return;
-
-  // Ignore modified shortcuts (Cmd+R, Ctrl+T, ...).
-  if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-  // Only respond to letters while playing.
-  if (state !== 'playing') return;
-
-  guessLetter(key);
-});
-
-restartBtn.addEventListener('click', () => {
+  buildKeyboard();
+  loadStats();
   newRound();
-});
+}
 
-overlayBtn.addEventListener('click', () => {
-  newRound();
-});
-
-// Init
-buildKeyboard();
-loadStats();
-newRound();
+export const game = defineGame({ init, reset: newRound });
