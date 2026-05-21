@@ -6,9 +6,14 @@
 // Pitfalls actively guarded:
 // - explicit state machine; inputs gated
 // - AI delay setTimeout uses gen token; reset bumps it
-// - safeRead/safeWrite around localStorage
+// - @shared/storage around localStorage
 // - cell coordinate model single source of truth (CSS grid + dataset)
 // - body has no <h1>/hint
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 
 const SIZE = 8;
 type Cell = 0 | 1 | 2 | 3 | 4;
@@ -25,16 +30,16 @@ type GameState = 'playerTurn' | 'aiTurn' | 'gameOver';
 const KEY_WINS = 'dama.wins';
 const KEY_LOSSES = 'dama.losses';
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const winsEl = document.querySelector<HTMLElement>('#wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#losses')!;
-const turnEl = document.querySelector<HTMLElement>('#turn')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayAction = document.querySelector<HTMLButtonElement>('#overlay-action')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let boardEl!: HTMLElement;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let turnEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayAction!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
 
 let board: Cell[] = new Array(SIZE * SIZE).fill(0);
 let state: GameState = 'playerTurn';
@@ -42,24 +47,11 @@ let selected: number | null = null;
 let availableMoves: Move[] = [];
 let wins = 0;
 let losses = 0;
-let gen = 0;
+const gen = createGenToken();
 
-function safeRead(key: string): number {
-  try {
-    const v = localStorage.getItem(key);
-    if (v === null) return 0;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
+function loadStat(key: string): number {
+  const v = safeRead<number>(key, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
 
 function idx(r: number, c: number): number { return r * SIZE + c; }
@@ -267,9 +259,9 @@ function aiPickBestMove(): Move | null {
 }
 
 function scheduleAi(): void {
-  const myGen = gen;
+  const myGen = gen.current();
   window.setTimeout(() => {
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'aiTurn') return;
     aiTurn();
   }, 480);
@@ -315,10 +307,10 @@ function setStatus(s: string): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function syncHud(): void {
@@ -327,7 +319,7 @@ function syncHud(): void {
 }
 
 function newGame(): void {
-  gen += 1;
+  gen.bump();
   setupInitial();
   selected = null;
   availableMoves = [];
@@ -339,19 +331,35 @@ function newGame(): void {
   syncHud();
 }
 
-boardEl.addEventListener('click', onCellClick);
-restartBtn.addEventListener('click', newGame);
-overlayAction.addEventListener('click', newGame);
-window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'r') {
-    newGame();
-    e.preventDefault();
-  } else if (state === 'gameOver' && (e.key === 'Enter' || e.key === ' ')) {
-    newGame();
-    e.preventDefault();
-  }
-});
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  winsEl = document.querySelector<HTMLElement>('#wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#losses')!;
+  turnEl = document.querySelector<HTMLElement>('#turn')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayAction = document.querySelector<HTMLButtonElement>('#overlay-action')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-wins = safeRead(KEY_WINS);
-losses = safeRead(KEY_LOSSES);
-newGame();
+  wins = loadStat(KEY_WINS);
+  losses = loadStat(KEY_LOSSES);
+
+  boardEl.addEventListener('click', onCellClick);
+  restartBtn.addEventListener('click', newGame);
+  overlayAction.addEventListener('click', newGame);
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'r') {
+      newGame();
+      e.preventDefault();
+    } else if (state === 'gameOver' && (e.key === 'Enter' || e.key === ' ')) {
+      newGame();
+      e.preventDefault();
+    }
+  });
+
+  newGame();
+}
+
+export const game = defineGame({ init, reset: newGame });
