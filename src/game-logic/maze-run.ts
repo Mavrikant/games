@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // Maze Run — procedural maze, drag/swipe + arrow/WASD navigation.
 //
 // Design notes / pitfalls avoided:
@@ -22,16 +26,16 @@ interface Cell {
 }
 
 // --- DOM ---
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const timeEl = document.querySelector<HTMLElement>('#time')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-action')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let levelEl!: HTMLElement;
+let timeEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayBtn!: HTMLButtonElement;
 
 // --- Tunables ---
 const LOGICAL = 480;             // canvas logical px (square)
@@ -63,7 +67,7 @@ let state: GameState = 'ready';
 let lastTickMs = 0;
 let rafHandle = 0;
 let shakeUntil = 0;
-let generationToken = 0;
+const generationToken = createGenToken();
 
 // Movement animation between cells. `animFromX/Y -> playerX/Y` over animMs.
 let animFromX = 0;
@@ -174,7 +178,7 @@ function setLevel(n: number, carryTime: boolean): void {
 }
 
 function resetRun(): void {
-  generationToken++; // invalidate any in-flight callbacks
+  generationToken.bump(); // invalidate any in-flight callbacks
   // Cancel any in-flight rAF; the stale loop also self-aborts via token
   // check but cancelling immediately means no half-frame is rendered
   // against fresh state.
@@ -259,10 +263,10 @@ function showOverlay(title: string, msg: string, btnLabel: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
   overlayBtn.textContent = btnLabel;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // --- Movement ---
@@ -301,9 +305,9 @@ function tryMove(dir: Dir): void {
 // --- Loop ---
 function startRafIfNeeded(): void {
   if (rafHandle !== 0) return;
-  const myToken = generationToken;
+  const myToken = generationToken.current();
   const tick = (now: number): void => {
-    if (myToken !== generationToken) {
+    if (!generationToken.isCurrent(myToken)) {
       rafHandle = 0;
       return; // stale loop — fresh one was started by reset
     }
@@ -474,6 +478,7 @@ function draw(): void {
 }
 
 // --- Input: keyboard ---
+function _wire(): void {
 window.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k === 'arrowup' || k === 'w') {
@@ -637,6 +642,23 @@ function onResize(): void {
 }
 window.addEventListener('resize', onResize);
 window.addEventListener('orientationchange', onResize);
+}
 
-// --- Boot ---
-resetRun();
+// --- Init ---
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  timeEl = document.querySelector<HTMLElement>('#time')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-action')!;
+
+  _wire();
+  resetRun();
+}
+
+export const game = defineGame({ init, reset: resetRun });
