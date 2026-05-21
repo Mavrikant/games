@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // Sky Jump — sonsuz dikey tırmanış (Doodle Jump tarzı).
 // - Karakter platforma değdiğinde otomatik zıplar (sabit zıplama gücü).
 // - Yatay kontrol: sol/sağ ok, A/D, veya mobil ekranın sol/sağ yarısına tap-and-hold.
@@ -27,14 +31,14 @@ type Platform = {
 };
 
 // ---------- DOM ----------
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 // ---------- Sabitler ----------
 // Logical viewport (mantıksal piksel). Canvas backing store DPR ile ölçeklenir.
@@ -112,7 +116,7 @@ function safeWriteBest(v: number): void {
 
 // ---------- State ----------
 let state: State = 'ready';
-let generation = 0;        // restart token — async leaks için (defensive)
+const generation = createGenToken();
 let dpr = 1;
 
 // Karakter durumu (dünya koordinatları)
@@ -129,7 +133,7 @@ let scrollY = 0;           // dünyada en alttaki görünür y (canvas alt kenar
 let highestY = 0;          // şimdiye kadarki en yüksek py (=skor)
 
 let platforms: Platform[] = [];
-let bestHeight = safeReadBest();
+let bestHeight = 0;
 let lastTs = 0;
 let physicsAccum = 0;
 let rafHandle = 0;
@@ -142,11 +146,11 @@ function rand(min: number, max: number): number {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function updateHud(): void {
@@ -239,7 +243,7 @@ function pruneOffscreenPlatforms(): void {
 
 // ---------- Reset ----------
 function reset(): void {
-  generation++;
+  generation.bump();
   state = 'ready';
   spawnInitialPlatforms();
   px = W / 2;
@@ -650,7 +654,7 @@ function frame(ts: number): void {
 }
 
 // ---------- Inputs ----------
-// Klavye
+function _wire(): void {
 window.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k === 'arrowleft' || k === 'a') {
@@ -777,14 +781,27 @@ document.addEventListener('visibilitychange', () => {
     physicsAccum = 0;
   }
 });
+}
 
-// ---------- Boot ----------
-resizeCanvas();
-reset();
-cancelAnimationFrame(rafHandle);
-lastTs = 0;
-rafHandle = requestAnimationFrame(frame);
+// ---------- Init ----------
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-// generation token kullanılmıyor doğrudan ama defensive — async iş eklenince
-// `const myGen = generation; ... if (myGen !== generation) return;` pattern'i hazır.
-void generation;
+  bestHeight = safeReadBest();
+  _wire();
+
+  resizeCanvas();
+  reset();
+  cancelAnimationFrame(rafHandle);
+  lastTs = 0;
+  rafHandle = requestAnimationFrame(frame);
+}
+
+export const game = defineGame({ init, reset });
