@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import GameLayout from '@layouts/GameLayout.astro';
 import RelatedGames from '@components/RelatedGames.astro';
+import EmbedCode from '@components/EmbedCode.astro';
 
 const bodyModules = import.meta.glob<{ default: any }>(
   '/src/game-bodies/*.astro',
@@ -86,6 +87,7 @@ const gameSchema = {
   </Fragment>
   <Body />
   <RelatedGames slot="below" current={game} all={allGames} />
+  <EmbedCode slot="below" slug={game.id} title={game.data.title} />
 </GameLayout>
 
 {gameCss && <style is:global set:html={gameCss} />}

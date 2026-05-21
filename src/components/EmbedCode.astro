@@ -1,0 +1,141 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+}
+
+const { slug, title } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+const embedUrl = new URL(`${base}embed/${slug}/`, site).href;
+const iframe = `<iframe src="${embedUrl}" width="100%" height="640" style="border:0;border-radius:12px" title="${title.replace(/"/g, '&quot;')} — karaman.dev/games" loading="lazy" allow="fullscreen"></iframe>`;
+---
+
+<details class="embed-code">
+  <summary>Bu oyunu kendi siten için göm</summary>
+  <p class="embed-code__hint">
+    Kopyala-yapıştır iframe — kullanım ücretsiz, link
+    <code>karaman.dev/games</code> ile bırak.
+  </p>
+  <textarea
+    class="embed-code__snippet"
+    readonly
+    rows="4"
+    aria-label="Embed iframe kodu"
+    data-embed
+    set:html={iframe}
+  />
+  <button class="embed-code__copy hud__btn" type="button" data-embed-copy>
+    Kopyala
+  </button>
+</details>
+
+<script>
+  function track(name: string) {
+    const w = window as unknown as { plausible?: (e: string) => void };
+    if (typeof w.plausible === 'function') {
+      try {
+        w.plausible(name);
+      } catch {
+        /* swallow */
+      }
+    }
+  }
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement | null)?.closest(
+      'button[data-embed-copy]',
+    );
+    if (!(btn instanceof HTMLButtonElement)) return;
+    const details = btn.closest('details');
+    const textarea = details?.querySelector('textarea[data-embed]');
+    if (!(textarea instanceof HTMLTextAreaElement)) return;
+    try {
+      await navigator.clipboard.writeText(textarea.value);
+      const orig = btn.textContent ?? 'Kopyala';
+      btn.textContent = 'Kopyalandı';
+      track('embed:copy');
+      setTimeout(() => {
+        btn.textContent = orig;
+      }, 1600);
+    } catch {
+      textarea.select();
+    }
+  });
+</script>
+
+<style>
+  .embed-code {
+    margin: 0 auto;
+    max-width: 480px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    overflow: hidden;
+  }
+  .embed-code > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 10px 14px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .embed-code > summary::-webkit-details-marker {
+    display: none;
+  }
+  .embed-code > summary:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid var(--text-muted);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.15s;
+  }
+  .embed-code[open] > summary:before {
+    transform: rotate(90deg);
+  }
+  .embed-code > summary:hover {
+    background: var(--surface-2);
+  }
+  .embed-code__hint {
+    margin: 0;
+    padding: 0 14px 8px;
+    line-height: 1.5;
+    font-size: 12px;
+  }
+  .embed-code__hint code {
+    background: var(--surface-2);
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  .embed-code__snippet {
+    display: block;
+    width: calc(100% - 28px);
+    margin: 0 14px 8px;
+    padding: 8px 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font:
+      11px/1.4 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    resize: vertical;
+  }
+  .embed-code__copy {
+    margin: 0 14px 14px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import EmbedLayout from '@layouts/EmbedLayout.astro';
+
+const bodyModules = import.meta.glob<{ default: any }>(
+  '/src/game-bodies/*.astro',
+  { eager: true },
+);
+
+const cssModules = import.meta.glob<string>('/src/styles/games/*.css', {
+  eager: true,
+  query: '?inline',
+  import: 'default',
+});
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const games = await getCollection('games');
+  return games.map((game) => ({
+    params: { slug: game.id },
+    props: { game },
+  }));
+};
+
+interface Props {
+  game: CollectionEntry<'games'>;
+}
+
+const { game } = Astro.props;
+const bodyPath = `/src/game-bodies/${game.id}.astro`;
+const bodyMod = bodyModules[bodyPath];
+if (!bodyMod) {
+  throw new Error(
+    `No body component found at ${bodyPath} for game '${game.id}'.`,
+  );
+}
+const Body = bodyMod.default;
+
+const cssKey = `/src/styles/games/${game.id}.css`;
+const gameCss = cssModules[cssKey] ?? '';
+---
+
+<EmbedLayout
+  title={`${game.data.title} — karaman.dev/games`}
+  description={game.data.description}
+  controls={game.data.controls}
+>
+  <Body />
+</EmbedLayout>
+
+{gameCss && <style is:global set:html={gameCss} />}
+
+<script>
+  const loaders = import.meta.glob('/src/game-logic/*.ts');
+  const segments = location.pathname.replace(/\/+$/, '').split('/');
+  const slug = segments[segments.length - 1];
+  const loader = loaders[`/src/game-logic/${slug}.ts`];
+  if (loader) {
+    loader();
+  } else {
+    console.error(`No game-logic module for slug '${slug}'`);
+  }
+</script>
