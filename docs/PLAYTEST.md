@@ -53,6 +53,16 @@
       `preview_eval` ile `Object.defineProperty(window, 'localStorage', { get: () => { throw 0 } })`
       sonrası reload) sayfa hâlâ yükleniyor
       — pitfall: [unguarded-storage](PITFALLS.md#unguarded-storage)
+- [ ] **Overlay gerçekten gizleniyor**: oyun başlama input'undan sonra
+      `getComputedStyle(overlayEl).opacity === '0'` VEYA `display === 'none'`.
+      Audit'in CSS check'i CI'de tutar (`scripts/audit-games.mjs --ci`), ama
+      runtime'da elle de doğrula — visual regression compositing'i yakalamaz.
+      — pitfall: [missing-overlay-css](PITFALLS.md#missing-overlay-css)
+- [ ] **Ready state'ten çıkış var**: overlay mesajının söz verdiği aksiyon
+      (örn. "Başla'ya tıkla", "Space'e bas") gerçekten state'i Playing'e
+      taşıyor. Disabled button'ın click handler'ı fire etmez — fallback
+      keyboard veya explicit Start button olsun.
+      — pitfall: [unreachable-start-state](PITFALLS.md#unreachable-start-state)
 
 ### B. Input matrisi
 - [ ] `content/games/<slug>.json`'daki `controls` alanında listelenen
