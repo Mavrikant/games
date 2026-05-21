@@ -1,3 +1,5 @@
+import { defineGame } from '@shared/game-module';
+
 // Vardiya — sosyo-teknik vardiya planlama bulmacası.
 // Pitfalls actively guarded:
 // - overlay-input-leak: explicit state machine; cell/worker clicks no-op outside 'planning'.
@@ -227,21 +229,21 @@ const LEVELS: Level[] = [
   },
 ];
 
-const gridEl = document.querySelector<HTMLElement>('#grid')!;
-const workersEl = document.querySelector<HTMLElement>('#workers')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const commitBtn = document.querySelector<HTMLButtonElement>('#commit')!;
-const clearBtn = document.querySelector<HTMLButtonElement>('#clear')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitleEl = document.querySelector<HTMLElement>('#overlayTitle')!;
-const overlayMsgEl = document.querySelector<HTMLElement>('#overlayMsg')!;
-const overlayDetailsEl = document.querySelector<HTMLElement>('#overlayDetails')!;
-const overlayRetryBtn = document.querySelector<HTMLButtonElement>('#overlayRetry')!;
-const overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlayNext')!;
+let gridEl!: HTMLElement;
+let workersEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let levelEl!: HTMLElement;
+let commitBtn!: HTMLButtonElement;
+let clearBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let overlayEl!: HTMLElement;
+let overlayTitleEl!: HTMLElement;
+let overlayMsgEl!: HTMLElement;
+let overlayDetailsEl!: HTMLElement;
+let overlayRetryBtn!: HTMLButtonElement;
+let overlayNextBtn!: HTMLButtonElement;
 
 let state: GameState = 'planning';
 let levelIdx = 0;
@@ -682,6 +684,7 @@ function fullReset(): void {
   setStatus(`Level ${level().id} — ${level().hint}`);
 }
 
+function _wire(): void {
 gridEl.addEventListener('click', (e) => {
   if (state !== 'planning') return;
   const target = e.target as HTMLElement | null;
@@ -761,8 +764,27 @@ window.addEventListener('keydown', (e) => {
     return;
   }
 });
+}
 
 function init(): void {
+  gridEl = document.querySelector<HTMLElement>('#grid')!;
+  workersEl = document.querySelector<HTMLElement>('#workers')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  commitBtn = document.querySelector<HTMLButtonElement>('#commit')!;
+  clearBtn = document.querySelector<HTMLButtonElement>('#clear')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitleEl = document.querySelector<HTMLElement>('#overlayTitle')!;
+  overlayMsgEl = document.querySelector<HTMLElement>('#overlayMsg')!;
+  overlayDetailsEl = document.querySelector<HTMLElement>('#overlayDetails')!;
+  overlayRetryBtn = document.querySelector<HTMLButtonElement>('#overlayRetry')!;
+  overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlayNext')!;
+
+  _wire();
+
   bestScore = safeRead(STORAGE_BEST_SCORE, 0);
   bestLevel = safeRead(STORAGE_BEST_LEVEL, 1);
   levelIdx = 0;
@@ -776,7 +798,7 @@ function init(): void {
   setStatus(`Level ${level().id} — ${level().hint}`);
 }
 
-init();
+export const game = defineGame({ init, reset: fullReset });
 
 declare global {
   interface Window {
