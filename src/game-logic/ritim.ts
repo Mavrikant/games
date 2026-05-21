@@ -1,15 +1,16 @@
-export {};
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type State = 'ready' | 'playing' | 'gameover';
 type FeedbackKind = 'perfect' | 'good' | 'miss' | null;
 
-// ── DOM ──────────────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+// ── DOM (filled in init) ──────────────────────────────────────────────────────
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const W = 400;
@@ -30,21 +31,13 @@ const MAX_MISSES = 3;
 // ── Storage helpers ──────────────────────────────────────────────────────────
 const STORAGE_KEY = 'ritim.best';
 
-function safeRead(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? Number(raw) || 0 : 0;
-  } catch {
-    return 0;
-  }
+function loadBest(): number {
+  const v = safeRead<number>(STORAGE_KEY, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
 
-function safeWrite(v: number): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(v));
-  } catch {
-    /* ignore */
-  }
+function persistBest(): void {
+  safeWrite(STORAGE_KEY, best);
 }
 
 // ── State variables ──────────────────────────────────────────────────────────
@@ -93,7 +86,7 @@ function endGame(): void {
   state = 'gameover';
   if (score > best) {
     best = score;
-    safeWrite(best);
+    persistBest();
   }
   updateHud();
 }
@@ -348,39 +341,56 @@ function frame(ts: number): void {
   rafId = requestAnimationFrame(frame);
 }
 
-// ── Input ────────────────────────────────────────────────────────────────────
-document.addEventListener('keydown', (e: KeyboardEvent) => {
-  if (e.code === 'Space') {
-    e.preventDefault();
-    handleTap();
-  } else if (e.key === 'r' || e.key === 'R') {
+// ── Init ─────────────────────────────────────────────────────────────────────
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+
+  best = loadBest();
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      handleTap();
+    } else if (e.key === 'r' || e.key === 'R') {
+      reset();
+    }
+  });
+
+  canvas.addEventListener(
+    'pointerdown',
+    (e: PointerEvent) => {
+      e.preventDefault();
+      handleTap();
+    },
+    { passive: false },
+  );
+
+  canvas.addEventListener(
+    'touchstart',
+    (e: TouchEvent) => {
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+
+  restartBtn.addEventListener('click', () => {
     reset();
-  }
-});
+  });
 
-canvas.addEventListener('pointerdown', (e: PointerEvent) => {
-  e.preventDefault();
-  handleTap();
-}, { passive: false });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      lastTs = 0;
+    }
+  });
 
-canvas.addEventListener('touchstart', (e: TouchEvent) => {
-  e.preventDefault();
-}, { passive: false });
-
-restartBtn.addEventListener('click', () => {
   reset();
-});
+  cancelAnimationFrame(rafId);
+  lastTs = 0;
+  rafId = requestAnimationFrame(frame);
+}
 
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    lastTs = 0;
-  }
-});
-
-// ── Boot ─────────────────────────────────────────────────────────────────────
-best = safeRead();
-reset();
-cancelAnimationFrame(rafId);
-lastTs = 0;
-rafId = requestAnimationFrame(frame);
-void generation;
+export const game = defineGame({ init, reset });
