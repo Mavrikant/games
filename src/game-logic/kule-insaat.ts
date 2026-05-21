@@ -1,4 +1,6 @@
-export {};
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const W = 360;
@@ -18,32 +20,15 @@ const FLOOR_COLORS: string[] = [
   '#84cc16', '#22c55e', '#14b8a6', '#06b6d4',
 ];
 
-// ─── DOM ──────────────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+// ─── DOM (filled in init) ─────────────────────────────────────────────────────
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 // ─── Storage ──────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'kule-insaat.best';
-
-function safeRead(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? Number(raw) || 0 : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWrite(v: number): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(v));
-  } catch {
-    /* ignore */
-  }
-}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type State = 'ready' | 'playing' | 'gameover';
@@ -65,7 +50,7 @@ type FallingPiece = {
 
 // ─── State variables ──────────────────────────────────────────────────────────
 let state: State = 'ready';
-let generation = 0;
+const gen = createGenToken();
 let floors: Floor[] = [];
 let movingX = 0;
 let movingDir = 1;
@@ -261,7 +246,7 @@ function drop(): void {
     state = 'gameover';
     if (score > best) {
       best = score;
-      safeWrite(best);
+      safeWrite(STORAGE_KEY, best);
     }
     updateHud();
     return;
@@ -320,7 +305,7 @@ function drop(): void {
 }
 
 function reset(): void {
-  generation++;
+  gen.bump();
   state = 'ready';
   floors = [
     {
@@ -369,7 +354,7 @@ function update(dt: number): void {
 
 // ─── RAF loop ─────────────────────────────────────────────────────────────────
 function frame(ts: number): void {
-  const currentGen = generation;
+  const currentGen = gen.current();
   if (lastTs === 0) lastTs = ts;
   const dt = Math.min((ts - lastTs) / 1000, 0.05);
   lastTs = ts;
@@ -377,44 +362,62 @@ function frame(ts: number): void {
   update(dt);
   draw();
 
-  if (currentGen === generation) {
+  if (gen.isCurrent(currentGen)) {
     rafId = requestAnimationFrame(frame);
   }
 }
 
-// ─── Input ────────────────────────────────────────────────────────────────────
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') {
-    e.preventDefault();
-    drop();
-  } else if (e.key === 'r' || e.key === 'R') {
+// ─── Init ─────────────────────────────────────────────────────────────────────
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+
+  best = safeRead<number>(STORAGE_KEY, 0);
+  if (!Number.isFinite(best) || best < 0) best = 0;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      drop();
+    } else if (e.key === 'r' || e.key === 'R') {
+      reset();
+    }
+  });
+
+  canvas.addEventListener(
+    'pointerdown',
+    (e) => {
+      e.preventDefault();
+      drop();
+    },
+    { passive: false },
+  );
+
+  canvas.addEventListener(
+    'touchstart',
+    (e) => {
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+
+  restartBtn.addEventListener('click', () => {
     reset();
-  }
-});
+  });
 
-canvas.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  drop();
-}, { passive: false });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      lastTs = 0;
+    }
+  });
 
-canvas.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-}, { passive: false });
-
-restartBtn.addEventListener('click', () => {
   reset();
-});
+  cancelAnimationFrame(rafId);
+  lastTs = 0;
+  rafId = requestAnimationFrame(frame);
+}
 
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    lastTs = 0;
-  }
-});
-
-// ─── Boot ─────────────────────────────────────────────────────────────────────
-best = safeRead();
-reset();
-cancelAnimationFrame(rafId);
-lastTs = 0;
-rafId = requestAnimationFrame(frame);
-void generation;
+export const game = defineGame({ init, reset });
