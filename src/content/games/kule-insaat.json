@@ -1,0 +1,8 @@
+{
+  "title": "Kule İnşaatı",
+  "description": "Kayan bloğu tam denk getirip bırak — en yüksek kuleyi inşa et.",
+  "dateAdded": "2026-05-21",
+  "tags": ["zamanlama", "strateji", "tek-oyunculu"],
+  "controls": "Boşluk / ekrana bas: bloğu bırak · R: yeniden başla",
+  "howToPlay": "Ekranın üstünde bir blok soldan sağa, sağdan sola kayar. SPACE ya da ekrana basarak bloğu üstteki kata bırak. Bloğun alt katla örtüşen kısmı kalır, taşan kısım kopar ve düşer. Her katla hız artar! Blok fazla daralırsa oyun biter. Kaç kat inşa edebilirsin?"
+}
