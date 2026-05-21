@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type GameState = 'ready' | 'playing' | 'gameover';
 
 interface Passenger {
@@ -30,43 +34,30 @@ const COLOR_VARS = [
   '--lift-p5',
 ];
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const floorEl = document.querySelector<HTMLElement>('#floor')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let floorEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 let state: GameState = 'ready';
 let elevatorY = 0;
 let targetFloor = 1;
 let score = 0;
-let best = safeReadBest();
+let best = 0;
 let waiting: Passenger[] = [];
 let riding: Passenger[] = [];
 let nextPassengerId = 1;
 let spawnTimerMs = 0;
 let lastFrameTime = 0;
 
-function safeReadBest(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_BEST);
-    const n = raw ? Number(raw) : 0;
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWriteBest(n: number): void {
-  try {
-    localStorage.setItem(STORAGE_BEST, String(n));
-  } catch {
-    /* ignore */
-  }
+function loadBest(): number {
+  const v = safeRead<number>(STORAGE_BEST, 0);
+  return Number.isFinite(v) && v > 0 ? v : 0;
 }
 
 const cssCache = new Map<string, string>();
@@ -107,11 +98,11 @@ function nearestFloor(): number {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function patienceForScore(s: number): number {
@@ -191,7 +182,7 @@ function gameOver(): void {
   if (score > best) {
     best = score;
     bestEl.textContent = String(best);
-    safeWriteBest(best);
+    safeWrite(STORAGE_BEST, best);
   }
   showOverlay('Sabırlar tükendi', `Skor: ${score} · Tekrar için bir kata dokun veya R`);
 }
@@ -209,7 +200,7 @@ function handleArrival(): void {
       if (score > best) {
         best = score;
         bestEl.textContent = String(best);
-        safeWriteBest(best);
+        safeWrite(STORAGE_BEST, best);
       }
     } else {
       stillRiding.push(p);
@@ -460,43 +451,59 @@ function pickFloorFromPointer(clientY: number): number {
   return 0;
 }
 
-canvas.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  const f = pickFloorFromPointer(e.clientY);
-  if (f > 0) selectFloor(f);
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  floorEl = document.querySelector<HTMLElement>('#floor')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key;
-  if (k >= '1' && k <= String(FLOORS)) {
-    selectFloor(Number(k));
+  best = loadBest();
+
+  canvas.addEventListener('pointerdown', (e) => {
     e.preventDefault();
-    return;
-  }
-  if (k === 'ArrowUp') {
-    selectFloor(Math.min(FLOORS, nearestFloor() + 1));
-    e.preventDefault();
-    return;
-  }
-  if (k === 'ArrowDown') {
-    selectFloor(Math.max(1, nearestFloor() - 1));
-    e.preventDefault();
-    return;
-  }
-  if (k === ' ' || k === 'Enter') {
-    if (state === 'ready' || state === 'gameover') {
-      startPlaying();
+    const f = pickFloorFromPointer(e.clientY);
+    if (f > 0) selectFloor(f);
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (k >= '1' && k <= String(FLOORS)) {
+      selectFloor(Number(k));
+      e.preventDefault();
+      return;
     }
-    e.preventDefault();
-    return;
-  }
-  if (k.toLowerCase() === 'r') {
-    reset();
-    e.preventDefault();
-  }
-});
+    if (k === 'ArrowUp') {
+      selectFloor(Math.min(FLOORS, nearestFloor() + 1));
+      e.preventDefault();
+      return;
+    }
+    if (k === 'ArrowDown') {
+      selectFloor(Math.max(1, nearestFloor() - 1));
+      e.preventDefault();
+      return;
+    }
+    if (k === ' ' || k === 'Enter') {
+      if (state === 'ready' || state === 'gameover') {
+        startPlaying();
+      }
+      e.preventDefault();
+      return;
+    }
+    if (k.toLowerCase() === 'r') {
+      reset();
+      e.preventDefault();
+    }
+  });
 
-restartBtn.addEventListener('click', () => reset());
+  restartBtn.addEventListener('click', () => reset());
 
-reset();
-requestAnimationFrame(loop);
+  reset();
+  requestAnimationFrame(loop);
+}
+
+export const game = defineGame({ init, reset });
