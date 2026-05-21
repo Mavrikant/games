@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const logicDir = resolve(root, 'src', 'game-logic');
+const cssDir = resolve(root, 'src', 'styles', 'games');
 
 if (!existsSync(logicDir)) {
   console.error(`Not found: ${logicDir}`);
@@ -73,6 +74,24 @@ for (const file of files) {
   if (usesSharedGenToken) score++;
 
   const slug = file.replace(/\.ts$/, '');
+
+  // Overlay CSS contract: if @shared/overlay is imported, the per-game CSS
+  // must define a `.overlay--hidden` (or `.<prefix>-overlay--hidden`) rule.
+  // The helper toggles the class; the visual effect comes from CSS. Missing
+  // this CSS makes hideOverlay() a no-op — see pitfall: missing-overlay-css.
+  let missingOverlayCss = false;
+  if (usesSharedOverlay) {
+    const cssPath = resolve(cssDir, `${slug}.css`);
+    if (!existsSync(cssPath)) {
+      missingOverlayCss = true;
+    } else {
+      const cssContent = readFileSync(cssPath, 'utf8');
+      // Accept either canonical .overlay--hidden or per-game prefixed (e.g. .pc-overlay--hidden).
+      const hasHiddenRule = /\.[\w-]*overlay--hidden\s*\{/.test(cssContent);
+      if (!hasHiddenRule) missingOverlayCss = true;
+    }
+  }
+
   rows.push({
     slug,
     score,
@@ -82,6 +101,7 @@ for (const file of files) {
     genToken: usesSharedGenToken,
     moduleLevelQs,
     unguardedStorage,
+    missingOverlayCss,
     loc: lines.length,
   });
 }
@@ -101,25 +121,31 @@ const fullyAdopted = rows.filter((r) => r.score === 4).length;
 const noAdoption = rows.filter((r) => r.score === 0).length;
 const anyUnguarded = rows.filter((r) => r.unguardedStorage > 0).length;
 const anyModuleLevelQs = rows.filter((r) => r.moduleLevelQs > 0).length;
+const anyMissingOverlayCss = rows.filter((r) => r.missingOverlayCss).length;
 
 const banner = `
 # Game-logic audit
 
-| Toplam oyun | Tam adoption (4/4) | Adoption yok (0/4) | Unguarded storage | Module-level querySelector |
-|---:|---:|---:|---:|---:|
-| ${totalGames} | ${fullyAdopted} | ${noAdoption} | ${anyUnguarded} | ${anyModuleLevelQs} |
+| Toplam oyun | Tam adoption (4/4) | Adoption yok (0/4) | Unguarded storage | Module-level qS | Missing overlay CSS |
+|---:|---:|---:|---:|---:|---:|
+| ${totalGames} | ${fullyAdopted} | ${noAdoption} | ${anyUnguarded} | ${anyModuleLevelQs} | ${anyMissingOverlayCss} |
 
 ## Detaylı tablo
 
-| Slug | Score | Storage | GameModule | Overlay | GenToken | UnsafeLS | ModLvlQS | LOC |
-|---|---:|:---:|:---:|:---:|:---:|---:|---:|---:|
+| Slug | Score | Storage | GameModule | Overlay | GenToken | UnsafeLS | ModLvlQS | OvCSS | LOC |
+|---|---:|:---:|:---:|:---:|:---:|---:|---:|:---:|---:|
 `;
 
 console.log(banner.trim());
 
 for (const r of rows) {
+  // OvCSS column: '·' = no overlay import (n/a), '✓' = imports + has CSS,
+  // '✗' = imports but CSS missing the .overlay--hidden rule (broken).
+  let ovCss;
+  if (!r.overlay) ovCss = '·';
+  else ovCss = r.missingOverlayCss ? '✗' : '✓';
   console.log(
-    `| ${r.slug} | ${r.score}/4 | ${mark(r.storage)} | ${mark(r.gameModule)} | ${mark(r.overlay)} | ${mark(r.genToken)} | ${r.unguardedStorage} | ${r.moduleLevelQs} | ${r.loc} |`,
+    `| ${r.slug} | ${r.score}/4 | ${mark(r.storage)} | ${mark(r.gameModule)} | ${mark(r.overlay)} | ${mark(r.genToken)} | ${r.unguardedStorage} | ${r.moduleLevelQs} | ${ovCss} | ${r.loc} |`,
   );
 }
 
@@ -129,25 +155,37 @@ console.log(`
 - **UnsafeLS**: \`localStorage\` çağrısı yakın try/catch içinde değil
   (PITFALLS#unguarded-storage aktif riski). Heuristic — yanlış pozitif olabilir.
 - **ModLvlQS**: \`const x = document.querySelector(...)\` top-level
-  (PITFALLS#unguarded-storage'in DOM varyantı; Safari private mode crash riski yok ama early-access patterns kötü).
+  (PITFALLS#module-level-dom-access).
+- **OvCSS**: \`@shared/overlay\` import edildi ama oyun-spesifik CSS'te
+  \`.overlay--hidden\` (veya prefixli varyantı) tanımı yok →
+  \`hideOverlay()\` görsel hiçbir şey yapmaz (PITFALLS#missing-overlay-css).
 - En düşük score'lu oyunlar önce gelir; o tarafta migration başla.
-- \`--ci\` flag ile CI'da çalışırsa unsafe storage veya module-level qS
-  görürse exit 1. Yeni oyunlar için ratchet — eklenen oyun mevcut
-  standardı bozarsa CI fail.
+- \`--ci\` flag ile CI'da çalışırsa unsafe storage, module-level qS,
+  veya missing overlay CSS görürse exit 1. Yeni oyunlar için ratchet —
+  eklenen oyun mevcut standardı bozarsa CI fail.
 `);
 
 // CI mode: exit non-zero if any regression. This locks in the current
 // post-migration state — no future agent can land a game that uses raw
-// localStorage outside try/catch or declares module-level querySelectors.
+// localStorage outside try/catch, declares module-level querySelectors,
+// or imports @shared/overlay without the required CSS contract.
 if (process.argv.includes('--ci')) {
-  if (anyUnguarded > 0 || anyModuleLevelQs > 0) {
+  if (anyUnguarded > 0 || anyModuleLevelQs > 0 || anyMissingOverlayCss > 0) {
+    const offenders = rows
+      .filter((r) => r.missingOverlayCss)
+      .map((r) => r.slug)
+      .join(', ');
     console.error(
-      `\nCI gate: ${anyUnguarded} unsafe localStorage call(s) and ${anyModuleLevelQs} module-level querySelector(s) detected.`,
+      `\nCI gate: ${anyUnguarded} unsafe localStorage call(s), ${anyModuleLevelQs} module-level querySelector(s), ${anyMissingOverlayCss} missing overlay CSS rule(s).`,
     );
+    if (anyMissingOverlayCss > 0) {
+      console.error(`  Missing .overlay--hidden in: ${offenders}`);
+      console.error(`  Fix: add the .overlay / .overlay--hidden block from scripts/templates/style.css`);
+    }
     console.error(
-      `Use @shared/storage and move DOM access into init() (see docs/SHARED_HELPERS.md).`,
+      `Use @shared/storage, move DOM access into init(), and define .overlay--hidden CSS (see docs/SHARED_HELPERS.md, PITFALLS.md#missing-overlay-css).`,
     );
     process.exit(1);
   }
-  console.log('CI gate: passed (0 unsafe storage, 0 module-level querySelector).');
+  console.log('CI gate: passed (0 unsafe storage, 0 module-level querySelector, 0 missing overlay CSS).');
 }
