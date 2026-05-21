@@ -1,0 +1,8 @@
+{
+  "title": "Kafe Görevlisi",
+  "description": "Müşterilerin siparişini ezberle ve doğru sırayla hazırla — barista hafıza oyunu.",
+  "dateAdded": "2026-05-21",
+  "tags": ["hafıza", "sıralama", "bulmaca"],
+  "controls": "Fare: içecek seç · Backspace: son seçimi geri al · R: yeniden başla",
+  "howToPlay": "Müşteri siparişi birkaç saniye gösterir, sonra gizler. Alttaki içecek düğmelerinden doğru sırayla seç; yanlış seçimi Backspace ile geri al. 'Sipariş Ver' düğmesiyle onayla. Her doğru siparişte bir sonraki sipariş bir içecek daha uzun olur. 3 hata yapınca oyun biter."
+}

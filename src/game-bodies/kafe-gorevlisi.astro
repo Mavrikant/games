@@ -1,0 +1,41 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <div class="hud__lives" aria-label="Canlar">
+    <span class="life" id="life-1">♥</span>
+    <span class="life" id="life-2">♥</span>
+    <span class="life" id="life-3">♥</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div id="overlay" class="overlay">
+  <div class="overlay__inner">
+    <h2 id="overlay-title">Kafe Görevlisi</h2>
+    <p id="overlay-msg">Müşteri siparişini ezberle ve doğru sırayla hazırla.<br>Başlamak için aşağıdan bir içecek seç.</p>
+  </div>
+</div>
+<div id="kafe-wrap">
+  <div id="order-panel">
+    <div id="order-label">Sipariş bekleniyor…</div>
+    <div id="order-items"></div>
+  </div>
+  <div id="tray-panel">
+    <div id="tray-label">Tepsiniz</div>
+    <div id="tray-items"></div>
+  </div>
+  <div id="menu-panel">
+    <button class="drink-btn" data-drink="kahve" type="button">☕ Kahve</button>
+    <button class="drink-btn" data-drink="cay" type="button">🍵 Çay</button>
+    <button class="drink-btn" data-drink="kola" type="button">🥤 Kola</button>
+    <button class="drink-btn" data-drink="meyvesuyu" type="button">🧃 Meyve Suyu</button>
+    <button class="drink-btn" data-drink="su" type="button">💧 Su</button>
+    <button class="drink-btn" data-drink="limonata" type="button">🍋 Limonata</button>
+  </div>
+  <div id="action-row">
+    <button id="submit-btn" type="button" disabled>Sipariş Ver</button>
+    <button id="undo-btn" type="button" disabled>↩ Geri Al</button>
+  </div>
+</div>
