@@ -124,10 +124,10 @@ git add \
 ## Playtest (PR öncesi — zorunlu)
 
 `curl /games/<slug>/ → 200` smoke test'i **artık geçerli değil**. Geçmiş
-4 fix PR'ı ([#9](https://github.com/Mavrikant/browser-games/pull/9),
-[#10](https://github.com/Mavrikant/browser-games/pull/10),
-[#11](https://github.com/Mavrikant/browser-games/pull/11),
-[#12](https://github.com/Mavrikant/browser-games/pull/12)) curl ile
+4 fix PR'ı ([#9](https://github.com/Mavrikant/games/pull/9),
+[#10](https://github.com/Mavrikant/games/pull/10),
+[#11](https://github.com/Mavrikant/games/pull/11),
+[#12](https://github.com/Mavrikant/games/pull/12)) curl ile
 yakalanamazdı; hepsi 30 saniyelik gerçek oynayarak-test ile yakalanırdı.
 
 `npm run dev` (veya `preview_start`) çalıştır, sonra
