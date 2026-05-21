@@ -1,0 +1,7 @@
+{
+  "title": "Tersine Dizi",
+  "description": "Yanıp sönen kareleri ters sırada tıkla. Her seviyede dizi uzar; üç hata yapana kadar devam et.",
+  "dateAdded": "2026-05-21",
+  "tags": ["hafıza","zihinsel"],
+  "controls": "Fare ile karelere tıkla; Space yeniden başlat"
+}
