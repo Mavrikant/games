@@ -1,3 +1,8 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // Dokuma — weave the shown pattern by choosing UP/DOWN as the shuttle crosses each warp.
 // Mechanic: shuttle moves left-to-right (and snake-style back) across COLS warp threads.
 // Above the loom: a target pattern (PATTERN_ROWS rows). Player must reproduce it row by row.
@@ -38,17 +43,17 @@ interface Tile {
   remainingMs: number; // time left for the current column
 }
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const livesEl = document.querySelector<HTMLElement>('#lives')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const touchUpBtn = document.querySelector<HTMLButtonElement>('#touch-up')!;
-const touchDownBtn = document.querySelector<HTMLButtonElement>('#touch-down')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let livesEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let touchUpBtn!: HTMLButtonElement;
+let touchDownBtn!: HTMLButtonElement;
 
 let state: GameState = 'ready';
 let score = 0;
@@ -57,26 +62,12 @@ let best = 0; // initialized in init()
 let tilesCompleted = 0;
 let tile: Tile = makeTile(0);
 let lastFrameTime = 0;
-let generationToken = 0; // bumped on reset to invalidate stale callbacks
+const generationToken = createGenToken();
 let pendingClearTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-// Persistence helpers — guarded against private/disabled storage.
-function safeReadBest(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_BEST);
-    const n = raw ? Number(raw) : 0;
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWriteBest(n: number): void {
-  try {
-    localStorage.setItem(STORAGE_BEST, String(n));
-  } catch {
-    /* ignore */
-  }
+function loadBest(): number {
+  const v = safeRead<number>(STORAGE_BEST, 0);
+  return Number.isFinite(v) && v > 0 ? v : 0;
 }
 
 // CSS variable cache (theme-aware drawing)
@@ -364,10 +355,10 @@ function updateHud(): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function applyInput(choice: 'U' | 'D'): void {
@@ -379,7 +370,7 @@ function applyInput(choice: 'U' | 'D'): void {
     score += 1;
     if (score > best) {
       best = score;
-      safeWriteBest(best);
+      safeWrite(STORAGE_BEST, best);
     }
     updateHud();
   } else {
@@ -436,7 +427,7 @@ function finishRow(): void {
     score += 4; // bonus for completing a tile
     if (score > best) {
       best = score;
-      safeWriteBest(best);
+      safeWrite(STORAGE_BEST, best);
     }
     updateHud();
     enterTileClear();
@@ -451,11 +442,11 @@ function finishRow(): void {
 function enterTileClear(): void {
   state = 'tileClear';
   showOverlay('Tabaka tamam!', `Skor: ${score} · sıradaki örüntü hazırlanıyor`);
-  const tokenAtSchedule = generationToken;
+  const tokenAtSchedule = generationToken.current();
   if (pendingClearTimeoutId !== null) clearTimeout(pendingClearTimeoutId);
   pendingClearTimeoutId = setTimeout(() => {
     pendingClearTimeoutId = null;
-    if (generationToken !== tokenAtSchedule) return; // stale, reset happened
+    if (!generationToken.isCurrent(tokenAtSchedule)) return; // stale, reset happened
     if (state !== 'tileClear') return;
     tile = makeTile(tilesCompleted);
     state = 'playing';
@@ -479,7 +470,7 @@ function startPlaying(): void {
 }
 
 function fullReset(): void {
-  generationToken += 1;
+  generationToken.bump();
   if (pendingClearTimeoutId !== null) {
     clearTimeout(pendingClearTimeoutId);
     pendingClearTimeoutId = null;
@@ -542,57 +533,67 @@ function handleInput(action: 'up' | 'down' | 'start' | 'restart'): void {
   }
 }
 
-window.addEventListener('keydown', (e) => {
-  // Don't preventDefault on modifier combos so browser shortcuts still work.
-  if (e.ctrlKey || e.metaKey || e.altKey) return;
-  const k = e.key;
-  if (k === 'ArrowUp' || k === 'w' || k === 'W' || k === 'z' || k === 'Z') {
-    handleInput('up');
-    e.preventDefault();
-  } else if (k === 'ArrowDown' || k === 's' || k === 'S' || k === 'x' || k === 'X') {
-    handleInput('down');
-    e.preventDefault();
-  } else if (k === ' ' || k === 'Enter') {
-    handleInput('start');
-    e.preventDefault();
-  } else if (k === 'r' || k === 'R') {
-    handleInput('restart');
-    e.preventDefault();
-  }
-});
-
-// Canvas: tap upper half = up, lower half = down (per docs)
-canvas.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  const rect = canvas.getBoundingClientRect();
-  const yCanvas = ((e.clientY - rect.top) / rect.height) * CANVAS_H;
-  if (state === 'ready' || state === 'gameover') {
-    handleInput('start');
-    return;
-  }
-  if (state !== 'playing') return;
-  if (yCanvas < CANVAS_H / 2) handleInput('up');
-  else handleInput('down');
-});
-
-touchUpBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (state === 'ready' || state === 'gameover') handleInput('start');
-  else handleInput('up');
-});
-touchDownBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (state === 'ready' || state === 'gameover') handleInput('start');
-  else handleInput('down');
-});
-
-restartBtn.addEventListener('click', () => handleInput('restart'));
-
-// --- Init (no module-level side effects on storage; everything runs here) ---
+// --- Init ---
 function init(): void {
-  best = safeReadBest();
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  livesEl = document.querySelector<HTMLElement>('#lives')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  touchUpBtn = document.querySelector<HTMLButtonElement>('#touch-up')!;
+  touchDownBtn = document.querySelector<HTMLButtonElement>('#touch-down')!;
+
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    if (k === 'ArrowUp' || k === 'w' || k === 'W' || k === 'z' || k === 'Z') {
+      handleInput('up');
+      e.preventDefault();
+    } else if (k === 'ArrowDown' || k === 's' || k === 'S' || k === 'x' || k === 'X') {
+      handleInput('down');
+      e.preventDefault();
+    } else if (k === ' ' || k === 'Enter') {
+      handleInput('start');
+      e.preventDefault();
+    } else if (k === 'r' || k === 'R') {
+      handleInput('restart');
+      e.preventDefault();
+    }
+  });
+
+  canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const yCanvas = ((e.clientY - rect.top) / rect.height) * CANVAS_H;
+    if (state === 'ready' || state === 'gameover') {
+      handleInput('start');
+      return;
+    }
+    if (state !== 'playing') return;
+    if (yCanvas < CANVAS_H / 2) handleInput('up');
+    else handleInput('down');
+  });
+
+  touchUpBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (state === 'ready' || state === 'gameover') handleInput('start');
+    else handleInput('up');
+  });
+  touchDownBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (state === 'ready' || state === 'gameover') handleInput('start');
+    else handleInput('down');
+  });
+
+  restartBtn.addEventListener('click', () => handleInput('restart'));
+
+  best = loadBest();
   fullReset();
   requestAnimationFrame(loop);
 }
 
-init();
+export const game = defineGame({ init, reset: fullReset });
