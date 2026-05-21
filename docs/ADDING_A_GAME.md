@@ -66,17 +66,23 @@ Kurallar:
 
 ## 4. Logic'i yaz
 
+Scaffold zaten `@shared/*` + `defineGame()` boilerplate'i üretir. Doldur:
+
 `src/game-logic/my-game.ts`:
 
 ```ts
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
 
 const STORAGE_KEY = 'my-game.best';
-let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+let best = 0;
 let score = 0;
+
+// DOM refs — init() içinde doldurulur. Module-level querySelector yasak.
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 function reset(): void {
   score = 0;
@@ -88,15 +94,32 @@ function draw(): void {
   // … canvas çizimi
 }
 
-restartBtn.addEventListener('click', reset);
-reset();
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+
+  best = safeRead<number>(STORAGE_KEY, 0);
+
+  restartBtn.addEventListener('click', reset);
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
 ```
 
 Kurallar:
+- Tüm `document.querySelector` + event listener + `localStorage` erişimi
+  `init()` içinde. Module-level olursa `npm run audit:games --ci` fail.
+- State sadece `@shared/storage` üzerinden (`safeRead`/`safeWrite`).
+  Anahtar prefix `<slug>.` (`my-game.best`).
 - DOM seçicileri `!` ile non-null asserlebilirsin (markup garanti).
-- State sadece `localStorage`. Anahtar prefix `<slug>.` (`my-game.best`).
-- `window.addEventListener('keydown', …)` OK; ama focus iframe'de değilse
-  tetiklenmez — `restart` butonu gibi mouse aksiyon her zaman çalışmalı.
+- Async setTimeout/setInterval bir reset sırasında stale kalıyorsa
+  `@shared/gen-token` kullan (örn. `src/game-logic/2048.ts` AI move).
+- Overlay göster/gizle: `@shared/overlay`'ın `showOverlay`/`hideOverlay`'i
+  `.overlay--hidden` class + `aria-hidden` atomik toggle eder.
 - Modül seviyesinde init et (`reset()` en sonda); Astro `<script>` ile
   page'e bağlar.
 
@@ -152,17 +175,27 @@ Hata varsa düzelt. Sık hatalar:
 - **Cannot redeclare variable**: TS aynı isimde global var sayıyor — dosyayı
   ESM yap (en üste `export {}` ekle veya bir şey import et).
 
-Sonra:
+Sonra otomatik kontroller (CI'da da koşar):
+
+```sh
+npm run audit:games --ci    # 0 module-level qS, 0 unsafe localStorage
+npm run test:smoke          # her oyun headless chromium'da yüklenir
+```
+
+`test:smoke` `test-results/<slug>.png` üretir; oyununun screenshot'ına
+bakabilirsin. CI'da artifact olarak 7 gün saklanır.
+
+Manuel oynanış kontrolü:
 
 ```sh
 npm run dev   # http://localhost:4321/games/
 ```
 
-Test et:
 - Arşivde kart görünüyor mu? → karta tıkla, iframe'de açılıyor mu?
 - Direkt URL `http://localhost:4321/games/my-game/` çalışıyor mu?
 - Klavye / mouse kontrolleri reactif mi?
 - localStorage skor saklıyor mu? (refresh sonrası dur)
+- [docs/PLAYTEST.md](PLAYTEST.md) checklist'i — runtime/UX bug'lar için zorunlu
 
 ## 8. Commit + PR
 
