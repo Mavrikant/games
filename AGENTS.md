@@ -36,6 +36,21 @@ yarıyor:
 | Mevcut oyunda görsel polish | `src/styles/games/<slug>.css` + (varsa) `<slug>.svg` |
 | Shared layer değişikliği | **DURAKLA → human review iste** |
 
+### Ortak yardımcılar — `src/shared/`
+
+Yeni oyun yazarken aşağıdaki helper'ları **kendin yeniden yazma** — import
+et. Tutarsız pattern'ler (3 farklı overlay stili, ham `localStorage` çağrısı)
+geçmiş bug'ların kaynağıydı.
+
+| Modül | Ne sağlar | Pitfall |
+|---|---|---|
+| `@shared/storage` | `safeRead<T>(key, fallback)`, `safeWrite(key, value)`, `safeRemove(key)` | `unguarded-storage` |
+| `@shared/overlay` | `showOverlay(el)`, `hideOverlay(el)`, `isOverlayHidden(el)` — classList + aria-hidden atomik | `overlay-input-leak` (kısmî) |
+| `@shared/gen-token` | `createGenToken()` — reset-safe async callback iptali | `stale-async-callback` |
+
+Kural: `src/shared/` **import-only**. Buradaki dosyaları değiştirmek shared
+layer modifikasyonudur → human review zorunlu.
+
 `<slug>` = kebab-case, sadece `[a-z0-9-]`. (`my-game` ✓, `MyGame` ✗,
 `my_game` ✗, `mygame2!` ✗.)
 
@@ -152,7 +167,7 @@ issue tag'le:
 
 - Shared layer değişikliği (`layouts/`, `tokens.css`, `base.css`,
   `game-shell.css`, `archive.css`, `content.config.ts`, `astro.config.mjs`,
-  `package.json`, herhangi bir `.github/` dosyası)
+  `package.json`, `src/shared/`, herhangi bir `.github/` dosyası)
 - Yeni dependency
 - Build pipeline değişikliği
 - Mevcut bir oyunun davranışını başka bir ajanın ekleyeceği değişikliklere
