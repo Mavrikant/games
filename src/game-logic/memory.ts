@@ -1,3 +1,8 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 type Difficulty = 'easy' | 'medium' | 'hard';
 
 interface DiffConfig {
@@ -17,19 +22,16 @@ const STORAGE_BEST = 'memory.best';
 const STORAGE_DIFF = 'memory.difficulty';
 const FLIP_BACK_MS = 750;
 
-const board = document.querySelector<HTMLElement>('#board')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const timeEl = document.querySelector<HTMLElement>('#time')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const diffBtns = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
-);
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let board!: HTMLElement;
+let movesEl!: HTMLElement;
+let timeEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let diffBtns: HTMLButtonElement[] = [];
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 interface Best {
   moves: number;
@@ -43,8 +45,8 @@ interface Card {
   revealed: boolean;
 }
 
-let difficulty: Difficulty = loadDifficulty();
-const bestMap: BestMap = loadBest();
+let difficulty: Difficulty = 'medium';
+let bestMap: BestMap = {};
 
 let cards: Card[] = [];
 let cardEls: HTMLButtonElement[] = [];
@@ -55,27 +57,23 @@ let startTime = 0;
 let timerHandle: number | null = null;
 let lock = false;
 let won = false;
+const gen = createGenToken();
 
 function loadBest(): BestMap {
-  try {
-    const raw = localStorage.getItem(STORAGE_BEST);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as unknown;
-    if (!parsed || typeof parsed !== 'object') return {};
-    return parsed as BestMap;
-  } catch {
-    return {};
-  }
+  const v = safeRead<BestMap | null>(STORAGE_BEST, null);
+  if (!v || typeof v !== 'object') return {};
+  return v;
 }
 
 function saveBest(): void {
-  try {
-    localStorage.setItem(STORAGE_BEST, JSON.stringify(bestMap));
-  } catch {
-    /* ignore */
-  }
+  safeWrite(STORAGE_BEST, bestMap);
 }
 
+/**
+ * Difficulty is stored as a raw string (not JSON-encoded) to remain
+ * compatible with the format from before the @shared/storage migration.
+ * Wrapped in try/catch for Safari private mode.
+ */
 function loadDifficulty(): Difficulty {
   let raw = '';
   try {
@@ -113,6 +111,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 function startGame(): void {
+  gen.bump();
   hideOverlay();
   stopTimer();
   const { cols, rows } = DIFFS[difficulty];
@@ -196,7 +195,9 @@ function onCardClick(i: number): void {
     if (cards.every((c) => c.matched)) win();
   } else {
     lock = true;
+    const myGen = gen.current();
     window.setTimeout(() => {
+      if (!gen.isCurrent(myGen)) return;
       cards[a]!.revealed = false;
       cards[b]!.revealed = false;
       flipped = [];
@@ -251,38 +252,58 @@ function win(): void {
   }
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Tebrikler!';
   overlayMsg.textContent = `${moves} hamle · ${formatTime(elapsedSec)}`;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
-diffBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const d = btn.dataset.diff;
-    if (d === 'easy' || d === 'medium' || d === 'hard') setDifficulty(d);
+function init(): void {
+  board = document.querySelector<HTMLElement>('#board')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  timeEl = document.querySelector<HTMLElement>('#time')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  diffBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
+  );
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+
+  difficulty = loadDifficulty();
+  bestMap = loadBest();
+
+  diffBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const d = btn.dataset.diff;
+      if (d === 'easy' || d === 'medium' || d === 'hard') setDifficulty(d);
+    });
   });
-});
 
-restartBtn.addEventListener('click', startGame);
-overlayRestart.addEventListener('click', startGame);
+  restartBtn.addEventListener('click', startGame);
+  overlayRestart.addEventListener('click', startGame);
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'r') {
-    startGame();
-    e.preventDefault();
-  } else if (k === '1') {
-    setDifficulty('easy');
-    e.preventDefault();
-  } else if (k === '2') {
-    setDifficulty('medium');
-    e.preventDefault();
-  } else if (k === '3') {
-    setDifficulty('hard');
-    e.preventDefault();
-  }
-});
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'r') {
+      startGame();
+      e.preventDefault();
+    } else if (k === '1') {
+      setDifficulty('easy');
+      e.preventDefault();
+    } else if (k === '2') {
+      setDifficulty('medium');
+      e.preventDefault();
+    } else if (k === '3') {
+      setDifficulty('hard');
+      e.preventDefault();
+    }
+  });
 
-startGame();
+  startGame();
+}
+
+export const game = defineGame({ init, reset: startGame });
