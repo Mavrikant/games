@@ -1,3 +1,5 @@
+import { defineGame } from '@shared/game-module';
+
 // Water Sort — sıvı renk sıralama puzzle.
 // Her tüp 4 katman. Hedef: her tüp ya boş ya da tek renk dolu olsun.
 // Üst katman + onunla aynı renkten ardışık katmanlar tek seferde dökülür.
@@ -48,24 +50,24 @@ const PALETTE: string[] = [
   '#d946ef', // magenta
 ];
 
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const undoBtn = document.querySelector<HTMLButtonElement>('#undo')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const newGameBtn = document.querySelector<HTMLButtonElement>('#new-game')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitleEl = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
+let levelEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let boardEl!: HTMLElement;
+let undoBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let newGameBtn!: HTMLButtonElement;
+let overlayEl!: HTMLElement;
+let overlayTitleEl!: HTMLElement;
+let overlayMsgEl!: HTMLElement;
+let overlayNextBtn!: HTMLButtonElement;
 
 // State.
 // tubes[i] = layers from bottom to top. tubes[i][0] = en alttaki sıvı.
 let tubes: number[][] = [];
 let history: number[][][] = []; // önceki tüp durumlarının snapshot'ları.
-let level = safeReadNumber(STORAGE_LEVEL, 1);
-let bestMoves: Record<string, number> = safeReadJSON(STORAGE_BEST, {});
+let level = 1;
+let bestMoves: Record<string, number> = {};
 let moves = 0;
 let numColors = 0;
 let numEmpty = 0;
@@ -717,47 +719,63 @@ function renderLiquid(el: HTMLElement, tube: number[]): void {
   }
 }
 
-// -------------------- Input wiring --------------------
+// -------------------- Init --------------------
 
-undoBtn.addEventListener('click', () => undo());
-restartBtn.addEventListener('click', () => restartCurrentPuzzle());
-newGameBtn.addEventListener('click', () => startLevel(level, true));
+function init(): void {
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  undoBtn = document.querySelector<HTMLButtonElement>('#undo')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  newGameBtn = document.querySelector<HTMLButtonElement>('#new-game')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitleEl = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
 
-overlayNextBtn.addEventListener('click', () => {
-  // overlay open → ana state Playing'e dönmemeli, doğrudan nextLevel.
-  nextLevel();
-});
+  level = safeReadNumber(STORAGE_LEVEL, 1);
+  bestMoves = safeReadJSON(STORAGE_BEST, {});
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (won) {
-    if (k === 'enter' || k === 'n' || k === ' ') {
-      nextLevel();
-      e.preventDefault();
-    }
-    return;
-  }
-  if (k === 'z' || (e.metaKey && k === 'z') || (e.ctrlKey && k === 'z')) {
-    undo();
-    e.preventDefault();
-  } else if (k === 'r') {
-    restartCurrentPuzzle();
-    e.preventDefault();
-  } else if (k === 'n') {
-    // sadece çözülmüşse kullanıcının "sonraki seviye"si.
+  undoBtn.addEventListener('click', () => undo());
+  restartBtn.addEventListener('click', () => restartCurrentPuzzle());
+  newGameBtn.addEventListener('click', () => startLevel(level, true));
+
+  overlayNextBtn.addEventListener('click', () => {
+    nextLevel();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
     if (won) {
-      nextLevel();
-      e.preventDefault();
+      if (k === 'enter' || k === 'n' || k === ' ') {
+        nextLevel();
+        e.preventDefault();
+      }
+      return;
     }
-  } else if (k === 'escape') {
-    if (selectedIdx !== null) {
-      selectedIdx = null;
-      renderBoard();
+    if (k === 'z' || (e.metaKey && k === 'z') || (e.ctrlKey && k === 'z')) {
+      undo();
       e.preventDefault();
+    } else if (k === 'r') {
+      restartCurrentPuzzle();
+      e.preventDefault();
+    } else if (k === 'n') {
+      if (won) {
+        nextLevel();
+        e.preventDefault();
+      }
+    } else if (k === 'escape') {
+      if (selectedIdx !== null) {
+        selectedIdx = null;
+        renderBoard();
+        e.preventDefault();
+      }
     }
-  }
-});
+  });
 
-// Init.
-loadOrInit();
-updateHud();
+  loadOrInit();
+  updateHud();
+}
+
+export const game = defineGame({ init, reset: restartCurrentPuzzle });
