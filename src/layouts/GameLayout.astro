@@ -39,6 +39,7 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).hre
     <div class="stage__actions">
       <ShareButton url={shareUrl} title={title} text={description} />
     </div>
+    <slot name="below" />
   </main>
   <SiteFooter />
 </BaseLayout>
