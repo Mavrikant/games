@@ -4,6 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Nav from '@components/Nav.astro';
 import Card from '@components/Card.astro';
 import PlayerOverlay from '@components/PlayerOverlay.astro';
+import SiteFooter from '@components/SiteFooter.astro';
 import '@styles/archive.css';
 
 const all = await getCollection('games');
@@ -145,6 +146,7 @@ const itemListSchema = {
     </footer>
   </main>
 
+  <SiteFooter />
   <PlayerOverlay />
 
   <script

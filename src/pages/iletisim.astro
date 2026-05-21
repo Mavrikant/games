@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+import '@styles/archive.css';
+
+const games = await getCollection('games');
+
+const contactEmail =
+  import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
+const tiktokUrl = import.meta.env.PUBLIC_TIKTOK_URL ?? '';
+const instagramUrl = import.meta.env.PUBLIC_INSTAGRAM_URL ?? '';
+const twitterUrl = import.meta.env.PUBLIC_TWITTER_URL ?? '';
+const youtubeUrl = import.meta.env.PUBLIC_YOUTUBE_URL ?? '';
+const discordUrl = import.meta.env.PUBLIC_DISCORD_URL ?? '';
+
+const socials = [
+  { name: 'TikTok', url: tiktokUrl },
+  { name: 'Instagram', url: instagramUrl },
+  { name: 'X / Twitter', url: twitterUrl },
+  { name: 'YouTube', url: youtubeUrl },
+  { name: 'Discord', url: discordUrl },
+].filter((s) => s.url);
+---
+
+<BaseLayout
+  title="İletişim — Tarayıcı Oyunları"
+  description="karaman.dev/games iletişim bilgileri: e-posta, sosyal medya hesapları, geri bildirim ve sponsor iletişimi."
+>
+  <Nav count={games.length} />
+  <main class="app legal">
+    <h1>İletişim</h1>
+    <p class="legal__updated">Geri bildirim, oyun önerisi, hata raporu, sponsor görüşmeleri için bu sayfa.</p>
+
+    <h2>E-posta</h2>
+    <p>
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </p>
+    <p>Tipik yanıt süresi: 2-5 iş günü.</p>
+
+    {
+      socials.length > 0 && (
+        <>
+          <h2>Sosyal medya</h2>
+          <ul>
+            {socials.map((s) => (
+              <li>
+                <strong>{s.name}</strong>:{' '}
+                <a href={s.url} target="_blank" rel="noopener noreferrer">
+                  {s.url.replace(/^https?:\/\//, '')}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    <h2>Hata raporu / oyun önerisi</h2>
+    <p>
+      Bu site açık kaynak. Bir hata bulduysan veya oyun fikrin varsa GitHub'da
+      issue açabilirsin:
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/Mavrikant/games/issues"
+          target="_blank"
+          rel="noopener noreferrer">Mavrikant/games — Issues</a>
+      </li>
+    </ul>
+
+    <h2>Sponsor / iş birliği</h2>
+    <p>
+      Sponsorluk, custom branded oyun yaptırma, iframe lisansı veya başka
+      iş birliği için e-posta ile ulaş — yukarıdaki adres.
+      Aylık ziyaretçi/sayfa görüntüleme verileri için sorduğunda paylaşılır.
+    </p>
+
+    <h2>Eğitim kullanımı</h2>
+    <p>
+      Sınıfta veya etüt grubunda oyunları kullanmak ücretsiz. İhtiyacın olan
+      bir tema veya zorluk seviyesi varsa söyle, listeye ekleyebiliriz.
+    </p>
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,197 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+import '@styles/archive.css';
+
+const games = await getCollection('games');
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
+---
+
+<BaseLayout
+  title="Gizlilik Politikası — Tarayıcı Oyunları"
+  description="karaman.dev/games gizlilik politikası: hangi veriler toplanır, nasıl kullanılır, KVKK kapsamındaki haklarınız."
+>
+  <Nav count={games.length} />
+  <main class="app legal">
+    <h1>Gizlilik Politikası</h1>
+    <p class="legal__updated">Son güncelleme: {new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+    <h2>Veri sorumlusu</h2>
+    <p>
+      Bu site karaman.dev tarafından işletilmektedir. KVKK kapsamında veri
+      sorumlusu sıfatıyla aşağıdaki bilgileri sunarız. İletişim:
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+    </p>
+
+    <h2>Toplanan veriler</h2>
+    <p>Bu sitede aşağıdaki anonim/teknik veriler toplanabilir:</p>
+    <ul>
+      <li>
+        <strong>Ziyaret istatistikleri</strong>: Hangi sayfayı ziyaret
+        ettiğiniz, ziyaret süresi, geldiğiniz site (referrer), tarayıcı türü,
+        cihaz türü, ülke düzeyinde konum. Bu veriler{' '}
+        {plausibleDomain ? (
+          <span>
+            <a
+              href="https://plausible.io/data-policy"
+              target="_blank"
+              rel="noopener noreferrer">Plausible Analytics</a>
+            {' '}üzerinden toplanır.
+          </span>
+        ) : (
+          <span>analitik bir araç (Plausible) üzerinden toplanabilir.</span>
+        )}
+        {' '}Çerez kullanılmaz, IP adresi saklanmaz, ziyaretçi kimlikleri
+        kişiselleştirilmez.
+      </li>
+      <li>
+        <strong>Reklam çerezleri</strong>:{' '}
+        {adsenseClient ? (
+          <span>
+            Sitede Google AdSense reklamları görüntülenebilir. AdSense kendi
+            çerezlerini ve cihaz tanımlayıcılarını kullanarak ilgi alanına dayalı
+            reklam sunabilir. Detay:{' '}
+            <a
+              href="https://policies.google.com/technologies/ads"
+              target="_blank"
+              rel="noopener noreferrer">Google reklam politikası</a>.
+          </span>
+        ) : (
+          <span>
+            İleride bu sitede Google AdSense reklamları görüntülenebilir. AdSense
+            çerez kullanarak ilgi alanına dayalı reklam sunabilir; bu durumda
+            bu politika güncellenecektir.
+          </span>
+        )}
+      </li>
+      <li>
+        <strong>Yerel depolama (localStorage)</strong>: Her oyun, sizin en iyi
+        skorunuzu ve oyun ilerlemenizi tarayıcınızda saklar. Bu veriler
+        sunucuya gönderilmez; tarayıcı verilerini sildiğinizde kaybolur.
+      </li>
+    </ul>
+
+    <h2>Verilerin kullanım amacı</h2>
+    <ul>
+      <li>Hangi oyunların daha çok oynandığını anlamak ve içeriği geliştirmek</li>
+      <li>Site performansını ve erişilebilirliği iyileştirmek</li>
+      <li>Reklam yayınlanıyorsa, içerikle alakalı reklam göstermek</li>
+    </ul>
+
+    <h2>Üçüncü taraflar</h2>
+    <p>Site aşağıdaki üçüncü taraf hizmetleri kullanabilir:</p>
+    <ul>
+      <li>
+        <strong>Plausible Analytics</strong> (eu-host, cookie-free):{' '}
+        <a href="https://plausible.io/privacy"
+          target="_blank"
+          rel="noopener noreferrer">plausible.io/privacy</a>
+      </li>
+      <li>
+        <strong>Google AdSense</strong> (etkinleştirildiğinde):{' '}
+        <a href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer">policies.google.com/privacy</a>
+      </li>
+      <li>
+        <strong>GitHub Pages</strong> (hosting):{' '}
+        <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement"
+          target="_blank"
+          rel="noopener noreferrer">GitHub gizlilik politikası</a>
+      </li>
+      <li>
+        <strong>Rsms.me</strong> (Inter fontu için CDN)
+      </li>
+    </ul>
+
+    <h2>KVKK kapsamındaki haklarınız</h2>
+    <p>
+      6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 11. maddesi uyarınca
+      aşağıdaki haklara sahipsiniz:
+    </p>
+    <ul>
+      <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+      <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+      <li>İşlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme</li>
+      <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+      <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+      <li>KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde silinmesini isteme</li>
+      <li>Otomatik sistemler vasıtasıyla analiz edilmesine itiraz etme</li>
+    </ul>
+    <p>
+      Haklarınızı kullanmak için{' '}
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a> adresine yazılı
+      başvuruda bulunabilirsiniz.
+    </p>
+
+    <h2>Çerez tercihleri</h2>
+    <p>
+      Tarayıcınızın ayarlarından çerezleri devre dışı bırakabilirsiniz.
+      Plausible Analytics çerez kullanmaz; AdSense aktifse Google reklam ayarları
+      üzerinden{' '}
+      <a href="https://adssettings.google.com/"
+        target="_blank"
+        rel="noopener noreferrer">adssettings.google.com</a>{' '}
+      adresinden ilgi alanına dayalı reklamı kapatabilirsiniz.
+    </p>
+
+    <h2>Çocukların gizliliği</h2>
+    <p>
+      Bu site herhangi bir yaş grubuna hitap edebilir ancak bilinçli olarak 13
+      yaş altındaki çocuklardan kişisel veri toplamaz.
+    </p>
+
+    <h2>Politikadaki değişiklikler</h2>
+    <p>
+      Bu politika güncellenebilir. Değişiklikler bu sayfada yayınlanır; ana
+      değişiklikler sosyal medya ve bülten üzerinden duyurulur.
+    </p>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+
+<style is:global>
+  .legal {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .legal h1 {
+    font-size: 28px;
+    margin: 0 0 8px;
+  }
+  .legal h2 {
+    font-size: 18px;
+    margin: 28px 0 8px;
+    color: var(--text);
+  }
+  .legal__updated {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 0 0 24px;
+  }
+  .legal p,
+  .legal ul {
+    color: var(--text-muted);
+  }
+  .legal ul {
+    padding-left: 22px;
+    margin: 8px 0 12px;
+  }
+  .legal li {
+    margin: 6px 0;
+  }
+  .legal a {
+    color: var(--accent, #60a5fa);
+  }
+  .legal a:hover {
+    text-decoration: underline;
+  }
+</style>

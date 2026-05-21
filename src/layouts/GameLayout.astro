@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import ShareButton from '@components/ShareButton.astro';
 import '@styles/game-shell.css';
 
 interface Props {
@@ -11,6 +13,8 @@ interface Props {
 }
 
 const { title, description, controls, howToPlay, ogImage } = Astro.props;
+
+const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 
 <BaseLayout
@@ -29,5 +33,17 @@ const { title, description, controls, howToPlay, ogImage } = Astro.props;
         <p>{howToPlay}</p>
       </details>
     )}
+    <div class="stage__actions">
+      <ShareButton url={shareUrl} title={title} text={description} />
+    </div>
   </main>
+  <SiteFooter />
 </BaseLayout>
+
+<style is:global>
+  .stage__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+</style>

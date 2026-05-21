@@ -1,0 +1,106 @@
+---
+interface Props {
+  url?: string;
+  title?: string;
+  text?: string;
+}
+const { url, title, text } = Astro.props;
+---
+
+<button
+  class="share-btn hud__btn"
+  type="button"
+  data-share-url={url ?? ''}
+  data-share-title={title ?? ''}
+  data-share-text={text ?? ''}
+  aria-label="Paylaş"
+>
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="4" cy="8" r="2"></circle>
+    <circle cx="12" cy="3.5" r="2"></circle>
+    <circle cx="12" cy="12.5" r="2"></circle>
+    <line x1="5.7" y1="7" x2="10.3" y2="4.5"></line>
+    <line x1="5.7" y1="9" x2="10.3" y2="11.5"></line>
+  </svg>
+  <span>Paylaş</span>
+</button>
+
+<script>
+  function trackEvent(name: string): void {
+    const w = window as unknown as { plausible?: (e: string) => void };
+    if (typeof w.plausible === 'function') {
+      try {
+        w.plausible(name);
+      } catch {
+        /* swallow */
+      }
+    }
+  }
+
+  document.addEventListener('click', async (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    const btn = target.closest<HTMLButtonElement>('.share-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    const shareUrl = btn.dataset.shareUrl || window.location.href;
+    const shareTitle = btn.dataset.shareTitle || document.title;
+    const shareText = btn.dataset.shareText || '';
+
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({
+          url: shareUrl,
+          title: shareTitle,
+          text: shareText,
+        });
+        trackEvent('share:native');
+        return;
+      } catch (err) {
+        // User cancelled or share failed; fall through to clipboard.
+        const name = err instanceof Error ? err.name : '';
+        if (name === 'AbortError') return; // user cancelled
+      }
+    }
+
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        btn.classList.add('share-btn--copied');
+        const label = btn.querySelector('span');
+        const originalText = label?.textContent ?? 'Paylaş';
+        if (label) label.textContent = 'Kopyalandı';
+        trackEvent('share:clipboard');
+        setTimeout(() => {
+          btn.classList.remove('share-btn--copied');
+          if (label) label.textContent = originalText;
+        }, 1600);
+      } catch {
+        /* clipboard blocked — give up silently */
+      }
+    }
+  });
+</script>
+
+<style>
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .share-btn--copied {
+    color: var(--accent, #60a5fa);
+    border-color: var(--accent, #60a5fa);
+  }
+</style>

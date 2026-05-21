@@ -23,6 +23,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
 const ogImageUrl = ogImage
   ? new URL(ogImage, Astro.site ?? Astro.url.origin).href
   : undefined;
+
+// Analytics + ads — env-driven so dev builds don't ping production endpoints.
+// Set in deploy CI: PUBLIC_PLAUSIBLE_DOMAIN=karaman.dev, PUBLIC_ADSENSE_CLIENT=ca-pub-…
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 ---
 
 <!doctype html>
@@ -49,6 +54,36 @@ const ogImageUrl = ogImage
     <title>{title}</title>
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    {
+      plausibleDomain && (
+        <script
+          is:inline
+          defer
+          data-domain={plausibleDomain}
+          src="https://plausible.io/js/script.outbound-links.tagged-events.js"
+        />
+      )
+    }
+    {
+      plausibleDomain && (
+        <script
+          is:inline
+          set:html={
+            'window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }'
+          }
+        />
+      )
+    }
+    {
+      adsenseClient && (
+        <script
+          is:inline
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+          crossorigin="anonymous"
+        />
+      )
+    }
     <slot name="head" />
   </head>
   <body>
