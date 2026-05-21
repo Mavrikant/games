@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 
 type State = 'ready' | 'showing' | 'waiting' | 'gameover';
 
@@ -31,10 +32,14 @@ let best = 0;
 let lives = MAX_LIVES;
 let orderLength = 1;
 let showTimer: ReturnType<typeof setTimeout> | null = null;
+let nextOrderTimer: ReturnType<typeof setTimeout> | null = null;
+let gameoverTimer: ReturnType<typeof setTimeout> | null = null;
+let genToken = createGenToken();
 
 let overlayEl!: HTMLElement;
 let overlayTitle!: HTMLElement;
 let overlayMsg!: HTMLElement;
+let overlayStartBtn!: HTMLButtonElement;
 let restartBtn!: HTMLButtonElement;
 let scoreEl!: HTMLElement;
 let bestEl!: HTMLElement;
@@ -49,14 +54,22 @@ let undoBtn!: HTMLButtonElement;
 let kafeWrap!: HTMLElement;
 let drinkBtns!: NodeListOf<HTMLButtonElement>;
 
-function showOverlay(title: string, msg: string): void {
+function showOverlay(title: string, msg: string, startLabel?: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
+  overlayStartBtn.textContent = startLabel ?? 'Başla';
+  overlayStartBtn.style.display = state === 'gameover' || state === 'ready' ? '' : 'none';
   showOverlayEl(overlayEl);
 }
 
 function hideOverlay(): void {
   hideOverlayEl(overlayEl);
+}
+
+function clearAllPendingTimers(): void {
+  if (showTimer !== null) { clearTimeout(showTimer); showTimer = null; }
+  if (nextOrderTimer !== null) { clearTimeout(nextOrderTimer); nextOrderTimer = null; }
+  if (gameoverTimer !== null) { clearTimeout(gameoverTimer); gameoverTimer = null; }
 }
 
 function updateLives(): void {
@@ -105,6 +118,7 @@ function setDrinkBtnsEnabled(enabled: boolean): void {
 }
 
 function startNewOrder(): void {
+  const myToken = genToken;
   order = randomOrder(orderLength);
   tray = [];
   state = 'showing';
@@ -115,6 +129,8 @@ function startNewOrder(): void {
 
   if (showTimer !== null) clearTimeout(showTimer);
   showTimer = setTimeout(() => {
+    showTimer = null;
+    if (myToken !== genToken) return;
     orderLabel.textContent = 'Sipariş gizlendi — şimdi hazırla!';
     renderOrderItems(false);
     state = 'waiting';
@@ -133,6 +149,7 @@ function flashWrap(type: 'ok' | 'err'): void {
 function submitOrder(): void {
   if (state !== 'waiting') return;
   const correct = tray.every((d, i) => d.id === order[i]!.id);
+  const myToken = genToken;
   if (correct) {
     score++;
     scoreEl.textContent = String(score);
@@ -143,7 +160,12 @@ function submitOrder(): void {
     }
     orderLength = Math.min(orderLength + 1, 6);
     flashWrap('ok');
-    setTimeout(() => startNewOrder(), 600);
+    setDrinkBtnsEnabled(false);
+    nextOrderTimer = setTimeout(() => {
+      nextOrderTimer = null;
+      if (myToken !== genToken) return;
+      startNewOrder();
+    }, 600);
   } else {
     lives--;
     updateLives();
@@ -151,23 +173,34 @@ function submitOrder(): void {
     flashWrap('err');
     renderOrderItems(true);
     orderLabel.textContent = 'Yanlış! Doğru sipariş:';
+    setDrinkBtnsEnabled(false);
     if (lives <= 0) {
       state = 'gameover';
-      if (showTimer !== null) clearTimeout(showTimer);
-      setDrinkBtnsEnabled(false);
-      setTimeout(() => {
-        showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
+      gameoverTimer = setTimeout(() => {
+        gameoverTimer = null;
+        if (myToken !== genToken) return;
+        showOverlay('Bitti!', `Skor: ${score} · R ile veya butonla yeniden başla`, 'Yeniden başla');
       }, 1200);
     } else {
       state = 'showing';
-      setDrinkBtnsEnabled(false);
-      setTimeout(() => startNewOrder(), 1800);
+      nextOrderTimer = setTimeout(() => {
+        nextOrderTimer = null;
+        if (myToken !== genToken) return;
+        startNewOrder();
+      }, 1800);
     }
   }
 }
 
+function startGameFromReady(): void {
+  if (state !== 'ready') return;
+  hideOverlay();
+  startNewOrder();
+}
+
 function reset(): void {
-  if (showTimer !== null) clearTimeout(showTimer);
+  genToken = createGenToken();
+  clearAllPendingTimers();
   state = 'ready';
   order = [];
   tray = [];
@@ -181,14 +214,14 @@ function reset(): void {
   orderItems.innerHTML = '';
   renderTray();
   setDrinkBtnsEnabled(false);
-  hideOverlay();
-  showOverlay('Kafe Görevlisi', 'Müşteri siparişini ezberle ve doğru sırayla hazırla.\nBaşlamak için aşağıdan bir içecek seç.');
+  showOverlay('Kafe Görevlisi', 'Müşteri siparişini ezberle ve doğru sırayla hazırla.\nBaşlamak için tıkla.', 'Başla');
 }
 
 function init(): void {
   overlayEl = document.querySelector<HTMLElement>('#overlay')!;
   overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
   overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayStartBtn = document.querySelector<HTMLButtonElement>('#overlay-start')!;
   restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
   scoreEl = document.querySelector<HTMLElement>('#score')!;
   bestEl = document.querySelector<HTMLElement>('#best')!;
@@ -205,13 +238,26 @@ function init(): void {
 
   best = safeRead<number>(STORAGE_KEY, 0);
 
+  overlayStartBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (state === 'ready') {
+      startGameFromReady();
+    } else if (state === 'gameover') {
+      reset();
+      startGameFromReady();
+    }
+  });
+
+  overlayEl.addEventListener('click', () => {
+    if (state === 'ready') startGameFromReady();
+    else if (state === 'gameover') {
+      reset();
+      startGameFromReady();
+    }
+  });
+
   drinkBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      if (state === 'ready') {
-        hideOverlay();
-        startNewOrder();
-        return;
-      }
       if (state !== 'waiting') return;
       if (tray.length >= orderLength) return;
       const drink = getDrink(btn.dataset.drink!);
@@ -229,18 +275,27 @@ function init(): void {
     renderTray();
   });
 
-  restartBtn.addEventListener('click', reset);
+  restartBtn.addEventListener('click', () => {
+    reset();
+    startGameFromReady();
+  });
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Backspace') {
-      e.preventDefault();
       if (state === 'waiting' && tray.length > 0) {
+        e.preventDefault();
         tray.pop();
         renderTray();
       }
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (state === 'waiting' && tray.length === orderLength) submitOrder();
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      if (state === 'ready' || state === 'gameover') {
+        e.preventDefault();
+        if (state === 'gameover') reset();
+        startGameFromReady();
+      } else if (state === 'waiting' && tray.length === orderLength) {
+        e.preventDefault();
+        submitOrder();
+      }
     } else if (e.key === 'r' || e.key === 'R') {
       e.preventDefault();
       reset();
