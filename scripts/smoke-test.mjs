@@ -73,10 +73,14 @@ try {
   process.exit(1);
 }
 
-// 1. Spawn astro preview server.
+// 1. Spawn astro preview server. detached:true puts the child in its
+// own process group so we can kill the entire tree at the end —
+// `npx astro preview` spawns a Vite child that ignores SIGTERM
+// reaching only the npx wrapper, leaving Node's event loop blocked.
 const server = spawn('npx', ['astro', 'preview', '--host', '127.0.0.1', '--port', String(PORT)], {
   cwd: root,
   stdio: ['ignore', 'pipe', 'pipe'],
+  detached: true,
 });
 
 let serverErrors = '';
@@ -93,7 +97,19 @@ let shuttingDown = false;
 function shutdown() {
   if (shuttingDown) return;
   shuttingDown = true;
-  if (!server.killed) server.kill('SIGTERM');
+  // Kill the whole process group (negative PID) so the Vite preview
+  // child dies along with the npx wrapper.
+  if (server.pid && !server.killed) {
+    try {
+      process.kill(-server.pid, 'SIGTERM');
+    } catch {
+      try {
+        server.kill('SIGTERM');
+      } catch {
+        /* already gone */
+      }
+    }
+  }
 }
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
@@ -300,4 +316,8 @@ try {
   shutdown();
   // Give the server a moment to shut down cleanly before this process exits.
   await new Promise((r) => setTimeout(r, 200));
+  // Force exit — npx/Vite preview can leave open handles (sockets,
+  // hot-reload watchers) that keep Node's event loop alive even after
+  // the process group is killed. process.exit() guarantees CI moves on.
+  process.exit(process.exitCode ?? 0);
 }
