@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kule İnşaatı">
+  <defs>
+    <linearGradient id="ki-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c1424" />
+      <stop offset="60%" stop-color="#0a0b0e" />
+      <stop offset="100%" stop-color="#050608" />
+    </linearGradient>
+    <linearGradient id="ki-block" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <linearGradient id="ki-block-2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+    <linearGradient id="ki-block-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ki-bg)" />
+
+  <!-- Stars / parallax dots -->
+  <g fill="#1a2540">
+    <circle cx="35" cy="60" r="1.4"/>
+    <circle cx="90" cy="40" r="1"/>
+    <circle cx="240" cy="55" r="1.2"/>
+    <circle cx="285" cy="35" r="1.6"/>
+    <circle cx="200" cy="70" r="0.9"/>
+  </g>
+
+  <!-- Tower (narrowing upward) -->
+  <g transform="translate(160,190)">
+    <rect x="-72" y="-30" width="144" height="30" fill="url(#ki-block)" rx="2"/>
+    <rect x="-65" y="-60" width="130" height="30" fill="url(#ki-block-2)" rx="2"/>
+    <rect x="-58" y="-90" width="116" height="30" fill="url(#ki-block)" rx="2"/>
+    <rect x="-50" y="-120" width="100" height="30" fill="url(#ki-block-2)" rx="2"/>
+    <rect x="-40" y="-150" width="80" height="30" fill="url(#ki-block)" rx="2"/>
+  </g>
+
+  <!-- Falling block at top (mid-slide) -->
+  <rect x="220" y="32" width="76" height="22" fill="url(#ki-block-top)" rx="2" />
+  <g stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7">
+    <path d="M218 30 L208 30"/>
+    <path d="M218 43 L204 43"/>
+  </g>
+
+  <text x="22" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Kule İnşaatı</text>
+</svg>

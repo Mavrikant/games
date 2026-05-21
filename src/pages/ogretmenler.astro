@@ -1,0 +1,229 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+import '@styles/archive.css';
+
+const games = await getCollection('games');
+const base = import.meta.env.BASE_URL;
+
+const recommended = [
+  {
+    slug: 'sudoku',
+    grade: '4–12. sınıf',
+    skill: 'Sayı mantığı, eleme, kuralcı düşünme',
+    classroomUse:
+      '5 dakikalık ısınma etkinliği veya matematik dersinde küme/eleme kavramına giriş. Kolay seviyede başla; öğrenciler kendi tempolarında ilerler. Tek bir tabletle de oynanır, sınıfa projeksiyon yapılarak ortak çözüm yaptırılabilir.',
+  },
+  {
+    slug: 'hanoi-kuleleri',
+    grade: '5–12. sınıf',
+    skill: 'Özyineli (rekürsif) düşünme, planlama, algoritma',
+    classroomUse:
+      'Bilişim Teknolojileri veya matematik dersinde rekürsiyon kavramına somut bir köprü. 3 disk başla → 4 → 5 ile zorluk artır. Soru: "5 disk için minimum hamle kaçtır? Neden 2ⁿ−1?" — formülü öğrenciler kendi keşfedebilir.',
+  },
+  {
+    slug: 'mastermind',
+    grade: '4–12. sınıf',
+    skill: 'Tümdengelim, hipotez kurma, bilgi azaltma',
+    classroomUse:
+      'Grup çalışmasında ideal: 4 kişilik takımlar, her tahmin için takım tartışsın. Hangi tahmin en çok bilgi getirir? Bilim yöntemine giriş için harika. 7 hamlede bitirme hedefi mantık derslerinde rekabet öğesi yaratır.',
+  },
+  {
+    slug: 'lights-out',
+    grade: '6–12. sınıf',
+    skill: 'Kombinatorik mantık, modüler aritmetik',
+    classroomUse:
+      'Üst sınıflarda "ışıkları kapatma her zaman mümkün mü?" sorusu ile lineer cebire açılır (mod-2 üzerinde matris çözümü). Alt sınıflarda saf bulmaca: "her çözümün ortak bir özelliği var mı?"',
+  },
+  {
+    slug: 'onbes-bulmaca',
+    grade: '4–9. sınıf',
+    skill: 'Uzamsal akıl yürütme, geri-planlama',
+    classroomUse:
+      'Kısa molalarda en uygun: ortalama 3-5 dakika. "Çözülmeyen hale getirme" denemesi parite kavramına güzel köprüdür — bazı başlangıç dizilimleri matematiksel olarak çözülemez.',
+  },
+  {
+    slug: 'mangala',
+    grade: '3–12. sınıf',
+    skill: 'Strateji, sayma, ileriye düşünme',
+    classroomUse:
+      'Türk kültürü dersi ile birleştirilebilir — Mangala UNESCO somut olmayan kültürel miras adayıdır. İkili oynanır; sınıfta turnuva düzeni kurulabilir. Saymak için somut deneyim, küçük sınıflarda matematik öncesi.',
+  },
+];
+
+const SITE_TITLE =
+  'Öğretmenlere — sınıfta 5 dakikalık mantık oyunları | karaman.dev/games';
+const SITE_DESCRIPTION =
+  'Sınıfta ısınma, grup çalışması veya beceri geliştirme için ücretsiz Türkçe tarayıcı oyunları. 6 mantık ve strateji oyununun pedagojik kullanım önerileri, sınıf düzeyi ve hangi beceriyi geliştirdiği.';
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <Nav count={games.length} />
+  <main class="app legal">
+    <h1>Öğretmenlere — sınıfta beş dakikalık mantık oyunları</h1>
+    <p class="legal__updated">
+      Ücretsiz Türkçe tarayıcı oyunları · indirme yok · kayıt yok · reklamsız
+      ders aracı
+    </p>
+
+    <p>
+      Bu site karaman.dev/games üzerinde, sınıfta ısınma etkinliği, grup
+      çalışması veya kısa bir mantık molası için kullanabileceğiniz oyunlar
+      barındırır. Hepsi tarayıcıda anında açılır; öğrenciler kayıt
+      yapmak zorunda değildir, mobil telefon veya sınıf bilgisayarında
+      sorunsuz çalışır.
+    </p>
+
+    <h2>Neden tarayıcı oyunları sınıfta işe yarar?</h2>
+    <ul>
+      <li>
+        <strong>Sıfır kurulum.</strong> Okul Wi-Fi'ı varsa yeter; QR kod ile
+        paylaşırsınız, öğrenci açar, oynar.
+      </li>
+      <li>
+        <strong>Somut mantık.</strong> Soyut kavramlar (rekürsiyon, parite,
+        kombinatorik) oyun mekaniği üzerinden hissedilir hale gelir.
+      </li>
+      <li>
+        <strong>Ölçeklenebilir zorluk.</strong> Aynı oyunda farklı seviyeler;
+        öğrenci hazır olduğu hızda ilerler.
+      </li>
+      <li>
+        <strong>Türkçe.</strong> Kelime engeli yok; talimatlar net.
+      </li>
+    </ul>
+
+    <h2>6 oyun, 6 farklı beceri</h2>
+
+    <div class="teach-list">
+      {
+        recommended.map((rec) => {
+          const game = games.find((g) => g.id === rec.slug);
+          if (!game) return null;
+          return (
+            <article class="teach-card">
+              <header class="teach-card__head">
+                <h3 class="teach-card__title">
+                  <a href={`${base}${game.id}/`}>{game.data.title}</a>
+                </h3>
+                <span class="teach-card__grade">{rec.grade}</span>
+              </header>
+              <p class="teach-card__desc">{game.data.description}</p>
+              <p class="teach-card__skill">
+                <strong>Beceri:</strong> {rec.skill}
+              </p>
+              <p class="teach-card__use">
+                <strong>Sınıfta kullanım:</strong> {rec.classroomUse}
+              </p>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <h2>Sınıfta nasıl kullanırım?</h2>
+    <ul>
+      <li>
+        <strong>QR kod ile paylaşın.</strong> Oyun sayfasının URL'sini bir
+        QR oluşturucuda (qr-code-generator.com gibi) QR'a çevirin, tahtaya
+        projeksiyon yapın. Öğrenciler telefonlarıyla taradığında doğrudan
+        oyuna girer.
+      </li>
+      <li>
+        <strong>Grup turnuvası.</strong> 3-4 kişilik gruplar; her grup
+        kendi cihazında oynar, en yüksek skor kazanır. Mangala ve
+        Mastermind grup tartışması açısından özellikle güçlü.
+      </li>
+      <li>
+        <strong>"Çözümü açıkla" görevi.</strong> Öğrencilere oyunu çözdükten
+        sonra "stratejini sınıfa anlat" görevi verin. Bu metabilişsel
+        beceriyi besler.
+      </li>
+      <li>
+        <strong>Matematik / Bilişim derslerinde köprü.</strong> Hanoi → rekürsiyon,
+        Lights Out → mod-2 cebir, Onbeş Bulmaca → parite invariantı. Konuya
+        oyunla giriş yapın, ardından teorik tartışmaya geçin.
+      </li>
+    </ul>
+
+    <h2>Tüm puzzle ve mantık oyunları</h2>
+    <p>
+      Yukarıdaki altı oyun başlangıç önerisidir. Sitede toplam {games.length}{' '}
+      oyun var ve birçoğu <em>puzzle</em>, <em>mantık</em> veya <em>strateji</em>
+      etiketli. Hepsini görmek için
+      <a href={`${base}`}> ana sayfa</a>'daki etiket filtresini kullanabilirsiniz.
+    </p>
+
+    <h2>İletişim ve iş birliği</h2>
+    <p>
+      Sınıfta kullandığınız oyunlar, eklenmesini istediğiniz konular veya
+      okul-toplu kullanım için özelleştirme talepleri için
+      <a href={`${base}iletisim/`}> iletişim sayfası</a>'ndan bize ulaşabilirsiniz.
+      Öğretmen toplulukları için ücretsiz, reklamsız bir embed sürümü de
+      sağlayabiliriz — her oyunda "Bu oyunu kendi siten için göm" başlığı
+      altında embed kodu hazır bulunur.
+    </p>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+
+<style is:global>
+  .teach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .teach-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .teach-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .teach-card__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .teach-card__title a {
+    color: var(--text);
+  }
+  .teach-card__title a:hover {
+    color: var(--accent);
+  }
+  .teach-card__grade {
+    color: var(--text-dim);
+    font-size: 12px;
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .teach-card__desc {
+    margin: 0 0 8px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+  }
+  .teach-card__skill,
+  .teach-card__use {
+    margin: 4px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .teach-card__skill strong,
+  .teach-card__use strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+</style>

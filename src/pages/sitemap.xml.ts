@@ -9,6 +9,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const urls = [
     { loc: `${origin}${base}`, lastmod: buildDate },
+    { loc: `${origin}${base}ogretmenler/`, lastmod: buildDate },
     ...games.map((g) => ({
       loc: `${origin}${base}${g.id}/`,
       lastmod: g.data.dateAdded,
