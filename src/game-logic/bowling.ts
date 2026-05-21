@@ -1,3 +1,8 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // Bowling — 10 frame, classic scoring (strike/spare/open).
 // Pitfalls actively guarded:
 // - visual-vs-hitbox: lane width + pin layout in a single const block; hit
@@ -42,17 +47,17 @@ const PIN_POSITIONS: { x: number; y: number }[] = [];
   }
 })();
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const frameEl = document.querySelector<HTMLElement>('#frame')!;
-const framesEl = document.querySelector<HTMLElement>('#frames')!;
-const statusEl = document.querySelector<HTMLElement>('#bw-status')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let frameEl!: HTMLElement;
+let framesEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 interface FrameScore {
   rolls: number[]; // pin counts per roll
@@ -71,32 +76,20 @@ let ballVx = 0;
 let ballVy = 0;
 let best = 0;
 let lastTime = 0;
-let gen = 0;
+const gen = createGenToken();
 
-function safeReadBest(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_BEST);
-    const n = raw ? Number(raw) : 0;
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  } catch {
-    return 0;
-  }
-}
-function safeWriteBest(n: number): void {
-  try {
-    localStorage.setItem(STORAGE_BEST, String(n));
-  } catch {
-    /* ignore */
-  }
+function loadBest(): number {
+  const v = safeRead<number>(STORAGE_BEST, 0);
+  return Number.isFinite(v) && v >= 0 ? v : 0;
 }
 
 function showOverlay(t: string, m: string): void {
   overlayTitle.textContent = t;
   overlayMsg.textContent = m;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function getCss(name: string): string {
@@ -528,7 +521,7 @@ function gameOver(): void {
   const total = totalScore();
   if (total > best) {
     best = total;
-    safeWriteBest(best);
+    safeWrite(STORAGE_BEST, best);
   }
   syncHud();
   showOverlay(`Skor ${total}`, total === 300 ? 'Mükemmel oyun!' : 'R ile yeniden başla.');
@@ -546,7 +539,7 @@ function setStatus(s: string): void {
 }
 
 function fullReset(): void {
-  gen += 1;
+  gen.bump();
   frames = [];
   pinsStanding = new Array(10).fill(true);
   state = 'aiming';
@@ -579,22 +572,38 @@ function loop(now: number): void {
   requestAnimationFrame(loop);
 }
 
-canvas.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  pressAction();
-});
-restartBtn.addEventListener('click', fullReset);
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === ' ' || k === 'enter') {
-    pressAction();
-    e.preventDefault();
-  } else if (k === 'r') {
-    fullReset();
-    e.preventDefault();
-  }
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  frameEl = document.querySelector<HTMLElement>('#frame')!;
+  framesEl = document.querySelector<HTMLElement>('#frames')!;
+  statusEl = document.querySelector<HTMLElement>('#bw-status')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-best = safeReadBest();
-fullReset();
-requestAnimationFrame(loop);
+  canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    pressAction();
+  });
+  restartBtn.addEventListener('click', fullReset);
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === ' ' || k === 'enter') {
+      pressAction();
+      e.preventDefault();
+    } else if (k === 'r') {
+      fullReset();
+      e.preventDefault();
+    }
+  });
+
+  best = loadBest();
+  fullReset();
+  requestAnimationFrame(loop);
+}
+
+export const game = defineGame({ init, reset: fullReset });
