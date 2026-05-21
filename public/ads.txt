@@ -1,6 +1,1 @@
-# ads.txt — Authorized Digital Sellers
-# Once AdSense is approved, replace the placeholder line below with the
-# canonical entry Google provides under AdSense > Sites > ads.txt status.
-# Format: <ad-system-domain>, <publisher-account-id>, <relationship>, <cert-id>
-#
-# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-3532431645667427, DIRECT, f08c47fec0942fa0
