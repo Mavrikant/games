@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+
 // Amiral Battı — classic 10x10 Battleship vs AI.
 // Standard fleet: 1×5 (Taşıyıcı), 1×4 (Savaş gemisi), 2×3 (Kruvazör + Denizaltı),
 // 1×2 (Destroyer). 5 ships, 17 cells per side.
@@ -50,20 +54,19 @@ type AiMode =
 
 // ---------- DOM ----------
 
-const enemyGridEl = document.querySelector<HTMLElement>('#ab-enemy-grid')!;
-const youGridEl = document.querySelector<HTMLElement>('#ab-you-grid')!;
-const statusEl = document.querySelector<HTMLElement>('#ab-status')!;
-const winsEl = document.querySelector<HTMLElement>('#ab-wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#ab-losses')!;
-const enemyLeftEl = document.querySelector<HTMLElement>('#ab-enemy-left')!;
-const youLeftEl = document.querySelector<HTMLElement>('#ab-you-left')!;
-const shuffleBtn = document.querySelector<HTMLButtonElement>('#ab-shuffle')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#ab-restart')!;
-const overlay = document.querySelector<HTMLElement>('#ab-overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#ab-overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#ab-overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#ab-overlay-restart')!;
+let enemyGridEl!: HTMLElement;
+let youGridEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let enemyLeftEl!: HTMLElement;
+let youLeftEl!: HTMLElement;
+let shuffleBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 // ---------- module-level state ----------
 
@@ -74,7 +77,7 @@ let wins = 0;
 let losses = 0;
 // Generation token: bumped on reset; any pending AI setTimeout bails if its
 // token no longer matches. Prevents stale-async-callback bugs.
-let gen = 0;
+const gen = createGenToken();
 let aiMode: AiMode = { kind: 'hunt' };
 let enemyCellEls: HTMLButtonElement[] = [];
 let youCellEls: HTMLButtonElement[] = [];
@@ -85,25 +88,6 @@ function makeEmptySide(): Side {
   const cells: Cell[] = [];
   for (let i = 0; i < TOTAL; i++) cells.push({ ship: -1, shot: false });
   return { cells, ships: [] };
-}
-
-function safeReadNumber(key: string): number {
-  try {
-    const raw = localStorage.getItem(key);
-    if (raw === null) return 0;
-    const n = Number(raw);
-    return Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWriteNumber(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
 }
 
 function idx(r: number, c: number): number {
@@ -403,13 +387,13 @@ function setStatus(text: string): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('ab-overlay--hidden');
+  overlay.classList.remove("ab-overlay--hidden"); overlay.setAttribute("aria-hidden", "false");
   overlay.setAttribute('aria-hidden', 'false');
   overlayRestart.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('ab-overlay--hidden');
+  overlay.classList.add("ab-overlay--hidden"); overlay.setAttribute("aria-hidden", "true");
   overlay.setAttribute('aria-hidden', 'true');
 }
 
@@ -437,7 +421,7 @@ function onEnemyClick(e: MouseEvent): void {
   if (allSunk(enemy)) {
     state = 'GameOver';
     wins++;
-    safeWriteNumber(STORAGE_WINS, wins);
+    safeWrite(STORAGE_WINS, wins);
     renderAll();
     showOverlay('Kazandın!', 'Düşmanın tüm filosunu batırdın.');
     return;
@@ -448,11 +432,11 @@ function onEnemyClick(e: MouseEvent): void {
 }
 
 function startAiTurn(): void {
-  const myGen = gen;
+  const myGen = gen.current();
   setStatus('Düşman düşünüyor…');
   window.setTimeout(() => {
     // Stale-async-callback guard: if reset bumped gen during the delay, bail.
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'AiTurn') return;
     const i = chooseAiTarget(you);
     if (i < 0) return;
@@ -470,7 +454,7 @@ function startAiTurn(): void {
     if (allSunk(you)) {
       state = 'GameOver';
       losses++;
-      safeWriteNumber(STORAGE_LOSSES, losses);
+      safeWrite(STORAGE_LOSSES, losses);
       renderAll();
       showOverlay('Kaybettin.', 'Filon battı.');
       return;
@@ -484,7 +468,7 @@ function startAiTurn(): void {
 
 function reset(): void {
   // Bump generation: any pending AI setTimeout from the previous game bails.
-  gen++;
+  gen.bump();
   enemy = makeEmptySide();
   you = makeEmptySide();
   regenerate(enemy);
@@ -512,29 +496,46 @@ function shuffleOwn(): void {
   renderAll();
 }
 
-// ---------- wire up ----------
+// ---------- init ----------
+function init(): void {
+  enemyGridEl = document.querySelector<HTMLElement>('#ab-enemy-grid')!;
+  youGridEl = document.querySelector<HTMLElement>('#ab-you-grid')!;
+  statusEl = document.querySelector<HTMLElement>('#ab-status')!;
+  winsEl = document.querySelector<HTMLElement>('#ab-wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#ab-losses')!;
+  enemyLeftEl = document.querySelector<HTMLElement>('#ab-enemy-left')!;
+  youLeftEl = document.querySelector<HTMLElement>('#ab-you-left')!;
+  shuffleBtn = document.querySelector<HTMLButtonElement>('#ab-shuffle')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#ab-restart')!;
+  overlay = document.querySelector<HTMLElement>('#ab-overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#ab-overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#ab-overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#ab-overlay-restart')!;
 
-wins = safeReadNumber(STORAGE_WINS);
-losses = safeReadNumber(STORAGE_LOSSES);
+  wins = safeRead<number>(STORAGE_WINS, 0);
+  losses = safeRead<number>(STORAGE_LOSSES, 0);
 
-buildGrid(enemyGridEl, enemyCellEls, true);
-buildGrid(youGridEl, youCellEls, false);
+  buildGrid(enemyGridEl, enemyCellEls, true);
+  buildGrid(youGridEl, youCellEls, false);
 
-restartBtn.addEventListener('click', reset);
-overlayRestart.addEventListener('click', reset);
-shuffleBtn.addEventListener('click', shuffleOwn);
+  restartBtn.addEventListener('click', reset);
+  overlayRestart.addEventListener('click', reset);
+  shuffleBtn.addEventListener('click', shuffleOwn);
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    reset();
-    e.preventDefault();
-  } else if (e.key === 'Enter' && state === 'GameOver') {
-    reset();
-    e.preventDefault();
-  }
-});
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      reset();
+      e.preventDefault();
+    } else if (e.key === 'Enter' && state === 'GameOver') {
+      reset();
+      e.preventDefault();
+    }
+  });
 
-reset();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
 
 // ---------- test hooks (exposed for headless playtest harness) ----------
 // Not used by the page; harness can attach to window via dynamic import.
