@@ -10,6 +10,7 @@
     "check": "astro check",
     "new-game": "node scripts/new-game.mjs",
     "audit:games": "node scripts/audit-games.mjs",
+    "test:smoke": "node scripts/smoke-test.mjs",
     "astro": "astro"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "playwright": "^1.49.1",
     "typescript": "^6.0.3"
   }
 }

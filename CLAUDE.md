@@ -111,6 +111,8 @@ public/thumbs/            ← kart görselleri
 | `npm run preview` | Prod build'i lokal serve et |
 | `npm run new-game <slug> -- --title "..." --description "..."` | Scaffold |
 | `npm run check` | Sadece type check |
+| `npm run audit:games` | `@shared/*` adoption + module-level qS raporu |
+| `npm run test:smoke` | Headless chromium ile her oyunu açıp init + console error kontrolü; screenshot `test-results/` |
 
 ## Doğrulama (PR açmadan önce çalıştır)
 

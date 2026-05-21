@@ -51,3 +51,28 @@ jobs:
             exit 1
           fi
           echo "All game routes generated."
+
+  playtest:
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+      - name: Install chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Headless smoke (init + console errors + screenshot)
+        run: npm run test:smoke
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playtest-screenshots
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 7
