@@ -1,3 +1,5 @@
+import { safeRead, safeWrite } from '@shared/storage';
+
 const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
 const ctx = canvas.getContext('2d')!;
 const scorePlayerEl = document.querySelector<HTMLElement>('#score-player')!;
@@ -50,7 +52,8 @@ let ballSpeed = BALL_BASE_SPEED;
 
 let playerScore = 0;
 let cpuScore = 0;
-let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+let best = safeRead<number>(STORAGE_KEY, 0);
+if (!Number.isFinite(best) || best < 0) best = 0;
 
 let serving = true;
 let serveTo: 1 | -1 = -1; // -1 = ball goes toward player (CPU serves), 1 = toward cpu
@@ -114,11 +117,7 @@ function awardPoint(toCpu: boolean): void {
   else playerScore++;
   if (playerScore > best) {
     best = playerScore;
-    try {
-      localStorage.setItem(STORAGE_KEY, String(best));
-    } catch {
-      /* ignore */
-    }
+    safeWrite(STORAGE_KEY, best);
   }
   updateHud();
 
