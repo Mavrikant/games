@@ -4,6 +4,12 @@
 > Geçmiş 4 fix PR'ının ([#9](https://github.com/Mavrikant/browser-games/pull/9), [#10](https://github.com/Mavrikant/browser-games/pull/10), [#11](https://github.com/Mavrikant/browser-games/pull/11), [#12](https://github.com/Mavrikant/browser-games/pull/12)) hepsi 30 saniyelik gerçek oynama
 > ile yakalanırdı. Bu dosya her oyun PR'ı öncesi yapılacak minimum playtest'i
 > tanımlar. Atlanırsa fix PR'ı sıraya girer.
+>
+> **`npm run test:smoke` artık var**: her oyun headless chromium'da
+> yükleniyor, init crash + console.error + blank render bu seviyede
+> yakalanıyor. Aşağıdaki insan-playtest checklist'i hâlâ zorunlu —
+> smoke ne overlay-input-leak'i ne stale-async-callback'i ne de yanlış
+> skoru yakalar.
 
 ## Felsefe
 
