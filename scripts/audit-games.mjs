@@ -14,6 +14,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const logicDir = resolve(root, 'src', 'game-logic');
 const cssDir = resolve(root, 'src', 'styles', 'games');
+const contentDir = resolve(root, 'src', 'content', 'games');
+const thumbsDir = resolve(root, 'public', 'thumbs');
 
 if (!existsSync(logicDir)) {
   console.error(`Not found: ${logicDir}`);
@@ -92,6 +94,25 @@ for (const file of files) {
     }
   }
 
+  // Thumbnail reference check: if the JSON metadata sets `thumbnail`,
+  // the referenced file under public/thumbs/ must actually exist. A dangling
+  // reference renders as a broken <img> on the archive card (Card.astro reads
+  // the field unconditionally). See pitfall: dangling-thumbnail-reference.
+  let danglingThumbnail = null; // either null or the referenced filename
+  const jsonPath = resolve(contentDir, `${slug}.json`);
+  if (existsSync(jsonPath)) {
+    let meta;
+    try {
+      meta = JSON.parse(readFileSync(jsonPath, 'utf8'));
+    } catch {
+      meta = null;
+    }
+    if (meta && typeof meta.thumbnail === 'string' && meta.thumbnail.length > 0) {
+      const thumbPath = resolve(thumbsDir, meta.thumbnail);
+      if (!existsSync(thumbPath)) danglingThumbnail = meta.thumbnail;
+    }
+  }
+
   rows.push({
     slug,
     score,
@@ -102,6 +123,7 @@ for (const file of files) {
     moduleLevelQs,
     unguardedStorage,
     missingOverlayCss,
+    danglingThumbnail,
     loc: lines.length,
   });
 }
@@ -122,18 +144,19 @@ const noAdoption = rows.filter((r) => r.score === 0).length;
 const anyUnguarded = rows.filter((r) => r.unguardedStorage > 0).length;
 const anyModuleLevelQs = rows.filter((r) => r.moduleLevelQs > 0).length;
 const anyMissingOverlayCss = rows.filter((r) => r.missingOverlayCss).length;
+const anyDanglingThumbnail = rows.filter((r) => r.danglingThumbnail).length;
 
 const banner = `
 # Game-logic audit
 
-| Toplam oyun | Tam adoption (4/4) | Adoption yok (0/4) | Unguarded storage | Module-level qS | Missing overlay CSS |
-|---:|---:|---:|---:|---:|---:|
-| ${totalGames} | ${fullyAdopted} | ${noAdoption} | ${anyUnguarded} | ${anyModuleLevelQs} | ${anyMissingOverlayCss} |
+| Toplam | 4/4 | 0/4 | Unsafe LS | Mod qS | Miss OvCSS | Dangling thumb |
+|---:|---:|---:|---:|---:|---:|---:|
+| ${totalGames} | ${fullyAdopted} | ${noAdoption} | ${anyUnguarded} | ${anyModuleLevelQs} | ${anyMissingOverlayCss} | ${anyDanglingThumbnail} |
 
 ## Detaylı tablo
 
-| Slug | Score | Storage | GameModule | Overlay | GenToken | UnsafeLS | ModLvlQS | OvCSS | LOC |
-|---|---:|:---:|:---:|:---:|:---:|---:|---:|:---:|---:|
+| Slug | Score | Storage | GameModule | Overlay | GenToken | UnsafeLS | ModLvlQS | OvCSS | Thumb | LOC |
+|---|---:|:---:|:---:|:---:|:---:|---:|---:|:---:|:---:|---:|
 `;
 
 console.log(banner.trim());
@@ -144,8 +167,10 @@ for (const r of rows) {
   let ovCss;
   if (!r.overlay) ovCss = '·';
   else ovCss = r.missingOverlayCss ? '✗' : '✓';
+  // Thumb column: '✗' = JSON references a file that doesn't exist.
+  const thumb = r.danglingThumbnail ? '✗' : '·';
   console.log(
-    `| ${r.slug} | ${r.score}/4 | ${mark(r.storage)} | ${mark(r.gameModule)} | ${mark(r.overlay)} | ${mark(r.genToken)} | ${r.unguardedStorage} | ${r.moduleLevelQs} | ${ovCss} | ${r.loc} |`,
+    `| ${r.slug} | ${r.score}/4 | ${mark(r.storage)} | ${mark(r.gameModule)} | ${mark(r.overlay)} | ${mark(r.genToken)} | ${r.unguardedStorage} | ${r.moduleLevelQs} | ${ovCss} | ${thumb} | ${r.loc} |`,
   );
 }
 
@@ -159,33 +184,50 @@ console.log(`
 - **OvCSS**: \`@shared/overlay\` import edildi ama oyun-spesifik CSS'te
   \`.overlay--hidden\` (veya prefixli varyantı) tanımı yok →
   \`hideOverlay()\` görsel hiçbir şey yapmaz (PITFALLS#missing-overlay-css).
+- **Thumb**: JSON \`thumbnail\` alanı \`public/thumbs/\` altında olmayan
+  bir dosyaya işaret ediyor → arşiv kartında broken \`<img>\`
+  (PITFALLS#dangling-thumbnail-reference).
 - En düşük score'lu oyunlar önce gelir; o tarafta migration başla.
 - \`--ci\` flag ile CI'da çalışırsa unsafe storage, module-level qS,
-  veya missing overlay CSS görürse exit 1. Yeni oyunlar için ratchet —
-  eklenen oyun mevcut standardı bozarsa CI fail.
+  missing overlay CSS veya dangling thumbnail görürse exit 1.
+  Yeni oyunlar için ratchet — eklenen oyun mevcut standardı bozarsa CI fail.
 `);
 
 // CI mode: exit non-zero if any regression. This locks in the current
 // post-migration state — no future agent can land a game that uses raw
 // localStorage outside try/catch, declares module-level querySelectors,
-// or imports @shared/overlay without the required CSS contract.
+// imports @shared/overlay without the required CSS contract, or
+// references a thumbnail file that doesn't exist.
 if (process.argv.includes('--ci')) {
-  if (anyUnguarded > 0 || anyModuleLevelQs > 0 || anyMissingOverlayCss > 0) {
-    const offenders = rows
+  if (
+    anyUnguarded > 0 ||
+    anyModuleLevelQs > 0 ||
+    anyMissingOverlayCss > 0 ||
+    anyDanglingThumbnail > 0
+  ) {
+    const overlayOffenders = rows
       .filter((r) => r.missingOverlayCss)
       .map((r) => r.slug)
       .join(', ');
+    const thumbOffenders = rows
+      .filter((r) => r.danglingThumbnail)
+      .map((r) => `${r.slug} → ${r.danglingThumbnail}`)
+      .join('; ');
     console.error(
-      `\nCI gate: ${anyUnguarded} unsafe localStorage call(s), ${anyModuleLevelQs} module-level querySelector(s), ${anyMissingOverlayCss} missing overlay CSS rule(s).`,
+      `\nCI gate: ${anyUnguarded} unsafe localStorage, ${anyModuleLevelQs} module-level querySelector(s), ${anyMissingOverlayCss} missing overlay CSS, ${anyDanglingThumbnail} dangling thumbnail(s).`,
     );
     if (anyMissingOverlayCss > 0) {
-      console.error(`  Missing .overlay--hidden in: ${offenders}`);
+      console.error(`  Missing .overlay--hidden in: ${overlayOffenders}`);
       console.error(`  Fix: add the .overlay / .overlay--hidden block from scripts/templates/style.css`);
     }
+    if (anyDanglingThumbnail > 0) {
+      console.error(`  Dangling thumbnail reference(s): ${thumbOffenders}`);
+      console.error(`  Fix: either create the SVG at public/thumbs/<slug>.svg, or remove the "thumbnail" field from the JSON.`);
+    }
     console.error(
-      `Use @shared/storage, move DOM access into init(), and define .overlay--hidden CSS (see docs/SHARED_HELPERS.md, PITFALLS.md#missing-overlay-css).`,
+      `See docs/SHARED_HELPERS.md and PITFALLS.md for migration steps.`,
     );
     process.exit(1);
   }
-  console.log('CI gate: passed (0 unsafe storage, 0 module-level querySelector, 0 missing overlay CSS).');
+  console.log('CI gate: passed (0 unsafe storage, 0 module-level qS, 0 missing overlay CSS, 0 dangling thumbnails).');
 }

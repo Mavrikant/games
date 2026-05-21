@@ -107,6 +107,12 @@
 
 ### G. Persistence ve resize
 - [ ] Yüksek skor / tercih bir oyundan sonra reload'da geri geliyor
+- [ ] **Arşiv kartında thumbnail görünüyor**: `/games/` ana sayfasını aç,
+      yeni oyunun kartında broken-img placeholder'ı yok (gerçek SVG render
+      oluyor). Audit CI gate'i (`audit-games.mjs --ci`) JSON-thumbnail
+      tutarlılığını kontrol eder, ama runtime'da da göz at — public/'a
+      doğru dosya isminin yazıldığını doğrular.
+      — pitfall: [dangling-thumbnail-reference](PITFALLS.md#dangling-thumbnail-reference)
 - [ ] Pencere boyutu değiştirildiğinde canvas/grid overflow yapmıyor; HUD
       kırpılmıyor; mobil görünümde (preview_resize 375×667) oynanabilir
 - [ ] Dark mode (varsa) — system tema değişikliğinde renkler kırılmıyor
