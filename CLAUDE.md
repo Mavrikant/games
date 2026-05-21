@@ -144,3 +144,4 @@ Bu repoda iki yönlü hafıza var; her ikisini de besle:
 - [docs/ADDING_A_GAME.md](docs/ADDING_A_GAME.md) — step-by-step yeni oyun
 - [docs/GAME_CONTRACT.md](docs/GAME_CONTRACT.md) — DOM/lifecycle kontratı
 - [docs/CONVENTIONS.md](docs/CONVENTIONS.md) — kod ve stil kuralları
+- [docs/SHARED_HELPERS.md](docs/SHARED_HELPERS.md) — `@shared/*` API'leri (yeni oyunda kullan)
