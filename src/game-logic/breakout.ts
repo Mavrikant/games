@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type Brick = {
   x: number;
   y: number;
@@ -10,16 +14,16 @@ type Brick = {
   alive: boolean;
 };
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const livesEl = document.querySelector<HTMLElement>('#lives')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let livesEl!: HTMLElement;
+let levelEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
 
 const STORAGE_KEY = 'breakout.highScore';
 
@@ -29,10 +33,7 @@ const STORAGE_KEY = 'breakout.highScore';
 const W = 480;
 const H = 600;
 
-// Set up the canvas backing store for HiDPI rendering. The canvas is
-// rendered at CSS width via the stylesheet; we resize the backing store
-// to match the rendered pixel size and apply a transform so the game
-// continues to draw in logical 480x600 coordinates.
+// Set up the canvas backing store for HiDPI rendering.
 function resizeCanvas(): void {
   const dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
   const rect = canvas.getBoundingClientRect();
@@ -44,7 +45,6 @@ function resizeCanvas(): void {
     canvas.width = targetW;
     canvas.height = targetH;
   }
-  // Map logical coordinate space (W x H) to backing store.
   ctx.setTransform(targetW / W, 0, 0, targetH / H, 0, 0);
 }
 
@@ -86,22 +86,19 @@ let ballX = W / 2;
 let ballY = PADDLE_Y - BALL_R - 1;
 let ballVX = 0;
 let ballVY = 0;
-// Ball speed is stored in pixels-per-second so frame-rate drops
-// don't slow the game down (delta-time integration in step()).
-// 5.0 px/frame at 60fps == 300 px/s.
 let ballSpeed = 300;
 
 let bricks: Brick[] = [];
 let score = 0;
 let lives = 3;
 let level = 1;
-let best = Number(localStorage.getItem(STORAGE_KEY) ?? '0') || 0;
+let best = 0;
 
-let running = false;   // true if ball is moving
+let running = false;
 let paused = false;
 let gameOver = false;
 let won = false;
-let ballAttached = true; // ball glued to paddle waiting for launch
+let ballAttached = true;
 
 let leftHeld = false;
 let rightHeld = false;
@@ -110,11 +107,11 @@ let lastTs = 0;
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.textContent = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function updateHud(): void {
@@ -133,7 +130,6 @@ function buildLevel(lv: number): void {
 
   for (let r = 0; r < rows; r++) {
     const palette = BRICK_PALETTE[r % BRICK_PALETTE.length]!;
-    // tougher bricks at top, harder levels = more multi-hit rows
     const hp = r < Math.min(2, Math.floor(lv / 2)) ? 2 : 1;
     for (let c = 0; c < BRICK_COLS; c++) {
       const x = BRICK_AREA_LEFT + c * (brickW + BRICK_PADDING);
@@ -164,7 +160,7 @@ function resetBallToPaddle(): void {
 function launchBall(): void {
   if (!ballAttached || gameOver || won || paused) return;
   ballAttached = false;
-  const angle = (-Math.PI / 2) + (Math.random() * 0.6 - 0.3); // mostly up, slight angle
+  const angle = -Math.PI / 2 + (Math.random() * 0.6 - 0.3);
   ballVX = Math.cos(angle) * ballSpeed;
   ballVY = Math.sin(angle) * ballSpeed;
   running = true;
@@ -173,7 +169,6 @@ function launchBall(): void {
 
 function nextLevel(): void {
   level++;
-  // px/sec (60fps-equivalent: 5.0..8.5 px/frame == 300..510 px/s)
   ballSpeed = Math.min(510, 300 + (level - 1) * 27);
   paddleW = Math.max(60, PADDLE_W_BASE - (level - 1) * 4);
   buildLevel(level);
@@ -208,11 +203,7 @@ function loseLife(): void {
     running = false;
     if (score > best) {
       best = score;
-      try {
-        localStorage.setItem(STORAGE_KEY, String(best));
-      } catch {
-        /* ignore */
-      }
+      safeWrite(STORAGE_KEY, best);
       updateHud();
     }
     showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
@@ -229,8 +220,7 @@ function bricksRemaining(): number {
 }
 
 function step(dt: number): void {
-  // Paddle movement via keys
-  const paddleSpeed = 520; // px/sec
+  const paddleSpeed = 520;
   if (leftHeld) paddleX -= paddleSpeed * dt;
   if (rightHeld) paddleX += paddleSpeed * dt;
   if (paddleX < 0) paddleX = 0;
@@ -244,9 +234,6 @@ function step(dt: number): void {
 
   if (!running || paused || gameOver || won) return;
 
-  // Substep for high speeds. ballVX/ballVY are in px/sec; total movement
-  // this frame is (vx * dt, vy * dt). Sub-step so each sub-step moves at
-  // most ~4 px, preventing tunneling through bricks/paddle.
   const dx = ballVX * dt;
   const dy = ballVY * dt;
   const moveLen = Math.hypot(dx, dy);
@@ -258,7 +245,6 @@ function step(dt: number): void {
     ballX += stepVX;
     ballY += stepVY;
 
-    // Walls
     if (ballX - BALL_R < 0) {
       ballX = BALL_R;
       ballVX = Math.abs(ballVX);
@@ -271,10 +257,6 @@ function step(dt: number): void {
       ballVY = Math.abs(ballVY);
     }
 
-    // Paddle. Vertical tolerance is one substep's downward travel; this
-    // catches the ball at any sub-step where it has just entered the
-    // paddle's band, without admitting false positives when the ball is
-    // already well past the paddle.
     if (
       ballVY > 0 &&
       ballY + BALL_R >= PADDLE_Y &&
@@ -284,7 +266,7 @@ function step(dt: number): void {
     ) {
       const hit = (ballX - (paddleX + paddleW / 2)) / (paddleW / 2);
       const clamped = Math.max(-0.85, Math.min(0.85, hit));
-      const angle = clamped * (Math.PI / 3); // up to ~60deg
+      const angle = clamped * (Math.PI / 3);
       const sp = Math.hypot(ballVX, ballVY);
       ballVX = sp * Math.sin(angle);
       ballVY = -Math.abs(sp * Math.cos(angle));
@@ -292,7 +274,6 @@ function step(dt: number): void {
       break;
     }
 
-    // Bricks
     let hitBrick = false;
     for (const b of bricks) {
       if (!b.alive) continue;
@@ -302,19 +283,14 @@ function step(dt: number): void {
         ballY + BALL_R > b.y &&
         ballY - BALL_R < b.y + b.h
       ) {
-        // Determine collision side via minimum penetration depth.
-        // The axis with smaller overlap is the side the ball entered from,
-        // so we reflect along that axis and push the ball out to avoid
-        // tunneling/oscillation on multi-hit bricks.
-        const overlapLeft = ballX + BALL_R - b.x;          // ball right past brick left
-        const overlapRight = b.x + b.w - (ballX - BALL_R); // brick right past ball left
-        const overlapTop = ballY + BALL_R - b.y;           // ball bottom past brick top
-        const overlapBottom = b.y + b.h - (ballY - BALL_R); // brick bottom past ball top
+        const overlapLeft = ballX + BALL_R - b.x;
+        const overlapRight = b.x + b.w - (ballX - BALL_R);
+        const overlapTop = ballY + BALL_R - b.y;
+        const overlapBottom = b.y + b.h - (ballY - BALL_R);
         const minX = Math.min(overlapLeft, overlapRight);
         const minY = Math.min(overlapTop, overlapBottom);
 
         if (minX < minY) {
-          // Horizontal collision (ball came from left or right side)
           if (overlapLeft < overlapRight) {
             ballX = b.x - BALL_R;
             if (ballVX > 0) ballVX = -ballVX;
@@ -323,7 +299,6 @@ function step(dt: number): void {
             if (ballVX < 0) ballVX = -ballVX;
           }
         } else {
-          // Vertical collision (ball came from top or bottom)
           if (overlapTop < overlapBottom) {
             ballY = b.y - BALL_R;
             if (ballVY > 0) ballVY = -ballVY;
@@ -341,11 +316,7 @@ function step(dt: number): void {
         }
         if (score > best) {
           best = score;
-          try {
-            localStorage.setItem(STORAGE_KEY, String(best));
-          } catch {
-            /* ignore */
-          }
+          safeWrite(STORAGE_KEY, best);
         }
         updateHud();
         hitBrick = true;
@@ -354,7 +325,6 @@ function step(dt: number): void {
     }
     if (hitBrick) break;
 
-    // Bottom = lose life
     if (ballY - BALL_R > H) {
       loseLife();
       return;
@@ -391,7 +361,6 @@ function draw(): void {
   ctx.fillStyle = css('--bo-bg', '#0a0b0e');
   ctx.fillRect(0, 0, W, H);
 
-  // Bricks
   for (const b of bricks) {
     if (!b.alive) continue;
     ctx.fillStyle = b.color;
@@ -406,12 +375,10 @@ function draw(): void {
     ctx.stroke();
   }
 
-  // Paddle
   ctx.fillStyle = css('--bo-paddle', '#38bdf8');
   drawRoundRect(paddleX, PADDLE_Y, paddleW, PADDLE_H, 6);
   ctx.fill();
 
-  // Ball
   ctx.fillStyle = css('--bo-ball', '#fde68a');
   ctx.beginPath();
   ctx.arc(ballX, ballY, BALL_R, 0, Math.PI * 2);
@@ -428,41 +395,6 @@ function frame(ts: number): void {
   requestAnimationFrame(frame);
 }
 
-// --- Input ---
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'arrowleft' || k === 'a') {
-    leftHeld = true;
-    e.preventDefault();
-  } else if (k === 'arrowright' || k === 'd') {
-    rightHeld = true;
-    e.preventDefault();
-  } else if (k === ' ') {
-    if (gameOver || won) {
-      resetGame();
-    } else if (ballAttached) {
-      launchBall();
-    }
-    e.preventDefault();
-  } else if (k === 'p') {
-    if (!ballAttached && !gameOver && !won) {
-      paused = !paused;
-      if (paused) showOverlay('Duraklatıldı', 'Devam için P.');
-      else hideOverlay();
-    }
-    e.preventDefault();
-  } else if (k === 'r') {
-    resetGame();
-    e.preventDefault();
-  }
-});
-
-window.addEventListener('keyup', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'arrowleft' || k === 'a') leftHeld = false;
-  else if (k === 'arrowright' || k === 'd') rightHeld = false;
-});
-
 function pointerXToPaddle(clientX: number): void {
   const rect = canvas.getBoundingClientRect();
   const ratio = W / rect.width;
@@ -472,51 +404,106 @@ function pointerXToPaddle(clientX: number): void {
   if (paddleX + paddleW > W) paddleX = W - paddleW;
 }
 
-canvas.addEventListener('mousemove', (e) => {
-  pointerXToPaddle(e.clientX);
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  livesEl = document.querySelector<HTMLElement>('#lives')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
 
-canvas.addEventListener('touchmove', (e) => {
-  const t = e.touches[0];
-  if (!t) return;
-  pointerXToPaddle(t.clientX);
-  e.preventDefault();
-}, { passive: false });
+  best = safeRead<number>(STORAGE_KEY, 0);
 
-canvas.addEventListener('touchstart', (e) => {
-  const t = e.touches[0];
-  if (!t) return;
-  pointerXToPaddle(t.clientX);
-  if (gameOver || won) {
-    resetGame();
-  } else if (ballAttached) {
-    launchBall();
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'arrowleft' || k === 'a') {
+      leftHeld = true;
+      e.preventDefault();
+    } else if (k === 'arrowright' || k === 'd') {
+      rightHeld = true;
+      e.preventDefault();
+    } else if (k === ' ') {
+      if (gameOver || won) {
+        resetGame();
+      } else if (ballAttached) {
+        launchBall();
+      }
+      e.preventDefault();
+    } else if (k === 'p') {
+      if (!ballAttached && !gameOver && !won) {
+        paused = !paused;
+        if (paused) showOverlay('Duraklatıldı', 'Devam için P.');
+        else hideOverlay();
+      }
+      e.preventDefault();
+    } else if (k === 'r') {
+      resetGame();
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('keyup', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'arrowleft' || k === 'a') leftHeld = false;
+    else if (k === 'arrowright' || k === 'd') rightHeld = false;
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    pointerXToPaddle(e.clientX);
+  });
+
+  canvas.addEventListener(
+    'touchmove',
+    (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      pointerXToPaddle(t.clientX);
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+
+  canvas.addEventListener(
+    'touchstart',
+    (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      pointerXToPaddle(t.clientX);
+      if (gameOver || won) {
+        resetGame();
+      } else if (ballAttached) {
+        launchBall();
+      }
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+
+  canvas.addEventListener('click', () => {
+    if (gameOver || won) {
+      resetGame();
+    } else if (ballAttached) {
+      launchBall();
+    }
+  });
+
+  restartBtn.addEventListener('click', resetGame);
+
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('orientationchange', () => {
+    requestAnimationFrame(resizeCanvas);
+  });
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(resizeCanvas).observe(canvas);
   }
-  e.preventDefault();
-}, { passive: false });
 
-canvas.addEventListener('click', () => {
-  if (gameOver || won) {
-    resetGame();
-  } else if (ballAttached) {
-    launchBall();
-  }
-});
-
-restartBtn.addEventListener('click', resetGame);
-
-window.addEventListener('resize', resizeCanvas);
-// Some mobile browsers fire orientationchange after a delayed layout pass.
-window.addEventListener('orientationchange', () => {
-  // Re-measure on the next frame so the CSS rect has settled.
-  requestAnimationFrame(resizeCanvas);
-});
-// ResizeObserver catches layout changes the resize event misses (e.g.
-// CSS-driven changes when the address bar collapses on mobile).
-if (typeof ResizeObserver !== 'undefined') {
-  new ResizeObserver(resizeCanvas).observe(canvas);
+  resizeCanvas();
+  resetGame();
+  requestAnimationFrame(frame);
 }
 
-resizeCanvas();
-resetGame();
-requestAnimationFrame(frame);
+export const game = defineGame({ init, reset: resetGame });
