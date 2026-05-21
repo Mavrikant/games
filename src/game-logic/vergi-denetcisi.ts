@@ -1,11 +1,15 @@
 // Vergi Denetçisi — fatura anomali tespit oyunu.
 // Pitfalls actively guarded:
 // - overlay-input-leak: state machine ('playing' | 'gameOver'); row clicks no-op in gameOver.
-// - stale-async-callback: round changes increment `gen`; deferred work checks token.
-// - unguarded-storage: safeRead/safeWrite wrap localStorage with try/catch.
+// - stale-async-callback: round changes bump gen; reserved for future async work.
+// - unguarded-storage: @shared/storage wraps localStorage with try/catch.
 // - duplicate-with-shared-layer: body has no <h1>, hint or how-to; layout supplies these.
 // - invisible-boot: init() renders first round + score=0 before any user input.
 // - visual-vs-hitbox: DOM row buttons; click target = visual row, no offset math.
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
 
 type GameState = 'playing' | 'gameOver';
 type AnomalyKind = 'math' | 'future-date' | 'duplicate' | 'absurd' | 'wrong-vat';
@@ -38,18 +42,17 @@ const ANOMALY_LABEL: Record<AnomalyKind, string> = {
   'wrong-vat': 'Yanlış KDV oranı',
 };
 
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const roundEl = document.querySelector<HTMLElement>('#round')!;
-const strikesEl = document.querySelector<HTMLElement>('#strikes')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const rowsEl = document.querySelector<HTMLElement>('#rows')!;
-const nextBtn = document.querySelector<HTMLButtonElement>('#next')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestartBtn =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let roundEl!: HTMLElement;
+let strikesEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let rowsEl!: HTMLElement;
+let nextBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let overlayEl!: HTMLElement;
+let overlayMsgEl!: HTMLElement;
+let overlayRestartBtn!: HTMLButtonElement;
 
 let state: GameState = 'playing';
 let invoices: Invoice[] = [];
@@ -60,24 +63,11 @@ let best = 0;
 let round = 1;
 let strikes = 0;
 let roundStartedAt = 0;
-let gen = 0;
+const gen = createGenToken();
 
-function safeRead(key: string, fallback: number): number {
-  try {
-    const v = localStorage.getItem(key);
-    if (v === null) return fallback;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
+function loadBest(key: string, fallback: number): number {
+  const v = safeRead<number>(key, fallback);
+  return Number.isFinite(v) ? v : fallback;
 }
 
 // Deterministic pseudo-random helpers so rounds feel varied but reproducible per seed.
@@ -382,7 +372,7 @@ function endRound(): void {
 }
 
 function startRound(): void {
-  gen += 1;
+  gen.bump();
   invoices = generateRound();
   marked = new Set();
   resolved = new Set();
@@ -395,7 +385,7 @@ function startRound(): void {
 }
 
 function fullReset(): void {
-  gen += 1;
+  gen.bump();
   state = 'playing';
   score = 0;
   strikes = 0;
@@ -431,52 +421,65 @@ function saveBest(): void {
   }
 }
 
-// Click delegation to the rows container — robust against re-render.
-rowsEl.addEventListener('click', (e) => {
-  if (state !== 'playing') return;
-  const target = e.target as HTMLElement | null;
-  if (!target) return;
-  const row = target.closest<HTMLElement>('.vd-row');
-  if (!row) return;
-  const id = row.dataset.id;
-  if (!id) return;
-  handleRowClick(id);
-});
-
-nextBtn.addEventListener('click', () => {
-  if (state !== 'playing') return;
-  endRound();
-});
-
-restartBtn.addEventListener('click', fullReset);
-overlayRestartBtn.addEventListener('click', fullReset);
-
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'r') {
-    fullReset();
-    e.preventDefault();
-    return;
-  }
-  if (state === 'gameOver') return;
-  if (k === 'enter' || k === ' ' || k === 'n') {
-    endRound();
-    e.preventDefault();
-  }
-});
-
 function init(): void {
-  best = safeRead(STORAGE_KEY_BEST, 0);
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  roundEl = document.querySelector<HTMLElement>('#round')!;
+  strikesEl = document.querySelector<HTMLElement>('#strikes')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  rowsEl = document.querySelector<HTMLElement>('#rows')!;
+  nextBtn = document.querySelector<HTMLButtonElement>('#next')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestartBtn = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+
+  best = loadBest(STORAGE_KEY_BEST, 0);
   score = 0;
   strikes = 0;
   round = 1;
   invoiceCounter = 1000 + rand(0, 500);
+
+  // Click delegation to the rows container — robust against re-render.
+  rowsEl.addEventListener('click', (e) => {
+    if (state !== 'playing') return;
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    const row = target.closest<HTMLElement>('.vd-row');
+    if (!row) return;
+    const id = row.dataset.id;
+    if (!id) return;
+    handleRowClick(id);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (state !== 'playing') return;
+    endRound();
+  });
+
+  restartBtn.addEventListener('click', fullReset);
+  overlayRestartBtn.addEventListener('click', fullReset);
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'r') {
+      fullReset();
+      e.preventDefault();
+      return;
+    }
+    if (state === 'gameOver') return;
+    if (k === 'enter' || k === ' ' || k === 'n') {
+      endRound();
+      e.preventDefault();
+    }
+  });
+
   setStatus('Anomalili satırlara tıkla. Temiz satıra tıklarsan hata sayılır.');
   startRound();
   syncHud();
 }
 
-init();
+export const game = defineGame({ init, reset: fullReset });
 
 // Expose for headless testing only (test harness reads this).
 declare global {
