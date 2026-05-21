@@ -14,6 +14,10 @@
 //   - duplicate-with-shared-layer: controls hint rendered by layout (from JSON)
 // ---------------------------------------------------------------------------
 
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+
 type State = 'ready' | 'playing' | 'gameover';
 type MoleKind = 'normal' | 'gold' | 'bomb';
 
@@ -72,33 +76,19 @@ const POPUP_MS = 700;
 const SHAKE_MS = 500;
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
-const boardWrap = document.querySelector<HTMLDivElement>('#board-wrap')!;
-const board = document.querySelector<HTMLDivElement>('#board')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const timeEl = document.querySelector<HTMLElement>('#time')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
+let boardWrap!: HTMLDivElement;
+let board!: HTMLDivElement;
+let scoreEl!: HTMLElement;
+let timeEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayBtn!: HTMLButtonElement;
 
 // ── Safe storage ────────────────────────────────────────────────────────────
-function safeRead(key: string, fallback: number): number {
-  try {
-    const v = localStorage.getItem(key);
-    return v !== null ? Number(v) || fallback : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
-}
+// Storage helpers come from @shared/storage; called inline.
 
 // ── Sprites ─────────────────────────────────────────────────────────────────
 function moleSvg(): string {
@@ -233,13 +223,13 @@ function showOverlay(title: string, msgHtml: string, btnLabel: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msgHtml;
   overlayBtn.textContent = btnLabel;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
   // give focus for keyboard users
   overlayBtn.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // ── Board ───────────────────────────────────────────────────────────────────
@@ -512,44 +502,46 @@ function resetToReady(): void {
   );
 }
 
-// ── Input handlers ───────────────────────────────────────────────────────────
-overlayBtn.addEventListener('click', () => {
-  // Single-tap transition for both ready and gameover (no overlay-input-leak)
-  startGame();
-});
+// ── Init ────────────────────────────────────────────────────────────────────
+function init(): void {
+  boardWrap = document.querySelector<HTMLDivElement>('#board-wrap')!;
+  board = document.querySelector<HTMLDivElement>('#board')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  timeEl = document.querySelector<HTMLElement>('#time')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayBtn = document.querySelector<HTMLButtonElement>('#overlay-btn')!;
 
-restartBtn.addEventListener('click', () => {
-  // Restart button always returns to a fresh round (immediately playing)
-  startGame();
-});
+  best = safeRead<number>(STORAGE_KEY, 0);
+  if (!Number.isFinite(best) || best < 0) best = 0;
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    e.preventDefault();
+  overlayBtn.addEventListener('click', () => {
     startGame();
-    return;
-  }
-  if (state !== 'playing') {
-    if (e.key === ' ' || e.key === 'Enter') {
+  });
+
+  restartBtn.addEventListener('click', () => {
+    startGame();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
       e.preventDefault();
       startGame();
+      return;
     }
-  }
-});
+    if (state !== 'playing') {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        startGame();
+      }
+    }
+  });
 
-// Pause when tab hidden — avoid catch-up frame storms.
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden && state === 'playing') {
-    // Bump token to invalidate pending callbacks; convert to gameover so the
-    // timer doesn't run silently in the background. (Round is only 60s anyway.)
-    // Simpler: leave timers ticking via setTimeout — they don't fire while
-    // tab is fully suspended, and resume when visible. This matches user
-    // expectation that 60s of real elapsed time is the round.
-    // No-op intentionally.
-  }
-});
+  buildBoard();
+  resetToReady();
+}
 
-// ── Init ────────────────────────────────────────────────────────────────────
-best = safeRead(STORAGE_KEY, 0);
-buildBoard();
-resetToReady();
+export const game = defineGame({ init, reset: resetToReady });
