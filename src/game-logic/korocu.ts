@@ -1,3 +1,7 @@
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 // ---------------------------------------------------------------------------
 // Korocu — Choir conductor rhythm game
 // Mechanic: 4 lanes (Soprano / Alto / Tenor / Bas) — beat markers fall from
@@ -18,8 +22,6 @@
 //   - duplicate-with-shared-layer: body only contains canvas/HUD; no title or
 //     hint paragraph (layout supplies them).
 // ---------------------------------------------------------------------------
-export {};
-
 type State = 'ready' | 'playing' | 'gameOver';
 type HitGrade = 'perfect' | 'great' | 'good';
 
@@ -77,17 +79,17 @@ const LANE_KEYS: string[][] = [
 ];
 
 // ── DOM ─────────────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const comboEl = document.querySelector<HTMLElement>('#combo')!;
-const foulsEl = document.querySelector<HTMLElement>('#fouls')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const hitButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.korocu-pad'));
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let comboEl!: HTMLElement;
+let foulsEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let hitButtons: HTMLButtonElement[] = [];
 
 // ── Safe storage ───────────────────────────────────────────────────────────
 function safeRead(key: string, fallback: number): number {
@@ -125,7 +127,7 @@ let fouls = 0;
 let hitsTotal = 0;
 let lastGrade: HitGrade | null = null;
 let gradeFlash = 0;
-let gen = 0;                     // generation token for stale-async guard
+const gen = createGenToken();
 let rafId: number | null = null;
 let frame = 0;
 let spawnCountdown = FIRST_SPAWN_DELAY;
@@ -236,7 +238,7 @@ function updateHud(): void {
 
 // ── Loop ───────────────────────────────────────────────────────────────────
 function loop(token: number): void {
-  if (token !== gen) return;          // stale guard
+  if (!gen.isCurrent(token)) return;          // stale guard
   if (state !== 'playing') return;
   rafId = requestAnimationFrame(() => loop(token));
   frame++;
@@ -430,10 +432,10 @@ function draw(): void {
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 function startGame(): void {
@@ -454,7 +456,7 @@ function startGame(): void {
   lastLaneSpawned = -1;
   updateHud();
   draw();
-  const token = ++gen; // bump generation, capture
+  const token = gen.bump(); // bump generation, capture
   rafId = requestAnimationFrame(() => loop(token));
 }
 
@@ -473,7 +475,7 @@ function endGame(): void {
 
 function reset(): void {
   // Bump generation FIRST — any in-flight rAF callback will short-circuit
-  gen++;
+  gen.bump();
   if (rafId !== null) {
     cancelAnimationFrame(rafId);
     rafId = null;
@@ -539,11 +541,10 @@ function handleInput(key: string): void {
   // unknown key → no-op
 }
 
+function _wireListeners(): void {
 window.addEventListener('keydown', (e) => {
-  // Don't preventDefault on browser shortcuts (Ctrl/Meta combos)
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key;
-  // Recognized keys consume default to avoid scroll / focus moves.
   const lower = k.toLowerCase();
   const accepted =
     lower === 'r' ||
@@ -555,7 +556,6 @@ window.addEventListener('keydown', (e) => {
   handleInput(k);
 });
 
-// Touch / on-screen pad
 hitButtons.forEach((btn) => {
   const lane = Number(btn.dataset.lane);
   if (!Number.isInteger(lane) || lane < 0 || lane >= LANES) return;
@@ -578,11 +578,11 @@ restartBtn.addEventListener('click', () => {
   reset();
 });
 
-// Overlay tap: in ready / gameOver, tapping anywhere on the overlay starts
 overlay.addEventListener('click', () => {
   if (state === 'ready') startGame();
   else if (state === 'gameOver') { reset(); startGame(); }
 });
+}
 
 // ── Headless test hook ─────────────────────────────────────────────────────
 // Expose a minimal internal API on globalThis only when a test harness sets a
@@ -697,4 +697,21 @@ if (typeof window !== 'undefined' && window.__KOROCU_TEST_HOOK__) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
-reset();
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  comboEl = document.querySelector<HTMLElement>('#combo')!;
+  foulsEl = document.querySelector<HTMLElement>('#fouls')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  hitButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.korocu-pad'));
+
+  _wireListeners();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
