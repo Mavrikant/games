@@ -2,6 +2,10 @@
 // AI uses positional weighting (corner > edge > inner > X/C squares)
 // combined with mobility — light heuristic, fast, no minimax tree.
 
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
+
 const SIZE = 8;
 const TOTAL = SIZE * SIZE;
 
@@ -38,18 +42,17 @@ const AI_DELAY_MS = 420;
 
 type GameState = 'PlayerTurn' | 'AiTurn' | 'GameOver';
 
-const boardEl = document.querySelector<HTMLElement>('#rv-board')!;
-const statusEl = document.querySelector<HTMLElement>('#rv-status')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#rv-restart')!;
-const blackCountEl = document.querySelector<HTMLElement>('#rv-black-count')!;
-const whiteCountEl = document.querySelector<HTMLElement>('#rv-white-count')!;
-const winsEl = document.querySelector<HTMLElement>('#rv-wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#rv-losses')!;
-const overlay = document.querySelector<HTMLElement>('#rv-overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#rv-overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#rv-overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#rv-overlay-restart')!;
+let boardEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let blackCountEl!: HTMLElement;
+let whiteCountEl!: HTMLElement;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 let board: Board = new Array<Cell>(TOTAL).fill(0);
 let cellEls: HTMLButtonElement[] = [];
@@ -58,28 +61,18 @@ let wins = 0;
 let losses = 0;
 // Generation token: any deferred AI / overlay callback bails if its token
 // doesn't match the current gen. Reset/restart bumps this.
-let gen = 0;
+const gen = createGenToken();
 
 // -----------------------------------------------------------------------
-// Storage (try/catch — Safari private mode etc. can throw).
+// Storage wrappers around @shared/storage with non-negative integer guard.
 // -----------------------------------------------------------------------
-function safeReadNumber(key: string): number {
-  try {
-    const raw = localStorage.getItem(key);
-    if (raw === null) return 0;
-    const n = Number(raw);
-    return Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0;
-  } catch {
-    return 0;
-  }
+function loadStat(key: string): number {
+  const v = safeRead<number>(key, 0);
+  return Number.isFinite(v) && v >= 0 ? Math.floor(v) : 0;
 }
 
-function safeWriteNumber(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore (private mode, full disk, disabled) */
-  }
+function saveStat(key: string, value: number): void {
+  safeWrite(key, value);
 }
 
 // -----------------------------------------------------------------------
@@ -273,12 +266,12 @@ function endGame(): void {
   let msg: string;
   if (black > white) {
     wins++;
-    safeWriteNumber(STORAGE_WINS, wins);
+    saveStat(STORAGE_WINS, wins);
     title = 'Kazandın!';
     msg = `Siyah ${black} – Beyaz ${white}.`;
   } else if (white > black) {
     losses++;
-    safeWriteNumber(STORAGE_LOSSES, losses);
+    saveStat(STORAGE_LOSSES, losses);
     title = 'Kaybettin.';
     msg = `Siyah ${black} – Beyaz ${white}.`;
   } else {
@@ -305,11 +298,11 @@ function startAiTurn(): void {
     renderBoard();
     return;
   }
-  const myGen = gen;
+  const myGen = gen.current();
   setStatus('Beyaz düşünüyor…');
   window.setTimeout(() => {
     // Generation guard: if reset happened during the delay, bail.
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'AiTurn') return;
     const move = chooseAiMove(board);
     if (move === null) {
@@ -401,7 +394,7 @@ function setupInitialPosition(): void {
 
 function reset(): void {
   // Bump generation: cancels any pending AI setTimeout from the prior game.
-  gen++;
+  gen.bump();
   setupInitialPosition();
   state = 'PlayerTurn';
   hideOverlay();
@@ -411,23 +404,39 @@ function reset(): void {
 }
 
 // -----------------------------------------------------------------------
-// Wire up.
+// Init.
 // -----------------------------------------------------------------------
-wins = safeReadNumber(STORAGE_WINS);
-losses = safeReadNumber(STORAGE_LOSSES);
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#rv-board')!;
+  statusEl = document.querySelector<HTMLElement>('#rv-status')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#rv-restart')!;
+  blackCountEl = document.querySelector<HTMLElement>('#rv-black-count')!;
+  whiteCountEl = document.querySelector<HTMLElement>('#rv-white-count')!;
+  winsEl = document.querySelector<HTMLElement>('#rv-wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#rv-losses')!;
+  overlay = document.querySelector<HTMLElement>('#rv-overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#rv-overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#rv-overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#rv-overlay-restart')!;
 
-restartBtn.addEventListener('click', reset);
-overlayRestart.addEventListener('click', reset);
+  wins = loadStat(STORAGE_WINS);
+  losses = loadStat(STORAGE_LOSSES);
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    reset();
-    e.preventDefault();
-  } else if (e.key === 'Enter' && state === 'GameOver') {
-    reset();
-    e.preventDefault();
-  }
-});
+  restartBtn.addEventListener('click', reset);
+  overlayRestart.addEventListener('click', reset);
 
-buildBoard();
-reset();
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      reset();
+      e.preventDefault();
+    } else if (e.key === 'Enter' && state === 'GameOver') {
+      reset();
+      e.preventDefault();
+    }
+  });
+
+  buildBoard();
+  reset();
+}
+
+export const game = defineGame({ init, reset });
