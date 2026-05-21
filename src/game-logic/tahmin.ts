@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
 // Tahmin — desenin devamını seç.
 // Mekanik: ekranda 4 item ve bir "?" görünür. Bir mantık var: aritmetik
 // (örn. 2,4,6,?), alternating renk, şekil rotasyonu veya kombinasyon.
@@ -54,23 +57,18 @@ type GameState = 'playing' | 'gameOver';
 
 // ---- DOM refs ----
 
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const livesEl = document.querySelector<HTMLElement>('#lives')!;
-const promptEl = document.querySelector<HTMLElement>('#prompt')!;
-const timerBarEl = document.querySelector<HTMLElement>('#timer-bar')!;
-const sequenceCells = Array.from(
-  document.querySelectorAll<HTMLElement>('.sequence__cell'),
-);
-const optionButtons = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.option'),
-);
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let livesEl!: HTMLElement;
+let promptEl!: HTMLElement;
+let timerBarEl!: HTMLElement;
+let sequenceCells: HTMLElement[] = [];
+let optionButtons: HTMLButtonElement[] = [];
+let restartBtn!: HTMLButtonElement;
+let overlayEl!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 // ---- Storage (safe) ----
 
@@ -111,7 +109,7 @@ let correctIndex = 0;
 let currentPattern: PatternKind = 'arithmetic';
 
 // Async generation token — reset/yeni soru bump eder.
-let gen = 0;
+const gen = createGenToken();
 
 // Süre kontrolü.
 let roundStart = 0;
@@ -568,7 +566,7 @@ function renderAll(): void {
 
 function newRound(): void {
   // Bump generation — eski timer ve flash callback'leri iptal edilsin.
-  gen++;
+  gen.bump();
   stopTimer();
   feedbackIndex = null;
   feedbackKind = null;
@@ -706,7 +704,7 @@ function hideOverlay(): void {
 
 function resetGame(): void {
   // Bump gen ile pending callback'ler iptal.
-  gen++;
+  gen.bump();
   stopTimer();
   state = 'playing';
   score = 0;
@@ -717,30 +715,47 @@ function resetGame(): void {
   newRound();
 }
 
-// ---- Wire up ----
+// ---- Init ----
 
-optionButtons.forEach((btn, i) => {
-  btn.addEventListener('click', () => pickOption(i));
-});
+function init(): void {
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  livesEl = document.querySelector<HTMLElement>('#lives')!;
+  promptEl = document.querySelector<HTMLElement>('#prompt')!;
+  timerBarEl = document.querySelector<HTMLElement>('#timer-bar')!;
+  sequenceCells = Array.from(
+    document.querySelectorAll<HTMLElement>('.sequence__cell'),
+  );
+  optionButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.option'),
+  );
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
 
-restartBtn.addEventListener('click', resetGame);
-overlayRestart.addEventListener('click', resetGame);
+  optionButtons.forEach((btn, i) => {
+    btn.addEventListener('click', () => pickOption(i));
+  });
 
-window.addEventListener('keydown', (event) => {
-  const k = event.key;
-  if (k === 'r' || k === 'R') {
-    resetGame();
-    event.preventDefault();
-    return;
-  }
-  if (k >= '1' && k <= '4') {
-    // overlay-input-leak: state guard pickOption içinde.
-    pickOption(Number(k) - 1);
-    event.preventDefault();
-  }
-});
+  restartBtn.addEventListener('click', resetGame);
+  overlayRestart.addEventListener('click', resetGame);
 
-// ---- Boot ----
+  window.addEventListener('keydown', (event) => {
+    const k = event.key;
+    if (k === 'r' || k === 'R') {
+      resetGame();
+      event.preventDefault();
+      return;
+    }
+    if (k >= '1' && k <= '4') {
+      pickOption(Number(k) - 1);
+      event.preventDefault();
+    }
+  });
 
-// invisible-boot: ilk render senkron. newRound() pattern üretir + timer'ı başlatır.
-resetGame();
+  resetGame();
+}
+
+export const game = defineGame({ init, reset: resetGame });
