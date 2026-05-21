@@ -1,4 +1,5 @@
-export {};
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const W = 400;
@@ -18,35 +19,16 @@ const STORAGE_KEY = 'hazine-avi.best';
 type State = 'ready' | 'playing' | 'roundEnd' | 'gameover';
 type CellState = 'hidden' | number;
 
-// ── DOM ──────────────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const roundEl = document.querySelector<HTMLElement>('#round')!;
-const probesEl = document.querySelector<HTMLElement>('#probes')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-
-// ── Storage ──────────────────────────────────────────────────────────────────
-function safeRead(): number {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? Number(raw) || 0 : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function safeWrite(v: number): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(v));
-  } catch {
-    /* ignore */
-  }
-}
+// ── DOM (filled in init) ──────────────────────────────────────────────────────
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let roundEl!: HTMLElement;
+let probesEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
 // ── State ────────────────────────────────────────────────────────────────────
 let state: State = 'ready';
-let generation = 0;
 let round = 1;
 let totalScore = 0;
 let probesUsed = 0;
@@ -197,14 +179,14 @@ function draw(): void {
     drawOverlay(
       'Hazine Avı',
       ['Tıkla veya SPACE — başlat'],
-      '#fbbf24'
+      '#fbbf24',
     );
   } else if (state === 'roundEnd') {
     const isLast = round >= TOTAL_ROUNDS;
     drawOverlay(
       `Tur ${round} bitti! +${roundScore} puan`,
       [isLast ? 'Son tur!' : 'Devam için tıkla'],
-      '#fbbf24'
+      '#fbbf24',
     );
   } else if (state === 'gameover') {
     const isNewBest = totalScore >= best && totalScore > 0;
@@ -213,9 +195,9 @@ function draw(): void {
       [
         `Toplam: ${totalScore} puan`,
         `En iyi: ${best} puan`,
-        'Tekrar için tıkla'
+        'Tekrar için tıkla',
       ],
-      isNewBest ? '#fbbf24' : '#ffffff'
+      isNewBest ? '#fbbf24' : '#ffffff',
     );
   }
 }
@@ -231,7 +213,7 @@ function nextRound(): void {
     state = 'gameover';
     if (totalScore > best) {
       best = totalScore;
-      safeWrite(best);
+      safeWrite(STORAGE_KEY, best);
     }
     draw();
   } else {
@@ -244,7 +226,6 @@ function nextRound(): void {
 }
 
 function reset(): void {
-  generation++;
   state = 'ready';
   round = 1;
   totalScore = 0;
@@ -289,37 +270,52 @@ function handleClick(canvasX: number, canvasY: number): void {
   draw();
 }
 
-// ── Input ─────────────────────────────────────────────────────────────────────
-canvas.addEventListener('pointerdown', (e: PointerEvent) => {
-  const [cx, cy] = canvasCoords(e);
-  handleClick(cx, cy);
-});
+// ── Init ─────────────────────────────────────────────────────────────────────
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  roundEl = document.querySelector<HTMLElement>('#round')!;
+  probesEl = document.querySelector<HTMLElement>('#probes')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-canvas.addEventListener('touchstart', (e: TouchEvent) => {
-  e.preventDefault();
-}, { passive: false });
+  best = safeRead<number>(STORAGE_KEY, 0);
+  if (!Number.isFinite(best) || best < 0) best = 0;
 
-restartBtn.addEventListener('click', () => {
-  reset();
-});
+  canvas.addEventListener('pointerdown', (e: PointerEvent) => {
+    const [cx, cy] = canvasCoords(e);
+    handleClick(cx, cy);
+  });
 
-document.addEventListener('keydown', (e: KeyboardEvent) => {
-  if (e.key === 'r' || e.key === 'R') {
+  canvas.addEventListener(
+    'touchstart',
+    (e: TouchEvent) => {
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+
+  restartBtn.addEventListener('click', () => {
     reset();
-    return;
-  }
-  if (e.key === ' ' || e.key === 'Enter') {
-    if (state === 'ready') {
-      beginPlay();
-    } else if (state === 'roundEnd') {
-      nextRound();
-    } else if (state === 'gameover') {
-      reset();
-    }
-  }
-});
+  });
 
-// ── Boot ──────────────────────────────────────────────────────────────────────
-best = safeRead();
-reset();
-void generation;
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'r' || e.key === 'R') {
+      reset();
+      return;
+    }
+    if (e.key === ' ' || e.key === 'Enter') {
+      if (state === 'ready') {
+        beginPlay();
+      } else if (state === 'roundEnd') {
+        nextRound();
+      } else if (state === 'gameover') {
+        reset();
+      }
+    }
+  });
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
