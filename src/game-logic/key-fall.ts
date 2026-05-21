@@ -2,12 +2,17 @@
 // Key Fall — Falling letters typing game
 // State machine: Ready | Playing | GameOver
 // Pitfalls addressed:
-//   - stale-async-callback: generation token on every reset()
-//   - unguarded-storage: safeRead/safeWrite helpers
+//   - stale-async-callback: @shared/gen-token on every reset()
+//   - unguarded-storage: @shared/storage helpers
 //   - overlay-input-leak: explicit state enum, all input through handleKey()
-//   - invisible-boot: overlay shown immediately on module init
+//   - invisible-boot: overlay shown immediately on init()
 //   - visual-vs-hitbox: letter hit zone = same constants for draw and collide
 // ---------------------------------------------------------------------------
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -39,30 +44,26 @@ const STORAGE_KEY = 'key-fall.best';
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const HIT_FLASH_EXPANSION = 0.8; // ring expansion factor during hit animation
 
-// ── DOM refs ─────────────────────────────────────────────────────────────────
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const scoreEl = document.querySelector<HTMLElement>('#score')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const life1 = document.querySelector<HTMLElement>('#life-1')!;
-const life2 = document.querySelector<HTMLElement>('#life-2')!;
-const life3 = document.querySelector<HTMLElement>('#life-3')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+// ── DOM refs (filled in init) ────────────────────────────────────────────────
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let scoreEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let life1!: HTMLElement;
+let life2!: HTMLElement;
+let life3!: HTMLElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
 
-// ── Safe storage ─────────────────────────────────────────────────────────────
-function safeRead(key: string, fallback: number): number {
-  try {
-    const v = localStorage.getItem(key);
-    return v !== null ? (Number(v) || fallback) : fallback;
-  } catch {
-    return fallback;
-  }
+// ── Safe storage (typed shims around @shared/storage with number coercion) ──
+function loadBest(key: string, fallback: number): number {
+  const v = safeRead<number>(key, fallback);
+  return Number.isFinite(v) && v >= 0 ? v : fallback;
 }
-function safeWrite(key: string, value: number): void {
-  try { localStorage.setItem(key, String(value)); } catch { /* ignore */ }
+function persistBest(key: string, value: number): void {
+  safeWrite(key, value);
 }
 
 // ── CSS var cache ────────────────────────────────────────────────────────────
@@ -83,7 +84,7 @@ let lives = MAX_LIVES;
 let level = 1;
 let lettersDestroyedThisLevel = 0;
 let letters: Letter[] = [];
-let frameToken = 0; // generation token for stale-async guard
+const frameGen = createGenToken();
 let rafId: number | null = null;
 let frameCount = 0;
 let spawnCountdown = 0;
@@ -95,10 +96,10 @@ const LANE_COLORS = ['#fb7185', '#f59e0b', '#34d399', '#60a5fa', '#c084fc'];
 function showOverlay(title: string, msg: string): void {
   overlayTitle.textContent = title;
   overlayMsg.innerHTML = msg;
-  overlay.classList.remove('overlay--hidden');
+  showOverlayEl(overlay);
 }
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
+  hideOverlayEl(overlay);
 }
 
 // ── Lives display ─────────────────────────────────────────────────────────────
@@ -136,7 +137,7 @@ function checkLevelUp(): void {
 
 // ── Game loop ─────────────────────────────────────────────────────────────────
 function gameLoop(token: number): void {
-  if (token !== frameToken) return; // stale callback guard
+  if (!frameGen.isCurrent(token)) return; // stale callback guard
   if (state !== 'playing') return;
 
   rafId = requestAnimationFrame(() => gameLoop(token));
@@ -176,7 +177,7 @@ function gameLoop(token: number): void {
         draw();
         const t = token;
         window.setTimeout(() => {
-          if (t !== frameToken) return;
+          if (!frameGen.isCurrent(t)) return;
           endGame();
         }, 400);
         return;
@@ -341,7 +342,7 @@ function tryHit(key: string): void {
   if (score > best) {
     best = score;
     bestEl.textContent = String(best);
-    safeWrite(STORAGE_KEY, best);
+    persistBest(STORAGE_KEY, best);
   }
 
   checkLevelUp();
@@ -355,7 +356,7 @@ function startGame(): void {
   spawnLetter();
   spawnCountdown = currentSpawnInterval();
 
-  const token = frameToken;
+  const token = frameGen.current();
   rafId = requestAnimationFrame(() => gameLoop(token));
 }
 
@@ -370,7 +371,7 @@ function endGame(): void {
 
 function reset(): void {
   // Bump generation token — invalidates any stale setTimeout/rAF callbacks
-  frameToken++;
+  frameGen.bump();
 
   if (rafId !== null) {
     cancelAnimationFrame(rafId);
@@ -396,9 +397,25 @@ function reset(): void {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-window.addEventListener('keydown', handleKey);
-restartBtn.addEventListener('click', () => {
-  reset();
-});
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  scoreEl = document.querySelector<HTMLElement>('#score')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  life1 = document.querySelector<HTMLElement>('#life-1')!;
+  life2 = document.querySelector<HTMLElement>('#life-2')!;
+  life3 = document.querySelector<HTMLElement>('#life-3')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
 
-reset();
+  window.addEventListener('keydown', handleKey);
+  restartBtn.addEventListener('click', () => {
+    reset();
+  });
+
+  reset();
+}
+
+export const game = defineGame({ init, reset });
