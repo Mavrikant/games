@@ -1,3 +1,5 @@
+import { defineGame } from '@shared/game-module';
+
 // Sokoban — kutuları hedef noktalarına itme bulmacası.
 //
 // Notasyon (yaygın Sokoban formatı):
@@ -141,20 +143,20 @@ const STORAGE_LEVEL = 'sokoban.level';
 const CANVAS_W = 480;
 const CANVAS_H = 480;
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const levelEl = document.querySelector<HTMLElement>('#level')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const pushesEl = document.querySelector<HTMLElement>('#pushes')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const undoBtn = document.querySelector<HTMLButtonElement>('#undo')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const nextBtn = document.querySelector<HTMLButtonElement>('#next')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
-const touchButtons = document.querySelectorAll<HTMLButtonElement>('.sb-touch__btn');
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let levelEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let pushesEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let undoBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let nextBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayNextBtn!: HTMLButtonElement;
+let touchButtons!: NodeListOf<HTMLButtonElement>;
 
 let state: GameState = 'playing';
 let currentLevelIdx = 0;
@@ -629,6 +631,7 @@ function handleKeyDown(e: KeyboardEvent): void {
   }
 }
 
+function _wireTouch(): void {
 for (const btn of Array.from(touchButtons)) {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -668,12 +671,28 @@ overlayNextBtn.addEventListener('click', (e) => {
 });
 
 window.addEventListener('keydown', handleKeyDown);
+}
 
 // -------------------- Init --------------------
 
-// unguarded-storage pitfall: localStorage'ı init içinde okuyoruz, module-level
-// side-effect değil. Hata atarsa fallback kullanırız.
 function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  levelEl = document.querySelector<HTMLElement>('#level')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  pushesEl = document.querySelector<HTMLElement>('#pushes')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  undoBtn = document.querySelector<HTMLButtonElement>('#undo')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  nextBtn = document.querySelector<HTMLButtonElement>('#next')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayNextBtn = document.querySelector<HTMLButtonElement>('#overlay-next')!;
+  touchButtons = document.querySelectorAll<HTMLButtonElement>('.sb-touch__btn');
+
+  _wireTouch();
+
   const storedBest = safeReadNumber(STORAGE_BEST, 0);
   best = Math.max(0, Math.min(LEVELS.length, Math.floor(storedBest)));
   const storedLevel = safeReadNumber(STORAGE_LEVEL, 0);
@@ -684,4 +703,4 @@ function init(): void {
   loadLevel(startIdx);
 }
 
-init();
+export const game = defineGame({ init, reset: restartLevel });
