@@ -142,6 +142,8 @@ function openGame(slug: string): void {
     return;
   }
   state.playingSlug = slug;
+  // Clear any blank srcdoc left by the previous closeGame() so src takes effect.
+  playerFrame.removeAttribute('srcdoc');
   playerFrame.src = game.url;
   playerTitle.textContent = game.title;
   if (game.controls) {
@@ -163,7 +165,11 @@ function openGame(slug: string): void {
 
 function closeGame(): void {
   state.playingSlug = null;
-  playerFrame.src = 'about:blank';
+  // Use a doctype'd blank doc instead of `about:blank` — the latter loads
+  // as quirks mode (no doctype) and surfaces a DevTools warning. srcdoc
+  // takes precedence over src, so reuses the existing iframe element.
+  playerFrame.removeAttribute('src');
+  playerFrame.srcdoc = '<!doctype html><html lang="tr"><head><meta charset="utf-8"></head><body></body></html>';
   player.classList.remove('player--open');
   app.classList.remove('app--hidden');
   document.title = 'Oyunlar — karaman.dev';
