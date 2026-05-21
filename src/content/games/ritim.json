@@ -1,0 +1,8 @@
+{
+  "title": "Ritim",
+  "description": "Genişleyen halka hedef çizgisine değdiğinde SPACE'e bas — darbeyi yakala.",
+  "dateAdded": "2026-05-21",
+  "tags": ["ritim", "zamanlama", "tek-oyunculu"],
+  "controls": "Boşluk / ekrana bas: darbeyi yakala · R: yeniden başla",
+  "howToPlay": "Ekranın ortasından büyüyen altın bir halka dışa doğru genişler. Halka parlayan beyaz hedef çizgisine değdiği anda SPACE ya da ekrana dokun. ±10 px içindeysen PERFECT (+3), ±26 px içindeysen GOOD (+1), dışındaysa MISS. Üst üste 3 MISS gelince oyun biter; 30 vuruşu tamamlarsan kazanırsın. Her 8 başarılı vuruşta tempo artar, kombon büyüdükçe puan çarpanın yükselir."
+}
