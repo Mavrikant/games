@@ -57,14 +57,8 @@ let overlayTitle!: HTMLElement;
 let overlayMsg!: HTMLElement;
 let restartBtn!: HTMLButtonElement;
 
-// ── Safe storage (typed shims around @shared/storage with number coercion) ──
-function loadBest(key: string, fallback: number): number {
-  const v = safeRead<number>(key, fallback);
-  return Number.isFinite(v) && v >= 0 ? v : fallback;
-}
-function persistBest(key: string, value: number): void {
-  safeWrite(key, value);
-}
+// Storage helpers from @shared/storage are used directly below — no
+// local shim needed since the values are simple numbers.
 
 // ── CSS var cache ────────────────────────────────────────────────────────────
 const cssCache = new Map<string, string>();
@@ -342,7 +336,7 @@ function tryHit(key: string): void {
   if (score > best) {
     best = score;
     bestEl.textContent = String(best);
-    persistBest(STORAGE_KEY, best);
+    safeWrite(STORAGE_KEY, best);
   }
 
   checkLevelUp();
