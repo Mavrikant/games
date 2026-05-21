@@ -3,9 +3,13 @@
 // - overlay-input-leak: state machine (betting | playerTurn | dealerTurn | gameOver);
 //   hit/stand disabled unless state==='playerTurn'.
 // - stale-async-callback: dealer's reveal loop uses a generation token; reset bumps it.
-// - unguarded-storage: safeRead/safeWrite wrap localStorage.
+// - unguarded-storage: @shared/storage wraps localStorage.
 // - duplicate-with-shared-layer: body has no <h1> or hint; layout renders these.
 // - invisible-boot: first frame paints HUD, chips, "Dağıt" enabled, cards empty.
+
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { createGenToken } from '@shared/gen-token';
 
 type Suit = '♠' | '♥' | '♦' | '♣';
 interface Card {
@@ -41,22 +45,22 @@ const KEY_WINS = 'blackjack.wins';
 const KEY_LOSSES = 'blackjack.losses';
 const KEY_BET = 'blackjack.bet';
 
-const chipsEl = document.querySelector<HTMLElement>('#chips')!;
-const betEl = document.querySelector<HTMLElement>('#bet')!;
-const betDisplayEl = document.querySelector<HTMLElement>('#bet-display')!;
-const winsEl = document.querySelector<HTMLElement>('#wins')!;
-const lossesEl = document.querySelector<HTMLElement>('#losses')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const dealerCardsEl = document.querySelector<HTMLElement>('#dealer-cards')!;
-const playerCardsEl = document.querySelector<HTMLElement>('#player-cards')!;
-const dealerTotalEl = document.querySelector<HTMLElement>('#dealer-total')!;
-const playerTotalEl = document.querySelector<HTMLElement>('#player-total')!;
-const statusEl = document.querySelector<HTMLElement>('#status')!;
-const dealBtn = document.querySelector<HTMLButtonElement>('#deal')!;
-const hitBtn = document.querySelector<HTMLButtonElement>('#hit')!;
-const standBtn = document.querySelector<HTMLButtonElement>('#stand')!;
-const betPlusBtn = document.querySelector<HTMLButtonElement>('#bet-plus')!;
-const betMinusBtn = document.querySelector<HTMLButtonElement>('#bet-minus')!;
+let chipsEl!: HTMLElement;
+let betEl!: HTMLElement;
+let betDisplayEl!: HTMLElement;
+let winsEl!: HTMLElement;
+let lossesEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let dealerCardsEl!: HTMLElement;
+let playerCardsEl!: HTMLElement;
+let dealerTotalEl!: HTMLElement;
+let playerTotalEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let dealBtn!: HTMLButtonElement;
+let hitBtn!: HTMLButtonElement;
+let standBtn!: HTMLButtonElement;
+let betPlusBtn!: HTMLButtonElement;
+let betMinusBtn!: HTMLButtonElement;
 
 let deck: Card[] = [];
 let dealerHand: Card[] = [];
@@ -67,24 +71,11 @@ let chips = STARTING_CHIPS;
 let wins = 0;
 let losses = 0;
 let bet = 50;
-let gen = 0;
+const gen = createGenToken();
 
-function safeRead(key: string, fallback: number): number {
-  try {
-    const v = localStorage.getItem(key);
-    if (v === null) return fallback;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function safeWrite(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore */
-  }
+function loadStat(key: string, fallback: number): number {
+  const v = safeRead<number>(key, fallback);
+  return Number.isFinite(v) ? v : fallback;
 }
 
 function buildDeck(): Card[] {
@@ -178,7 +169,7 @@ function startHand(): void {
     setStatus('Yeterli chip yok — bahsi azalt veya yeni oyunu sıfırla.');
     return;
   }
-  gen += 1;
+  gen.bump();
   chips -= bet;
   deck = shuffle(buildDeck());
   playerHand = [drawCard(), drawCard()];
@@ -231,15 +222,15 @@ function playerStand(): void {
   renderHands();
   setStatus('Krupiye sırası…');
   updateButtons();
-  runDealer(gen);
+  runDealer(gen.current());
 }
 
 function runDealer(myGen: number): void {
-  if (myGen !== gen) return;
+  if (!gen.isCurrent(myGen)) return;
   if (state !== 'dealerTurn') return;
   if (handTotal(dealerHand) < 17) {
     window.setTimeout(() => {
-      if (myGen !== gen) return;
+      if (!gen.isCurrent(myGen)) return;
       if (state !== 'dealerTurn') return;
       dealerHand.push(drawCard());
       renderHands();
@@ -275,9 +266,9 @@ function endHand(): void {
   syncHud();
   updateButtons();
   // After a short pause, back to betting.
-  const myGen = gen;
+  const myGen = gen.current();
   window.setTimeout(() => {
-    if (myGen !== gen) return;
+    if (!gen.isCurrent(myGen)) return;
     if (state !== 'gameOver') return;
     state = 'betting';
     setStatus('Yeni el için bahsi ayarla ve "Dağıt"a bas.');
@@ -297,7 +288,7 @@ function syncHud(): void {
 }
 
 function fullReset(): void {
-  gen += 1;
+  gen.bump();
   state = 'betting';
   chips = STARTING_CHIPS;
   wins = 0;
@@ -318,68 +309,86 @@ function fullReset(): void {
 }
 
 function init(): void {
-  chips = safeRead(KEY_CHIPS, STARTING_CHIPS);
-  wins = safeRead(KEY_WINS, 0);
-  losses = safeRead(KEY_LOSSES, 0);
-  bet = safeRead(KEY_BET, 50);
+  chipsEl = document.querySelector<HTMLElement>('#chips')!;
+  betEl = document.querySelector<HTMLElement>('#bet')!;
+  betDisplayEl = document.querySelector<HTMLElement>('#bet-display')!;
+  winsEl = document.querySelector<HTMLElement>('#wins')!;
+  lossesEl = document.querySelector<HTMLElement>('#losses')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  dealerCardsEl = document.querySelector<HTMLElement>('#dealer-cards')!;
+  playerCardsEl = document.querySelector<HTMLElement>('#player-cards')!;
+  dealerTotalEl = document.querySelector<HTMLElement>('#dealer-total')!;
+  playerTotalEl = document.querySelector<HTMLElement>('#player-total')!;
+  statusEl = document.querySelector<HTMLElement>('#status')!;
+  dealBtn = document.querySelector<HTMLButtonElement>('#deal')!;
+  hitBtn = document.querySelector<HTMLButtonElement>('#hit')!;
+  standBtn = document.querySelector<HTMLButtonElement>('#stand')!;
+  betPlusBtn = document.querySelector<HTMLButtonElement>('#bet-plus')!;
+  betMinusBtn = document.querySelector<HTMLButtonElement>('#bet-minus')!;
+
+  chips = loadStat(KEY_CHIPS, STARTING_CHIPS);
+  wins = loadStat(KEY_WINS, 0);
+  losses = loadStat(KEY_LOSSES, 0);
+  bet = loadStat(KEY_BET, 50);
   if (chips < MIN_BET) chips = STARTING_CHIPS;
   if (bet < MIN_BET) bet = MIN_BET;
   if (bet > chips) bet = chips;
   state = 'betting';
+
+  dealBtn.addEventListener('click', startHand);
+  hitBtn.addEventListener('click', playerHit);
+  standBtn.addEventListener('click', playerStand);
+  betPlusBtn.addEventListener('click', () => {
+    if (state !== 'betting') return;
+    if (bet + BET_STEP <= chips) {
+      bet += BET_STEP;
+      syncHud();
+      updateButtons();
+    }
+  });
+  betMinusBtn.addEventListener('click', () => {
+    if (state !== 'betting') return;
+    if (bet - BET_STEP >= MIN_BET) {
+      bet -= BET_STEP;
+      syncHud();
+      updateButtons();
+    }
+  });
+  restartBtn.addEventListener('click', fullReset);
+
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'r') {
+      fullReset();
+      e.preventDefault();
+      return;
+    }
+    if (state === 'playerTurn') {
+      if (k === 'h') {
+        playerHit();
+        e.preventDefault();
+      } else if (k === 's') {
+        playerStand();
+        e.preventDefault();
+      }
+    } else if (state === 'betting') {
+      if (k === 'enter' || k === ' ') {
+        startHand();
+        e.preventDefault();
+      } else if (k === '+' || k === '=') {
+        betPlusBtn.click();
+        e.preventDefault();
+      } else if (k === '-' || k === '_') {
+        betMinusBtn.click();
+        e.preventDefault();
+      }
+    }
+  });
+
   renderHands();
   syncHud();
   updateButtons();
   setStatus('Bahis ayarla ve "Dağıt"a bas.');
 }
 
-dealBtn.addEventListener('click', startHand);
-hitBtn.addEventListener('click', playerHit);
-standBtn.addEventListener('click', playerStand);
-betPlusBtn.addEventListener('click', () => {
-  if (state !== 'betting') return;
-  if (bet + BET_STEP <= chips) {
-    bet += BET_STEP;
-    syncHud();
-    updateButtons();
-  }
-});
-betMinusBtn.addEventListener('click', () => {
-  if (state !== 'betting') return;
-  if (bet - BET_STEP >= MIN_BET) {
-    bet -= BET_STEP;
-    syncHud();
-    updateButtons();
-  }
-});
-restartBtn.addEventListener('click', fullReset);
-
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'r') {
-    fullReset();
-    e.preventDefault();
-    return;
-  }
-  if (state === 'playerTurn') {
-    if (k === 'h') {
-      playerHit();
-      e.preventDefault();
-    } else if (k === 's') {
-      playerStand();
-      e.preventDefault();
-    }
-  } else if (state === 'betting') {
-    if (k === 'enter' || k === ' ') {
-      startHand();
-      e.preventDefault();
-    } else if (k === '+' || k === '=') {
-      betPlusBtn.click();
-      e.preventDefault();
-    } else if (k === '-' || k === '_') {
-      betMinusBtn.click();
-      e.preventDefault();
-    }
-  }
-});
-
-init();
+export const game = defineGame({ init, reset: fullReset });
