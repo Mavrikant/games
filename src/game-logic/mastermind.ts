@@ -1,5 +1,9 @@
 // Mastermind — klasik kod-kırma.
 // Bilgisayar 4 peg'lik bir gizli kod üretir (renk seti zorluğa göre değişir).
+
+import { defineGame } from '@shared/game-module';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 // Oyuncunun 10 denemesi var. Her tahmin sonrası geri bildirim:
 //   - black peg: doğru renk + doğru pozisyon (code[i] === guess[i])
 //   - white peg: doğru renk, yanlış pozisyon (Knuth: çoklu küme kesişimi - black)
@@ -47,29 +51,30 @@ type GameState = 'playing' | 'won' | 'lost';
 
 // ---- DOM refs ----
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const attemptEl = document.querySelector<HTMLElement>('#attempt')!;
-const winsEl = document.querySelector<HTMLElement>('#wins')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const submitBtn = document.querySelector<HTMLButtonElement>('#submit')!;
-const clearBtn = document.querySelector<HTMLButtonElement>('#clear')!;
-const paletteEl = document.querySelector<HTMLElement>('#palette')!;
-const paletteInner = document.querySelector<HTMLElement>('#palette-inner')!;
-const paletteCloseBtn =
-  document.querySelector<HTMLButtonElement>('#palette-close')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayCode = document.querySelector<HTMLElement>('#overlay-code')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
-const diffBtns = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
-);
+let boardEl!: HTMLElement;
+let attemptEl!: HTMLElement;
+let winsEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let submitBtn!: HTMLButtonElement;
+let clearBtn!: HTMLButtonElement;
+let paletteEl!: HTMLElement;
+let paletteInner!: HTMLElement;
+let paletteCloseBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayCode!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
+let diffBtns: HTMLButtonElement[] = [];
 
 // ---- Storage (safe) ----
 
+/**
+ * Reads a raw string from localStorage (not JSON-encoded; preserves the
+ * existing mastermind storage format). Use directly when the stored value
+ * isn't a JSON document.
+ */
 function safeRead(key: string): string | null {
   try {
     return localStorage.getItem(key);
@@ -121,7 +126,7 @@ let activeSlot: { row: number; col: number } | null = null;
 
 // Generation token — bump on every new game. Async callbacks (e.g. a
 // hypothetical animation timer) must check `if (myGen !== gen) return`.
-let gen = 0;
+const gen = createGenToken();
 
 // ---- Helpers ----
 
@@ -449,8 +454,7 @@ function showWin(attempts: number): void {
     attempts === 1
       ? '1 denemede kazandın!'
       : `${attempts} denemede kazandın.`;
-  overlay.classList.remove('overlay--hidden');
-  overlay.setAttribute('aria-hidden', 'false');
+  showOverlayEl(overlay);
   overlayRestart.focus({ preventScroll: true });
 }
 
@@ -458,21 +462,19 @@ function showLose(): void {
   renderCodeOverlay();
   overlayTitle.textContent = 'Süre doldu';
   overlayMsg.textContent = 'Gizli kod yukarıda — tekrar dene!';
-  overlay.classList.remove('overlay--hidden');
-  overlay.setAttribute('aria-hidden', 'false');
+  showOverlayEl(overlay);
   overlayRestart.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
-  overlay.setAttribute('aria-hidden', 'true');
+  hideOverlayEl(overlay);
 }
 
 // ---- New game ----
 
 function newGame(): void {
   // Bump generation so any pending async callback bails.
-  gen++;
+  gen.bump();
   // Close palette if mid-pick during spam restart.
   activeSlot = null;
   paletteEl.classList.add('palette--hidden');
@@ -507,51 +509,71 @@ function setDifficulty(d: Difficulty): void {
   newGame();
 }
 
-// ---- Wire up ----
+// ---- Init ----
 
-restartBtn.addEventListener('click', newGame);
-overlayRestart.addEventListener('click', newGame);
-submitBtn.addEventListener('click', submitGuess);
-clearBtn.addEventListener('click', clearCurrentRow);
-paletteCloseBtn.addEventListener('click', closePalette);
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  attemptEl = document.querySelector<HTMLElement>('#attempt')!;
+  winsEl = document.querySelector<HTMLElement>('#wins')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  submitBtn = document.querySelector<HTMLButtonElement>('#submit')!;
+  clearBtn = document.querySelector<HTMLButtonElement>('#clear')!;
+  paletteEl = document.querySelector<HTMLElement>('#palette')!;
+  paletteInner = document.querySelector<HTMLElement>('#palette-inner')!;
+  paletteCloseBtn = document.querySelector<HTMLButtonElement>('#palette-close')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayCode = document.querySelector<HTMLElement>('#overlay-code')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+  diffBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.diff__btn'),
+  );
 
-diffBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const d = btn.dataset.diff;
-    if (d === 'easy' || d === 'hard') setDifficulty(d);
+  restartBtn.addEventListener('click', newGame);
+  overlayRestart.addEventListener('click', newGame);
+  submitBtn.addEventListener('click', submitGuess);
+  clearBtn.addEventListener('click', clearCurrentRow);
+  paletteCloseBtn.addEventListener('click', closePalette);
+
+  diffBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const d = btn.dataset.diff;
+      if (d === 'easy' || d === 'hard') setDifficulty(d);
+    });
   });
-});
 
-window.addEventListener('keydown', (e) => {
-  const k = e.key.toLowerCase();
-  if (k === 'r') {
-    newGame();
-    e.preventDefault();
-    return;
-  }
-  if (k === 'escape') {
-    if (!paletteEl.classList.contains('palette--hidden')) {
-      closePalette();
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'r') {
+      newGame();
+      e.preventDefault();
+      return;
+    }
+    if (k === 'escape') {
+      if (!paletteEl.classList.contains('palette--hidden')) {
+        closePalette();
+        e.preventDefault();
+      }
+      return;
+    }
+    if (k === 'enter' && state === 'playing') {
+      if (!submitBtn.disabled) {
+        submitGuess();
+        e.preventDefault();
+      }
+      return;
+    }
+    if (k === 'enter' && (state === 'won' || state === 'lost')) {
+      newGame();
       e.preventDefault();
     }
-    return;
-  }
-  if (k === 'enter' && state === 'playing') {
-    if (!submitBtn.disabled) {
-      submitGuess();
-      e.preventDefault();
-    }
-    return;
-  }
-  // Enter on win/lose: new game.
-  if (k === 'enter' && (state === 'won' || state === 'lost')) {
-    newGame();
-    e.preventDefault();
-  }
-});
+  });
 
-// ---- Boot ----
+  buildBoard();
+  buildPalette();
+  newGame();
+}
 
-buildBoard();
-buildPalette();
-newGame();
+export const game = defineGame({ init, reset: newGame });
