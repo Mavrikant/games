@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
 /* Color Flow — Flow Free style puzzle: drag from each endpoint to its twin,
    fill every cell, paths never cross. Generation uses random self-avoiding
    walks that together tile the entire grid, guaranteeing solvability. */
@@ -53,20 +56,20 @@ const COLOR_PALETTE = [
 const STORAGE_LEVEL = 'color-flow.level';
 const STORAGE_BEST_PREFIX = 'color-flow.bestMoves.';
 
-const boardEl = document.querySelector<HTMLCanvasElement>('#cf-board')!;
-const levelEl = document.querySelector<HTMLElement>('#cf-level')!;
-const movesEl = document.querySelector<HTMLElement>('#cf-moves')!;
-const bestEl = document.querySelector<HTMLElement>('#cf-best')!;
-const sizeEl = document.querySelector<HTMLElement>('#cf-size')!;
-const statusEl = document.querySelector<HTMLElement>('#cf-status')!;
-const newBtn = document.querySelector<HTMLButtonElement>('#cf-new')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#cf-overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#cf-overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#cf-overlay-msg')!;
-const overlayNext = document.querySelector<HTMLButtonElement>('#cf-overlay-next')!;
+let boardEl!: HTMLCanvasElement;
+let levelEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let sizeEl!: HTMLElement;
+let statusEl!: HTMLElement;
+let newBtn!: HTMLButtonElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayNext!: HTMLButtonElement;
 
-const ctx = boardEl.getContext('2d')!;
+let ctx!: CanvasRenderingContext2D;
 
 // State
 let levelIndex = 0;
@@ -76,7 +79,7 @@ let moves = 0;
 let state: GameState = 'playing';
 // Token bumped on every reset/newPuzzle/levelChange. Async callbacks check
 // `if (myToken !== currentToken) return;` to drop stale work.
-let genToken = 0;
+const genToken = createGenToken();
 
 // Active drag state
 let dragColor = -1; // -1 = no drag
@@ -702,7 +705,7 @@ function clearPaths(): void {
 }
 
 function newPuzzle(): void {
-  genToken++;
+  genToken.bump();
   state = 'playing';
   cancelDrag();
   overlay.classList.add('cf-overlay--hidden');
@@ -856,6 +859,7 @@ function onPointerCancel(): void {
   commitDrag();
 }
 
+function _wire(): void {
 boardEl.addEventListener('pointerdown', onPointerDown);
 boardEl.addEventListener('pointermove', onPointerMove);
 boardEl.addEventListener('pointerup', onPointerUp);
@@ -907,7 +911,27 @@ window.addEventListener('resize', () => {
     drawAll();
   });
 });
+}
 
 // Init
-levelIndex = loadLevel();
-newPuzzle();
+function init(): void {
+  boardEl = document.querySelector<HTMLCanvasElement>('#cf-board')!;
+  ctx = boardEl.getContext('2d')!;
+  levelEl = document.querySelector<HTMLElement>('#cf-level')!;
+  movesEl = document.querySelector<HTMLElement>('#cf-moves')!;
+  bestEl = document.querySelector<HTMLElement>('#cf-best')!;
+  sizeEl = document.querySelector<HTMLElement>('#cf-size')!;
+  statusEl = document.querySelector<HTMLElement>('#cf-status')!;
+  newBtn = document.querySelector<HTMLButtonElement>('#cf-new')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#cf-overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#cf-overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#cf-overlay-msg')!;
+  overlayNext = document.querySelector<HTMLButtonElement>('#cf-overlay-next')!;
+
+  _wire();
+  levelIndex = loadLevel();
+  newPuzzle();
+}
+
+export const game = defineGame({ init, reset: () => newPuzzle() });
