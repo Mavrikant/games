@@ -6,6 +6,7 @@ import Card from '@components/Card.astro';
 import PlayerOverlay from '@components/PlayerOverlay.astro';
 import NewsletterForm from '@components/NewsletterForm.astro';
 import SiteFooter from '@components/SiteFooter.astro';
+import AdSlot from '@components/AdSlot.astro';
 import '@styles/archive.css';
 
 const all = await getCollection('games');
@@ -147,6 +148,7 @@ const itemListSchema = {
     </footer>
   </main>
 
+  <AdSlot position="homepage" />
   <NewsletterForm />
   <SiteFooter />
   <PlayerOverlay />

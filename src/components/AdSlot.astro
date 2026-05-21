@@ -1,0 +1,63 @@
+---
+// Responsive AdSense slot. Env-gated: renders nothing if either
+// PUBLIC_ADSENSE_CLIENT (ca-pub-…) or the per-position slot ID is missing.
+// The loader script is in BaseLayout — this component only adds <ins> +
+// the push() trigger so Google fills the slot.
+//
+// Per-position slot IDs come from env vars created in AdSense console:
+//   Sites → karaman.dev → Get ad code → create unit → copy the 10-digit
+//   data-ad-slot value → set as repo Variable.
+
+interface Props {
+  position: 'homepage' | 'game';
+  label?: string;
+}
+
+const { position, label = 'Reklam' } = Astro.props;
+
+const slotMap: Record<Props['position'], string> = {
+  homepage: import.meta.env.PUBLIC_ADSENSE_SLOT_HOMEPAGE ?? '',
+  game: import.meta.env.PUBLIC_ADSENSE_SLOT_GAME ?? '',
+};
+const slot = slotMap[position];
+const client = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
+const enabled = !!client && !!slot;
+---
+
+{
+  enabled && (
+    <aside class="adslot" aria-label={label}>
+      <span class="adslot__label">{label}</span>
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client={client}
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+      <script
+        is:inline
+        set:html="(adsbygoogle = window.adsbygoogle || []).push({});"
+      />
+    </aside>
+  )
+}
+
+<style>
+  .adslot {
+    margin: 24px auto 0;
+    max-width: 728px;
+    width: 100%;
+    text-align: center;
+    min-height: 90px;
+  }
+  .adslot__label {
+    display: block;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+</style>
