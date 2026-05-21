@@ -11,22 +11,37 @@
 2. **Runtime (sayfa açıldığında)**: `<script>` URL'den slug çıkarır ve
    `import.meta.glob('/src/game-logic/*.ts')` ile ilgili modülü dinamik
    import eder.
-3. **Modül yan etkisi**: Logic dosyası en üst seviyede DOM'u sorgular,
-   event handler bağlar, oyunu init eder. Export gerekmez.
+3. **Modül entry**: Logic dosyası `defineGame({ init })` export eder.
+   `defineGame` queueMicrotask ile `init()`'i otomatik çağırır — DOM
+   parse sonrası, manuel çağrıya gerek yok.
 
 ```ts
 // src/game-logic/<slug>.ts
-const board = document.querySelector<HTMLCanvasElement>('#board')!;
-const restart = document.querySelector<HTMLButtonElement>('#restart')!;
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
 
-function reset() { /* ... */ }
+let board!: HTMLCanvasElement;
+let restartBtn!: HTMLButtonElement;
 
-restart.addEventListener('click', reset);
-reset();   // ← init
+function reset(): void { /* ... */ }
+
+function init(): void {
+  // Tüm DOM querySelector + addEventListener + localStorage erişimi burada.
+  board = document.querySelector<HTMLCanvasElement>('#board')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  restartBtn.addEventListener('click', reset);
+  reset();
+}
+
+export const game = defineGame({ init, reset });
 ```
 
-DOM yüklendiğinde script de yüklendiği için `DOMContentLoaded` beklemek
-**gerekli değil** — Astro `<script>` tag'i body sonunda. Yine de zarar yok.
+**Module-level side effect yazma.** `const x = document.querySelector(...)`
+top-level → PITFALLS#module-level-dom-access. Aynı sınıfta: top-level
+`localStorage.getItem`, top-level event listener, top-level
+`new ResizeObserver`. Hepsi `init()` içine.
+
+CI'da `npm run audit:games --ci` bu kuralı zorunlu kılar (build fail).
 
 ## DOM bağlama kontratı
 
@@ -60,16 +75,29 @@ review** gerektirir.
 
 - Tek state mekanizması: `localStorage` (server yok)
 - Anahtar prefix: `<slug>.` — örn. `snake.best`, `xox.scores`
-- JSON serileştirilebilir veriler için `JSON.stringify`/`JSON.parse`
-- try/catch ile koru (kullanıcı disable etmiş olabilir)
+- Erişim **her zaman** `@shared/storage` üzerinden (JSON-encoded, try/catch built-in)
 
 ```ts
+import { safeRead, safeWrite } from '@shared/storage';
+
 const KEY = 'my-game.best';
-let best = Number(localStorage.getItem(KEY) ?? '0') || 0;
-try { localStorage.setItem(KEY, String(best)); } catch { /* ignore */ }
+
+// Generic, fallback değer döner; localStorage throw etse bile crash etmez.
+let best = safeRead<number>(KEY, 0);
+
+// En iyi skor değiştiğinde:
+safeWrite(KEY, best);
 ```
 
-`sessionStorage` da kullanılabilir; ama oyun reload'ında skor silinir.
+Ham `localStorage.getItem`/`setItem` çağrısı yasak — PITFALLS#unguarded-storage.
+CI'da `npm run audit:games --ci` yakalar.
+
+İstisna: önceden raw-string formatında saklanan veri varsa (örn.
+`localStorage.setItem(KEY, 'easy')`) ve format'ı korumak gerekiyorsa, local
+`try { localStorage.getItem(...) } catch { return fallback; }` pattern'i
+geçerli (örnek: `src/game-logic/memory.ts` `loadDifficulty`).
+
+`sessionStorage` da kullanılabilir ama reload'da silinir.
 
 ## Event handling
 
@@ -130,7 +158,8 @@ Snake'in çiziminde aynı pattern var; referans:
 
 - ✅ TypeScript strict — `noUncheckedIndexedAccess` aktif, array index
   null kontrol gerekli (`arr[0]!` veya guard)
-- ✅ İlk render'ı modül en sonunda yap (`init()` / `reset()`)
+- ✅ `defineGame({ init, reset })` export et; tüm side effect `init()` içinde
+- ✅ Storage `@shared/storage`, async iptal `@shared/gen-token`, overlay `@shared/overlay` ([docs/SHARED_HELPERS.md](SHARED_HELPERS.md))
 - ✅ Cleanup gerekmez (her sayfa kendi document'ı)
 - ✅ İskelet markup body dosyasında, dinamik markup logic'te
 - ✅ A11y: `aria-label` canvas/button'larda, `role="grid"` görsel grid'lerde
