@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
 
 type Dir = 'right' | 'left' | 'up' | 'down';
 type MirrorType = '/' | '\\' | null;
@@ -49,6 +50,14 @@ let laserPath: Array<{col: number; row: number}> = [];
 let hitTargets: Set<string> = new Set();
 let mirrorsPlaced = 0;
 let fired = false;
+let allLevelsCleared = false;
+let genToken = createGenToken();
+let pendingTransitionTimers: ReturnType<typeof setTimeout>[] = [];
+
+function clearPendingTransitions(): void {
+  for (const t of pendingTransitionTimers) clearTimeout(t);
+  pendingTransitionTimers = [];
+}
 
 const cssCache = new Map<string, string>();
 function getCss(v: string): string {
@@ -262,7 +271,10 @@ function drawLaserSource(): void {
 }
 
 function loadLevel(idx: number): void {
+  genToken = createGenToken();
+  clearPendingTransitions();
   currentLevel = idx;
+  allLevelsCleared = false;
   const level = LEVELS[idx]!;
   grid = makeGrid(level);
   laserPath = [];
@@ -308,6 +320,7 @@ function handleCellClick(e: MouseEvent): void {
 }
 
 function fireLaser(): void {
+  if (allLevelsCleared) return;
   const level = LEVELS[currentLevel]!;
   const result = simulateLaser(level);
   laserPath = result.path;
@@ -316,16 +329,28 @@ function fireLaser(): void {
   draw();
 
   const totalTargets = level.targets.length;
-  if (hitTargets.size === totalTargets) {
-    setTimeout(() => {
-      if (currentLevel < LEVELS.length - 1) {
-        showOverlay(`Seviye ${currentLevel + 1} Tamamlandı! 🎉`, 'Tebrikler! Bir sonraki seviyeye geçiliyor…');
-        setTimeout(() => loadLevel(currentLevel + 1), 2000);
-      } else {
-        showOverlay('Tüm Seviyeler Tamamlandı! 🏆', `Tüm ${LEVELS.length} bulmacayı çözdün! · R ile baştan başla`);
-      }
-    }, 300);
-  }
+  if (hitTargets.size !== totalTargets) return;
+
+  const myToken = genToken;
+  const t1 = setTimeout(() => {
+    if (myToken !== genToken) return;
+    if (currentLevel < LEVELS.length - 1) {
+      showOverlay(`Seviye ${currentLevel + 1} Tamamlandı! 🎉`, 'Tebrikler! Bir sonraki seviyeye geçiliyor…');
+      const t2 = setTimeout(() => {
+        if (myToken !== genToken) return;
+        loadLevel(currentLevel + 1);
+      }, 2000);
+      pendingTransitionTimers.push(t2);
+    } else {
+      allLevelsCleared = true;
+      showOverlay('Tüm Seviyeler Tamamlandı! 🏆', `Tüm ${LEVELS.length} bulmacayı çözdün! · R ile veya tıklayarak baştan başla`);
+    }
+  }, 300);
+  pendingTransitionTimers.push(t1);
+}
+
+function restartFromBeginning(): void {
+  loadLevel(0);
 }
 
 function init(): void {
@@ -345,18 +370,26 @@ function init(): void {
   clearBtn.addEventListener('click', () => loadLevel(currentLevel));
   restartBtn.addEventListener('click', () => loadLevel(currentLevel));
 
+  overlay.addEventListener('click', () => {
+    if (allLevelsCleared) restartFromBeginning();
+    else hideOverlay();
+  });
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'r' || e.key === 'R') {
       e.preventDefault();
-      loadLevel(currentLevel);
+      if (allLevelsCleared) restartFromBeginning();
+      else loadLevel(currentLevel);
     } else if (e.key === 'Enter' || e.key === 'f' || e.key === 'F') {
       e.preventDefault();
       fireLaser();
     }
   });
 
-  showOverlay('Lazer & Ayna', 'Hücrelere tıklayarak ayna yerleştir, lazeri tüm yıldızlara ulaştır.\nBaşlamak için kapat (veya hücreye tıkla).');
+  // First load: build level 0 grid (this hides overlay), then show welcome
+  // overlay on top — user dismisses via click/Enter/F to start.
   loadLevel(0);
+  showOverlay('Lazer & Ayna', 'Hücrelere tıklayarak ayna yerleştir, lazeri tüm yıldızlara ulaştır.\nBaşlamak için tıkla.');
 }
 
 export const game = defineGame({ init });
