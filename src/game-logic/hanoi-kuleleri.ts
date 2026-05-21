@@ -1,3 +1,6 @@
+import { defineGame } from '@shared/game-module';
+import { createGenToken } from '@shared/gen-token';
+
 // Hanoi Kuleleri — klasik 3 kule disk taşıma bulmacası.
 //
 // State machine: playing → solved (overlay açık)
@@ -83,17 +86,17 @@ interface AnimState {
   toCenter: [number, number]; // anim bitişi
 }
 
-const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
-const ctx = canvas.getContext('2d')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const optimalEl = document.querySelector<HTMLElement>('#optimal')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const diskBarEl = document.querySelector<HTMLElement>('#disk-bar')!;
-const overlayEl = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitleEl = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestartBtn = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let canvas!: HTMLCanvasElement;
+let ctx!: CanvasRenderingContext2D;
+let movesEl!: HTMLElement;
+let optimalEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let diskBarEl!: HTMLElement;
+let overlayEl!: HTMLElement;
+let overlayTitleEl!: HTMLElement;
+let overlayMsgEl!: HTMLElement;
+let overlayRestartBtn!: HTMLButtonElement;
 
 let diskCount: number = DEFAULT_DISKS;
 let towers: [Tower, Tower, Tower] = [[], [], []];
@@ -105,8 +108,8 @@ let shakeTower: number | null = null;
 let shakeUntil = 0;
 let bestByDisks: Record<number, number> = {};
 let rafHandle: number | null = null;
-let gen = 0; // generation token — stale-async-callback guard.
-let geom: Geom = computeGeom(canvas.width, canvas.height, DEFAULT_DISKS);
+const gen = createGenToken();
+let geom!: Geom;
 
 // ---------- Storage helpers (unguarded-storage pitfall) ----------
 
@@ -169,7 +172,7 @@ function optimalMoves(n: number): number {
 
 function newGame(n: number): void {
   // Bump generation so any pending async callback bails.
-  gen++;
+  gen.bump();
   cancelAnimation();
   diskCount = n;
   geom = computeGeom(canvas.width, canvas.height, n);
@@ -220,9 +223,9 @@ function tryMove(from: number, to: number): boolean {
   // hedefe push olarak yapılır.
   src.pop();
   scheduleDraw();
-  const myGen = gen;
+  const myGen = gen.current();
   window.setTimeout(() => {
-    if (myGen !== gen) return; // stale-async-callback guard
+    if (!gen.isCurrent(myGen)) return; // stale-async-callback guard
     if (!animation) return;
     // State mutate.
     towers[to].push(movingDisk);
@@ -234,9 +237,9 @@ function tryMove(from: number, to: number): boolean {
     if (towers[2].length === diskCount && state === 'playing') {
       const winMoves = moves;
       state = 'solved';
-      const winGen = gen;
+      const winGen = gen.current();
       window.setTimeout(() => {
-        if (winGen !== gen) return;
+        if (!gen.isCurrent(winGen)) return;
         showSolved(winMoves);
       }, SOLVED_DELAY_MS);
     }
@@ -573,6 +576,7 @@ function handleTowerClick(tower: number): void {
   }
 }
 
+function _wireListeners(): void {
 canvas.addEventListener('pointerdown', onCanvasPointer);
 
 restartBtn.addEventListener('click', () => newGame(diskCount));
@@ -625,9 +629,28 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
+}
 
 // ---------- Init ----------
 
-loadAllBest();
-diskCount = loadSavedDiskCount();
-newGame(diskCount);
+function init(): void {
+  canvas = document.querySelector<HTMLCanvasElement>('#board')!;
+  ctx = canvas.getContext('2d')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  optimalEl = document.querySelector<HTMLElement>('#optimal')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  diskBarEl = document.querySelector<HTMLElement>('#disk-bar')!;
+  overlayEl = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitleEl = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsgEl = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestartBtn = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+
+  _wireListeners();
+
+  loadAllBest();
+  diskCount = loadSavedDiskCount();
+  newGame(diskCount);
+}
+
+export const game = defineGame({ init, reset: () => newGame(diskCount) });
