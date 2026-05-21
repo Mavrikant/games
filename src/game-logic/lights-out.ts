@@ -3,58 +3,43 @@
 // applying N random toggles to an all-off grid (toggle is self-inverse,
 // so the resulting configuration is guaranteed reachable).
 
+import { defineGame } from '@shared/game-module';
+import { safeRead, safeWrite } from '@shared/storage';
+import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { createGenToken } from '@shared/gen-token';
+
 const SIZE = 5;
 const STORAGE_BEST = 'lights-out.best';
 const SCRAMBLE_MIN = 8;
 const SCRAMBLE_MAX = 12;
-const WIN_DELAY_MS = 420; // wait for the last fade-out before showing overlay
+const WIN_DELAY_MS = 420;
 
 type GameState = 'playing' | 'won';
 
-const boardEl = document.querySelector<HTMLElement>('#board')!;
-const movesEl = document.querySelector<HTMLElement>('#moves')!;
-const bestEl = document.querySelector<HTMLElement>('#best')!;
-const restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
-const overlay = document.querySelector<HTMLElement>('#overlay')!;
-const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
-const overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
-const overlayRestart =
-  document.querySelector<HTMLButtonElement>('#overlay-restart')!;
+let boardEl!: HTMLElement;
+let movesEl!: HTMLElement;
+let bestEl!: HTMLElement;
+let restartBtn!: HTMLButtonElement;
+let overlay!: HTMLElement;
+let overlayTitle!: HTMLElement;
+let overlayMsg!: HTMLElement;
+let overlayRestart!: HTMLButtonElement;
 
 let grid: boolean[] = new Array(SIZE * SIZE).fill(false);
 let cellEls: HTMLButtonElement[] = [];
 let moves = 0;
-let best: number | null = loadBest();
+let best: number | null = null;
 let state: GameState = 'playing';
 
-// Generation token guards async win callback from a stale game.
-let gen = 0;
-
-function safeReadNumber(key: string): number | null {
-  try {
-    const raw = localStorage.getItem(key);
-    if (raw === null) return null;
-    const n = Number(raw);
-    return Number.isFinite(n) && n > 0 ? n : null;
-  } catch {
-    return null;
-  }
-}
-
-function safeWriteNumber(key: string, value: number): void {
-  try {
-    localStorage.setItem(key, String(value));
-  } catch {
-    /* ignore (private mode, full disk, disabled, etc.) */
-  }
-}
+const gen = createGenToken();
 
 function loadBest(): number | null {
-  return safeReadNumber(STORAGE_BEST);
+  const v = safeRead<number>(STORAGE_BEST, 0);
+  return Number.isFinite(v) && v > 0 ? v : null;
 }
 
 function saveBest(): void {
-  if (best !== null) safeWriteNumber(STORAGE_BEST, best);
+  if (best !== null) safeWrite(STORAGE_BEST, best);
 }
 
 function idx(r: number, c: number): number {
@@ -80,8 +65,6 @@ function allOff(g: boolean[]): boolean {
 }
 
 function scramble(): boolean[] {
-  // Start from solved state, apply random moves. Every resulting
-  // configuration is guaranteed solvable. Avoid landing on all-off.
   const g: boolean[] = new Array(SIZE * SIZE).fill(false);
   const moveCount =
     SCRAMBLE_MIN + Math.floor(Math.random() * (SCRAMBLE_MAX - SCRAMBLE_MIN + 1));
@@ -91,8 +74,6 @@ function scramble(): boolean[] {
     applyMove(g, r, c);
   }
   if (allOff(g)) {
-    // extremely unlikely but possible — toggle one center move to ensure
-    // the board is actually a puzzle.
     applyMove(g, 2, 2);
   }
   return g;
@@ -148,13 +129,11 @@ function onCellClick(e: MouseEvent): void {
   renderGrid();
 
   if (allOff(grid)) {
-    // Lock further input immediately so spam-clicks during the fade
-    // can't increment moves past the winning count.
     state = 'won';
     const winMoves = moves;
-    const myGen = gen;
+    const myGen = gen.current();
     window.setTimeout(() => {
-      if (myGen !== gen) return; // user restarted during the fade
+      if (!gen.isCurrent(myGen)) return;
       showWin(winMoves);
     }, WIN_DELAY_MS);
   }
@@ -169,21 +148,16 @@ function showWin(winMoves: number): void {
   }
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Tüm ışıklar kapandı!';
   overlayMsg.textContent = `${winMoves} hamlede çözdün.`;
-  overlay.classList.remove('overlay--hidden');
-  overlay.setAttribute('aria-hidden', 'false');
-  // Move focus to the prominent "new game" button so keyboard users can
-  // restart with Enter immediately.
+  showOverlayEl(overlay);
   overlayRestart.focus({ preventScroll: true });
 }
 
 function hideOverlay(): void {
-  overlay.classList.add('overlay--hidden');
-  overlay.setAttribute('aria-hidden', 'true');
+  hideOverlayEl(overlay);
 }
 
 function startGame(): void {
-  // Bump generation so any pending win-timer from the previous game bails.
-  gen++;
+  gen.bump();
   state = 'playing';
   grid = scramble();
   moves = 0;
@@ -193,18 +167,33 @@ function startGame(): void {
   renderGrid();
 }
 
-restartBtn.addEventListener('click', startGame);
-overlayRestart.addEventListener('click', startGame);
+function init(): void {
+  boardEl = document.querySelector<HTMLElement>('#board')!;
+  movesEl = document.querySelector<HTMLElement>('#moves')!;
+  bestEl = document.querySelector<HTMLElement>('#best')!;
+  restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  overlay = document.querySelector<HTMLElement>('#overlay')!;
+  overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
+  overlayMsg = document.querySelector<HTMLElement>('#overlay-msg')!;
+  overlayRestart = document.querySelector<HTMLButtonElement>('#overlay-restart')!;
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') {
-    startGame();
-    e.preventDefault();
-  } else if (e.key === 'Enter' && state === 'won') {
-    startGame();
-    e.preventDefault();
-  }
-});
+  best = loadBest();
 
-buildBoard();
-startGame();
+  restartBtn.addEventListener('click', startGame);
+  overlayRestart.addEventListener('click', startGame);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      startGame();
+      e.preventDefault();
+    } else if (e.key === 'Enter' && state === 'won') {
+      startGame();
+      e.preventDefault();
+    }
+  });
+
+  buildBoard();
+  startGame();
+}
+
+export const game = defineGame({ init, reset: startGame });
