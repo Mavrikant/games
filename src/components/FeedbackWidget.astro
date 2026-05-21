@@ -1,0 +1,448 @@
+---
+// Site-içi geri bildirim widget'ı (sağ alt FAB + panel + form).
+// Backend-free: doğrudan Web3Forms API'ye POST eder. Kullanıcı
+// siteden çıkmaz. `PUBLIC_WEB3FORMS_KEY` boşsa widget hiç render
+// edilmez (env-gate). EmbedLayout BaseLayout'u extend etmediği
+// için /embed/* sayfalarında doğal olarak görünmez.
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+---
+
+{
+  web3formsKey && (
+    <div class="fb-root" data-fb-key={web3formsKey}>
+      <button
+        type="button"
+        class="fb-fab"
+        aria-label="Geri bildirim aç"
+        aria-expanded="false"
+        aria-controls="fb-panel"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+        <span class="fb-fab__tip">Geri bildirim</span>
+      </button>
+
+      <div id="fb-panel" class="fb-panel" hidden role="dialog" aria-modal="false" aria-labelledby="fb-title">
+        <header class="fb-panel__head">
+          <h2 id="fb-title" class="fb-panel__title">Geri bildirim</h2>
+          <button type="button" class="fb-close" aria-label="Kapat">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 3 L13 13 M13 3 L3 13" />
+            </svg>
+          </button>
+        </header>
+        <p class="fb-panel__hint">
+          Bir önerin, fikrin veya hatan mı var? Yaz, hepsini okuyoruz.
+        </p>
+        <form class="fb-form">
+          <textarea
+            class="fb-textarea"
+            name="message"
+            required
+            rows="5"
+            minlength="3"
+            maxlength="2000"
+            placeholder="Mesajın..."
+            aria-label="Geri bildirim mesajı"
+          />
+          {/* honeypot — bot doldurursa Web3Forms reddeder */}
+          <input
+            class="fb-honeypot"
+            type="text"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="fb-actions">
+            <button type="submit" class="fb-submit">
+              <span class="fb-submit__label">Gönder</span>
+              <span class="fb-submit__spinner" aria-hidden="true" />
+            </button>
+          </div>
+          <p class="fb-status" role="status" />
+        </form>
+        <div class="fb-success" hidden>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <p>Teşekkürler! Mesajını aldık.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const root = document.querySelector<HTMLDivElement>('.fb-root');
+  if (root) {
+    const accessKey = root.dataset.fbKey ?? '';
+    const fab = root.querySelector<HTMLButtonElement>('.fb-fab')!;
+    const panel = root.querySelector<HTMLDivElement>('.fb-panel')!;
+    const closeBtn = root.querySelector<HTMLButtonElement>('.fb-close')!;
+    const form = root.querySelector<HTMLFormElement>('.fb-form')!;
+    const textarea = form.querySelector<HTMLTextAreaElement>('.fb-textarea')!;
+    const submitBtn = form.querySelector<HTMLButtonElement>('.fb-submit')!;
+    const status = form.querySelector<HTMLParagraphElement>('.fb-status')!;
+    const successView = root.querySelector<HTMLDivElement>('.fb-success')!;
+
+    type PlausibleOpts = { props: Record<string, string> };
+    type PlausibleFn = (e: string, opts?: PlausibleOpts) => void;
+    function track(name: string, props?: Record<string, string>): void {
+      const w = window as unknown as { plausible?: PlausibleFn };
+      if (typeof w.plausible === 'function') {
+        try {
+          w.plausible(name, props ? { props } : undefined);
+        } catch {
+          /* swallow */
+        }
+      }
+    }
+
+    function currentGameSlug(): string {
+      const m = location.pathname.match(/\/games\/([^/]+)\/?$/);
+      return m ? m[1] : 'archive';
+    }
+
+    let isOpen = false;
+    function open(): void {
+      if (isOpen) return;
+      isOpen = true;
+      panel.hidden = false;
+      fab.setAttribute('aria-expanded', 'true');
+      // Reset to form view in case last close left success state
+      form.hidden = false;
+      successView.hidden = true;
+      status.textContent = '';
+      status.classList.remove('fb-status--error');
+      requestAnimationFrame(() => textarea.focus());
+      track('feedback:open', { game: currentGameSlug() });
+    }
+    function close(): void {
+      if (!isOpen) return;
+      isOpen = false;
+      panel.hidden = true;
+      fab.setAttribute('aria-expanded', 'false');
+      fab.focus();
+    }
+
+    fab.addEventListener('click', () => {
+      isOpen ? close() : open();
+    });
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) close();
+    });
+    document.addEventListener('click', (e) => {
+      if (!isOpen) return;
+      const target = e.target as Node | null;
+      if (target && (root.contains(target))) return;
+      close();
+    });
+
+    const RATE_LIMIT_MS = 60_000;
+    const LS_KEY = 'feedback.lastSubmit';
+
+    function showError(msg: string): void {
+      status.textContent = msg;
+      status.classList.add('fb-status--error');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.classList.remove('fb-status--error');
+
+      const message = textarea.value.trim();
+      if (message.length < 3) {
+        showError('Mesaj çok kısa.');
+        return;
+      }
+
+      // Rate limit
+      try {
+        const last = Number(localStorage.getItem(LS_KEY) ?? '0');
+        if (Date.now() - last < RATE_LIMIT_MS) {
+          showError('Çok hızlısın, biraz bekle.');
+          return;
+        }
+      } catch {
+        /* localStorage blocked: skip rate limit */
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add('fb-submit--loading');
+
+      const game = currentGameSlug();
+      const fd = new FormData();
+      fd.append('access_key', accessKey);
+      fd.append('subject', `karaman.dev/games feedback (${game})`);
+      fd.append('message', message);
+      fd.append('from_url', window.location.href);
+      fd.append('from_game', game);
+      const honeypot = form.querySelector<HTMLInputElement>('.fb-honeypot');
+      if (honeypot) fd.append('botcheck', honeypot.value);
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: fd,
+        });
+        const data = (await res.json()) as { success?: boolean; message?: string };
+        if (!res.ok || !data.success) {
+          throw new Error(data.message ?? 'Web3Forms reddetti');
+        }
+        try {
+          localStorage.setItem(LS_KEY, String(Date.now()));
+        } catch {
+          /* ignore */
+        }
+        track('feedback:submit', { game });
+        form.hidden = true;
+        successView.hidden = false;
+        setTimeout(() => {
+          textarea.value = '';
+          close();
+        }, 3000);
+      } catch (err) {
+        track('feedback:error', { game });
+        const msg = err instanceof Error ? err.message : 'Bilinmeyen hata';
+        showError(`Bir şeyler ters gitti: ${msg}`);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('fb-submit--loading');
+      }
+    });
+  }
+</script>
+
+<style>
+  .fb-root {
+    position: fixed;
+    right: 16px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    z-index: 50;
+    font-family: inherit;
+  }
+  .fb-fab {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--accent-strong, #6366f1);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    box-shadow:
+      0 6px 20px -6px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    cursor: pointer;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+    position: relative;
+  }
+  .fb-fab:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 10px 24px -6px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+  .fb-fab:active {
+    transform: translateY(0);
+  }
+  .fb-fab__tip {
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--surface-3, #232830);
+    color: var(--text, #f5f6f8);
+    border: 1px solid var(--border, #1f242c);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+  .fb-fab:hover .fb-fab__tip,
+  .fb-fab:focus-visible .fb-fab__tip {
+    opacity: 1;
+  }
+  @media (max-width: 480px) {
+    .fb-fab__tip {
+      display: none;
+    }
+  }
+
+  .fb-panel {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10px);
+    width: min(340px, calc(100vw - 32px));
+    background: var(--surface, #14171c);
+    border: 1px solid var(--border, #1f242c);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    box-shadow:
+      0 24px 48px -16px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    color: var(--text, #f5f6f8);
+    animation: fb-pop 0.16s ease-out;
+  }
+  @keyframes fb-pop {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .fb-panel__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .fb-panel__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .fb-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #98a0ad);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    line-height: 0;
+    transition:
+      color 0.15s,
+      background 0.15s;
+  }
+  .fb-close:hover {
+    color: var(--text, #f5f6f8);
+    background: var(--surface-2, #1c2027);
+  }
+  .fb-panel__hint {
+    margin: 0 0 12px;
+    color: var(--text-muted, #98a0ad);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .fb-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fb-textarea {
+    background: var(--surface-2, #1c2027);
+    border: 1px solid var(--border, #1f242c);
+    color: var(--text, #f5f6f8);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.15s;
+  }
+  .fb-textarea:focus {
+    outline: none;
+    border-color: var(--accent-strong, #6366f1);
+  }
+  .fb-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .fb-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .fb-submit {
+    position: relative;
+    background: var(--accent-strong, #6366f1);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .fb-submit:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+  .fb-submit:disabled {
+    cursor: progress;
+    opacity: 0.8;
+  }
+  .fb-submit__spinner {
+    display: none;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: fb-spin 0.7s linear infinite;
+  }
+  .fb-submit--loading .fb-submit__label {
+    visibility: hidden;
+  }
+  .fb-submit--loading .fb-submit__spinner {
+    display: block;
+  }
+  @keyframes fb-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .fb-status {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted, #98a0ad);
+    min-height: 16px;
+  }
+  .fb-status--error {
+    color: #f87171;
+  }
+  .fb-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0 4px;
+    text-align: center;
+  }
+  .fb-success p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text, #f5f6f8);
+  }
+</style>

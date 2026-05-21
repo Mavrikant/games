@@ -8,6 +8,7 @@ import '@styles/archive.css';
 const games = await getCollection('games');
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 const plausibleEnabled = (import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '') !== '';
+const web3formsEnabled = (import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '') !== '';
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
 ---
 
@@ -112,6 +113,23 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <a href="https://buttondown.email/privacy"
           target="_blank"
           rel="noopener noreferrer">buttondown.email/privacy</a>
+      </li>
+      <li>
+        <strong>Web3Forms</strong> (geri bildirim widget'ı —{' '}
+        {web3formsEnabled ? (
+          <span>
+            sağ alttaki "Geri bildirim" butonundan gönderdiğiniz mesajlar
+            Web3Forms üzerinden site sahibine e-posta olarak iletilir.
+          </span>
+        ) : (
+          <span>
+            ileride geri bildirim formu eklenebilir. Bu eklendiğinde
+            mesajlarınız Web3Forms üzerinden e-postayla iletilir.
+          </span>
+        )}{' '}
+        <a href="https://web3forms.com/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer">web3forms.com/privacy-policy</a>
       </li>
     </ul>
 

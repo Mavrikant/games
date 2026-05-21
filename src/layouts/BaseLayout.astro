@@ -1,6 +1,7 @@
 ---
 import '@styles/tokens.css';
 import '@styles/base.css';
+import FeedbackWidget from '@components/FeedbackWidget.astro';
 
 interface Props {
   title: string;
@@ -94,6 +95,7 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
   </head>
   <body>
     <slot />
+    <FeedbackWidget />
     <script is:inline>
       // Register service worker (offline support + install prompt). Only
       // runs on http(s) in production; localhost during dev sees no SW
