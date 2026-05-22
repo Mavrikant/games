@@ -1,0 +1,9 @@
+{
+  "title": "Hayalet İz",
+  "description": "Geçtiğin yol iki saniye sonra kırmızıya dönüp seni yakmaya çalışır. İleri planla, geçmişini kucaklama, altınları topla.",
+  "dateAdded": "2026-05-22",
+  "tags": ["arcade", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD: yön · Boşluk: başlat / yeniden dene · R: sıfırla · Mobil: yön düğmeleri",
+  "thumbnail": "hayalet-iz.svg",
+  "howToPlay": "Sen küçük, aydınlık bir kürsün ve karanlık arena boyunca asla durmadan ilerliyorsun. Hareket ettiğin her yer kayda alınıyor — ama iz GÖRÜNMEZ. Tam 2 saniye geçtikten sonra eski konumların hayalet olarak yüzeye çıkıyor: parlak kırmızı noktalar belirir, 1,5 saniye boyunca ölümcül kalır, sonra söner. Kuralın tek satırı: aktif kırmızı bir hayalete dokunma. Bu, geçmişe geri sarmamak demek; çizdiğin halkayı tamamlarsan, halkanın başı tam sen kapatmak üzereyken kırmızıya dönmüş olur ve seni yakalar. Sarı altın küreyi toplamak +1 puan getirir; her 5 puanda hızın artar, her 10 puanda hayaletin yüzeye çıkma gecikmesi biraz daha kısalır — yani arena hızla daralır. Ok tuşları veya WASD ile yönü anlık değiştir; boşluk başlat/tekrar dener, R sıfırlar. Mobilde yön düğmelerini kullan. Strateji: küçük dar dönüşlerden kaçın — sıkı bir geri dönüş halkayı küçük tutar ve hayalet senin önüne çıkar; geniş yaylar çiz, altını alırken hangi tarafa kaçacağını önceden planla. Duvara dokunmak da bitirir; arenanın kenarında ilerlerken bir adım önceden kıvrılmaya başla. En iyi skorun tarayıcında saklanır."
+}

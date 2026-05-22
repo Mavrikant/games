@@ -1,0 +1,121 @@
+:root {
+  --hi-bg: #0b0f17;
+  --hi-grid: #161c27;
+  --hi-player: #5eead4;
+  --hi-player-glow: rgba(94, 234, 212, 0.45);
+  --hi-ghost: #f87171;
+  --hi-ghost-glow: rgba(248, 113, 113, 0.55);
+  --hi-orb: #facc15;
+  --hi-orb-glow: rgba(250, 204, 21, 0.55);
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+.hud__score:first-child span {
+  color: var(--hi-player);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--hi-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  z-index: 5;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.touch {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  margin-top: 8px;
+}
+.touch__row {
+  display: flex;
+  gap: 6px;
+}
+.touch__btn {
+  width: 56px;
+  height: 56px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.touch__btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: flex;
+  }
+}
