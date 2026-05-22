@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Aydınlat">
+  <defs>
+    <linearGradient id="ay-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#161a24" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <radialGradient id="ay-lamp" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fff1c2" />
+      <stop offset="55%" stop-color="#f0c557" />
+      <stop offset="100%" stop-color="#d99a1c" />
+    </radialGradient>
+    <radialGradient id="ay-beam-h" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="rgba(240,197,87,0.42)" />
+      <stop offset="100%" stop-color="rgba(240,197,87,0)" />
+    </radialGradient>
+    <filter id="ay-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b" />
+      <feMerge>
+        <feMergeNode in="b" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="320" height="200" fill="url(#ay-bg)" />
+
+  <!-- 5x5 grid: cell 24, gap 4, board 136. Center on canvas. -->
+  <g transform="translate(92, 26)">
+    <!-- All 25 cells: dark base -->
+    <g fill="#171a21" stroke="#252a33" stroke-width="1">
+      <rect x="0"   y="0"   width="24" height="24" rx="5" />
+      <rect x="28"  y="0"   width="24" height="24" rx="5" />
+      <rect x="56"  y="0"   width="24" height="24" rx="5" />
+      <rect x="84"  y="0"   width="24" height="24" rx="5" />
+      <rect x="112" y="0"   width="24" height="24" rx="5" />
+
+      <rect x="0"   y="28"  width="24" height="24" rx="5" />
+      <rect x="28"  y="28"  width="24" height="24" rx="5" />
+      <rect x="84"  y="28"  width="24" height="24" rx="5" />
+      <rect x="112" y="28"  width="24" height="24" rx="5" />
+
+      <rect x="0"   y="56"  width="24" height="24" rx="5" />
+      <rect x="28"  y="56"  width="24" height="24" rx="5" />
+      <rect x="56"  y="56"  width="24" height="24" rx="5" />
+      <rect x="84"  y="56"  width="24" height="24" rx="5" />
+      <rect x="112" y="56"  width="24" height="24" rx="5" />
+
+      <rect x="0"   y="84"  width="24" height="24" rx="5" />
+      <rect x="28"  y="84"  width="24" height="24" rx="5" />
+      <rect x="84"  y="84"  width="24" height="24" rx="5" />
+      <rect x="112" y="84"  width="24" height="24" rx="5" />
+
+      <rect x="0"   y="112" width="24" height="24" rx="5" />
+      <rect x="28"  y="112" width="24" height="24" rx="5" />
+      <rect x="56"  y="112" width="24" height="24" rx="5" />
+      <rect x="84"  y="112" width="24" height="24" rx="5" />
+      <rect x="112" y="112" width="24" height="24" rx="5" />
+    </g>
+
+    <!-- Two black walls (numbered 2 + plain) -->
+    <g>
+      <rect x="56"  y="28"  width="24" height="24" rx="5" fill="#070809" stroke="#1a1d24" stroke-width="1" />
+      <text x="68" y="44" text-anchor="middle" fill="#f0c557" font-family="ui-sans-serif, sans-serif" font-size="14" font-weight="700">2</text>
+      <rect x="56"  y="84"  width="24" height="24" rx="5" fill="#070809" stroke="#1a1d24" stroke-width="1" />
+    </g>
+
+    <!-- Lit cells (amber tint) around the lamps -->
+    <g fill="rgba(240,197,87,0.18)" stroke="rgba(240,197,87,0.32)" stroke-width="1">
+      <!-- row of lamp at (0,1) (col 1) -->
+      <rect x="0"   y="0"   width="24" height="24" rx="5" />
+      <rect x="56"  y="0"   width="24" height="24" rx="5" />
+      <rect x="84"  y="0"   width="24" height="24" rx="5" />
+      <rect x="112" y="0"   width="24" height="24" rx="5" />
+      <!-- col 1 below lamp -->
+      <rect x="28"  y="28"  width="24" height="24" rx="5" />
+      <rect x="28"  y="56"  width="24" height="24" rx="5" />
+      <rect x="28"  y="84"  width="24" height="24" rx="5" />
+      <rect x="28"  y="112" width="24" height="24" rx="5" />
+      <!-- row of lamp at (4,3): row 4 -->
+      <rect x="0"   y="112" width="24" height="24" rx="5" />
+      <rect x="28"  y="112" width="24" height="24" rx="5" />
+      <rect x="56"  y="112" width="24" height="24" rx="5" />
+      <rect x="112" y="112" width="24" height="24" rx="5" />
+      <!-- col 3 (under (4,3) going up) -->
+      <rect x="84"  y="0"   width="24" height="24" rx="5" />
+      <rect x="84"  y="28"  width="24" height="24" rx="5" />
+      <rect x="84"  y="56"  width="24" height="24" rx="5" />
+      <rect x="84"  y="84"  width="24" height="24" rx="5" />
+    </g>
+
+    <!-- Two lamps -->
+    <g filter="url(#ay-glow)">
+      <rect x="28"  y="0"   width="24" height="24" rx="5" fill="url(#ay-lamp)" stroke="#f0c557" stroke-width="1" />
+      <circle cx="36" cy="8" r="3" fill="#fff1c2" opacity="0.85" />
+      <rect x="84"  y="112" width="24" height="24" rx="5" fill="url(#ay-lamp)" stroke="#f0c557" stroke-width="1" />
+      <circle cx="92" cy="120" r="3" fill="#fff1c2" opacity="0.85" />
+    </g>
+  </g>
+
+  <!-- Title baseline -->
+  <text x="160" y="180" text-anchor="middle" fill="#aab" font-family="ui-sans-serif, sans-serif" font-size="14" font-weight="600" letter-spacing="0.04em">AYDINLAT</text>
+</svg>
