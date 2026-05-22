@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tabak Çevir">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g stroke="#94a3b8" stroke-width="3">
+    <line x1="60" y1="170" x2="60" y2="80" />
+    <line x1="120" y1="170" x2="120" y2="80" />
+    <line x1="180" y1="170" x2="180" y2="80" />
+    <line x1="240" y1="170" x2="240" y2="80" />
+  </g>
+  <g stroke="#0f172a" stroke-width="1.5">
+    <ellipse cx="60" cy="80" rx="26" ry="9" fill="#4ade80" />
+    <ellipse cx="120" cy="80" rx="26" ry="9" fill="#fbbf24" />
+    <ellipse cx="180" cy="80" rx="26" ry="9" fill="#4ade80" />
+    <ellipse cx="240" cy="80" rx="26" ry="9" fill="#ef4444" />
+  </g>
+  <g fill="#0f172a">
+    <circle cx="50" cy="80" r="2" />
+    <circle cx="70" cy="80" r="2" />
+    <circle cx="110" cy="80" r="2" />
+    <circle cx="130" cy="80" r="2" />
+    <circle cx="170" cy="80" r="2" />
+    <circle cx="190" cy="80" r="2" />
+    <circle cx="230" cy="80" r="2" />
+    <circle cx="250" cy="80" r="2" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Tabak Çevir</text>
+</svg>
