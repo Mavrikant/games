@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="score">1</span></div>
+  <div class="hud__score">En iyi<span id="best">0</span></div>
+  <div class="hud__score">Kalan<span id="remaining">0</span></div>
+  <button id="undo" class="hud__btn" type="button">Geri al</button>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Tek Çizgi oyun alanı"></canvas>
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tek Çizgi</h2>
+      <p id="overlay-msg">Başlamak için bir düğüme dokun.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Sonraki bölüm</button>
+    </div>
+  </div>
+</div>

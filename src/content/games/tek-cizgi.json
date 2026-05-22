@@ -1,0 +1,9 @@
+{
+  "title": "Tek Çizgi",
+  "description": "Kalemi kaldırmadan tüm çizgileri çiz — Euler yolunu bul.",
+  "dateAdded": "2026-05-22",
+  "tags": ["puzzle", "mantık", "özgün", "matematik"],
+  "controls": "Tıkla/dokun: düğüm seç · U: geri al · R: sıfırla · N: sonraki bölüm",
+  "howToPlay": "Königsberg Köprüleri probleminin minik kuzeni: ekrandaki düğümleri (içi dolu daireler) birleştiren tüm çizgileri kalemi kaldırmadan, hiçbir çizgiyi iki kez geçmeden çiz. Başlamak için herhangi bir düğüme tıkla veya dokun — seçtiğin düğüm vurgulanır. Sonra ona düz bir çizgiyle bağlı olan komşu düğümlerden birine dokun: ikisi arasındaki çizgi vurgu rengine boyanır ve kalemin oraya kaymış olur. Bir sonraki adımda yalnızca kalemin durduğu düğümün henüz kullanılmamış komşularına gidebilirsin; çapraz olmayan, doğrudan bağlı olmayan düğümlere atlamak yasak. Yanlış bir düğüme dokunursan hareket reddedilir, bölüm durumu bozulmaz. 'Geri al' (U tuşu veya buton) son çizdiğin çizgiyi geri verir; 'Sıfırla' (R) bölümü en baştan başlatır. Tüm çizgiler boyandığında bölümü tamamlamış olursun: skor +1, en yüksek bölüm numaran kayıt altına alınır ve 'Sonraki' (N) ile bir adım daha karmaşık grafiğe geçersin. Bazı grafiklerde sadece belirli düğümlerden başlayarak çözüm mümkündür (Euler teoremi: tek dereceli düğümlerden başlamalısın). Eğer kendini sıkışmış hissedersen geri al ya da sıfırla ve farklı bir başlangıç noktası dene. İpucu: önce gözünle her düğüme bağlı çizgi sayısını say — eğer iki düğümün bağlantı sayısı tek, kalan hepsi çift ise bu iki düğümden birinden başla; tüm sayılar çift ise istediğin yerden başla. Üç tek-dereceli düğüm varsa o grafik çözülemez, ama bu bulmacada sana hep çözülebilir olan veriliyor.",
+  "thumbnail": "tek-cizgi.svg"
+}
