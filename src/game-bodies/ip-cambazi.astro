@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Mesafe<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score hud__wind">Rüzgar<span id="wind">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="İp Cambazı oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">İp Cambazı</h2>
+      <p id="overlay-msg">← / → veya A / D ile dengeyi koru. Başlamak için bir yön tuşuna bas.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-dir="left" type="button">◀ Sol</button>
+  <button class="touch__btn" data-dir="right" type="button">Sağ ▶</button>
+</div>

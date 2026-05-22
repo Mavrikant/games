@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="İp Cambazı">
+  <defs>
+    <linearGradient id="ipc-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1340" />
+      <stop offset="55%" stop-color="#5d3a73" />
+      <stop offset="100%" stop-color="#c97a5a" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ipc-sky)" />
+  <circle cx="245" cy="105" r="14" fill="#ffd9a8" />
+  <g fill="#1a1430">
+    <polygon points="0,160 40,130 80,150 120,120 160,145 200,125 240,150 280,128 320,148 320,200 0,200" />
+  </g>
+  <g fill="#2a2042">
+    <polygon points="0,170 50,150 90,165 140,140 190,160 240,148 290,162 320,156 320,200 0,200" opacity="0.85" />
+  </g>
+  <rect x="0" y="156" width="320" height="3" fill="#d4a574" />
+  <rect x="0" y="158" width="6" height="42" fill="#3a2a1a" />
+  <rect x="314" y="158" width="6" height="42" fill="#3a2a1a" />
+  <g transform="translate(160 156) rotate(-12)">
+    <rect x="-1.5" y="-60" width="3" height="60" fill="#fafafa" />
+    <circle cx="0" cy="-66" r="7" fill="#fafafa" />
+    <rect x="-80" y="-38" width="160" height="3" rx="1.5" fill="#c7884a" />
+    <circle cx="-80" cy="-36" r="3" fill="#c7884a" />
+    <circle cx="80" cy="-36" r="3" fill="#c7884a" />
+    <line x1="0" y1="-35" x2="-12" y2="-40" stroke="#fafafa" stroke-width="3" stroke-linecap="round" />
+    <line x1="0" y1="-35" x2="12" y2="-40" stroke="#fafafa" stroke-width="3" stroke-linecap="round" />
+    <line x1="0" y1="0" x2="-5" y2="12" stroke="#fafafa" stroke-width="3" stroke-linecap="round" />
+    <line x1="0" y1="0" x2="5" y2="12" stroke="#fafafa" stroke-width="3" stroke-linecap="round" />
+  </g>
+  <g stroke="rgba(220,230,255,0.55)" stroke-width="1.2">
+    <line x1="20" y1="80" x2="55" y2="80" />
+    <line x1="40" y1="60" x2="80" y2="60" />
+    <line x1="70" y1="100" x2="105" y2="100" />
+  </g>
+  <text x="14" y="28" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#fef3c7">İp Cambazı</text>
+</svg>
