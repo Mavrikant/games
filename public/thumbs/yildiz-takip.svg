@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Yildiz Takibi">
+  <defs>
+    <linearGradient id="yt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0d1f" />
+      <stop offset="100%" stop-color="#03050d" />
+    </linearGradient>
+    <radialGradient id="yt-target" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#7cf2a8" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#7cf2a8" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#7cf2a8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#yt-bg)" />
+  <g fill="#cdd6f4">
+    <polygon points="60,150 62,158 70,158 64,163 66,171 60,166 54,171 56,163 50,158 58,158" />
+    <polygon points="100,60 102,68 110,68 104,73 106,81 100,76 94,81 96,73 90,68 98,68" />
+    <polygon points="240,40 242,48 250,48 244,53 246,61 240,56 234,61 236,53 230,48 238,48" />
+    <polygon points="260,140 262,148 270,148 264,153 266,161 260,156 254,161 256,153 250,148 258,148" />
+    <polygon points="200,160 202,168 210,168 204,173 206,181 200,176 194,181 196,173 190,168 198,168" />
+  </g>
+  <circle cx="160" cy="100" r="38" fill="url(#yt-target)" />
+  <polygon points="160,80 165,96 182,96 168,106 173,122 160,112 147,122 152,106 138,96 155,96" fill="#7cf2a8" />
+  <circle cx="200" cy="110" r="6" fill="none" stroke="#f5c66b" stroke-width="2" />
+  <line x1="200" y1="100" x2="200" y2="120" stroke="#f5c66b" stroke-width="2" />
+  <line x1="190" y1="110" x2="210" y2="110" stroke="#f5c66b" stroke-width="2" />
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e4ecff">Yildiz Takibi</text>
+</svg>

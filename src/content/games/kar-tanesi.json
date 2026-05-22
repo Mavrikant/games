@@ -3,5 +3,6 @@
   "description": "Hücreleri tıkla — her tıklama 6 yönde simetrik yansır. Hedef kar tanesini eşle, 90 saniyede ne kadar çok tane çözebilirsin?",
   "dateAdded": "2026-05-22",
   "tags": ["puzzle", "özgün", "simetri", "desen"],
-  "controls": "Tıkla: hücreyi 6 yönde aç/kapa · R: yeniden başla"
+  "controls": "Tıkla: hücreyi 6 yönde aç/kapa · R: yeniden başla",
+  "thumbnail": "kar-tanesi.svg"
 }
