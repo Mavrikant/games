@@ -1,0 +1,9 @@
+{
+  "title": "Yaşam Oyunu",
+  "description": "Conway'in klasik hücresel otomatı — başlangıç desenini çiz, evrimi izle. Glider, blinker veya kendi şeklini dene.",
+  "dateAdded": "2026-05-22",
+  "tags": ["klasik", "simülasyon", "desen"],
+  "controls": "Tıkla/sürükle: hücre çiz · Boşluk: oynat/durdur · N: bir adım · C: temizle · R: rastgele · P: hazır desen",
+  "howToPlay": "John Conway'in 1970'te tasarladığı Yaşam Oyunu, oyuncusu olmayan bir \"oyun\"dur — sen sadece başlangıç koşulunu kurarsın, kurallar gerisini yapar. Her hücre ya canlı ya ölüdür; her nesil aynı anda dört kuralla güncellenir: 2 veya 3 canlı komşusu olan bir canlı hücre yaşar (kalan canlı hücreler ölür: yalnızlıktan veya kalabalıktan); tam 3 canlı komşusu olan bir ölü hücre doğar. Komşuluk 8 yöndür (Moore komşuluğu). Bu sürümde ızgaranın kenarları torus gibi sarar — bir glider sağdan çıkıp soldan girer. Tahtayı tıkla veya sürükle: ilk dokunduğun hücre durumunu çevirir (canlı→ölü veya tersi); parmağını/fareyi basılı tutup sürükledikçe aynı durumu boyamaya devam eder. Boşluk simülasyonu başlatır ve duraklatır; N tuşu duraklatılmışken bir nesil ilerletir; C tahtayı temizler; R rastgele %25 yoğunlukta hücreyle doldurur; P hazır desenlerden birini (Glider, Blinker, Beacon, Pulsar, hafif uzay gemisi) sırayla tahtaya yerleştirir. Sağdaki hız kaydırıcısı saniyedeki nesil sayısını ayarlar (1-30). HUD nesil sayısı ve canlı hücre sayısını gösterir. İpucu: küçük desenler şaşırtıcı uzun ömürlü olabilir — örneğin R-pentomino sadece 5 hücredir ama 1103 nesil boyunca evrim geçirir; kendi açılışlarınla deney yap.",
+  "thumbnail": "yasam-oyunu.svg"
+}
