@@ -1,0 +1,9 @@
+{
+  "title": "Çark",
+  "description": "Üç dönen halkanın aralığını hizalayıp tek atışla içten dışa deldir geç — saf zamanlama ve nişan.",
+  "dateAdded": "2026-05-22",
+  "tags": ["arcade", "refleks", "zamanlama", "özgün"],
+  "controls": "Fare: nişan al · Sol tık / Boşluk / Enter: ateşle · A·D veya ← →: ince ayar · R: yeniden başla",
+  "thumbnail": "cark.svg",
+  "howToPlay": "Çarkın merkezindeki ışıklı oktan dışa doğru bir mermi atıyorsun, ama yolu üç eş merkezli dönen halka kesiyor — her biri farklı yönde ve farklı hızda döner, her birinde tek bir açıklık vardır. Mermin dış kenara ulaşabilmek için tam fırlatma anında üç açıklığın hepsinin mermin geçeceği yönle hizalı olması gerekir. Fareyle ekrandaki herhangi bir noktaya hareket et, ok merkezden o yönü gösterir; klavyeyle ince ayar için A/D veya ←/→ tuşlarına bas. Hazır olduğunda sol tıkla, Boşluk veya Enter'a basarak ateş et. Mermi anında değil sabit hızla dışarı ilerler — yani fırlatma anındaki hizalanmaya değil, mermin her halkaya vardığı andaki hizalanmaya bakılır; halkalar bu sürede dönmeye devam eder, bu yüzden zamanlamayı önden vermek zorundasın. Mermi bir halkanın açıklığına denk gelirse aralıktan geçer, denk gelmezse o halkanın gövdesinde durur ve atış boşa gider. Her başarılı atış 1 puandır ve 5 puanda bir 'tier' atlarsın: halkaların açıklıkları daralır, dönüş hızları artar. 60 saniye boyunca olabildiğince çok mermi geçir; süre dolunca en yüksek skorun otomatik kaydedilir. Strateji: önce iki yakın halkanın açıklıklarının buluşacağı anı yakala — dışarıdaki üçüncü halka genelde en yavaş döner, onu sabit bir 'pencere' gibi düşün ve içtekileri ona göre senkronize etmeye çalış; yanlış atış cezası yok, ritmi bul ve seri yap."
+}
