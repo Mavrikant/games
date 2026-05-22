@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="score">1</span></div>
+  <div class="hud__score">Kalan<span id="remaining">0</span></div>
+  <div class="hud__score">Süre<span id="timer">0</span></div>
+  <div class="hud__score">Rekor<span id="best">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="640" height="400" aria-label="Çoban oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çoban</h2>
+      <p id="overlay-msg">Köpeği hareket ettirmek için ok tuşlarına veya WASD'ye bas.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-dir="up" type="button">▲</button>
+  <div class="touch__row">
+    <button class="touch__btn" data-dir="left" type="button">◀</button>
+    <button class="touch__btn" data-dir="down" type="button">▼</button>
+    <button class="touch__btn" data-dir="right" type="button">▶</button>
+  </div>
+</div>
