@@ -1,0 +1,206 @@
+:root {
+  --tt-peg: #c4a05c;
+  --tt-peg-deep: #7a5c2a;
+  --tt-peg-highlight: #f4dca2;
+  --tt-hole: #1a1d24;
+  --tt-hole-edge: #2a2f3a;
+  --tt-target: #4ade80;
+  --tt-target-glow: rgba(74, 222, 128, 0.45);
+  --tt-selected: #60a5fa;
+  --tt-selected-glow: rgba(96, 165, 250, 0.55);
+}
+
+.hud__stat {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.hud__btn--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hud__btn--accent:hover {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+}
+
+.tt-board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tt-board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: clamp(4px, 1.4vw, 8px);
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: min(100%, calc(100svh - 200px));
+  padding: clamp(8px, 2vw, 14px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.tt-cell {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--tt-hole);
+  border: 1px solid var(--tt-hole-edge);
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  aspect-ratio: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: visible;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.22s ease,
+    transform 0.12s ease;
+}
+
+.tt-cell--blocked {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.tt-cell--peg {
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--tt-peg-highlight) 0%,
+    var(--tt-peg) 50%,
+    var(--tt-peg-deep) 100%
+  );
+  border-color: var(--tt-peg-deep);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.45),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tt-cell--empty {
+  background: radial-gradient(
+    circle at center,
+    #0c0d12 0%,
+    var(--tt-hole) 65%
+  );
+}
+
+.tt-cell--peg:hover {
+  transform: translateY(-1px);
+}
+
+.tt-cell--selected {
+  box-shadow:
+    0 0 0 3px var(--tt-selected),
+    0 0 14px 2px var(--tt-selected-glow);
+  border-color: var(--tt-selected);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.tt-cell--target {
+  background: radial-gradient(
+    circle at center,
+    rgba(74, 222, 128, 0.35) 0%,
+    var(--tt-hole) 70%
+  );
+  box-shadow:
+    inset 0 0 0 2px var(--tt-target),
+    0 0 10px 2px var(--tt-target-glow);
+  cursor: pointer;
+}
+
+.tt-cell:active:not(.tt-cell--blocked) {
+  transform: scale(0.95);
+}
+
+.tt-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tt-status {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  min-height: 1.3em;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 5;
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 86%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
