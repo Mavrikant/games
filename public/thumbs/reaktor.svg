@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Reaktör">
+  <defs>
+    <linearGradient id="rk-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#15171f" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <linearGradient id="rk-rod" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="55%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#f87171" />
+    </linearGradient>
+    <radialGradient id="rk-core" cx="0.5" cy="0.55" r="0.6">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#fbbf24" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#rk-bg)" />
+  <!-- Reactor vessel outline -->
+  <rect x="40" y="34" width="240" height="138" rx="14" fill="#14171c" stroke="#2f3540" stroke-width="2" />
+  <!-- Glowing core -->
+  <ellipse cx="160" cy="103" rx="100" ry="46" fill="url(#rk-core)" />
+  <!-- 4 control rods inserted at varying depths -->
+  <g>
+    <!-- Rod tracks -->
+    <rect x="70" y="46" width="14" height="98" rx="3" fill="#0a0b0e" stroke="#2f3540" />
+    <rect x="118" y="46" width="14" height="98" rx="3" fill="#0a0b0e" stroke="#2f3540" />
+    <rect x="166" y="46" width="14" height="98" rx="3" fill="#0a0b0e" stroke="#2f3540" />
+    <rect x="214" y="46" width="14" height="98" rx="3" fill="#0a0b0e" stroke="#2f3540" />
+    <!-- Rod fills (from bottom) showing different activity levels -->
+    <rect x="70" y="86" width="14" height="58" rx="3" fill="url(#rk-rod)" />
+    <rect x="118" y="62" width="14" height="82" rx="3" fill="url(#rk-rod)" />
+    <rect x="166" y="100" width="14" height="44" rx="3" fill="url(#rk-rod)" />
+    <rect x="214" y="74" width="14" height="70" rx="3" fill="url(#rk-rod)" />
+    <!-- Handles at the top of each fill -->
+    <rect x="66" y="84" width="22" height="6" rx="1.5" fill="#f5f6f8" />
+    <rect x="114" y="60" width="22" height="6" rx="1.5" fill="#f5f6f8" />
+    <rect x="162" y="98" width="22" height="6" rx="1.5" fill="#f5f6f8" />
+    <rect x="210" y="72" width="22" height="6" rx="1.5" fill="#f5f6f8" />
+  </g>
+  <!-- Temperature gauge -->
+  <rect x="50" y="156" width="220" height="8" rx="4" fill="#0a0b0e" stroke="#2f3540" />
+  <rect x="50" y="156" width="80" height="8" rx="4" fill="rgba(52,211,153,0.55)" />
+  <rect x="130" y="156" width="50" height="8" rx="4" fill="rgba(251,191,36,0.55)" />
+  <rect x="180" y="156" width="20" height="8" rx="4" fill="rgba(248,113,113,0.55)" />
+  <circle cx="148" cy="160" r="5" fill="#f5f6f8" stroke="#0a0b0e" />
+  <!-- Atom symbol top-right -->
+  <g transform="translate(258,52)" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0.85">
+    <circle r="3" fill="#818cf8" stroke="none" />
+    <ellipse rx="11" ry="4" />
+    <ellipse rx="11" ry="4" transform="rotate(60)" />
+    <ellipse rx="11" ry="4" transform="rotate(-60)" />
+  </g>
+  <!-- Title -->
+  <text x="20" y="194" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Reaktör</text>
+</svg>

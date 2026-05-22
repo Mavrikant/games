@@ -1,0 +1,96 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <section class="reactor" aria-label="Reaktör paneli">
+    <div class="rk-gauges">
+      <div class="rk-gauge">
+        <div class="rk-gauge__label">
+          <span>Sıcaklık (°C)</span>
+          <span class="rk-gauge__val" id="temp-val">25°</span>
+        </div>
+        <div class="rk-gauge__track">
+          <div class="rk-gauge__zone rk-gauge__zone--cold" style="left: 0%; width: 14.9%"></div>
+          <div class="rk-gauge__zone rk-gauge__zone--safe" style="left: 14.9%; width: 59.5%"></div>
+          <div class="rk-gauge__zone rk-gauge__zone--hot" style="left: 74.4%; width: 18.3%"></div>
+          <div class="rk-gauge__zone rk-gauge__zone--danger" style="left: 92.7%; width: 7.3%"></div>
+          <div class="rk-gauge__needle" id="temp-needle" data-zone="cold" style="left: 0%"></div>
+        </div>
+        <div class="rk-gauge__sub">
+          <span>Güvenli: 200°–900°</span>
+          <span class="rk-warn" id="temp-warn">·</span>
+          <span>Meltdown: 1200°</span>
+        </div>
+      </div>
+
+      <div class="rk-gauge">
+        <div class="rk-gauge__label">
+          <span>Güç çıkışı — Talep: <span id="demand-val">200</span> MW (±30)</span>
+          <span class="rk-gauge__val" id="power-val">0 MW</span>
+        </div>
+        <div class="rk-gauge__track">
+          <div class="rk-power" id="power-bar" style="width: 0%"></div>
+          <div class="rk-power-demand" id="demand-band" style="left: 22%; width: 6%"></div>
+        </div>
+        <div class="rk-gauge__sub">
+          <span>Sonraki talep: <span id="demand-timer">8</span>s</span>
+          <span>Verim: <span id="eff-val">0%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rk-rods" role="group" aria-label="Kontrol çubukları">
+      {Array.from({ length: 4 }, (_, i) => (
+        <div class="rk-rod" data-rod={i}>
+          <div class="rk-rod__head">Çubuk {i + 1}</div>
+          <div class="rk-rod__slider" data-rod-slider={i}>
+            <div class="rk-rod__fill" data-rod-fill={i}></div>
+            <div
+              class="rk-rod__handle"
+              data-rod-handle={i}
+              role="slider"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-label={`Çubuk ${i + 1} aktiflik yüzdesi`}
+            ></div>
+          </div>
+          <div class="rk-rod__pct" data-rod-pct={i}>0%</div>
+          <div class="rk-rod__btns">
+            <button
+              class="rk-rod__btn"
+              data-rod-up={i}
+              type="button"
+              aria-label={`Çubuk ${i + 1} çek (aktifliği artır)`}
+            >▲</button>
+            <button
+              class="rk-rod__btn"
+              data-rod-down={i}
+              type="button"
+              aria-label={`Çubuk ${i + 1} sok (aktifliği azalt)`}
+            >▼</button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="rk-tip" id="status-tip">Başlamak için aşağıdaki Başla'ya bas.</p>
+  </section>
+
+  <div id="overlay" class="overlay" role="dialog" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Reaktöre hoşgeldin</h2>
+      <p id="overlay-msg">
+        Hedef: güç talebini karşıla (±30 MW), sıcaklığı 200°–900° arasında tut.
+        1200°+ = MELTDOWN!
+      </p>
+      <button id="start-btn" class="hud__btn hud__btn--primary" type="button">Başla</button>
+    </div>
+  </div>
+</div>

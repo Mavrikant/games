@@ -1,0 +1,9 @@
+{
+  "title": "Reaktör",
+  "description": "Nükleer reaktör operatörü ol: 4 kontrol çubuğunu yönet, sıcaklığı güvenli aralıkta tut, değişen güç talebini karşıla. Meltdown olmasın.",
+  "dateAdded": "2026-05-22",
+  "tags": ["simülasyon","operatör","strateji"],
+  "controls": "Fare: çubukları sürükle • 1-4: çubuk seç • Yukarı/Aşağı: çek/sok • R: yeniden başla",
+  "thumbnail": "reaktor.svg",
+  "howToPlay": "Reaktörde 4 kontrol çubuğu var. Çubukları çektikçe (▲) reaktif madde açığa çıkar; sıcaklık ve güç artar. Hedef: değişen güç talebini ±25 MW içinde karşıla, sıcaklığı 200°–900° arası tut. Çok yüksek sıcaklık verimi düşürür; 1200°+ MELTDOWN'dur. Skor: kararlı çalıştığın her saniye için 1 puan."
+}
