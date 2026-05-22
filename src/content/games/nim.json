@@ -1,0 +1,9 @@
+{
+  "title": "Nim",
+  "description": "Klasik matematik strateji — üç sıradan taş al, son taşı alan kazanır. Akıllı rakibe karşı oyna.",
+  "dateAdded": "2026-05-22",
+  "tags": ["strateji", "klasik", "düşünme"],
+  "controls": "Tıkla: o taş ve sağındaki taşları al · R: yeniden başla",
+  "howToPlay": "Nim, bilinen en eski matematiksel strateji oyunlarından biridir. Üç sıra var: 3, 4 ve 5 taş. Sırayla oynarsınız; her hamlende tek bir sıradan en az 1 taş almak zorundasın (istediğin kadar, ama yalnız o sıradan). Bu oyun setinde mekanik şöyle: bir sıradaki herhangi bir taşa tıklarsın — o taş ve onun sağındaki bütün taşlar birden alınır. Yani bir sıranın en sağdaki taşına tıklamak 1 taş, ortasına tıklamak yarısını, en solundakine tıklamak tüm sırayı alır. Son taşı alan kazanır (normal play). Bilgisayar bu oyunun çözülmüş stratejisini bilir — sıraların XOR toplamı sıfır değilse, optimum hamleyi bulup XOR'u sıfıra çeker; sıfırsa rastgele oynar. Yani kazanmak için bilgisayarın XOR=0 durumuna düştüğü bir konum yaratmalısın; klasik (3, 4, 5) açılışında XOR = 3^4^5 = 2'dir, demek ki sen ilk başta kazanabilir konumdasın — ama tek bir yanlış hamlede pozisyonu rakibe kaptırırsın. R tuşu yeni oyun başlatır; skor (kazanma-kaybetme) yerel olarak hatırlanır.",
+  "thumbnail": "nim.svg"
+}

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Nim">
+  <defs>
+    <linearGradient id="nim-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1b1404" />
+      <stop offset="100%" stop-color="#0a0902" />
+    </linearGradient>
+    <radialGradient id="nim-stone" cx="0.35" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#ffe6a0" />
+      <stop offset="55%" stop-color="#f0c557" />
+      <stop offset="100%" stop-color="#7a5a18" />
+    </radialGradient>
+    <radialGradient id="nim-stone-red" cx="0.35" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#ffd1d1" />
+      <stop offset="55%" stop-color="#f87171" />
+      <stop offset="100%" stop-color="#7a2424" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#nim-bg)" />
+  <g>
+    <!-- Row 1: 3 stones -->
+    <circle cx="100" cy="60" r="18" fill="url(#nim-stone)" />
+    <circle cx="150" cy="60" r="18" fill="url(#nim-stone)" />
+    <circle cx="200" cy="60" r="18" fill="url(#nim-stone)" />
+    <!-- Row 2: 4 stones (last 2 red preview) -->
+    <circle cx="75" cy="110" r="18" fill="url(#nim-stone)" />
+    <circle cx="125" cy="110" r="18" fill="url(#nim-stone)" />
+    <circle cx="175" cy="110" r="18" fill="url(#nim-stone-red)" stroke="#a52828" stroke-width="2" />
+    <circle cx="225" cy="110" r="18" fill="url(#nim-stone-red)" stroke="#a52828" stroke-width="2" />
+    <!-- Row 3: 5 stones -->
+    <circle cx="50" cy="160" r="18" fill="url(#nim-stone)" />
+    <circle cx="100" cy="160" r="18" fill="url(#nim-stone)" />
+    <circle cx="150" cy="160" r="18" fill="url(#nim-stone)" />
+    <circle cx="200" cy="160" r="18" fill="url(#nim-stone)" />
+    <circle cx="250" cy="160" r="18" fill="url(#nim-stone)" />
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f0e0b0">Nim</text>
+</svg>
