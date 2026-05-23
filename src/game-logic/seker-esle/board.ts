@@ -55,7 +55,7 @@ export function applyTileClasses(t: Tile): void {
   const classes = ['tile'];
   if (t.color === -1) {
     classes.push('tile--color-bomb');
-  } else {
+  } else if (t.color >= 0) {
     classes.push(`tile--c${t.color}`);
   }
   if (t.special === 'striped-h') classes.push('tile--striped-h');
@@ -156,6 +156,7 @@ export function buildLevelBoard(level: LevelDef): void {
       const ing = ingredientSet.has(key) ? 'cherry' : null;
       const jelly = jellyMap.get(key) ?? 0;
       if (sp === 'color-bomb') color = -1;
+      if (ing) color = -3; // ingredients never participate in color matches
       const tile = createTile({
         color,
         row: r,

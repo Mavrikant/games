@@ -21,6 +21,14 @@ function isBlocked(r: number, c: number): boolean {
   return blockedSet.has(`${r},${c}`);
 }
 
+// Bottom-most non-blocked row for a column (where ingredients can drop out).
+function bottomReachableRow(c: number): number {
+  for (let r = SIZE - 1; r >= 0; r--) {
+    if (!isBlocked(r, c)) return r;
+  }
+  return SIZE - 1;
+}
+
 // Decrement jelly under matched tiles. Call BEFORE actually removing them.
 export function decrementJellyUnder(matched: Iterable<Tile>): number {
   let cleared = 0;
@@ -33,42 +41,24 @@ export function decrementJellyUnder(matched: Iterable<Tile>): number {
   return cleared;
 }
 
-// Remove matched tiles from grid + DOM. Returns ingredient drop count for tiles
-// that were already at the bottom-most reachable row.
+// Remove matched tiles from grid + DOM. Ingredient tiles are NEVER matched
+// (color -3 makes them skip the match algorithm) — they are harvested only
+// when gravity drops them to the bottom row.
 export function removeMatched(matched: Iterable<Tile>): GravityResult {
-  let ingredientsCleared = 0;
-  let jellyCleared = 0;
   for (const t of matched) {
-    if (t.ingredient && t.row === bottomReachableRow(t.col)) {
-      ingredientsCleared += 1;
-    }
-    if (t.jellyLayers === 0 && wasJustClearedJelly(t)) {
-      jellyCleared += 1;
-    }
+    if (t.ingredient) continue; // safety: never remove ingredient via match
     state.grid[t.row]![t.col] = null;
     t.el.remove();
   }
-  return { ingredientsCleared, jellyCleared };
-}
-
-function wasJustClearedJelly(_t: Tile): boolean {
-  return false;
-}
-
-// Bottom-most non-blocked row for a column (where ingredients can drop out).
-function bottomReachableRow(c: number): number {
-  for (let r = SIZE - 1; r >= 0; r--) {
-    if (!isBlocked(r, c)) return r;
-  }
-  return SIZE - 1;
+  return { ingredientsCleared: 0, jellyCleared: 0 };
 }
 
 // Apply gravity: compact columns downward, ingredients fall like normal tiles,
 // refill empty slots from above with new tiles starting offscreen.
-// Note: an ingredient that REACHES the bottom row stays for the next match
-// (we count it only when it gets matched/removed there). Simpler than splitting
-// "ingredient passes off-board" semantics — works fine visually.
+// Ingredients that reach the bottom-most non-blocked row are automatically
+// removed and counted as "collected" via a custom event.
 export function applyGravityAndRefill(level: LevelDef): void {
+
   for (let c = 0; c < SIZE; c++) {
     let write = SIZE - 1;
     for (let r = SIZE - 1; r >= 0; r--) {
@@ -107,9 +97,25 @@ export function applyGravityAndRefill(level: LevelDef): void {
       state.grid[r]![c] = tile;
     }
   }
+  // Harvest ingredients sitting at the bottom-most reachable row.
+  let ingredientsHarvested = 0;
+  for (let c = 0; c < SIZE; c++) {
+    const bottom = bottomReachableRow(c);
+    const tile = state.grid[bottom]?.[c];
+    if (tile && tile.ingredient) {
+      tile.el.classList.add('tile--matched');
+      const el = tile.el;
+      state.grid[bottom]![c] = null;
+      window.setTimeout(() => el.remove(), 220);
+      ingredientsHarvested += 1;
+    }
+  }
   requestAnimationFrame(() => {
     forEachTile((t) => setTilePos(t));
   });
+  if (ingredientsHarvested > 0) {
+    document.dispatchEvent(new CustomEvent('seker-ingredient-clear', { detail: ingredientsHarvested }));
+  }
 }
 
 export function refreshAllClasses(): void {

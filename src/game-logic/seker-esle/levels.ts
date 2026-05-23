@@ -51,9 +51,11 @@ function bossLayout(): LayoutPlacement {
 }
 
 function ingredientLayout(count: number): LayoutPlacement {
+  // Ingredients drop down via gravity to the bottom row. Starting them at
+  // row 6 keeps the mission solvable within a normal move budget (1-2 drops).
   const cols = [1, 6, 3, 4, 0, 7];
   const placements: [number, number][] = [];
-  for (let i = 0; i < count; i++) placements.push([0, cols[i % cols.length]!]);
+  for (let i = 0; i < count; i++) placements.push([6, cols[i % cols.length]!]);
   return { blocked: [], jelly: [], ingredients: placements, preSpecials: [] };
 }
 
@@ -80,29 +82,29 @@ const HAND_TUNED: LevelDef[] = [
   { id: 3, mission: scoreMission(500), colors: 4, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(500) },
   { id: 4, mission: scoreMission(700), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(700) },
   { id: 5, mission: scoreMission(900), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(900) },
-  { id: 6, mission: ingredientMission(800, 1), colors: 4, moves: 20, layout: ingredientLayout(1), starThresholds: scoreThresholds(800), title: 'Kiraz indir' },
-  { id: 7, mission: ingredientMission(900, 2), colors: 4, moves: 22, layout: ingredientLayout(2), starThresholds: scoreThresholds(900) },
-  { id: 8, mission: scoreMission(1200), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1200) },
-  { id: 9, mission: scoreMission(1400), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1400) },
-  { id: 10, mission: scoreMission(2000), colors: 5, moves: 20, layout: bossLayout(), starThresholds: scoreThresholds(2000), isBoss: true, title: 'Boss: jöle çapraz' },
-  { id: 11, mission: jellyMission(1200, 4), colors: 5, moves: 22, layout: jellyLayout(4), starThresholds: scoreThresholds(1200), title: 'Jöleyi temizle' },
-  { id: 12, mission: jellyMission(1400, 6), colors: 5, moves: 22, layout: jellyLayout(6), starThresholds: scoreThresholds(1400) },
-  { id: 13, mission: scoreMission(1600), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1600) },
-  { id: 14, mission: colorMission(1200, [[0, 12]]), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1200), title: 'Pembe topla' },
-  { id: 15, mission: colorMission(1400, [[0, 8], [3, 8]]), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1400) },
-  { id: 16, mission: scoreMission(1800), colors: 6, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1800) },
-  { id: 17, mission: ingredientMission(1400, 3), colors: 5, moves: 22, layout: ingredientLayout(3), starThresholds: scoreThresholds(1400) },
-  { id: 18, mission: jellyMission(1600, 8), colors: 5, moves: 22, layout: jellyLayout(8), starThresholds: scoreThresholds(1600) },
-  { id: 19, mission: colorMission(1700, [[1, 10], [2, 10]]), colors: 6, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1700) },
-  { id: 20, mission: scoreMission(3000), colors: 6, moves: 18, layout: bossLayout(), starThresholds: scoreThresholds(3000), isBoss: true, title: 'Boss: hızlı skor' },
+  { id: 6, mission: ingredientMission(600, 1), colors: 4, moves: 25, layout: ingredientLayout(1), starThresholds: scoreThresholds(600), title: 'Kiraz indir' },
+  { id: 7, mission: ingredientMission(700, 2), colors: 4, moves: 28, layout: ingredientLayout(2), starThresholds: scoreThresholds(700) },
+  { id: 8, mission: scoreMission(1000), colors: 5, moves: 24, layout: emptyLayout(), starThresholds: scoreThresholds(1000) },
+  { id: 9, mission: scoreMission(1200), colors: 5, moves: 24, layout: emptyLayout(), starThresholds: scoreThresholds(1200) },
+  { id: 10, mission: scoreMission(1500), colors: 5, moves: 24, layout: bossLayout(), starThresholds: scoreThresholds(1500), isBoss: true, title: 'Boss: jöle çapraz' },
+  { id: 11, mission: jellyMission(900, 4), colors: 5, moves: 26, layout: jellyLayout(4), starThresholds: scoreThresholds(900), title: 'Jöleyi temizle' },
+  { id: 12, mission: jellyMission(1100, 6), colors: 5, moves: 28, layout: jellyLayout(6), starThresholds: scoreThresholds(1100) },
+  { id: 13, mission: scoreMission(1300), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(1300) },
+  { id: 14, mission: colorMission(800, [[0, 10]]), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(800), title: 'Pembe topla' },
+  { id: 15, mission: colorMission(900, [[0, 6], [3, 6]]), colors: 5, moves: 22, layout: emptyLayout(), starThresholds: scoreThresholds(900) },
+  { id: 16, mission: scoreMission(1400), colors: 6, moves: 24, layout: emptyLayout(), starThresholds: scoreThresholds(1400) },
+  { id: 17, mission: ingredientMission(900, 2), colors: 5, moves: 24, layout: ingredientLayout(2), starThresholds: scoreThresholds(900) },
+  { id: 18, mission: jellyMission(1200, 6), colors: 5, moves: 24, layout: jellyLayout(6), starThresholds: scoreThresholds(1200) },
+  { id: 19, mission: colorMission(1200, [[1, 8], [2, 8]]), colors: 6, moves: 24, layout: emptyLayout(), starThresholds: scoreThresholds(1200) },
+  { id: 20, mission: scoreMission(2000), colors: 6, moves: 24, layout: bossLayout(), starThresholds: scoreThresholds(2000), isBoss: true, title: 'Boss: hızlı skor' },
 ];
 
 function generatedLevel(id: number): LevelDef {
   const tier = Math.floor((id - 1) / 10);
   const isBoss = id % 10 === 0;
   const colors = Math.min(7, 4 + Math.floor(tier / 2));
-  const moves = Math.max(14, 22 - Math.floor(tier / 2) - (isBoss ? 4 : 0));
-  const scoreBase = 800 + tier * 350 + (isBoss ? 1200 : 0);
+  const moves = Math.max(18, 26 - Math.floor(tier / 2) - (isBoss ? 2 : 0));
+  const scoreBase = 600 + tier * 220 + (isBoss ? 600 : 0);
   const variant = id % 4;
   let mission: MissionDef;
   let layout: LayoutPlacement = emptyLayout();
@@ -114,17 +116,17 @@ function generatedLevel(id: number): LevelDef {
       title = `Boss seviye ${id}`;
     }
   } else if (variant === 1) {
-    const n = Math.min(6, 1 + Math.floor(tier / 2));
+    const n = Math.min(4, 1 + Math.floor(tier / 3));
     mission = ingredientMission(scoreBase, n);
     layout = ingredientLayout(n);
     title = `Kiraz ${n}`;
   } else if (variant === 2) {
-    const n = Math.min(14, 4 + tier);
+    const n = Math.min(10, 3 + tier);
     mission = jellyMission(scoreBase, n);
     layout = jellyLayout(n);
     title = `Jöle ${n}`;
   } else {
-    const totalCount = Math.min(20, 10 + tier);
+    const totalCount = Math.min(16, 8 + tier);
     const colorA = id % colors;
     const colorB = (id + 2) % colors;
     mission = colorMission(scoreBase, [
