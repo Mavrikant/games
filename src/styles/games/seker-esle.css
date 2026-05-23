@@ -658,15 +658,18 @@
 .level-card__stars { display: flex; gap: 1px; font-size: 0.8rem; }
 .level-card--locked {
   filter: grayscale(0.7);
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
 }
+.level-card--locked .level-card__stars { visibility: hidden; }
+.level-card--locked .level-card__num { opacity: 0.5; }
 .level-card__lock {
   position: absolute;
-  inset: 0;
+  inset: auto 0 28% 0;
   display: grid;
   place-items: center;
   font-size: 1.6rem;
+  pointer-events: none;
 }
 .level-card--current {
   border-color: var(--se-accent-2);
