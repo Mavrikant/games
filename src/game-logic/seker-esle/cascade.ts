@@ -195,6 +195,7 @@ function processMatches(matched: Set<Tile>, spawns: SpecialSpawn[], groupSizes: 
   gained = Math.round(gained * multiplier);
   state.score += gained;
   state.profile.stats.totalMatches += matched.size;
+  recordAchievementEvent({ kind: 'match', size: matched.size });
 
   const toExclude = new Set<Tile>();
   for (const sp of spawns) {
