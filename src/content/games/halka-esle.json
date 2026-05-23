@@ -1,0 +1,9 @@
+{
+  "title": "Halka Eşle",
+  "description": "Match-3'ün toroidal twist'i: swap yok — satır ve sütunları ok ile kaydır, 3+ aynı renk eşleştir. 100 level.",
+  "dateAdded": "2026-05-23",
+  "tags": ["bulmaca", "renk", "level", "match-3"],
+  "controls": "Fare/dokunma: grid kenarındaki oklara tıkla (satır/sütun kaydır) · Klavye: ok tuşları + 1-7 sayısı (hangi satır/sütun) · R: level sıfırla · L: level seçici",
+  "howToPlay": "Her satır ve sütun bir kapalı halkadır — yatay/dikey kenardaki oklara tıklayınca o satır veya sütun bir adım kayar; uçtan çıkan tile diğer uca wrap olur (toroidal grid). 3+ aynı renk yatay/dikey hizalanırsa patlar; boşalan yerler kaydırılan satır/sütundan dolar veya yeni renk gelir. Her level'da bir hedef (rengi N defa patlat, kilitli tile'ları temizle, vb.) ve sınırlı hamle hakkı var. 100 level prosedürel zorlanma ile gelir; ilerleme localStorage'a yazılır. Klavyede ok tuşu yönü, 1-9 sayısı şerit numarasını belirler.",
+  "thumbnail": "halka-esle.svg"
+}
