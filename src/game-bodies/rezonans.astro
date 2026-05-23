@@ -1,0 +1,28 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">En iyi<span id="best">1</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="240" aria-label="Hedef ve senin dalga formun"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Rezonans!</h2>
+      <p id="overlay-msg">Sonraki seviye için Enter'a bas.</p>
+      <button id="next" class="hud__btn" type="button">Sonraki seviye</button>
+    </div>
+  </div>
+</div>
+
+<div class="rz-match" aria-label="Eşleşme oranı">
+  <div class="rz-match__label">Eşleşme</div>
+  <div class="rz-match__bar"><span id="match-fill" class="rz-match__fill"></span></div>
+  <div id="match-pct" class="rz-match__pct">0%</div>
+</div>
+
+<div id="eq" class="rz-eq" role="group" aria-label="Harmonik genlik çubukları"></div>
