@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sahte Para">
+  <defs>
+    <linearGradient id="sahte-para-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15171f" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sahte-para-bg)" />
+  <polygon points="142,168 178,168 160,58" fill="#232830" stroke="#2f3540" />
+  <rect x="108" y="168" width="104" height="8" rx="2" fill="#1c2027" stroke="#2f3540" />
+  <circle cx="160" cy="52" r="6" fill="#6366f1" />
+  <g transform="translate(160 52) rotate(-10)">
+    <rect x="-118" y="-4" width="236" height="8" rx="2" fill="#98a0ad" />
+    <line x1="-108" y1="2" x2="-108" y2="40" stroke="#5b626d" stroke-width="2" />
+    <line x1="108" y1="2" x2="108" y2="40" stroke="#5b626d" stroke-width="2" />
+    <path d="M-138 40 a30 16 0 0 0 60 0 Z" fill="#232830" stroke="#2f3540" />
+    <path d="M78 40 a30 16 0 0 0 60 0 Z" fill="#232830" stroke="#2f3540" />
+    <circle cx="-108" cy="34" r="13" fill="#fbbf24" stroke="rgba(0,0,0,0.4)" stroke-width="1.4" />
+    <text x="-108" y="39" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="800" fill="#0a0b0e" text-anchor="middle">?</text>
+    <circle cx="108" cy="34" r="13" fill="#3a4150" stroke="#2f3540" stroke-width="1.4" />
+  </g>
+  <g>
+    <circle cx="44" cy="150" r="14" fill="#3a4150" stroke="#2f3540" />
+    <circle cx="78" cy="150" r="14" fill="#3a4150" stroke="#2f3540" />
+    <circle cx="276" cy="150" r="14" fill="#fbbf24" stroke="rgba(0,0,0,0.4)" stroke-width="1.4" />
+    <text x="276" y="155" font-family="ui-sans-serif, system-ui" font-size="15" font-weight="800" fill="#0a0b0e" text-anchor="middle">?</text>
+  </g>
+  <text x="20" y="192" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Sahte Para</text>
+</svg>
