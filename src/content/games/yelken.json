@@ -1,0 +1,9 @@
+{
+  "title": "Yelken",
+  "description": "Rüzgâra karşı dümdüz gidemezsin — orsa çekerek zikzak çiz, şamandıraları sırayla dön ve en kısa sürede bitiş hattına ulaş.",
+  "dateAdded": "2026-05-23",
+  "tags": ["yelken", "fizik", "zamanlama", "tek-oyunculu"],
+  "controls": "← / → veya A / D: dümeni çevir · Boşluk / Enter: başlat · R: yeniden başla · Mobil: sol/sağ butonları",
+  "howToPlay": "Rüzgâr ekranın yukarısından aşağıya doğru eser ve gerçek bir yelkenli gibi rüzgâra doğrudan karşı gidemezsin: pruvan tam rüzgâr yönüne (yukarıya) ±42° yaklaşınca yelken fışkırır (orsa/luffing), hız sıfıra düşer ve tekne rüzgârla geri sürüklenir. Bu yüzden yukarıdaki hedeflere ulaşmak için zikzak — yani orsa çekmek — zorundasın. Dümeni ← / → (ya da A / D) ile kırarsın; tekne her zaman pruvasının baktığı yöne, o anki yelken açısına bağlı bir hızla ilerler: en hızlısı rüzgârı yandan aldığında (apaz), en yavaşı kıç üstü poyrazda. Sol alttaki pusula pruvanı (yeşil iğne) ve kırmızı 'gidilemez' dilimi gösterir; iğne kırmızıya girerse orsadasın, biraz aç. Görevin 1, 2, 3 numaralı şamandıraları SIRAYLA, sarı halkalarının içinden geçerek dönmek; üçünü de geçince üstteki dama desenli BİTİŞ hattı etkinleşir, ona değdiğin an liman tamamlanır. Süre yukarıda sayılır, en kısa sürede bitiren rekoru kapar ve rekor otomatik kaydedilir. Başlamak için Boşluk/Enter veya bir yön tuşuna bas; R ile, Yeniden başla düğmesiyle ya da bitiş ekranında herhangi bir yön tuşuyla rota yeniden (şamandıralar yeni yerlerde) kurulur. İpucu: şamandıralar sola-sağa-sola dizilir, bu yüzden her birini döndükten sonra tekrar orsa değiştirip karşı bordaya geçmen gerekir; orsadayken paniğe kapılıp aşırı düzeltme yapma, dümeni gidilemez dilimin hemen dışında tutarsan en verimli tırmanırsın.",
+  "thumbnail": "yelken.svg"
+}
