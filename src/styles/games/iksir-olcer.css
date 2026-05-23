@@ -1,0 +1,244 @@
+/*
+ * İksir Ölçer — apothecary decanting puzzle.
+ * Overlay positioning + .overlay--hidden are required by @shared/overlay
+ * (pitfall: missing-overlay-css). Do not delete the overlay block.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.flasks {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(14px, 5vw, 34px);
+  min-height: 220px;
+  padding: 12px 6px 4px;
+}
+
+.flask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.flask__glass {
+  position: relative;
+  width: clamp(56px, 18vw, 78px);
+  height: clamp(150px, 42vw, 190px);
+  padding: 0;
+  border: 2px solid var(--border-strong);
+  border-top: none;
+  border-radius: 6px 6px 16px 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.01)
+  );
+  background-color: var(--surface-2);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.flask__glass:hover {
+  transform: translateY(-2px);
+}
+
+.flask__glass--sel {
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 18px var(--accent-soft);
+}
+
+.flask__glass--hit {
+  box-shadow:
+    0 0 0 2px var(--success),
+    0 0 22px rgba(52, 211, 153, 0.45);
+}
+
+.flask__liquid {
+  position: absolute;
+  inset: 0 0 0 0;
+  top: auto;
+  height: 0;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  transition: height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flask__glass--hit .flask__liquid {
+  background: linear-gradient(180deg, var(--success), #15976a);
+}
+
+.flask__target {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px dashed var(--text-muted);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.flask__target::after {
+  content: '';
+  position: absolute;
+  right: 3px;
+  top: -5px;
+  border: 4px solid transparent;
+  border-right-color: var(--text-muted);
+}
+
+.flask__amt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  text-align: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.flask__amt b {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.flask__ctl {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.flask__op {
+  font: inherit;
+  font-size: 12px;
+  padding: 6px 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.flask__op:hover {
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+.io-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+
+.io-status {
+  margin: 0;
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.hud__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hud__btn--primary {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+}
+
+/* overlay (required by @shared/overlay) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__stars {
+  font-size: 34px;
+  letter-spacing: 4px;
+  color: #fbbf24;
+  margin-bottom: 6px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.overlay__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

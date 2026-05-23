@@ -1,0 +1,9 @@
+{
+  "title": "İksir Ölçer",
+  "description": "Şifacının şişelerini doldur, boşalt ve birbirine dök; hedef miktarı tam ölç. Az hamlede çöz, üç yıldız topla.",
+  "dateAdded": "2026-05-23",
+  "tags": ["bulmaca", "mantık", "tek-oyunculu"],
+  "controls": "Şişeye tıkla: kaynak seç · başka şişeye tıkla: dök · Doldur/Boşalt düğmeleri · 1-9: şişe · F: doldur · E: boşalt · U: geri al · R: sıfırla",
+  "howToPlay": "Şifacının tezgâhında işaretsiz şişeler var; tek yapabildiğin bir şişeyi ağzına kadar doldurmak, tamamen boşaltmak ya da içindekini başka bir şişeye dökmek. Dökerken sıvı, ya kaynak şişe boşalana ya da hedef şişe dolana kadar akar — yani şişe kapasiteleri senin tek ölçü aletin. Amacın HUD'da yazan hedef miktarı herhangi bir şişede tam olarak elde etmek. Bir şişeye tıkladığında o kaynak olarak seçilir (mor parıltı); ardından başka bir şişeye tıklarsan seçilen şişeden oraya dökülür. Aynı şişeye tekrar tıklamak seçimi iptal eder. Her şişenin altındaki 'Doldur' düğmesi onu kapasitesine kadar doldurur, 'Boşalt' tamamen tezgâha döker. Klavyede 1-9 şişe seçer, F doldurur, E boşaltır, U son hamleyi geri alır, R bölümü sıfırlar. Hedef çizgisi her şişede kesik çizgiyle gösterilir; bir şişe hedefe ulaştığında yeşile döner ve bölüm biter. Her bölümün bir 'en az hamle' sayısı vardır: o sayıda ya da altında bitirirsen üç yıldız, biraz fazlasında iki, daha fazlasında bir yıldız alırsın — yani önce çözümü bul, sonra daha kısasını arayarak tekrar oyna. İpucu: hedef genelde iki kapasitenin farkından doğar; büyük şişeyi doldurup küçüğüne boşaltmayı, sonra küçüğü dökeltip kalanı taşımayı dene. Üç şişeli bölümlerde ortadaki şişeyi bir 'ara ölçek' gibi kullan. İlerlemen ve topladığın yıldızlar tarayıcında saklanır.",
+  "thumbnail": "iksir-olcer.svg"
+}

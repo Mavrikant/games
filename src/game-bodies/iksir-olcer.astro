@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="level">1</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <div class="hud__score">Hedef<span id="target">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+
+<div class="board-wrap">
+  <div id="flasks" class="flasks" role="group" aria-label="Şişeler"></div>
+
+  <div class="io-bar">
+    <button id="undo" class="hud__btn" type="button">↶ Geri al</button>
+    <p id="status" class="io-status" aria-live="polite"></p>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <div id="overlay-stars" class="overlay__stars">★★★</div>
+      <h2 id="overlay-title">Hedef tutturuldu!</h2>
+      <p id="overlay-msg"></p>
+      <div class="overlay__actions">
+        <button id="next-btn" class="hud__btn hud__btn--primary" type="button">
+          Sonraki bölüm
+        </button>
+        <button id="replay-btn" class="hud__btn" type="button">Tekrar dene</button>
+      </div>
+    </div>
+  </div>
+</div>
