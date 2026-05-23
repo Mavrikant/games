@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sayı Boyama">
+  <defs>
+    <linearGradient id="sb-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sb-bg)" />
+
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Sayı Boyama</text>
+
+  <!-- 5x5 grid on the right with clue gutters. Cell 24px, gap 3px. -->
+  <g transform="translate(150, 58)" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">
+    <!-- column clues -->
+    <g fill="#98a0ad" text-anchor="middle">
+      <text x="48" y="22">2</text>
+      <text x="75" y="16">1</text><text x="75" y="28">1</text>
+      <text x="102" y="22">3</text>
+      <text x="129" y="22">2</text>
+      <text x="156" y="22">1</text>
+    </g>
+    <!-- row clues -->
+    <g fill="#98a0ad" text-anchor="end">
+      <text x="30" y="48">3</text>
+      <text x="30" y="75">1 1</text>
+      <text x="30" y="102">5</text>
+      <text x="30" y="129">2</text>
+      <text x="30" y="156">1 1</text>
+    </g>
+
+    <!-- empty cells -->
+    <g fill="#1c2027" stroke="#2f3540" stroke-width="1">
+      <rect x="36"  y="30"  width="24" height="24" rx="3" />
+      <rect x="63"  y="30"  width="24" height="24" rx="3" />
+      <rect x="90"  y="30"  width="24" height="24" rx="3" />
+      <rect x="117" y="30"  width="24" height="24" rx="3" />
+      <rect x="144" y="30"  width="24" height="24" rx="3" />
+
+      <rect x="36"  y="57"  width="24" height="24" rx="3" />
+      <rect x="63"  y="57"  width="24" height="24" rx="3" />
+      <rect x="90"  y="57"  width="24" height="24" rx="3" />
+      <rect x="117" y="57"  width="24" height="24" rx="3" />
+      <rect x="144" y="57"  width="24" height="24" rx="3" />
+
+      <rect x="36"  y="84"  width="24" height="24" rx="3" />
+      <rect x="63"  y="84"  width="24" height="24" rx="3" />
+      <rect x="90"  y="84"  width="24" height="24" rx="3" />
+      <rect x="117" y="84"  width="24" height="24" rx="3" />
+      <rect x="144" y="84"  width="24" height="24" rx="3" />
+
+      <rect x="36"  y="111" width="24" height="24" rx="3" />
+      <rect x="63"  y="111" width="24" height="24" rx="3" />
+      <rect x="90"  y="111" width="24" height="24" rx="3" />
+      <rect x="117" y="111" width="24" height="24" rx="3" />
+      <rect x="144" y="111" width="24" height="24" rx="3" />
+
+      <rect x="36"  y="138" width="24" height="24" rx="3" />
+      <rect x="63"  y="138" width="24" height="24" rx="3" />
+      <rect x="90"  y="138" width="24" height="24" rx="3" />
+      <rect x="117" y="138" width="24" height="24" rx="3" />
+      <rect x="144" y="138" width="24" height="24" rx="3" />
+    </g>
+
+    <!-- filled cells (the hidden picture) -->
+    <g fill="#818cf8" stroke="#6366f1" stroke-width="1">
+      <rect x="36"  y="30"  width="24" height="24" rx="3" />
+      <rect x="63"  y="30"  width="24" height="24" rx="3" />
+      <rect x="90"  y="30"  width="24" height="24" rx="3" />
+
+      <rect x="36"  y="57"  width="24" height="24" rx="3" />
+      <rect x="90"  y="57"  width="24" height="24" rx="3" />
+
+      <rect x="36"  y="84"  width="24" height="24" rx="3" />
+      <rect x="63"  y="84"  width="24" height="24" rx="3" />
+      <rect x="90"  y="84"  width="24" height="24" rx="3" />
+      <rect x="117" y="84"  width="24" height="24" rx="3" />
+      <rect x="144" y="84"  width="24" height="24" rx="3" />
+
+      <rect x="90"  y="111" width="24" height="24" rx="3" />
+      <rect x="117" y="111" width="24" height="24" rx="3" />
+
+      <rect x="36"  y="138" width="24" height="24" rx="3" />
+      <rect x="144" y="138" width="24" height="24" rx="3" />
+    </g>
+  </g>
+</svg>

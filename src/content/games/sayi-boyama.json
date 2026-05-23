@@ -1,0 +1,9 @@
+{
+  "title": "Sayı Boyama",
+  "description": "Satır ve sütun ipuçlarını kullanarak gizli deseni boya — her sayı o sıradaki kesintisiz dolu hücre dizisini söyler.",
+  "dateAdded": "2026-05-23",
+  "tags": ["puzzle", "mantık", "nonogram"],
+  "controls": "Tık / tap: boya · Sağ tık veya İşaretle modu: ✕ · M: mod · R: yeni",
+  "howToPlay": "Bir nonogram (resimli mantık bulmacası) çözüyorsun. Her satırın solunda ve her sütunun üstünde sayılar var; bu sayılar o satır ya da sütunda soldan sağa (veya yukarıdan aşağıya) kaç tane kesintisiz dolu hücre olduğunu, hangi sırayla geldiğini söyler. Örneğin \"3 1\" o sırada önce 3 dolu hücrelik bir blok, sonra en az bir boşluk, ardından 1 dolu hücre olduğu anlamına gelir. \"0\" o sıranın tamamen boş olduğunu gösterir. Amacın bütün ipuçlarını aynı anda sağlayan dolu/boş düzenini bulmak. Bir hücreye tıklayıp dolu/boş yapabilir, kesin boş olduğunu düşündüğün hücreleri ✕ ile işaretleyebilirsin — ✕ işaretleri yalnızca sana yardımcıdır, çözümü etkilemez. Masaüstünde sol tık boyar, sağ tık ✕ koyar; dokunmatikte üstteki \"Mod\" butonuyla boyama ve işaretleme arasında geçiş yap (M tuşu da çalışır). Bir satır ya da sütunun ipucu sağlandığında o sıranın sayıları soluklaşır; bu, doğru gittiğinin işaretidir ama her zaman tek çözüm olmayabilir — önemli olan tüm satır ve sütunların aynı anda uyması. Tüm ipuçları sağlandığı an bulmaca biter ve süren kaydedilir; aynı boyutta daha hızlı bitirirsen en iyi süren güncellenir. Boyut butonuyla 5×5 ve 10×10 arasında geçebilir, R ile ya da Yeni butonuyla istediğin an taze bir bulmaca açabilirsin.",
+  "thumbnail": "sayi-boyama.svg"
+}
