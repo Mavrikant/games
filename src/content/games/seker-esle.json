@@ -1,9 +1,8 @@
 {
   "title": "Şeker Eşle",
-  "description": "8×8 ızgarada renkli şekerleri komşusuyla değiş tokuş ederek 3+ eşleşmeler yarat; her seviye atladıkça oyun zorlaşır, kaybedersen bir önceki seviyeye düşersin.",
+  "description": "100 seviyelik bağımlılık yapan match-3: özel şekerler, combo patlamaları, partikül efektleri, prosedürel Web Audio sesleri, 4 görev tipi, 14 başarım, günlük meydan okuma, seri ödülü ve yardımcılar.",
   "dateAdded": "2026-05-23",
   "tags": ["puzzle", "eşleştirme", "seviye"],
   "controls": "Bir şekere tıkla → yan komşusuna tıkla",
   "howToPlay": "Amacın 8×8 ızgaradaki renkli şekerleri yer değiştirerek aynı renkten 3 veya daha fazlasını yan yana ya da alt alta getirmek ve her seviyede istenen hedef skoru hamleler bitmeden tamamlamak. Bir şekere tıkla, sonra hemen yanındaki (yatay veya dikey komşu) bir şekere tıkla; iki şeker yer değiştirir. Yer değiştirme yalnızca en az bir eşleşme oluşturacaksa kabul edilir, aksi takdirde şekerler eski yerine döner. Eşleşen şekerler patlar, üstündeki şekerler aşağı kayar ve boş hücreler tepeden yeni şekerlerle dolar; eğer düşen şekerler kendiliğinden yeni eşleşmeler oluşturursa zincirleme patlama olur ve bu sana ek puan kazandırır. Her seviyenin sabit bir hamle hakkı ve sabit bir hedef skoru vardır; hedefe ulaşırsan bir üst seviyeye geçersin, ulaşamazsan bir alt seviyeye düşersin, yani ilerleme hem ödüllü hem riskli. Seviye yükseldikçe ızgaradaki renk sayısı artar (4'ten başlar, en fazla 7'ye çıkar) ve hamle hakkın azalır, böylece her hamleyi daha dikkatli planlaman gerekir. İpucu: 4'lü veya 5'li eşleşmeler 3'lülere göre çok daha fazla puan verir, bu yüzden mümkün olduğunca uzun zincirler kurmaya çalış; ayrıca alt sıralarda yapılan hamleler genellikle daha büyük kombo zincirleri tetikler çünkü yukarıdan düşen şekerler yeni eşleşme şansı yaratır. En iyi skorun tarayıcında saklanır ve seviyene devam edersin.",
   "thumbnail": "seker-esle.svg"
-}

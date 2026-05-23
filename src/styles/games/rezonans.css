@@ -1,0 +1,197 @@
+/*
+ * Per-game styles. The scaffold ships with the standard board-wrap +
+ * overlay positioning that @shared/overlay's helpers expect; do not
+ * delete these unless your game has no overlay at all. The helper sets
+ * the `.overlay--hidden` class and aria-hidden, but the visual effect
+ * (opacity 0 + pointer-events none) comes from CSS — without these
+ * rules, hideOverlay() does nothing visible.  pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.overlay__inner #next {
+  margin-top: 16px;
+}
+
+/* Match meter */
+.rz-match {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  margin: 14px auto 4px;
+}
+
+.rz-match__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.rz-match__bar {
+  flex: 1;
+  height: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rz-match__fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.15s ease-out;
+}
+
+.rz-match__pct {
+  min-width: 3.5ch;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* Equalizer */
+.rz-eq {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  margin: 12px auto 0;
+}
+
+.rz-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 64px;
+}
+
+.rz-band__track {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.rz-band--selected .rz-band__track {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.rz-cell {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  border-radius: 5px;
+  height: 22px;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.1s ease-out;
+}
+
+.rz-cell:hover {
+  border-color: var(--accent);
+}
+
+.rz-cell--on {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.rz-cell--mute {
+  background: var(--surface-3);
+}
+
+.rz-band__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,52 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Tur<span id="round">1</span></div>
+  <div class="hud__stat">Tartım<span id="weigh">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <div class="sp-scale" aria-hidden="true">
+    <svg id="scale-svg" viewBox="0 0 320 200" role="img" aria-label="Terazi">
+      <line class="sp-post" x1="160" y1="34" x2="160" y2="168"></line>
+      <polygon class="sp-base" points="120,176 200,176 185,168 135,168"></polygon>
+      <circle class="sp-pivot" cx="160" cy="34" r="6"></circle>
+      <g id="beam">
+        <line class="sp-beam" x1="40" y1="34" x2="280" y2="34"></line>
+        <g id="pan-left" class="sp-pan">
+          <line class="sp-cord" x1="0" y1="0" x2="0" y2="42"></line>
+          <path class="sp-cup" d="M-30 42 a30 16 0 0 0 60 0 Z"></path>
+          <text class="sp-pan-label" x="0" y="34">L</text>
+        </g>
+        <g id="pan-right" class="sp-pan">
+          <line class="sp-cord" x1="0" y1="0" x2="0" y2="42"></line>
+          <path class="sp-cup" d="M-30 42 a30 16 0 0 0 60 0 Z"></path>
+          <text class="sp-pan-label" x="0" y="34">R</text>
+        </g>
+      </g>
+    </svg>
+    <p id="verdict" class="sp-verdict" aria-live="polite">Bir para diğerlerinden ağır.</p>
+  </div>
+
+  <div id="coins" class="sp-coins" role="group" aria-label="Paralar"></div>
+
+  <div class="sp-actions">
+    <button id="weigh-btn" class="sp-btn sp-btn--primary" type="button">Tart</button>
+    <button id="clear-btn" class="sp-btn" type="button">Kefeleri boşalt</button>
+    <button id="accuse-btn" class="sp-btn sp-btn--danger" type="button">Suçla</button>
+  </div>
+  <p id="status" class="sp-status">Paralara dokunup kefelere ata, sonra Tart'a bas.</p>
+
+  <ol id="log" class="sp-log" aria-label="Tartım geçmişi"></ol>
+
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sahte Para</h2>
+      <p id="overlay-msg"></p>
+      <button id="overlay-btn" class="sp-btn sp-btn--primary" type="button">Başla</button>
+    </div>
+  </div>
+</div>

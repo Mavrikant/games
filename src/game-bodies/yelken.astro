@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">0.0</span></div>
+  <div class="hud__score">Rekor<span id="best">—</span></div>
+  <div class="hud__score">Şamandıra<span id="buoys">0/3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Yelken oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Yelken</h2>
+      <p id="overlay-msg">Rüzgâr yukarıdan eser; doğrudan ona karşı gidemezsin. ← / → ile dümeni kır, orsa çekerek şamandıraları dön. Başlamak için Boşluk'a bas.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-dir="left" type="button">◀ Sol</button>
+  <button class="touch__btn" data-dir="right" type="button">Sağ ▶</button>
+</div>

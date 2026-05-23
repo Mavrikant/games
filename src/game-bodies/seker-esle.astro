@@ -1,42 +1,172 @@
 ---
 ---
 
-<header class="hud">
-  <div class="hud__scores">
-    <div class="score-box">
-      <span class="score-box__label">Seviye</span>
-      <span id="level" class="score-box__value">1</span>
+<div class="seker-esle-stage" data-reduced-motion="false">
+  <header class="hud">
+    <div class="hud__left">
+      <button id="map-btn" class="hud__btn hud__btn--ghost" type="button" aria-label="Harita">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 9 4l6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v16M15 6v16"/></svg>
+      </button>
+      <div class="hud__title">
+        <span id="level-title" class="hud__title-line">Seviye 1</span>
+        <span class="hud__title-sub">⭐ <span id="hud-stars">0</span> · En yüksek <span id="hud-best">1</span> · Lv <span id="hud-level">1</span></span>
+      </div>
     </div>
-    <div class="score-box">
-      <span class="score-box__label">Hedef</span>
-      <span id="target" class="score-box__value">350</span>
+    <div class="hud__scores">
+      <div class="score-box score-box--score">
+        <span class="score-box__label">Skor</span>
+        <span id="hud-score" class="score-box__value">0</span>
+      </div>
+      <div class="score-box score-box--moves">
+        <span class="score-box__label">Hamle</span>
+        <span id="hud-moves" class="score-box__value">22</span>
+      </div>
     </div>
-    <div class="score-box">
-      <span class="score-box__label">Skor</span>
-      <span id="score" class="score-box__value">0</span>
-    </div>
-    <div class="score-box">
-      <span class="score-box__label">Hamle</span>
-      <span id="moves" class="score-box__value">22</span>
-    </div>
-    <div class="score-box">
-      <span class="score-box__label">En yüksek</span>
-      <span id="best" class="score-box__value">1</span>
-    </div>
-  </div>
-  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
-</header>
+    <button id="restart" class="hud__btn" type="button" aria-label="Yeniden başla">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+    </button>
+  </header>
 
-<div id="board" class="board" role="grid" aria-label="Şeker Eşle tahtası">
-  <div class="board__bg">
-    {Array.from({ length: 64 }, () => <div class="board__cell"></div>)}
+  <div class="mission-bar">
+    <span class="mission-bar__icon" id="mission-icon" aria-hidden="true">⭐</span>
+    <div class="mission-bar__wrap">
+      <div class="mission-bar__label">
+        <span id="mission-label">Hedef skor</span>
+        <span class="mission-bar__count" id="mission-count">0/350</span>
+      </div>
+      <div class="mission-bar__track">
+        <div class="mission-bar__fill" id="mission-fill"></div>
+      </div>
+    </div>
   </div>
-  <div id="tiles" class="board__tiles"></div>
-  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
-    <div class="overlay__title" id="overlay-title">Seviye tamam!</div>
-    <div class="overlay__msg" id="overlay-msg">Sonraki seviyeye geç.</div>
-    <button id="overlay-btn" class="hud__btn" type="button">Devam</button>
+
+  <div id="board" class="board" role="grid" aria-label="Şeker Eşle tahtası">
+    <div class="board__bg">
+      {Array.from({ length: 64 }, () => <div class="board__cell"></div>)}
+    </div>
+    <div id="tiles" class="board__tiles"></div>
+    <canvas id="particles" class="board__particles" aria-hidden="true"></canvas>
+    <div id="combo-banner" class="combo-banner" aria-live="polite"></div>
+    <div id="combo-streak" class="combo-streak" aria-live="polite"></div>
+    <div id="score-popups" class="score-popups" aria-hidden="true"></div>
   </div>
+
+  <div id="booster-bar" class="booster-bar" role="toolbar" aria-label="Yardımcılar"></div>
+
+  <!-- Overlays -->
+  <div id="map" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel map-panel">
+      <div class="map-panel__header">
+        <h2 class="overlay__title">Şeker Yolu</h2>
+        <div class="map-panel__stats">
+          <span class="map-stat">⭐ <span id="map-total-stars">0</span></span>
+          <span class="map-stat">📅 <span id="map-streak">0 gün</span></span>
+        </div>
+      </div>
+      <div class="map-panel__actions">
+        <button id="map-play" class="hud__btn hud__btn--primary" type="button">Devam et</button>
+        <button id="map-daily" class="hud__btn" type="button">🎁 Günün</button>
+        <button id="map-achievements" class="hud__btn" type="button">🏆</button>
+        <button id="map-settings" class="hud__btn" type="button">⚙️</button>
+      </div>
+      <div id="map-grid" class="map-grid" role="list"></div>
+    </div>
+  </div>
+
+  <div id="level-complete" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 id="level-complete-title" class="overlay__title">Seviye tamam!</h2>
+      <div id="level-complete-stars" class="stars-row"></div>
+      <div class="overlay__msg">Skorun: <span id="level-complete-score">0</span></div>
+      <div class="overlay__actions">
+        <button id="level-complete-next" class="hud__btn hud__btn--primary" type="button">Sonraki</button>
+        <button id="level-complete-map" class="hud__btn" type="button">Harita</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="level-fail" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Hamlelerin bitti</h2>
+      <p class="overlay__msg">Hedefe ulaşamadın. Tekrar denemek ister misin?</p>
+      <div class="overlay__actions">
+        <button id="level-fail-plus5" class="hud__btn hud__btn--primary" type="button">+5 Hamle kullan</button>
+        <button id="level-fail-retry" class="hud__btn" type="button">Yeniden</button>
+        <button id="level-fail-map" class="hud__btn" type="button">Harita</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Ayarlar</h2>
+      <label class="setting-row">
+        <span>Ses</span>
+        <input id="setting-sound" type="checkbox" checked />
+      </label>
+      <label class="setting-row">
+        <span>Titreşim</span>
+        <input id="setting-vibrate" type="checkbox" checked />
+      </label>
+      <label class="setting-row">
+        <span>Az hareket modu</span>
+        <input id="setting-motion" type="checkbox" />
+      </label>
+      <div class="overlay__actions">
+        <button id="setting-close" class="hud__btn hud__btn--primary" type="button">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tutorial" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Hoş geldin!</h2>
+      <p id="tutorial-step" class="overlay__msg">Bir şekere dokun ve yan komşusuna doğru sürükle.</p>
+      <div class="tutorial-figure" aria-hidden="true">🍬👆🍬</div>
+      <div class="overlay__actions">
+        <button id="tutorial-next" class="hud__btn hud__btn--primary" type="button">Anladım</button>
+        <button id="tutorial-skip" class="hud__btn" type="button">Atla</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="achievements" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Başarımlar</h2>
+      <div id="achievements-grid" class="ach-grid"></div>
+      <div class="overlay__actions">
+        <button id="achievements-close" class="hud__btn hud__btn--primary" type="button">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="daily-intro" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title" id="daily-title">Günün Meydan Okuması</h2>
+      <p class="overlay__msg">Bugün için özel bir bulmaca seni bekliyor. Tamamlarsan ekstra ödüller var!</p>
+      <div class="overlay__actions">
+        <button id="daily-play" class="hud__btn hud__btn--primary" type="button">🎁 Oyna</button>
+        <button id="daily-close" class="hud__btn" type="button">Sonra</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="comeback" class="overlay overlay-screen overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Tekrar hoş geldin!</h2>
+      <p class="overlay__msg">Geri döndün! İşte 3 yardımcı hediye 🎁</p>
+      <div class="comeback-gifts">
+        <span>🔨 Çekiç</span>
+        <span>🔁 Yer değiş</span>
+        <span>➕5 Hamle</span>
+      </div>
+      <div class="overlay__actions">
+        <button id="comeback-claim" class="hud__btn hud__btn--primary" type="button">Topla</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast toast--hidden" aria-live="polite"></div>
+
+  <div id="hud-stars-row" class="visually-hidden" aria-hidden="true"></div>
 </div>
-
-<p class="caption">Bir şekere tıkla, sonra yan komşusuna tıkla — 3+ aynı renk patlar.</p>
