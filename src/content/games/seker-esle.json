@@ -1,8 +1,9 @@
 {
   "title": "Şeker Eşle",
-  "description": "8×8 ızgarada renkli şekerleri komşusuyla değiş tokuş ederek 3+ eşleşmeler yarat; her seviye atladıkça oyun zorlaşır, kaybedersen bir önceki seviyeye düşersin.",
+  "description": "100 seviyelik bağımlılık yapan match-3: özel şekerler, combo patlamaları, partikül efektleri, prosedürel Web Audio sesleri, 4 görev tipi, 14 başarım, günlük meydan okuma, seri ödülü ve yardımcılar.",
   "dateAdded": "2026-05-23",
-  "tags": ["puzzle", "eşleştirme", "seviye"],
-  "controls": "Bir şekere tıkla → yan komşusuna tıkla",
-  "thumbnail": "seker-esle.svg"
+  "tags": ["puzzle", "eşleştirme", "seviye", "match3", "günlük"],
+  "controls": "Şekere dokun ve komşusuna sürükle (veya iki kez dokun). 4'lü eşleme çizgili, L/T sarmalanmış, 5'li renk bombası yaratır.",
+  "thumbnail": "seker-esle.svg",
+  "howToPlay": "Renkli şekerleri 3 ya da daha fazla yan yana getir. 4'lü eşleştirirsen çizgili şeker, L/T şekli yaparsan sarmalanmış, 5'li yaparsan renk bombası kazanırsın. Her seviyenin bir görevi var: skora ulaş, kirazları indir, jöleyi temizle veya renk topla. 3 yıldız topla, başarımları aç, günlük meydan okumayı kaçırma."
 }

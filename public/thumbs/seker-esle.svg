@@ -1,90 +1,99 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Şeker Eşle">
   <defs>
     <linearGradient id="se-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#15171f" />
-      <stop offset="100%" stop-color="#0a0b0e" />
+      <stop offset="0%" stop-color="#fff5e6" />
+      <stop offset="100%" stop-color="#ffd1a1" />
     </linearGradient>
     <radialGradient id="se-red" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ff8a99" />
-      <stop offset="100%" stop-color="#e0344b" />
+      <stop offset="0%" stop-color="#ff8ca5" />
+      <stop offset="100%" stop-color="#ff3b6b" />
     </radialGradient>
     <radialGradient id="se-yellow" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ffe680" />
-      <stop offset="100%" stop-color="#e0b020" />
+      <stop offset="0%" stop-color="#fff09c" />
+      <stop offset="100%" stop-color="#ffd400" />
     </radialGradient>
     <radialGradient id="se-green" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#9bf0b6" />
-      <stop offset="100%" stop-color="#28a45a" />
+      <stop offset="0%" stop-color="#7bf3a6" />
+      <stop offset="100%" stop-color="#25d366" />
     </radialGradient>
     <radialGradient id="se-blue" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#8fc4ff" />
-      <stop offset="100%" stop-color="#2f7fe0" />
+      <stop offset="0%" stop-color="#95dcff" />
+      <stop offset="100%" stop-color="#29b6ff" />
     </radialGradient>
     <radialGradient id="se-purple" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#d0b4ff" />
-      <stop offset="100%" stop-color="#7a4ed0" />
+      <stop offset="0%" stop-color="#d9a8ff" />
+      <stop offset="100%" stop-color="#b14bff" />
     </radialGradient>
     <radialGradient id="se-orange" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ffc488" />
-      <stop offset="100%" stop-color="#e87a1f" />
+      <stop offset="0%" stop-color="#ffc888" />
+      <stop offset="100%" stop-color="#ff8a00" />
     </radialGradient>
+    <linearGradient id="se-bomb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff3b6b" />
+      <stop offset="33%" stop-color="#ffd400" />
+      <stop offset="66%" stop-color="#29b6ff" />
+      <stop offset="100%" stop-color="#b14bff" />
+    </linearGradient>
   </defs>
   <rect width="320" height="200" fill="url(#se-bg)" />
-
-  <!-- 5x4 board cells -->
+  <!-- Decorative confetti dots -->
+  <g opacity="0.6">
+    <circle cx="20" cy="20" r="3" fill="#ff3b6b" />
+    <circle cx="300" cy="15" r="3" fill="#25d366" />
+    <circle cx="290" cy="180" r="3" fill="#b14bff" />
+    <circle cx="15" cy="185" r="3" fill="#ffd400" />
+    <circle cx="55" cy="180" r="2" fill="#29b6ff" />
+    <circle cx="270" cy="40" r="2" fill="#ff66ce" />
+  </g>
   <g transform="translate(40,28)">
-    <g fill="#1c2027" stroke="#2f3540" stroke-width="1">
-      <rect x="0"   y="0"   width="48" height="36" rx="6" />
-      <rect x="48"  y="0"   width="48" height="36" rx="6" />
-      <rect x="96"  y="0"   width="48" height="36" rx="6" />
-      <rect x="144" y="0"   width="48" height="36" rx="6" />
-      <rect x="192" y="0"   width="48" height="36" rx="6" />
-      <rect x="0"   y="36"  width="48" height="36" rx="6" />
-      <rect x="48"  y="36"  width="48" height="36" rx="6" />
-      <rect x="96"  y="36"  width="48" height="36" rx="6" />
-      <rect x="144" y="36"  width="48" height="36" rx="6" />
-      <rect x="192" y="36"  width="48" height="36" rx="6" />
-      <rect x="0"   y="72"  width="48" height="36" rx="6" />
-      <rect x="48"  y="72"  width="48" height="36" rx="6" />
-      <rect x="96"  y="72"  width="48" height="36" rx="6" />
-      <rect x="144" y="72"  width="48" height="36" rx="6" />
-      <rect x="192" y="72"  width="48" height="36" rx="6" />
-      <rect x="0"   y="108" width="48" height="36" rx="6" />
-      <rect x="48"  y="108" width="48" height="36" rx="6" />
-      <rect x="96"  y="108" width="48" height="36" rx="6" />
-      <rect x="144" y="108" width="48" height="36" rx="6" />
-      <rect x="192" y="108" width="48" height="36" rx="6" />
+    <g fill="#ffd680" stroke="#e9a93a" stroke-width="2">
+      <rect x="0"   y="0"   width="48" height="36" rx="8" />
+      <rect x="48"  y="0"   width="48" height="36" rx="8" />
+      <rect x="96"  y="0"   width="48" height="36" rx="8" />
+      <rect x="144" y="0"   width="48" height="36" rx="8" />
+      <rect x="192" y="0"   width="48" height="36" rx="8" />
+      <rect x="0"   y="36"  width="48" height="36" rx="8" />
+      <rect x="48"  y="36"  width="48" height="36" rx="8" />
+      <rect x="96"  y="36"  width="48" height="36" rx="8" />
+      <rect x="144" y="36"  width="48" height="36" rx="8" />
+      <rect x="192" y="36"  width="48" height="36" rx="8" />
+      <rect x="0"   y="72"  width="48" height="36" rx="8" />
+      <rect x="48"  y="72"  width="48" height="36" rx="8" />
+      <rect x="96"  y="72"  width="48" height="36" rx="8" />
+      <rect x="144" y="72"  width="48" height="36" rx="8" />
+      <rect x="192" y="72"  width="48" height="36" rx="8" />
+      <rect x="0"   y="108" width="48" height="36" rx="8" />
+      <rect x="48"  y="108" width="48" height="36" rx="8" />
+      <rect x="96"  y="108" width="48" height="36" rx="8" />
+      <rect x="144" y="108" width="48" height="36" rx="8" />
+      <rect x="192" y="108" width="48" height="36" rx="8" />
     </g>
-
-    <!-- Highlight: matched horizontal row (3 reds in second row) -->
-    <g fill="none" stroke="#ff8a99" stroke-width="2" stroke-dasharray="3 3" opacity="0.7">
-      <rect x="44"  y="40" width="148" height="28" rx="14" />
+    <g fill="none" stroke="#fff" stroke-width="3" opacity="0.85" stroke-linecap="round">
+      <rect x="44" y="40" width="148" height="28" rx="14" />
     </g>
-
-    <!-- Candies (circles) -->
-    <!-- Row 0 -->
-    <circle cx="24"  cy="18"  r="13" fill="url(#se-purple)" />
-    <circle cx="72"  cy="18"  r="13" fill="url(#se-yellow)" />
-    <circle cx="120" cy="18"  r="13" fill="url(#se-blue)" />
-    <circle cx="168" cy="18"  r="13" fill="url(#se-green)" />
-    <circle cx="216" cy="18"  r="13" fill="url(#se-orange)" />
-    <!-- Row 1: the three reds about to match -->
-    <circle cx="24"  cy="54"  r="13" fill="url(#se-green)" />
-    <circle cx="72"  cy="54"  r="13" fill="url(#se-red)" />
-    <circle cx="120" cy="54"  r="13" fill="url(#se-red)" />
-    <circle cx="168" cy="54"  r="13" fill="url(#se-red)" />
-    <circle cx="216" cy="54"  r="13" fill="url(#se-blue)" />
-    <!-- Row 2 -->
-    <circle cx="24"  cy="90"  r="13" fill="url(#se-yellow)" />
-    <circle cx="72"  cy="90"  r="13" fill="url(#se-purple)" />
-    <circle cx="120" cy="90"  r="13" fill="url(#se-orange)" />
-    <circle cx="168" cy="90"  r="13" fill="url(#se-yellow)" />
-    <circle cx="216" cy="90"  r="13" fill="url(#se-green)" />
-    <!-- Row 3 -->
-    <circle cx="24"  cy="126" r="13" fill="url(#se-blue)" />
-    <circle cx="72"  cy="126" r="13" fill="url(#se-orange)" />
-    <circle cx="120" cy="126" r="13" fill="url(#se-green)" />
-    <circle cx="168" cy="126" r="13" fill="url(#se-purple)" />
-    <circle cx="216" cy="126" r="13" fill="url(#se-red)" />
+    <circle cx="24"  cy="18"  r="14" fill="url(#se-purple)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="72"  cy="18"  r="14" fill="url(#se-yellow)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="120" cy="18"  r="14" fill="url(#se-blue)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="168" cy="18"  r="14" fill="url(#se-green)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="216" cy="18"  r="14" fill="url(#se-bomb)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="24"  cy="54"  r="14" fill="url(#se-green)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="72"  cy="54"  r="14" fill="url(#se-red)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="120" cy="54"  r="14" fill="url(#se-red)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="168" cy="54"  r="14" fill="url(#se-red)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="216" cy="54"  r="14" fill="url(#se-blue)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="24"  cy="90"  r="14" fill="url(#se-yellow)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="72"  cy="90"  r="14" fill="url(#se-purple)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="120" cy="90"  r="14" fill="url(#se-orange)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="168" cy="90"  r="14" fill="url(#se-yellow)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="216" cy="90"  r="14" fill="url(#se-green)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="24"  cy="126" r="14" fill="url(#se-blue)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="72"  cy="126" r="14" fill="url(#se-orange)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="120" cy="126" r="14" fill="url(#se-green)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="168" cy="126" r="14" fill="url(#se-purple)" stroke="#2a1b0d" stroke-width="1.5" />
+    <circle cx="216" cy="126" r="14" fill="url(#se-red)" stroke="#2a1b0d" stroke-width="1.5" />
+  </g>
+  <!-- Star sparkles -->
+  <g fill="#ffd400" stroke="#b48400" stroke-width="1">
+    <polygon points="280,170 284,158 288,170 300,174 288,178 284,190 280,178 268,174" />
   </g>
 </svg>
