@@ -113,5 +113,5 @@ export function getMissionProgress(): MissionProgress {
 }
 
 export function isMissionComplete(): boolean {
-  return getMissionProgress().done && state.score >= (active?.scoreTarget ?? 0);
+  return getMissionProgress().done;
 }
