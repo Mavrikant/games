@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Buz Kayağı">
+  <defs>
+    <linearGradient id="bk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16213a" />
+      <stop offset="100%" stop-color="#0a0e1a" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bk-bg)" />
+  <g transform="translate(64,28)">
+    <!-- Ice field: 8 cols x 4 rows of 24px cells -->
+    <g>
+      <rect x="0" y="0" width="192" height="96" fill="#22304a" />
+      <rect x="24" y="0" width="24" height="24" fill="#1b2740" />
+      <rect x="72" y="0" width="24" height="24" fill="#1b2740" />
+      <rect x="120" y="0" width="24" height="24" fill="#1b2740" />
+      <rect x="168" y="0" width="24" height="24" fill="#1b2740" />
+      <rect x="0" y="24" width="24" height="24" fill="#1b2740" />
+      <rect x="48" y="24" width="24" height="24" fill="#1b2740" />
+      <rect x="96" y="24" width="24" height="24" fill="#1b2740" />
+      <rect x="144" y="24" width="24" height="24" fill="#1b2740" />
+      <rect x="24" y="48" width="24" height="24" fill="#1b2740" />
+      <rect x="72" y="48" width="24" height="24" fill="#1b2740" />
+      <rect x="120" y="48" width="24" height="24" fill="#1b2740" />
+      <rect x="168" y="48" width="24" height="24" fill="#1b2740" />
+      <rect x="0" y="72" width="24" height="24" fill="#1b2740" />
+      <rect x="48" y="72" width="24" height="24" fill="#1b2740" />
+      <rect x="96" y="72" width="24" height="24" fill="#1b2740" />
+      <rect x="144" y="72" width="24" height="24" fill="#1b2740" />
+    </g>
+    <!-- Walls / blocks -->
+    <g fill="#0d1426" stroke="rgba(255,255,255,0.05)" stroke-width="0.8">
+      <rect x="72" y="48" width="24" height="24" />
+      <rect x="120" y="0" width="24" height="24" />
+    </g>
+    <!-- Slide path arrow -->
+    <path d="M24 84 L168 84 L168 36" fill="none" stroke="#0ea5e9" stroke-width="3"
+      stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 7" opacity="0.85" />
+    <!-- Crystals -->
+    <g fill="#38bdf8" stroke="rgba(255,255,255,0.65)" stroke-width="1">
+      <path d="M84,72 L90,84 L84,96 L78,84 Z" />
+      <path d="M180,48 L186,60 L180,72 L174,60 Z" />
+    </g>
+    <!-- Exit (active) -->
+    <g transform="translate(156,12)">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="#34d399" stroke-width="2.5" />
+      <circle cx="12" cy="12" r="4.5" fill="#34d399" fill-opacity="0.3" stroke="#34d399" stroke-width="1.5" />
+    </g>
+    <!-- Skater -->
+    <g transform="translate(12,72)">
+      <circle cx="12" cy="12" r="9" fill="#f8fafc" stroke="#0ea5e9" stroke-width="2" />
+      <circle cx="8.5" cy="10.5" r="1.2" fill="#0ea5e9" />
+      <circle cx="15.5" cy="10.5" r="1.2" fill="#0ea5e9" />
+    </g>
+  </g>
+  <text x="20" y="178" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Buz Kayağı</text>
+  <text x="104" y="178" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="500" fill="#5a6473">kayan buz bulmacası</text>
+</svg>

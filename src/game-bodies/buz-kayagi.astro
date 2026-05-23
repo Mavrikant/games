@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Seviye<span id="level">1/10</span></div>
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">Kristal<span id="gems">0/0</span></div>
+  <div class="hud__stat">En iyi<span id="best">—</span></div>
+</header>
+<div class="bk-actions" role="group" aria-label="Aksiyonlar">
+  <button id="undo" class="hud__btn bk-actions__btn" type="button" aria-label="Son hamleyi geri al">
+    <span aria-hidden="true">↶</span> Geri al
+  </button>
+  <button id="restart" class="hud__btn bk-actions__btn" type="button" aria-label="Seviyeyi sıfırla">
+    Sıfırla
+  </button>
+  <button id="next" class="hud__btn bk-actions__btn" type="button" aria-label="Sonraki seviyeye geç">
+    Sonraki →
+  </button>
+</div>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Buz Kayağı oyun alanı"></canvas>
+  <div id="overlay" class="bk-overlay bk-overlay--hidden" aria-hidden="true">
+    <div class="bk-overlay__inner">
+      <h2 id="overlay-title">Seviye tamam!</h2>
+      <p id="overlay-msg">Tüm kristaller toplandı.</p>
+      <button id="overlay-next" class="hud__btn bk-overlay__btn" type="button">Sonraki seviye</button>
+    </div>
+  </div>
+</div>
+<div class="bk-touch" role="group" aria-label="Kaydırma yönü">
+  <button class="bk-touch__btn bk-touch__btn--up" data-dir="up" aria-label="Yukarı kay" type="button">↑</button>
+  <button class="bk-touch__btn bk-touch__btn--left" data-dir="left" aria-label="Sola kay" type="button">←</button>
+  <button class="bk-touch__btn bk-touch__btn--down" data-dir="down" aria-label="Aşağı kay" type="button">↓</button>
+  <button class="bk-touch__btn bk-touch__btn--right" data-dir="right" aria-label="Sağa kay" type="button">→</button>
+</div>
