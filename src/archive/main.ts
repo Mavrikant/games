@@ -24,6 +24,17 @@ const state: State = {
   playingSlug: null,
 };
 
+// Plausible is loaded by BaseLayout when PUBLIC_PLAUSIBLE_SCRIPT_ID is set;
+// noop if the script is absent. We never send raw user input (e.g. the
+// search query) — only the fact that the feature was used.
+type PlausibleProps = Record<string, string | number | boolean>;
+function track(event: string, props?: PlausibleProps): void {
+  const fn = (window as unknown as { plausible?: (e: string, o?: { props: PlausibleProps }) => void }).plausible;
+  if (typeof fn === 'function') {
+    fn(event, props ? { props } : undefined);
+  }
+}
+
 const app = document.querySelector<HTMLElement>('#app')!;
 const player = document.querySelector<HTMLElement>('#player')!;
 const playerFrame = document.querySelector<HTMLIFrameElement>('#player-frame')!;
@@ -142,6 +153,7 @@ function openGame(slug: string): void {
     return;
   }
   state.playingSlug = slug;
+  track('Game Start', { slug });
   // Clear any blank srcdoc left by the previous closeGame() so src takes effect.
   playerFrame.removeAttribute('srcdoc');
   playerFrame.src = game.url;
@@ -201,11 +213,24 @@ tagsEl.addEventListener('click', (e) => {
   state.activeTag = tag === '' ? null : tag;
   renderTags();
   applyFilters();
+  if (tag) track('Tag Filter', { tag });
 });
 
+// Debounce search-used event so we don't fire on every keystroke. We don't
+// send the query text, only the fact a non-empty search was performed.
+let searchEventTimer: number | undefined;
+let lastReportedSearch = '';
 searchEl.addEventListener('input', () => {
   state.query = searchEl.value;
   applyFilters();
+  if (searchEventTimer !== undefined) clearTimeout(searchEventTimer);
+  searchEventTimer = window.setTimeout(() => {
+    const trimmed = state.query.trim();
+    if (trimmed.length >= 2 && trimmed !== lastReportedSearch) {
+      lastReportedSearch = trimmed;
+      track('Search Used');
+    }
+  }, 800);
 });
 
 sortEl.addEventListener('change', () => {
