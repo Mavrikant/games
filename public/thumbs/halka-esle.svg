@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Halka Eşle">
+  <defs>
+    <linearGradient id="he-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d111c" />
+      <stop offset="100%" stop-color="#070910" />
+    </linearGradient>
+    <linearGradient id="he-r" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="100%" stop-color="#e11d48" />
+    </linearGradient>
+    <linearGradient id="he-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+    <linearGradient id="he-b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="he-y" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcd34d" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="he-p" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="200" rx="14" fill="url(#he-bg)" />
+  <rect x="1" y="1" width="318" height="198" rx="13" stroke="#171a21" fill="none" />
+
+  <!-- 5×5 grid centered, with arrow gutters -->
+  <g transform="translate(100,30)">
+    <!-- top arrows (down ↓) -->
+    <g fill="#5a6373" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" text-anchor="middle">
+      <text x="12" y="10">↓</text>
+      <text x="36" y="10">↓</text>
+      <text x="60" y="10">↓</text>
+      <text x="84" y="10">↓</text>
+      <text x="108" y="10">↓</text>
+    </g>
+    <!-- bottom arrows (up ↑) -->
+    <g fill="#5a6373" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" text-anchor="middle">
+      <text x="12" y="148">↑</text>
+      <text x="36" y="148">↑</text>
+      <text x="60" y="148">↑</text>
+      <text x="84" y="148">↑</text>
+      <text x="108" y="148">↑</text>
+    </g>
+    <!-- left arrows (right →) -->
+    <g fill="#5a6373" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" text-anchor="middle">
+      <text x="-12" y="28">→</text>
+      <text x="-12" y="52">→</text>
+      <text x="-12" y="76">→</text>
+      <text x="-12" y="100">→</text>
+      <text x="-12" y="124">→</text>
+    </g>
+    <!-- right arrows (left ←) -->
+    <g fill="#5a6373" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" text-anchor="middle">
+      <text x="132" y="28">←</text>
+      <text x="132" y="52">←</text>
+      <text x="132" y="76">←</text>
+      <text x="132" y="100">←</text>
+      <text x="132" y="124">←</text>
+    </g>
+
+    <!-- highlighted shifting row -->
+    <rect x="0" y="66" width="120" height="20" fill="rgba(244,63,94,0.10)" rx="3" />
+
+    <!-- tiles (5x5) -->
+    <!-- row 0 -->
+    <rect x="2"  y="18" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <rect x="26" y="18" width="20" height="20" rx="4" fill="url(#he-b)" />
+    <rect x="50" y="18" width="20" height="20" rx="4" fill="url(#he-y)" />
+    <rect x="74" y="18" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="98" y="18" width="20" height="20" rx="4" fill="url(#he-p)" />
+    <!-- row 1 -->
+    <rect x="2"  y="42" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="26" y="42" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <rect x="50" y="42" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <rect x="74" y="42" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <rect x="98" y="42" width="20" height="20" rx="4" fill="url(#he-b)" />
+    <!-- row 2 (the shifting/match row) -->
+    <rect x="2"  y="66" width="20" height="20" rx="4" fill="url(#he-y)" />
+    <rect x="26" y="66" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="50" y="66" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="74" y="66" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="98" y="66" width="20" height="20" rx="4" fill="url(#he-p)" />
+    <!-- row 3 -->
+    <rect x="2"  y="90" width="20" height="20" rx="4" fill="url(#he-b)" />
+    <rect x="26" y="90" width="20" height="20" rx="4" fill="url(#he-p)" />
+    <rect x="50" y="90" width="20" height="20" rx="4" fill="url(#he-y)" />
+    <rect x="74" y="90" width="20" height="20" rx="4" fill="url(#he-y)" />
+    <rect x="98" y="90" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <!-- row 4 -->
+    <rect x="2"  y="114" width="20" height="20" rx="4" fill="url(#he-r)" />
+    <rect x="26" y="114" width="20" height="20" rx="4" fill="url(#he-y)" />
+    <rect x="50" y="114" width="20" height="20" rx="4" fill="url(#he-b)" />
+    <rect x="74" y="114" width="20" height="20" rx="4" fill="url(#he-g)" />
+    <rect x="98" y="114" width="20" height="20" rx="4" fill="url(#he-b)" />
+
+    <!-- toroidal wrap indicator: dotted curve from right edge looping to left -->
+    <path d="M 124,76 Q 138,76 138,52 Q 138,28 -4,28 Q -18,28 -18,76"
+          fill="none" stroke="rgba(244,63,94,0.55)" stroke-width="1.2" stroke-dasharray="2 3" />
+  </g>
+
+  <!-- title -->
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="800" fill="#e4e4ed">Halka Eşle</text>
+  <text x="20" y="50" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" fill="#8892a6" letter-spacing="0.04em">TOROİDAL MATCH-3</text>
+
+  <!-- level indicator -->
+  <g transform="translate(20,160)">
+    <rect x="0" y="0" width="56" height="22" rx="6" fill="#11151f" stroke="#1d2230" />
+    <text x="28" y="15" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e4e4ed" text-anchor="middle">100 LEVEL</text>
+  </g>
+
+  <text x="300" y="194" text-anchor="end" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600" fill="#5a6473" letter-spacing="0.05em">BULMACA · RENK</text>
+</svg>

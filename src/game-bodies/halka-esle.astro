@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score he-stat">Level<span id="level-display">1</span><span class="he-total">/<span id="level-total">100</span></span></div>
+  <div class="hud__score he-stat">Hamle<span id="moves-left">0</span></div>
+  <div class="hud__score he-stat he-stat--obj">Hedef<span id="objective">—</span></div>
+  <button id="restart" class="hud__btn" type="button" aria-label="Level'ı sıfırla">Sıfırla</button>
+  <button id="level-select-btn" class="hud__btn" type="button" aria-label="Level seç">Level seç</button>
+</header>
+
+<div class="board-wrap" id="board-wrap">
+  <div id="board" class="he-board" role="grid" aria-label="Halka Eşle tahtası"></div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Halka Eşle</h2>
+      <p id="overlay-msg">Kenardaki oklarla satır/sütunu kaydır. 3+ aynı renk eşle. Her tile uçtan uca wrap olur — bu klasik match-3 değil.</p>
+      <button id="overlay-action" class="he-overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+
+<section id="level-select" class="he-modal overlay--hidden" aria-hidden="true" aria-label="Level seçici">
+  <div class="he-modal__inner">
+    <div class="he-modal__head">
+      <h3>Level seç</h3>
+      <button id="level-close" class="he-modal__close" type="button" aria-label="Kapat">✕</button>
+    </div>
+    <p class="he-modal__hint" id="level-progress-hint">İlerleme: 0 / 100</p>
+    <div id="level-grid" class="he-level-grid" role="list"></div>
+  </div>
+</section>
