@@ -1,0 +1,9 @@
+{
+  "title": "Yangın Hattı",
+  "description": "Orman yangınını söndüremezsin — sadece çevreleyebilirsin. Her tur ağaçları keserek hat aç, sonra alevin bir adım yayılmasına izin ver. Köyü kurtar, ormandan ne kalırsa skorun.",
+  "dateAdded": "2026-05-23",
+  "tags": ["puzzle","strateji","özgün","tek-oyunculu"],
+  "controls": "Tıkla: ağaç kes (hat aç) · Boşluk/Enter: turu ilerlet (alev yayılır) · R: sıfırla",
+  "thumbnail": "yangin-hatti.svg",
+  "howToPlay": "Bir orman yangını başladı ve onu söndürmek elinde değil — yapabileceğin tek şey önüne geçip çevrelemek. Tahta ağaçlarla (yeşil) dolu; bir köşede korumak zorunda olduğun mavi köy (4 ev), karşı köşede ise turuncu alev var. Oyun sıra tabanlı: önce planlarsın, sonra alevin yayılmasına izin verirsin. Her tur 4 'kazma' hakkın var; yeşil bir kareye tıklayınca o ağacı kesip yanmayan bir yangın hattına (kahverengi) çevirirsin. Aynı tur içinde yanlış yere açtığın hattı tekrar tıklayıp geri alabilirsin (hak iade olur). Hazır olduğunda Boşluk'a basar ya da 'İlerlet' düğmesine tıklarsın: alev, kendisine dik komşu olan tüm ağaçlara ve evlere aynı anda bir kare sıçrar. Bir sonraki turda nereye sıçrayacağını turuncu çerçeveli kareler önceden gösterir — hattını bu uyarıya göre kur. Alev yalnızca yangın hattı, doğal açıklık (gri) veya tahtanın kenarı tarafından durdurulur; bu engellerle alevi tamamen kuşatırsan 'çevrelendi' sayılır ve tur biter. Amaç ikili: hiçbir evin yanmaması (bir ev tutuşursa köy yanar, oyun biter) ve oyun bittiğinde mümkün olduğunca çok yeşil ağacın ayakta kalması. Dikkat: açtığın her hat da bir ağaca mâl olur, yani gereğinden fazla kesmek de skorunu düşürür — dar ve akıllı bir hat, geniş bir hattan daha iyidir. Skorun bittiğinde kalan ağaç sayısıdır; en yükseği tarayıcında saklanır. R her şeyi sıfırlar ve yeni bir rastgele harita üretir. İpucu: alevi açık alanda kuşatmaya çalışma — onu tahtanın kenarına veya doğal açıklıklara doğru yönlendir ki daha kısa bir hatla kapatabilesin."
+}

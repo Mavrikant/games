@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Ağaç<span id="trees">0</span></div>
+  <div class="hud__score">Kazma<span id="digs">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="384" aria-label="Yangın Hattı oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Yangın Hattı</h2>
+      <p id="overlay-msg"></p>
+      <button id="overlay-btn" class="hud__btn yh-overlay-btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<button id="advance" class="hud__btn yh-advance" type="button">İlerlet ▶ (alev yayılır)</button>
