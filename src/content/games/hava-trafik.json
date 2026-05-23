@@ -1,0 +1,9 @@
+{
+  "title": "Hava Trafik",
+  "description": "Radar ekranındaki uçaklara parmağınla rota çiz; her uçağı kendi rengindeki piste indir, çarpışmadan kaçın.",
+  "dateAdded": "2026-05-23",
+  "tags": ["strateji", "refleks", "tek-oyunculu"],
+  "controls": "Fare/dokunma: bir uçağa dokun ve sürükleyerek rota çiz · R: yeniden başla",
+  "howToPlay": "Sen bir hava trafik kontrolörüsün. Radar ekranının kenarlarından sürekli yeni uçaklar belirir; her uçak bir renge sahiptir ve aynı renkteki pist kapısına (ekran kenarındaki halkalar) inmek zorundadır. Bir uçağa dokunup parmağını (ya da fareyi basılı tutup) sürükleyerek o uçağın izleyeceği rotayı çizersin: uçak çizdiğin yolu takip eder, yol bitince son yönünde düz uçmaya devam eder. Doğru renkteki kapıya ulaşan uçak iner ve skorun bir artar. İstediğin zaman yeni bir rota çizerek uçağın yönünü değiştirebilirsin. Tek kural: hiçbir iki uçak birbirine değmemeli — çarpışma olduğu an oyun biter. Skor arttıkça uçaklar daha sık gelir, bu yüzden rotaları çakışmayacak şekilde önceden planla; uçakları farklı yüksekliklere değil, farklı yollara ayırarak düşün. Yanlış kapının üzerinden geçmek zararsızdır, uçak sadece iner değil üstünden uçar; ekrandan dışarı çıkan uçak ise sessizce kaybolur (puan kaybı yok ama fırsat kaçar). En yüksek skorun tarayıcında saklanır. Başlamak ya da çarpışmadan sonra yeniden başlamak için ekrana dokunman yeterli; R tuşu veya 'Yeniden başla' düğmesi de turu sıfırlar.",
+  "thumbnail": "hava-trafik.svg"
+}
