@@ -685,7 +685,7 @@
   background: linear-gradient(180deg, #fff, #c19eff);
   border-color: var(--se-candy-4);
 }
-.level-card--boss .level-card__num::after {
+.level-card--boss:not(.level-card--locked) .level-card__num::after {
   content: ' 👑';
 }
 
