@@ -1,0 +1,8 @@
+{
+  "title": "Şeker Eşle",
+  "description": "8×8 ızgarada renkli şekerleri komşusuyla değiş tokuş ederek 3+ eşleşmeler yarat; her seviye atladıkça oyun zorlaşır, kaybedersen bir önceki seviyeye düşersin.",
+  "dateAdded": "2026-05-23",
+  "tags": ["puzzle", "eşleştirme", "seviye"],
+  "controls": "Bir şekere tıkla → yan komşusuna tıkla",
+  "thumbnail": "seker-esle.svg"
+}

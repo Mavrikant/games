@@ -1,0 +1,42 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__scores">
+    <div class="score-box">
+      <span class="score-box__label">Seviye</span>
+      <span id="level" class="score-box__value">1</span>
+    </div>
+    <div class="score-box">
+      <span class="score-box__label">Hedef</span>
+      <span id="target" class="score-box__value">350</span>
+    </div>
+    <div class="score-box">
+      <span class="score-box__label">Skor</span>
+      <span id="score" class="score-box__value">0</span>
+    </div>
+    <div class="score-box">
+      <span class="score-box__label">Hamle</span>
+      <span id="moves" class="score-box__value">22</span>
+    </div>
+    <div class="score-box">
+      <span class="score-box__label">En yüksek</span>
+      <span id="best" class="score-box__value">1</span>
+    </div>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board" class="board" role="grid" aria-label="Şeker Eşle tahtası">
+  <div class="board__bg">
+    {Array.from({ length: 64 }, () => <div class="board__cell"></div>)}
+  </div>
+  <div id="tiles" class="board__tiles"></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__title" id="overlay-title">Seviye tamam!</div>
+    <div class="overlay__msg" id="overlay-msg">Sonraki seviyeye geç.</div>
+    <button id="overlay-btn" class="hud__btn" type="button">Devam</button>
+  </div>
+</div>
+
+<p class="caption">Bir şekere tıkla, sonra yan komşusuna tıkla — 3+ aynı renk patlar.</p>
