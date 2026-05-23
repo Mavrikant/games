@@ -1,0 +1,9 @@
+{
+  "title": "Ayna İkizler",
+  "description": "Tek tuşla iki ikizi yönet — turuncu ikiz yatayda ters hareket eder. İkisini de aynı anda hedefe ulaştır.",
+  "dateAdded": "2026-05-23",
+  "tags": ["puzzle", "mantık", "orijinal"],
+  "controls": "Ok tuşları / WASD: ikizleri oynat · Z: geri al · R: seviyeyi sıfırla",
+  "thumbnail": "ayna-ikizler.svg",
+  "howToPlay": "Tahtada iki ikiz var: mavi ve turuncu. Tek bir yön tuşuna bastığında ikisi de aynı anda hareket eder, ama bir aynanın iki yanındaymış gibi: mavi ikiz bastığın yöne giderken turuncu ikizin yatay ekseni terstir — sen sağa basınca mavi sağa, turuncu sola gider; sola basınca tam tersi olur. Yukarı ve aşağı hareketlerde ise ikisi de aynı yöne gider. Amacın her iki ikizi de kendi renkli hedef karesine aynı anda oturtmak; iki ikiz de hedefindeyken seviye tamamlanır. Duvarlar işin püf noktası: bir ikiz duvara ya da tahtanın kenarına dayandığında o hamlede yerinde kalır, diğeri hareketine devam eder — ikizleri bu şekilde birbirinden ayırarak ayna simetrisini kırar ve ikisini farklı yerlere yönlendirirsin. Ok tuşları veya WASD ile oyna, mobilde alttaki yön düğmelerini kullan. Yanlış hamle yaparsan Z ile geri al, çıkmaza girersen R ile seviyeyi sıfırla. Her seviyeyi en az hamlede çözmeye çalış; en iyi derecen rekor olarak saklanır."
+}

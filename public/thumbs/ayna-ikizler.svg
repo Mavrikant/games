@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Ayna İkizler">
+  <defs>
+    <linearGradient id="ai-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15171f" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <radialGradient id="ai-blue" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#8fc4ff" />
+      <stop offset="100%" stop-color="#2f7fe0" />
+    </radialGradient>
+    <radialGradient id="ai-orange" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ffc488" />
+      <stop offset="100%" stop-color="#e87a1f" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ai-bg)" />
+
+  <!-- Mirror line down the middle -->
+  <line x1="160" y1="24" x2="160" y2="176" stroke="#3a4256" stroke-width="2" stroke-dasharray="6 6" />
+
+  <!-- Grid -->
+  <g transform="translate(40,44)">
+    <g fill="#1c2027" stroke="#2f3540" stroke-width="1">
+      <rect x="0"   y="0"  width="40" height="40" />
+      <rect x="40"  y="0"  width="40" height="40" />
+      <rect x="80"  y="0"  width="40" height="40" />
+      <rect x="120" y="0"  width="40" height="40" />
+      <rect x="160" y="0"  width="40" height="40" />
+      <rect x="200" y="0"  width="40" height="40" />
+      <rect x="0"   y="40" width="40" height="40" />
+      <rect x="40"  y="40" width="40" height="40" />
+      <rect x="80"  y="40" width="40" height="40" />
+      <rect x="120" y="40" width="40" height="40" />
+      <rect x="160" y="40" width="40" height="40" />
+      <rect x="200" y="40" width="40" height="40" />
+    </g>
+
+    <!-- Goal rings -->
+    <rect x="200" y="0"  width="40" height="40" fill="none" stroke="#4a9eff" stroke-width="3" rx="6" />
+    <rect x="0"   y="40" width="40" height="40" fill="none" stroke="#ff9d4a" stroke-width="3" rx="6" />
+
+    <!-- Twins -->
+    <circle cx="20"  cy="20" r="14" fill="url(#ai-blue)" />
+    <circle cx="220" cy="60" r="14" fill="url(#ai-orange)" />
+
+    <!-- Opposite-direction arrows -->
+    <g stroke="#98a0ad" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <path d="M44,20 L60,20 M55,15 L60,20 L55,25" />
+      <path d="M196,60 L180,60 M185,55 L180,60 L185,65" />
+    </g>
+  </g>
+</svg>

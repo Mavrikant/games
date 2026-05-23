@@ -1,0 +1,207 @@
+/*
+ * Per-game styles. The scaffold ships with the standard board-wrap +
+ * overlay positioning that @shared/overlay's helpers expect; do not
+ * delete these unless your game has no overlay at all. The helper sets
+ * the `.overlay--hidden` class and aria-hidden, but the visual effect
+ * (opacity 0 + pointer-events none) comes from CSS — without these
+ * rules, hideOverlay() does nothing visible.  pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.ai-board {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.ai-cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+  background: var(--surface-2);
+  border-radius: 7px;
+}
+
+.ai-cell--wall {
+  background: var(--surface-3);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+
+.ai-cell--goal-blue {
+  box-shadow: inset 0 0 0 2px #4a9eff;
+}
+
+.ai-cell--goal-orange {
+  box-shadow: inset 0 0 0 2px #ff9d4a;
+}
+
+.ai-cell--goal-blue.ai-cell--goal-orange {
+  box-shadow:
+    inset 0 0 0 2px #4a9eff,
+    inset 0 0 0 4px #ff9d4a;
+}
+
+.ai-twin {
+  width: 62%;
+  height: 62%;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  transition: transform 0.08s ease-out;
+}
+
+.ai-twin--blue {
+  background: radial-gradient(circle at 35% 30%, #8fc4ff, #2f7fe0);
+}
+
+.ai-twin--orange {
+  background: radial-gradient(circle at 35% 30%, #ffc488, #e87a1f);
+}
+
+.ai-twin--home {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Two twins sharing one cell sit side by side instead of stacking. */
+.ai-cell .ai-twin + .ai-twin {
+  width: 44%;
+  height: 44%;
+}
+.ai-cell .ai-twin:only-child {
+  width: 62%;
+  height: 62%;
+}
+.ai-cell .ai-twin:first-child:not(:only-child) {
+  width: 44%;
+  height: 44%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.ai-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px auto 0;
+}
+
+.ai-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  grid-template-rows: repeat(2, 52px);
+  gap: 6px;
+}
+
+.ai-key {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.ai-key:active {
+  background: var(--accent-soft);
+}
+
+.ai-key--up {
+  grid-column: 2;
+  grid-row: 1;
+}
+.ai-key--left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.ai-key--down {
+  grid-column: 2;
+  grid-row: 2;
+}
+.ai-key--right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.ai-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

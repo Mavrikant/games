@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1 / 6</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <div class="hud__score">Rekor<span id="best">—</span></div>
+</header>
+
+<div class="board-wrap">
+  <div id="board" class="ai-board" role="grid" aria-label="Ayna İkizler tahtası"></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="ov-title">Seviye tamam!</h2>
+      <p id="ov-text"></p>
+      <button id="ov-btn" class="hud__btn" type="button">Sonraki seviye</button>
+    </div>
+  </div>
+</div>
+
+<div class="ai-controls">
+  <div class="ai-dpad" aria-label="Yön tuşları">
+    <button class="ai-key ai-key--up" data-dir="up" type="button" aria-label="Yukarı">↑</button>
+    <button class="ai-key ai-key--left" data-dir="left" type="button" aria-label="Sol">←</button>
+    <button class="ai-key ai-key--down" data-dir="down" type="button" aria-label="Aşağı">↓</button>
+    <button class="ai-key ai-key--right" data-dir="right" type="button" aria-label="Sağ">→</button>
+  </div>
+  <div class="ai-actions">
+    <button id="undo" class="hud__btn" type="button">Geri al</button>
+    <button id="reset" class="hud__btn" type="button">Sıfırla</button>
+  </div>
+</div>
