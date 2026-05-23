@@ -29,12 +29,23 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).hre
   <main class="stage">
     <h1 class="stage__title">{heading} <span class="stage__title-sub">— ücretsiz tarayıcı oyunu</span></h1>
     <slot />
-    {controls && <p class="hint">{controls}</p>}
+    {description && (
+      <p class="stage__intro">{description}</p>
+    )}
+    {controls && (
+      <section class="info-block" aria-labelledby="controls-heading">
+        <h2 id="controls-heading" class="info-block__heading">Kontroller</h2>
+        <p class="hint">{controls}</p>
+      </section>
+    )}
     {howToPlay && (
-      <details class="howto">
-        <summary>Nasıl oynanır?</summary>
-        <p>{howToPlay}</p>
-      </details>
+      <section class="info-block" aria-labelledby="howto-heading">
+        <h2 id="howto-heading" class="info-block__heading">Nasıl oynanır?</h2>
+        <details class="howto">
+          <summary>İpuçları ve detaylı strateji</summary>
+          <p>{howToPlay}</p>
+        </details>
+      </section>
     )}
     <div class="stage__actions">
       <ShareButton url={shareUrl} title={title} text={description} />
@@ -62,6 +73,29 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).hre
     color: var(--text-muted);
     font-weight: 400;
     font-size: 14px;
+  }
+  .stage__intro {
+    margin: 8px auto 0;
+    max-width: 640px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 16px;
+  }
+  .info-block {
+    margin: 16px auto 0;
+    max-width: 640px;
+    padding: 0 16px;
+  }
+  .info-block__heading {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-align: center;
   }
   @media (max-width: 480px) {
     .stage__title-sub {
