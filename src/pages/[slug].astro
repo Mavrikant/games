@@ -74,6 +74,57 @@ const gameSchema = {
     priceCurrency: 'USD',
   },
 };
+
+const faqAnswerHowToPlay =
+  game.data.howToPlay ??
+  `${game.data.title} oyununu açtığında oyun otomatik olarak başlar. ${game.data.controls ? 'Kontroller: ' + game.data.controls : 'Ekrandaki yönlendirmeleri takip et.'}`;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: `${game.data.title} nasıl oynanır?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faqAnswerHowToPlay,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `${game.data.title} ücretsiz mi?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Evet, ${game.data.title} tamamen ücretsizdir. Hiçbir ödeme, abonelik veya satın alma gerekmez. Tarayıcında doğrudan oynayabilirsin.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `${game.data.title} oynamak için hesap açmam gerekir mi?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Hayır. Kayıt yok, giriş yok, e-posta istenmez. Sayfayı aç ve hemen oyna. Skorların tarayıcının yerel depolamasında saklanır, hiçbir sunucuya gönderilmez.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `${game.data.title} mobil cihazda çalışır mı?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Evet. Oyun mobil tarayıcılarda (Safari, Chrome) çalışacak şekilde tasarlanmıştır. Dokunmatik kontroller desteklenir; tablet ve telefondan da rahatça oynayabilirsin.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `${game.data.title} indirmek gerekir mi?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Hayır, hiçbir indirme veya kurulum gerekmez. Oyun tamamen tarayıcıda çalışır. İstersen sayfayı ana ekranına ekleyip uygulama gibi de kullanabilirsin.',
+      },
+    },
+  ],
+};
 ---
 
 <GameLayout
@@ -89,6 +140,11 @@ const gameSchema = {
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(gameSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(faqSchema)}
     />
   </Fragment>
   <Body />
