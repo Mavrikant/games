@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Tersine">
+  <rect width="480" height="300" fill="#0e1016"/>
+  <g transform="translate(165 30)">
+    <rect x="0"   y="0"   width="44" height="44" rx="10" fill="hsl(0 70% 55%)"/>
+    <rect x="53"  y="0"   width="44" height="44" rx="10" fill="hsl(35 70% 55%)"/>
+    <rect x="106" y="0"   width="44" height="44" rx="10" fill="hsl(130 60% 48%)"/>
+    <rect x="0"   y="53"  width="44" height="44" rx="10" fill="hsl(190 70% 55%)"/>
+    <rect x="53"  y="53"  width="44" height="44" rx="10" fill="hsl(265 60% 60%)"/>
+    <rect x="106" y="53"  width="44" height="44" rx="10" fill="hsl(320 65% 58%)"/>
+    <rect x="0"   y="106" width="44" height="44" rx="10" fill="hsl(55 75% 55%)"/>
+    <rect x="53"  y="106" width="44" height="44" rx="10" fill="hsl(160 60% 48%)"/>
+    <rect x="106" y="106" width="44" height="44" rx="10" fill="hsl(230 65% 60%)"/>
+  </g>
+  <g fill="none" stroke="#e7e9ee" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 230 a90 60 0 1 1 180 0"/>
+    <path d="M150 230 l-18 -26 m18 26 l28 -14"/>
+  </g>
+  <text x="240" y="278" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#e7e9ee">Tersine</text>
+</svg>

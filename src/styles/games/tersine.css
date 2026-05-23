@@ -1,0 +1,144 @@
+/* Per-game styles for Tersine (reverse-recall pad grid). */
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.ters-status {
+  text-align: center;
+  margin: 0 auto 14px;
+  min-height: 1.4em;
+  font-size: 14px;
+  color: var(--text-dim, #aab);
+  letter-spacing: 0.02em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.ters-pads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ters-pad {
+  --pad-hue: 200;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--border, #2a2d36);
+  border-radius: 16px;
+  background: hsl(var(--pad-hue) 32% 17%);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.12s ease,
+    background 0.1s ease,
+    filter 0.1s ease;
+}
+
+.ters-pad:nth-child(1) {
+  --pad-hue: 0;
+}
+.ters-pad:nth-child(2) {
+  --pad-hue: 35;
+}
+.ters-pad:nth-child(3) {
+  --pad-hue: 130;
+}
+.ters-pad:nth-child(4) {
+  --pad-hue: 190;
+}
+.ters-pad:nth-child(5) {
+  --pad-hue: 265;
+}
+.ters-pad:nth-child(6) {
+  --pad-hue: 320;
+}
+.ters-pad:nth-child(7) {
+  --pad-hue: 55;
+}
+.ters-pad:nth-child(8) {
+  --pad-hue: 160;
+}
+.ters-pad:nth-child(9) {
+  --pad-hue: 230;
+}
+
+.ters-pad:active {
+  transform: scale(0.96);
+}
+
+.ters-pad--lit {
+  background: hsl(var(--pad-hue) 85% 60%);
+  box-shadow: 0 0 22px hsl(var(--pad-hue) 90% 60% / 0.75);
+  filter: brightness(1.1);
+}
+
+.ters-pad--good {
+  background: hsl(142 68% 48%);
+  box-shadow: 0 0 22px hsl(142 80% 52% / 0.8);
+}
+
+.ters-pad--bad {
+  background: hsl(2 76% 52%);
+  box-shadow: 0 0 22px hsl(2 86% 55% / 0.8);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 16px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}

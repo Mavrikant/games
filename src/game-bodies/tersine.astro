@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Tur<span id="round">1</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div id="status" class="ters-status" aria-live="polite">Başlamak için Başla'ya bas</div>
+<div class="board-wrap">
+  <div id="pads" class="ters-pads" role="grid" aria-label="Tersine pad ızgarası">
+    {Array.from({ length: 9 }, (_, i) => (
+      <button class="ters-pad" data-i={i} type="button" aria-label={`${i + 1}. pad`} role="gridcell"></button>
+    ))}
+  </div>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tersine</h2>
+      <p id="overlay-msg">Padlerin yanış sırasını izle, sonra TERSTEN gir. Her turda dizi bir adım uzar.</p>
+      <button id="start" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
