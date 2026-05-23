@@ -1,0 +1,19 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="level">1</span></div>
+  <div class="hud__score">Kesişme<span id="crossings">0</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Karıştır</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Düğüm Çöz oyun alanı"></canvas>
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Bölüm tamam!</h2>
+      <p id="overlay-msg">Tüm kesişmeleri açtın.</p>
+      <button id="next" class="hud__btn dz-next" type="button">Sonraki bölüm</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "title": "Düğüm Çöz",
+  "description": "Düğümleri sürükle, kesişen ipleri aç. Hiçbir çizgi kesişmeyince bölüm biter.",
+  "dateAdded": "2026-05-23",
+  "tags": ["bulmaca","mantık","sürükle"],
+  "controls": "Fare/dokunma ile düğümleri sürükle",
+  "howToPlay": "Düğümleri sürükleyerek hareket ettir. Kırmızı çizgiler kesişen ipleri gösterir. Hiçbir ip kesişmeyecek şekilde düğümleri yerleştir; kesişme sayısı sıfıra inince bölüm biter. Her zaman çözümü vardır — daha az hamleyle çöz, rekorunu kır.",
+  "thumbnail": "dugum-coz.svg"
+}
