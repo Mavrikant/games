@@ -655,7 +655,8 @@
 .level-card:hover { transform: translateY(-2px); }
 .level-card:active { transform: translateY(2px); }
 .level-card__num { font-size: 1.2rem; line-height: 1; }
-.level-card__stars { display: flex; gap: 1px; font-size: 0.8rem; }
+.level-card__stars { display: flex; gap: 2px; }
+.level-card__stars .star { font-size: 0.95rem; line-height: 1; }
 .level-card--locked {
   filter: grayscale(0.7);
   opacity: 0.7;
