@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Nesil<span id="generation">0</span></div>
+  <div class="hud__stat">Nüfus<span id="population">0</span></div>
+  <button id="play" class="hud__btn hud__btn--accent" type="button" aria-label="Oynat veya duraklat">Oynat</button>
+  <button id="step" class="hud__btn" type="button" aria-label="Bir nesil ilerlet">Adım</button>
+</header>
+<div class="yo-board-wrap">
+  <canvas id="board" class="yo-board" width="600" height="420" aria-label="Yaşam Oyunu izgarası"></canvas>
+  <div class="yo-controls">
+    <label class="yo-speed">
+      <span>Hız</span>
+      <input id="speed" type="range" min="1" max="30" step="1" value="10" aria-label="Saniyedeki nesil sayısı" />
+      <span id="speed-out" class="yo-speed__out">10/sn</span>
+    </label>
+    <div class="yo-actions">
+      <button id="preset" class="hud__btn yo-btn-sm" type="button">Desen ekle</button>
+      <button id="randomize" class="hud__btn yo-btn-sm" type="button">Rastgele</button>
+      <button id="clear" class="hud__btn yo-btn-sm" type="button">Temizle</button>
+    </div>
+  </div>
+</div>
