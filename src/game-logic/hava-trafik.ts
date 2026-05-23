@@ -5,7 +5,8 @@ import { showOverlay, hideOverlay } from '@shared/overlay';
 
 // Hava Trafik — air-traffic-control / flight-routing.
 // Draw a path for a plane by dragging; it follows the path then flies straight.
-// Land each plane at the gate matching its colour; never let two planes touch.
+// Land each plane at the gate matching its colour; never let two planes touch
+// and never let a plane fly off the screen.
 //
 // PITFALLS guarded here (see docs/PITFALLS.md):
 // - unguarded-storage: safeRead/safeWrite wrap localStorage.
@@ -181,22 +182,31 @@ function update(dt: number): void {
     const g = GATES[p.color]!;
     if (dist(p.x, p.y, g.x, g.y) <= LAND_DIST) {
       score += 1;
+      scoreEl.textContent = String(score);
       if (dragId === p.id) dragId = null;
       return false;
     }
     return true;
   });
 
-  // Off-screen planes leave silently (a missed routing, no penalty).
-  planes = planes.filter((p) => {
-    const out =
+  // A plane that leaves the airspace is a failed landing => game over.
+  const lost = planes.find(
+    (p) =>
       p.x < -EXIT_MARGIN ||
       p.x > W + EXIT_MARGIN ||
       p.y < -EXIT_MARGIN ||
-      p.y > H + EXIT_MARGIN;
-    if (out && dragId === p.id) dragId = null;
-    return !out;
-  });
+      p.y > H + EXIT_MARGIN,
+  );
+  if (lost) {
+    // Mark the edge the plane escaped through so the failure is visible.
+    crash = {
+      x: Math.max(PLANE_R, Math.min(W - PLANE_R, lost.x)),
+      y: Math.max(PLANE_R, Math.min(H - PLANE_R, lost.y)),
+    };
+    if (dragId === lost.id) dragId = null;
+    endGame('lost');
+    return;
+  }
 
   // Collisions => game over.
   for (let i = 0; i < planes.length; i++) {
@@ -205,7 +215,7 @@ function update(dt: number): void {
       const b = planes[j]!;
       if (dist(a.x, a.y, b.x, b.y) < COLLISION_DIST) {
         crash = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
-        endGame();
+        endGame('crash');
         return;
       }
     }
@@ -362,7 +372,7 @@ function startGame(): void {
   rafId = requestAnimationFrame((t) => loop(t, myGen));
 }
 
-function endGame(): void {
+function endGame(reason: 'crash' | 'lost'): void {
   state = 'gameover';
   gen.bump();
   cancelAnimationFrame(rafId);
@@ -370,7 +380,7 @@ function endGame(): void {
   commitBest();
   scoreEl.textContent = String(score);
   bestEl.textContent = String(best);
-  overlayTitle.textContent = 'Çarpışma!';
+  overlayTitle.textContent = reason === 'crash' ? 'Çarpışma!' : 'Uçak kayboldu!';
   overlayMsg.textContent = `İndirdiğin uçak: ${score}\n\nYeniden başlamak için ekrana dokun.`;
   draw();
   showOverlay(overlay);
@@ -398,7 +408,7 @@ function reset(): void {
   bestEl.textContent = String(best);
   overlayTitle.textContent = 'Hava Trafik';
   overlayMsg.textContent =
-    'Bir uçağa dokun ve parmağını sürükleyerek pistine giden rotayı çiz. Her uçağı kendi rengindeki piste indir, iki uçağı çarpıştırma.\n\nBaşlamak için ekrana dokun.';
+    'Bir uçağa dokun ve parmağını sürükleyerek pistine giden rotayı çiz. Her uçağı kendi rengindeki piste indir; iki uçağı çarpıştırma ve hiçbir uçağın ekrandan çıkmasına izin verme.\n\nBaşlamak için ekrana dokun.';
   draw();
   showOverlay(overlay);
 }

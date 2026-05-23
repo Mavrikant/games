@@ -163,6 +163,18 @@ bug'ını yakalamaz. Type-check ve build hiçbir runtime/UX bug'ını yakalamaz.
 uygula. Curl smoke test artık yeterli değil.
 **Önlem**: Playtest, build kadar zorunlu. Atlanamaz. CI'da `npm run test:smoke` artık her oyunu headless chromium'da açıyor; init crash, console error, blank render bu seviyede yakalanır. Ama oynanış bug'larını (yanlış skor, AI lock, restart race) hâlâ insan playtest yakalayabilir — [docs/PLAYTEST.md](PLAYTEST.md) zorunlu.
 
+### hud-counter-synced-only-at-lifecycle-edges
+**Vaka**: hava-trafik — `update()` döngüsünde uçak inince `score += 1` yapılıyordu, ama `scoreEl.textContent` yalnız `startGame()`/`endGame()`/`reset()` içinde yazılıyordu. Sonuç: oyun boyunca "İnen" sayacı 0'da takılı kaldı; gerçek değer ancak game-over ekranında belirdi. Skor değişkeni doğruydu, HUD yalanlıyordu.
+**Pattern**: Türetilmiş bir sayaç/HUD değeri oyun döngüsünde mutate ediliyor ama DOM senkronu sadece lifecycle sınırlarında (start/end/reset) yapılıyor. Frame loop değeri değiştirir, ekran güncellenmez → "donmuş HUD". Build ve curl bunu asla yakalamaz; sayacın **artması gereken anı** gözlemlemek gerekir.
+**Tespit**: Oyna ve skoru artıran aksiyonu yap (uçağı indir, blok kır, düşman vur) — HUD'un **tam o anda** değiştiğini gör. Kod tarafında `grep -n 'score *+=\|score++'`: her artış satırının yanında bir `el.textContent` yazımı (veya ortak `setScore`) var mı?
+**Önlem**: Skor mutasyonu ile DOM yazımını **aynı yerde** tut (artır → hemen `scoreEl.textContent = String(score)`), ya da tek bir `setScore(n)` helper'ından geçir. Sayacı yalnız terminal state'lerde senkronlamak "kazanınca doğru, oynarken yanlış" sınıfı bug üretir. Smoke senaryosu: `scripts/smoke-scenarios/hava-trafik.mjs` skorun oyun **devam ederken** arttığını assert eder.
+
+### designed-lose-condition-not-wired
+**Vaka**: hava-trafik — ekrandan çıkan uçak `planes = planes.filter(...)` ile **sessizce** siliniyordu ("a missed routing, no penalty"). Tek kaybetme yolu havada çarpışmaydı; oyuncu bir uçağı yönlendirmeyi unutup ekrandan kaçırınca hiçbir sonuç olmuyordu — oysa "uçağı kaçırmak" tasarım gereği bir başarısızlık.
+**Pattern**: Bir başarısızlık olayı (entity ekrandan çıktı / süre doldu / yanlış hedefe gitti) yalnızca temizlikle (filter/remove) ele alınıyor, ama **sonucu** (`endGame()`/ceza/can kaybı) bağlanmamış. "Sessizce kaybol" = eksik lose condition; oyun teknik olarak çalışır ama beklenen kuralı uygulamaz.
+**Tespit**: Her entity-removal noktasında sor: "bu olay oyuncu için başarısızlık mı?" Öyleyse skor/can/game-over sonucu var mı? Oyna: en az bir entity'yi bilerek kaçır ve oyunun tepki verdiğini doğrula.
+**Önlem**: "İyi" çıkışı (hedefe ulaştı) ve "kötü" çıkışı (kaçtı) ayrı dallarda işle; kötü dal `endGame()` veya ceza çağırsın. Overlay/ipucu metnini de güncelle ki oyuncu yeni kuralı bilsin.
+
 ---
 
 ## Bu dosya ne zaman güncellenir?
