@@ -1,0 +1,48 @@
+---
+const pigments = [
+  { id: 'c', name: 'Camgöbeği' },
+  { id: 'm', name: 'Macenta' },
+  { id: 'y', name: 'Sarı' },
+];
+---
+
+<header class="hud">
+  <div class="hud__score">Seri<span id="streak">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="rk">
+  <div class="rk__swatches">
+    <figure class="rk__swatch">
+      <div id="target" class="rk__chip" aria-label="Hedef renk"></div>
+      <figcaption>Hedef</figcaption>
+    </figure>
+    <figure class="rk__swatch">
+      <div id="mix" class="rk__chip" aria-label="Senin karışımın"></div>
+      <figcaption>Karışımın</figcaption>
+    </figure>
+  </div>
+
+  <div class="rk__meta">
+    <span id="closeness">Yakınlık: 0%</span>
+    <span id="tries">Deneme: 3 / 3</span>
+  </div>
+
+  <div class="rk__pigments">
+    {pigments.map((p) => (
+      <div class="rk__pig">
+        <span class="rk__pig-name">{p.name}</span>
+        <div class="rk__stepper">
+          <button class="rk__step" data-pig={p.id} data-dir="-1" type="button" aria-label={`${p.name} azalt`}>−</button>
+          <span class="rk__count" id={`count-${p.id}`}>0</span>
+          <button class="rk__step" data-pig={p.id} data-dir="1" type="button" aria-label={`${p.name} arttır`}>+</button>
+        </div>
+        <span class="rk__pig-hint" id={`hint-${p.id}`} aria-hidden="true"></span>
+      </div>
+    ))}
+  </div>
+
+  <button id="submit" class="rk__submit" type="button">Eşleştir</button>
+  <p id="status" class="rk__status" role="status">Hedef rengi yakala — pigmentleri ayarla, Eşleştir'e bas.</p>
+</div>

@@ -1,0 +1,9 @@
+{
+  "title": "Renk Karıştır",
+  "description": "Hedef rengi yakala — camgöbeği, macenta ve sarı pigmentleri doğru oranda karıştır, sınırlı denemede tuttur.",
+  "dateAdded": "2026-05-23",
+  "tags": ["puzzle","mantik","tek-oyunculu","mobil"],
+  "controls": "+ / − : pigment ayarla · Eşleştir / Enter: tahmin · R: yeniden başla · Klavye: Q/A camgöbeği, W/S macenta, E/D sarı",
+  "thumbnail": "renk-karistir.svg",
+  "howToPlay": "Amacın üstteki 'Hedef' renk kutusuyla aynı rengi 'Karışımın' kutusunda üretmek. Renkler eksiltici (subtractive) boya mantığıyla karışır: camgöbeği kırmızıyı, macenta yeşili, sarı ise maviyi emer; her pigmentten ne kadar çok damla eklersen o kanal o kadar koyulaşır. Üç pigmentin damla sayısını + / − düğmeleriyle (ya da klavyede Q/A, W/S, E/D) ayarla, karışım kutusu anında güncellenir. Hazır olunca 'Eşleştir'e (veya Enter'a) bas. Tahminin birebir tutmazsa her pigmentin altında bir ipucu belirir: ▲ daha fazla, ▼ daha az, ● doğru. Her tur sınırlı deneme hakkın var; doğru karışımı bulursan serin bir artar ve bir sonraki renk biraz daha zorlaşır (pigment aralığı genişler). Denemeler biterse doğru karışım gösterilir, seri sıfırlanır ve kolay bir renge dönülür. Rekorun, art arda tutturduğun en uzun seridir. İpucu: önce kutunun rengine bakıp kabaca tahmin et — kırmızıya çalan bir renk az camgöbeği, koyu bir renk çok pigment demektir; ilk tahminini gözünle ne kadar iyi seçersen ipuçlarını o kadar az harcar, zor renklerde seriyi o kadar uzun tutarsın."
+}

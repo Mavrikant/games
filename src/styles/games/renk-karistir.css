@@ -1,0 +1,184 @@
+/* Renk Karıştır — no overlay; DOM swatches + steppers. */
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.rk {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rk__swatches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.rk__swatch {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rk__chip {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius, 14px);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-card);
+  background: #fff;
+}
+
+.rk__swatch figcaption {
+  text-align: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.rk__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.rk__pigments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.rk__pig {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rk__pig-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+
+.rk__stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rk__step {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.rk__step:hover:not(:disabled) {
+  background: var(--surface-3);
+}
+
+.rk__step:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.rk__count {
+  min-width: 24px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.rk__pig-hint {
+  font-size: 16px;
+  line-height: 1;
+  min-height: 18px;
+  color: var(--text-dim);
+}
+
+.rk__pig-hint--up {
+  color: var(--success, #34d399);
+}
+
+.rk__pig-hint--down {
+  color: #f59e0b;
+}
+
+.rk__pig-hint--ok {
+  color: var(--accent);
+}
+
+.rk__submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--accent-strong);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.rk__submit:hover:not(:disabled) {
+  background: var(--accent);
+  color: #0a0b0e;
+}
+
+.rk__submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.rk__status {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  min-height: 21px;
+}
