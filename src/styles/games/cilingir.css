@@ -1,0 +1,130 @@
+/*
+ * Per-game styles. Keeps the standard board-wrap + overlay positioning that
+ * @shared/overlay's helpers expect (.overlay--hidden does the visual hide).
+ * pitfall: missing-overlay-css.
+ */
+
+:root {
+  --cl-track: #1a1e25;
+  --cl-track-edge: #2a3038;
+  --cl-zone: #34d399;
+  --cl-zone-soft: rgba(52, 211, 153, 0.16);
+  --cl-marker: #fbbf24;
+  --cl-set: #34d399;
+  --cl-miss: #fb7185;
+  --cl-dim: #3a414c;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.8);
+  border-radius: 14px;
+  z-index: 5;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s ease-out;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+#action {
+  font-size: 15px;
+  padding: 12px 28px;
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.touch {
+  display: none;
+  margin-top: 6px;
+  user-select: none;
+}
+.touch__btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.touch__btn--wide {
+  width: 100%;
+}
+.touch__btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: block;
+  }
+}

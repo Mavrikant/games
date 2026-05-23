@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Kilit<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Maymuncuk<span id="picks">3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Çilingir kilit alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çilingir</h2>
+      <p id="overlay-msg">Pimin kayan göstergesi yeşil bölgedeyken sabitle.</p>
+      <button id="action" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="touch">
+  <button id="set-btn" class="touch__btn touch__btn--wide" type="button">Sabitle</button>
+</div>

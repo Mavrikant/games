@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çilingir">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c2230" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g>
+    <!-- pin tracks -->
+    <rect x="120" y="40" width="20" height="120" rx="10" fill="#1a1e25" stroke="#2a3038" stroke-width="2" />
+    <rect x="155" y="40" width="20" height="120" rx="10" fill="#1a1e25" stroke="#818cf8" stroke-width="2" />
+    <rect x="190" y="40" width="20" height="120" rx="10" fill="#1a1e25" stroke="#2a3038" stroke-width="2" />
+    <!-- set pin (left): green zone + locked bar -->
+    <rect x="123" y="88" width="14" height="40" rx="5" fill="rgba(52,211,153,0.18)" />
+    <rect x="117" y="103" width="26" height="10" rx="5" fill="#34d399" />
+    <!-- active pin (middle): zone + amber marker -->
+    <rect x="158" y="82" width="14" height="44" rx="5" fill="rgba(52,211,153,0.18)" stroke="#34d399" stroke-width="2" />
+    <rect x="151" y="70" width="28" height="12" rx="6" fill="#fbbf24" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Çilingir</text>
+</svg>
