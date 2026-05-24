@@ -61,47 +61,68 @@
 }
 
 .bs-board {
-  display: grid;
-  grid-template-columns: repeat(var(--cols, 8), 1fr);
-  gap: 3px;
+  position: relative;
   width: 100%;
+  /* aspect-ratio + --hex-w/--hex-h are set inline from COLS/ROWS in JS. */
 }
 
+/* Pointy-top hexagon. The cell box carries the ownership "rim" colour; the
+   ::before inner hexagon carries the actual game colour, scaled down so the
+   rim shows through as a uniform hex-shaped ring (and as the inter-cell gap
+   for neutral cells). */
 .bs-cell {
-  aspect-ratio: 1 / 1;
-  border-radius: 3px;
+  --hex-clip: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  --rim: rgba(0, 0, 0, 0.34);
+  --rim-scale: 0.9;
+  position: absolute;
+  width: var(--hex-w, 11.7%);
+  height: var(--hex-h, 11.7%);
+  background-color: var(--rim);
+  clip-path: var(--hex-clip);
+  transition: background-color 0.12s ease-out;
+}
+
+.bs-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--cell-color, #333);
+  clip-path: var(--hex-clip);
+  transform: scale(var(--rim-scale));
   transition:
     background-color 0.12s ease-out,
-    box-shadow 0.12s ease-out;
+    transform 0.12s ease-out;
 }
 
-/* Six distinct colours. */
+/* Six distinct colours (drive the inner hexagon via a custom property). */
 .bs-cell--c0 {
-  background: #ef4444;
+  --cell-color: #ef4444;
 }
 .bs-cell--c1 {
-  background: #f97316;
+  --cell-color: #f97316;
 }
 .bs-cell--c2 {
-  background: #facc15;
+  --cell-color: #facc15;
 }
 .bs-cell--c3 {
-  background: #22c55e;
+  --cell-color: #22c55e;
 }
 .bs-cell--c4 {
-  background: #3b82f6;
+  --cell-color: #3b82f6;
 }
 .bs-cell--c5 {
-  background: #a855f7;
+  --cell-color: #a855f7;
 }
 
 /* Ownership rings distinguish the two territories regardless of colour. */
 .bs-cell--mine {
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  --rim: rgba(255, 255, 255, 0.92);
+  --rim-scale: 0.66;
 }
 
 .bs-cell--ai {
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+  --rim: rgba(8, 9, 13, 0.85);
+  --rim-scale: 0.66;
 }
 
 /* --- Palette ---------------------------------------------------------- */

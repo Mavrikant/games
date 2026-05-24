@@ -4,53 +4,48 @@
       <stop offset="0%" stop-color="#1c1c2a" />
       <stop offset="100%" stop-color="#0a0a14" />
     </linearGradient>
+    <polygon id="bs-hex" points="0,-11 9.53,-5.5 9.53,5.5 0,11 -9.53,5.5 -9.53,-5.5" />
   </defs>
   <rect width="320" height="200" fill="url(#bs-bg)" />
 
-  <!-- 6x6 territory grid -->
+  <!-- pointy-top hexagonal territory grid (odd-r offset) -->
   <g>
     <!-- row 0 (top) -->
-    <rect x="150" y="30" width="20" height="20" rx="4" fill="#22c55e" />
-    <rect x="173" y="30" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="196" y="30" width="20" height="20" rx="4" fill="#facc15" />
-    <rect x="219" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
-    <rect x="242" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
-    <rect x="265" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <use href="#bs-hex" x="175" y="44" fill="#22c55e" />
+    <use href="#bs-hex" x="194.05" y="44" fill="#3b82f6" />
+    <use href="#bs-hex" x="213.1" y="44" fill="#facc15" />
+    <use href="#bs-hex" x="232.15" y="44" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <use href="#bs-hex" x="251.2" y="44" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
     <!-- row 1 -->
-    <rect x="150" y="53" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="173" y="53" width="20" height="20" rx="4" fill="#ef4444" />
-    <rect x="196" y="53" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="219" y="53" width="20" height="20" rx="4" fill="#facc15" />
-    <rect x="242" y="53" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
-    <rect x="265" y="53" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <use href="#bs-hex" x="184.53" y="60.5" fill="#3b82f6" />
+    <use href="#bs-hex" x="203.58" y="60.5" fill="#ef4444" />
+    <use href="#bs-hex" x="222.63" y="60.5" fill="#3b82f6" />
+    <use href="#bs-hex" x="241.68" y="60.5" fill="#facc15" />
+    <use href="#bs-hex" x="260.73" y="60.5" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
     <!-- row 2 -->
-    <rect x="150" y="76" width="20" height="20" rx="4" fill="#f97316" />
-    <rect x="173" y="76" width="20" height="20" rx="4" fill="#facc15" />
-    <rect x="196" y="76" width="20" height="20" rx="4" fill="#ef4444" />
-    <rect x="219" y="76" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="242" y="76" width="20" height="20" rx="4" fill="#22c55e" />
-    <rect x="265" y="76" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <use href="#bs-hex" x="175" y="77" fill="#f97316" />
+    <use href="#bs-hex" x="194.05" y="77" fill="#facc15" />
+    <use href="#bs-hex" x="213.1" y="77" fill="#ef4444" />
+    <use href="#bs-hex" x="232.15" y="77" fill="#3b82f6" />
+    <use href="#bs-hex" x="251.2" y="77" fill="#22c55e" />
     <!-- row 3 -->
-    <rect x="150" y="99" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="173" y="99" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="196" y="99" width="20" height="20" rx="4" fill="#facc15" />
-    <rect x="219" y="99" width="20" height="20" rx="4" fill="#ef4444" />
-    <rect x="242" y="99" width="20" height="20" rx="4" fill="#f97316" />
-    <rect x="265" y="99" width="20" height="20" rx="4" fill="#3b82f6" />
+    <use href="#bs-hex" x="184.53" y="93.5" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="203.58" y="93.5" fill="#3b82f6" />
+    <use href="#bs-hex" x="222.63" y="93.5" fill="#facc15" />
+    <use href="#bs-hex" x="241.68" y="93.5" fill="#ef4444" />
+    <use href="#bs-hex" x="260.73" y="93.5" fill="#f97316" />
     <!-- row 4 -->
-    <rect x="150" y="122" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="173" y="122" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="196" y="122" width="20" height="20" rx="4" fill="#f97316" />
-    <rect x="219" y="122" width="20" height="20" rx="4" fill="#facc15" />
-    <rect x="242" y="122" width="20" height="20" rx="4" fill="#ef4444" />
-    <rect x="265" y="122" width="20" height="20" rx="4" fill="#facc15" />
+    <use href="#bs-hex" x="175" y="110" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="194.05" y="110" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="213.1" y="110" fill="#f97316" />
+    <use href="#bs-hex" x="232.15" y="110" fill="#facc15" />
+    <use href="#bs-hex" x="251.2" y="110" fill="#ef4444" />
     <!-- row 5 (bottom) -->
-    <rect x="150" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="173" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="196" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
-    <rect x="219" y="145" width="20" height="20" rx="4" fill="#3b82f6" />
-    <rect x="242" y="145" width="20" height="20" rx="4" fill="#a855f7" />
-    <rect x="265" y="145" width="20" height="20" rx="4" fill="#f97316" />
+    <use href="#bs-hex" x="184.53" y="126.5" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="203.58" y="126.5" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="222.63" y="126.5" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <use href="#bs-hex" x="241.68" y="126.5" fill="#3b82f6" />
+    <use href="#bs-hex" x="260.73" y="126.5" fill="#a855f7" />
   </g>
 
   <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Boya</text>

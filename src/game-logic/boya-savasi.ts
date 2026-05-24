@@ -7,9 +7,13 @@
 // current colour, nor the opponent's current colour. Most cells when the
 // board is full wins.
 //
-// The starting board is generated so no two orthogonally-adjacent cells
+// The starting board is generated so no two hex-adjacent (6-neighbour) cells
 // share a colour — this guarantees each seed is a single cell and every
 // pick has a well-defined, bounded gain.
+//
+// The board is a pointy-top hexagonal grid in "odd-r" offset coordinates
+// (odd rows are shifted right by half a cell). Cells are laid out by absolute
+// percentage positions inside an aspect-ratio'd board so they scale fluidly.
 //
 // PITFALLS guarded here (see docs/PITFALLS.md):
 // - unguarded-storage: all localStorage via @shared/storage.
@@ -37,6 +41,35 @@ const AI_START = COLS - 1; // top-right
 const AI_DELAY_MS = 480;
 // Hard safety cap so a degenerate board can never hang the turn loop.
 const MAX_MOVES = TOTAL * 3;
+
+// --- Hex layout (pointy-top, "odd-r" offset) -------------------------------
+// All values are percentages of the board box, whose aspect-ratio is set so
+// each clip-path hexagon renders as a regular hexagon at any board width.
+// V = total board height measured in hex circumradii (R): top row spans 2R,
+// every further row adds 1.5R.
+const HEX_V = 0.5 + 1.5 * ROWS;
+const HEX_W_PCT = 100 / (COLS + 0.5); // hex flat-to-flat width, % of board
+const HEX_H_PCT = (2 / HEX_V) * 100; // hex point-to-point height, % of board
+const ROW_PITCH_PCT = (1.5 / HEX_V) * 100; // vertical centre-to-centre, % of board
+const BOARD_ASPECT = ((COLS + 0.5) * Math.sqrt(3)) / HEX_V; // width / height
+
+// Hex neighbour offsets [dCol, dRow] for "odd-r" rows.
+const EVEN_ROW_DELTAS: ReadonlyArray<readonly [number, number]> = [
+  [1, 0],
+  [0, -1],
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, 1],
+];
+const ODD_ROW_DELTAS: ReadonlyArray<readonly [number, number]> = [
+  [1, 0],
+  [1, -1],
+  [0, -1],
+  [-1, 0],
+  [0, 1],
+  [1, 1],
+];
 
 const STORAGE_WINS = 'boya-savasi.wins';
 const STORAGE_LOSSES = 'boya-savasi.losses';
@@ -80,13 +113,21 @@ function loadStat(key: string): number {
 // ---------------------------------------------------------------------------
 // Geometry
 // ---------------------------------------------------------------------------
-function neighborsOwnedBy(o: Int8Array, i: number, p: number): boolean {
+function hexNeighbors(i: number): number[] {
   const r = Math.floor(i / COLS);
   const c = i % COLS;
-  if (c > 0 && o[i - 1] === p) return true;
-  if (c < COLS - 1 && o[i + 1] === p) return true;
-  if (r > 0 && o[i - COLS] === p) return true;
-  if (r < ROWS - 1 && o[i + COLS] === p) return true;
+  const deltas = r % 2 === 0 ? EVEN_ROW_DELTAS : ODD_ROW_DELTAS;
+  const out: number[] = [];
+  for (const [dc, dr] of deltas) {
+    const nc = c + dc;
+    const nr = r + dr;
+    if (nc >= 0 && nc < COLS && nr >= 0 && nr < ROWS) out.push(nr * COLS + nc);
+  }
+  return out;
+}
+
+function neighborsOwnedBy(o: Int8Array, i: number, p: number): boolean {
+  for (const n of hexNeighbors(i)) if (o[n] === p) return true;
   return false;
 }
 
@@ -158,11 +199,11 @@ function chooseAiColor(): number {
 function generateBoard(): void {
   color = new Int8Array(TOTAL);
   for (let i = 0; i < TOTAL; i++) {
-    const r = Math.floor(i / COLS);
-    const c = i % COLS;
+    // Ban the colours of already-placed hex neighbours (those with a smaller
+    // index in row-major order). At most three such neighbours exist, so with
+    // six colours there are always at least three choices left.
     const banned = new Set<number>();
-    if (c > 0) banned.add(color[i - 1]!);
-    if (r > 0) banned.add(color[i - COLS]!);
+    for (const n of hexNeighbors(i)) if (n < i) banned.add(color[n]!);
     const choices: number[] = [];
     for (let k = 0; k < NUM_COLORS; k++) if (!banned.has(k)) choices.push(k);
     color[i] = choices[Math.floor(Math.random() * choices.length)]!;
@@ -174,12 +215,9 @@ function generateBoard(): void {
   playerColor = color[PLAYER_START]!;
 
   // Guarantee the two seeds differ, keeping the no-adjacent-match invariant
-  // for the AI seed (its only neighbours are its left + below cells).
-  const aiR = Math.floor(AI_START / COLS);
-  const aiC = AI_START % COLS;
+  // around the AI seed (a corner cell with at most three neighbours).
   const aiBanned = new Set<number>([playerColor]);
-  if (aiC > 0) aiBanned.add(color[AI_START - 1]!);
-  if (aiR < ROWS - 1) aiBanned.add(color[AI_START + COLS]!);
+  for (const n of hexNeighbors(AI_START)) aiBanned.add(color[n]!);
   if (aiBanned.has(color[AI_START]!)) {
     for (let k = 0; k < NUM_COLORS; k++) {
       if (!aiBanned.has(k)) {
@@ -195,13 +233,20 @@ function generateBoard(): void {
 // Rendering
 // ---------------------------------------------------------------------------
 function buildBoard(): void {
-  boardEl.style.setProperty('--cols', String(COLS));
+  boardEl.style.aspectRatio = String(BOARD_ASPECT);
+  boardEl.style.setProperty('--hex-w', `${HEX_W_PCT}%`);
+  boardEl.style.setProperty('--hex-h', `${HEX_H_PCT}%`);
   boardEl.innerHTML = '';
   cellEls = [];
   for (let i = 0; i < TOTAL; i++) {
+    const r = Math.floor(i / COLS);
+    const c = i % COLS;
+    const odd = r % 2 === 1;
     const cell = document.createElement('div');
     cell.className = 'bs-cell';
     cell.setAttribute('role', 'gridcell');
+    cell.style.left = `${(odd ? c + 0.5 : c) * HEX_W_PCT}%`;
+    cell.style.top = `${r * ROW_PITCH_PCT}%`;
     boardEl.appendChild(cell);
     cellEls.push(cell);
   }
