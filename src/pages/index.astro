@@ -237,7 +237,14 @@ const itemListSchema = {
 
     <div id="tags" class="tags"></div>
     <div id="grid" class="grid">
-      {games.map((g) => <Card game={g} />)}
+      {games.map((g, i) => (
+        <>
+          <Card game={g} />
+          {(i + 1) % 8 === 0 && i < games.length - 1 && (
+            <AdSlot position="in-grid" />
+          )}
+        </>
+      ))}
     </div>
 
     <footer class="footer">

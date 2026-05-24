@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import SiteFooter from '@components/SiteFooter.astro';
 import ShareButton from '@components/ShareButton.astro';
+import AdSlot from '@components/AdSlot.astro';
 import { t, type Lang } from '@shared/i18n';
 import '@styles/game-shell.css';
 
@@ -47,32 +48,37 @@ const subTitle =
   hreflangs={hreflangs}
 >
   <slot name="head" slot="head" />
-  <main class="stage">
-    <h1 class="stage__title">{heading} <span class="stage__title-sub">{subTitle}</span></h1>
-    <slot />
-    {description && (
-      <p class="stage__intro">{description}</p>
-    )}
-    {controls && (
-      <section class="info-block" aria-labelledby="controls-heading">
-        <h2 id="controls-heading" class="info-block__heading">{t('controls.heading', lang)}</h2>
-        <p class="hint">{controls}</p>
-      </section>
-    )}
-    {howToPlay && (
-      <section class="info-block" aria-labelledby="howto-heading">
-        <h2 id="howto-heading" class="info-block__heading">{t('howto.heading', lang)}</h2>
-        <details class="howto">
-          <summary>{t('howto.summary', lang)}</summary>
-          <p>{howToPlay}</p>
-        </details>
-      </section>
-    )}
-    <div class="stage__actions">
-      <ShareButton url={shareUrl} title={title} text={description} />
-    </div>
-    <slot name="below" />
-  </main>
+  <div class="game-shell-grid">
+    <main class="stage">
+      <h1 class="stage__title">{heading} <span class="stage__title-sub">{subTitle}</span></h1>
+      <slot />
+      {description && (
+        <p class="stage__intro">{description}</p>
+      )}
+      {controls && (
+        <section class="info-block" aria-labelledby="controls-heading">
+          <h2 id="controls-heading" class="info-block__heading">{t('controls.heading', lang)}</h2>
+          <p class="hint">{controls}</p>
+        </section>
+      )}
+      {howToPlay && (
+        <section class="info-block" aria-labelledby="howto-heading">
+          <h2 id="howto-heading" class="info-block__heading">{t('howto.heading', lang)}</h2>
+          <details class="howto">
+            <summary>{t('howto.summary', lang)}</summary>
+            <p>{howToPlay}</p>
+          </details>
+        </section>
+      )}
+      <div class="stage__actions">
+        <ShareButton url={shareUrl} title={title} text={description} />
+      </div>
+      <slot name="below" />
+    </main>
+    <aside class="game-sidebar" aria-label={lang === 'en' ? 'Advertisement' : 'Reklam alanı'}>
+      <AdSlot position="sidebar" />
+    </aside>
+  </div>
   <SiteFooter />
 </BaseLayout>
 
@@ -122,6 +128,31 @@ const subTitle =
     .stage__title-sub {
       display: block;
       font-size: 12px;
+    }
+  }
+  /* Game shell grid: stage in column 1, sidebar ad slot in column 2.
+     Sidebar is desktop-only (>=1024px) so mobile keeps the existing
+     full-width stage layout untouched. */
+  .game-shell-grid {
+    display: block;
+  }
+  .game-sidebar {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .game-shell-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      align-items: start;
+    }
+    .game-sidebar {
+      display: block;
+      position: sticky;
+      top: 24px;
     }
   }
 </style>
