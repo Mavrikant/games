@@ -19,6 +19,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "playwright": "^1.49.1",
+    "png-to-ico": "^3.0.1",
     "typescript": "^6.0.3"
   }
 }
