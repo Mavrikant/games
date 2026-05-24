@@ -3,6 +3,12 @@ import '@styles/tokens.css';
 import '@styles/base.css';
 import FeedbackWidget from '@components/FeedbackWidget.astro';
 import StickyAd from '@components/StickyAd.astro';
+import { htmlLang, ogLocale, type Lang } from '@shared/i18n';
+
+interface HreflangLink {
+  lang: string; // 'tr' | 'en' | 'x-default'
+  href: string;
+}
 
 interface Props {
   title: string;
@@ -10,6 +16,8 @@ interface Props {
   ogTitle?: string;
   ogType?: 'website' | 'article';
   ogImage?: string;
+  lang?: Lang;
+  hreflangs?: HreflangLink[];
 }
 
 const {
@@ -18,6 +26,8 @@ const {
   ogTitle = title,
   ogType = 'website',
   ogImage,
+  lang = 'tr',
+  hreflangs = [],
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
@@ -42,7 +52,7 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
 ---
 
 <!doctype html>
-<html lang="tr">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,6 +60,9 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
     <meta name="theme-color" content="#0a0b0e" />
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
+    {hreflangs.map((alt) => (
+      <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+    ))}
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} sizes="32x32" />
     <link rel="icon" type="image/png" sizes="192x192" href={`${import.meta.env.BASE_URL}icon-192.png`} />
@@ -64,7 +77,7 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
     <meta property="og:title" content={ogTitle} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale" content={ogLocale[lang]} />
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />

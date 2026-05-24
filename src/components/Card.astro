@@ -1,12 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '@shared/i18n';
 
 interface Props {
   game: CollectionEntry<'games'>;
+  lang?: Lang;
 }
 
-const { game } = Astro.props;
-const { title, description, dateAdded, tags, thumbnail } = game.data;
+const { game, lang = 'tr' } = Astro.props;
+const enBlock = lang === 'en' ? game.data.en : undefined;
+const title = enBlock?.title ?? game.data.title;
+const description = enBlock?.description ?? game.data.description;
+const { dateAdded, tags, thumbnail } = game.data;
 const thumbUrl = thumbnail
   ? `${import.meta.env.BASE_URL}thumbs/${thumbnail}`
   : null;

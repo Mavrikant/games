@@ -1,19 +1,44 @@
 ---
+import { t, type Lang } from '@shared/i18n';
+
 interface Props {
   count: number;
+  lang?: Lang;
 }
-const { count } = Astro.props;
+const { count, lang = 'tr' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const homeHref = lang === 'en' ? `${base}en/` : base;
+const otherLangHref = lang === 'en' ? base : `${base}en/`;
 ---
 
 <header class="nav">
-  <a class="brand" href={base}>
+  <a class="brand" href={homeHref}>
     <span class="brand__logo" aria-hidden="true">K</span>
     <span>karaman.dev</span>
     <span class="brand__sep">/</span>
-    <span class="brand__path">games</span>
+    <span class="brand__path">{t('site.brandPath', lang)}</span>
   </a>
   <nav class="nav__meta">
-    <span class="nav__count">{count} oyun</span>
+    <a class="nav__lang" href={otherLangHref} hreflang={lang === 'en' ? 'tr' : 'en'}>
+      {lang === 'en' ? t('lang.switchToTr', 'en') : t('lang.switchToEn', 'tr')}
+    </a>
+    <span class="nav__count">{t('games.count', lang, { n: count })}</span>
   </nav>
 </header>
+
+<style>
+  .nav__lang {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 12px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav__lang:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+</style>

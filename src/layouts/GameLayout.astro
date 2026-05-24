@@ -2,7 +2,13 @@
 import BaseLayout from './BaseLayout.astro';
 import SiteFooter from '@components/SiteFooter.astro';
 import ShareButton from '@components/ShareButton.astro';
+import { t, type Lang } from '@shared/i18n';
 import '@styles/game-shell.css';
+
+interface HreflangLink {
+  lang: string;
+  href: string;
+}
 
 interface Props {
   title: string;
@@ -11,12 +17,25 @@ interface Props {
   controls?: string;
   howToPlay?: string;
   ogImage?: string;
+  lang?: Lang;
+  hreflangs?: HreflangLink[];
 }
 
-const { title, h1, description, controls, howToPlay, ogImage } = Astro.props;
+const {
+  title,
+  h1,
+  description,
+  controls,
+  howToPlay,
+  ogImage,
+  lang = 'tr',
+  hreflangs = [],
+} = Astro.props;
 const heading = h1 ?? title;
 
 const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+const subTitle =
+  lang === 'en' ? '— free browser game' : '— ücretsiz tarayıcı oyunu';
 ---
 
 <BaseLayout
@@ -24,25 +43,27 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).hre
   description={description}
   ogType="article"
   ogImage={ogImage}
+  lang={lang}
+  hreflangs={hreflangs}
 >
   <slot name="head" slot="head" />
   <main class="stage">
-    <h1 class="stage__title">{heading} <span class="stage__title-sub">— ücretsiz tarayıcı oyunu</span></h1>
+    <h1 class="stage__title">{heading} <span class="stage__title-sub">{subTitle}</span></h1>
     <slot />
     {description && (
       <p class="stage__intro">{description}</p>
     )}
     {controls && (
       <section class="info-block" aria-labelledby="controls-heading">
-        <h2 id="controls-heading" class="info-block__heading">Kontroller</h2>
+        <h2 id="controls-heading" class="info-block__heading">{t('controls.heading', lang)}</h2>
         <p class="hint">{controls}</p>
       </section>
     )}
     {howToPlay && (
       <section class="info-block" aria-labelledby="howto-heading">
-        <h2 id="howto-heading" class="info-block__heading">Nasıl oynanır?</h2>
+        <h2 id="howto-heading" class="info-block__heading">{t('howto.heading', lang)}</h2>
         <details class="howto">
-          <summary>İpuçları ve detaylı strateji</summary>
+          <summary>{t('howto.summary', lang)}</summary>
           <p>{howToPlay}</p>
         </details>
       </section>

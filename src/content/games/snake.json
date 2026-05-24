@@ -5,5 +5,11 @@
   "tags": ["arcade", "klasik", "tek-oyunculu"],
   "controls": "Ok tuşları veya WASD · Boşluk: duraklat · R: yeniden başla",
   "howToPlay": "Amacın yılanı 20x20'lik kareli alanda olabildiğince uzatarak yüksek skor toplamak. Ok tuşları veya WASD ile yön ver; yılan her tikte bir kare ilerler ve seçtiğin yöne dönerek hareketine devam eder. Geldiğin yönün tam tersine dönemezsin, bu yüzden 180 derece geri dönüş için iki ardışık komut gerekir. Kırmızı yemin üstünden geçtiğinde skor bir artar ve yılan bir kare uzar; yem alanın boş bir hücresinde yeniden belirir. Duvara çarparsan ya da kuyruğunu ısırırsan oyun anında biter; en yüksek skorun tarayıcında saklanır. Başlamak için bir yön tuşuna basman yeterli; oyun sırasında boşluk tuşu duraklatır, R tuşu veya 'Yeniden başla' düğmesi yeni bir tur açar. Strateji ipucu: yılan uzadıkça kuyruğunu duvarın kenarında dolaştırarak ortayı boş tut ve yeme dik açıyla yaklaş; köşeye sıkıştığında panikleyip ters köşeyi denemek yerine sakin bir spiralle nefes alanı yarat.",
-  "thumbnail": "snake.svg"
+  "thumbnail": "snake.svg",
+  "en": {
+    "title": "Snake",
+    "description": "The classic snake game — eat the food, grow longer, don't crash into the walls or your own tail.",
+    "controls": "Arrow keys or WASD · Space: pause · R: restart",
+    "howToPlay": "Steer the snake around a 20×20 grid and grow it as long as you can without colliding with the walls or its own body. Arrow keys or WASD set the direction; the snake moves one cell per tick and keeps going until you turn. You can't reverse 180° in a single press, so flipping direction takes two consecutive inputs. Crossing the red food cell scores a point and adds one segment to the snake; new food then appears in a free cell. Hitting the wall or your tail ends the run instantly — your best score is saved in the browser. Press any direction key to start, Space to pause, and R or the on-screen Restart button to begin a new round. Strategy tip: as the snake grows, hug the walls with the tail and keep the middle open so you can approach food head-on; if you get cornered, don't panic-turn — coast in a calm spiral until you carve out room to breathe."
+  }
 }

@@ -115,6 +115,12 @@ const itemListSchema = {
   title={SITE_TITLE}
   description={SITE_DESCRIPTION}
   ogTitle="Tarayıcı Oyunları"
+  lang="tr"
+  hreflangs={[
+    { lang: 'tr', href: new URL(base, site).href },
+    { lang: 'en', href: new URL(`${base}en/`, site).href },
+    { lang: 'x-default', href: new URL(base, site).href },
+  ]}
 >
   <Fragment slot="head">
     <script
