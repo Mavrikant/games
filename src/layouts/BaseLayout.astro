@@ -2,6 +2,7 @@
 import '@styles/tokens.css';
 import '@styles/base.css';
 import FeedbackWidget from '@components/FeedbackWidget.astro';
+import StickyAd from '@components/StickyAd.astro';
 
 interface Props {
   title: string;
@@ -118,6 +119,7 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
   <body>
     <slot />
     <FeedbackWidget />
+    <StickyAd />
     <script is:inline>
       // Register service worker (offline support + install prompt). Only
       // runs on http(s) in production; localhost during dev sees no SW

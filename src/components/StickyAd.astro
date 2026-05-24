@@ -1,0 +1,99 @@
+---
+// Bottom-anchored sticky ad banner. Renders only if the sticky AdSense
+// slot is configured (env-gated inside AdSlot). The close button hides
+// the banner for 24h via localStorage so users keep control.
+import AdSlot from './AdSlot.astro';
+---
+
+<div id="sticky-ad" class="sticky-ad" hidden>
+  <button
+    type="button"
+    class="sticky-ad__close"
+    aria-label="Reklamı kapat"
+  >×</button>
+  <AdSlot position="sticky" />
+</div>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'sticky-ad.dismissed';
+    const COOLDOWN_MS = 24 * 60 * 60 * 1000;
+
+    const root = document.getElementById('sticky-ad');
+    if (!root) return;
+
+    // AdSlot is env-gated; if it didn't render, leave the wrapper hidden.
+    const slot = root.querySelector('.adslot--sticky');
+    if (!slot) return;
+
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const ts = Number(raw);
+        if (Number.isFinite(ts) && Date.now() - ts < COOLDOWN_MS) return;
+      }
+    } catch (_) {
+      // private mode or storage blocked — show banner anyway
+    }
+
+    root.hidden = false;
+    document.documentElement.classList.add('has-sticky-ad');
+
+    const closeBtn = root.querySelector('.sticky-ad__close');
+    closeBtn &&
+      closeBtn.addEventListener('click', function () {
+        root.hidden = true;
+        document.documentElement.classList.remove('has-sticky-ad');
+        try {
+          localStorage.setItem(STORAGE_KEY, String(Date.now()));
+        } catch (_) {}
+      });
+  })();
+</script>
+
+<style is:global>
+  /* Reserve space at page bottom while the sticky banner is visible so
+     fixed footers/HUD don't sit underneath it. */
+  html.has-sticky-ad body {
+    padding-bottom: 68px;
+  }
+</style>
+
+<style>
+  .sticky-ad {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 4px 36px 4px 4px;
+    min-height: 60px;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.35);
+  }
+  .sticky-ad[hidden] {
+    display: none !important;
+  }
+  .sticky-ad__close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1;
+  }
+  .sticky-ad__close:hover,
+  .sticky-ad__close:focus-visible {
+    background: rgba(0, 0, 0, 0.85);
+    outline: none;
+  }
+</style>
