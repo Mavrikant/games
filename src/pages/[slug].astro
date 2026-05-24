@@ -134,6 +134,12 @@ const faqSchema = {
   controls={game.data.controls}
   howToPlay={game.data.howToPlay}
   ogImage={ogImagePath}
+  lang="tr"
+  hreflangs={game.data.en ? [
+    { lang: 'tr', href: gameUrl },
+    { lang: 'en', href: new URL(`${base}en/${game.id}/`, site).href },
+    { lang: 'x-default', href: gameUrl },
+  ] : []}
 >
   <Fragment slot="head">
     <script

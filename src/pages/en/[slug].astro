@@ -1,0 +1,124 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import GameLayout from '@layouts/GameLayout.astro';
+import RelatedGames from '@components/RelatedGames.astro';
+import EmbedCode from '@components/EmbedCode.astro';
+import AdSlot from '@components/AdSlot.astro';
+
+const bodyModules = import.meta.glob<{ default: any }>(
+  '/src/game-bodies/*.astro',
+  { eager: true },
+);
+
+const cssModules = import.meta.glob<string>('/src/styles/games/*.css', {
+  eager: true,
+  query: '?inline',
+  import: 'default',
+});
+
+// EN route is opt-in: a game only gets /games/en/<slug>/ when its content
+// JSON has an `en` block. Untranslated games stay TR-only so we don't ship
+// English pages that are actually in Turkish.
+export const getStaticPaths: GetStaticPaths = async () => {
+  const games = await getCollection('games');
+  return games
+    .filter((g) => g.data.en)
+    .map((game) => ({
+      params: { slug: game.id },
+      props: { game, allGames: games },
+    }));
+};
+
+interface Props {
+  game: CollectionEntry<'games'>;
+  allGames: CollectionEntry<'games'>[];
+}
+
+const { game, allGames } = Astro.props;
+const en = game.data.en!;
+const bodyPath = `/src/game-bodies/${game.id}.astro`;
+const bodyMod = bodyModules[bodyPath];
+if (!bodyMod) {
+  throw new Error(
+    `No body component found at ${bodyPath} for game '${game.id}'. Add src/game-bodies/${game.id}.astro.`,
+  );
+}
+const Body = bodyMod.default;
+
+const cssKey = `/src/styles/games/${game.id}.css`;
+const gameCss = cssModules[cssKey] ?? '';
+
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+const gameUrlEn = new URL(`${base}en/${game.id}/`, site).href;
+const gameUrlTr = new URL(`${base}${game.id}/`, site).href;
+const thumbUrl = game.data.thumbnail
+  ? new URL(`${base}thumbs/${game.data.thumbnail}`, site).href
+  : undefined;
+const ogImagePath = game.data.thumbnail
+  ? `${base}thumbs/og/${game.data.thumbnail.replace(/\.svg$/, '.png')}`
+  : undefined;
+
+const gameSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: en.title,
+  description: en.description,
+  url: gameUrlEn,
+  inLanguage: 'en',
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'Web Browser',
+  genre: game.data.tags,
+  datePublished: game.data.dateAdded,
+  ...(thumbUrl ? { image: thumbUrl } : {}),
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+---
+
+<GameLayout
+  title={`${en.title} — Play in browser`}
+  h1={en.title}
+  description={en.description}
+  controls={en.controls}
+  howToPlay={en.howToPlay}
+  ogImage={ogImagePath}
+  lang="en"
+  hreflangs={[
+    { lang: 'tr', href: gameUrlTr },
+    { lang: 'en', href: gameUrlEn },
+    { lang: 'x-default', href: gameUrlTr },
+  ]}
+>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(gameSchema)}
+    />
+  </Fragment>
+  <Body />
+  <RelatedGames slot="below" current={game} all={allGames} />
+  <AdSlot slot="below" position="game" />
+  <EmbedCode slot="below" slug={game.id} title={en.title} />
+</GameLayout>
+
+{gameCss && <style is:global set:html={gameCss} />}
+
+<script>
+  const loaders = import.meta.glob('/src/game-logic/*.ts');
+  // URL is /games/en/<slug>/ → grab the slug from the second-to-last segment
+  const segments = location.pathname.replace(/\/+$/, '').split('/');
+  const slug = segments[segments.length - 1];
+  const loader = loaders[`/src/game-logic/${slug}.ts`];
+  if (loader) {
+    loader();
+  } else {
+    console.error(`No game-logic module for slug '${slug}'`);
+  }
+</script>
