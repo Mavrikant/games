@@ -151,6 +151,7 @@ const faqSchema = {
   <RelatedGames slot="below" current={game} all={allGames} />
   <AdSlot slot="below" position="game" />
   <EmbedCode slot="below" slug={game.id} title={game.data.title} />
+  <AdSlot slot="below" position="footer" />
 </GameLayout>
 
 {gameCss && <style is:global set:html={gameCss} />}
