@@ -64,11 +64,12 @@ npm run preview   # build'i lokal test et
 
 Site bir PWA'dır — çevrimdışı çalışır ve ana ekrana kurulabilir:
 
-- **Android (Chrome):** menü (⋮) → **Ana ekrana ekle**.
+- **Android (Chrome):** üstteki **Kur** butonu (ya da menü ⋮ → **Ana ekrana ekle**).
 - **iOS (Safari):** **Paylaş** → **Ana Ekrana Ekle**.
 
 Kurulduktan sonra daha önce açtığın oyunlar çevrimdışı da oynanabilir. Yeni
-sürüm çıktığında köşede "Yeni sürüm var" bildirimi görünür; **Yenile**'ye dokun.
+sürümler arka planda **otomatik** güncellenir — bir sonraki açılışta en güncel
+sürümü alırsın (elle yenileme gerekmez).
 
 ## Yeni oyun ekleme
 
