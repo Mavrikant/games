@@ -1,0 +1,184 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Card from '@components/Card.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import AdSlot from '@components/AdSlot.astro';
+import { CATEGORIES, type CategoryMeta } from '../../data/categories';
+import '@styles/archive.css';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const games = await getCollection('games');
+  return CATEGORIES.map((cat) => ({
+    params: { tag: cat.tag },
+    props: { meta: cat, allGames: games },
+  }));
+};
+
+interface Props {
+  meta: CategoryMeta;
+  allGames: Awaited<ReturnType<typeof getCollection<'games'>>>;
+}
+
+const { meta, allGames } = Astro.props;
+const matching = allGames
+  .filter((g) => g.data.tags.includes(meta.tag))
+  .sort((a, b) => b.data.dateAdded.localeCompare(a.data.dateAdded));
+
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+const pageUrl = new URL(`${base}kategori/${meta.tag}/`, site).href;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Ana Sayfa',
+      item: new URL(base, site).href,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: meta.title,
+      item: pageUrl,
+    },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: meta.title,
+  description: meta.metaDescription,
+  url: pageUrl,
+  inLanguage: 'tr',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Tarayıcı Oyunları',
+    url: new URL(base, site).href,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: matching.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(`${base}${g.id}/`, site).href,
+      name: g.data.title,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${meta.title} — Tarayıcıda Ücretsiz Oyna`}
+  description={meta.metaDescription}
+  ogTitle={meta.title}
+>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(collectionSchema)}
+    />
+  </Fragment>
+
+  <Nav count={allGames.length} />
+  <main class="app category">
+    <nav class="category__crumbs" aria-label="Konum">
+      <a href={base}>Ana Sayfa</a>
+      <span aria-hidden="true">›</span>
+      <span>{meta.title}</span>
+    </nav>
+    <section class="category__intro">
+      <h1>{meta.title}</h1>
+      {meta.intro.map((p) => <p>{p}</p>)}
+      <p class="category__count">
+        Bu kategoride <strong>{matching.length}</strong> oyun var — en yeniden eskiye sıralı.
+      </p>
+    </section>
+
+    <div class="grid">
+      {matching.map((g, i) => (
+        <>
+          <Card game={g} />
+          {(i + 1) % 8 === 0 && i < matching.length - 1 && (
+            <AdSlot position="in-grid" />
+          )}
+        </>
+      ))}
+    </div>
+  </main>
+
+  <AdSlot position="homepage" />
+  <SiteFooter />
+
+  <script is:inline define:vars={{ base }}>
+    // Card is a <button>, not an <a>, so it needs an explicit navigation
+    // handler on this page (the homepage has archive/main.ts for that).
+    // Goes straight to the game page — no PlayerOverlay on category pages.
+    document.addEventListener('click', (e) => {
+      const card = e.target?.closest?.('.card[data-slug]');
+      if (!card) return;
+      const slug = card.getAttribute('data-slug');
+      if (slug) location.href = `${base}${slug}/`;
+    });
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .category {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .category__crumbs {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .category__crumbs a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .category__crumbs a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .category__intro {
+    max-width: 720px;
+    margin: 0 0 28px;
+  }
+  .category__intro h1 {
+    font-size: 28px;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+  .category__intro p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0 0 12px;
+  }
+  .category__count {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  .category__count strong {
+    color: var(--text);
+  }
+</style>

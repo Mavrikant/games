@@ -75,6 +75,58 @@ const gameSchema = {
   },
 };
 
+// Breadcrumb: Home → (Category if it has a landing page) → Game.
+// FEATURED_CATEGORIES must stay in sync with src/pages/kategori/[tag].astro
+// getStaticPaths — otherwise we'd link to a 404.
+const FEATURED_CATEGORIES = new Set([
+  'puzzle',
+  'arcade',
+  'refleks',
+  'strateji',
+  'bulmaca',
+  'klasik',
+  'kart',
+  'kelime',
+]);
+const CATEGORY_LABELS: Record<string, string> = {
+  puzzle: 'Puzzle Oyunları',
+  arcade: 'Arcade Oyunları',
+  refleks: 'Refleks Oyunları',
+  strateji: 'Strateji Oyunları',
+  bulmaca: 'Bulmaca Oyunları',
+  klasik: 'Klasik Oyunlar',
+  kart: 'Kart Oyunları',
+  kelime: 'Kelime Oyunları',
+};
+const primaryCategory = game.data.tags.find((t) => FEATURED_CATEGORIES.has(t));
+const breadcrumbItems: { '@type': 'ListItem'; position: number; name: string; item: string }[] = [
+  {
+    '@type': 'ListItem',
+    position: 1,
+    name: 'Ana Sayfa',
+    item: new URL(base, site).href,
+  },
+];
+if (primaryCategory) {
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: 2,
+    name: CATEGORY_LABELS[primaryCategory] ?? primaryCategory,
+    item: new URL(`${base}kategori/${primaryCategory}/`, site).href,
+  });
+}
+breadcrumbItems.push({
+  '@type': 'ListItem',
+  position: breadcrumbItems.length + 1,
+  name: game.data.title,
+  item: gameUrl,
+});
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems,
+};
+
 const faqAnswerHowToPlay =
   game.data.howToPlay ??
   `${game.data.title} oyununu açtığında oyun otomatik olarak başlar. ${game.data.controls ? 'Kontroller: ' + game.data.controls : 'Ekrandaki yönlendirmeleri takip et.'}`;
@@ -140,6 +192,11 @@ const faqSchema = {
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(gameSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(breadcrumbSchema)}
     />
     <script
       type="application/ld+json"
