@@ -5,5 +5,11 @@
   "tags": ["arcade", "klasik", "puzzle", "tek-oyunculu"],
   "controls": "← → hareket · ↓ yumuşak düşür · Boşluk sert düşür · Z / X döndür · P duraklat · R yeniden başla",
   "howToPlay": "Amaç, yukarıdan düşen yedi farklı tetromino parçasını oyun alanının tabanında yatay satırları eksiksiz dolduracak şekilde yerleştirmek; dolu her satır temizlenir ve sana puan kazandırır. Parçayı sola/sağa kaydırmak için ← ve → tuşlarını, saat yönünde döndürmek için X (veya ↑), tersi yönde döndürmek için Z tuşunu kullan; ↓ ile yumuşak düşürerek hızı kontrol eder, Boşluk ile sert düşürerek parçayı anında en alta kilitlersin. C veya Shift ile aktif parçayı kenarda tutup yedektekiyle değiştirebilirsin; P duraklatır, R sıfırdan başlatır. Her 10 satırda seviye atlarsın ve yerçekimi hızlanır, puan da seviyeyle çarpılarak büyür — tek seferde dört satır (Tetris) en yüksek ödülü verir. Bloklar tepeye kadar yığılıp yeni parçaya yer kalmadığında oyun biter. İpucu: sağ sütunu boş bırakıp dikey I parçasıyla dört katlı temizlik için biriktir; hayalet gölgeyi rehber alıp parçaları düz tabanla yerleştir.",
-  "thumbnail": "tetris.svg"
+  "thumbnail": "tetris.svg",
+  "en": {
+    "title": "Tetris",
+    "description": "The classic falling-block puzzle — clear lines, speed up, chase a top score.",
+    "controls": "← → move · ↓ soft drop · Space hard drop · Z / X rotate · P pause · R restart",
+    "howToPlay": "Stack the seven different tetromino pieces falling from above so they completely fill horizontal rows on the playfield; every full row clears and scores points. Move pieces left/right with ← and →, rotate clockwise with X (or ↑) and counter-clockwise with Z, soft drop with ↓ to control speed, or hard drop with Space to lock the piece instantly. C or Shift swaps the active piece with the hold slot. P pauses, R restarts. Every ten cleared rows you level up — gravity speeds up and the score multiplier grows. Clearing four rows at once (a Tetris) gives the biggest payout. The run ends when the stack reaches the top and no more pieces fit. Tip: keep the rightmost column open and feed it the vertical I-piece for four-row clears; use the ghost outline to land pieces flat against the existing stack."
+  }
 }

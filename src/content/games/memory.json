@@ -5,5 +5,11 @@
   "tags": ["puzzle", "hafıza", "klasik"],
   "controls": "Mouse / dokunma · 1-2-3: zorluk · R: yeniden başla",
   "howToPlay": "Amacın, kapalı duran tüm kart çiftlerini olabildiğince az hamleyle ve kısa sürede bulup tahtayı temizlemek. Mouse veya dokunmayla bir karta basınca o kart açılır ve altındaki meyve sembolü görünür; ikinci kartı da açtığında bir hamle sayılır. İki sembol aynıysa kartlar açık ve eşleşmiş olarak kalır, farklıysa kısa bir süre sonra tekrar kapanır ve yerlerini hatırlaman gerekir. Üstteki butonlardan veya 1-2-3 tuşlarından zorluk seç (Kolay 4×3, Orta 4×4, Zor 6×4); R tuşu ya da Yeniden başla ile her an yeni dağılımla başlayabilirsin. Tüm çiftler eşleştiğinde oyun biter ve hamle sayın ile süren rekor olarak kaydedilir. İpucu: ilk turlarda kartları rastgele değil, sistemli (örneğin satır satır) aç ki yerleri zihnine yerleşsin; eşini gördüğün bir sembolü hatırlıyorsan, başka bir kart açıp şansa bırakmak yerine doğrudan o çifti tamamla — gereksiz açış rekor hamleni şişirir.",
-  "thumbnail": "memory.svg"
+  "thumbnail": "memory.svg",
+  "en": {
+    "title": "Memory Match",
+    "description": "Match every pair of cards in the fewest moves and the shortest time.",
+    "controls": "Mouse / touch · 1-2-3: difficulty · R: restart",
+    "howToPlay": "Find every matching pair on a face-down grid using as few moves and as little time as possible. Click or tap a card to flip it and reveal the fruit beneath; flipping a second card counts as one move. If the two symbols match the cards stay open; if they don't, they flip back after a short pause and you have to remember where each one was. Pick difficulty from the top buttons or the 1-2-3 keys (Easy 4×3, Medium 4×4, Hard 6×4); R or Restart deals a fresh shuffle. The round ends when every pair is matched, and your move count plus elapsed time are saved as a personal best. Tip: don't flip randomly in the early rounds — scan row by row so positions stick. The moment you spot a card whose partner you've already seen, close the pair right away instead of opening a new card and gambling."
+  }
 }

@@ -5,5 +5,11 @@
   "tags": ["strateji", "klasik", "masa-oyunu", "türk"],
   "controls": "Çukura tıkla: taşları dağıt · R: yeni oyun",
   "howToPlay": "Klasik Türk Mangala — alt sıradaki 6 çukur senin, üst sıra AI'nın; sağdaki büyük hazne senin puan kumbaran, soldaki AI'nın. Her küçük çukur 4 taşla başlar. Kendi çukurlarından birine tıkladığında Türk varyantı gereği bir taş başlangıç çukurunda kalır, kalanlar saat yönünün tersine teker teker dağıtılır; kendi haznene taş düşer ama rakibin haznesi atlanır. Son taşın nereye düştüğüne göre üç özel durum vardır: kendi haznene düşerse ekstra tur kazanırsın; kendi tarafında boş bir çukura düşerse o taş ve tam karşısındaki rakip çukurun tüm taşları haznene gider; rakip tarafta bir çukura düşer ve o çukurdaki yeni toplam çift sayı (2, 4, 6…) olursa çukurun tamamını toplarsın. Bir tarafın altı çukuru da boşaldığında oyun biter ve karşı taraftaki taşlar o tarafın haznesine süpürülür; haznesinde çoğunluk olan kazanır. İpucu: ekstra tur zincirlerini kovala ve son taşı rakibin dolu bir çukuruna çift sayı yapacak şekilde indirmeye çalış. AI 2-derinlik minimax kullanır.",
-  "thumbnail": "mangala.svg"
+  "thumbnail": "mangala.svg",
+  "en": {
+    "title": "Mangala",
+    "description": "Turkish Mancala — sow your stones around the pits and pile the most in your store.",
+    "controls": "Click a pit: sow the stones · R: new game",
+    "howToPlay": "Turkish Mangala — the bottom row of six pits is yours, the top row is the AI's; the large store on the right is your score bin, the one on the left is the AI's. Every small pit starts with 4 stones. Click any of your own pits to sow: in the Turkish variant, one stone stays in the starting pit and the rest are distributed one by one counter-clockwise, dropping into your store but skipping the opponent's. Where the last stone lands triggers three possible bonuses: in your own store grants an extra turn; in one of your empty pits sweeps that stone plus all of the opposing pit's stones into your store; in an opponent pit where the new total is even (2, 4, 6…) collects the whole pit. When one side empties all six small pits the game ends and the remaining stones go to that side's store. The bigger pile wins. Tip: chain extra-turn moves and aim to land the last stone on an opponent pit where the count goes even. AI uses 2-ply minimax."
+  }
 }

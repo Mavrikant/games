@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Tap / tıkla · R: yeniden başla",
   "howToPlay": "Amacın 5×5 tahtadaki bütün ışıkları söndürmek. Başlangıçta tahta rastgele bir desenle karışık gelir ve her zaman çözülebilir bir durumdadır. Bir hücreye tıkladığında ya da dokunduğunda yalnızca o hücre değil; üstündeki, altındaki, sağındaki ve solundaki hücreler de aç/kapa durumunu değiştirir (köşegen komşular etkilenmez). Tahta kenarındaki hücrelerde eksik komşular doğal olarak atlanır. Tüm ışıklar kapandığı anda oyun biter; hamle sayın kaydedilir ve daha azıyla bitirirsen en iyi skorun güncellenir. R tuşuyla ya da Yeniden başla butonuyla istediğin an yeni bir bulmacayla başlayabilirsin. Strateji ipucu: aynı hücreye iki kez basmak hamleyi geri alır, bu yüzden her tıklamayı düşünerek yap; deneyimli oyuncular önce en üst satırı doğrudan çözer, sonra alt satırların kalıbına göre bir sonraki satırın altındaki ışıkları söndürmeye odaklanır (\"chase the lights\" yöntemi).",
-  "thumbnail": "lights-out.svg"
+  "thumbnail": "lights-out.svg",
+  "en": {
+    "title": "Lights Out",
+    "description": "Turn off every light — tapping a cell flips it and its four neighbours.",
+    "controls": "Tap / click · R: restart",
+    "howToPlay": "Switch off every light on a 5×5 board. The board starts in a random but solvable pattern. Tapping or clicking a cell toggles that cell and its four orthogonal neighbours (up, down, left, right — never diagonals); edge cells naturally have fewer neighbours, so those toggles affect fewer lights. The instant every light is off you win; your move count is saved, and beating it lowers your best score. Press R or Restart for a new puzzle. Strategy: tapping the same cell twice cancels the move, so be deliberate. Experienced solvers use the 'chase the lights' technique — solve the top row directly, then in each next row press the cells directly below any lights still on in the row above. Repeat down to the last row; if that ends in a known stuck pattern you adjust the first row with a small fixed table."
+  }
 }

@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "mantık", "kod-kırma"],
   "controls": "Slot tıkla: renk seç · Kontrol Et: tahmin gönder · R: yeniden başla",
   "howToPlay": "Amacın bilgisayarın gizlediği 4 pegli renk kodunu en az denemede çözmek. Kolay modda 6, Zor modda 8 renk vardır ve aynı renk kodda birden fazla kez geçebilir. Aktif satırdaki bir slota tıklayınca açılan paletten renk seç; yanlış koyduğun pegi tekrar tıklayıp değiştirebilir, × ile temizleyebilirsin. Dört slotu da doldurunca \"Kontrol Et\" (veya Enter) ile tahmini gönder. Geri bildirim sağda iki tür peg olarak gelir: dolu siyah peg = doğru renk + doğru pozisyon, içi boş beyaz peg = doğru renk ama yanlış pozisyon; ipuçlarının sırası slotlarla eşleşmez, sadece sayıları önemlidir. 10 denemede tüm pegler siyah olursa kazanırsın, hak biterse gizli kod açığa çıkar. İpucu: ilk iki tahmini farklı renk gruplarıyla yaparak hangi renklerin kodda olduğunu daralt; sonra renkleri sabit tutup yerlerini değiştirerek pozisyonları sabitle. R tuşu yeni oyun başlatır.",
-  "thumbnail": "mastermind.svg"
+  "thumbnail": "mastermind.svg",
+  "en": {
+    "title": "Mastermind",
+    "description": "Crack the secret colour code — the feedback pegs guide every guess.",
+    "controls": "Click a slot: pick a colour · Check: submit guess · R: restart",
+    "howToPlay": "Crack the computer's hidden 4-peg colour code in as few guesses as possible. Easy mode uses 6 colours, Hard uses 8 — colours can repeat in the secret. Click a slot in the active row to open the palette and pick a colour; click again to change or use × to clear. With all four slots filled, hit Check (or Enter) to submit. Feedback appears on the right as two kinds of pegs: a filled black peg means a correct colour in the correct position, an empty white peg means a correct colour in the wrong position. The order of the feedback pegs doesn't map to slot positions — only the counts matter. Crack the code in 10 attempts to win; run out and the secret is revealed. Tip: spend the first two guesses sweeping different colour groups to find which colours are in the code, then hold those colours fixed and shuffle their positions to pin them down. R starts a new round."
+  }
 }

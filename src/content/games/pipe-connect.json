@@ -5,5 +5,11 @@
   "tags": ["puzzle", "rotasyon", "akış"],
   "controls": "Dokun / tıkla: 90° döndür · R: yeni puzzle",
   "howToPlay": "Amacın, ızgaranın sol kenarındaki kaynak ile sağ kenardaki çıkış arasında kesintisiz bir boru hattı kurmak. Her boru hücresine tıkla ya da dokun; parça 90 derece saat yönünde döner. Düz borular, dirsekler ve T parçaları farklı yön kombinasyonlarına sahiptir; iki komşu hücrenin bağlanması için bakışan kenarlarının ikisinin de açık olması gerekir. Kaynak ve çıkış sabittir, döndürülemez. Akışın ulaştığı borular renk değiştirerek aydınlanır; bu görsel ipucu, hangi parçanın doğru bağlandığını anında gösterir. Çıkış hücresi aydınlandığında bölüm tamamlanır ve bir sonraki seviye açılır. Her seviyede en az hamle rekorun kaydedilir, klavyeden R tuşu yeni puzzle üretir. İpucu: önce kaynaktan başlayarak yolu adım adım kur, yola dahil olmayan çöp boruları görmezden gel; T parçaları üç yönlü olduğu için akışı bölmek yerine birleştirmek için kullan.",
-  "thumbnail": "pipe-connect.svg"
+  "thumbnail": "pipe-connect.svg",
+  "en": {
+    "title": "Pipe Connect",
+    "description": "Rotate the pipe segments and complete the flow from source to outlet.",
+    "controls": "Tap / click: rotate 90° · R: new puzzle",
+    "howToPlay": "Build an unbroken pipeline between the source on the left edge of the grid and the outlet on the right. Tap or click any pipe cell to rotate it 90° clockwise. Straight pipes, elbows, and T-pieces each have different open sides — two neighbouring cells only connect when both their facing edges are open. The source and outlet are locked and can't rotate. As soon as the flow reaches a pipe it lights up, giving you instant visual feedback on what's connected. Light up the outlet to clear the level and unlock the next. Your fewest-moves record per level is saved; press R for a new puzzle. Tip: build from the source outward step by step and ignore decoy pipes that aren't on your route. Use T-pieces to merge flow back together rather than splitting it."
+  }
 }

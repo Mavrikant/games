@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "tek-oyunculu"],
   "controls": "Ok tuşları veya WASD · Mobilde kaydır · R: yeniden başla",
   "howToPlay": "Amacın 4x4 tahtadaki karoları birleştirerek 2048 değerine ulaşmak. Masaüstünde ok tuşları veya WASD ile, mobilde tahta üzerinde parmağını sürükleyerek yön ver; R tuşu ya da Yeni Oyun düğmesi tahtayı sıfırlar. Bir yöne kaydırdığında tüm karolar o yöne hareket eder ve aynı sayıyı taşıyan iki karo çarpıştığında birleşip değerini ikiye katlar; her hamle sonunda boş bir hücreye yeni bir 2 (bazen 4) karosu eklenir, kazanılan birleşme değeri skoruna yazılır ve en iyi skorun tarayıcında saklanır. 2048 karosunu oluşturduğunda kazanma ekranı çıkar ama dilersen devam edip daha yüksek karolar (4096, 8192) hedefleyebilirsin; tahta tamamen dolar ve hiçbir komşu eşleşme kalmazsa oyun biter. İpucu: en büyük karonu bir köşeye sabitle ve her hamlede o köşeyi koru, ayrıca hamlelerini tek bir baskın eksene (örneğin yalnız sol ve aşağı) yaslayarak büyük karoları yan yana toplamayı kolaylaştır.",
-  "thumbnail": "2048.svg"
+  "thumbnail": "2048.svg",
+  "en": {
+    "title": "2048",
+    "description": "Merge the tiles, reach 2048. The classic sliding number puzzle.",
+    "controls": "Arrow keys or WASD · Swipe on mobile · R: restart",
+    "howToPlay": "Merge tiles on a 4×4 board to reach the 2048 tile. On desktop, use the arrow keys or WASD; on mobile, swipe across the board to slide tiles in that direction. R or the New Game button resets the board. Every move slides every tile as far as it can go in that direction; when two tiles with the same number collide they merge into one tile worth their sum, and each merge adds that amount to your score. A new 2 (occasionally a 4) appears in a random empty cell after each move; your best score is saved in the browser. Creating a 2048 tile triggers the win banner, but you can keep going for 4096 or 8192. The game ends when the board fills up and no neighbouring tiles can merge. Tip: anchor your largest tile in a corner and keep it there by preferring two of the four directions (e.g. only left and down) so big tiles stack up against the corner instead of drifting away."
+  }
 }

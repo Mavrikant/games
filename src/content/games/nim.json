@@ -5,5 +5,11 @@
   "tags": ["strateji", "klasik", "düşünme"],
   "controls": "Tıkla: o taş ve sağındaki taşları al · R: yeniden başla",
   "howToPlay": "Nim, bilinen en eski matematiksel strateji oyunlarından biridir. Üç sıra var: 3, 4 ve 5 taş. Sırayla oynarsınız; her hamlende tek bir sıradan en az 1 taş almak zorundasın (istediğin kadar, ama yalnız o sıradan). Bu oyun setinde mekanik şöyle: bir sıradaki herhangi bir taşa tıklarsın — o taş ve onun sağındaki bütün taşlar birden alınır. Yani bir sıranın en sağdaki taşına tıklamak 1 taş, ortasına tıklamak yarısını, en solundakine tıklamak tüm sırayı alır. Son taşı alan kazanır (normal play). Bilgisayar bu oyunun çözülmüş stratejisini bilir — sıraların XOR toplamı sıfır değilse, optimum hamleyi bulup XOR'u sıfıra çeker; sıfırsa rastgele oynar. Yani kazanmak için bilgisayarın XOR=0 durumuna düştüğü bir konum yaratmalısın; klasik (3, 4, 5) açılışında XOR = 3^4^5 = 2'dir, demek ki sen ilk başta kazanabilir konumdasın — ama tek bir yanlış hamlede pozisyonu rakibe kaptırırsın. R tuşu yeni oyun başlatır; skor (kazanma-kaybetme) yerel olarak hatırlanır.",
-  "thumbnail": "nim.svg"
+  "thumbnail": "nim.svg",
+  "en": {
+    "title": "Nim",
+    "description": "The classic mathematical strategy game — take stones from three rows, last one to move wins. Beat the perfect AI.",
+    "controls": "Click: take that stone and everything to its right · R: restart",
+    "howToPlay": "Nim is one of the oldest mathematical strategy games. Three rows hold 3, 4, and 5 stones. You and the computer alternate; on each turn you take at least one stone from exactly one row (as many as you want, but all from the same row). In this implementation: click any stone in a row and it plus every stone to its right is removed — so clicking the rightmost stone takes 1, the middle takes half the row, the leftmost takes the whole row. Take the last stone to win (normal play). The computer plays the solved strategy — when the XOR of row sizes is non-zero it finds the move that brings XOR to zero; when XOR is zero it plays randomly. To beat it you need to put it into the XOR=0 trap. The opening (3, 4, 5) has XOR = 3 XOR 4 XOR 5 = 2, so you start in a winning position — but one wrong move hands it back. R starts a new game; wins and losses are saved locally."
+  }
 }

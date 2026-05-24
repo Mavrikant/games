@@ -5,5 +5,11 @@
   "tags": ["arcade", "klasik", "spor", "skor"],
   "controls": "Boşluk / tıkla: açı sabitle → güç sabitle · R: yeniden başla",
   "howToPlay": "Amacın 10 frame boyunca pinleri devirip mümkün olan en yüksek skoru toplamak. Her atış iki aşamalı bir zamanlama oyunudur: önce pistin altındaki yatay açı çubuğu sağa-sola süzülür, doğru hizaya geldiğinde boşluğa (veya kanvasa tıklayarak) bas; ardından sağdaki dikey güç çubuğu yukarı-aşağı hareket etmeye başlar, istediğin güçte yine boşluğa basarak topu bırak. R tuşu oyunu yeniden başlatır. Bir frame'de iki atış hakkın var; ilk atışta 10 pini birden devirirsen strike olur, frame tek atışta biter ve sonraki iki atışın puanı bonus eklenir. İki atışta 10 pini tamamlarsan spare olur, sonraki atışın puanı bonus eklenir. 10. frame özeldir: strike veya spare yaparsan bir ya da iki bonus atış kazanırsın. Maksimum skor 300'dür. İpucu: açıyı pistin tam ortasına değil, ön pinin biraz sağına ya da soluna nişanla — köşeden giren toplar daha çok pin deviren zincirleme tepki yaratır. Gücü her zaman maksimuma çekmek yerine orta-üst seviyede tutmak, kontrolü korurken yeterli vuruşu sağlar.",
-  "thumbnail": "bowling.svg"
+  "thumbnail": "bowling.svg",
+  "en": {
+    "title": "Bowling",
+    "description": "Hit the highest score across 10 frames — pile up strikes and spares for bonus points.",
+    "controls": "Space / click: lock angle → lock power · R: restart",
+    "howToPlay": "Rack up the highest score across 10 frames by knocking down pins. Each throw is a two-step timing puzzle: first the horizontal angle bar slides left/right under the lane — press Space (or click the canvas) when it's lined up; then a vertical power bar rises and falls on the right — press again at your chosen power to release the ball. R restarts the game. Each frame gives you two throws; knocking down all 10 pins on the first throw is a strike (frame ends instantly, the next two throws bonus into this frame). Spare them on the second throw to bonus the next single throw. The 10th frame is special — strikes or spares grant up to two bonus throws. Maximum score is 300. Tip: aim slightly right or left of the head pin instead of dead centre — corner entries create the chain reaction that flattens more pins. Stay in the middle-to-upper power band rather than maxing it out; control beats raw force."
+  }
 }
