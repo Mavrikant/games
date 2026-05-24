@@ -24,7 +24,7 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
       <span class="nav__streak-count" data-streak-count>0</span>
     </span>
     <button class="nav__install" type="button" data-pwa-install hidden>
-      {lang === 'en' ? 'Install' : 'Kur'}
+      {lang === 'en' ? 'Download' : 'İndir'}
     </button>
     <a class="nav__lang" href={otherLangHref} hreflang={lang === 'en' ? 'tr' : 'en'}>
       {lang === 'en' ? t('lang.switchToTr', 'en') : t('lang.switchToEn', 'tr')}
