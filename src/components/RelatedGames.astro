@@ -1,14 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '@shared/i18n';
 
 interface Props {
   current: CollectionEntry<'games'>;
   all: CollectionEntry<'games'>[];
   limit?: number;
+  lang?: Lang;
 }
 
-const { current, all, limit = 4 } = Astro.props;
+const { current, all, limit = 4, lang = 'tr' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const linkBase = lang === 'en' ? `${base}en/` : base;
 const currentTags = new Set(current.data.tags);
 
 const ranked = all
@@ -28,17 +31,19 @@ const ranked = all
 
 {
   ranked.length > 0 && (
-    <aside class="related" aria-label="İlgili oyunlar">
-      <h2 class="related__title">İlgili oyunlar</h2>
+    <aside class="related" aria-label={t('related.title', lang)}>
+      <h2 class="related__title">{t('related.title', lang)}</h2>
       <ul class="related__list">
         {ranked.map((g) => {
+          const enBlock = lang === 'en' ? g.data.en : undefined;
+          const displayTitle = enBlock?.title ?? g.data.title;
           const thumbUrl = g.data.thumbnail
             ? `${base}thumbs/${g.data.thumbnail}`
             : null;
-          const placeholder = g.data.title.charAt(0).toUpperCase();
+          const placeholder = displayTitle.charAt(0).toUpperCase();
           return (
             <li class="related__item">
-              <a class="related__link" href={`${base}${g.id}/`} data-related-slug={g.id}>
+              <a class="related__link" href={`${linkBase}${g.id}/`} data-related-slug={g.id}>
                 <span class="related__thumb">
                   {thumbUrl ? (
                     <img src={thumbUrl} alt="" loading="lazy" />
@@ -48,7 +53,7 @@ const ranked = all
                     </span>
                   )}
                 </span>
-                <span class="related__name">{g.data.title}</span>
+                <span class="related__name">{displayTitle}</span>
                 <span class="related__score" data-related-score hidden />
               </a>
             </li>
