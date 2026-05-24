@@ -5,10 +5,12 @@
   "start_url": "/games/",
   "scope": "/games/",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#0a0b0e",
   "theme_color": "#0a0b0e",
-  "lang": "tr",
+  "lang": "tr-TR",
+  "dir": "ltr",
+  "categories": ["games", "entertainment"],
   "icons": [
     {
       "src": "/games/favicon.svg",
@@ -33,6 +35,15 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Rastgele oyun",
+      "short_name": "Rastgele",
+      "description": "Rastgele bir oyun aç",
+      "url": "/games/?random=1",
+      "icons": [{ "src": "/games/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }
