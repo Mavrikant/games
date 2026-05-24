@@ -49,11 +49,23 @@ const ogImageUrl = new URL(ogImagePath, Astro.site ?? Astro.url.origin).href;
 const plausibleId = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '';
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
+// PUBLIC_GA_MEASUREMENT_ID is the GA4 tag id (G-…). Empty → no Google tag.
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
 ---
 
 <!doctype html>
 <html lang={htmlLang[lang]}>
   <head>
+    {/* Google tag (gtag.js) */}
+    {gaMeasurementId && (
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
+    )}
+    {gaMeasurementId && (
+      <script
+        is:inline
+        set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
+      />
+    )}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
