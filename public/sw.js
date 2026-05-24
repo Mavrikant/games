@@ -12,7 +12,7 @@
 // Bump CACHE_VERSION whenever the precache list shape changes; old
 // caches are deleted on `activate`.
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const PRECACHE = `karaman-games-precache-${CACHE_VERSION}`;
 const RUNTIME = `karaman-games-runtime-${CACHE_VERSION}`;
 
@@ -20,14 +20,15 @@ const PRECACHE_URLS = [
   '/games/',
   '/games/favicon.svg',
   '/games/manifest.webmanifest',
+  '/games/offline.html',
 ];
 
 self.addEventListener('install', (event) => {
+  // No skipWaiting() here on purpose: an updated worker stays "waiting" so the
+  // page can offer a refresh toast (see the message handler below). The very
+  // first install still activates immediately since no worker controls yet.
   event.waitUntil(
-    caches
-      .open(PRECACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting()),
+    caches.open(PRECACHE).then((cache) => cache.addAll(PRECACHE_URLS)),
   );
 });
 
@@ -98,7 +99,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. HTML and everything else — network-first, fall back to cache.
+  // 3. HTML and everything else — network-first, fall back to cache, then to
+  //    the offline page for navigations that were never cached.
   event.respondWith(
     fetch(req)
       .then((res) => {
@@ -106,6 +108,21 @@ self.addEventListener('fetch', (event) => {
         caches.open(RUNTIME).then((cache) => cache.put(req, copy));
         return res;
       })
-      .catch(() => caches.match(req).then((cached) => cached || caches.match('/games/'))),
+      .catch(() =>
+        caches.match(req).then(
+          (cached) =>
+            cached ||
+            (req.mode === 'navigate'
+              ? caches.match('/games/offline.html')
+              : caches.match('/games/')),
+        ),
+      ),
   );
+});
+
+// The page posts this when the user accepts the refresh toast; the waiting
+// worker then activates (install no longer auto-skips, so updates wait for
+// user action rather than reloading underneath them).
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
