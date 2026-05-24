@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Card from '@components/Card.astro';
+import PlayerOverlay from '@components/PlayerOverlay.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import AdSlot from '@components/AdSlot.astro';
+import '@styles/archive.css';
+import '@styles/listicle.css';
+
+// Picks lean toward short rounds, calm visuals, no violence, and
+// curriculum tie-ins (math, logic, language).
+const PICKS = [
+  { slug: '2048', tag: 'sayı duygusu, üs alma' },
+  { slug: 'sudoku', tag: 'mantık ve örüntü' },
+  { slug: 'memory', tag: 'çalışma belleği' },
+  { slug: 'adam-asmaca', tag: 'Türkçe kelime hazinesi' },
+  { slug: 'hanoi-kuleleri', tag: 'rekürsif düşünme' },
+  { slug: 'tic-tac-toe', tag: 'iki oyunculu giriş' },
+  { slug: 'dama', tag: 'strateji ve sıra alma' },
+  { slug: 'lights-out', tag: 'paralel mantık' },
+  { slug: 'mastermind', tag: 'hipotez ve çıkarım' },
+  { slug: 'mangala', tag: 'aritmetik + strateji' },
+  { slug: 'mahjong-solitaire', tag: 'görsel eşleştirme' },
+  { slug: 'kar-tanesi', tag: 'simetri ve geometri' },
+];
+
+const allGames = await getCollection('games');
+const games = PICKS.map((p) => {
+  const g = allGames.find((x) => x.id === p.slug);
+  return g ? { game: g, tag: p.tag } : null;
+}).filter((x): x is { game: typeof allGames[number]; tag: string } => x !== null);
+
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+const pageUrl = new URL(`${base}listeler/sinifa-uygun-oyunlar/`, site).href;
+const gamesData = games.map(({ game: g }) => ({
+  slug: g.id,
+  title: g.data.title,
+  description: g.data.description,
+  dateAdded: g.data.dateAdded,
+  tags: g.data.tags,
+  controls: g.data.controls ?? '',
+  url: `${base}${g.id}/`,
+}));
+
+const TITLE = 'Sınıfa uygun tarayıcı oyunları — öğretmenler için 12 seçki';
+const DESCRIPTION =
+  'Sınıfta projektörle veya bireysel cihazlarla oynanabilen 12 ücretsiz tarayıcı oyunu: mantık, sayı, kelime ve strateji. Reklamsız, kısa partiler, hızlı kurulum.';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: TITLE,
+  description: DESCRIPTION,
+  url: pageUrl,
+  inLanguage: 'tr',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: games.map(({ game: g }, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(`${base}${g.id}/`, site).href,
+      name: g.data.title,
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: new URL(base, site).href },
+    { '@type': 'ListItem', position: 2, name: 'Listeler', item: new URL(`${base}listeler/`, site).href },
+    { '@type': 'ListItem', position: 3, name: 'Sınıfa uygun oyunlar', item: pageUrl },
+  ],
+};
+---
+
+<BaseLayout title={TITLE} description={DESCRIPTION} ogTitle="Sınıfa uygun oyunlar" lang="tr">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav count={allGames.length} />
+  <main class="app listicle">
+    <nav class="listicle__crumbs" aria-label="Konum">
+      <a href={base}>Ana Sayfa</a>
+      <span aria-hidden="true">›</span>
+      <span>Sınıfa uygun oyunlar</span>
+    </nav>
+
+    <article class="listicle__intro">
+      <h1>Sınıfa uygun 12 tarayıcı oyunu — öğretmenler için</h1>
+      <p class="listicle__lede">
+        Projektörle bir aktivite başlatmak, ders sonu 10 dakikalık bir mola
+        düzenlemek veya kişisel cihazlarla küçük grup çalışması yapmak için
+        kullanabileceğin, reklamsız ve hesap istemeyen 12 oyun. Hepsi
+        tarayıcıda doğrudan açılır; indirme yok, kayıt yok, parça toplama
+        ekranı yok.
+      </p>
+      <p>
+        Liste, müfredattaki konularla doğal bağı olan oyunları öne çıkartır:
+        sayı duygusu ve aritmetik, mantık ve örüntü, Türkçe kelime hazinesi,
+        geometri ve simetri, strateji ve karar alma. Tüm seçimler kısa
+        oturumlu (5–10 dakika) ve şiddet içermez; orta okul yaş grubundan
+        liseye kadar kullanılabilir, bazıları (Hanoi Kuleleri, Mastermind)
+        ilkokul 4–5. sınıfa da uyarlanabilir.
+      </p>
+      <p>
+        Sınıfta nasıl kullanılır? Üç hızlı format öneriyoruz: <strong>açılış
+        ısınması</strong> (3 dakika tek bir oyun, dersin konusuyla bağlı —
+        ör. üs konusundan önce 2048), <strong>kazanım pekiştirme</strong>
+        (5 dakika, çift veya küçük grup), <strong>uzun proje</strong>
+        (öğrenciler kendi stratejilerini yazıp en yüksek skoru hedefler).
+      </p>
+    </article>
+
+    <ol class="listicle__list">
+      {games.map(({ game: g, tag }, i) => (
+        <li class="listicle__item">
+          <span class="listicle__rank">{i + 1}</span>
+          <div class="listicle__card-wrap">
+            <Card game={g} />
+            <span class="listicle__hint">Müfredat bağı: {tag}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <AdSlot position="homepage" />
+
+    <section class="listicle__outro">
+      <h2>Sınıfta kullanırken pratik notlar</h2>
+      <p>
+        Skorlar yalnızca öğrencinin kendi tarayıcısında saklanır, herhangi
+        bir sunucuya gönderilmez — yani okul cihazını silmek herkes için
+        sıfırdan başlamak demektir. Etiketsiz, kayıtsız oynanış KVKK
+        açısından da en sade çözümdür. Daha geniş bir kütüphane için{' '}
+        <a href={`${base}ogretmenler/`}>Öğretmen Rehberi</a> sayfasını
+        ziyaret edebilir, derste hangi oyunun hangi kazanımla
+        eşleşeceğini tartışabilirsin.
+      </p>
+      <h2>Daha fazla kategori</h2>
+      <p>
+        Sayı, mantık ve örüntü çalışmak için{' '}
+        <a href={`${base}kategori/puzzle/`}>Puzzle</a> ve{' '}
+        <a href={`${base}kategori/mantik/`}>Mantık</a> oyunlarına;
+        strateji ve karar alma için{' '}
+        <a href={`${base}kategori/strateji/`}>Strateji</a> sayfasına
+        bakabilirsin.
+      </p>
+    </section>
+  </main>
+
+  <SiteFooter />
+  <PlayerOverlay />
+
+  <script
+    is:inline
+    id="games-data"
+    type="application/json"
+    set:html={JSON.stringify(gamesData)}
+  />
+
+  <script>
+    import '../../archive/main.ts';
+  </script>
+</BaseLayout>
