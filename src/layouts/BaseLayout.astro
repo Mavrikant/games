@@ -112,6 +112,8 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
           location.hostname === '127.0.0.1';
         if (!('serviceWorker' in navigator) || !secure) return;
 
+        var pendingReload = false;
+
         function showUpdateToast(worker) {
           if (!worker || document.getElementById('sw-update-toast')) return;
           var bar = document.createElement('div');
@@ -131,6 +133,7 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
             'cursor:pointer;border:0;border-radius:8px;padding:7px 14px;' +
             'font:inherit;font-weight:600;color:#fff;background:#6366f1';
           btn.addEventListener('click', function () {
+            pendingReload = true;
             worker.postMessage({ type: 'SKIP_WAITING' });
           });
           bar.appendChild(label);
@@ -157,11 +160,10 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
               /* registration failed; offline simply unavailable */
             });
 
-          var refreshing = false;
+          // Reload only after the user accepted the update — never on the
+          // first visit when the worker initially takes control.
           navigator.serviceWorker.addEventListener('controllerchange', function () {
-            if (refreshing) return;
-            refreshing = true;
-            location.reload();
+            if (pendingReload) location.reload();
           });
         });
       })();
