@@ -79,6 +79,74 @@ const gameSchema = {
     priceCurrency: 'USD',
   },
 };
+
+// EN site has no category landing pages, so the breadcrumb is Home → Game.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: new URL(`${base}en/`, site).href,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: en.title,
+      item: gameUrlEn,
+    },
+  ],
+};
+
+const faqAnswerHowToPlay =
+  en.howToPlay ??
+  `${en.title} starts automatically when you open the page. ${en.controls ? 'Controls: ' + en.controls : 'Follow the on-screen prompts.'}`;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: `How do you play ${en.title}?`,
+      acceptedAnswer: { '@type': 'Answer', text: faqAnswerHowToPlay },
+    },
+    {
+      '@type': 'Question',
+      name: `Is ${en.title} free?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Yes, ${en.title} is completely free. No payment, subscription, or in-app purchases. Play directly in your browser.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `Do I need an account to play ${en.title}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. No sign-up, no login, no email required. Open the page and start playing. Scores are saved locally in your browser, never sent to a server.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `Does ${en.title} work on mobile?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. The game is designed to run in mobile browsers (Safari, Chrome). Touch controls are supported on tablets and phones.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: `Do I need to download ${en.title}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No, no download or installation is required. The game runs entirely in your browser. You can also add the page to your home screen and use it like an app.',
+      },
+    },
+  ],
+};
 ---
 
 <GameLayout
@@ -101,11 +169,22 @@ const gameSchema = {
       is:inline
       set:html={JSON.stringify(gameSchema)}
     />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(faqSchema)}
+    />
   </Fragment>
   <Body />
-  <RelatedGames slot="below" current={game} all={allGames} />
+  <RelatedGames slot="below" current={game} all={allGames} lang="en" />
   <AdSlot slot="below" position="game" />
   <EmbedCode slot="below" slug={game.id} title={en.title} />
+  <AdSlot slot="below" position="footer" />
 </GameLayout>
 
 {gameCss && <style is:global set:html={gameCss} />}

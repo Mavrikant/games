@@ -153,10 +153,16 @@ const itemListSchema = {
     </section>
 
     <section class="featured" aria-labelledby="featured-title">
-      <span class="featured__eyebrow">Bugünün önerisi</span>
+      <div class="featured__head">
+        <span class="featured__eyebrow">Bugünün önerisi</span>
+        <span class="featured__done" data-daily-done hidden>
+          Bugün oynadın <span aria-hidden="true">✓</span>
+        </span>
+      </div>
       <button
         class="featured__card"
         data-shelf-slug={featured.id}
+        data-daily-challenge
         type="button"
         aria-label={`${featured.data.title} oyna`}
       >
@@ -237,7 +243,14 @@ const itemListSchema = {
 
     <div id="tags" class="tags"></div>
     <div id="grid" class="grid">
-      {games.map((g) => <Card game={g} />)}
+      {games.map((g, i) => (
+        <>
+          <Card game={g} />
+          {(i + 1) % 8 === 0 && i < games.length - 1 && (
+            <AdSlot position="in-grid" />
+          )}
+        </>
+      ))}
     </div>
 
     <footer class="footer">
@@ -274,6 +287,19 @@ const itemListSchema = {
 
   <script>
     import '../archive/main.ts';
+    import { isDailyDone, markDailyDone } from '../shared/daily';
+
+    if (isDailyDone()) {
+      document.querySelector('[data-daily-done]')?.removeAttribute('hidden');
+    }
+    document
+      .querySelector('[data-daily-challenge]')
+      ?.addEventListener('click', () => {
+        markDailyDone();
+        document
+          .querySelector('[data-daily-done]')
+          ?.removeAttribute('hidden');
+      });
   </script>
 </BaseLayout>
 
@@ -284,6 +310,14 @@ const itemListSchema = {
     max-width: 1024px;
     padding: 0 16px;
   }
+  .featured__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
   .featured__eyebrow {
     display: inline-block;
     color: var(--accent);
@@ -291,7 +325,21 @@ const itemListSchema = {
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+  }
+  .featured__done {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .featured__done[hidden] {
+    display: none;
   }
   .featured__card {
     display: grid;
