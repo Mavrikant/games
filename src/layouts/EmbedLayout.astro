@@ -2,6 +2,7 @@
 import '@styles/tokens.css';
 import '@styles/base.css';
 import '@styles/game-shell.css';
+import { gtagInitScript } from '@shared/ga';
 
 interface Props {
   title: string;
@@ -24,7 +25,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
     {gaMeasurementId && (
       <script
         is:inline
-        set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
+        set:html={gtagInitScript(gaMeasurementId)}
       />
     )}
     <meta charset="UTF-8" />

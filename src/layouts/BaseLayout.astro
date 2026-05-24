@@ -4,6 +4,7 @@ import '@styles/base.css';
 import FeedbackWidget from '@components/FeedbackWidget.astro';
 import StickyAd from '@components/StickyAd.astro';
 import { htmlLang, ogLocale, type Lang } from '@shared/i18n';
+import { gtagInitScript } from '@shared/ga';
 
 interface HreflangLink {
   lang: string; // 'tr' | 'en' | 'x-default'
@@ -63,7 +64,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
     {gaMeasurementId && (
       <script
         is:inline
-        set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
+        set:html={gtagInitScript(gaMeasurementId)}
       />
     )}
     <meta charset="UTF-8" />
