@@ -60,6 +60,16 @@ npm run build     # astro check + astro build → dist/
 npm run preview   # build'i lokal test et
 ```
 
+## PWA olarak kurma
+
+Site bir PWA'dır — çevrimdışı çalışır ve ana ekrana kurulabilir:
+
+- **Android (Chrome):** menü (⋮) → **Ana ekrana ekle**.
+- **iOS (Safari):** **Paylaş** → **Ana Ekrana Ekle**.
+
+Kurulduktan sonra daha önce açtığın oyunlar çevrimdışı da oynanabilir. Yeni
+sürüm çıktığında köşede "Yeni sürüm var" bildirimi görünür; **Yenile**'ye dokun.
+
 ## Yeni oyun ekleme
 
 ```sh

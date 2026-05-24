@@ -250,4 +250,17 @@ void sortLabelEl;
 
 renderTags();
 applyFilters();
+
+// PWA "Rastgele oyun" shortcut (manifest): /games/?random=1 opens a random
+// game. An explicit #/play/ hash wins; the query is cleaned from the URL so
+// a reload doesn't re-roll.
+if (
+  new URLSearchParams(location.search).get('random') &&
+  games.length > 0 &&
+  !location.hash.startsWith('#/play/')
+) {
+  openGame(games[Math.floor(Math.random() * games.length)].slug);
+  history.replaceState(null, '', location.pathname + location.hash);
+}
+
 syncFromHash();
