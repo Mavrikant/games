@@ -23,6 +23,7 @@ jobs:
     # Variables tab. Leaving any unset just omits that piece of the page.
     env:
       PUBLIC_PLAUSIBLE_SCRIPT_ID: ${{ vars.PUBLIC_PLAUSIBLE_SCRIPT_ID }}
+      PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || 'G-SS831K8J0P' }}
       PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
       PUBLIC_ADSENSE_SLOT_HOMEPAGE: ${{ vars.PUBLIC_ADSENSE_SLOT_HOMEPAGE }}
       PUBLIC_ADSENSE_SLOT_GAME: ${{ vars.PUBLIC_ADSENSE_SLOT_GAME }}
