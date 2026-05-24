@@ -24,11 +24,14 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener('install', (event) => {
-  // No skipWaiting() here on purpose: an updated worker stays "waiting" so the
-  // page can offer a refresh toast (see the message handler below). The very
-  // first install still activates immediately since no worker controls yet.
+  // Activate the updated worker as soon as it's installed so a new version
+  // applies in the background. The page is NOT reloaded — clients.claim() on
+  // activate lets the next navigation serve fresh content (silent update).
   event.waitUntil(
-    caches.open(PRECACHE).then((cache) => cache.addAll(PRECACHE_URLS)),
+    caches
+      .open(PRECACHE)
+      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(() => self.skipWaiting()),
   );
 });
 
@@ -118,11 +121,4 @@ self.addEventListener('fetch', (event) => {
         ),
       ),
   );
-});
-
-// The page posts this when the user accepts the refresh toast; the waiting
-// worker then activates (install no longer auto-skips, so updates wait for
-// user action rather than reloading underneath them).
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });

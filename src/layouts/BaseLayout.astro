@@ -139,78 +139,34 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
     <FeedbackWidget />
     <StickyAd />
     <script is:inline>
-      // Register service worker (offline support). Runs on https or localhost
-      // (both secure contexts) so `npm run preview` can exercise the PWA. A
-      // detected update shows a manual refresh toast — no auto-reload.
+      // Register service worker (offline + silent auto-update). Runs on https
+      // or localhost (both secure contexts) so `npm run preview` can exercise
+      // it. A new version activates in the background (worker skipWaiting +
+      // clients.claim) and takes effect on the next navigation — the page is
+      // never reloaded underneath the user, so no refresh prompt is needed.
       (function () {
         var secure =
           location.protocol === 'https:' ||
           location.hostname === 'localhost' ||
           location.hostname === '127.0.0.1';
         if (!('serviceWorker' in navigator) || !secure) return;
-
-        var pendingReload = false;
-
-        function showUpdateToast(worker) {
-          if (!worker || document.getElementById('sw-update-toast')) return;
-          var bar = document.createElement('div');
-          bar.id = 'sw-update-toast';
-          bar.style.cssText =
-            'position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;' +
-            'align-items:center;gap:12px;padding:12px 14px;border-radius:12px;' +
-            'background:#14171c;color:#f5f6f8;border:1px solid #2f3540;' +
-            'box-shadow:0 8px 30px rgba(0,0,0,.45);' +
-            'font:500 14px/1.3 ui-sans-serif,system-ui,sans-serif';
-          var label = document.createElement('span');
-          label.textContent = 'Yeni sürüm var';
-          var btn = document.createElement('button');
-          btn.type = 'button';
-          btn.textContent = 'Yenile';
-          btn.style.cssText =
-            'cursor:pointer;border:0;border-radius:8px;padding:7px 14px;' +
-            'font:inherit;font-weight:600;color:#fff;background:#6366f1';
-          btn.addEventListener('click', function () {
-            pendingReload = true;
-            worker.postMessage({ type: 'SKIP_WAITING' });
-          });
-          bar.appendChild(label);
-          bar.appendChild(btn);
-          document.body.appendChild(bar);
-        }
-
         window.addEventListener('load', function () {
           navigator.serviceWorker
             .register('/games/sw.js', { scope: '/games/' })
-            .then(function (reg) {
-              if (reg.waiting) showUpdateToast(reg.waiting);
-              reg.addEventListener('updatefound', function () {
-                var nw = reg.installing;
-                if (!nw) return;
-                nw.addEventListener('statechange', function () {
-                  if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-                    showUpdateToast(nw);
-                  }
-                });
-              });
-            })
             .catch(function () {
               /* registration failed; offline simply unavailable */
             });
-
-          // Reload only after the user accepted the update — never on the
-          // first visit when the worker initially takes control.
-          navigator.serviceWorker.addEventListener('controllerchange', function () {
-            if (pendingReload) location.reload();
-          });
         });
       })();
     </script>
     <script is:inline>
-      // Install promotion — encourage adding the app to the home screen.
-      // Chromium/Android: capture beforeinstallprompt and offer an "Ekle"
-      // button. iOS Safari (no such event): show the Share → "Ana Ekrana
-      // Ekle" hint on the homepage. Hidden inside the archive iframe, when
-      // already installed, or for 14 days after the user dismisses it.
+      // Install promotion + one-tap "Kur" entry point.
+      // Chromium/Android: capture beforeinstallprompt; surface it via an auto
+      // banner (dismissible, 14-day cooldown) AND a persistent nav button that
+      // stays available even after the banner is dismissed. iOS Safari has no
+      // install API, so the nav button / homepage banner show the manual
+      // Share → "Ana Ekrana Ekle" hint. Hidden in the archive iframe and when
+      // already installed.
       (function () {
         if (window.top !== window.self) return;
         var standalone =
@@ -220,17 +176,50 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
 
         var KEY = 'pwa-install.dismissed';
         var COOLDOWN = 14 * 24 * 60 * 60 * 1000;
-        try {
-          var raw = localStorage.getItem(KEY);
-          if (raw && Date.now() - Number(raw) < COOLDOWN) return;
-        } catch (e) {}
+        function bannerSnoozed() {
+          try {
+            var raw = localStorage.getItem(KEY);
+            return !!raw && Date.now() - Number(raw) < COOLDOWN;
+          } catch (e) {
+            return false;
+          }
+        }
 
+        var ua = navigator.userAgent || '';
+        var iosSafari =
+          /iphone|ipad|ipod/i.test(ua) && /safari/i.test(ua) && !/crios|fxios|edgios/i.test(ua);
         var deferred = null;
 
-        function snooze() {
+        function navButton() {
+          return document.querySelector('[data-pwa-install]');
+        }
+        function revealNavButton() {
+          var b = navButton();
+          if (b) b.hidden = false;
+        }
+        function hideNavButton() {
+          var b = navButton();
+          if (b) b.hidden = true;
+        }
+
+        function dismissBanner() {
           try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
           var el = document.getElementById('pwa-install');
           if (el) el.remove();
+        }
+
+        function triggerInstall() {
+          if (deferred) {
+            deferred.prompt();
+            deferred.userChoice.then(function () {
+              try { if (window.plausible) window.plausible('PWA Install'); } catch (e) {}
+              deferred = null;
+              dismissBanner();
+              hideNavButton();
+            });
+          } else if (iosSafari) {
+            showBanner('Ana ekrana eklemek için <b>Paylaş</b> ↑ → <b>“Ana Ekrana Ekle”</b>.', false);
+          }
         }
 
         function showBanner(html, installable) {
@@ -264,15 +253,7 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
             add.style.cssText =
               'cursor:pointer;border:0;border-radius:8px;padding:8px 14px;font:inherit;' +
               'font-weight:600;color:#fff;background:#6366f1;flex:0 0 auto';
-            add.addEventListener('click', function () {
-              if (!deferred) return;
-              deferred.prompt();
-              deferred.userChoice.then(function () {
-                try { if (window.plausible) window.plausible('PWA Install'); } catch (e) {}
-                deferred = null;
-                snooze();
-              });
-            });
+            add.addEventListener('click', triggerInstall);
             bar.appendChild(add);
           }
 
@@ -283,30 +264,47 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
           close.style.cssText =
             'cursor:pointer;border:0;background:transparent;color:#98a0ad;font-size:20px;' +
             'line-height:1;padding:2px 4px;flex:0 0 auto';
-          close.addEventListener('click', snooze);
+          close.addEventListener('click', dismissBanner);
           bar.appendChild(close);
 
           document.body.appendChild(bar);
         }
 
+        // Persistent nav "Kur" button (homepage only; absent on game pages).
+        // Always available when installable, even after the banner is snoozed.
+        document.addEventListener('click', function (e) {
+          var trigger = e.target && e.target.closest && e.target.closest('[data-pwa-install]');
+          if (trigger) {
+            e.preventDefault();
+            triggerInstall();
+          }
+        });
+
         window.addEventListener('beforeinstallprompt', function (e) {
           e.preventDefault();
           deferred = e;
-          showBanner('Oyunları <b>ana ekrana ekle</b> — tek dokunuşla aç, çevrimdışı oyna.', true);
+          revealNavButton();
+          if (!bannerSnoozed()) {
+            showBanner('Oyunları <b>ana ekrana ekle</b> — tek dokunuşla aç, çevrimdışı oyna.', true);
+          }
         });
-        window.addEventListener('appinstalled', snooze);
+        window.addEventListener('appinstalled', function () {
+          deferred = null;
+          dismissBanner();
+          hideNavButton();
+        });
 
-        // iOS Safari has no beforeinstallprompt; nudge with the manual flow,
-        // homepage only so it isn't repeated on every game page.
-        var ua = navigator.userAgent || '';
-        var iosSafari =
-          /iphone|ipad|ipod/i.test(ua) && /safari/i.test(ua) && !/crios|fxios|edgios/i.test(ua);
-        if (iosSafari && (location.pathname === '/games/' || location.pathname === '/games')) {
-          window.addEventListener('load', function () {
-            setTimeout(function () {
-              showBanner('Ana ekrana eklemek için <b>Paylaş</b> ↑ → <b>“Ana Ekrana Ekle”</b>.', false);
-            }, 1500);
-          });
+        if (iosSafari) {
+          revealNavButton();
+          if (location.pathname === '/games/' || location.pathname === '/games') {
+            window.addEventListener('load', function () {
+              setTimeout(function () {
+                if (!bannerSnoozed()) {
+                  showBanner('Ana ekrana eklemek için <b>Paylaş</b> ↑ → <b>“Ana Ekrana Ekle”</b>.', false);
+                }
+              }, 1500);
+            });
+          }
         }
       })();
     </script>
