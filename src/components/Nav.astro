@@ -14,6 +14,46 @@ const base = import.meta.env.BASE_URL;
     <span class="brand__path">games</span>
   </a>
   <nav class="nav__meta">
+    <span class="nav__streak" data-streak hidden title="Üst üste ziyaret günleri">
+      <span aria-hidden="true">🔥</span>
+      <span class="nav__streak-count" data-streak-count>0</span>
+    </span>
     <span class="nav__count">{count} oyun</span>
   </nav>
 </header>
+
+<script>
+  import { updateStreak } from '../shared/daily';
+
+  const days = updateStreak();
+  if (days > 1) {
+    const el = document.querySelector('[data-streak]') as HTMLElement | null;
+    const count = document.querySelector('[data-streak-count]');
+    if (el && count) {
+      count.textContent = String(days);
+      el.removeAttribute('hidden');
+    }
+  }
+</script>
+
+<style>
+  .nav__streak {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-right: 8px;
+  }
+  .nav__streak[hidden] {
+    display: none;
+  }
+  .nav__streak-count {
+    font-variant-numeric: tabular-nums;
+  }
+</style>
