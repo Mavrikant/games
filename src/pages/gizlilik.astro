@@ -7,6 +7,8 @@ import '@styles/archive.css';
 
 const games = await getCollection('games');
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
+const fundingChoicesEnabled =
+  (import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '') !== '';
 const plausibleEnabled = (import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '') !== '';
 const web3formsEnabled = (import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '') !== '';
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
@@ -99,6 +101,19 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
           rel="noopener noreferrer">policies.google.com/privacy</a>
       </li>
       <li>
+        <strong>Google Funding Choices / Privacy &amp; Messaging</strong>
+        {' '}
+        ({fundingChoicesEnabled ? 'aktif' : 'AdSense aktif olduğunda devreye girer'}):
+        {' '}
+        AB Ekonomik Bölgesi, Birleşik Krallık ve İsviçre'den gelen
+        ziyaretçilere GDPR/ePrivacy uyumlu rıza banner'ı gösterir.
+        Tercihiniz IAB TCF v2.2 formatında saklanır ve reklam ortaklarımıza
+        iletilir.{' '}
+        <a href="https://support.google.com/admanager/answer/9011581"
+          target="_blank"
+          rel="noopener noreferrer">Funding Choices hakkında</a>.
+      </li>
+      <li>
         <strong>GitHub Pages</strong> (hosting):{' '}
         <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement"
           target="_blank"
@@ -169,6 +184,16 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         target="_blank"
         rel="noopener noreferrer">adssettings.google.com</a>{' '}
       adresinden ilgi alanına dayalı reklamı kapatabilirsiniz.
+    </p>
+    <p>
+      AB Ekonomik Bölgesi, Birleşik Krallık ve İsviçre'den giriş yapan
+      ziyaretçilere ilk ziyarette Google Funding Choices üzerinden çerez
+      ve reklam rıza banner'ı gösterilir. Bu banner'da rızayı kabul edebilir,
+      reddedebilir veya tercihlerinizi ayrıntılı yönetebilirsiniz; seçiminizi
+      daha sonra sayfanın altındaki "Gizlilik tercihleri" linkinden veya
+      tarayıcı verilerinizi silerek değiştirebilirsiniz. Türkiye dahil EEA
+      dışı ziyaretçilere banner gösterilmez; KVKK kapsamındaki haklarınız
+      yukarıda açıklanmıştır.
     </p>
 
     <h2>Çocukların gizliliği</h2>

@@ -31,8 +31,13 @@ const ogImageUrl = new URL(ogImagePath, Astro.site ?? Astro.url.origin).href;
 // install snippet (the bit after `pa-` in the script URL, e.g.
 // `BMAxUwrIK8Icg2HpLysj2`). Empty → no analytics rendered.
 // PUBLIC_ADSENSE_CLIENT is the AdSense `ca-pub-…` id. Empty → no ads.
+// PUBLIC_FUNDING_CHOICES_ID is the publisher id (`pub-…`, no `ca-` prefix)
+// shown in the Funding Choices / Privacy & Messaging console. When set,
+// EEA/UK/CH visitors get a GDPR consent banner so personalized ad CPM
+// stays unlocked; TR visitors see nothing (geo-handled by Google).
 const plausibleId = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '';
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
+const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
 ---
 
 <!doctype html>
@@ -88,6 +93,23 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
           crossorigin="anonymous"
+        />
+      )
+    }
+    {
+      fundingChoicesId && (
+        <script
+          is:inline
+          async
+          src={`https://fundingchoicesmessages.google.com/i/${fundingChoicesId}?ers=1`}
+        />
+      )
+    }
+    {
+      fundingChoicesId && (
+        <script
+          is:inline
+          set:html="(function(){function signalGooglefcPresent(){if(!window.frames['googlefcPresent']){if(document.body){const iframe=document.createElement('iframe');iframe.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px';iframe.style.display='none';iframe.name='googlefcPresent';document.body.appendChild(iframe);}else{setTimeout(signalGooglefcPresent,0);}}}signalGooglefcPresent();})();"
         />
       )
     }
