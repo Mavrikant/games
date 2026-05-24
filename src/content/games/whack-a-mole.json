@@ -5,5 +5,11 @@
   "tags": ["arcade", "refleks", "tek-oyunculu"],
   "controls": "Tıkla veya dokun: köstebeği yakala · Bombadan kaç · R: yeniden başla",
   "howToPlay": "Amacın 60 saniye boyunca 3x3 tahtadaki deliklerden çıkan köstebekleri yakalayarak en yüksek skoru toplamak. Beliren köstebeklere fareyle tıkla veya dokunmatik ekranda parmağınla bas; deliğin herhangi bir yerine vurman yeterli, minik sprite'a nişan almana gerek yok. Normal köstebek +10, nadir çıkan altın köstebek +30 puan kazandırır; ancak siyah bombaya dokunursan -20 puan kaybeder ve tahta sallanır (skor sıfırın altına inmez). Her köstebek yalnızca kısa bir süre yukarıda kalır, altın köstebek daha da hızlı kaçar. Oyun ilerledikçe spawn temposu her 10 saniyede bir kısalır, yani tempo giderek artar. R tuşuyla istediğin an yeniden başlatabilirsin. İpucu: deliklerin merkezi arası gözünü gezdir, sadece tek bir noktaya odaklanma; altın köstebek belirir belirmez önceliğini ona ver, bombayı gördüğünde elini geri çek.",
-  "thumbnail": "whack-a-mole.svg"
+  "thumbnail": "whack-a-mole.svg",
+  "en": {
+    "title": "Whack-a-Mole",
+    "description": "Bonk the moles — but dodge the bomb and don't miss the golden one.",
+    "controls": "Click or tap: hit the mole · Avoid the bomb · R: restart",
+    "howToPlay": "Score as high as possible in 60 seconds on a 3×3 grid of holes. Tap or click a mole as it pops up; anywhere inside the hole counts — you don't have to land on the tiny sprite. Normal moles score +10, the rare golden mole scores +30, and the black bomb costs −20 and shakes the board (the score never drops below zero). Each mole stays up for only a short window and the golden one disappears faster. Spawn pace tightens every 10 seconds, so the tempo ramps up. R restarts any time. Tip: keep your gaze between the holes rather than locked on one spot, and prioritise the golden mole the instant it appears. Pull your hand back when you spot a bomb."
+  }
 }

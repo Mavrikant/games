@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "eşleştirme", "sabır"],
   "controls": "Tıkla: taş seç · İkinciye tıkla: eşleştir + kaldır · U: geri al · H: ipucu · N: yeni karışım · R: yeni oyun",
   "howToPlay": "Amaç, 4 katmanlı piramit halinde dizilmiş 60 mahjong taşını ikişer ikişer eşleştirerek tamamen temizlemek. Bir taşı kaldırabilmen için onun 'serbest' olması gerekir: üstünde başka bir taş bulunmamalı VE sol ya da sağ kenarlarından en az biri açık olmalı; iki yanı da komşu taşla kapalıysa veya üzerinde bir taş varsa o taş kilitlidir ve sönük görünür. Oyna: serbest bir taşa tıkla, ardından aynı sembole sahip başka bir serbest taşa tıkla — ikisi de tahtadan kalkar ve altta kalanlar açığa çıkar. Aynı taşa tekrar tıklayarak veya Esc ile seçimini iptal edebilirsin. Yardımcılar: H ile ipucu (3 hak; uygun bir çifti vurgular), U ile son eşleştirmeyi geri al, N veya R ile yeni karışım. Tüm taşları kaldırırsan kazanırsın; eşleşebilecek serbest çift kalmazsa kaybedersin (karışımlar çözülebilir üretilir ama yanlış sırayla açtığın yığınlar seni kilitleyebilir). İpucu: önce üst katmanlardaki taşları kaldırıp altta sıkışmış olanları açığa çıkarmaya çalış; aynı sembolden dört kopya varsa hangi ikisini kaldıracağını seçerken diğer çiftin ileride erişilebilir kalacağından emin ol.",
-  "thumbnail": "mahjong-solitaire.svg"
+  "thumbnail": "mahjong-solitaire.svg",
+  "en": {
+    "title": "Mahjong Solitaire",
+    "description": "Match and remove mahjong tiles — peel the stack apart layer by layer.",
+    "controls": "Click: select tile · Click second: match + remove · U: undo · H: hint · N: new shuffle · R: new game",
+    "howToPlay": "Clear a 4-layer mahjong pyramid (60 tiles) by removing matching pairs. A tile can only be lifted when it's 'free' — nothing on top of it AND at least one of the left or right neighbours is empty. Tiles blocked on both sides or with a tile resting on them are locked and dim. To play: click a free tile, then click another free tile with the same symbol — both are removed and the layers beneath them are exposed. Click the selected tile again or press Esc to cancel. Helpers: H gives a hint (3 per game; highlights a valid pair), U undoes the last match, N reshuffles, R starts a new game. Clear every tile to win; lose when no free pair remains (shuffles are guaranteed solvable but a wrong order can lock you out). Tip: peel the top layer first to free what's below; when four copies of a symbol are on the table, pick the two whose removal still leaves the other pair reachable later."
+  }
 }

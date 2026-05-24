@@ -5,5 +5,11 @@
   "tags": ["strateji", "klasik", "masa-oyunu"],
   "controls": "Tıkla / dokun: hücreye taş koy · R: yeniden başla",
   "howToPlay": "8x8 tahtada siyah taşlarla oynarsın, beyazları yapay zekâ kontrol eder; amacın oyun sonunda tahtada kendi renginden daha çok taş bırakmaktır. Sırası gelen hücreye tıkla ya da dokun — yasal hamleler önceden vurgulanır, R tuşu oyunu sıfırlar. Bir hamlenin geçerli olması için yatay, dikey veya çapraz bir hatta en az bir rakip taşını kendi iki taşının arasına sıkıştırman gerekir; sıkışan tüm beyaz taşlar anında siyaha döner ve aynı hamlede birden çok yön tetiklenebilir. Yasal hamlen yoksa pas geçilir; iki taraf da üst üste pas geçerse veya tahta dolarsa çok taşı olan kazanır. İpucu: köşeler çevrilemediği için altın değerindedir, köşeye komşu kareleri (X ve C noktaları) erken vermek rakibe köşeyi armağan eder; ayrıca açılışta az taş çevirip rakibin hamle seçeneklerini daraltmak çoğunlukla çok taş kapmaktan daha güçlüdür.",
-  "thumbnail": "reversi.svg"
+  "thumbnail": "reversi.svg",
+  "en": {
+    "title": "Reversi",
+    "description": "Classic strategy — flip the opponent's stones and dominate the 8×8 board.",
+    "controls": "Click / tap: place a stone · R: restart",
+    "howToPlay": "Play as Black on an 8×8 board against the computer's White; the side with the most stones at the end wins. Click or tap a cell to place — legal moves are highlighted in advance; R resets the game. A move is legal only if it sandwiches at least one of the opponent's stones between the new stone and an existing stone of your colour along a horizontal, vertical, or diagonal line. Every sandwiched white stone flips to black at once and a single move can trigger flips in multiple directions. With no legal move you pass; two consecutive passes (or a full board) ends the game and the bigger pile wins. Tip: corners can never be flipped so they're gold — but the squares adjacent to corners (the X and C points) give the corner away cheaply, so don't open them early. In the opening, flipping fewer stones to restrict the opponent's move options is usually stronger than greedily flipping many."
+  }
 }

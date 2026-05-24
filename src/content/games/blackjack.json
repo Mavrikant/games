@@ -5,5 +5,11 @@
   "tags": ["kart", "klasik", "casino", "strateji"],
   "controls": "Hit: kart al · Stand: dur · Yeni el: dağıt · +/-: bahis ayarla · R: yeni oyun",
   "howToPlay": "Amaç krupiyeyi yenerek elini 21'e mümkün olduğunca yaklaştırmak, ama 21'i aşmamaktır. Önce + ve − tuşlarıyla (veya klavyede +/−) bahsini ayarla, ardından Dağıt'a (Enter/Boşluk) bas: sana iki kart açık, krupiyeye bir açık bir kapalı kart dağıtılır. Resimli kartlar 10, Aslar elini bozmuyorsa 11, bozuyorsa 1 sayılır; ikisi 21 yaparsa Blackjack olur ve 3:2 öder. Hit (H) ile kart ekleyebilir, Stand (S) ile durabilirsin. 21'i geçersen bust olur ve bahsi kaybedersin. Durduğunda krupiye kapalı kartını açar; 16 ve altında çekmek, 17 ve üstünde durmak zorundadır. Krupiye bust olursa veya senin toplamın daha yüksekse kazanır, eşitlikte bahsin geri gelir (push). R tuşu chip ve skoru sıfırlayıp yeni oyuna başlatır. İpucu: krupiyenin açık kartı 7 ve üzeriyse 17'ye kadar çekmeyi göze al; 12-16 arası 'kırılgan' ellerde krupiyenin 2-6 açık kartı varsa durmak genellikle daha güvenlidir. Chipler tükenirse otomatik 1000 chip ile yeniden başlarsın.",
-  "thumbnail": "blackjack.svg"
+  "thumbnail": "blackjack.svg",
+  "en": {
+    "title": "Blackjack",
+    "description": "Beat the dealer with a hand as close to 21 as possible — the classic card game.",
+    "controls": "Hit: draw · Stand: hold · Deal: new hand · +/-: adjust bet · R: new game",
+    "howToPlay": "Beat the dealer by getting closer to 21 without going over. Set your bet with + and − (or the +/− keys), then press Deal (Enter/Space): you get two cards face-up, the dealer gets one face-up and one face-down. Face cards are worth 10, aces are 11 unless that would bust you (then they fall to 1). Two cards totalling 21 is Blackjack and pays 3:2. Hit (H) draws another card, Stand (S) ends your turn. Going over 21 is a bust and you lose the bet. When you stand the dealer reveals their hole card and must draw on 16 or lower and stand on 17 or higher. You win if the dealer busts or if your total beats theirs; ties return your bet (push). R clears chips and starts a new game. Tip: when the dealer shows 7 or higher, draw up to 17 — they're likely to make a strong hand. On stiff totals 12–16, standing is usually safer if the dealer's up-card is 2–6. Run out of chips and you auto-restart with 1000."
+  }
 }

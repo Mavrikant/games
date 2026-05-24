@@ -5,5 +5,11 @@
   "tags": ["arcade", "klasik", "tek-oyunculu"],
   "controls": "← → veya A/D · Fare/dokunma: paddle · Boşluk: başlat/topu fırlat · P: duraklat · R: yeniden başla",
   "howToPlay": "Amacın ekranın üstündeki tüm tuğlaları topu sektirerek kırmak ve bir sonraki seviyeye ilerlemek. Paddle'ı sol ok veya A ile sola, sağ ok veya D ile sağa hareket ettir; istersen fare imlecini veya parmağını kullanarak da paddle'ı sürükleyebilirsin. Top paddle'a yapışık başlar; Boşluk tuşu ya da tıklama ile fırlat. P duraklatır, R oyunu sıfırlar. Üst sıralardaki tuğlalar daha yüksek puan verir; ileri seviyelerde bazı tuğlalar iki vuruşla kırılır ve hem top hızlanır hem paddle daralır. Top alta düşerse bir can kaybedersin, üç canın da biterse oyun sona erer ve en yüksek skorun kaydedilir. İpucu: topu paddle'ın kenarına denk getirirsen sekme açısı keskinleşir; bunu, kenardaki ulaşılması zor tuğlaları hedeflemek için kullan ve aceleci hamleler yerine paddle'ı topun düşeceği noktaya önceden götür.",
-  "thumbnail": "breakout.svg"
+  "thumbnail": "breakout.svg",
+  "en": {
+    "title": "Breakout",
+    "description": "Bounce the ball, break every brick. The classic arcade reflex game.",
+    "controls": "← → or A/D · Mouse/touch: paddle · Space: launch ball · P: pause · R: restart",
+    "howToPlay": "Break every brick at the top of the screen by bouncing the ball off your paddle. Move the paddle left with ← or A and right with → or D; you can also drag it with the mouse or your finger. The ball starts attached to the paddle — press Space or tap to launch. P pauses, R restarts. Bricks in the higher rows are worth more; later stages introduce bricks that need two hits, the ball speeds up, and the paddle shrinks. If the ball falls past the paddle you lose a life — three lives and the run ends with your best score saved. Tip: striking the ball near the paddle's edge sharpens the bounce angle — use that to reach awkward corner bricks, and position the paddle under where the ball will land rather than chasing it."
+  }
 }

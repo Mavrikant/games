@@ -5,5 +5,11 @@
   "tags": ["strateji", "klasik", "masa-oyunu"],
   "controls": "Tıkla: kendi elinden taş seç → Sol/Sağ uca tıkla · Çek: boneyard'tan al · Pas · R: yeni oyun",
   "howToPlay": "Amacın elindeki tüm domino taşlarını rakipten önce bitirmek. Klasik double-six setiyle oynanır: 28 taş karıştırılır, sana ve rakibine yedişer taş dağıtılır, kalan 14 taş boneyard (çekme yığını) olur. Oyuna en yüksek çift sahibi başlar ve o taş otomatik olarak masaya konur. Sıran geldiğinde elindeki bir taşa tıklayarak seç, sonra zincirin Sol veya Sağ ucundaki butona tıkla; yalnızca açık uçla eşleşen taşları yerleştirebilirsin (örneğin uç 5 ise, 5'i olan bir taş gerekir; gerekirse oyun taşı otomatik çevirir). Oynayacak taşın yoksa Çek tuşuyla boneyard'tan taş al; uygun taş gelene kadar veya yığın bitene kadar çekmek zorundasın. Boneyard boş ve hâlâ oynayamıyorsan Pas geçilir. Tüm taşlarını ilk bitiren turu kazanır; iki taraf da bloke olursa elindeki taşların pip (nokta) toplamı daha düşük olan kazanır. R tuşu yeni oyun başlatır. Strateji: yüksek puanlı taşları (6-6, 5-6 gibi) erken oyna ki blokede aleyhine puan yazmasın; bir rengi tüketmek için rakibe o sayıyı verme ve elindeki çeşidi koru.",
-  "thumbnail": "domino.svg"
+  "thumbnail": "domino.svg",
+  "en": {
+    "title": "Dominoes",
+    "description": "Link matching ends in a chain — empty your hand before the opponent does.",
+    "controls": "Click: pick a tile from your hand → click the Left or Right end · Draw: pull from the boneyard · Pass · R: new game",
+    "howToPlay": "Empty your hand of dominoes before the opponent does. Played with the classic double-six set: 28 tiles shuffled, seven dealt to each side, the remaining 14 forming the boneyard. Whoever holds the highest double starts and that tile auto-opens the chain. On your turn, click a tile in your hand, then click the Left or Right end of the chain to place it; you can only attach a tile whose value matches the open end (e.g. a 5-end needs a tile with a 5; the engine flips orientation for you). With no playable tile, hit Draw to pull from the boneyard — you keep drawing until you can play or the boneyard runs out. Boneyard empty and still no move? You pass. First to empty their hand wins the round; if both sides block, lowest pip total wins. R starts a new game. Tip: play high-pip tiles (6-6, 5-6) early so they don't bury you in a block; avoid feeding the opponent a value you also hold, and keep a variety of values in hand so you don't get stranded on a single suit."
+  }
 }

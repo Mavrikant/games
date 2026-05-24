@@ -5,5 +5,11 @@
   "tags": ["klasik", "tek-oyunculu", "puzzle"],
   "controls": "Sol tık: aç · Sağ tık / uzun bas: bayrak · Çift tık: chord · R: yeniden başla",
   "howToPlay": "Amacın, tahtadaki tüm mayınsız hücreleri açarak tarlayı temizlemek; bunu yaparken hiçbir mayına basmamak. Sol tıkla hücre açarsın, sağ tıkla (mobilde uzun basışla) mayın olduğundan şüphelendiğin kareye bayrak koyarsın; açılan bir sayı hücresine çift tıklayınca, etrafındaki bayrak sayısı sayıya eşitse kalan komşuları tek hamlede otomatik açabilirsin (chord). Açılan her sayı, o hücreyi çevreleyen sekiz komşudaki toplam mayın adedini gösterir; boş hücreler ise zincirleme açılır ve sana geniş güvenli alanlar kazandırır. İlk tık asla mayına denk gelmez, ama tek bir yanlış açılış oyunu anında bitirir; bütün güvenli karelere ulaştığında kazanırsın. İpucu: önce sayıların kenarlarındaki bariz mayınları bayrakla işaretle, sonra chord ile hızlıca ilerle; emin değilsen tahmin etmek yerine başka bir köşeden devam et. R tuşu yeniden başlatır.",
-  "thumbnail": "minesweeper.svg"
+  "thumbnail": "minesweeper.svg",
+  "en": {
+    "title": "Minesweeper",
+    "description": "Uncover safe cells without stepping on a mine — the number hints show the way.",
+    "controls": "Left click: open · Right click / long press: flag · Double click: chord · R: restart",
+    "howToPlay": "Clear the board by opening every cell that doesn't hide a mine. Left-click to open a cell; right-click (or long-press on mobile) to flag a cell you suspect. Double-clicking an opened number cell auto-opens all its remaining neighbours if you've already flagged the right number of mines around it (a chord move). Each opened number tells you how many mines sit in the eight cells touching it; empty cells chain-open and reveal large safe areas. Your first click never lands on a mine, but a single wrong click ends the run. Win by opening every safe cell. Tip: flag the obvious mines around clear numbers first, then chord through to expand quickly; if you can't deduce the next move, switch to a different corner instead of guessing. Press R to restart."
+  }
 }

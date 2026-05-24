@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "mantık", "sayı"],
   "controls": "Tıkla: hücre seç · 1-9: doldur · 0/Backspace: sil · Ok tuşları: cursor · H: ipucu · R: yeniden başla · N: yeni tahta",
   "howToPlay": "Amacın 9×9 tahtayı 1-9 rakamlarıyla öyle doldurmak ki her satır, her sütun ve her 3×3 blok dokuz rakamı tam bir kez içersin. Başlangıçta verilen kalın hücreler sabittir ve değiştirilemez; boş bir hücreye tıklayarak ya da ok tuşlarıyla imleci gezdirerek seçim yap, ardından klavyeden 1-9 tuşlarına veya alttaki rakam paneline basarak rakamı yerleştir. 0 ya da Backspace seçili hücreyi temizler. Aynı satır, sütun veya blokta tekrarlayan bir rakam koyduğunda çakışan hücreler kırmızıyla işaretlenir; seçili hücrenin satır/sütun/bloğu ve aynı rakamı taşıyan diğer hücreler de vurgulanır, bu sayede olası yerleri kolay tararsın. Tahtayı kurallara uygun şekilde tamamen doldurduğunda oyun otomatik kazanılır ve süren en iyi skor olarak kaydedilir. Strateji olarak önce tek olası rakamın kaldığı hücrelere odaklan; bir rakamın bir bloğa, satıra veya sütuna yalnızca tek bir hücrede sığdığı durumları ('tek yer' tekniği) ara. Sıkıştığında 'İpucu' (H) boş bir hücreye doğru rakamı yerleştirir, ancak her tahta için sadece 3 ipucu hakkın vardır; R ile tahtayı sıfırlar, N ile yeni bir bulmaca açarsın.",
-  "thumbnail": "sudoku.svg"
+  "thumbnail": "sudoku.svg",
+  "en": {
+    "title": "Sudoku",
+    "description": "The classic number puzzle — fill every row, column, and 3×3 box with 1–9.",
+    "controls": "Click: select cell · 1–9: fill · 0/Backspace: clear · Arrow keys: cursor · H: hint · R: restart · N: new board",
+    "howToPlay": "Fill the 9×9 board with the digits 1 through 9 so that every row, every column, and every 3×3 block contains each digit exactly once. The bold given numbers are fixed and can't be changed. Click an empty cell or move the cursor with the arrow keys, then press a number key (or use the on-screen number pad) to place a digit; 0 or Backspace clears the selection. Conflicting digits flash red, and cells in the same row, column, or block as the selection are highlighted to help you scan options. Finishing the board correctly auto-wins and records your time as a best score. Strategy: start with cells that only have one possible digit, and look for 'single position' patterns where a digit fits only one cell in a given block, row, or column. The Hint button (H) fills one correct digit but you only get three hints per board; R resets the current board, N deals a new puzzle."
+  }
 }

@@ -5,5 +5,11 @@
   "tags": ["arcade", "refleks", "tek-oyunculu"],
   "controls": "Boşluk / tıkla / dokun: zıpla · R: yeniden başla",
   "howToPlay": "Amacın sarı kuşu hayatta tutarak ardı ardına gelen yeşil borulardan geçirmek ve mümkün olduğunca yüksek skora ulaşmak. Kontrol son derece sade: Boşluk tuşuna basmak, ekrana tıklamak veya dokunmak kuşu yukarı doğru bir kanat çırpışıyla itiyor; hiçbir şey yapmazsan yer çekimi devreye girip kuşu giderek hızlanan bir düşüşe sokuyor. Sahnede ekran boyunca soldan sağa kayan boru çiftleri var ve her çiftin ortasında dar bir boşluk bulunuyor; bu boşluğun tam ortasından geçmen gerekiyor. Borunun gövdesine, başlık kısmına, üst tavana ya da alttaki zemine değdiğin an oyun biter; sağ üstteki skor sıfırlanır ve en iyi skorun otomatik kaydedilir. Geçtiğin her boru çifti bir puan değerinde. Strateji olarak panik halinde art arda zıplamak yerine her dokunuş arasında kısa bir bekleme bırak; küçük, ritmik kanat çırpışlarıyla yüksekliği koru. Yaklaşan boşluğa tek bir bütün hareketle değil, çok sayıda mini zıplamayla yaklaşmak çarpışmayı belirgin biçimde azaltır. R tuşu veya Yeniden başla düğmesi her an temiz bir tur başlatır.",
-  "thumbnail": "flappy.svg"
+  "thumbnail": "flappy.svg",
+  "en": {
+    "title": "Flappy",
+    "description": "Tap to flap, weave through the pipes. One-button reflex addiction in the browser.",
+    "controls": "Space / click / tap: flap · R: restart",
+    "howToPlay": "Keep the yellow bird alive long enough to weave through endless pairs of green pipes for as high a score as you can. Controls are stripped down to a single action: pressing Space, clicking, or tapping flaps the bird upward; do nothing and gravity pulls it into an accelerating dive. The pipes scroll right-to-left across the screen and each pair leaves a narrow vertical gap — fly through the middle of every gap. Touching a pipe body, a pipe cap, the ceiling, or the ground ends the run instantly; the run score resets and your best score is saved automatically. Each pipe pair cleared is worth one point. Tip: don't panic-spam the flap button — leave a short beat between taps. Approach an upcoming gap with a series of small rhythmic flaps instead of a single big surge; tiny corrections beat large ones. Press R or Restart for a clean attempt at any time."
+  }
 }
