@@ -26,6 +26,10 @@ export const GET: APIRoute = async ({ site }) => {
       ],
     },
     { loc: `${origin}${base}ogretmenler/`, lastmod: buildDate },
+    // SEO listicle landings
+    { loc: `${origin}${base}listeler/en-iyi-puzzle-oyunlari/`, lastmod: buildDate },
+    { loc: `${origin}${base}listeler/sinifa-uygun-oyunlar/`, lastmod: buildDate },
+    { loc: `${origin}${base}listeler/2-dakikalik-mola-oyunlari/`, lastmod: buildDate },
     // EN homepage
     {
       loc: `${origin}${base}en/`,

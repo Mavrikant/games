@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Card from '@components/Card.astro';
+import PlayerOverlay from '@components/PlayerOverlay.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import AdSlot from '@components/AdSlot.astro';
+import '@styles/archive.css';
+import '@styles/listicle.css';
+
+// Quick rounds (≤ 2 minutes), one-button or single-input controls,
+// no save state needed to feel satisfying.
+const PICKS = [
+  { slug: 'flappy', tag: 'tek tuş, anında başla' },
+  { slug: 'snake', tag: '30 saniyelik tur, klasik' },
+  { slug: 'whack-a-mole', tag: '60 saniyelik puanlama' },
+  { slug: 'breakout', tag: 'level başına 60-90 sn' },
+  { slug: 'tic-tac-toe', tag: '30 saniyelik el' },
+  { slug: '2048', tag: 'her hamle 5 saniye' },
+  { slug: 'sky-jump', tag: 'tek hata, tek tur' },
+  { slug: 'pong', tag: '7 sayılık hızlı maç' },
+  { slug: 'halka-esle', tag: 'kart eşleştirme' },
+  { slug: 'lights-out', tag: 'birkaç tıklamada çöz' },
+  { slug: 'ip-cambazi', tag: 'denge refleksi' },
+  { slug: 'ritim', tag: 'tek tuş ritim' },
+];
+
+const allGames = await getCollection('games');
+const games = PICKS.map((p) => {
+  const g = allGames.find((x) => x.id === p.slug);
+  return g ? { game: g, tag: p.tag } : null;
+}).filter((x): x is { game: typeof allGames[number]; tag: string } => x !== null);
+
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(base, Astro.url.origin);
+const pageUrl = new URL(`${base}listeler/2-dakikalik-mola-oyunlari/`, site).href;
+const gamesData = games.map(({ game: g }) => ({
+  slug: g.id,
+  title: g.data.title,
+  description: g.data.description,
+  dateAdded: g.data.dateAdded,
+  tags: g.data.tags,
+  controls: g.data.controls ?? '',
+  url: `${base}${g.id}/`,
+}));
+
+const TITLE = '2 dakikalık mola için 12 hızlı tarayıcı oyunu';
+const DESCRIPTION =
+  'İş arasında 2 dakikan mı var? Tek tuşla başlayan, kısa turlu 12 hızlı tarayıcı oyunu — Flappy, Snake, Tetris ve daha fazlası. Anında oyna, biter bitmez kapat.';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: TITLE,
+  description: DESCRIPTION,
+  url: pageUrl,
+  inLanguage: 'tr',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: games.map(({ game: g }, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(`${base}${g.id}/`, site).href,
+      name: g.data.title,
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: new URL(base, site).href },
+    { '@type': 'ListItem', position: 2, name: 'Listeler', item: new URL(`${base}listeler/`, site).href },
+    { '@type': 'ListItem', position: 3, name: '2 dakikalık mola oyunları', item: pageUrl },
+  ],
+};
+---
+
+<BaseLayout title={TITLE} description={DESCRIPTION} ogTitle="2 dakikalık mola oyunları" lang="tr">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav count={allGames.length} />
+  <main class="app listicle">
+    <nav class="listicle__crumbs" aria-label="Konum">
+      <a href={base}>Ana Sayfa</a>
+      <span aria-hidden="true">›</span>
+      <span>2 dakikalık mola oyunları</span>
+    </nav>
+
+    <article class="listicle__intro">
+      <h1>2 dakikalık mola için 12 hızlı tarayıcı oyunu</h1>
+      <p class="listicle__lede">
+        Compile bitirmeyi bekliyorsun, kahve hazırlanıyor, ya da Zoom toplantısı
+        2 dakika sonra başlayacak — beyni dağıtmak için harika bir an. Bu
+        liste, tek tuşla başlayan, tek hayatta biten, akıllı telefonda da bir
+        eliyle oynanabilen 12 hızlı oyunu topluyor.
+      </p>
+      <p>
+        Üç ortak özellik: <strong>açılış 5 saniye</strong> (tutorial yok,
+        sayfaya gelir gelmez Boşluk veya tıklama ile başlar),
+        <strong>tek tur 60–120 saniye</strong> (kaybedince 5 saniye içinde
+        yeni tur başlar), <strong>kayıt gerekmez</strong> (skor tarayıcıda
+        kalır, gizleyemediğin ne tarih var ne lider tablosu).
+      </p>
+      <p>
+        İş yerinde patron geçer geçmez kapatabileceğin minimal görsellerle
+        tasarlandılar — gürültülü efektler yok, bildirim spam'ı yok,
+        pop-up reklam yok. Cebindeki en yararsız 2 dakikayı en eğlenceli
+        2 dakikaya çevirmek için ideal.
+      </p>
+    </article>
+
+    <ol class="listicle__list">
+      {games.map(({ game: g, tag }, i) => (
+        <li class="listicle__item">
+          <span class="listicle__rank">{i + 1}</span>
+          <div class="listicle__card-wrap">
+            <Card game={g} />
+            <span class="listicle__hint">Mola formatı: {tag}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <AdSlot position="homepage" />
+
+    <section class="listicle__outro">
+      <h2>Mola oyunu seçerken nelere baktık?</h2>
+      <p>
+        Üç ölçüt: <em>açılış hızı</em> (sayfa yüklenir yüklenmez 5 saniyede
+        oynanabiliyor mu), <em>tur uzunluğu</em> (en fazla 2 dakikalık tek
+        oturumlar), <em>geri dönüş eşiği</em> (öldükten sonra yeni tur tek
+        tuşa başlıyor mu). Snake ve Flappy en yüksek puanı alıyor; daha
+        strateji odaklı (Lights Out) sıraya katılma sebebi ise 4-5
+        tıklamada çözülebilen kısa bulmacalar olmaları.
+      </p>
+      <h2>Daha fazlası</h2>
+      <p>
+        Hızlı tempo seviyorsan{' '}
+        <a href={`${base}kategori/arcade/`}>Arcade</a> ve{' '}
+        <a href={`${base}kategori/refleks/`}>Refleks</a> kategorileri
+        zaman tüneline bağlanmadan saatler doldurabilir. Mola yerine
+        zihin egzersizi arıyorsan{' '}
+        <a href={`${base}listeler/en-iyi-puzzle-oyunlari/`}>en iyi puzzle
+        oyunları</a> seçkimize göz at.
+      </p>
+    </section>
+  </main>
+
+  <SiteFooter />
+  <PlayerOverlay />
+
+  <script
+    is:inline
+    id="games-data"
+    type="application/json"
+    set:html={JSON.stringify(gamesData)}
+  />
+
+  <script>
+    import '../../archive/main.ts';
+  </script>
+</BaseLayout>
