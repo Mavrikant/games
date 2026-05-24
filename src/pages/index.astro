@@ -17,6 +17,45 @@ const games = all.sort((a, b) =>
 const base = import.meta.env.BASE_URL;
 const site = Astro.site ?? new URL(base, Astro.url.origin);
 
+// "Bugünün önerisi" — deterministic day-of-year selection so the featured
+// game rotates daily without any server, and rebuilding the same day picks
+// the same game.
+const _today = new Date();
+const _startOfYear = Date.UTC(_today.getUTCFullYear(), 0, 0);
+const dayIndex = Math.floor((_today.getTime() - _startOfYear) / 86_400_000);
+const featured = games[dayIndex % games.length];
+const featuredThumbUrl = featured.data.thumbnail
+  ? `${base}thumbs/${featured.data.thumbnail}`
+  : null;
+
+// Category shelves above the full grid — surface 6 newest matches per tag
+// cluster so casual visitors find something to play before reaching the
+// long list (lifts pages/session = ad impressions).
+const TAG_SETS: { title: string; eyebrow: string; tags: string[] }[] = [
+  {
+    title: 'Beyin & Mantık',
+    eyebrow: 'Düşünce egzersizi',
+    tags: ['puzzle', 'mantık', 'bulmaca'],
+  },
+  {
+    title: 'Refleks & Aksiyon',
+    eyebrow: 'Hız ve zamanlama',
+    tags: ['arcade', 'refleks', 'reflex'],
+  },
+  {
+    title: 'Sıralı Strateji',
+    eyebrow: 'Plan, hamle, kazan',
+    tags: ['strateji'],
+  },
+];
+const shelves = TAG_SETS.map((set) => {
+  const matchSet = new Set(set.tags);
+  const items = games
+    .filter((g) => g.data.tags.some((t) => matchSet.has(t)))
+    .slice(0, 6);
+  return { ...set, games: items };
+}).filter((s) => s.games.length > 0);
+
 const gamesData = games.map((g) => ({
   slug: g.id,
   title: g.data.title,
@@ -107,6 +146,60 @@ const itemListSchema = {
       </p>
     </section>
 
+    <section class="featured" aria-labelledby="featured-title">
+      <span class="featured__eyebrow">Bugünün önerisi</span>
+      <button
+        class="featured__card"
+        data-shelf-slug={featured.id}
+        type="button"
+        aria-label={`${featured.data.title} oyna`}
+      >
+        {featuredThumbUrl && (
+          <div class="featured__thumb">
+            <img src={featuredThumbUrl} alt="" loading="eager" />
+          </div>
+        )}
+        <div class="featured__body">
+          <h2 class="featured__title" id="featured-title">{featured.data.title}</h2>
+          <p class="featured__desc">{featured.data.description}</p>
+          <span class="featured__cta">Hemen oyna →</span>
+        </div>
+      </button>
+    </section>
+
+    {shelves.map((shelf) => (
+      <section class="shelf" aria-label={shelf.title}>
+        <header class="shelf__head">
+          <span class="shelf__eyebrow">{shelf.eyebrow}</span>
+          <h2 class="shelf__title">{shelf.title}</h2>
+        </header>
+        <div class="shelf__row">
+          {shelf.games.map((g) => {
+            const thumb = g.data.thumbnail
+              ? `${base}thumbs/${g.data.thumbnail}`
+              : null;
+            return (
+              <button
+                class="shelf__card"
+                data-shelf-slug={g.id}
+                type="button"
+                aria-label={`${g.data.title} oyna`}
+              >
+                {thumb ? (
+                  <img src={thumb} alt="" loading="lazy" />
+                ) : (
+                  <span class="shelf__card-thumb-fallback" aria-hidden="true">
+                    {g.data.title.charAt(0).toUpperCase()}
+                  </span>
+                )}
+                <span class="shelf__card-title">{g.data.title}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
     <div class="toolbar">
       <div class="search">
         <svg
@@ -160,7 +253,197 @@ const itemListSchema = {
     set:html={JSON.stringify(gamesData)}
   />
 
+  <script is:inline>
+    // Featured and shelf cards trigger the same #/play/<slug> hash that
+    // archive/main.ts already listens to (popstate -> syncFromHash ->
+    // openGame), so we don't need to import or modify the archive runtime.
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      const trigger = t && t.closest && t.closest('[data-shelf-slug]');
+      if (!trigger) return;
+      const slug = trigger.getAttribute('data-shelf-slug');
+      if (slug) location.hash = `#/play/${slug}`;
+    });
+  </script>
+
   <script>
     import '../archive/main.ts';
   </script>
 </BaseLayout>
+
+<style is:global>
+  /* Featured shelf — "Bugünün önerisi" hero spotlight */
+  .featured {
+    margin: 0 auto 28px;
+    max-width: 1024px;
+    padding: 0 16px;
+  }
+  .featured__eyebrow {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .featured__card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: left;
+    color: var(--text);
+    transition: transform 0.18s ease, border-color 0.18s ease;
+    font: inherit;
+  }
+  .featured__card:hover,
+  .featured__card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    outline: none;
+  }
+  .featured__thumb {
+    aspect-ratio: 16 / 10;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .featured__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .featured__body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+  .featured__title {
+    font-size: 22px;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .featured__desc {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .featured__cta {
+    margin-top: 6px;
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 14px;
+  }
+  @media (min-width: 720px) {
+    .featured__card {
+      grid-template-columns: minmax(0, 480px) 1fr;
+    }
+    .featured__body {
+      padding: 28px 32px;
+      gap: 8px;
+    }
+    .featured__title {
+      font-size: 28px;
+    }
+  }
+
+  /* Category shelves above the long grid */
+  .shelf {
+    margin: 0 auto 24px;
+    max-width: 1200px;
+    padding: 0 16px;
+  }
+  .shelf__head {
+    margin-bottom: 10px;
+  }
+  .shelf__eyebrow {
+    color: var(--text-dim);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .shelf__title {
+    font-size: 18px;
+    margin: 4px 0 0;
+    color: var(--text);
+  }
+  .shelf__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .shelf__card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+    font: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .shelf__card:hover,
+  .shelf__card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--border-strong);
+    outline: none;
+  }
+  .shelf__card img {
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+    background: var(--surface-2);
+  }
+  .shelf__card-thumb-fallback {
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+    background: var(--surface-2);
+    color: var(--text-dim);
+    border-radius: 6px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .shelf__card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px 2px;
+  }
+  /* On narrow screens swap shelf to a horizontally-scrollable rail so
+     more items remain reachable without dominating vertical space. */
+  @media (max-width: 640px) {
+    .shelf__row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 10px;
+      padding: 4px 16px 12px;
+      margin: 0 -16px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shelf__card {
+      flex: 0 0 150px;
+      scroll-snap-align: start;
+    }
+  }
+</style>
