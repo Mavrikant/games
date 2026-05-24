@@ -1,0 +1,195 @@
+/* Boya Savaşı — territory flood-fill vs AI. */
+
+/* --- HUD meta --------------------------------------------------------- */
+.bs-meta {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.bs-meta__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.bs-meta__icon {
+  color: var(--accent);
+}
+
+.bs-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bs-dot--mine {
+  background: var(--text);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.bs-dot--ai {
+  background: #0b0c10;
+  box-shadow: 0 0 0 2px var(--border-strong);
+}
+
+/* --- Status line ------------------------------------------------------ */
+.bs-status {
+  text-align: center;
+  margin: 4px auto 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  min-height: 1.2em;
+}
+
+/* --- Board ------------------------------------------------------------ */
+.bs-board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.bs-board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 8), 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+.bs-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 3px;
+  transition:
+    background-color 0.12s ease-out,
+    box-shadow 0.12s ease-out;
+}
+
+/* Six distinct colours. */
+.bs-cell--c0 {
+  background: #ef4444;
+}
+.bs-cell--c1 {
+  background: #f97316;
+}
+.bs-cell--c2 {
+  background: #facc15;
+}
+.bs-cell--c3 {
+  background: #22c55e;
+}
+.bs-cell--c4 {
+  background: #3b82f6;
+}
+.bs-cell--c5 {
+  background: #a855f7;
+}
+
+/* Ownership rings distinguish the two territories regardless of colour. */
+.bs-cell--mine {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+.bs-cell--ai {
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Palette ---------------------------------------------------------- */
+.bs-palette {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 440px;
+  margin: 16px auto 0;
+}
+
+.bs-swatch {
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--border-strong);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition:
+    transform 0.1s ease-out,
+    opacity 0.12s ease-out,
+    border-color 0.12s ease-out;
+}
+
+.bs-swatch:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--text);
+}
+
+.bs-swatch:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.bs-swatch--c0 {
+  background: #ef4444;
+}
+.bs-swatch--c1 {
+  background: #f97316;
+}
+.bs-swatch--c2 {
+  background: #facc15;
+}
+.bs-swatch--c3 {
+  background: #22c55e;
+}
+.bs-swatch--c4 {
+  background: #3b82f6;
+}
+.bs-swatch--c5 {
+  background: #a855f7;
+}
+
+/* --- Overlay (visual contract for hideOverlay) ------------------------ */
+.bs-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.bs-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bs-overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.bs-overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.bs-overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 15px;
+}

@@ -1,0 +1,45 @@
+---
+---
+
+<header class="hud">
+  <div class="bs-meta">
+    <div class="bs-meta__item" title="Senin bölgen">
+      <span class="bs-dot bs-dot--mine" aria-hidden="true"></span>
+      <span id="bs-mine">1</span>
+    </div>
+    <div class="bs-meta__item" title="Yapay zekânın bölgesi">
+      <span class="bs-dot bs-dot--ai" aria-hidden="true"></span>
+      <span id="bs-ai">1</span>
+    </div>
+    <div class="bs-meta__item" title="Galibiyet–mağlubiyet">
+      <span class="bs-meta__icon" aria-hidden="true">★</span>
+      <span><span id="bs-wins">0</span>–<span id="bs-losses">0</span></span>
+    </div>
+  </div>
+  <button id="bs-restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="bs-status" class="bs-status" role="status" aria-live="polite">
+  Sıra sende — bir renk seç.
+</div>
+
+<div class="bs-board-wrap">
+  <div
+    id="bs-board"
+    class="bs-board"
+    role="grid"
+    aria-label="Boya Savaşı tahtası"
+  ></div>
+  <div id="bs-overlay" class="bs-overlay bs-overlay--hidden" aria-hidden="true">
+    <div class="bs-overlay__inner">
+      <h2 id="bs-ov-title">Oyun bitti</h2>
+      <p id="bs-ov-msg">—</p>
+      <button
+        id="bs-ov-restart"
+        class="hud__btn hud__btn--accent"
+        type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
+
+<div id="bs-palette" class="bs-palette" role="group" aria-label="Renk seçimi"></div>

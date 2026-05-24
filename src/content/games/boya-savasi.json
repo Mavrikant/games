@@ -1,0 +1,15 @@
+{
+  "title": "Boya Savaşı",
+  "description": "Köşelerden başlayıp renk seçerek bölge kap — yapay zekâya karşı tahtanın çoğunu boya. Rakibin rengini seçemezsin.",
+  "dateAdded": "2026-05-24",
+  "tags": ["strateji", "bulmaca", "yapay-zeka"],
+  "controls": "Renk düğmeleri / 1-6 tuşları · R: yeniden başla",
+  "howToPlay": "Tahta altı renkli karelerden oluşur ve hiçbir komşu kare aynı renkte başlamaz. Sen sol-alt köşedeki tek kareyle, yapay zekâ sağ-üst köşedeki kareyle başlar. Sıran geldiğinde paletten bir renk seçersin: sahip olduğun tüm kareler o renge boyanır, ardından bölgen taşar — o renge sahip bitişik nötr karelerin hepsini yutar, bu zincirleme devam eder. Kuralın özü şu: kendi mevcut rengini de rakibinin mevcut rengini de seçemezsin, yani her tur kalan dört renkten birini oynarsın (yasak renkler palette soluk görünür). 1-6 tuşları renklere kısayoldur, R oyunu sıfırlar. Tahtada nötr kare kalmayınca oyun biter ve daha çok kareye sahip olan kazanır. İpucu: her zaman en çok kare kazandıran rengi seçmek (açgözlü oyun) erken tur için iyidir ama rakibin büyük bir bölge bağlamasını önlemek için bazen daha az kazandıran bir rengi seçip onun yolunu kesmek gerekir.",
+  "thumbnail": "boya-savasi.svg",
+  "en": {
+    "title": "Paint War",
+    "description": "Start from a corner and claim territory by picking colours — out-paint the AI for most of the board. You can't pick the opponent's colour.",
+    "controls": "Colour buttons / keys 1-6 · R: restart",
+    "howToPlay": "The board is a grid of six-coloured cells, generated so no two neighbouring cells share a colour. You start as the single cell in the bottom-left corner; the AI starts in the top-right. On your turn pick a colour from the palette: every cell you own turns that colour, then your region floods — absorbing all adjacent neutral cells of that colour, chaining outward. The key rule: you may not pick your own current colour nor the opponent's current colour, so each turn you choose one of the remaining four (forbidden colours are dimmed in the palette). Keys 1-6 are colour shortcuts; R restarts. The game ends when no neutral cells remain and whoever owns more cells wins. Tip: grabbing the colour that claims the most cells (greedy play) is good early, but to stop the AI from sealing off a big region you sometimes pick a lower-gain colour to cut off its path."
+  }
+}

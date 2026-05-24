@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Boya Savaşı">
+  <defs>
+    <linearGradient id="bs-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bs-bg)" />
+
+  <!-- 6x6 territory grid -->
+  <g>
+    <!-- row 0 (top) -->
+    <rect x="150" y="30" width="20" height="20" rx="4" fill="#22c55e" />
+    <rect x="173" y="30" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="196" y="30" width="20" height="20" rx="4" fill="#facc15" />
+    <rect x="219" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <rect x="242" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <rect x="265" y="30" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <!-- row 1 -->
+    <rect x="150" y="53" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="173" y="53" width="20" height="20" rx="4" fill="#ef4444" />
+    <rect x="196" y="53" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="219" y="53" width="20" height="20" rx="4" fill="#facc15" />
+    <rect x="242" y="53" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <rect x="265" y="53" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <!-- row 2 -->
+    <rect x="150" y="76" width="20" height="20" rx="4" fill="#f97316" />
+    <rect x="173" y="76" width="20" height="20" rx="4" fill="#facc15" />
+    <rect x="196" y="76" width="20" height="20" rx="4" fill="#ef4444" />
+    <rect x="219" y="76" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="242" y="76" width="20" height="20" rx="4" fill="#22c55e" />
+    <rect x="265" y="76" width="20" height="20" rx="4" fill="#a855f7" stroke="rgba(0,0,0,0.6)" stroke-width="2.5" />
+    <!-- row 3 -->
+    <rect x="150" y="99" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="173" y="99" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="196" y="99" width="20" height="20" rx="4" fill="#facc15" />
+    <rect x="219" y="99" width="20" height="20" rx="4" fill="#ef4444" />
+    <rect x="242" y="99" width="20" height="20" rx="4" fill="#f97316" />
+    <rect x="265" y="99" width="20" height="20" rx="4" fill="#3b82f6" />
+    <!-- row 4 -->
+    <rect x="150" y="122" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="173" y="122" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="196" y="122" width="20" height="20" rx="4" fill="#f97316" />
+    <rect x="219" y="122" width="20" height="20" rx="4" fill="#facc15" />
+    <rect x="242" y="122" width="20" height="20" rx="4" fill="#ef4444" />
+    <rect x="265" y="122" width="20" height="20" rx="4" fill="#facc15" />
+    <!-- row 5 (bottom) -->
+    <rect x="150" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="173" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="196" y="145" width="20" height="20" rx="4" fill="#22c55e" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+    <rect x="219" y="145" width="20" height="20" rx="4" fill="#3b82f6" />
+    <rect x="242" y="145" width="20" height="20" rx="4" fill="#a855f7" />
+    <rect x="265" y="145" width="20" height="20" rx="4" fill="#f97316" />
+  </g>
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Boya</text>
+  <text x="20" y="60" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Savaşı</text>
+  <text x="20" y="82" font-family="ui-sans-serif, system-ui" font-size="11" fill="#98a0ad">Bölge kap</text>
+</svg>
