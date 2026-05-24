@@ -192,5 +192,110 @@ const fundingChoicesId = import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '';
         });
       })();
     </script>
+    <script is:inline>
+      // Install promotion — encourage adding the app to the home screen.
+      // Chromium/Android: capture beforeinstallprompt and offer an "Ekle"
+      // button. iOS Safari (no such event): show the Share → "Ana Ekrana
+      // Ekle" hint on the homepage. Hidden inside the archive iframe, when
+      // already installed, or for 14 days after the user dismisses it.
+      (function () {
+        if (window.top !== window.self) return;
+        var standalone =
+          window.matchMedia('(display-mode: standalone)').matches ||
+          window.navigator.standalone === true;
+        if (standalone) return;
+
+        var KEY = 'pwa-install.dismissed';
+        var COOLDOWN = 14 * 24 * 60 * 60 * 1000;
+        try {
+          var raw = localStorage.getItem(KEY);
+          if (raw && Date.now() - Number(raw) < COOLDOWN) return;
+        } catch (e) {}
+
+        var deferred = null;
+
+        function snooze() {
+          try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+          var el = document.getElementById('pwa-install');
+          if (el) el.remove();
+        }
+
+        function showBanner(html, installable) {
+          if (document.getElementById('pwa-install')) return;
+          var bottom = document.documentElement.classList.contains('has-sticky-ad') ? 84 : 16;
+          var bar = document.createElement('div');
+          bar.id = 'pwa-install';
+          bar.style.cssText =
+            'position:fixed;left:16px;bottom:' + bottom + 'px;z-index:9998;max-width:340px;' +
+            'display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;' +
+            'background:#14171c;color:#f5f6f8;border:1px solid #2f3540;' +
+            'box-shadow:0 8px 30px rgba(0,0,0,.45);font:500 13.5px/1.35 ui-sans-serif,system-ui,sans-serif';
+
+          var icon = document.createElement('img');
+          icon.src = '/games/icon-192.png';
+          icon.alt = '';
+          icon.width = 40;
+          icon.height = 40;
+          icon.style.cssText = 'width:40px;height:40px;border-radius:10px;flex:0 0 auto';
+          bar.appendChild(icon);
+
+          var text = document.createElement('div');
+          text.style.flex = '1';
+          text.innerHTML = html;
+          bar.appendChild(text);
+
+          if (installable) {
+            var add = document.createElement('button');
+            add.type = 'button';
+            add.textContent = 'Ekle';
+            add.style.cssText =
+              'cursor:pointer;border:0;border-radius:8px;padding:8px 14px;font:inherit;' +
+              'font-weight:600;color:#fff;background:#6366f1;flex:0 0 auto';
+            add.addEventListener('click', function () {
+              if (!deferred) return;
+              deferred.prompt();
+              deferred.userChoice.then(function () {
+                try { if (window.plausible) window.plausible('PWA Install'); } catch (e) {}
+                deferred = null;
+                snooze();
+              });
+            });
+            bar.appendChild(add);
+          }
+
+          var close = document.createElement('button');
+          close.type = 'button';
+          close.setAttribute('aria-label', 'Kapat');
+          close.textContent = '×';
+          close.style.cssText =
+            'cursor:pointer;border:0;background:transparent;color:#98a0ad;font-size:20px;' +
+            'line-height:1;padding:2px 4px;flex:0 0 auto';
+          close.addEventListener('click', snooze);
+          bar.appendChild(close);
+
+          document.body.appendChild(bar);
+        }
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferred = e;
+          showBanner('Oyunları <b>ana ekrana ekle</b> — tek dokunuşla aç, çevrimdışı oyna.', true);
+        });
+        window.addEventListener('appinstalled', snooze);
+
+        // iOS Safari has no beforeinstallprompt; nudge with the manual flow,
+        // homepage only so it isn't repeated on every game page.
+        var ua = navigator.userAgent || '';
+        var iosSafari =
+          /iphone|ipad|ipod/i.test(ua) && /safari/i.test(ua) && !/crios|fxios|edgios/i.test(ua);
+        if (iosSafari && (location.pathname === '/games/' || location.pathname === '/games')) {
+          window.addEventListener('load', function () {
+            setTimeout(function () {
+              showBanner('Ana ekrana eklemek için <b>Paylaş</b> ↑ → <b>“Ana Ekrana Ekle”</b>.', false);
+            }, 1500);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
