@@ -10,6 +10,7 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 const fundingChoicesEnabled =
   (import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '') !== '';
 const plausibleEnabled = (import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '') !== '';
+const gaEnabled = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '') !== '';
 const web3formsEnabled = (import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '') !== '';
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
 ---
@@ -51,6 +52,19 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         {' '}Çerez kullanılmaz, IP adresi saklanmaz, ziyaretçi kimlikleri
         kişiselleştirilmez.
       </li>
+      {gaEnabled && (
+        <li>
+          <strong>Google Analytics 4</strong>: Sayfa görüntülemeleri, ziyaret
+          süresi, yaklaşık (ülke/şehir düzeyinde) konum, cihaz ve tarayıcı
+          bilgisi gibi kullanım istatistikleri Google Analytics ile de
+          toplanır. Plausible'dan farklı olarak Google Analytics bu amaçla
+          çerez ve cihaz tanımlayıcıları kullanır. Detay:{' '}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer">Google gizlilik politikası</a>.
+        </li>
+      )}
       <li>
         <strong>Reklam çerezleri</strong>:{' '}
         {adsenseClient ? (
@@ -94,6 +108,14 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
           target="_blank"
           rel="noopener noreferrer">plausible.io/privacy</a>
       </li>
+      {gaEnabled && (
+        <li>
+          <strong>Google Analytics</strong> (çerez tabanlı istatistik):{' '}
+          <a href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer">policies.google.com/privacy</a>
+        </li>
+      )}
       <li>
         <strong>Google AdSense</strong> (etkinleştirildiğinde):{' '}
         <a href="https://policies.google.com/privacy"
@@ -185,6 +207,17 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         rel="noopener noreferrer">adssettings.google.com</a>{' '}
       adresinden ilgi alanına dayalı reklamı kapatabilirsiniz.
     </p>
+    {gaEnabled && (
+      <p>
+        Google Analytics çerez ve cihaz tanımlayıcıları kullanır. Analytics
+        ölçümünü tüm sitelerde devre dışı bırakmak için Google'ın{' '}
+        <a href="https://tools.google.com/dlpage/gaoptout"
+          target="_blank"
+          rel="noopener noreferrer">Analytics Devre Dışı Bırakma</a>{' '}
+        tarayıcı eklentisini kurabilir ya da tarayıcınızın çerez ayarlarını
+        kullanabilirsiniz.
+      </p>
+    )}
     <p>
       AB Ekonomik Bölgesi, Birleşik Krallık ve İsviçre'den giriş yapan
       ziyaretçilere ilk ziyarette Google Funding Choices üzerinden çerez
