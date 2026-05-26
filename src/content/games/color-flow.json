@@ -5,5 +5,11 @@
   "tags": ["puzzle", "tek-oyunculu", "mobil"],
   "controls": "Sürükle: yol çiz · Aynı renge tekrar dokun: yolu sil · R: yeniden başla · N: yeni puzzle",
   "howToPlay": "Amaç, gridin üzerindeki her renk çiftini bir uçtan diğerine kesintisiz bir yolla bağlamak ve aynı zamanda tüm hücreleri doldurmaktır — boş kare kalmamalı, yollar kesişmemeli. Bir uca parmağını ya da fareyi basılı tutup komşu hücrelere doğru sürükleyerek yolu uzat; yanlışlıkla başka renge çarparsan onun yolu o noktadan otomatik kesilir, kendi yolunun üzerine geri sürüklersen son kısmı geri alırsın. Aynı renge yeniden dokunup başlangıçtan çekerek bir yolu tamamen silebilir, R ile mevcut bölümü sıfırlayabilir, N ile yepyeni bir puzzle açabilirsin. Tüm renkler doğru uçlara ulaşıp grid tamamen dolduğunda seviye biter ve hamle sayın rekoruna işlenir. İpucu: önce köşe ve kenarlara yakın renkleri bağla, çünkü ortadaki renkler için daha esnek alan kalır; ayrıca uzun renkleri kısa renklerin etrafından dolaştırarak izole boş hücre bırakmamaya dikkat et.",
-  "thumbnail": "color-flow.svg"
+  "thumbnail": "color-flow.svg",
+  "en": {
+    "title": "Color Flow",
+    "description": "Connect matching coloured dots by dragging — without crossing paths, fill the whole grid.",
+    "controls": "Drag: draw a path · Tap the same colour again: erase the path · R: restart · N: new puzzle",
+    "howToPlay": "The aim is to connect every pair of colours on the grid with an unbroken path from one end to the other, and at the same time fill all the cells — no square may be left empty, and paths must not cross. Hold your finger or the mouse on an endpoint and drag toward neighbouring cells to extend the path; if you accidentally run into another colour, its path is automatically cut from that point, and if you drag back over your own path you undo its last section. You can erase a path entirely by tapping its colour again and pulling from the start, reset the current level with R, or open a brand-new puzzle with N. When all the colours reach their correct ends and the grid is completely full, the level is over and your move count is logged to your record. Tip: connect the colours near the corners and edges first, because that leaves more flexible space for the colours in the middle; also, route the long colours around the short ones to be careful not to leave isolated empty cells."
+  }
 }
