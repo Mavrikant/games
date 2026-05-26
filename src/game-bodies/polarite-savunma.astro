@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud td-hud">
+  <div class="hud__stat">Çekirdek<span id="lives">0</span></div>
+  <div class="hud__stat">Altın<span id="gold">0</span></div>
+  <div class="hud__stat">Dalga<span id="wave">0</span></div>
+  <button id="polarity" class="hud__btn td-polarity" type="button" aria-label="Aktif polariteyi değiştir">
+    Kutup<span id="polarity-label">—</span>
+  </button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Polarite savunması oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Polarite Savunması</h2>
+      <p id="overlay-msg"></p>
+      <button id="overlay-btn" class="hud__btn td-start" type="button">Başla</button>
+    </div>
+  </div>
+</div>

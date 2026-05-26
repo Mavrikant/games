@@ -1,0 +1,9 @@
+{
+  "title": "Polarite Savunması",
+  "description": "İki kutuplu düşman dalgalarını durdur: kulelerin yalnızca aktif polariteyle eşleşen düşmanları vurur, doğru anda kutbu değiştir.",
+  "dateAdded": "2026-05-26",
+  "tags": ["strateji", "tower-defense", "tek-oyunculu"],
+  "controls": "Boşluk: polariteyi değiştir · Tıkla/dokun: kule kur · Enter: dalgayı erken başlat · R: yeniden başla",
+  "howToPlay": "Yılankavi yolun sonundaki çekirdeği koru. Düşmanlar iki kutupta gelir: kırmızı daireler ve mavi baklavalar. Klasik kule savunmasından farkı şu: kulelerin AYNI ANDA yalnızca tek bir kutbu hedefler — ekranın o anki aktif polaritesini. Aktif kutuptaki düşmanlar vurulur, karşı kutuptakiler kalkanlıdır (kesik beyaz halka ile gösterilir) ve hasarsız geçer. Bu yüzden tek iş kule dizmek değil; gelen rengin çoğunluğuna göre Boşluk tuşu (ya da Kutup düğmesi) ile polariteyi doğru anda çevirmektir. Boş bir kareye tıklayarak/dokunarak 50 altına kule kurarsın; kule menzili imleç altında halka olarak gösterilir, yola ve dolu karelere kule konmaz. Her dalga öncesi kısa bir hazırlık süresi vardır (Enter ile erken başlatabilirsin) — bu sürede kulelerini yerleştir. Öldürdüğün her düşman altın verir, her dalga sonunda bonus alırsın; kaçırdığın her düşman bir çekirdek puanı götürür. Çekirdek puanın biterse oyun biter. On dalganın hepsini savuşturursan kazanırsın. En iyi ulaştığın dalga tarayıcında saklanır.",
+  "thumbnail": "polarite-savunma.svg"
+}
