@@ -5,5 +5,11 @@
   "tags": ["puzzle", "hafıza", "tek-oyunculu"],
   "controls": "Başlat düğmesi / Boşluk / Enter: turu başlat · 1-9 veya tıkla: kare seç · R: sıfırla",
   "howToPlay": "Amaç, 3x3 ızgarada gösterilen kare desenini hatırlayıp aynı kareleri tam tersi sırayla geri çalmak ve diziyi olabildiğince uzatmaktır. Başlat düğmesine, Boşluk veya Enter tuşuna basarak turu başlatırsın; ardından kareler sırayla yanıp söner. Sıra sende olduğunda kareleri fareyle tıklayabilir ya da klavyeden 1-9 rakamlarını (sol üstten sağ alta) kullanabilirsin: ilk girmen gereken, desende en son yanan karedir; sonuncu girmen gereken ise ilk yanan karedir. Tüm diziyi doğru tamamlarsan skorun artar, yeni bir kare eklenir ve tur uzar; tek bir yanlış seçim oyunu bitirir. En yüksek skorun tarayıcında saklanır; R tuşu her şeyi sıfırlar. İpucu: desen oynanırken kareleri zihninde gruplara böl ve sonu öne alarak içinden tekrar et — uzun dizilerde sondan başa doğru \"film geri sarma\" gibi düşünmek hata oranını ciddi şekilde düşürür.",
-  "thumbnail": "echo-grid.svg"
+  "thumbnail": "echo-grid.svg",
+  "en": {
+    "title": "Echo Grid",
+    "description": "Watch the pattern, then play the same cells back in reverse order. Each round the sequence grows a little longer.",
+    "controls": "Start button / Space / Enter: begin the round · 1-9 or click: select a cell · R: reset",
+    "howToPlay": "The goal is to remember the pattern of cells shown on a 3x3 grid and play the same cells back in the exact reverse order, stretching the sequence out as long as possible. You start a round by pressing the Start button, Space, or Enter; the cells then flash one after another. When it's your turn you can click the cells with the mouse or use the number keys 1-9 (top-left to bottom-right): the first one you need to enter is the cell that flashed last in the pattern, and the last one you need to enter is the cell that flashed first. If you complete the whole sequence correctly your score rises, a new cell is added, and the round grows longer; a single wrong choice ends the game. Your high score is saved in your browser; the R key resets everything. Tip: as the pattern plays, break the cells into groups in your mind and rehearse them by putting the end first — on long sequences, thinking of it as \"rewinding the film\" from end to start dramatically lowers your error rate."
+  }
 }

@@ -5,5 +5,11 @@
   "tags": ["puzzle", "zeka", "sıralama"],
   "controls": "Tüpe dokun → seç · ikinciye dokun → dök · Z: geri al · R: yeniden başla · N: sonraki seviye",
   "howToPlay": "Amaç: ekrandaki her tüpü ya tamamen boş bırakmak ya da tek bir renkle doldurarak puzzle'ı çözmek. Önce kaynak tüpe tıkla (seçildiğini hafifçe yukarı kalkmasından anlarsın), ardından hedef tüpe tıkla; üstteki sıvı katmanı oraya akar. Döküm yalnızca iki durumda mümkündür: hedef tüp boştur ya da hedefin en üst rengi kaynağın en üst rengiyle aynıdır. Üst üste duran aynı renkli ardışık katmanlar tek hamlede birlikte akar, ama hedefte yer kalmadıysa sadece sığacak kadarı dökülür; her tüp en fazla 4 katman alır. Yanlış seçim yaptıysan aynı tüpe tekrar tıklayarak ya da Esc ile bırakabilirsin. Hata yaparsan Z (veya Geri al) ile son hamleyi geri çevir, R ile bölümü sıfırdan başlat, çözünce N ile sonraki seviyeye geç. İpucu: boş tüpleri acele harcama, onları geçici depo olarak kullan; ayrıca dökmeden önce o rengin altındaki katmanın hangi tüpte bittiğine bak, böylece tıkanmadan zincirleme hamleler kurabilirsin.",
-  "thumbnail": "water-sort.svg"
+  "thumbnail": "water-sort.svg",
+  "en": {
+    "title": "Water Sort",
+    "description": "Pour the coloured liquids between tubes so that each tube ends up a single colour.",
+    "controls": "Tap a tube → select · tap a second → pour · Z: undo · R: restart · N: next level",
+    "howToPlay": "Goal: solve the puzzle by leaving every tube on screen either completely empty or filled with a single colour. First click the source tube (you'll know it's selected because it rises slightly), then click the target tube; the top layer of liquid flows across. A pour is only possible in two cases: the target tube is empty, or the target's top colour is the same as the source's top colour. Consecutive same-coloured layers stacked on top of each other flow together in a single move, but if there isn't enough room in the target, only as much as fits is poured; each tube holds at most 4 layers. If you made the wrong selection, you can deselect by clicking the same tube again or pressing Esc. If you make a mistake, undo the last move with Z (or Undo), reset the level from scratch with R, and once solved move to the next level with N. Tip: don't waste empty tubes hastily — use them as temporary storage; also, before pouring, check which tube the layer beneath that colour ends up in, so you can set up chained moves without getting stuck."
+  }
 }

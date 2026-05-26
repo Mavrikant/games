@@ -5,5 +5,11 @@
   "tags": ["arcade", "yönetim", "özgün", "akış"],
   "controls": "Boşluk veya tıkla: sinyal değiştir · R: yeniden başla",
   "howToPlay": "Dört yönlü bir kavşakta trafik memurusun: amacın arabaları çarptırmadan ve kuyrukları tıkamadan mümkün olduğunca çok aracı geçirip skoru yükseltmek. Kavşakta iki sinyal var; kuzey-güney (NS) ekseni veya doğu-batı (EW) ekseni yeşil olur, diğeri kırmızı bekler. Sinyali değiştirmek için boşluğa bas, kavşağa tıkla ya da Sinyali değiştir düğmesini kullan; her geçişte yarım saniyelik sarı faz olur ve bu sırada kimse ilerleyemez. Her aracın üzerinde yeşilden kırmızıya inen bir sabır çubuğu vardır; bir sürücünün sabrı tükenirse oyun biter, R ile yeniden başlarsın. Skor arttıkça araçlar daha sık spawn olur, sabır süreleri kısalır ve kırmızı şeritli ambulanslar belirir — ambulanslar kırmızıyı tanımaz ama sarıda yine durur, bu yüzden onlar kuyruğa girmeden ekseni çevirmeye çalış. İpucu: sinyali sırf bir araba geldi diye değiştirme; ikinci eksende en az iki-üç araç birikene veya bir sabır çubuğu kırmızıya dönmeye yaklaşana kadar bekle, sarı geçişin lüks olmadığını unutma.",
-  "thumbnail": "trafik-memuru.svg"
+  "thumbnail": "trafik-memuru.svg",
+  "en": {
+    "title": "Traffic Officer",
+    "description": "Switch the signals at the right time — let the cars through without crashing them, and keep queues from piling up.",
+    "controls": "Space or click: switch the signal · R: restart",
+    "howToPlay": "You're a traffic officer at a four-way intersection: your goal is to let as many vehicles through as possible without crashing them or clogging the queues, and to raise your score. There are two signals at the intersection; either the north-south (NS) axis or the east-west (EW) axis turns green while the other waits on red. To switch the signal, press Space, click the intersection, or use the Switch signal button; each switch has a half-second yellow phase during which no one may proceed. Every vehicle has a patience bar that drops from green to red; if a driver's patience runs out the game ends, and you restart with R. As your score rises, vehicles spawn more often, patience times shorten, and red-striped ambulances appear — ambulances ignore the red but still stop on yellow, so try to turn the axis before they join a queue. Tip: don't switch the signal just because a single car has arrived; wait until at least two or three vehicles have built up on the other axis or a patience bar is close to turning red, and remember that the yellow transition is not a luxury."
+  }
 }

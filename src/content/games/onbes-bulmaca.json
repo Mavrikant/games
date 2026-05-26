@@ -5,5 +5,11 @@
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Tıkla: boşluğa komşu plakayı kaydır · Ok tuşları: boşluğu hareket ettir · R: yeniden karıştır",
   "howToPlay": "Amacın, karışık duran numaralı plakaları sol-üstten sağ-alta doğru artan sırayla dizmek ve boş hücreyi sağ-alt köşeye getirmek. Varsayılan 4×4 tahtada 1'den 15'e kadar plakalar ve tek bir boşluk vardır; üstteki düğmelerle 3×3 (kolay) veya 5×5 (zor) boyutuna da geçebilirsin. Hamle yapmak için boşluğa yatay ya da dikey komşu olan bir plakaya tıkla — plaka boşluğa kayar, boşluk plakanın yerine geçer; çapraz hareket veya uzak plaka seçimi yoktur. Klavyede ok tuşları boşluğu hareket ettirir (alttaki plaka ters yönde kayar), R tuşu tahtayı yeniden karıştırır. İlk hamleyle birlikte süre ve hamle sayacı başlar; her boyut için en az hamle ve en kısa süreden oluşan rekorun ayrı saklanır. Strateji: üst satırı ve sol sütunu sırayla sabitleyip kalan küçük alanda çalış; bir köşeyi yerleştirirken son iki plakayı önce ters sırada hizalayıp ardından döndürerek yerine oturtmak klasik kilitlenmeyi önler.",
-  "thumbnail": "onbes-bulmaca.svg"
+  "thumbnail": "onbes-bulmaca.svg",
+  "en": {
+    "title": "Fifteen Puzzle",
+    "description": "Slide the tiles to arrange 1-15 in the correct order — the classic sliding puzzle.",
+    "controls": "Click: slide a tile adjacent to the gap · Arrow keys: move the gap · R: reshuffle",
+    "howToPlay": "Your goal is to arrange the scrambled numbered tiles in ascending order from top-left to bottom-right and bring the empty cell into the bottom-right corner. The default 4×4 board has tiles numbered 1 to 15 plus a single gap; using the buttons at the top, you can also switch to a 3×3 (easy) or 5×5 (hard) size. To make a move, click a tile that is horizontally or vertically adjacent to the gap — the tile slides into the gap and the gap takes the tile's place; there is no diagonal movement or selecting distant tiles. On the keyboard, the arrow keys move the gap (the tile underneath slides in the opposite direction), and the R key reshuffles the board. The timer and move counter start with your first move; your record, consisting of the fewest moves and the shortest time, is stored separately for each size. Strategy: lock down the top row and the left column in order and then work in the remaining smaller area; when placing a corner, the classic deadlock is avoided by first aligning the last two tiles in reverse order and then rotating them into place."
+  }
 }

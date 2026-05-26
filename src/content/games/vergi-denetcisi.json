@@ -5,5 +5,11 @@
   "tags": ["puzzle", "özgün", "mantık", "gözlem"],
   "controls": "Tıkla: satırı şüpheli işaretle · Sonraki: turu bitir · R: yeniden başla",
   "howToPlay": "Amacın bir vergi müfettişi gibi fatura tablolarındaki anomalileri tespit etmek. Her turda 8 satırlık bir tablo açılır ve genelde 3 ile 5 satırda bir hile gizlidir: tutar + KDV toplamı tutmuyor olabilir, tarih gelecekte olabilir, aynı fatura numarası iki satırda birden geçiyor olabilir, tutar diğerlerine göre anormal yüksek olabilir ya da KDV oranı standart %18 yerine garip bir orana çekilmiş olabilir. Şüphelendiğin satıra fareyle tıklayarak işaretle; doğru tespit taban puan artı hızlı oynayışta zaman bonusu kazandırır, temiz bir satırı yanlışlıkla işaretlersen ceza puanı alır ve hata sayacın artar. 3 hataya ulaşırsan müfettişlikten alınır ve oyun biter; turu erken bitirmek için Sonraki tur, baştan başlamak için R tuşunu kullan. İpucu: önce her satırda tutar + KDV = toplam kontrolünü hızlıca yap, sonra tarihlere ve fatura numarası tekrarına göz at; emin değilsen işaretleme, kaçırılan anomali sadece bonus kaybettirir ama yanlış işaret seni koltuğundan eder.",
-  "thumbnail": "vergi-denetcisi.svg"
+  "thumbnail": "vergi-denetcisi.svg",
+  "en": {
+    "title": "Tax Auditor",
+    "description": "Spot the anomalies in the invoices — does the total not add up, is the date odd, is it a duplicate.",
+    "controls": "Click: flag the row as suspicious · Next: end the round · R: restart",
+    "howToPlay": "Your goal is to detect the anomalies in invoice tables, like a tax inspector. Each round opens a table of 8 rows, and usually 3 to 5 of them hide a fraud: the amount + VAT might not match the total, the date might be in the future, the same invoice number might appear in two rows at once, the amount might be abnormally high compared with the others, or the VAT rate might have been pulled to a strange figure instead of the standard 18%. Mark a row you suspect by clicking it with the mouse; a correct catch earns base points plus a time bonus for fast play, while wrongly flagging a clean row costs you penalty points and increases your error counter. If you reach 3 errors you're stripped of your inspector's post and the game ends; use Next round to end a round early, and R to start over. Tip: first quickly check amount + VAT = total on every row, then scan the dates and look for repeated invoice numbers; if you're not sure, don't flag it — a missed anomaly only loses you a bonus, but a wrong flag gets you removed from your chair."
+  }
 }

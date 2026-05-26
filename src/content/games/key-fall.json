@@ -5,5 +5,11 @@
   "tags": ["arcade", "yazarlık", "tek-oyunculu"],
   "controls": "Klavye: ilgili harfe bas · R: yeniden başla",
   "howToPlay": "Amacın, beş şeritli oyun alanında yukarıdan düşen harfleri zemin çizgisine ulaşmadan klavyeden tuşlayarak yok etmek. Başlamak için Boşluk veya Enter'a bas; ardından ekrana inen her harf için klavyede karşılığı olan tuşa (A-Z) bas — aynı harfin birden fazla kopyası varsa sistem otomatik olarak en alttaki, yani en acil olanı vurur. Her isabet 1 puan kazandırır ve sekiz harfte bir seviye atlarsın; her seviyede harfler daha hızlı düşer ve daha sık doğar. Zemini geçen her harf bir can götürür, üç can da bitince oyun sona erer ve en iyi skorun tarayıcında saklanır. R tuşuyla istediğin an sıfırlayabilirsin. İpucu: gözünü en alttaki harfe odakla ve şeritlerin renklerini hızlı tarama için referans al; panikleyip yanlış tuşa basmak ceza vermez ama dikkati dağıtır, bu yüzden bir harfi bıraktıysan hemen bir sonrakine geç.",
-  "thumbnail": "key-fall.svg"
+  "thumbnail": "key-fall.svg",
+  "en": {
+    "title": "Key Fall",
+    "description": "Hit the falling letters quickly — every letter is a point, every miss costs a life!",
+    "controls": "Keyboard: press the matching letter · R: restart",
+    "howToPlay": "Your goal is to destroy the letters falling from the top of a five-lane play area by typing them on the keyboard before they reach the floor line. Press Space or Enter to start; then, for each letter that drops onto the screen, press its matching key (A-Z) — if there are several copies of the same letter, the system automatically hits the lowest one, that is, the most urgent. Every hit earns 1 point, and you level up every eight letters; at each level the letters fall faster and spawn more often. Every letter that crosses the floor costs a life, and when all three lives are gone the game ends and your best score is saved in the browser. You can reset at any time with the R key. Tip: focus your eyes on the lowest letter and use the lane colours as a reference for quick scanning; panicking and pressing the wrong key carries no penalty but is distracting, so if you give up on a letter, move on to the next one right away."
+  }
 }

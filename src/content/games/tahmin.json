@@ -5,5 +5,11 @@
   "tags": ["puzzle", "özgün", "mantık", "desen"],
   "controls": "Tıkla: cevap seç · 1-4: cevap seç · R: yeniden başla",
   "howToPlay": "Amacın, üstteki sırada gizli olan deseni çözüp soru işareti (?) ile gösterilen son kutunun ne olması gerektiğini bulmak. Her turda dört kutu bir mantık taşır: sayı dizisi (örn. 2, 4, 6, 8 → ?), iki ya da üç renkli alternating dizilim (kırmızı, mavi, kırmızı, mavi → ?), şekil rotasyonu (üçgen 0°, 90°, 180°, 270° → ?) ya da sayı ve rengin birlikte değiştiği kombo desen. Üst başlık sana hangi tür desen olduğunu söyler. Aşağıdaki dört seçenekten doğru devamı fareyle tıklayarak veya 1-4 tuşlarıyla seç; doğru cevap skoru +1 artırır, yanlış seçim veya 12 saniyelik sürenin dolması bir can götürür. Üç canın da bitince oyun biter ve en iyi skorun kaydedilir; R tuşu ya da Yeniden başla butonu yeni bir oyun başlatır. İpucu: önce başlık etiketine bakıp desen türünü daralt, sonra ardışık iki kutunun farkına (sayıda adım, renkte sıra, şekilde dönüş yönü) odaklan — acele etme ama zaman çubuğu kızarmadan kararını ver.",
-  "thumbnail": "tahmin.svg"
+  "thumbnail": "tahmin.svg",
+  "en": {
+    "title": "Guess",
+    "description": "Pick what comes next in the pattern — number, colour, shape or combination.",
+    "controls": "Click: choose an answer · 1-4: choose an answer · R: restart",
+    "howToPlay": "Your goal is to work out the pattern hidden in the top row and figure out what the final box, shown with a question mark (?), should be. Each round, four boxes carry a piece of logic: a number sequence (e.g. 2, 4, 6, 8 → ?), an alternating arrangement of two or three colours (red, blue, red, blue → ?), a shape rotation (triangle at 0°, 90°, 180°, 270° → ?), or a combo pattern where number and colour change together. The heading at the top tells you which type of pattern it is. Choose the correct continuation from the four options below by clicking with the mouse or pressing the 1-4 keys; a correct answer raises your score by +1, while a wrong choice or letting the 12-second timer run out costs you a life. When all three lives are gone the game ends and your best score is saved; the R key or the Restart button starts a new game. Tip: first look at the heading label to narrow down the pattern type, then focus on the difference between two consecutive boxes (the step in numbers, the order of colours, the direction of rotation in shapes) — don't rush, but make your decision before the time bar turns red."
+  }
 }

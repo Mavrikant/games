@@ -5,5 +5,11 @@
   "tags": ["puzzle", "maze", "tek-oyunculu"],
   "controls": "Ok tuşları / WASD veya swipe · R: yeniden başla · Boşluk: duraklat",
   "howToPlay": "Amacın, sol üst köşedeki mavi karakteri prosedürel olarak üretilen labirentin içinden geçirip sağ alt köşede parlayan sarı çıkış hücresine ulaştırmak. Masaüstünde ok tuşları veya WASD ile yön ver; mobilde labirent üzerinde parmağını kaydır ya da alttaki yön pedine dokun. Boşluk tuşu oyunu duraklatır, R ise koşuyu sıfırlar. Her seviyede 60 saniyen var; süre içinde çıkışa varırsan bir sonraki seviye açılır, labirent büyür ve kalan süreye +5 saniye bonus eklenir. Süre biterse koşu sona erer ve ulaştığın en yüksek seviye kaydedilir. İpucu: duvara çarpınca karakter sarsılır, bu yüzden önce gözünle rotayı tara, sonra hızla art arda yön ver — uzun koridorlarda tek bir kaydırma birden çok hücre ilerletebilir. Çıkmaz sokaklara saplanmamak için duvar takip etme (sağ/sol el kuralı) tekniğini deneyebilirsin.",
-  "thumbnail": "maze-run.svg"
+  "thumbnail": "maze-run.svg",
+  "en": {
+    "title": "Maze Run",
+    "description": "Reach the exit of a procedurally generated maze — when time runs out, the maze is redrawn.",
+    "controls": "Arrow keys / WASD or swipe · R: restart · Space: pause",
+    "howToPlay": "Your goal is to guide the blue character in the top-left corner through the procedurally generated maze and reach the glowing yellow exit cell in the bottom-right corner. On desktop, steer with the arrow keys or WASD; on mobile, swipe your finger across the maze or tap the directional pad at the bottom. The Space key pauses the game, while R resets the run. You have 60 seconds on each level; if you reach the exit in time, the next level unlocks, the maze grows larger, and a +5 second bonus is added to your remaining time. When time runs out the run ends, and the highest level you reached is saved. Tip: the character shakes when it hits a wall, so scan the route with your eyes first, then give directions in quick succession — in long corridors a single swipe can advance you multiple cells. To avoid getting stuck in dead ends, you can try the wall-following technique (the right/left-hand rule)."
+  }
 }

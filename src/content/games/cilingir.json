@@ -5,5 +5,11 @@
   "tags": ["zamanlama", "refleks", "tek-oyunculu", "orijinal"],
   "controls": "Boşluk / Enter veya tıkla: aktif pimi sabitle · R: yeniden başla",
   "howToPlay": "Sen bir çilingirsin; her kilitte birden fazla pim var ve hepsini soldan sağa teker teker oturtman gerekiyor. Aktif pimin üzerinde parlak bir gösterge yukarı-aşağı süzülür; pimin ortasındaki yeşil emniyet bölgesi ise sabittir. Gösterge tam yeşil bölgenin içindeyken Boşluk veya Enter'a bas (ya da alana dokun/tıkla) — pim oturur ve sıradaki pime geçersin. Bütün pimleri oturtunca kilit açılır, skorun bir artar ve bir sonraki kilit gelir: daha çok pim, daha hızlı gösterge ve daha dar emniyet bölgesi. Gösterge bölgenin dışındayken sabitlersen bir maymuncuk kırılır; üç maymuncuğun da kırılınca tur biter. Açtığın en yüksek kilit sayısı tarayıcında rekor olarak saklanır. İpucu: göstergenin yön değiştirdiği uç noktalarda (en üst ve en alt) bir an yavaşladığını unutma, ama emniyet bölgesi ortadadır; acele edip kenarda basmak yerine göstergenin bölgeye girmesini sakince bekle. Dar bölgelerde, göstergeyi bölgenin tam ortasına denk getirmeye çalış ki hız arttıkça tepki payın olsun.",
-  "thumbnail": "cilingir.svg"
+  "thumbnail": "cilingir.svg",
+  "en": {
+    "title": "Locksmith",
+    "description": "Pick the lock: lock each pin's sliding indicator inside the green zone, crack the lock, and move on to harder ones.",
+    "controls": "Space / Enter or click: set the active pin · R: restart",
+    "howToPlay": "You're a locksmith; every lock has several pins and you have to set them one by one from left to right. A bright indicator glides up and down over the active pin, while the green safe zone in the middle of the pin stays fixed. When the indicator is right inside the green zone, press Space or Enter (or tap/click the area) — the pin sets and you move on to the next one. Once you've set all the pins the lock opens, your score goes up by one and the next lock arrives: more pins, a faster indicator and a narrower safe zone. If you set it while the indicator is outside the zone, a pick breaks; when all three picks break the round is over. The highest number of locks you've opened is saved as a record in your browser. Tip: remember that the indicator slows for a moment at the turning points (the very top and very bottom), but the safe zone is in the middle; rather than rushing and pressing at the edge, calmly wait for the indicator to enter the zone. In the narrow zones, try to catch the indicator dead centre so you have a margin for reaction as the speed increases."
+  }
 }
