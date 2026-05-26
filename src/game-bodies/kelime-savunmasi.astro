@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">Rekor<span id="best">0</span></div>
+  <div class="hud__lives">Can<span id="lives">♥♥♥</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Kelime Savunması oyun alanı"></canvas>
+  <input
+    id="typer"
+    class="typer"
+    type="text"
+    inputmode="text"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="none"
+    spellcheck="false"
+    aria-label="Kelime yaz"
+  />
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Kelime Savunması</h2>
+      <p id="overlay-msg">Düşen kelimeleri yazarak vur.<br />Başlamak için Başla'ya bas veya Enter.</p>
+      <button id="start" class="hud__btn start__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

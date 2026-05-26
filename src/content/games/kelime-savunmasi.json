@@ -1,0 +1,9 @@
+{
+  "title": "Kelime Savunması",
+  "description": "Düşen Türkçe kelimeleri yazarak vur — şehrine ulaşmadan klavyenle savun. Tek oyunda doğru harf akışı her şey.",
+  "dateAdded": "2026-05-26",
+  "tags": ["kelime", "refleks", "yazma", "özgün", "tek-oyunculu"],
+  "controls": "Harfleri yaz: kelimeyi hedefle/vur · Esc/Backspace: hedefi bırak · Enter: başla / yeniden · R: sıfırla",
+  "howToPlay": "Kelime Savunması bir yazarak-savunma oyunudur: ekranın üstünden sürekli Türkçe kelimeler düşer ve en altta korumaya çalıştığın şehre (kırmızı şerit) ulaşmadan onları yok etmen gerekir. Yok etmenin tek yolu kelimeyi klavyede doğru sırayla yazmaktır. Henüz bir hedefin yokken bir harfe bastığında, o harfle başlayan kelimelerden şehre en yakın olanı otomatik olarak kilitlenir ve çevresinde bir çerçeve belirir; ardından o kelimeyi sonuna kadar yazarsın. Doğru yazdığın her harf yeşile döner, kelime bitince patlar ve uzunluğu kadar puan kazanırsın. Yanlış harfler yok sayılır, yani panikleyip rastgele basman hedefini bozmaz; istersen Esc veya Backspace ile mevcut hedefi bırakıp başka kelimeye geçebilirsin. Bir kelime şehre değerse bir can kaybedersin (başta üç canın var) ve üç can da bittiğinde oyun sona erer. Skor yükseldikçe kelimeler hem daha sık iner hem daha hızlı düşer, bu yüzden hangi kelimeye önce saldıracağını seçmek önemlidir — en alttaki, en uzun veya en hızlı kelimeyi önceliklendir. Masaüstünde doğrudan yazmaya başla; mobilde oyun alanına dokununca klavye açılır. Enter oyunu başlatır ve bittiğinde yeniden başlatır, R her an sıfırlar. En yüksek skorun tarayıcında saklanır.",
+  "thumbnail": "kelime-savunmasi.svg"
+}

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kelime Savunması">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="city" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(251,113,133,0.35)" />
+      <stop offset="100%" stop-color="rgba(251,113,133,0.05)" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- falling words -->
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700">
+    <text x="44" y="46" font-size="18" fill="#98a0ad">rüzgar</text>
+    <text x="196" y="70" font-size="18" fill="#98a0ad">deniz</text>
+
+    <!-- locked target -->
+    <rect x="104" y="92" width="118" height="34" rx="9" fill="rgba(129,140,248,0.16)" stroke="#818cf8" stroke-width="1.5" />
+    <text x="114" y="115" font-size="19">
+      <tspan fill="#34d399">yıl</tspan><tspan fill="#f5f6f8">dız</tspan>
+    </text>
+  </g>
+
+  <!-- city / danger line -->
+  <rect x="0" y="160" width="320" height="40" fill="url(#city)" />
+  <line x1="0" y1="160" x2="320" y2="160" stroke="#fb7185" stroke-width="2" />
+  <text x="160" y="184" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="rgba(251,113,133,0.9)" letter-spacing="2">ŞEHİR</text>
+</svg>
