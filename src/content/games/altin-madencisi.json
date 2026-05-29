@@ -1,0 +1,15 @@
+{
+  "title": "Altın Madencisi",
+  "description": "Sallanan çengeli doğru anda fırlat; altın, elmas ve para torbalarını çekerek seviye hedefini süre dolmadan topla.",
+  "dateAdded": "2026-05-29",
+  "tags": ["arcade", "klasik", "tek-oyunculu", "zamana-karşı"],
+  "controls": "Boşluk / Enter / aşağı ok / tıkla: çengeli fırlat · R: yeniden başla",
+  "howToPlay": "Madenci ekranın üstünde durur ve çengeli sarkaç gibi sürekli sağa sola sallanır. Tek görevin doğru anı yakalayıp çengeli toprağın içindeki ganimetin üzerine fırlatmak: Boşluk, Enter, aşağı ok tuşuna bas, ekrana dokun ya da 'Çengeli Fırlat' düğmesini kullan. Çengel düz bir çizgide uzar; bir nesneye değerse onu kavrar ve yukarı çeker, hiçbir şeye değmezse kenara çarpıp boş döner. Önemli ayrıntı: çekme hızı nesnenin ağırlığına bağlıdır — küçük altın ve elmas hızlıca yukarı gelir, büyük altın külçesi ve kaya ise yavaş yavaş sürünür ve değerli saniyelerini yer. Değerler farklıdır: küçük altın 60, orta 130, büyük külçe 320, elmas 650, '$' torbası rastgele (20–600), kaya ise neredeyse değersiz (12) bir tuzaktır. Her seviyede ekranın üstündeki Hedef parayı 60 saniye içinde toplamalısın; ulaşırsan bir sonraki, daha yüksek hedefli seviyeye geçersin, süre hedefe varmadan biterse oyun sona erer ve ulaştığın en yüksek seviye tarayıcında saklanır. Strateji: önce hızlı ve değerli elmas/küçük altınları topla, büyük külçeyi ancak hedefe yetişmek için zaman varsa dene, kayadan uzak dur. Çengel hedefe tam denk gelene kadar bekle — erken fırlatmak boşa gider ve geri dönmesini beklersin.",
+  "thumbnail": "altin-madencisi.svg",
+  "en": {
+    "title": "Gold Miner",
+    "description": "Fling the swinging claw at the right moment to reel in gold, diamonds and money bags, hitting each level's cash goal before time runs out.",
+    "controls": "Space / Enter / Down arrow / tap: fire the claw · R: restart",
+    "howToPlay": "The miner sits at the top of the screen and the claw swings back and forth like a pendulum. Your only job is to time it right and launch the claw onto the loot buried in the dirt: press Space, Enter, the Down arrow, tap the screen, or use the 'Fire the Claw' button. The claw extends in a straight line; if it touches an object it grabs and reels it up, otherwise it bounces off the edge and returns empty. Key detail: the pull speed depends on the object's weight — small gold and diamonds come up fast, while large nuggets and rocks crawl up slowly and eat precious seconds. Values differ: small gold 60, medium 130, large nugget 320, diamond 650, the '$' bag is random (20–600), and rock is a near-worthless trap (12). Each level you must collect the Goal cash shown at the top within 60 seconds; reach it and you advance to the next, higher-goal level, but if time expires before the goal the run ends and your highest level reached is saved in the browser. Strategy: grab the fast, valuable diamonds and small gold first, attempt the big nugget only if you have time to spare, and avoid the rocks. Wait until the claw lines up exactly with your target — firing early wastes the throw and you have to wait for it to return."
+  }
+}
