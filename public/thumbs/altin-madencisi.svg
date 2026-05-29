@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Altın Madencisi">
+  <defs>
+    <linearGradient id="dirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b3d24"/>
+      <stop offset="1" stop-color="#3a2616"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="#1b2330"/>
+  <rect y="58" width="320" height="142" fill="url(#dirt)"/>
+  <rect y="54" width="320" height="6" fill="#7a5230"/>
+  <!-- miner -->
+  <rect x="142" y="36" width="36" height="14" rx="3" fill="#39414d"/>
+  <circle cx="160" cy="28" r="9" fill="#cdd3db"/>
+  <rect x="150" y="31" width="20" height="5" fill="#e0b15a"/>
+  <!-- claw line + claw -->
+  <line x1="160" y1="50" x2="120" y2="120" stroke="#d8dee8" stroke-width="3"/>
+  <g stroke="#aeb6c2" stroke-width="4" stroke-linecap="round" fill="none" transform="translate(120,120) rotate(-30)">
+    <line x1="0" y1="-5" x2="0" y2="4"/>
+    <line x1="0" y1="4" x2="-9" y2="13"/>
+    <line x1="0" y1="4" x2="9" y2="13"/>
+  </g>
+  <!-- loot -->
+  <circle cx="120" cy="140" r="16" fill="#ffb300"/>
+  <circle cx="113" cy="133" r="4" fill="#ffffff" opacity="0.55"/>
+  <circle cx="240" cy="110" r="11" fill="#ffcf3f"/>
+  <g transform="translate(70,160)">
+    <polygon points="0,-12 12,0 0,12 -12,0" fill="#7fe7ff" stroke="#ffffff" stroke-opacity="0.7" stroke-width="2"/>
+  </g>
+  <circle cx="265" cy="165" r="20" fill="#7a7f88"/>
+  <circle cx="258" cy="158" r="6" fill="#000000" opacity="0.18"/>
+  <circle cx="190" cy="170" r="14" fill="#b9893f"/>
+  <text x="190" y="175" font-family="sans-serif" font-size="14" font-weight="700" fill="#ffd86b" text-anchor="middle">$</text>
+</svg>
