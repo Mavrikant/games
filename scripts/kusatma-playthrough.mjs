@@ -50,6 +50,7 @@ const getState = (page) =>
       active: S.activeAmmo,
       targets: blocks.filter((b) => b.kind === 'target'),
       alive: blocks.length,
+      blocks,
       hasIron: blocks.some((b) => b.kind === 'iron'),
       hasTnt: blocks.some((b) => b.kind === 'tnt'),
       proj: S.projectiles.length,
@@ -158,18 +159,29 @@ async function main() {
   deep.push(`cluster split: ${sawSplit ? 'OK' : 'NOT SEEN'}`);
   if (!sawSplit) failures.push('cluster');
 
-  // fireball explosion + TNT chain on a honeycomb level (41)
-  await startLevel(page, 41);
-  let before = (await getState(page)).alive;
-  {
+  // fireball explosion + TNT chain: find a Volcano-world level with a tnt
+  // cluster and aim a fireball straight at it.
+  let before = 0;
+  let after = 0;
+  let chainTested = false;
+  for (const id of [44, 46, 48, 42, 45, 47, 49, 43, 50, 41]) {
+    await startLevel(page, id);
     const st = await getState(page);
-    const shot = chooseShot(st); // hasTnt + fire available => picks fire, aims at a target
-    await applyShot(page, shot.angle, shot.power, 'fire');
+    const tnts = st.blocks.filter((b) => b.kind === 'tnt');
+    if (tnts.length < 3) continue;
+    before = st.alive;
+    const t = tnts.sort((a, b) => a.col - b.col || b.row - a.row)[0];
+    const tx = CASTLE_X + t.col * BLOCK + BLOCK / 2;
+    const ty = GROUND_Y - (t.row + 1) * BLOCK + BLOCK / 2;
+    const s = solve(tx - P0X, ty - P0Y, G * grav('fire'), st.eng.speedMin, st.eng.speedMax, st.eng.angleMin, st.eng.angleMax);
+    await applyShot(page, s.angle, s.power, 'fire');
     await waitShot(page);
+    after = (await getState(page)).alive;
+    chainTested = true;
+    break;
   }
-  let after = (await getState(page)).alive;
   deep.push(`fire/chain removed ${before - after} blocks in one shot`);
-  if (before - after < 3) failures.push('fire-chain');
+  if (!chainTested || before - after < 3) failures.push('fire-chain');
 
   // forced game-over: weak flat shots that fall short, never clearing
   await startLevel(page, 2);
