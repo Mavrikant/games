@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay, hideOverlay } from '@shared/overlay';
@@ -19,6 +20,7 @@ import { showOverlay, hideOverlay } from '@shared/overlay';
 // - module-level-dom-access: all DOM/storage access lives in init().
 
 const STORAGE_BEST = 'hava-trafik.best';
+const SCORE_DESC = { gameId: 'hava-trafik', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 // --- Geometry: shared by render AND physics. Never duplicate these. ---
 const W = 480;
@@ -378,6 +380,7 @@ function endGame(reason: 'crash' | 'lost'): void {
   cancelAnimationFrame(rafId);
   dragId = null;
   commitBest();
+  reportGameOver(SCORE_DESC, score);
   scoreEl.textContent = String(score);
   bestEl.textContent = String(best);
   overlayTitle.textContent = reason === 'crash' ? 'Çarpışma!' : 'Uçak kayboldu!';

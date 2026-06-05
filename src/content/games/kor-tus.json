@@ -6,6 +6,12 @@
   "controls": "Boşluk veya dokun: vuruş · R: yeniden başla",
   "howToPlay": "Ekranın ortasında yatay bir çubuk ve onun üzerinde sabit duran yeşil bir hedef bölgesi görürsün; sarı renkli gösterge bu çubuk üzerinde sürekli sağa-sola hareket eder ve görevin tam o yeşil bölgenin içindeyken Boşluk tuşuna basmak (mobilde ekrana dokunmak). Doğru zamanlama için +1 puan alırsın, hedef dışında basarsan üç canından biri eksilir ve canlar bitince oyun biter. Tek tuşlu, refleks ve zamanlama odaklı bir arcade oyunudur — kontrol kolay, ama tutarlı yüksek skor zor. Her 5 başarılı isabette sarı göstergenin hareket hızı belirgin biçimde artar; bu yüzden ilerleyen seviyelerde hedef pencerenden geçiş süresi sadece milisaniyeler olur ve göz-el koordinasyonunun sınırlarına dayanırsın. Strateji: gözünü göstergeye değil, hedef bölgesinin kenarına sabitle ve göstergenin oraya gelişini periferik görüşle takip et; bu refleks tepkini ortalama 60-80 milisaniye iyileştirir çünkü merkezi görüş tepkide yavaştır. Bir başka tekniğe ritim sayma denir: göstergenin tam tur süresini içinden 'bir-iki-bir-iki' diye say ve hedef anda bas, beyin bu örüntüyü çok hızlı öğrenir. Yüksek seviyelerde gösterge çok hızlandığında 'tahmin atışı' yöntemine geç: hedef bölgesine ulaşmadan biraz önce bas, çünkü tuştan ekrana giden gecikme zaten birkaç frame'lik ek bir gecikme katar. En iyi skorun tarayıcında saklanır; tipik oyuncu 15-25 isabette, deneyimli oyuncu 50+ isabette tıkanır.",
   "thumbnail": "kor-tus.svg",
+  "scoring": {
+    "storageKey": "kor-tus.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Blind Keys",
     "description": "Catch the moving indicator when it reaches the target zone — a one-key timing game.",

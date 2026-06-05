@@ -6,6 +6,12 @@
   "controls": "Boşluk / tıkla / dokun: zıpla · R: yeniden başla",
   "howToPlay": "Amacın sarı kuşu hayatta tutarak ardı ardına gelen yeşil borulardan geçirmek ve mümkün olduğunca yüksek skora ulaşmak. Kontrol son derece sade: Boşluk tuşuna basmak, ekrana tıklamak veya dokunmak kuşu yukarı doğru bir kanat çırpışıyla itiyor; hiçbir şey yapmazsan yer çekimi devreye girip kuşu giderek hızlanan bir düşüşe sokuyor. Sahnede ekran boyunca soldan sağa kayan boru çiftleri var ve her çiftin ortasında dar bir boşluk bulunuyor; bu boşluğun tam ortasından geçmen gerekiyor. Borunun gövdesine, başlık kısmına, üst tavana ya da alttaki zemine değdiğin an oyun biter; sağ üstteki skor sıfırlanır ve en iyi skorun otomatik kaydedilir. Geçtiğin her boru çifti bir puan değerinde. Strateji olarak panik halinde art arda zıplamak yerine her dokunuş arasında kısa bir bekleme bırak; küçük, ritmik kanat çırpışlarıyla yüksekliği koru. Yaklaşan boşluğa tek bir bütün hareketle değil, çok sayıda mini zıplamayla yaklaşmak çarpışmayı belirgin biçimde azaltır. R tuşu veya Yeniden başla düğmesi her an temiz bir tur başlatır.",
   "thumbnail": "flappy.svg",
+  "scoring": {
+    "storageKey": "flappy.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Flappy",
     "description": "Tap to flap, weave through the pipes. One-button reflex addiction in the browser.",

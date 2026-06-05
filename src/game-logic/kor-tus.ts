@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 type State = 'ready' | 'playing' | 'gameover';
@@ -17,6 +18,7 @@ const SPEED_INC = 0.4;
 const MAX_LIVES = 3;
 const HITS_PER_LEVEL = 5;
 const STORAGE_KEY = 'kor-tus.best';
+const SCORE_DESC = { gameId: 'kor-tus', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -122,6 +124,7 @@ function endGame(): void {
   state = 'gameover';
   cancelAnimationFrame(rafId);
   draw();
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Bitti!', `Skor: ${score} · Tıkla veya R ile yeniden başla`);
 }
 

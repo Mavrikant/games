@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
@@ -29,6 +30,7 @@ const AIM_BAR_Y = LANE_BOTTOM + 30;
 const POWER_BAR_X = CANVAS_W - 24;
 
 const STORAGE_BEST = 'bowling.best';
+const SCORE_DESC = { gameId: 'bowling', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const PIN_POSITIONS: { x: number; y: number }[] = [];
 (function buildPins() {
@@ -516,6 +518,7 @@ function gameOver(): void {
     safeWrite(STORAGE_BEST, best);
   }
   syncHud();
+  reportGameOver(SCORE_DESC, total);
   showOverlay(`Skor ${total}`, total === 300 ? 'Mükemmel oyun!' : 'R ile yeniden başla.');
 }
 

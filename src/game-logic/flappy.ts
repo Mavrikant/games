@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 
@@ -9,6 +10,7 @@ type Pipe = {
 };
 
 const STORAGE_KEY = 'flappy.best';
+const SCORE_DESC = { gameId: 'flappy', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -129,6 +131,7 @@ function gameOver(): void {
     safeWrite(STORAGE_KEY, best);
     bestEl.textContent = String(best);
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Çarptın!', `Skor: ${score} · En iyi: ${best}. Tekrar denemek için dokun.`);
 }
 
