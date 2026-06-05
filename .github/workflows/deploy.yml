@@ -38,6 +38,10 @@ jobs:
       PUBLIC_BUTTONDOWN_USER: ${{ vars.PUBLIC_BUTTONDOWN_USER }}
       PUBLIC_WEB3FORMS_KEY: ${{ vars.PUBLIC_WEB3FORMS_KEY }}
       PUBLIC_CONTACT_EMAIL: ${{ vars.PUBLIC_CONTACT_EMAIL }}
+      # Global leaderboard (Supabase). Anon key is the PUBLIC anon key (RLS-protected).
+      # Both empty -> leaderboard stays off. See docs/LEADERBOARD.md.
+      PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
+      PUBLIC_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SUPABASE_ANON_KEY }}
       PUBLIC_TIKTOK_URL: ${{ vars.PUBLIC_TIKTOK_URL }}
       PUBLIC_INSTAGRAM_URL: ${{ vars.PUBLIC_INSTAGRAM_URL }}
       PUBLIC_TWITTER_URL: ${{ vars.PUBLIC_TWITTER_URL }}

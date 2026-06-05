@@ -6,6 +6,12 @@
   "controls": "Ok tuşları veya WASD · Mobilde kaydır · R: yeniden başla",
   "howToPlay": "Amacın 4x4 tahtadaki karoları birleştirerek 2048 değerine ulaşmak. Masaüstünde ok tuşları veya WASD ile, mobilde tahta üzerinde parmağını sürükleyerek yön ver; R tuşu ya da Yeni Oyun düğmesi tahtayı sıfırlar. Bir yöne kaydırdığında tüm karolar o yöne hareket eder ve aynı sayıyı taşıyan iki karo çarpıştığında birleşip değerini ikiye katlar; her hamle sonunda boş bir hücreye yeni bir 2 (bazen 4) karosu eklenir, kazanılan birleşme değeri skoruna yazılır ve en iyi skorun tarayıcında saklanır. 2048 karosunu oluşturduğunda kazanma ekranı çıkar ama dilersen devam edip daha yüksek karolar (4096, 8192) hedefleyebilirsin; tahta tamamen dolar ve hiçbir komşu eşleşme kalmazsa oyun biter. İpucu: en büyük karonu bir köşeye sabitle ve her hamlede o köşeyi koru, ayrıca hamlelerini tek bir baskın eksene (örneğin yalnız sol ve aşağı) yaslayarak büyük karoları yan yana toplamayı kolaylaştır.",
   "thumbnail": "2048.svg",
+  "scoring": {
+    "storageKey": "2048.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "2048",
     "description": "Merge the tiles, reach 2048. The classic sliding number puzzle.",

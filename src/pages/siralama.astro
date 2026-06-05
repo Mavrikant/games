@@ -1,0 +1,230 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+import '@styles/archive.css';
+
+const games = await getCollection('games');
+const base = import.meta.env.BASE_URL;
+const leaderboardEnabled =
+  (import.meta.env.PUBLIC_SUPABASE_URL ?? '') !== '' &&
+  (import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '') !== '';
+
+interface Board {
+  gameId: string;
+  slug: string;
+  title: string;
+  label: string;
+  unit: string;
+  direction: 'higher' | 'lower';
+  url: string;
+}
+
+// Only games that opted into the score contract (a `scoring` block in their
+// JSON) appear on the board. The runtime fetches the rows; here we just emit the
+// list of boards + their display metadata.
+const boards: Board[] = games
+  .filter((g) => g.data.scoring)
+  .map((g) => {
+    const s = g.data.scoring!;
+    return {
+      gameId: s.id ?? g.id,
+      slug: g.id,
+      title: g.data.title,
+      label: s.label,
+      unit: s.unit ?? '',
+      direction: s.direction,
+      url: `${base}${g.id}/`,
+    };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title, 'tr'));
+---
+
+<BaseLayout
+  title="Sıralama — Tarayıcı Oyunları"
+  description="Tüm oyuncuların en iyi skorları. Google veya GitHub ile giriş yap, skorunu küresel sıralamaya gönder."
+>
+  <Nav count={games.length} />
+  <main class="app leaderboard-page">
+    <h1>Sıralama</h1>
+    <p class="leaderboard-page__lead">
+      Oyuncuların en iyi skorları. Giriş yaparsan kendi skorun da listeye girer —
+      skorlar yine cihazında saklanır, yalnızca sıralamaya katılmak için sunucuya
+      gönderilir.
+    </p>
+
+    {
+      leaderboardEnabled ? (
+        <div id="leaderboard-root" data-enabled="true">
+          <div class="lb__auth" id="lb-auth" hidden />
+          <div class="lb__boards" id="lb-boards">
+            {boards.length === 0 && (
+              <p class="lb__empty">Henüz sıralamaya katılan oyun yok.</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div id="leaderboard-root" data-enabled="false">
+          <p class="lb__soon">
+            Çevrimiçi sıralama yakında. Skorların şimdilik yalnızca bu cihazda
+            saklanıyor.
+          </p>
+          {boards.length > 0 && (
+            <ul class="lb__soon-list">
+              {boards.map((b) => (
+                <li>
+                  <a href={b.url}>{b.title}</a> — {b.label}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )
+    }
+
+    <script
+      is:inline
+      id="leaderboard-data"
+      type="application/json"
+      set:html={JSON.stringify(boards)}
+    />
+  </main>
+  <SiteFooter />
+
+  <script>
+    import '../archive/leaderboard.ts';
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .leaderboard-page {
+    max-width: 720px;
+  }
+  .leaderboard-page h1 {
+    font-size: 28px;
+    margin: 0 0 8px;
+  }
+  .leaderboard-page__lead {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+  }
+
+  .lb__auth {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .lb__who {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .lb__btn {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .lb__btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .lb__boards {
+    display: grid;
+    gap: 22px;
+  }
+  .lb__board {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: var(--surface);
+  }
+  .lb__board-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+  .lb__board-title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .lb__board-title a:hover {
+    color: var(--accent);
+  }
+  .lb__board-metric {
+    color: var(--text-dim);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .lb__rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .lb__row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .lb__row--self {
+    background: var(--accent-soft, rgba(96, 165, 250, 0.12));
+  }
+  .lb__rank {
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .lb__name {
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lb__value {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lb__empty,
+  .lb__loading,
+  .lb__soon {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .lb__soon-list {
+    margin: 12px 0 0;
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .lb__soon-list a {
+    color: var(--accent, #60a5fa);
+    text-decoration: none;
+  }
+</style>
