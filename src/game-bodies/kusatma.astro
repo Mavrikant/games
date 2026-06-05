@@ -2,18 +2,96 @@
 ---
 
 <header class="hud">
-  <div class="hud__score">Skor<span id="score">0</span></div>
-  <div class="hud__ammo">Mühimmat<span id="ammo">0</span></div>
-  <div class="hud__score">Rekor<span id="best">0</span></div>
-  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+  <button id="map-btn" class="hud__icon" type="button" aria-label="Harita">≡</button>
+  <div class="hud__stat hud__stat--score">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <div class="hud__stat hud__stat--stars">Yıldız<span id="total-stars">0</span></div>
+  <button id="sound-toggle" class="hud__icon" type="button" aria-label="Ses">🔊</button>
+  <button id="restart" class="hud__icon" type="button" aria-label="Yeniden başla">↻</button>
 </header>
+
+<div class="subhud">
+  <span id="level-name" class="subhud__level">Seviye 1</span>
+  <div id="ammo-bar" class="ammo-bar" role="toolbar" aria-label="Mühimmat"></div>
+</div>
+
 <div class="board-wrap">
   <canvas id="board" width="640" height="400" aria-label="Kuşatma — mancınıkla kaleyi yık"></canvas>
-  <div id="overlay" class="overlay">
-    <div class="overlay__inner">
-      <h2 id="overlay-title">Kuşatma</h2>
-      <p id="overlay-msg">Mancınığı geri çekip bırak; surları yıkıp tüm sancakları devir.</p>
-      <button id="overlay-btn" class="ks-btn" type="button">Başla</button>
+
+  <div id="intro" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Kuşatma</h2>
+      <p class="overlay__msg">Mancınığı geri çek ve bırak; arkasındaki yayı izleyerek mühimmatın bitmeden tüm kızıl sancakları devir.
+60 kale · 5 kuşatma makinesi · 6 mühimmat türü seni bekliyor.</p>
+      <button id="intro-start" class="ks-btn ks-btn--primary" type="button">Kuşatmaya başla</button>
     </div>
   </div>
+
+  <div id="map" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel map-panel">
+      <div class="map-panel__head">
+        <h2 class="overlay__title">Sefer Haritası</h2>
+        <span class="map-panel__stars">⭐ <span id="map-total-stars">0</span></span>
+      </div>
+      <div class="map-panel__actions">
+        <button id="map-play" class="ks-btn ks-btn--primary" type="button">Devam et</button>
+        <button id="map-ach" class="ks-btn" type="button">🏅 Madalyalar</button>
+        <button id="map-settings" class="ks-btn" type="button">⚙️ Ayarlar</button>
+      </div>
+      <div id="map-grid" class="map-grid"></div>
+    </div>
+  </div>
+
+  <div id="prelevel" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title" id="prelevel-title">Seviye</h2>
+      <p class="overlay__msg">Bu seferki kuşatma makineni seç:</p>
+      <div id="prelevel-engines" class="engine-grid"></div>
+      <button id="prelevel-back" class="ks-btn" type="button">← Harita</button>
+    </div>
+  </div>
+
+  <div id="level-complete" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title" id="lc-title">Sur düştü!</h2>
+      <div id="lc-stars" class="stars-row"></div>
+      <p class="overlay__msg">Skor: <span id="lc-score">0</span></p>
+      <div class="overlay__actions">
+        <button id="lc-next" class="ks-btn ks-btn--primary" type="button">Sonraki →</button>
+        <button id="lc-retry" class="ks-btn" type="button">Tekrar</button>
+        <button id="lc-map" class="ks-btn" type="button">Harita</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameover" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Mühimmat bitti</h2>
+      <p class="overlay__msg">Kale dayandı; sancaklar hâlâ ayakta. Tekrar dene!</p>
+      <div class="overlay__actions">
+        <button id="go-retry" class="ks-btn ks-btn--primary" type="button">Tekrar dene</button>
+        <button id="go-map" class="ks-btn" type="button">Harita</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel">
+      <h2 class="overlay__title">Ayarlar</h2>
+      <label class="setting-row"><span>Ses efektleri</span><input id="set-sfx" type="checkbox" checked /></label>
+      <label class="setting-row"><span>Müzik</span><input id="set-music" type="checkbox" checked /></label>
+      <label class="setting-row"><span>Az hareket modu</span><input id="set-motion" type="checkbox" /></label>
+      <button id="set-close" class="ks-btn ks-btn--primary" type="button">Kapat</button>
+    </div>
+  </div>
+
+  <div id="achievements" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__panel ach-panel">
+      <h2 class="overlay__title">Madalyalar</h2>
+      <div id="ach-grid" class="ach-grid"></div>
+      <button id="ach-close" class="ks-btn ks-btn--primary" type="button">Kapat</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
 </div>
