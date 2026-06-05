@@ -4,7 +4,7 @@
 
 import { defineGame } from '@shared/game-module';
 import { S, loadProfile, progressFor } from './kusatma/state';
-import { bindCanvas, resizeCanvas, draw } from './kusatma/render';
+import { bindCanvas, resizeCanvas, draw, applyFullscreenLayout } from './kusatma/render';
 import { bindUi, showIntro, type UiHandlers } from './kusatma/ui';
 import { bindInput } from './kusatma/input';
 import { startLoop } from './kusatma/loop';
@@ -52,6 +52,60 @@ function init(): void {
   restartBtn?.addEventListener('click', () => {
     audio.ensureAudio();
     retryLevel();
+  });
+
+  // Fullscreen: native Fullscreen API on the game root, with a CSS-maximize
+  // fallback for contexts that block it (e.g. iOS Safari, which has no
+  // element.requestFullscreen).
+  const ksRoot = document.querySelector<HTMLElement>('#ks-root');
+  const fsBtn = document.querySelector<HTMLButtonElement>('#fullscreen-toggle');
+  function fsActive(): boolean {
+    return document.fullscreenElement === ksRoot || !!ksRoot?.classList.contains('ks-root--max');
+  }
+  function syncFs(): void {
+    const active = fsActive();
+    applyFullscreenLayout(active);
+    if (fsBtn) {
+      fsBtn.textContent = active ? '🗗' : '⛶';
+      fsBtn.setAttribute('aria-label', active ? 'Tam ekrandan çık' : 'Tam ekran');
+    }
+    resizeCanvas();
+  }
+  function toggleFs(): void {
+    if (!ksRoot) return;
+    if (document.fullscreenElement === ksRoot) {
+      void document.exitFullscreen?.();
+      return;
+    }
+    if (ksRoot.classList.contains('ks-root--max')) {
+      ksRoot.classList.remove('ks-root--max');
+      syncFs();
+      return;
+    }
+    const req = ksRoot.requestFullscreen?.();
+    if (req && typeof req.then === 'function') {
+      req.then(syncFs).catch(() => {
+        ksRoot.classList.add('ks-root--max');
+        syncFs();
+      });
+    } else if (!ksRoot.requestFullscreen) {
+      ksRoot.classList.add('ks-root--max');
+      syncFs();
+    } else {
+      syncFs();
+    }
+  }
+  fsBtn?.addEventListener('click', () => {
+    audio.ensureAudio();
+    toggleFs();
+  });
+  document.addEventListener('fullscreenchange', syncFs);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'f' || e.key === 'F') {
+      audio.ensureAudio();
+      toggleFs();
+      e.preventDefault();
+    }
   });
 
   window.addEventListener('resize', resizeCanvas);

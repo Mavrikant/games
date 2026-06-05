@@ -27,10 +27,21 @@ import { drawParticles, drawPopups } from './fx';
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
 let dpr = 1;
+let boardWrap: HTMLElement | null = null;
+let ksRoot: HTMLElement | null = null;
+let hudEl: HTMLElement | null = null;
+let subhudEl: HTMLElement | null = null;
 
 export function bindCanvas(c: HTMLCanvasElement): void {
   canvas = c;
   ctx = c.getContext('2d')!;
+  boardWrap = c.closest('.board-wrap');
+  ksRoot = document.querySelector('#ks-root');
+  hudEl = document.querySelector('.hud');
+  subhudEl = document.querySelector('.subhud');
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => resizeCanvas()).observe(c);
+  }
   resizeCanvas();
 }
 
@@ -38,16 +49,42 @@ export function getCanvas(): HTMLCanvasElement {
   return canvas;
 }
 
+// Backing store tracks the canvas's actual displayed size so it stays crisp at
+// any scale (normal stage, fullscreen, or the CSS-maximize fallback). The game
+// keeps drawing in logical W×H coords; the transform absorbs the scale.
 export function resizeCanvas(): void {
-  const next = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
-  if (next === dpr && canvas.width === W * dpr) return;
-  dpr = next;
-  canvas.width = Math.round(W * dpr);
-  canvas.height = Math.round(H * dpr);
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  const cssW = rect.width || W;
+  dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  const bw = Math.max(1, Math.round(cssW * dpr));
+  const bh = Math.max(1, Math.round(cssW * (H / W) * dpr));
+  if (canvas.width !== bw || canvas.height !== bh) {
+    canvas.width = bw;
+    canvas.height = bh;
+  }
+  const s = (cssW / W) * dpr;
+  ctx.setTransform(s, 0, 0, s, 0, 0);
   ctx.imageSmoothingEnabled = true;
   draw();
 }
+
+// Size the board to fill the screen (minus the HUD) at 16:10 when fullscreen /
+// maximized; clear the inline size to fall back to the normal stage layout.
+export function applyFullscreenLayout(active: boolean): void {
+  if (!boardWrap) return;
+  if (!active) {
+    boardWrap.style.width = '';
+    return;
+  }
+  const root = ksRoot ?? boardWrap.parentElement;
+  const availW = (root?.clientWidth ?? window.innerWidth) - 24;
+  const hud = (hudEl?.offsetHeight ?? 0) + (subhudEl?.offsetHeight ?? 0) + 24;
+  const availH = (root?.clientHeight ?? window.innerHeight) - hud;
+  const scale = Math.max(0.1, Math.min(availW / W, availH / H));
+  boardWrap.style.width = `${Math.floor(W * scale)}px`;
+}
+
 
 function theme(): WorldDef {
   return WORLDS[S.level?.world ?? 0] ?? WORLDS[0]!;

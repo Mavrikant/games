@@ -429,3 +429,30 @@
     padding: 16px;
   }
 }
+
+/* Fullscreen / maximize */
+.ks-root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ks-root:fullscreen,
+.ks-root.ks-root--max {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+  padding: 12px;
+  background: var(--bg);
+  z-index: 9999;
+  overflow: hidden;
+}
+.ks-root:fullscreen .board-wrap,
+.ks-root.ks-root--max .board-wrap {
+  margin: auto;
+  max-width: none;
+}
+.ks-root:fullscreen::backdrop {
+  background: var(--bg);
+}
