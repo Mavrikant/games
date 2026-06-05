@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kuşatma">
+  <defs>
+    <linearGradient id="ksky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e1c33" />
+      <stop offset="100%" stop-color="#41506b" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ksky)" />
+  <circle cx="262" cy="40" r="15" fill="#ffecaa" fill-opacity="0.85" />
+  <!-- hills -->
+  <path d="M0 170 Q80 116 170 170 Z" fill="#1a2740" />
+  <path d="M120 170 Q230 124 320 170 Z" fill="#243450" />
+  <!-- ground -->
+  <rect x="0" y="170" width="320" height="30" fill="#2c2118" />
+  <rect x="0" y="170" width="320" height="5" fill="#46663f" />
+
+  <!-- castle (stacked blocks) -->
+  <g>
+    <!-- front wall -->
+    <rect x="176" y="122" width="24" height="24" fill="#79828f" />
+    <rect x="176" y="146" width="24" height="24" fill="#79828f" />
+    <rect x="176" y="122" width="24" height="4" fill="#98a1ae" />
+    <rect x="176" y="146" width="24" height="4" fill="#98a1ae" />
+    <!-- keep tower -->
+    <rect x="214" y="98" width="24" height="24" fill="#79828f" />
+    <rect x="214" y="122" width="24" height="24" fill="#79828f" />
+    <rect x="214" y="146" width="24" height="24" fill="#79828f" />
+    <rect x="214" y="98" width="24" height="4" fill="#98a1ae" />
+    <!-- supply barrel -->
+    <rect x="252" y="146" width="20" height="24" fill="#d2982f" />
+    <rect x="252" y="153" width="20" height="3" fill="#6f5018" />
+    <rect x="252" y="163" width="20" height="3" fill="#6f5018" />
+    <!-- banner on keep -->
+    <rect x="225" y="78" width="2" height="22" fill="#caa45a" />
+    <polygon points="227,78 245,82 227,88" fill="#d23b3b" />
+  </g>
+
+  <!-- catapult -->
+  <g>
+    <rect x="28" y="150" width="40" height="7" rx="2" fill="#412a14" />
+    <rect x="56" y="128" width="6" height="24" fill="#6a4525" />
+    <line x1="60" y1="130" x2="38" y2="150" stroke="#6a4525" stroke-width="5" stroke-linecap="round" />
+    <circle cx="38" cy="158" r="6" fill="#412a14" />
+    <circle cx="60" cy="158" r="6" fill="#412a14" />
+  </g>
+
+  <!-- trajectory + boulder -->
+  <g fill="#f5f6f8" fill-opacity="0.55">
+    <circle cx="70" cy="120" r="2.4" />
+    <circle cx="92" cy="100" r="2.4" />
+    <circle cx="116" cy="88" r="2.4" />
+    <circle cx="140" cy="84" r="2.4" />
+    <circle cx="164" cy="90" r="2.4" />
+  </g>
+  <circle cx="52" cy="132" r="8" fill="#ccd1d9" stroke="#7b8290" stroke-width="1" />
+
+  <text x="18" y="34" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#f5f6f8">Kuşatma</text>
+</svg>
