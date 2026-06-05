@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { recordScore } from '@shared/leaderboard';
 
 type Dir = 'up' | 'down' | 'left' | 'right';
 
@@ -25,6 +26,9 @@ interface SavedState {
 const SIZE = 4;
 const STORAGE_BEST = '2048.best';
 const STORAGE_STATE = '2048.state';
+// Global-leaderboard contract. recordScore() also keeps the local best in sync,
+// so this is purely additive on top of the existing STORAGE_BEST handling.
+const SCORE_DESC = { gameId: '2048', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 let boardEl!: HTMLDivElement;
 let tilesEl!: HTMLDivElement;
@@ -307,6 +311,9 @@ function checkEnd(): void {
   }
   if (!hasMoves()) {
     dead = true;
+    // Final score for this run — submit to the global board (no-op when the
+    // backend is off or the player is signed out).
+    recordScore(SCORE_DESC, score);
     showOverlay('Bitti', `Hamle kalmadı. Skor: ${score}`, 'Yeniden başla');
   }
 }

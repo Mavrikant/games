@@ -6,12 +6,16 @@ import { getCollection } from 'astro:content';
 import '@styles/archive.css';
 
 const games = await getCollection('games');
+const base = import.meta.env.BASE_URL;
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 const fundingChoicesEnabled =
   (import.meta.env.PUBLIC_FUNDING_CHOICES_ID ?? '') !== '';
 const plausibleEnabled = (import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_ID ?? '') !== '';
 const gaEnabled = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '') !== '';
 const web3formsEnabled = (import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '') !== '';
+const leaderboardEnabled =
+  (import.meta.env.PUBLIC_SUPABASE_URL ?? '') !== '' &&
+  (import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '') !== '';
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.dev';
 ---
 
@@ -88,7 +92,19 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
       <li>
         <strong>Yerel depolama (localStorage)</strong>: Her oyun, sizin en iyi
         skorunuzu ve oyun ilerlemenizi tarayıcınızda saklar. Bu veriler
-        sunucuya gönderilmez; tarayıcı verilerini sildiğinizde kaybolur.
+        öntanımlı olarak sunucuya gönderilmez; tarayıcı verilerini sildiğinizde
+        kaybolur.
+      </li>
+      <li>
+        <strong>Küresel sıralama (isteğe bağlı)</strong>: Oyunlar giriş
+        yapmadan oynanır ve skorlar varsayılan olarak yalnızca cihazınızda
+        kalır. Yalnızca <a href={`${base}siralama/`}>Sıralama</a> sayfasında
+        Google veya GitHub ile giriş yapıp küresel sıralamaya katılmayı
+        seçerseniz, takma adınız (OAuth profilinizden) ve oyun skorlarınız
+        sıralama sunucusunda (Supabase) saklanır. Giriş yapmazsanız hiçbir skor
+        sunucuya gönderilmez. Sıralamadaki verilerinizin silinmesini istemek
+        için <a href={`mailto:${contactEmail}`}>{contactEmail}</a> adresine
+        yazabilirsiniz.
       </li>
     </ul>
 
@@ -174,6 +190,31 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <a href="https://web3forms.com/privacy-policy"
           target="_blank"
           rel="noopener noreferrer">web3forms.com/privacy-policy</a>
+      </li>
+      <li>
+        <strong>Supabase</strong> (küresel sıralama altyapısı —{' '}
+        {leaderboardEnabled ? (
+          <span>
+            Sıralamaya giriş yaparsanız kimlik doğrulama (Google/GitHub OAuth),
+            takma adınız ve skorlarınız Supabase üzerinde barındırılan veritabanında
+            saklanır.
+          </span>
+        ) : (
+          <span>
+            küresel sıralama etkinleştirildiğinde, giriş yapan oyuncuların takma
+            adı ve skorları Supabase üzerinde saklanır.
+          </span>
+        )}{' '}
+        <a href="https://supabase.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer">supabase.com/privacy</a>. Giriş için
+        kullanılan sağlayıcılar:{' '}
+        <a href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer">Google</a> ·{' '}
+        <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a>.
       </li>
     </ul>
 
