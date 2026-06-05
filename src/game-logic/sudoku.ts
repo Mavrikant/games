@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { recordScore } from '@shared/leaderboard';
 
 // Sudoku — 9×9 grid, classic rules.
 //
@@ -161,6 +162,9 @@ const SCAN_DELAY_MS = 60; // delay between cell mutation and conflict re-render
 
 const DIFFICULTY_KEY = 'sudoku.difficulty';
 const bestKey = (d: Difficulty): string => `sudoku.best-${d}`;
+// Global leaderboard tracks the "easy" board only — one fixed difficulty so
+// times are comparable. Lower time (seconds) is better.
+const SCORE_DESC = { gameId: 'sudoku-easy', storageKey: 'sudoku.best-easy', direction: 'lower' as const };
 
 // --- DOM ---
 let boardEl!: HTMLElement;
@@ -510,6 +514,7 @@ function winGame(): void {
     saveBest(difficulty, elapsedSec);
     isRecord = true;
   }
+  if (difficulty === 'easy') recordScore(SCORE_DESC, elapsedSec);
   renderHud();
   setStatus(`Çözdün! Süre: ${formatTime(elapsedSec)}`, 'win');
   overlayTitle.textContent = isRecord ? 'Yeni rekor!' : 'Tebrikler!';

@@ -17,6 +17,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { recordScore } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 type MoleKind = 'normal' | 'gold' | 'bomb';
@@ -42,6 +43,7 @@ interface MoleSlot {
 const GRID = 9; // 3 × 3
 const ROUND_SECONDS = 60;
 const STORAGE_KEY = 'whack-a-mole.bestScore';
+const SCORE_DESC = { gameId: 'whack-a-mole', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // Show timing
 const SHOW_MIN_MS = 800;
@@ -474,6 +476,8 @@ function endGame(): void {
     s.locked = false;
   }
   boardWrap.classList.remove('is-shaking');
+
+  recordScore(SCORE_DESC, score);
 
   const isBest = score >= best; // best already written incrementally; this is for messaging
   const title = isBest && score > 0 ? 'Yeni rekor!' : 'Süre doldu!';

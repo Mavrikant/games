@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { recordScore } from '@shared/leaderboard';
 
 type Brick = {
   x: number;
@@ -26,6 +27,7 @@ let overlayTitle!: HTMLElement;
 let overlayMsg!: HTMLElement;
 
 const STORAGE_KEY = 'breakout.highScore';
+const SCORE_DESC = { gameId: 'breakout', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // Logical play-field dimensions; canvas backing store is scaled to match
 // CSS-rendered size * devicePixelRatio for crisp output on HiDPI/mobile,
@@ -206,6 +208,7 @@ function loseLife(): void {
       safeWrite(STORAGE_KEY, best);
       updateHud();
     }
+    recordScore(SCORE_DESC, score);
     showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
   } else {
     resetBallToPaddle();

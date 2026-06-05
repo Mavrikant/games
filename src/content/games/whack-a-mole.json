@@ -6,6 +6,12 @@
   "controls": "Tıkla veya dokun: köstebeği yakala · Bombadan kaç · R: yeniden başla",
   "howToPlay": "Amacın 60 saniye boyunca 3x3 tahtadaki deliklerden çıkan köstebekleri yakalayarak en yüksek skoru toplamak. Beliren köstebeklere fareyle tıkla veya dokunmatik ekranda parmağınla bas; deliğin herhangi bir yerine vurman yeterli, minik sprite'a nişan almana gerek yok. Normal köstebek +10, nadir çıkan altın köstebek +30 puan kazandırır; ancak siyah bombaya dokunursan -20 puan kaybeder ve tahta sallanır (skor sıfırın altına inmez). Her köstebek yalnızca kısa bir süre yukarıda kalır, altın köstebek daha da hızlı kaçar. Oyun ilerledikçe spawn temposu her 10 saniyede bir kısalır, yani tempo giderek artar. R tuşuyla istediğin an yeniden başlatabilirsin. İpucu: deliklerin merkezi arası gözünü gezdir, sadece tek bir noktaya odaklanma; altın köstebek belirir belirmez önceliğini ona ver, bombayı gördüğünde elini geri çek.",
   "thumbnail": "whack-a-mole.svg",
+  "scoring": {
+    "storageKey": "whack-a-mole.bestScore",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Whack-a-Mole",
     "description": "Bonk the moles — but dodge the bomb and don't miss the golden one.",

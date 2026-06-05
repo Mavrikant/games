@@ -6,6 +6,12 @@
   "controls": "← → veya A/D · Fare/dokunma: paddle · Boşluk: başlat/topu fırlat · P: duraklat · R: yeniden başla",
   "howToPlay": "Amacın ekranın üstündeki tüm tuğlaları topu sektirerek kırmak ve bir sonraki seviyeye ilerlemek. Paddle'ı sol ok veya A ile sola, sağ ok veya D ile sağa hareket ettir; istersen fare imlecini veya parmağını kullanarak da paddle'ı sürükleyebilirsin. Top paddle'a yapışık başlar; Boşluk tuşu ya da tıklama ile fırlat. P duraklatır, R oyunu sıfırlar. Üst sıralardaki tuğlalar daha yüksek puan verir; ileri seviyelerde bazı tuğlalar iki vuruşla kırılır ve hem top hızlanır hem paddle daralır. Top alta düşerse bir can kaybedersin, üç canın da biterse oyun sona erer ve en yüksek skorun kaydedilir. İpucu: topu paddle'ın kenarına denk getirirsen sekme açısı keskinleşir; bunu, kenardaki ulaşılması zor tuğlaları hedeflemek için kullan ve aceleci hamleler yerine paddle'ı topun düşeceği noktaya önceden götür.",
   "thumbnail": "breakout.svg",
+  "scoring": {
+    "storageKey": "breakout.highScore",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Breakout",
     "description": "Bounce the ball, break every brick. The classic arcade reflex game.",

@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { recordScore } from '@shared/leaderboard';
 
 // Sky Jump — sonsuz dikey tırmanış (Doodle Jump tarzı).
 // - Karakter platforma değdiğinde otomatik zıplar (sabit zıplama gücü).
@@ -96,6 +97,9 @@ function css(varName: string, fallback: string): string {
 
 // ---------- Storage (safe) ----------
 const STORAGE_KEY = 'sky-jump.bestHeight';
+// Leaderboard tracks metres (what the HUD shows), not the raw px stored above —
+// so it uses its own key. recordScore keeps 'sky-jump.best' (metres) in sync.
+const SCORE_DESC = { gameId: 'sky-jump', storageKey: 'sky-jump.best', direction: 'higher' as const };
 function safeReadBest(): number {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -279,6 +283,7 @@ function gameOver(): void {
     updateHud();
   }
   const m = Math.floor(highestY / 10);
+  recordScore(SCORE_DESC, m);
   const b = Math.floor(bestHeight / 10);
   showOverlay('Düştün!', `${m} m · en iyi ${b} m · tekrar denemek için R ya da Yeniden başla.`);
 }
