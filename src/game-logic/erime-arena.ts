@@ -14,17 +14,23 @@ import type { PeerState, RoomHandle } from '@shared/realtime-room';
 // - hud-counter-synced-only-at-lifecycle-edges: HUD is rewritten every frame.
 
 // ---- world / tuning -------------------------------------------------------
-const WORLD = 2600;
+const WORLD = 1600;
 const START_MASS = 100;
 const MIN_MASS = 100; // melt floor — you never shrink below the spawn size
 const MAX_MASS = 6000;
 const FOOD_MASS = 7;
-const NUM_FOOD = 240;
-const NUM_BOTS = 9; // local "wildlife" — keeps the arena alive solo or online
+const NUM_FOOD = 160;
+const NUM_BOTS = 6; // local "wildlife" — keeps the arena alive solo or online
 const MELT_K = 0.035; // fraction of mass lost per second (bigger melts faster)
 const EAT_RATIO = 1.18; // must be this much larger to swallow another blob
 const GAIN = 0.85; // share of the victim's mass absorbed
 const BASE_SPEED = 240; // world units/sec at spawn size
+// Players spawn within this radius of the arena center so people in the same
+// room meet quickly instead of scattering across the whole world.
+const SPAWN_SPREAD = 220;
+// Brief invulnerability after (re)spawning, so a fresh mass-100 cell isn't
+// instantly swallowed by a nearby bigger blob before it can move.
+const SPAWN_PROTECT_MS = 2500;
 const ROOM = 'lobby';
 const PEER_STALE_MS = 5000;
 const EAT_COOLDOWN_MS = 1200;
@@ -77,6 +83,7 @@ const cam = { x: WORLD / 2, y: WORLD / 2 };
 const self: Blob = { x: WORLD / 2, y: WORLD / 2, mass: START_MASS, hue: 210, name: 'Sen' };
 let peakMass = START_MASS;
 let best = START_MASS;
+let protectUntil = 0; // performance.now() until which self can't be eaten
 
 const food: Pellet[] = [];
 const bots: Bot[] = [];
@@ -160,12 +167,16 @@ function startPlay(): void {
   } else {
     self.name = 'Sen';
   }
-  self.x = rnd(WORLD * 0.3, WORLD * 0.7);
-  self.y = rnd(WORLD * 0.3, WORLD * 0.7);
+  self.x = WORLD / 2 + rnd(-SPAWN_SPREAD, SPAWN_SPREAD);
+  self.y = WORLD / 2 + rnd(-SPAWN_SPREAD, SPAWN_SPREAD);
   self.mass = START_MASS;
   peakMass = START_MASS;
   state = 'playing';
+  protectUntil = performance.now() + SPAWN_PROTECT_MS;
   hideOverlayEl(overlay);
+  // Drop focus from the name field so movement keys steer instead of typing
+  // into the (now hidden) input.
+  nameInput.blur();
 }
 
 function die(): void {
@@ -315,7 +326,7 @@ function updateBots(dt: number): void {
 }
 
 // Bots eating each other / self; self eating bots; self dying to bigger bots.
-function resolveLocalEating(): void {
+function resolveLocalEating(now: number): void {
   // bot vs bot
   for (const a of bots) {
     for (const b of bots) {
@@ -337,6 +348,7 @@ function resolveLocalEating(): void {
       b.y = rnd(40, WORLD - 40);
       b.mass = rnd(60, 150);
     } else if (b.mass > self.mass * EAT_RATIO) {
+      if (now < protectUntil) continue; // spawn protection
       die();
       return;
     }
@@ -357,6 +369,7 @@ function resolvePeerEating(now: number): void {
       self.mass = Math.min(MAX_MASS, self.mass + peer.mass * GAIN);
       eatCooldown.set(peer.id, now + EAT_COOLDOWN_MS);
     } else if (peer.mass > self.mass * EAT_RATIO) {
+      if (now < protectUntil) continue; // spawn protection
       eatCooldown.set(peer.id, now + EAT_COOLDOWN_MS);
       die();
       return;
@@ -378,7 +391,7 @@ function update(dt: number, now: number): void {
     if (self.mass > peakMass) peakMass = self.mass;
   }
   updateBots(dt);
-  resolveLocalEating();
+  resolveLocalEating(now);
   if (online) {
     prunePeers(now);
     resolvePeerEating(now);
@@ -415,6 +428,15 @@ function drawBlob(b: Blob, isSelf: boolean): void {
   ctx.lineWidth = Math.max(1.5, r * 0.08);
   ctx.strokeStyle = `hsl(${b.hue} 70% ${isSelf ? 72 : 32}%)`;
   ctx.stroke();
+  if (isSelf && performance.now() < protectUntil) {
+    ctx.beginPath();
+    ctx.arc(x, y, r + 4, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
   if (r > 14) {
     ctx.fillStyle = 'rgba(255,255,255,0.92)';
     ctx.font = `${Math.max(10, Math.min(20, r * 0.5))}px Inter, system-ui, sans-serif`;
@@ -480,6 +502,40 @@ function render(): void {
   if (state === 'playing') drawList.push({ b: self, isSelf: true });
   drawList.sort((a, b) => a.b.mass - b.b.mass);
   for (const d of drawList) drawBlob(d.b, d.isSelf);
+
+  // Off-screen indicators for human peers, so other players stay findable
+  // even when they spawn or roam outside the viewport.
+  const cx = view.w / 2;
+  const cy = view.h / 2;
+  const m = 16;
+  for (const p of peers.values()) {
+    if (!p.alive) continue;
+    const px = sx(p.x);
+    const py = sy(p.y);
+    if (px >= 0 && px <= view.w && py >= 0 && py <= view.h) continue; // on screen
+    let dx = px - cx;
+    let dy = py - cy;
+    const len = Math.hypot(dx, dy) || 1;
+    dx /= len;
+    dy /= len;
+    const tx = dx > 0 ? (view.w - m - cx) / dx : dx < 0 ? (m - cx) / dx : Infinity;
+    const ty = dy > 0 ? (view.h - m - cy) / dy : dy < 0 ? (m - cy) / dy : Infinity;
+    const t = Math.min(tx, ty);
+    const ex = cx + dx * t;
+    const ey = cy + dy * t;
+    ctx.beginPath();
+    ctx.arc(ex, ey, 7, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${p.hue} 68% 55%)`;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    ctx.font = '11px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(p.name, ex - dx * 16, ey - dy * 10);
+  }
 }
 
 function updateHud(now: number): void {
@@ -555,7 +611,10 @@ async function connect(): Promise<void> {
   const myGen = gen.current();
   const handle = await joinRoom(ROOM, {
     onState: (peer) => {
-      peers.set(peer.id, peer);
+      // Stamp with the local receive time (performance.now, same clock as the
+      // loop) — the sender's epoch timestamp can't be compared across machines
+      // (clock skew) and would mis-fire staleness pruning.
+      peers.set(peer.id, { ...peer, t: performance.now() });
     },
     onLeave: (id) => {
       peers.delete(id);
@@ -613,7 +672,22 @@ function init(): void {
   });
 
   window.addEventListener('keydown', (e) => {
+    // Don't hijack typing: while the name field (or any input) is focused,
+    // letters/space type normally and only Enter starts the run.
+    const target = e.target as HTMLElement | null;
+    const typing =
+      !!target &&
+      (target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable);
     const k = e.key.toLowerCase();
+    if (typing) {
+      if (k === 'enter' && state !== 'playing') {
+        startPlay();
+        e.preventDefault();
+      }
+      return;
+    }
     const dir = keyDir(k);
     if (dir) {
       keys.add(dir);
