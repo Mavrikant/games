@@ -123,6 +123,7 @@ export async function submitScore(args: SubmitArgs): Promise<void> {
     await client.rpc('submit_score', {
       p_game_id: args.gameId,
       p_value: args.value,
+      p_direction: args.direction,
     });
   } catch {
     /* offline / blocked / backend down → ignore */

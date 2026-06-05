@@ -122,9 +122,9 @@ create table public.game_config (
 );
 alter table public.game_config enable row level security;
 create policy "config read" on public.game_config for select using (true);
--- Adopte edilmiş oyunlar (her gameId için bir satır şart — yoksa RPC 'unknown game' der).
--- max_value bir tavandır: 'higher' oyunlarda saçma-yüksek, 'lower' (süre) oyunlarda
--- saçma-büyük değerleri eler.
+-- Opsiyonel: bilinen oyunlar için açık tavan (max_value). submit_score eksik
+-- satırı otomatik oluşturur (tavansız), ama saçma değerleri elemek için
+-- buradan tavan koyabilirsin. 'lower' (süre) oyunlarda büyük değerler elenir.
 insert into public.game_config (game_id, direction, max_value) values
   ('2048',         'higher', 4000000),
   ('snake',        'higher', 400),
@@ -134,14 +134,26 @@ insert into public.game_config (game_id, direction, max_value) values
   ('whack-a-mole', 'higher', 100000),
   ('sudoku-easy',  'lower',  86400);
 
--- submit_score: auth.uid() damgalar, tavanı uygular, yöne göre en iyiyi tutar.
-create or replace function public.submit_score(p_game_id text, p_value numeric)
-returns void language plpgsql security definer set search_path = public as $$
+-- submit_score: auth.uid() damgalar; game_config satırı yoksa client'ın
+-- gönderdiği yön (p_direction) ile OTOMATİK oluşturur — böylece yeni oyunlar
+-- ek SQL olmadan çalışır. Sonra tavanı uygular ve yöne göre en iyiyi tutar.
+drop function if exists public.submit_score(text, numeric);
+create or replace function public.submit_score(
+  p_game_id text, p_value numeric, p_direction text default 'higher'
+) returns void language plpgsql security definer set search_path = public as $$
 declare cfg public.game_config%rowtype;
 begin
   if auth.uid() is null then raise exception 'auth required'; end if;
+  if p_direction not in ('higher','lower') then p_direction := 'higher'; end if;
+
   select * into cfg from public.game_config where game_id = p_game_id;
-  if not found then raise exception 'unknown game'; end if;
+  if not found then
+    insert into public.game_config (game_id, direction, max_value)
+    values (p_game_id, p_direction, null)
+    on conflict (game_id) do nothing;
+    select * into cfg from public.game_config where game_id = p_game_id;
+  end if;
+
   if cfg.max_value is not null and p_value > cfg.max_value then
     raise exception 'value out of range';
   end if;
