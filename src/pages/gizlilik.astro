@@ -99,7 +99,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <strong>Küresel sıralama (isteğe bağlı)</strong>: Oyunlar giriş
         yapmadan oynanır ve skorlar varsayılan olarak yalnızca cihazınızda
         kalır. Yalnızca <a href={`${base}siralama/`}>Sıralama</a> sayfasında
-        Google veya GitHub ile giriş yapıp küresel sıralamaya katılmayı
+        Google ile giriş yapıp küresel sıralamaya katılmayı
         seçerseniz, takma adınız (OAuth profilinizden) ve oyun skorlarınız
         sıralama sunucusunda (Supabase) saklanır. Giriş yapmazsanız hiçbir skor
         sunucuya gönderilmez. Sıralamadaki verilerinizin silinmesini istemek
@@ -195,7 +195,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <strong>Supabase</strong> (küresel sıralama altyapısı —{' '}
         {leaderboardEnabled ? (
           <span>
-            Sıralamaya giriş yaparsanız kimlik doğrulama (Google/GitHub OAuth),
+            Sıralamaya giriş yaparsanız kimlik doğrulama (Google OAuth),
             takma adınız ve skorlarınız Supabase üzerinde barındırılan veritabanında
             saklanır.
           </span>
@@ -208,13 +208,10 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'iletisim@karaman.d
         <a href="https://supabase.com/privacy"
           target="_blank"
           rel="noopener noreferrer">supabase.com/privacy</a>. Giriş için
-        kullanılan sağlayıcılar:{' '}
+        kullanılan sağlayıcı:{' '}
         <a href="https://policies.google.com/privacy"
           target="_blank"
-          rel="noopener noreferrer">Google</a> ·{' '}
-        <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement"
-          target="_blank"
-          rel="noopener noreferrer">GitHub</a>.
+          rel="noopener noreferrer">Google</a>.
       </li>
     </ul>
 
