@@ -1,0 +1,15 @@
+{
+  "title": "Erime Arena",
+  "description": "Çok oyunculu hücre arenası: küçükleri yut, büyüklerden kaç — ama büyüdükçe erirsin, durmadan beslenmek zorundasın.",
+  "dateAdded": "2026-06-05",
+  "tags": ["arcade", "aksiyon", "çok-oyunculu"],
+  "controls": "Fare / dokunma ile yönlen · WASD veya ok tuşları · Boşluk: başla",
+  "howToPlay": "Erime Arena, agar.io'nun klasik 'büyük olan küçüğü yutar' mekaniğine bir bükülme ekler: hücren her saniye kütlesinin küçük bir bölümünü kaybeder (erir) ve hücre ne kadar büyükse o kadar hızlı erir. Bu yüzden lider olmak yetmez; tahtın tepesinde kalmak için durmadan yem ve daha küçük rakipleri yutman gerekir — ezici bir lider bile beslenmeyi bırakırsa hızla erir. Hücreni fareyle ya da ekrana dokunup parmağını gezdirerek yönlendirirsin; WASD veya ok tuşları da çalışır. Büyüdükçe yavaşlarsın, o yüzden köşeye sıkışmamaya dikkat et. Senden en az ~%18 büyük bir hücreyle çakışırsan yutulursun ve baştan, küçük bir hücre olarak yeniden doğarsın. Oyun, site için bir Supabase Realtime projesi yapılandırıldıysa gerçek oyuncularla aynı odada (çevrimiçi) oynanır; aksi halde yapay zekâlı botlarla çevrimdışı oynarsın. Sağ üstteki tablo o anki en büyük beş hücreyi gösterir; rekor zirve kütlen tarayıcında saklanır. Not: konum ve kütleler istemciden yayınlandığı için bu bir 'topluluk' modudur, doğrulanmış bir sıralama değil.",
+  "thumbnail": "erime-arena.svg",
+  "en": {
+    "title": "Melt Arena",
+    "description": "Multiplayer cell arena: swallow the small, flee the big — but the bigger you grow, the faster you melt, so you must keep feeding.",
+    "controls": "Mouse / touch to steer · WASD or arrow keys · Space: start",
+    "howToPlay": "Melt Arena adds a twist to agar.io's classic 'big eats small' loop: your cell continuously loses a small fraction of its mass every second (it melts), and the bigger the cell, the faster it melts. Being the leader is not enough — to stay on top you must keep eating pellets and smaller rivals, because even a dominant cell shrinks fast once it stops feeding. Steer with the mouse or by dragging your finger; WASD and arrow keys also work. You move slower as you grow, so avoid getting cornered. Colliding with a cell at least ~18% larger gets you swallowed, and you respawn small. When a Supabase Realtime project is configured for the site you share a room with real players (online); otherwise you play offline against AI bots. The panel at the top-right shows the five biggest cells, and your peak-mass record is saved in your browser. Note: positions and masses are broadcast from the client, so this is a 'community' mode, not a verified ranking."
+  }
+}

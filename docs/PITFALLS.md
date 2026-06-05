@@ -175,6 +175,18 @@ uygula. Curl smoke test artık yeterli değil.
 **Tespit**: Her entity-removal noktasında sor: "bu olay oyuncu için başarısızlık mı?" Öyleyse skor/can/game-over sonucu var mı? Oyna: en az bir entity'yi bilerek kaçır ve oyunun tepki verdiğini doğrula.
 **Önlem**: "İyi" çıkışı (hedefe ulaştı) ve "kötü" çıkışı (kaçtı) ayrı dallarda işle; kötü dal `endGame()` veya ceza çağırsın. Overlay/ipucu metnini de güncelle ki oyuncu yeni kuralı bilsin.
 
+### deadzone-blocks-keyboard-steering
+**Vaka**: erime-arena — `steerSelf()` hem fare hem klavye girişini tek bir `if (len > 4)` eşiğinden geçiriyordu. Fare için `len` merkeze olan **piksel** mesafesidir (yüzlerce px), klavye için ise birim vektördür (`hypot(±1,0)=1`). 1 hiçbir zaman 4'ten büyük olmadığı için **klavyeyle oyuncu hiç hareket etmiyordu**; build/smoke yeşildi çünkü init çökmüyordu, sadece WASD/ok tuşları sessizce işlevsizdi.
+**Pattern**: İki farklı ölçek/birimdeki girişi (piksel offset vs. birim yön) ortak bir eşik/deadzone ile kapılamak. Eşik bir giriş türü için doğru, diğeri için her zaman yanlış sonuç verir.
+**Tespit**: Her giriş yöntemini ayrı ayrı dene (fare **ve** klavye **ve** dokunma). Headless doğrulama: tuşu basılı tutup birkaç saniye sonra konum/mass'in gerçekten değiştiğini assert et — sadece "overlay gizlendi" yetmez.
+**Önlem**: Deadzone'u yalnız sürekli (analog/piksel) girişe uygula; klavye gibi ayrık girişte "herhangi bir tuş basılı → hareket et". Yönü normalize edip eşiği ayır.
+
+### realtime-must-degrade-silently
+**Vaka**: erime-arena + `@shared/realtime-room` — multiplayer Supabase Realtime (broadcast/presence) ile çalışır, ama smoke test ağı bloklar ve **herhangi bir `console.error`'da CI'ı kırar**. SDK'yı modül seviyesinde import etmek veya bağlantı hatasını loglamak smoke'u kırardı.
+**Pattern**: 3rd-party/ağ bağımlı özellik, env yokken (varsayılan/dev/smoke) sessizce no-op olmazsa tüm oyunları düşüren bir CI kırığına dönüşür. Statik proje + ağ = her zaman opsiyonel olmalı.
+**Tespit**: Env boşken `npm run test:smoke` yeşil mi? Oyun çevrimdışı (bot/tek-oyunculu) tam oynanabilir mi? `console.error` sıfır mı?
+**Önlem**: `@shared/leaderboard-client` desenini izle: `*Enabled()` flag'i + lazy `import()` (env boşsa SDK hiç yüklenmez) + her hata `catch` ile yutulur, `null` döner. Oyun `null`'ı "çevrimdışı oyna" olarak ele alsın.
+
 ---
 
 ## Bu dosya ne zaman güncellenir?
