@@ -39,6 +39,12 @@ const messages: Record<Lang, Record<string, string>> = {
     'howto.heading': 'Nasıl oynanır?',
     'howto.summary': 'İpuçları ve detaylı strateji',
     'category.intro.count': 'Bu kategoride {n} oyun var — en yeniden eskiye sıralı.',
+    'nav.leaderboard': 'Sıralama',
+    'leaderboard.title': 'Sıralama',
+    'leaderboard.empty': 'Henüz skor yok',
+    'leaderboard.signin': 'Giriş yap',
+    'leaderboard.signout': 'Çıkış',
+    'leaderboard.soon': 'Çevrimiçi sıralama yakında',
   },
   en: {
     'site.title': 'Browser Games — free, no install, play instantly',
@@ -70,6 +76,12 @@ const messages: Record<Lang, Record<string, string>> = {
     'howto.heading': 'How to play',
     'howto.summary': 'Tips and detailed strategy',
     'category.intro.count': '{n} games in this category — newest first.',
+    'nav.leaderboard': 'Leaderboard',
+    'leaderboard.title': 'Leaderboard',
+    'leaderboard.empty': 'No scores yet',
+    'leaderboard.signin': 'Sign in',
+    'leaderboard.signout': 'Sign out',
+    'leaderboard.soon': 'Online leaderboard coming soon',
   },
 };
 

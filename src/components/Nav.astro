@@ -23,6 +23,9 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
       <span aria-hidden="true">🔥</span>
       <span class="nav__streak-count" data-streak-count>0</span>
     </span>
+    <a class="nav__leaderboard" href={`${base}siralama/`}>
+      {t('nav.leaderboard', lang)}
+    </a>
     <button class="nav__install" type="button" data-pwa-install hidden>
       {lang === 'en' ? 'Download' : 'İndir'}
     </button>
@@ -78,6 +81,21 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
     transition: color 0.15s, border-color 0.15s;
   }
   .nav__lang:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .nav__leaderboard {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav__leaderboard:hover {
     color: var(--accent);
     border-color: var(--accent);
   }
