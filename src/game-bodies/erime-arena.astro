@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Kütle<span id="mass">100</span></div>
+  <div class="hud__score">Rekor<span id="best">100</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden doğ</button>
+</header>
+<div id="status" class="ea-status" aria-live="polite">⚪ Çevrimdışı</div>
+<div class="board-wrap">
+  <canvas id="board" aria-label="Erime Arena oyun alanı"></canvas>
+  <ul id="leaders" class="leaders" aria-label="Sıralama"></ul>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Erime Arena</h2>
+      <p id="overlay-msg">
+        Küçükleri yut, büyüklerden kaç. Büyüdükçe erirsin — durmadan beslen.
+      </p>
+      <input
+        id="name"
+        class="ea-name"
+        type="text"
+        maxlength="14"
+        placeholder="Takma adın"
+        aria-label="Takma ad"
+      />
+      <button id="start" class="ea-start" type="button">Başla</button>
+    </div>
+  </div>
+</div>

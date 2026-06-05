@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Erime Arena">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#161826" />
+      <stop offset="100%" stop-color="#0a0b12" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+    <path d="M40 0V200M120 0V200M200 0V200M280 0V200M0 50H320M0 100H320M0 150H320" />
+  </g>
+  <!-- pellets -->
+  <g>
+    <circle cx="48" cy="40" r="4" fill="#fbbf24" />
+    <circle cx="250" cy="60" r="4" fill="#34d399" />
+    <circle cx="90" cy="160" r="4" fill="#f472b6" />
+    <circle cx="290" cy="150" r="4" fill="#60a5fa" />
+    <circle cx="160" cy="30" r="4" fill="#a78bfa" />
+  </g>
+  <!-- big self blob -->
+  <circle cx="135" cy="115" r="46" fill="#818cf8" stroke="#c7cbff" stroke-width="4" />
+  <text x="135" y="120" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">Sen</text>
+  <!-- smaller rivals -->
+  <circle cx="238" cy="128" r="26" fill="#34d399" stroke="#0a3d2a" stroke-width="3" />
+  <circle cx="62" cy="70" r="18" fill="#f472b6" stroke="#3d0a26" stroke-width="3" />
+  <text x="16" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Erime Arena</text>
+</svg>
