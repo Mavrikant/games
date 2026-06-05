@@ -3,7 +3,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 type PieceKind = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
 type Cell = PieceKind | null;
@@ -475,7 +475,7 @@ function die(): void {
     best = score;
     safeWrite(STORAGE_KEY, best);
   }
-  recordScore(SCORE_DESC, score);
+  reportGameOver(SCORE_DESC, score);
   updateHud();
   draw();
   showOverlay('Oyun bitti', `Skor: ${score} · R ile yeniden başla`);

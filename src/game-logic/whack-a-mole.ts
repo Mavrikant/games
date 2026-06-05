@@ -17,7 +17,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 type MoleKind = 'normal' | 'gold' | 'bomb';
@@ -477,7 +477,7 @@ function endGame(): void {
   }
   boardWrap.classList.remove('is-shaking');
 
-  recordScore(SCORE_DESC, score);
+  reportGameOver(SCORE_DESC, score);
 
   const isBest = score >= best; // best already written incrementally; this is for messaging
   const title = isBest && score > 0 ? 'Yeni rekor!' : 'Süre doldu!';

@@ -2,7 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Dir = 'up' | 'down' | 'left' | 'right';
 
@@ -313,7 +313,7 @@ function checkEnd(): void {
     dead = true;
     // Final score for this run — submit to the global board (no-op when the
     // backend is off or the player is signed out).
-    recordScore(SCORE_DESC, score);
+    reportGameOver(SCORE_DESC, score);
     showOverlay('Bitti', `Hamle kalmadı. Skor: ${score}`, 'Yeniden başla');
   }
 }

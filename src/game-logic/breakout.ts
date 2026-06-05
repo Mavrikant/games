@@ -1,7 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Brick = {
   x: number;
@@ -208,7 +208,7 @@ function loseLife(): void {
       safeWrite(STORAGE_KEY, best);
       updateHud();
     }
-    recordScore(SCORE_DESC, score);
+    reportGameOver(SCORE_DESC, score);
     showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
   } else {
     resetBallToPaddle();

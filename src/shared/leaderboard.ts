@@ -13,7 +13,8 @@
 // /siralama page reads at build time to render and rank each board.
 
 import { safeRead, safeWrite } from './storage';
-import { submitScore } from './leaderboard-client';
+import { submitScore, leaderboardEnabled } from './leaderboard-client';
+import { showScoreboard } from './score-overlay';
 
 export interface ScoreDescriptor {
   /** Backend board id. Matches `scoring.id` in the game's JSON (defaults to slug). */
@@ -33,12 +34,43 @@ function isNewBest(
   return direction === 'higher' ? value > prev : value < prev;
 }
 
-export function recordScore(desc: ScoreDescriptor, value: number): void {
-  if (!Number.isFinite(value)) return;
+function writeLocalBest(desc: ScoreDescriptor, value: number): void {
   const prev = safeRead<number | null>(desc.storageKey, null);
   if (isNewBest(value, prev, desc.direction)) {
     safeWrite(desc.storageKey, value);
   }
-  // Fire-and-forget; never throws (see @shared/leaderboard-client).
+}
+
+// Silent variant: update the local best and fire-and-forget submit. No UI.
+export function recordScore(desc: ScoreDescriptor, value: number): void {
+  if (!Number.isFinite(value)) return;
+  writeLocalBest(desc, value);
   void submitScore({ gameId: desc.gameId, value, direction: desc.direction });
+}
+
+/**
+ * Call at game-over. Updates the local best, and — when the online leaderboard
+ * is enabled — pops the shared scoreboard overlay (global top-N + your score,
+ * with a sign-in prompt when signed out, which also submits the score). When
+ * the backend is disabled it behaves exactly like recordScore (no UI), so dev
+ * and the smoke test are unaffected.
+ */
+export function reportGameOver(
+  desc: ScoreDescriptor,
+  value: number,
+  opts: { label?: string; unit?: string } = {},
+): void {
+  if (!Number.isFinite(value)) return;
+  writeLocalBest(desc, value);
+  if (!leaderboardEnabled()) {
+    void submitScore({ gameId: desc.gameId, value, direction: desc.direction });
+    return;
+  }
+  void showScoreboard({
+    gameId: desc.gameId,
+    direction: desc.direction,
+    value,
+    label: opts.label,
+    unit: opts.unit,
+  });
 }

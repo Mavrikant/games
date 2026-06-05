@@ -1,7 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Dir = 'up' | 'down' | 'left' | 'right';
 type Cell = { x: number; y: number };
@@ -146,7 +146,7 @@ function die(): void {
   alive = false;
   stopLoop();
   draw();
-  recordScore(SCORE_DESC, score);
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
 }
 

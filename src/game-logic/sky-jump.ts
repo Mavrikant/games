@@ -1,7 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Sky Jump — sonsuz dikey tırmanış (Doodle Jump tarzı).
 // - Karakter platforma değdiğinde otomatik zıplar (sabit zıplama gücü).
@@ -283,7 +283,7 @@ function gameOver(): void {
     updateHud();
   }
   const m = Math.floor(highestY / 10);
-  recordScore(SCORE_DESC, m);
+  reportGameOver(SCORE_DESC, m, { label: 'Yükseklik', unit: 'm' });
   const b = Math.floor(bestHeight / 10);
   showOverlay('Düştün!', `${m} m · en iyi ${b} m · tekrar denemek için R ya da Yeniden başla.`);
 }

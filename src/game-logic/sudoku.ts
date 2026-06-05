@@ -1,6 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
-import { recordScore } from '@shared/leaderboard';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Sudoku — 9×9 grid, classic rules.
 //
@@ -514,7 +514,7 @@ function winGame(): void {
     saveBest(difficulty, elapsedSec);
     isRecord = true;
   }
-  if (difficulty === 'easy') recordScore(SCORE_DESC, elapsedSec);
+  if (difficulty === 'easy') reportGameOver(SCORE_DESC, elapsedSec, { label: 'Süren', unit: 'sn' });
   renderHud();
   setStatus(`Çözdün! Süre: ${formatTime(elapsedSec)}`, 'win');
   overlayTitle.textContent = isRecord ? 'Yeni rekor!' : 'Tebrikler!';
