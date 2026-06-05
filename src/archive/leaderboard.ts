@@ -57,8 +57,7 @@ async function renderAuth(el: HTMLElement | null): Promise<void> {
   } else {
     el.innerHTML =
       '<span class="lb__who">Skorunu küresel sıralamaya göndermek için giriş yap:</span>' +
-      '<button class="lb__btn lb__btn--google" type="button" data-provider="google">Google ile giriş</button>' +
-      '<button class="lb__btn lb__btn--github" type="button" data-provider="github">GitHub ile giriş</button>';
+      '<button class="lb__btn lb__btn--google" type="button" data-provider="google">Google ile giriş</button>';
     el.querySelectorAll<HTMLButtonElement>('[data-provider]').forEach((btn) => {
       btn.addEventListener('click', () => {
         void signIn(btn.dataset.provider as OAuthProvider);
