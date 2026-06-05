@@ -3,6 +3,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { recordScore } from '@shared/leaderboard';
 
 type PieceKind = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
 type Cell = PieceKind | null;
@@ -14,6 +15,7 @@ const HIDDEN_ROWS = 2; // spawn buffer above visible area
 const TOTAL_ROWS = ROWS + HIDDEN_ROWS;
 
 const STORAGE_KEY = 'tetris.highScore';
+const SCORE_DESC = { gameId: 'tetris', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -473,6 +475,7 @@ function die(): void {
     best = score;
     safeWrite(STORAGE_KEY, best);
   }
+  recordScore(SCORE_DESC, score);
   updateHud();
   draw();
   showOverlay('Oyun bitti', `Skor: ${score} · R ile yeniden başla`);

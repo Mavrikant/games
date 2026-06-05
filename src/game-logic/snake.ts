@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { recordScore } from '@shared/leaderboard';
 
 type Dir = 'up' | 'down' | 'left' | 'right';
 type Cell = { x: number; y: number };
@@ -9,6 +10,7 @@ const COLS = 20;
 const ROWS = 20;
 const TICK_MS = 110;
 const STORAGE_KEY = 'snake.best';
+const SCORE_DESC = { gameId: 'snake', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -144,6 +146,7 @@ function die(): void {
   alive = false;
   stopLoop();
   draw();
+  recordScore(SCORE_DESC, score);
   showOverlay('Bitti!', `Skor: ${score} · R ile yeniden başla`);
 }
 

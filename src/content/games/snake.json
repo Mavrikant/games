@@ -6,6 +6,12 @@
   "controls": "Ok tuşları veya WASD · Boşluk: duraklat · R: yeniden başla",
   "howToPlay": "Amacın yılanı 20x20'lik kareli alanda olabildiğince uzatarak yüksek skor toplamak. Ok tuşları veya WASD ile yön ver; yılan her tikte bir kare ilerler ve seçtiğin yöne dönerek hareketine devam eder. Geldiğin yönün tam tersine dönemezsin, bu yüzden 180 derece geri dönüş için iki ardışık komut gerekir. Kırmızı yemin üstünden geçtiğinde skor bir artar ve yılan bir kare uzar; yem alanın boş bir hücresinde yeniden belirir. Duvara çarparsan ya da kuyruğunu ısırırsan oyun anında biter; en yüksek skorun tarayıcında saklanır. Başlamak için bir yön tuşuna basman yeterli; oyun sırasında boşluk tuşu duraklatır, R tuşu veya 'Yeniden başla' düğmesi yeni bir tur açar. Strateji ipucu: yılan uzadıkça kuyruğunu duvarın kenarında dolaştırarak ortayı boş tut ve yeme dik açıyla yaklaş; köşeye sıkıştığında panikleyip ters köşeyi denemek yerine sakin bir spiralle nefes alanı yarat.",
   "thumbnail": "snake.svg",
+  "scoring": {
+    "storageKey": "snake.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Snake",
     "description": "The classic snake game — eat the food, grow longer, don't crash into the walls or your own tail.",

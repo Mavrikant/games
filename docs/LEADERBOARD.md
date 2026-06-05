@@ -95,9 +95,17 @@ create table public.game_config (
 );
 alter table public.game_config enable row level security;
 create policy "config read" on public.game_config for select using (true);
--- Örnek:
-insert into public.game_config (game_id, direction, max_value)
-values ('2048', 'higher', 4000000);
+-- Adopte edilmiş oyunlar (her gameId için bir satır şart — yoksa RPC 'unknown game' der).
+-- max_value bir tavandır: 'higher' oyunlarda saçma-yüksek, 'lower' (süre) oyunlarda
+-- saçma-büyük değerleri eler.
+insert into public.game_config (game_id, direction, max_value) values
+  ('2048',         'higher', 4000000),
+  ('snake',        'higher', 400),
+  ('sky-jump',     'higher', 1000000),
+  ('breakout',     'higher', 10000000),
+  ('tetris',       'higher', 10000000),
+  ('whack-a-mole', 'higher', 100000),
+  ('sudoku-easy',  'lower',  86400);
 
 -- submit_score: auth.uid() damgalar, tavanı uygular, yöne göre en iyiyi tutar.
 create or replace function public.submit_score(p_game_id text, p_value numeric)
