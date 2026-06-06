@@ -10,6 +10,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Suit = '♠' | '♥' | '♦' | '♣';
 interface Card {
@@ -44,6 +45,8 @@ const KEY_CHIPS = 'blackjack.chips';
 const KEY_WINS = 'blackjack.wins';
 const KEY_LOSSES = 'blackjack.losses';
 const KEY_BET = 'blackjack.bet';
+// Leaderboard: highest chip bankroll reached at a round resolution.
+const SCORE_DESC = { gameId: 'blackjack', storageKey: KEY_CHIPS, direction: 'higher' as const };
 
 let chipsEl!: HTMLElement;
 let betEl!: HTMLElement;
@@ -257,6 +260,8 @@ function runDealer(myGen: number): void {
 
 function endHand(): void {
   state = 'gameOver';
+  // Report the bankroll for this resolved round before any auto-refill kicks in.
+  reportGameOver(SCORE_DESC, chips, { label: 'Çip' });
   if (chips < MIN_BET) {
     chips = STARTING_CHIPS;
     setStatus(statusEl.textContent + ' Chipler bitti — yeniden 1000 chip verildi.');

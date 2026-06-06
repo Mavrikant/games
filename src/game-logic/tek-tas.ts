@@ -10,6 +10,11 @@ import {
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
+
+// Global leaderboard: pegs remaining at the terminal position (fewer is
+// better). No numeric best key existed, so we mirror to a flat key.
+const SCORE_DESC = { gameId: 'tek-tas', storageKey: 'tek-tas.lb', direction: 'lower' as const };
 
 const SIZE = 7;
 const CENTER = 3;
@@ -210,6 +215,7 @@ function checkEnd(): void {
   if (pegs === 1) {
     state = 'won';
     const centerWin = boardState[idx(CENTER, CENTER)] === 'peg';
+    reportGameOver(SCORE_DESC, pegs, { label: 'Kalan taş' });
     showEnd(
       centerWin ? 'Kusursuz!' : 'Tek taş kaldı!',
       centerWin
@@ -220,6 +226,7 @@ function checkEnd(): void {
   }
   if (!hasAnyLegalMove()) {
     state = 'stuck';
+    reportGameOver(SCORE_DESC, pegs, { label: 'Kalan taş' });
     showEnd(
       'Sıkıştın',
       `${pegs} taş kaldı, geçerli hamle yok. Geri al ile başka bir yol dene.`,

@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -21,6 +22,11 @@ const EMOJI = ['🍒', '🍋', '🍇', '🍉', '🍑', '🥝', '🍓', '🥥', '
 const STORAGE_BEST = 'memory.best';
 const STORAGE_DIFF = 'memory.difficulty';
 const FLIP_BACK_MS = 750;
+
+// Global leaderboard tracks the "easy" board only — one fixed difficulty so
+// solve times are comparable. Lower time (seconds) is better. The game's own
+// best is a per-difficulty object map, so we mirror to a dedicated flat key.
+const SCORE_DESC = { gameId: 'memory-easy', storageKey: 'memory.lb', direction: 'lower' as const };
 
 let board!: HTMLElement;
 let movesEl!: HTMLElement;
@@ -249,6 +255,9 @@ function win(): void {
     bestMap[difficulty] = { moves, time: elapsedSec };
     saveBest();
     renderBest();
+  }
+  if (difficulty === 'easy') {
+    reportGameOver(SCORE_DESC, elapsedSec, { label: 'Süre', unit: 'sn' });
   }
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Tebrikler!';
   overlayMsg.textContent = `${moves} hamle · ${formatTime(elapsedSec)}`;

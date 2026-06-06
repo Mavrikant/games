@@ -6,6 +6,7 @@
   "controls": "Harfe tıkla veya klavyede bas · R: yeniden başla",
   "howToPlay": "Amacın, darağacı tamamlanmadan ekranda alt çizgilerle gizlenmiş Türkçe kelimeyi harf harf çözmektir. Her tur başında oyun sana kelimenin kategorisini (Hayvan, Meslek, Şehir, Yemek veya Eşya) söyler; harf seçmek için ekrandaki Türkçe klavyeden (A–Z artı Ç, Ğ, I, İ, Ö, Ş, Ü; Q/W/X yok) tuşa tıklayabilir veya fiziksel klavyenden ilgili harfe basabilirsin — büyük/küçük harf ve Türkçe karakter farkı gözetilmez, yani 'i' ile 'İ' aynı sayılır. Doğru tahminler kelimedeki tüm konumlarda anında açılır, yanlış tahminler ise sağda 'Yanlış (n/6)' listesine eklenir ve darağacına sırayla baş, gövde, sol kol, sağ kol, sol bacak, sağ bacak çizilir. 6. yanlışta adam asılır ve turu kaybedersin (kelime ifşa olur); altıncı yanlıştan önce tüm harfleri açarsan kazanırsın. Üstteki sayaç toplam galibiyet ve mağlubiyetini tutar ve tarayıcında saklanır. İpucu: önce sesli harfleri (A, E, İ, I, O, Ö, U, Ü) deneyerek kelimenin iskeletini çıkar, sonra kategoriye uygun yaygın ünsüzlere geç; yeni bir kelime için sağ üstteki Yeniden başla düğmesine bas veya R tuşuna dokun.",
   "thumbnail": "adam-asmaca.svg",
+  "scoring": { "storageKey": "adam-asmaca.wins", "label": "Galibiyet", "direction": "higher", "labelEn": "Wins" },
   "en": {
     "title": "Hangman",
     "description": "Guess the Turkish word — find it before the wrong letters complete the gallows.",

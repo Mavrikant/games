@@ -5,6 +5,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 const SIZE = 8;
 const TOTAL = SIZE * SIZE;
@@ -37,6 +38,9 @@ const WEIGHTS: ReadonlyArray<number> = [
 
 const STORAGE_WINS = 'reversi.wins';
 const STORAGE_LOSSES = 'reversi.losses';
+
+// Global leaderboard: cumulative player wins ("most wins" board).
+const SCORE_DESC = { gameId: 'reversi', storageKey: STORAGE_WINS, direction: 'higher' as const };
 
 const AI_DELAY_MS = 420;
 
@@ -269,6 +273,7 @@ function endGame(): void {
     saveStat(STORAGE_WINS, wins);
     title = 'Kazandın!';
     msg = `Siyah ${black} – Beyaz ${white}.`;
+    reportGameOver(SCORE_DESC, wins, { label: 'Galibiyet' });
   } else if (white > black) {
     losses++;
     saveStat(STORAGE_LOSSES, losses);

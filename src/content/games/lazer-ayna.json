@@ -6,6 +6,12 @@
   "controls": "Fare: hücreye tıkla (ayna yerleştir/döndür/kaldır) · Ateşle düğmesi: lazeri çalıştır · R: seviyeyi sıfırla",
   "howToPlay": "Optik bir bulmaca: ızgaranın bir kenarındaki lazer kaynağından çıkan ışını, aynaları doğru yerlere koyarak tahtadaki tüm yıldız hedeflerine ulaştırman gerekir. Boş bir hücreye tıkladığında o hücreye / yönünde bir ayna yerleşir; aynı hücreye tekrar tıklarsan ayna \\ yönüne döner; üçüncü tıkta ayna tamamen kaldırılır. Bu üçlü tıklama döngüsü sayesinde tek elle yerleştirme, çevirme ve silme işlemlerini hızlı yapabilirsin. Aynalar ışını fiziksel optik kurallarına göre 90 derece yansıtır: / aynası sağa giden ışını yukarı, yukarı giden ışını sağa, sola gideni aşağı, aşağı gideni sola çevirir; \\ aynası ise sağa gideni aşağı, aşağı gideni sağa, sola gideni yukarı, yukarı gideni sola çevirir. Tüm aynalarını yerleştirdiğine emin olduktan sonra 'Ateşle' düğmesine bas; ışın aktarımı animasyonla çizilir, isabet ettiği her yıldız parlar ve tüm yıldızlar vurulursa bir üst seviyeye geçersin. Toplam 7 seviye var ve her seviye bir öncekinden daha karmaşıktır — yıldız sayısı artar, engel duvarlar eklenir, aynı ışının birden fazla yıldızdan geçmesi gereken bağlamlı tasarımlar ortaya çıkar. Strateji: ilk önce ışının başlangıç yönünü ve son yıldızın konumunu işaretle, sonra geriye doğru çalışarak son aynanın nerede olması gerektiğini bul. Birden fazla yıldız varsa aynı ışını tek seferde geçirebilecek bir 'zikzak' yolu hayal et; iki ayrı yol yapmak yerine tek karmaşık yol genellikle daha az aynayla çözüm verir. Aynaların ardışık sıralaması önemlidir çünkü ışın bir aynaya çarptığında yön değiştirir ve ondan sonraki aynalar sadece bu yeni yön üzerinden etkilenir.",
   "thumbnail": "lazer-ayna.svg",
+  "scoring": {
+    "storageKey": "lazer-ayna.lb",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
   "en": {
     "title": "Laser & Mirror",
     "description": "Place mirrors to guide the laser to every target — an optics puzzle.",

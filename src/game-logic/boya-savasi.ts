@@ -25,6 +25,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 const COLS = 8;
 const ROWS = 11;
@@ -73,6 +74,9 @@ const ODD_ROW_DELTAS: ReadonlyArray<readonly [number, number]> = [
 
 const STORAGE_WINS = 'boya-savasi.wins';
 const STORAGE_LOSSES = 'boya-savasi.losses';
+// Leaderboard: territory the player ends up owning (higher is better). Flat
+// mirror key so it never clashes with the win/loss tallies.
+const SCORE_DESC = { gameId: 'boya-savasi', storageKey: 'boya-savasi.lb', direction: 'higher' as const };
 
 type GameState = 'PlayerTurn' | 'AiTurn' | 'GameOver';
 

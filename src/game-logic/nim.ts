@@ -10,10 +10,15 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 const INITIAL_PILES: readonly number[] = [3, 4, 5];
 const AI_DELAY_MS = 520;
 const STORAGE_SCORE = 'nim.score';
+
+// Global leaderboard: cumulative player wins ("most wins" board). The game's
+// own score lives inside an object (nim.score), so we mirror to a flat key.
+const SCORE_DESC = { gameId: 'nim', storageKey: 'nim.lb', direction: 'higher' as const };
 
 type Turn = 'human' | 'ai';
 type State = 'playing' | 'over';
@@ -139,6 +144,7 @@ function applyMove(row: number, take: number): boolean {
     if (turn === 'human') {
       scores.wins++;
       statusEl.textContent = `Kazandın! Son taşı sen aldın.  (${scores.wins}-${scores.losses})`;
+      reportGameOver(SCORE_DESC, scores.wins, { label: 'Galibiyet' });
     } else {
       scores.losses++;
       statusEl.textContent = `Bilgisayar kazandı. Son taşı o aldı.  (${scores.wins}-${scores.losses})`;

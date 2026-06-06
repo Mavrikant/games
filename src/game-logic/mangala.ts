@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Mangala — Türk Mancala
 //
@@ -89,6 +90,9 @@ type GameState = 'PlayerTurn' | 'AiTurn' | 'GameOver';
 
 const STORAGE_WINS = 'mangala.wins';
 const STORAGE_LOSSES = 'mangala.losses';
+
+// Global leaderboard: cumulative player wins ("most wins" board).
+const SCORE_DESC = { gameId: 'mangala', storageKey: STORAGE_WINS, direction: 'higher' as const };
 
 const AI_DELAY_MS = 480;
 
@@ -455,6 +459,7 @@ function endGame(): void {
     safeWrite(STORAGE_WINS, wins);
     title = 'Kazandın!';
     msg = `Sen ${you} – AI ${ai}.`;
+    reportGameOver(SCORE_DESC, wins, { label: 'Galibiyet' });
   } else if (ai > you) {
     losses++;
     safeWrite(STORAGE_LOSSES, losses);

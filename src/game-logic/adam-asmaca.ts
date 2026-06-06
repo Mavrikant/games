@@ -27,6 +27,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'playing' | 'won' | 'lost';
 
@@ -38,6 +39,7 @@ interface WordEntry {
 const MAX_WRONG = 6;
 const STORAGE_WINS = 'adam-asmaca.wins';
 const STORAGE_LOSSES = 'adam-asmaca.losses';
+const SCORE_DESC = { gameId: 'adam-asmaca', storageKey: STORAGE_WINS, direction: 'higher' as const };
 
 // Türkçe alfabe — display order, no Q/W/X.
 // 29 harf. Klavyede 8'li grid yapacağız (CSS responsive).
@@ -469,6 +471,7 @@ function guessLetter(rawLetter: string): boolean {
     safeWrite(STORAGE_WINS, wins);
     renderHud();
     updateKeyboardState();
+    reportGameOver(SCORE_DESC, wins, { label: 'Galibiyet' });
     showOverlay(
       'Kazandın!',
       `Kelime: <b>${escapeHtml(currentWord)}</b><br />R ile yeni kelime.`,

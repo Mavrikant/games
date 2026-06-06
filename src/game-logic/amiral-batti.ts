@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Amiral Battı — classic 10x10 Battleship vs AI.
 // Standard fleet: 1×5 (Taşıyıcı), 1×4 (Savaş gemisi), 2×3 (Kruvazör + Denizaltı),
@@ -26,6 +27,9 @@ const FLEET_CELLS = FLEET.reduce((sum, [n]) => sum + n, 0); // 17
 
 const STORAGE_WINS = 'amiral-batti.wins';
 const STORAGE_LOSSES = 'amiral-batti.losses';
+// Leaderboard: fewest shots to sink the enemy fleet (lower is better). Mirror
+// key is flat so it never collides with the win/loss tallies above.
+const SCORE_DESC = { gameId: 'amiral-batti', storageKey: 'amiral-batti.lb', direction: 'lower' as const };
 
 const AI_DELAY_MS = 540;
 
@@ -422,7 +426,11 @@ function onEnemyClick(e: MouseEvent): void {
     state = 'GameOver';
     wins++;
     safeWrite(STORAGE_WINS, wins);
+    // Shots fired this game = cells the player has fired on the enemy grid.
+    let shotsFired = 0;
+    for (const c of enemy.cells) if (c.shot) shotsFired++;
     renderAll();
+    reportGameOver(SCORE_DESC, shotsFired, { label: 'Atış', unit: 'atış' });
     showOverlay('Kazandın!', 'Düşmanın tüm filosunu batırdın.');
     return;
   }

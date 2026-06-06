@@ -6,6 +6,7 @@
   "controls": "Renk düğmeleri / 1-6 tuşları · R: yeniden başla",
   "howToPlay": "Tahta altı renkli altıgen hücrelerden oluşur ve hiçbir komşu altıgen aynı renkte başlamaz; her altıgenin altıya kadar komşusu vardır. Sen sol-alt köşedeki tek altıgenle, yapay zekâ sağ-üst köşedeki altıgenle başlar. Sıran geldiğinde paletten bir renk seçersin: sahip olduğun tüm altıgenler o renge boyanır, ardından bölgen taşar — o renge sahip bitişik nötr altıgenlerin hepsini yutar, bu zincirleme devam eder. Kuralın özü şu: kendi mevcut rengini de rakibinin mevcut rengini de seçemezsin, yani her tur kalan dört renkten birini oynarsın (yasak renkler palette soluk görünür). 1-6 tuşları renklere kısayoldur, R oyunu sıfırlar. Tahtada nötr altıgen kalmayınca oyun biter ve daha çok altıgene sahip olan kazanır. İpucu: her zaman en çok altıgen kazandıran rengi seçmek (açgözlü oyun) erken tur için iyidir ama rakibin büyük bir bölge bağlamasını önlemek için bazen daha az kazandıran bir rengi seçip onun yolunu kesmek gerekir.",
   "thumbnail": "boya-savasi.svg",
+  "scoring": { "storageKey": "boya-savasi.lb", "label": "Skor", "direction": "higher", "labelEn": "Score" },
   "en": {
     "title": "Paint War",
     "description": "Start from a corner and claim territory by picking colours — out-paint the AI for most of the board. You can't pick the opponent's colour.",

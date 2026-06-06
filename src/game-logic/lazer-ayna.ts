@@ -1,6 +1,11 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
+
+// Global leaderboard: highest level reached (1-based). No persistent best key
+// existed for this game, so we mirror to a dedicated flat key.
+const SCORE_DESC = { gameId: 'lazer-ayna', storageKey: 'lazer-ayna.lb', direction: 'higher' as const };
 
 type Dir = 'right' | 'left' | 'up' | 'down';
 type MirrorType = '/' | '\\' | null;
@@ -354,6 +359,9 @@ function fireLaser(): void {
 
   const totalTargets = level.targets.length;
   if (hitTargets.size !== totalTargets) return;
+
+  // Level cleared — record the level number (1-based) reached.
+  reportGameOver(SCORE_DESC, currentLevel + 1, { label: 'Seviye' });
 
   const myToken = genToken;
   const t1 = setTimeout(() => {

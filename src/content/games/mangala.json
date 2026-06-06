@@ -6,6 +6,12 @@
   "controls": "Çukura tıkla: taşları dağıt · R: yeni oyun",
   "howToPlay": "Klasik Türk Mangala — alt sıradaki 6 çukur senin, üst sıra AI'nın; sağdaki büyük hazne senin puan kumbaran, soldaki AI'nın. Her küçük çukur 4 taşla başlar. Kendi çukurlarından birine tıkladığında Türk varyantı gereği bir taş başlangıç çukurunda kalır, kalanlar saat yönünün tersine teker teker dağıtılır; kendi haznene taş düşer ama rakibin haznesi atlanır. Son taşın nereye düştüğüne göre üç özel durum vardır: kendi haznene düşerse ekstra tur kazanırsın; kendi tarafında boş bir çukura düşerse o taş ve tam karşısındaki rakip çukurun tüm taşları haznene gider; rakip tarafta bir çukura düşer ve o çukurdaki yeni toplam çift sayı (2, 4, 6…) olursa çukurun tamamını toplarsın. Bir tarafın altı çukuru da boşaldığında oyun biter ve karşı taraftaki taşlar o tarafın haznesine süpürülür; haznesinde çoğunluk olan kazanır. İpucu: ekstra tur zincirlerini kovala ve son taşı rakibin dolu bir çukuruna çift sayı yapacak şekilde indirmeye çalış. AI 2-derinlik minimax kullanır.",
   "thumbnail": "mangala.svg",
+  "scoring": {
+    "storageKey": "mangala.wins",
+    "label": "Galibiyet",
+    "direction": "higher",
+    "labelEn": "Wins"
+  },
   "en": {
     "title": "Mangala",
     "description": "Turkish Mancala — sow your stones around the pits and pile the most in your store.",
