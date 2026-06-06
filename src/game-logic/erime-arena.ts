@@ -110,6 +110,10 @@ let online = false;
 const pointer = { x: 0, y: 0, active: false };
 const keys = new Set<string>();
 const facing = { x: 1, y: 0 }; // last movement direction, for ejecting mass
+const isTouch =
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(pointer: coarse)').matches;
 
 let lastTime = 0;
 let leaderTimer = 0;
@@ -141,7 +145,7 @@ function spawnPellet(): Pellet {
 
 // Creative names for the AI cells instead of a flat "Bot".
 const BOT_NAMES = [
-  'Amip', 'Mikrop', 'Yutangaç', 'Obur', 'Sümük', 'Zıpzıp', 'Çekirdek',
+  'serdAI', 'Amip', 'Mikrop', 'Yutangaç', 'Obur', 'Sümük', 'Zıpzıp', 'Çekirdek',
   'Plazmo', 'Yamyam', 'Şişko', 'Gobzilla', 'Damlacık', 'Mitoz', 'Bakter',
   'Pıtırcık', 'Kabarcık', 'Yapışkan', 'Açgöz', 'Minicik', 'Lokmacı',
   'Köpük', 'Hücrik', 'Pelte', 'Salyangoz', 'Virüsoğlu', 'Baloncuk',
@@ -280,14 +284,15 @@ function steerSelf(dt: number): void {
   }
 }
 
-// Fling a pellet ahead and shrink — costs mass but makes you smaller/faster.
+// Fling a pellet backward (opposite your heading) and shrink — costs mass but
+// makes you smaller/faster, leaving the blob behind you as you flee.
 function ejectMass(): void {
   if (state !== 'playing') return;
   if (self.mass - EJECT_COST < EJECT_MIN) return;
   self.mass -= EJECT_COST;
   const r = radiusOf(self.mass);
-  const px = Math.min(WORLD - 8, Math.max(8, self.x + facing.x * (r + 14)));
-  const py = Math.min(WORLD - 8, Math.max(8, self.y + facing.y * (r + 14)));
+  const px = Math.min(WORLD - 8, Math.max(8, self.x - facing.x * (r + 14)));
+  const py = Math.min(WORLD - 8, Math.max(8, self.y - facing.y * (r + 14)));
   food.push({ x: px, y: py, hue: self.hue });
   // Bound the pellet count over a long session of ejecting.
   if (food.length > NUM_FOOD + 30) food.shift();
@@ -551,15 +556,16 @@ function render(): void {
     ctx.fill();
   }
 
-  // all blobs, smaller first so bigger draw on top
-  const drawList: Array<{ b: Blob; isSelf: boolean }> = [];
-  for (const b of bots) drawList.push({ b, isSelf: false });
+  // Other blobs first, smaller under bigger; then always draw self on top so
+  // you never lose your own cell beneath a larger one (key on small screens).
+  const drawList: Blob[] = [];
+  for (const b of bots) drawList.push(b);
   for (const p of peers.values()) {
-    if (p.alive) drawList.push({ b: p, isSelf: false });
+    if (p.alive) drawList.push(p);
   }
-  if (state === 'playing') drawList.push({ b: self, isSelf: true });
-  drawList.sort((a, b) => a.b.mass - b.b.mass);
-  for (const d of drawList) drawBlob(d.b, d.isSelf);
+  drawList.sort((a, b) => a.mass - b.mass);
+  for (const b of drawList) drawBlob(b, false);
+  if (state === 'playing') drawBlob(self, true);
 
   // Off-screen indicators for human peers, so other players stay findable
   // even when they spawn or roam outside the viewport.
@@ -653,40 +659,50 @@ function sizeCanvas(): void {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-// Fullscreen toggle on the whole game container (HUD + status + board stay
-// visible). Best-effort: vendor-prefixed for Safari, errors swallowed (iOS
-// doesn't allow element fullscreen, so it simply stays inline there).
-type FsElement = HTMLElement & { webkitRequestFullscreen?: () => unknown };
-type FsDocument = Document & {
-  webkitFullscreenElement?: Element | null;
-  webkitExitFullscreen?: () => unknown;
-};
+// Fullscreen on the whole game container (HUD + status + board). The native
+// Fullscreen API doesn't work for elements on iOS Safari, so we fall back to a
+// CSS "maximize" class (.ea-root--max → position:fixed; inset:0; 100dvh) that
+// fills the viewport everywhere. Mirrors the kusatma pattern.
+const FS_MAX = 'ea-root--max';
 
-function isFullscreen(): boolean {
-  const d = document as FsDocument;
-  return !!(document.fullscreenElement || d.webkitFullscreenElement);
+function fsActive(): boolean {
+  return document.fullscreenElement === eaRoot || eaRoot.classList.contains(FS_MAX);
+}
+
+function syncFs(): void {
+  const active = fsActive();
+  fsBtn.textContent = active ? '🗗' : '⛶';
+  fsBtn.setAttribute('aria-label', active ? 'Tam ekrandan çık' : 'Tam ekran');
+  sizeCanvas();
+}
+
+// Try native fullscreen first; on rejection/absence (iOS), use the CSS fill.
+function enterFullscreen(): void {
+  if (fsActive()) return;
+  const req = eaRoot.requestFullscreen?.();
+  if (req && typeof req.then === 'function') {
+    req.then(syncFs).catch(() => {
+      eaRoot.classList.add(FS_MAX);
+      syncFs();
+    });
+  } else {
+    eaRoot.classList.add(FS_MAX);
+    syncFs();
+  }
+}
+
+function exitFullscreen(): void {
+  if (document.fullscreenElement === eaRoot) {
+    const r = document.exitFullscreen?.();
+    if (r && typeof r.catch === 'function') r.catch(() => {});
+  }
+  eaRoot.classList.remove(FS_MAX);
+  syncFs();
 }
 
 function toggleFullscreen(): void {
-  try {
-    if (isFullscreen()) {
-      const d = document as FsDocument;
-      const exit = document.exitFullscreen || d.webkitExitFullscreen;
-      const r = exit?.call(document);
-      if (r && typeof (r as Promise<unknown>).catch === 'function') {
-        (r as Promise<unknown>).catch(() => {});
-      }
-    } else {
-      const e = eaRoot as FsElement;
-      const req = e.requestFullscreen || e.webkitRequestFullscreen;
-      const r = req?.call(e);
-      if (r && typeof (r as Promise<unknown>).catch === 'function') {
-        (r as Promise<unknown>).catch(() => {});
-      }
-    }
-  } catch {
-    /* fullscreen unsupported (e.g. iOS) — stay inline */
-  }
+  if (fsActive()) exitFullscreen();
+  else enterFullscreen();
 }
 
 function keyDir(k: string): 'up' | 'down' | 'left' | 'right' | null {
@@ -824,7 +840,12 @@ function init(): void {
     if (dir) keys.delete(dir);
   });
 
-  startBtn.addEventListener('click', startPlay);
+  // On touch devices the Start button is a user gesture, so enter fullscreen
+  // (CSS fill on iOS) for an immersive, screen-filling mobile experience.
+  startBtn.addEventListener('click', () => {
+    if (isTouch && !fsActive()) enterFullscreen();
+    startPlay();
+  });
   restartBtn.addEventListener('click', startPlay);
   fsBtn.addEventListener('click', () => {
     toggleFullscreen();
@@ -834,10 +855,9 @@ function init(): void {
     ejectMass();
     ejectBtn.blur();
   });
-  // The board element resizes when entering/leaving fullscreen; re-fit the
-  // canvas backing store. (ResizeObserver usually covers this; this is a
-  // belt-and-suspenders fallback across browsers.)
-  document.addEventListener('fullscreenchange', sizeCanvas);
+  // Re-fit the canvas backing store when fullscreen/orientation/size changes.
+  document.addEventListener('fullscreenchange', syncFs);
+  window.addEventListener('orientationchange', sizeCanvas);
 
   seedWorld();
   showOverlayEl(overlay);
