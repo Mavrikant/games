@@ -1,8 +1,35 @@
 /*
- * Erime Arena — realtime multiplayer agar-like with a "melt" twist.
+ * Hücre Savaşı — realtime multiplayer agar-like cell arena.
  * Overlay positioning + .overlay--hidden are required by @shared/overlay
  * (pitfall: missing-overlay-css). Do not delete them.
  */
+
+.ea-root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Fullscreen: the whole container fills the screen; HUD + status stay at the
+ * top and the board grows to fill the rest. */
+.ea-root:fullscreen,
+.ea-root:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+  gap: 8px;
+  background: var(--bg);
+}
+
+.ea-root:fullscreen .board-wrap,
+.ea-root:-webkit-full-screen .board-wrap {
+  max-width: none;
+  width: 100%;
+  aspect-ratio: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}
 
 .ea-status {
   text-align: center;
@@ -14,7 +41,7 @@
 .board-wrap {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
   aspect-ratio: 1 / 1;
 }

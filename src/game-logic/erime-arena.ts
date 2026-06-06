@@ -16,12 +16,10 @@ import type { PeerState, RoomHandle } from '@shared/realtime-room';
 // ---- world / tuning -------------------------------------------------------
 const WORLD = 1600;
 const START_MASS = 100;
-const MIN_MASS = 100; // melt floor — you never shrink below the spawn size
 const MAX_MASS = 6000;
 const FOOD_MASS = 7;
 const NUM_FOOD = 160;
 const NUM_BOTS = 6; // local "wildlife" — keeps the arena alive solo or online
-const MELT_K = 0.035; // fraction of mass lost per second (bigger melts faster)
 const EAT_RATIO = 1.18; // must be this much larger to swallow another blob
 const GAIN = 0.85; // share of the victim's mass absorbed
 const BASE_SPEED = 240; // world units/sec at spawn size
@@ -75,6 +73,8 @@ let overlayMsg!: HTMLElement;
 let nameInput!: HTMLInputElement;
 let startBtn!: HTMLButtonElement;
 let restartBtn!: HTMLButtonElement;
+let fsBtn!: HTMLButtonElement;
+let eaRoot!: HTMLElement;
 
 const view = { w: 360, h: 360 };
 let zoom = 1;
@@ -206,9 +206,9 @@ function reset(): void {
   self.mass = START_MASS;
   peakMass = START_MASS;
   state = 'ready';
-  overlayTitle.textContent = 'Erime Arena';
+  overlayTitle.textContent = 'Hücre Savaşı';
   overlayMsg.textContent =
-    'Küçükleri yut, büyüklerden kaç. Büyüdükçe erirsin — durmadan beslen.';
+    'Yemleri ve daha küçük hücreleri yut, büyü; büyüklerden kaç.';
   startBtn.textContent = 'Başla';
   showOverlayEl(overlay);
   startLoop();
@@ -240,10 +240,6 @@ function steerSelf(dt: number): void {
     self.y += (dy / len) * s;
     clampWorld(self);
   }
-}
-
-function melt(b: Blob, dt: number): void {
-  b.mass = Math.max(MIN_MASS, b.mass - b.mass * MELT_K * dt);
 }
 
 // Eat nearby pellets for a blob; returns mass gained.
@@ -320,7 +316,6 @@ function updateBots(dt: number): void {
       bot.y += (dy / len) * s;
       clampWorld(bot);
     }
-    melt(bot, dt);
     eatFood(bot);
   }
 }
@@ -386,7 +381,6 @@ function prunePeers(now: number): void {
 function update(dt: number, now: number): void {
   if (state === 'playing') {
     steerSelf(dt);
-    melt(self, dt);
     eatFood(self);
     if (self.mass > peakMass) peakMass = self.mass;
   }
@@ -595,6 +589,42 @@ function sizeCanvas(): void {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// Fullscreen toggle on the whole game container (HUD + status + board stay
+// visible). Best-effort: vendor-prefixed for Safari, errors swallowed (iOS
+// doesn't allow element fullscreen, so it simply stays inline there).
+type FsElement = HTMLElement & { webkitRequestFullscreen?: () => unknown };
+type FsDocument = Document & {
+  webkitFullscreenElement?: Element | null;
+  webkitExitFullscreen?: () => unknown;
+};
+
+function isFullscreen(): boolean {
+  const d = document as FsDocument;
+  return !!(document.fullscreenElement || d.webkitFullscreenElement);
+}
+
+function toggleFullscreen(): void {
+  try {
+    if (isFullscreen()) {
+      const d = document as FsDocument;
+      const exit = document.exitFullscreen || d.webkitExitFullscreen;
+      const r = exit?.call(document);
+      if (r && typeof (r as Promise<unknown>).catch === 'function') {
+        (r as Promise<unknown>).catch(() => {});
+      }
+    } else {
+      const e = eaRoot as FsElement;
+      const req = e.requestFullscreen || e.webkitRequestFullscreen;
+      const r = req?.call(e);
+      if (r && typeof (r as Promise<unknown>).catch === 'function') {
+        (r as Promise<unknown>).catch(() => {});
+      }
+    }
+  } catch {
+    /* fullscreen unsupported (e.g. iOS) — stay inline */
+  }
+}
+
 function keyDir(k: string): 'up' | 'down' | 'left' | 'right' | null {
   if (k === 'arrowup' || k === 'w') return 'up';
   if (k === 'arrowdown' || k === 's') return 'down';
@@ -645,6 +675,8 @@ function init(): void {
   nameInput = document.querySelector<HTMLInputElement>('#name')!;
   startBtn = document.querySelector<HTMLButtonElement>('#start')!;
   restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
+  fsBtn = document.querySelector<HTMLButtonElement>('#fs')!;
+  eaRoot = document.querySelector<HTMLElement>('#ea-root')!;
 
   best = safeRead<number>(STORAGE_BEST, START_MASS);
   self.hue = Math.floor(rnd(160, 260));
@@ -707,6 +739,11 @@ function init(): void {
 
   startBtn.addEventListener('click', startPlay);
   restartBtn.addEventListener('click', startPlay);
+  fsBtn.addEventListener('click', toggleFullscreen);
+  // The board element resizes when entering/leaving fullscreen; re-fit the
+  // canvas backing store. (ResizeObserver usually covers this; this is a
+  // belt-and-suspenders fallback across browsers.)
+  document.addEventListener('fullscreenchange', sizeCanvas);
 
   seedWorld();
   showOverlayEl(overlay);
