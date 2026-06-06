@@ -23,6 +23,11 @@ const NUM_BOTS = 6; // local "wildlife" — keeps the arena alive solo or online
 const EAT_RATIO = 1.18; // must be this much larger to swallow another blob
 const GAIN = 0.85; // share of the victim's mass absorbed
 const BASE_SPEED = 240; // world units/sec at spawn size
+// Eject (Space / "Yem at"): fling a pellet ahead and shrink yourself — costs
+// mass but you get faster (smaller = faster). EJECT_MIN is the floor you can
+// shrink to by ejecting.
+const EJECT_COST = 16;
+const EJECT_MIN = 60;
 // Players spawn within this radius of the arena center so people in the same
 // room meet quickly instead of scattering across the whole world.
 const SPAWN_SPREAD = 220;
@@ -74,6 +79,7 @@ let nameInput!: HTMLInputElement;
 let startBtn!: HTMLButtonElement;
 let restartBtn!: HTMLButtonElement;
 let fsBtn!: HTMLButtonElement;
+let ejectBtn!: HTMLButtonElement;
 let eaRoot!: HTMLElement;
 
 const view = { w: 360, h: 360 };
@@ -88,7 +94,14 @@ let protectUntil = 0; // performance.now() until which self can't be eaten
 const food: Pellet[] = [];
 const bots: Bot[] = [];
 
-const peers = new Map<string, PeerState>();
+// Peers keep a smoothed render position (x,y) that eases toward the latest
+// broadcast target (tx,ty), so other cells glide between updates instead of
+// teleporting at the broadcast rate.
+interface NetPeer extends PeerState {
+  tx: number;
+  ty: number;
+}
+const peers = new Map<string, NetPeer>();
 const eatCooldown = new Map<string, number>();
 let room: RoomHandle | null = null;
 let online = false;
@@ -96,6 +109,7 @@ let online = false;
 // input
 const pointer = { x: 0, y: 0, active: false };
 const keys = new Set<string>();
+const facing = { x: 1, y: 0 }; // last movement direction, for ejecting mass
 
 let lastTime = 0;
 let leaderTimer = 0;
@@ -110,7 +124,8 @@ function radiusOf(mass: number): number {
 }
 
 function speedOf(mass: number): number {
-  const f = Math.min(1.3, Math.max(0.4, Math.pow(START_MASS / mass, 0.4)));
+  // Strongly size-dependent: small cells dart, big cells lumber.
+  const f = Math.min(1.8, Math.max(0.32, Math.pow(START_MASS / mass, 0.5)));
   return BASE_SPEED * f;
 }
 
@@ -124,7 +139,26 @@ function spawnPellet(): Pellet {
   return { x: rnd(20, WORLD - 20), y: rnd(20, WORLD - 20), hue: Math.floor(rnd(0, 360)) };
 }
 
-function makeBot(): Bot {
+// Creative names for the AI cells instead of a flat "Bot".
+const BOT_NAMES = [
+  'Amip', 'Mikrop', 'Yutangaç', 'Obur', 'Sümük', 'Zıpzıp', 'Çekirdek',
+  'Plazmo', 'Yamyam', 'Şişko', 'Gobzilla', 'Damlacık', 'Mitoz', 'Bakter',
+  'Pıtırcık', 'Kabarcık', 'Yapışkan', 'Açgöz', 'Minicik', 'Lokmacı',
+  'Köpük', 'Hücrik', 'Pelte', 'Salyangoz', 'Virüsoğlu', 'Baloncuk',
+];
+
+function shuffled<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]!;
+    a[i] = a[j]!;
+    a[j] = tmp;
+  }
+  return a;
+}
+
+function makeBot(name: string): Bot {
   const x = rnd(40, WORLD - 40);
   const y = rnd(40, WORLD - 40);
   return {
@@ -132,7 +166,7 @@ function makeBot(): Bot {
     y,
     mass: rnd(60, 360),
     hue: Math.floor(rnd(0, 360)),
-    name: 'Bot',
+    name,
     tx: x,
     ty: y,
     retarget: 0,
@@ -174,9 +208,10 @@ function startPlay(): void {
   state = 'playing';
   protectUntil = performance.now() + SPAWN_PROTECT_MS;
   hideOverlayEl(overlay);
-  // Drop focus from the name field so movement keys steer instead of typing
-  // into the (now hidden) input.
-  nameInput.blur();
+  // Drop focus from whatever was clicked (name field / Start button) so that
+  // Space/Enter steer or eject instead of re-triggering the focused control
+  // (which used to restart the run).
+  if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
 }
 
 function die(): void {
@@ -195,7 +230,8 @@ function seedWorld(): void {
   food.length = 0;
   for (let i = 0; i < NUM_FOOD; i++) food.push(spawnPellet());
   bots.length = 0;
-  for (let i = 0; i < NUM_BOTS; i++) bots.push(makeBot());
+  const names = shuffled(BOT_NAMES);
+  for (let i = 0; i < NUM_BOTS; i++) bots.push(makeBot(names[i % names.length]!));
 }
 
 function reset(): void {
@@ -235,11 +271,26 @@ function steerSelf(dt: number): void {
   }
   if (active) {
     const len = Math.hypot(dx, dy) || 1;
+    facing.x = dx / len;
+    facing.y = dy / len;
     const s = speedOf(self.mass) * dt;
     self.x += (dx / len) * s;
     self.y += (dy / len) * s;
     clampWorld(self);
   }
+}
+
+// Fling a pellet ahead and shrink — costs mass but makes you smaller/faster.
+function ejectMass(): void {
+  if (state !== 'playing') return;
+  if (self.mass - EJECT_COST < EJECT_MIN) return;
+  self.mass -= EJECT_COST;
+  const r = radiusOf(self.mass);
+  const px = Math.min(WORLD - 8, Math.max(8, self.x + facing.x * (r + 14)));
+  const py = Math.min(WORLD - 8, Math.max(8, self.y + facing.y * (r + 14)));
+  food.push({ x: px, y: py, hue: self.hue });
+  // Bound the pellet count over a long session of ejecting.
+  if (food.length > NUM_FOOD + 30) food.shift();
 }
 
 // Eat nearby pellets for a blob; returns mass gained.
@@ -288,7 +339,9 @@ function updateBots(dt: number): void {
     } else if (prey) {
       bot.tx = prey.x;
       bot.ty = prey.y;
-    } else if (bot.retarget <= 0) {
+    } else {
+      // Continuously head for the nearest pellet so motion stays smooth
+      // (no freeze-then-dart); only wander when no food is around.
       let bestP: Pellet | null = null;
       let bestD = Infinity;
       for (const p of food) {
@@ -301,11 +354,11 @@ function updateBots(dt: number): void {
       if (bestP) {
         bot.tx = bestP.x;
         bot.ty = bestP.y;
-      } else {
+      } else if (bot.retarget <= 0) {
         bot.tx = rnd(40, WORLD - 40);
         bot.ty = rnd(40, WORLD - 40);
+        bot.retarget = rnd(0.6, 1.4);
       }
-      bot.retarget = rnd(0.4, 1.2);
     }
     const dx = bot.tx - bot.x;
     const dy = bot.ty - bot.y;
@@ -378,6 +431,16 @@ function prunePeers(now: number): void {
   }
 }
 
+// Ease each peer's render position toward its latest broadcast target so other
+// cells glide smoothly between updates instead of teleporting.
+function interpPeers(dt: number): void {
+  const k = Math.min(1, dt * 14);
+  for (const p of peers.values()) {
+    p.x += (p.tx - p.x) * k;
+    p.y += (p.ty - p.y) * k;
+  }
+}
+
 function update(dt: number, now: number): void {
   if (state === 'playing') {
     steerSelf(dt);
@@ -388,6 +451,7 @@ function update(dt: number, now: number): void {
   resolveLocalEating(now);
   if (online) {
     prunePeers(now);
+    interpPeers(dt);
     resolvePeerEating(now);
     if (room) {
       room.send({
@@ -643,8 +707,21 @@ async function connect(): Promise<void> {
     onState: (peer) => {
       // Stamp with the local receive time (performance.now, same clock as the
       // loop) — the sender's epoch timestamp can't be compared across machines
-      // (clock skew) and would mis-fire staleness pruning.
-      peers.set(peer.id, { ...peer, t: performance.now() });
+      // (clock skew) and would mis-fire staleness pruning. Keep the smoothed
+      // render position (x,y) and ease it toward the new target (tx,ty).
+      const now = performance.now();
+      const ex = peers.get(peer.id);
+      if (ex) {
+        ex.tx = peer.x;
+        ex.ty = peer.y;
+        ex.mass = peer.mass;
+        ex.alive = peer.alive;
+        ex.name = peer.name;
+        ex.hue = peer.hue;
+        ex.t = now;
+      } else {
+        peers.set(peer.id, { ...peer, t: now, tx: peer.x, ty: peer.y });
+      }
     },
     onLeave: (id) => {
       peers.delete(id);
@@ -676,6 +753,7 @@ function init(): void {
   startBtn = document.querySelector<HTMLButtonElement>('#start')!;
   restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
   fsBtn = document.querySelector<HTMLButtonElement>('#fs')!;
+  ejectBtn = document.querySelector<HTMLButtonElement>('#eject')!;
   eaRoot = document.querySelector<HTMLElement>('#ea-root')!;
 
   best = safeRead<number>(STORAGE_BEST, START_MASS);
@@ -720,12 +798,21 @@ function init(): void {
       }
       return;
     }
+    if (k === ' ') {
+      // Space ejects mass while playing; starts the run otherwise. Always
+      // preventDefault so it never scrolls or re-activates a focused button
+      // (which used to restart the game).
+      if (state === 'playing') ejectMass();
+      else startPlay();
+      e.preventDefault();
+      return;
+    }
     const dir = keyDir(k);
     if (dir) {
       keys.add(dir);
       if (state !== 'playing') startPlay();
       e.preventDefault();
-    } else if (k === ' ' || k === 'enter') {
+    } else if (k === 'enter') {
       if (state !== 'playing') {
         startPlay();
         e.preventDefault();
@@ -739,7 +826,14 @@ function init(): void {
 
   startBtn.addEventListener('click', startPlay);
   restartBtn.addEventListener('click', startPlay);
-  fsBtn.addEventListener('click', toggleFullscreen);
+  fsBtn.addEventListener('click', () => {
+    toggleFullscreen();
+    fsBtn.blur();
+  });
+  ejectBtn.addEventListener('click', () => {
+    ejectMass();
+    ejectBtn.blur();
+  });
   // The board element resizes when entering/leaving fullscreen; re-fit the
   // canvas backing store. (ResizeObserver usually covers this; this is a
   // belt-and-suspenders fallback across browsers.)
