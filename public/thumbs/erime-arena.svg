@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Erime Arena">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Hücre Savaşı">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#161826" />
@@ -23,5 +23,5 @@
   <!-- smaller rivals -->
   <circle cx="238" cy="128" r="26" fill="#34d399" stroke="#0a3d2a" stroke-width="3" />
   <circle cx="62" cy="70" r="18" fill="#f472b6" stroke="#3d0a26" stroke-width="3" />
-  <text x="16" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Erime Arena</text>
+  <text x="16" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5f6f8">Hücre Savaşı</text>
 </svg>
