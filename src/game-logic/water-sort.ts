@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Water Sort — sıvı renk sıralama puzzle.
 // Her tüp 4 katman. Hedef: her tüp ya boş ya da tek renk dolu olsun.
@@ -32,6 +33,7 @@ const POUR_MS = 360;
 const STORAGE_LEVEL = 'water-sort.level';
 const STORAGE_BEST = 'water-sort.bestMoves';
 const STORAGE_STATE = 'water-sort.state';
+const SCORE_DESC = { gameId: 'water-sort', storageKey: STORAGE_BEST, direction: 'lower' as const };
 
 // Palet — kullanıcının beyni 12+ rengi kolayca ayırabilsin diye yüksek
 // kontrastlı, "su" hissi veren tonlar.
@@ -581,6 +583,7 @@ function handleWin(): void {
     bestMoves[key] = moves;
     persistBest();
   }
+  reportGameOver(SCORE_DESC, moves, { label: 'Hamle' });
   updateHud();
   showWin();
 }

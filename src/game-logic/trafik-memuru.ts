@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Trafik Memuru — kavşak sinyal yönetimi
 // Pitfalls:
@@ -55,6 +56,7 @@ const CENTER_Y = GEOM.H / 2;
 
 const YELLOW_MS = 500;
 const STORAGE_BEST = 'trafik-memuru.best';
+const SCORE_DESC = { gameId: 'trafik-memuru', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const CAR_BASE_SPEED = 90; // px/sec
 const CAR_GAP = 6; // gap between cars in queue (px)
 
@@ -445,6 +447,7 @@ function gameOver(): void {
     bestEl.textContent = String(best);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Sabırlar tükendi', `Skor: ${score} · Bir tık veya R ile yeniden başla.`);
 }
 

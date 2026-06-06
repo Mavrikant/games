@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Tahmin — desenin devamını seç.
 // Mekanik: ekranda 4 item ve bir "?" görünür. Bir mantık var: aritmetik
@@ -29,6 +30,7 @@ const TICK_MS = 100; // timer bar refresh interval
 const FLASH_MS = 600; // doğru/yanlış vurgu süresi (sonraki sorudan önce)
 const STARTING_LIVES = 3;
 const STORAGE_BEST = 'tahmin.best';
+const SCORE_DESC = { gameId: 'tahmin', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const SEQ_LENGTH = 4; // gösterilen item sayısı (5. slot ?)
 const OPTION_COUNT = 4;
 
@@ -677,6 +679,7 @@ function applyWrong(idx: number | null): void {
 function gameOver(): void {
   state = 'gameOver';
   stopTimer();
+  reportGameOver(SCORE_DESC, score);
   // Options disabled re-render.
   renderOptions();
   showOverlay();

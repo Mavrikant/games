@@ -1,9 +1,16 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { hideOverlay, showOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 const STORAGE_BEST = 'kopru-adalari.best';
 const STORAGE_DIFF = 'kopru-adalari.diff';
+
+// Global leaderboard tracks the "kolay" (easy) board only — one fixed
+// difficulty so move totals are comparable. Lower moves is better. Uses its
+// own scalar key (the in-game record store is a per-difficulty record under
+// STORAGE_BEST, which must not be overwritten with a scalar).
+const SCORE_DESC = { gameId: 'kopru-adalari-kolay', storageKey: 'kopru-adalari.best-kolay', direction: 'lower' as const };
 
 type Difficulty = 'kolay' | 'orta' | 'zor';
 
@@ -453,6 +460,7 @@ function handleWin(): void {
     safeWrite(STORAGE_BEST, bests);
     beat = true;
   }
+  if (currentDiff === 'kolay') reportGameOver(SCORE_DESC, moves, { label: 'Hamle' });
   overlayTitle.textContent = beat ? 'Yeni rekor!' : 'Tebrikler!';
   const diffLabel =
     currentDiff === 'kolay' ? 'Kolay' : currentDiff === 'orta' ? 'Orta' : 'Zor';

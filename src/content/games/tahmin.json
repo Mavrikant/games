@@ -6,6 +6,12 @@
   "controls": "Tıkla: cevap seç · 1-4: cevap seç · R: yeniden başla",
   "howToPlay": "Amacın, üstteki sırada gizli olan deseni çözüp soru işareti (?) ile gösterilen son kutunun ne olması gerektiğini bulmak. Her turda dört kutu bir mantık taşır: sayı dizisi (örn. 2, 4, 6, 8 → ?), iki ya da üç renkli alternating dizilim (kırmızı, mavi, kırmızı, mavi → ?), şekil rotasyonu (üçgen 0°, 90°, 180°, 270° → ?) ya da sayı ve rengin birlikte değiştiği kombo desen. Üst başlık sana hangi tür desen olduğunu söyler. Aşağıdaki dört seçenekten doğru devamı fareyle tıklayarak veya 1-4 tuşlarıyla seç; doğru cevap skoru +1 artırır, yanlış seçim veya 12 saniyelik sürenin dolması bir can götürür. Üç canın da bitince oyun biter ve en iyi skorun kaydedilir; R tuşu ya da Yeniden başla butonu yeni bir oyun başlatır. İpucu: önce başlık etiketine bakıp desen türünü daralt, sonra ardışık iki kutunun farkına (sayıda adım, renkte sıra, şekilde dönüş yönü) odaklan — acele etme ama zaman çubuğu kızarmadan kararını ver.",
   "thumbnail": "tahmin.svg",
+  "scoring": {
+    "storageKey": "tahmin.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Guess",
     "description": "Pick what comes next in the pattern — number, colour, shape or combination.",

@@ -5,6 +5,7 @@ import {
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (docs/PITFALLS.md):
 // - unguarded-storage: safeRead/safeWrite only.
@@ -17,6 +18,7 @@ import { createGenToken } from '@shared/gen-token';
 type State = 'ready' | 'playing' | 'won';
 
 const STORAGE_BEST = 'yelken.best';
+const SCORE_DESC = { gameId: 'yelken', storageKey: STORAGE_BEST, direction: 'lower' as const };
 
 const W = 480;
 const H = 600;
@@ -181,6 +183,7 @@ function win(): void {
   } else {
     line = `Süre: ${fmt(finalTime)} sn · Rekor: ${fmt(best)} sn`;
   }
+  reportGameOver(SCORE_DESC, finalTime, { label: 'Süre', unit: 'sn' });
   draw();
   showOverlay(
     'Limana vardın!',

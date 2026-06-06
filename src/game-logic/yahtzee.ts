@@ -90,6 +90,9 @@ const PIP_MAP: Record<DieFace, ReadonlyArray<readonly [number, number]>> = {
 // --- DOM ---
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
+
+const SCORE_DESC = { gameId: SLUG, storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 let root!: HTMLElement;
 let dieEls: HTMLButtonElement[] = [];
@@ -449,6 +452,7 @@ function onCategoryClick(cat: CatKey): void {
   }
   if (turn >= 13) {
     state = 'gameOver';
+    reportGameOver(SCORE_DESC, total);
     renderAll();
     showOverlay();
     setStatus(`Oyun bitti! Toplam: ${total}`);

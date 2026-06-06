@@ -4,8 +4,10 @@ import {
   showOverlay as showOverlayEl,
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 const STORAGE_BEST = 'yildiz-takip.best';
+const SCORE_DESC = { gameId: 'yildiz-takip', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 type State = 'ready' | 'reveal' | 'playing' | 'gameover' | 'levelup';
 
@@ -171,6 +173,7 @@ function endRound(success: boolean): void {
     );
   } else {
     commitBest(level);
+    reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
     const pct = totalActiveTime > 0 ? onTargetTime / totalActiveTime : 0;
     state = 'gameover';
     setOverlay(

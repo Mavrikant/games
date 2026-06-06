@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Vardiya — sosyo-teknik vardiya planlama bulmacası.
 // Pitfalls actively guarded:
@@ -79,6 +80,7 @@ interface EvalReport {
 
 const STORAGE_BEST_LEVEL = 'vardiya.bestLevel';
 const STORAGE_BEST_SCORE = 'vardiya.bestScore';
+const SCORE_DESC = { gameId: 'vardiya', storageKey: STORAGE_BEST_SCORE, direction: 'higher' as const };
 const DAY_NAMES = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'];
 const SHIFT_NAMES = ['Gündüz', 'Akşam'];
 const SHIFT_ICONS = ['☼', '☾'];
@@ -629,6 +631,7 @@ function commit(): void {
     bestLevel = level().id;
     safeWrite(STORAGE_BEST_LEVEL, bestLevel);
   }
+  reportGameOver(SCORE_DESC, report.score);
   state = report.passed ? 'levelComplete' : 'reviewing';
   syncHud();
   showOverlay(report);

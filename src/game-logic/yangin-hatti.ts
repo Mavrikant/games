@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (docs/PITFALLS.md):
 // - unguarded-storage: safeRead/safeWrite only.
@@ -16,6 +17,7 @@ const ROWS = 12;
 const DIGS_PER_TURN = 4;
 const EMPTY_COUNT = 7;
 const STORAGE_BEST = 'yangin-hatti.best';
+const SCORE_DESC = { gameId: 'yangin-hatti', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const enum Cell {
   Tree,
@@ -202,6 +204,7 @@ function advance(): void {
       best = saved;
       safeWrite(STORAGE_BEST, best);
     }
+    reportGameOver(SCORE_DESC, saved);
   }
 
   syncHud();

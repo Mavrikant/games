@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Hanoi Kuleleri — klasik 3 kule disk taşıma bulmacası.
 //
@@ -20,6 +21,10 @@ const DISK_OPTIONS = [3, 4, 5, 6, 7, 8] as const;
 
 const STORAGE_DISKS = 'hanoi-kuleleri.disks';
 const STORAGE_BEST_PREFIX = 'hanoi-kuleleri.best-';
+
+// Global leaderboard tracks the default 4-disk board only — one fixed disk
+// count so move totals are comparable. Lower moves is better.
+const SCORE_DESC = { gameId: 'hanoi-kuleleri-4', storageKey: 'hanoi-kuleleri.best-4', direction: 'lower' as const };
 
 const ANIM_MS = 220;
 const SHAKE_MS = 280;
@@ -267,6 +272,7 @@ function showSolved(winMoves: number): void {
     bestByDisks[diskCount] = winMoves;
     saveBest(diskCount, winMoves);
   }
+  if (diskCount === DEFAULT_DISKS) reportGameOver(SCORE_DESC, winMoves, { label: 'Hamle' });
   const isOptimal = winMoves === optimal;
   overlayTitleEl.textContent = isOptimal
     ? 'Mükemmel çözüm!'

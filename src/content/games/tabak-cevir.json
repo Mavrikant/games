@@ -6,6 +6,12 @@
   "controls": "Tıkla/dokun: tabağa enerji ver · 1-9: numarayla tabağa enerji ver · Boşluk/Enter: başla · R: yeniden başla",
   "howToPlay": "Tabak Çevir, sirk hokkabazlarının çoklu tabağı sırıklarda döndürme akrobasisinden ilham alan, gerçek zamanlı bir dikkat yönetimi oyunudur. Sahnede başlangıçta 5 sırığın üstünde dönen 5 tabak vardır; her tabağın altında yeşil bir enerji çubuğu yer alır ve zaman geçtikçe çubuk dolu (yeşil) → uyarı (sarı) → tehlike (kırmızı) renklerinden geçerek boşalır. Boşalan tabak sırıktan düşer ve oyun biter — bu yüzden hiçbirini sıfıra düşürmeden tümünü dönüşte tutman gerekir. Bir tabağa enerji vermek için üstüne tıkla, dokun veya tabağın altında yazılı numarayı (1-9) klavyeden bas; tabak parlayarak hızlanır ve dönüşüne tam güçle devam eder. Enerji düştükçe sırık gözle görülür biçimde sallanmaya başlar — kırmızı çubuk + büyük salınım acil müdahale işaretidir. Skor, hayatta kaldığın saniye sayısının on katıdır; her 14 saniyede bir sahneye yeni bir tabak eklenir (maksimum 9'a kadar) ve oyun ilerledikçe enerji daha hızlı tükenir, dolayısıyla aynı anda yönetmen gereken hem tabak sayısı hem tempo artar. Strateji: enerjisi düşük olanı en son tıklayıp arada serpiştirilmiş orta-enerjili tabaklara kısa rotasyonla bakım yapmak yerine, hep en kırmızıya bak ve önce onu kurtar — dolu olanı 'tazelemek' enerjiyi tavanlatamadığı için boşa hareket sayılır. 9. tabak geldikten sonra sürdürmek imkânsıza yakındır; gerçek puan oraya kadar ne kadar temiz oynadığına bağlıdır. R tuşu sahneyi sıfırlar, Boşluk veya Enter yeni bir tur başlatır.",
   "thumbnail": "tabak-cevir.svg",
+  "scoring": {
+    "storageKey": "tabak-cevir.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Spinning Plates",
     "description": "Keep the plates spinning like a circus juggler — click the ones running low on energy in time so none of them fall.",

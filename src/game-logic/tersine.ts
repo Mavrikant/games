@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay, hideOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (see docs/PITFALLS.md):
 // - unguarded-storage: best score via safeRead/safeWrite.
@@ -13,6 +14,7 @@ import { showOverlay, hideOverlay } from '@shared/overlay';
 // - module-level-dom-access: all DOM/storage access lives in init().
 
 const STORAGE_BEST = 'tersine.best';
+const SCORE_DESC = { gameId: 'tersine', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const START_LEN = 2;
 const PAD_COUNT = 9;
 
@@ -117,6 +119,7 @@ function failRound(wrong: number, expected: number): void {
   flashClass(wrong, 'ters-pad--bad', BAD_FLASH, myGen);
   flashClass(expected, 'ters-pad--lit', BAD_FLASH, myGen);
   const completed = round - 1;
+  reportGameOver(SCORE_DESC, completed, { label: 'Seviye' });
   overlayTitle.textContent = 'Bitti!';
   overlayMsg.textContent = `Tamamlanan tur: ${completed}\nRekor: ${best}`;
   startBtn.textContent = 'Tekrar oyna';

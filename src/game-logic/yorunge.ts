@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Yörünge — yerçekimi kuyularını yerleştirip uyduyu hedefe sapla.
 //
@@ -19,6 +20,7 @@ import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@sha
 // - missing-overlay-css: scaffold style.css'ten overlay bloğu korunuyor.
 
 const STORAGE_BEST = 'yorunge.best';
+const SCORE_DESC = { gameId: 'yorunge', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 type Phase = 'placing' | 'simulating' | 'won' | 'lost';
 
@@ -494,6 +496,7 @@ function win(): void {
     bestLevel = levelIdx + 1;
     safeWrite(STORAGE_BEST, bestLevel);
   }
+  reportGameOver(SCORE_DESC, levelIdx + 1, { label: 'Seviye' });
   overlayTitle.textContent = 'Bölüm Tamam!';
   const nextIdx = (levelIdx + 1) % LEVELS.length;
   const lap = Math.floor((levelIdx + 1) / LEVELS.length);

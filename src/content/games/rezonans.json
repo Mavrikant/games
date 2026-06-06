@@ -6,6 +6,12 @@
   "controls": "← →: çubuk seç · ↑ ↓: genlik · Tıkla: doğrudan ayarla · Enter: sonraki seviye · R: yeniden",
   "howToPlay": "Rezonans bir toplamsal sentez (additive synthesis) bulmacasıdır. Ekranda mor renkli bir hedef dalga formu görürsün: bu dalga, birkaç sinüs harmoniğinin (1x, 2x, 3x... frekanslar) tam sayı genliklerle toplanmasıyla oluşur. Senin görevin alttaki ekolayzer çubuklarını ayarlayarak yeşil eğriyi mor hedefin tam üstüne oturtmak. Her çubuk bir harmoniğin genliğini temsil eder; bir hücreye tıklayarak o yüksekliği doğrudan seçebilir, ya da ← → ile çubuk seçip ↑ ↓ ile genliği bir bir değiştirebilirsin. Üstteki 'Eşleşme' çubuğu sıcak-soğuk pusulan gibidir: doğru harmonik yaklaştıkça yüzde artar, %100'e ulaştığında iki eğri çakışır ve seviye çözülür. Kaybetme yok; tek ölçü ne kadar ileri gittiğin ve kaç hamlede çözdüğün. Üst seviyelerde harmonik sayısı artar (3'ten 6'ya kadar), dolayısıyla dalga daha karmaşık ve okunması daha zor olur. İpucu: önce en yavaş kıvrımı (düşük harmonikleri) yakala, sonra eğrinin üstündeki küçük dalgalanmaları yüksek harmoniklerle düzelt. Bir harmoniği artırıp eşleşme düşüyorsa, o harmonik hedefte yok veya daha düşük demektir. En yüksek çözdüğün seviye tarayıcında saklanır.",
   "thumbnail": "rezonans.svg",
+  "scoring": {
+    "storageKey": "rezonans.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
   "en": {
     "title": "Resonance",
     "description": "Solve the target waveform: tune the harmonic bars to reproduce the curve exactly.",

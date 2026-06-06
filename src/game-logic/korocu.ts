@@ -62,6 +62,7 @@ const FIRST_SPAWN_DELAY = 14;        // immediate first-spawn frame budget after
 const MAX_FOULS = 5;
 const FLASH_FRAMES = 18;
 const STORAGE_KEY = 'korocu.best';
+const SCORE_DESC = { gameId: 'korocu', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // Points per grade — combo bonus also adds (combo / 5 floored).
 const POINTS: Record<HitGrade, number> = { perfect: 100, great: 60, good: 30 };
@@ -467,6 +468,7 @@ function endGame(): void {
     cancelAnimationFrame(rafId);
     rafId = null;
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay(
     'Konser bitti!',
     `Skor: <b>${score}</b> · En yüksek kombo: <b>${bestCombo}</b><br>` +

@@ -6,6 +6,13 @@
   "controls": "Tıkla → ada seç · Hizalı bir komşu adaya tıkla → köprü ekle/yükselt/sil · R: sıfırla · N: yeni puzzle",
   "howToPlay": "Amacın tahtadaki sayılı adaları köprülerle birleştirmek. Her adanın üzerindeki rakam, o adaya bağlanması gereken toplam köprü sayısıdır (bir çift köprü 2 sayılır). Köprüler yalnızca yatay ya da dikey olarak çekilebilir; üçüncü bir adanın üzerinden atlayamazlar ve birbirleriyle kesişemezler. Hamle yapmak için önce bir adaya tıkla — etrafında bir vurgu belirir. Sonra aynı satır veya sütundaki bir komşu adaya tıkla: aralarına tek köprü çekilir. Aynı çifte yeniden tıklarsan köprü çift köprüye yükselir, bir kez daha tıklarsan tamamen silinir. İki ada arasında en fazla iki köprü olabilir. Bir adanın halkası, üzerindeki sayı kadar bağlantı geldiğinde yeşile döner; sayıyı aşarsan halka kırmızı olur ve düzeltmeden çözülmez. Tüm adaların bağlantı sayısı doğru olduğunda ve tüm adalar tek bir bağlı bileşen oluşturduğunda (yani köprüler üzerinden her adadan her adaya gidebildiğinde) bölüm tamamlanır. Üç zorluk vardır: Kolay 6×6, Orta 7×7, Zor 8×8. Her zorluk için en az hamleyle çözüm rekorun saklanır. İpucu: önce yüksek sayılı (5+) ya da köşeye sıkışmış adaları çöz — bunlarda seçenek az, kalan tahtayı zorlamadan kurmana yarar.",
   "thumbnail": "kopru-adalari.svg",
+  "scoring": {
+    "id": "kopru-adalari-kolay",
+    "storageKey": "kopru-adalari.best-kolay",
+    "label": "Hamle (kolay)",
+    "direction": "lower",
+    "labelEn": "Moves (easy)"
+  },
   "en": {
     "title": "Bridge Islands",
     "description": "Connect the numbered islands with bridges — the connection count must match exactly, bridges must not cross, and everything must form a single piece.",

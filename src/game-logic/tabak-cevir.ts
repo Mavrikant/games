@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -11,6 +12,7 @@ interface Plate {
 }
 
 const STORAGE_BEST = 'tabak-cevir.best';
+const SCORE_DESC = { gameId: 'tabak-cevir', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const START_PLATES = 5;
 const MAX_PLATES = 9;
 const ENERGY_FULL = 100;
@@ -115,6 +117,7 @@ function gameOver(reason: string): void {
     bestEl.textContent = String(best);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   draw();
   showOverlay('Tabak Düştü!', `${reason}\nSkor: ${score} · Rekor: ${best}`);
 }

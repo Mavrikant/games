@@ -10,6 +10,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type GameState = 'playing' | 'gameOver';
 type AnomalyKind = 'math' | 'future-date' | 'duplicate' | 'absurd' | 'wrong-vat';
@@ -26,6 +27,7 @@ interface Invoice {
 }
 
 const STORAGE_KEY_BEST = 'vergi-denetcisi.best';
+const SCORE_DESC = { gameId: 'vergi-denetcisi', storageKey: STORAGE_KEY_BEST, direction: 'higher' as const };
 const ROWS_PER_ROUND = 8;
 const MAX_STRIKES = 3;
 const STANDARD_VAT_RATE = 0.18;
@@ -411,6 +413,7 @@ function hideOverlay(): void {
 function endGame(msg: string): void {
   state = 'gameOver';
   saveBest();
+  reportGameOver(SCORE_DESC, score);
   showOverlay(`${msg} Skor: ${score}. En iyi: ${best}.`);
 }
 

@@ -5,6 +5,13 @@
   "tags": ["puzzle", "klasik", "mantık", "strateji"],
   "controls": "Tıkla/dokun: kule seç → kule seç (taşı) · 3-8: disk sayısı · R: yeniden başla",
   "thumbnail": "hanoi-kuleleri.svg",
+  "scoring": {
+    "id": "hanoi-kuleleri-4",
+    "storageKey": "hanoi-kuleleri.best-4",
+    "label": "Hamle (4 disk)",
+    "direction": "lower",
+    "labelEn": "Moves (4 disks)"
+  },
   "howToPlay": "Amacın, soldaki kulede üst üste dizili tüm diskleri aynı sırayla en sağdaki kuleye taşımak. Bir hamle yapmak için önce kaynağı (en üstteki diski almak istediğin kule), sonra hedefi tıkla; dokunmatik ekranda da aynı iki adımlı seçim geçerli. Klavyede 1/2/3 (veya Q/W/E) ile kuleleri seçebilir, 3–8 arası rakam tuşlarıyla disk sayısını değiştirebilir, R ile baştan başlayabilir, Esc ile seçimi iptal edebilirsin. Tek altın kural: büyük bir disk asla daha küçük bir diskin üstüne konamaz; geçersiz hamle yapmaya çalıştığında hedef kule kısaca sallanarak uyarır ve hamle sayılmaz. Tüm diskler doğru sırada en sağdaki kuleye dizildiğinde bulmaca çözülür ve hamle sayın 2^n−1 olan optimal değere ne kadar yakınsa skorun o kadar iyidir; her disk sayısı için en iyi skorun saklanır. Strateji: küçük diskten başlayıp hedefin orta kuleyi geçici depo gibi kullan; n diskli problemi çözmek için önce üstteki n−1 diski yardımcı kuleye taşı, en büyüğü hedefe gönder, sonra n−1'liği üstüne kur — bu özyinelemeli düşünce işin sırrıdır.",
   "en": {
     "title": "Tower of Hanoi",
