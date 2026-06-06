@@ -3,6 +3,7 @@
 // inside init() (invoked by defineGame after the DOM is parsed).
 
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { S, loadProfile, progressFor } from './kusatma/state';
 import { bindCanvas, resizeCanvas, draw, applyFullscreenLayout } from './kusatma/render';
 import { bindUi, showIntro, type UiHandlers } from './kusatma/ui';
@@ -22,6 +23,25 @@ import { validateAll } from './kusatma/levels';
 import { ENGINES } from './kusatma/engines';
 import { AMMO } from './kusatma/ammo';
 import * as audio from './kusatma/audio';
+
+// Leaderboard: this run's score (higher is better). Reported on the transition
+// into the 'gameover' state. The submodule flow owns that transition, so we
+// watch S.state from the entry file rather than editing it.
+const SCORE_DESC = { gameId: 'kusatma', storageKey: 'kusatma.lb', direction: 'higher' as const };
+
+// Poll S.state for the gameover transition and report the run score once per
+// game-over. Reads only existing runtime state; no new persistent tracking.
+function watchGameOver(): void {
+  let prevState = S.state;
+  const tick = (): void => {
+    if (S.state === 'gameover' && prevState !== 'gameover') {
+      reportGameOver(SCORE_DESC, S.score, { label: 'Skor' });
+    }
+    prevState = S.state;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
 
 function init(): void {
   const board = document.querySelector<HTMLCanvasElement>('#board')!;
@@ -124,6 +144,7 @@ function init(): void {
 
   draw();
   startLoop();
+  watchGameOver();
 
   // Read-only test hook (used by scripts/kusatma-playthrough.mjs). Harmless in
   // normal play; lets the headless harness drive the real game + run static

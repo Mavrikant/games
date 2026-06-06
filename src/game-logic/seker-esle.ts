@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 
 import { state, loadProfile, setPhase, bumpGeneration, persistProfile, recordLevelResult } from './seker-esle/state';
 import {
@@ -22,6 +23,10 @@ import type { LevelDef } from './seker-esle/types';
 
 let currentLevel: LevelDef | null = null;
 let dailyMode = false;
+
+// Global leaderboard: highest level reached (higher is better). The game's own
+// best level is persisted under the legacy key seker-esle.best by state.ts.
+const SCORE_DESC = { gameId: 'seker-esle', storageKey: 'seker-esle.best', direction: 'higher' as const };
 
 function startLevel(id: number, opts: { daily?: boolean } = {}): void {
   bumpGeneration();
@@ -142,6 +147,9 @@ function init(): void {
     if (dailyMode) {
       recordDailySolve(detail.stars, detail.score);
     }
+    // Highest level reached — recordLevelResult() already bumped bestLevel
+    // before this event fired.
+    reportGameOver(SCORE_DESC, state.profile.bestLevel, { label: 'Seviye' });
     showLevelComplete(currentLevel, detail.score, detail.stars);
   });
   document.addEventListener('seker-level-failed', () => {

@@ -4,6 +4,7 @@ import {
   showOverlay as showOverlayEl,
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (read docs/PITFALLS.md before editing):
 // - unguarded-storage: progress goes through safeRead/safeWrite.
@@ -31,6 +32,8 @@ const LEVELS: Level[] = [
 ];
 
 const PROGRESS_KEY = 'iksir-olcer.progress';
+// Leaderboard: highest level reached (flat mirror; full progress stays in PROGRESS_KEY).
+const SCORE_DESC = { gameId: 'iksir-olcer', storageKey: 'iksir-olcer.lb', direction: 'higher' as const };
 
 interface Progress {
   unlocked: number;
@@ -242,6 +245,7 @@ function afterMove(): void {
     selected = null;
     const s = starsFor(moves);
     recordStars(levelIdx, s);
+    reportGameOver(SCORE_DESC, levelIdx + 1, { label: 'Seviye' });
     showWin(s);
   }
   render();

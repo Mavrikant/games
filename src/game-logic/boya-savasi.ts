@@ -339,6 +339,7 @@ function endGame(): void {
   const msg = `Sen ${mine} – Yapay zekâ ${ai}`;
   renderHud();
   setStatus(`${title} ${msg}`);
+  reportGameOver(SCORE_DESC, mine, { label: 'Skor' });
   showOverlay(title, msg);
 }
 

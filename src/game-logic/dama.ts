@@ -14,6 +14,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 const SIZE = 8;
 type Cell = 0 | 1 | 2 | 3 | 4;
@@ -29,6 +30,8 @@ type GameState = 'playerTurn' | 'aiTurn' | 'gameOver';
 
 const KEY_WINS = 'dama.wins';
 const KEY_LOSSES = 'dama.losses';
+// Leaderboard: cumulative wins (a "most wins" board).
+const SCORE_DESC = { gameId: 'dama', storageKey: KEY_WINS, direction: 'higher' as const };
 
 let boardEl!: HTMLElement;
 let winsEl!: HTMLElement;
@@ -298,6 +301,7 @@ function endGame(winner: 'player' | 'ai'): void {
   safeWrite(KEY_WINS, wins);
   safeWrite(KEY_LOSSES, losses);
   syncHud();
+  if (winner === 'player') reportGameOver(SCORE_DESC, wins, { label: 'Galibiyet' });
 }
 
 function setStatus(s: string): void {

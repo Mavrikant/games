@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Mark = 'X' | 'O' | '';
 type Board = Mark[];
@@ -17,6 +18,10 @@ const LINES: ReadonlyArray<readonly [number, number, number]> = [
 ];
 
 const STORAGE_KEY = 'xox.scores';
+
+// Global leaderboard: cumulative player (X) wins ("most wins" board). The
+// game's score lives inside an object (xox.scores), so we mirror to a flat key.
+const SCORE_DESC = { gameId: 'tic-tac-toe', storageKey: 'tic-tac-toe.lb', direction: 'higher' as const };
 
 interface Scores {
   x: number;
@@ -111,6 +116,7 @@ function endGame(result: 'x' | 'o' | 'd', line?: readonly number[]): void {
   if (result === 'x') {
     scores.x++;
     statusEl.textContent = 'Kazandın!';
+    reportGameOver(SCORE_DESC, scores.x, { label: 'Galibiyet' });
   } else if (result === 'o') {
     scores.o++;
     statusEl.textContent = 'Bilgisayar kazandı.';

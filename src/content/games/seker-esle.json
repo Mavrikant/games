@@ -5,6 +5,12 @@
   "tags": ["puzzle", "eşleştirme", "seviye", "match3", "günlük"],
   "controls": "Şekere dokun ve komşusuna sürükle (veya iki kez dokun). 4'lü eşleme çizgili, L/T sarmalanmış, 5'li renk bombası yaratır.",
   "thumbnail": "seker-esle.svg",
+  "scoring": {
+    "storageKey": "seker-esle.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
   "howToPlay": "Amacın renkli şekerleri 3 ya da daha fazla yan yana getirerek patlatmak ve her seviyenin görevini sınırlı hamle hakkıyla tamamlamak. Bir şekeri seçip yan komşusuna sürükle (veya iki kez dokun) — eğer takas en az bir eşleşme oluşturursa kabul edilir, oluşturmazsa şekerler eski yerine döner. Üçten daha uzun eşleştirmeler özel şekerler yaratır ve oyunun asıl derinliği bu özel şekerlerden gelir: 4 şekeri tek hat üzerinde eşleştirirsen patladığında tüm satır veya sütunu süpüren çizgili şeker oluşur; 4'ü L veya T şeklinde eşleştirirsen 3×3 alanı patlatan sarmalanmış şeker; 5 şekeri tek hatta eşleştirirsen tahtadaki o renkten her şeyi temizleyen renk bombası kazanırsın. Özel şekerleri başka özel şekerlerle birleştirmek zincirleme patlamalar tetikler (örneğin renk bombası + çizgili şeker = tahta üzerindeki tüm o renkten şekerleri çizgili şekere dönüştürüp patlatır). Her seviye 4 farklı görev tipinden birini sunar: hedef skora ulaşmak, ekrana düşen kirazları en alta indirmek, tahtadaki jöleli hücreleri temizlemek veya belirli sayıda belirli rengi toplamak. Görev başarısı yıldız sistemiyle ölçülür — 3 yıldız için hedefin çok üstünde performans gerekir; 14 başarım uzun vadeli hedefler sunar. Günlük meydan okuma her gün yeni bir bulmaca verir; günlük seriyi bozmadan oynarsan seri ödülü kazanırsın ve özel yardımcılar (örneğin renk patlatıcı, hamle ekleyici) açılır. İpucu: özel şekerleri hemen tüketme — uzun zincirler için onları biriktirip iki özelin birleşmesini bekle, kazandığın bonus puan ve hamle ekonomisi katlanır. Prosedürel Web Audio sesleri ve partikül efektleri her başarılı combo'yu tatmin edici kılar.",
   "en": {
     "title": "Candy Match",

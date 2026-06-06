@@ -6,6 +6,12 @@
   "controls": "Taşı seç ve atlama yerini tıkla · U: geri al · R: yeniden başla · Esc: seçimi iptal et",
   "howToPlay": "Tek Taş (İngilizce: Peg Solitaire), 17. yüzyıldan kalma klasik tek kişilik bir bulmacadır. Tahta artı şeklinde 33 delikten oluşur: 7×7'lik bir ızgaranın dört köşesinden 2×2'lik bloklar çıkarılmıştır. Başlangıçta tüm deliklerde taş vardır — sadece ortadaki delik boştur. Hamle yapmak için bir taş seç, sonra onun yatay veya dikey komşusundaki bir taşı atlayıp iki kare ötedeki boş deliğe in: atladığın taş tahtadan kalkar. Çapraz atlama yoktur. Hedef tahtada tek bir taş bırakmak; \"mükemmel\" bitiş ise bu son taşın tam ortadaki delikte (başlangıçta boş olan) durmasıdır. Yeşil halkayla işaretli boş delikler seçtiğin taşın geçerli atlama hedefleridir; mavi taş seçili demektir. Eğer geçerli hamle kalmazsa \"sıkıştın\" ekranı çıkar. U tuşu hamleyi geri alır (ve sıkıştın ekranını da iptal eder); başka bir yol denersin. R tuşu tahtayı sıfırlar. İpucu: erken hamlelerde paniklemeyip taşları merkez yerine kenarlardan eritmek genelde daha iyi sonuç verir; tahta simetrik kaldığı sürece çözüm yolu da simetrik olur.",
   "thumbnail": "tek-tas.svg",
+  "scoring": {
+    "storageKey": "tek-tas.lb",
+    "label": "Kalan taş",
+    "direction": "lower",
+    "labelEn": "Pegs left"
+  },
   "en": {
     "title": "Peg Solitaire",
     "description": "The classic English solitaire — eliminate pegs by jumping them over one another. Goal: leave a single peg in the centre.",

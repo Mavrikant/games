@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Halka Eşle — match-3'ün toroidal twist'i.
 // Klasik Candy Crush'tan farkı: swap yok; her satır ve sütun kapalı bir halka,
@@ -22,6 +23,8 @@ import { createGenToken } from '@shared/gen-token';
 
 const STORAGE_PROGRESS = 'halka-esle.progress';
 const STORAGE_CURRENT = 'halka-esle.current';
+// Leaderboard: highest level reached (flat mirror; progress stays in its own keys).
+const SCORE_DESC = { gameId: 'halka-esle', storageKey: 'halka-esle.lb', direction: 'higher' as const };
 const TOTAL_LEVELS = 100;
 const COLOR_NAMES = ['kırmızı', 'yeşil', 'mavi', 'sarı', 'mor', 'pembe'];
 const COLOR_EMOJI = ['🔴', '🟢', '🔵', '🟡', '🟣', '🩷'];
@@ -574,6 +577,7 @@ function chainEnded(): void {
       maxUnlocked = Math.min(TOTAL_LEVELS, currentLevel + 1);
       safeWrite(STORAGE_PROGRESS, maxUnlocked - 1);
     }
+    reportGameOver(SCORE_DESC, currentLevel, { label: 'Seviye' });
     const isLast = currentLevel >= TOTAL_LEVELS;
     const nextLevel = currentLevel + 1;
     showGameOverlay(

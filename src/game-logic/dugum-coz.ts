@@ -4,6 +4,7 @@ import {
   showOverlay as showOverlayEl,
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Untangle / planarity puzzle. The graph is built from an arrangement of
 // straight lines: every pairwise line intersection is a node, and each line's
@@ -13,6 +14,9 @@ import {
 // scrambled and the player drags them back to a layout with zero crossings.
 
 const STORAGE_BEST = 'dugum-coz.best'; // best (fewest) moves per level
+// Leaderboard: highest level reached (per-level bests stay in STORAGE_BEST as a
+// map; this flat key is just the leaderboard mirror).
+const SCORE_DESC = { gameId: 'dugum-coz', storageKey: 'dugum-coz.lb', direction: 'higher' as const };
 
 const NODE_R = 11; // visual + hit radius
 const MARGIN = 28; // keep nodes away from canvas edge
@@ -326,6 +330,7 @@ function checkWin(): void {
   }
   overlayTitle.textContent = 'Bölüm tamam!';
   overlayMsg.textContent = msg;
+  reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
   showOverlayEl(overlay);
 }
 

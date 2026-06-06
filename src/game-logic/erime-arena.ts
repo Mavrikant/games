@@ -4,6 +4,7 @@ import { createGenToken } from '@shared/gen-token';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { joinRoom, realtimeEnabled } from '@shared/realtime-room';
 import type { PeerState, RoomHandle } from '@shared/realtime-room';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (see docs/PITFALLS.md before editing):
 // - unguarded-storage: safeRead/safeWrite wrap localStorage.
@@ -39,6 +40,9 @@ const PEER_STALE_MS = 5000;
 const EAT_COOLDOWN_MS = 1200;
 const STORAGE_BEST = 'erime-arena.best';
 const STORAGE_NAME = 'erime-arena.name';
+
+// Global leaderboard: peak mass reached this run (higher is better).
+const SCORE_DESC = { gameId: 'erime-arena', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 type State = 'ready' | 'playing' | 'dead';
 
@@ -224,6 +228,7 @@ function die(): void {
     best = Math.round(peakMass);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, Math.round(peakMass), { label: 'Skor' });
   overlayTitle.textContent = 'Yutuldun!';
   overlayMsg.textContent = `Zirve kütlen: ${Math.round(peakMass)} · Tekrar doğmak için Başla`;
   startBtn.textContent = 'Tekrar doğ';

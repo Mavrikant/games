@@ -6,6 +6,12 @@
   "controls": "Fare / dokunma ile yönlen · WASD veya ok tuşları · Boşluk veya “Yem at”: geriye kütle fırlat (küçül & hızlan) · ⛶ Tam ekran",
   "howToPlay": "Hücre Savaşı, agar.io tarzı çok oyunculu bir hücre arenasıdır. Mobil öncelikli oynanır: ekrana dokunup parmağını sürükleyerek hücreni yönlendirirsin (fare ve WASD/ok tuşları da çalışır). Arenaya saçılmış küçük yem noktalarını ve senden küçük hücreleri yutarak büyürsün; senden en az ~%18 büyük bir hücreyle çakışırsan yutulur ve yeniden, küçük bir hücre olarak doğarsın. Büyüdükçe yavaşlar, küçüldükçe hızlanırsın; bu yüzden köşeye sıkışmamaya ve büyük rakiplerden kaçmaya dikkat et. Boşluğa basarak (ya da sağ alttaki “Yem at” düğmesiyle) gittiğin yönün tersine, yani geriye bir parça kütle fırlatıp küçülebilir ve hızlanabilirsin — kaçmak için kullanışlıdır. Yeni doğan hücrene birkaç saniyelik dokunulmazlık (kesikli halka) verilir, böylece hemen yem olmazsın. Mobilde Başla'ya dokununca oyun otomatik tam ekran açılır; masaüstünde sağ üstteki ⛶ düğmesiyle tam ekrana geçebilirsin. Oyun, site için bir Supabase Realtime projesi yapılandırıldıysa gerçek oyuncularla aynı odada (çevrimiçi) oynanır; aksi halde yapay zekâlı hücrelerle çevrimdışı oynarsın. Ekranın dışındaki gerçek oyuncular kenarda isimli birer göstergeyle işaretlenir; sağ üstteki tablo o anki en büyük beş hücreyi gösterir. Not: konum ve kütleler istemciden yayınlandığı için bu bir 'topluluk' modudur, doğrulanmış bir sıralama değil.",
   "thumbnail": "erime-arena.svg",
+  "scoring": {
+    "storageKey": "erime-arena.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Cell War",
     "description": "Multiplayer cell arena: swallow pellets and smaller cells to grow, and flee from anyone bigger than you.",

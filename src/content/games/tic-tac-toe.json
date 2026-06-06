@@ -6,6 +6,12 @@
   "controls": "Hücreye tıkla · R: yeniden başla",
   "howToPlay": "Amacın 3x3 tahtada bilgisayardan önce üç işaretini bir hizaya getirmek. Sen her zaman X ile başlarsın: boş bir kareye tıklayarak işaretini koyarsın, ardından bilgisayar kısa bir düşünme süresinin sonunda O işaretini yerleştirir ve sıra tekrar sana döner. Üç X'i yatay, dikey veya çapraz olarak aynı çizgide topladığında kazanırsın; bilgisayar aynısını O ile başarırsa kaybedersin. Dokuz kare de dolar ve kimse üçü hizalayamazsa el berabere biter; skor tablosu galibiyet, beraberlik ve mağlubiyetlerini saklar. Yeni bir el için sağ üstteki düğmeye basabilir ya da R tuşuna dokunabilirsin. İpucu: ilk hamlede mümkünse merkez kareyi (4. kare) ele geçir, çünkü dört kazanma çizgisi buradan geçer; ayrıca her hamleden önce rakibin bir sonraki turda üçü tamamlayıp tamamlayamayacağına bak ve gerekirse o çizgiyi bloklamayı önceliklendir.",
   "thumbnail": "tic-tac-toe.svg",
+  "scoring": {
+    "storageKey": "tic-tac-toe.lb",
+    "label": "Galibiyet",
+    "direction": "higher",
+    "labelEn": "Wins"
+  },
   "en": {
     "title": "Tic-Tac-Toe",
     "description": "Classic 3×3 tic-tac-toe — play against the computer, online and free.",

@@ -8,6 +8,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 interface Tile {
   a: number;
@@ -25,6 +26,8 @@ type GameState = 'playerTurn' | 'aiTurn' | 'gameOver';
 
 const KEY_WINS = 'domino.wins';
 const KEY_LOSSES = 'domino.losses';
+// Leaderboard: cumulative wins (a "most wins" board).
+const SCORE_DESC = { gameId: 'domino', storageKey: KEY_WINS, direction: 'higher' as const };
 
 let winsEl!: HTMLElement;
 let lossesEl!: HTMLElement;
@@ -403,6 +406,7 @@ function pipSum(hand: Tile[]): number {
 
 function endGame(winner: 'player' | 'ai' | null): void {
   state = 'gameOver';
+  const winsBefore = wins;
   if (winner === 'player') {
     wins += 1;
     setStatus(`Kazandın! Tüm taşlarını oynadın.`);
@@ -426,6 +430,7 @@ function endGame(winner: 'player' | 'ai' | null): void {
   safeWrite(KEY_WINS, wins);
   safeWrite(KEY_LOSSES, losses);
   syncAll();
+  if (wins > winsBefore) reportGameOver(SCORE_DESC, wins, { label: 'Galibiyet' });
 }
 
 function init(): void {
