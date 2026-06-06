@@ -6,6 +6,12 @@
   "controls": "Boşluk / Enter veya tıkla: aktif pimi sabitle · R: yeniden başla",
   "howToPlay": "Sen bir çilingirsin; her kilitte birden fazla pim var ve hepsini soldan sağa teker teker oturtman gerekiyor. Aktif pimin üzerinde parlak bir gösterge yukarı-aşağı süzülür; pimin ortasındaki yeşil emniyet bölgesi ise sabittir. Gösterge tam yeşil bölgenin içindeyken Boşluk veya Enter'a bas (ya da alana dokun/tıkla) — pim oturur ve sıradaki pime geçersin. Bütün pimleri oturtunca kilit açılır, skorun bir artar ve bir sonraki kilit gelir: daha çok pim, daha hızlı gösterge ve daha dar emniyet bölgesi. Gösterge bölgenin dışındayken sabitlersen bir maymuncuk kırılır; üç maymuncuğun da kırılınca tur biter. Açtığın en yüksek kilit sayısı tarayıcında rekor olarak saklanır. İpucu: göstergenin yön değiştirdiği uç noktalarda (en üst ve en alt) bir an yavaşladığını unutma, ama emniyet bölgesi ortadadır; acele edip kenarda basmak yerine göstergenin bölgeye girmesini sakince bekle. Dar bölgelerde, göstergeyi bölgenin tam ortasına denk getirmeye çalış ki hız arttıkça tepki payın olsun.",
   "thumbnail": "cilingir.svg",
+  "scoring": {
+    "storageKey": "cilingir.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Locksmith",
     "description": "Pick the lock: lock each pin's sliding indicator inside the green zone, crack the lock, and move on to harder ones.",

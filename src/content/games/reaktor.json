@@ -5,6 +5,12 @@
   "tags": ["simülasyon","operatör","strateji"],
   "controls": "Fare: çubukları sürükle • 1-4: çubuk seç • Yukarı/Aşağı: çek/sok • R: yeniden başla",
   "thumbnail": "reaktor.svg",
+  "scoring": {
+    "storageKey": "reaktor.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "howToPlay": "Nükleer reaktör operatörü olarak görevin elektrik şebekesinden gelen değişken güç talebini karşılarken reaktörü güvenli sıcaklık aralığında tutmak — yani gerçek dünyada bir santral operatörünün yaptığı işin sadeleştirilmiş bir simülasyonu. Ekranda 4 kontrol çubuğu var; çubuğu yukarı çektikçe (▲ ok veya fareyle sürükleyerek) çubuğun reaktörden uzaklaştırdığı kısım artar, reaktif madde daha fazla nötrona maruz kalır ve hem güç çıkışı hem sıcaklık yükselir. Çubukları aşağı bastırarak (▼) tersini yaparsın, reaksiyon yavaşlar, güç ve sıcaklık düşer. Üst panelde anlık güç çıkışın MW cinsinden, hedef güç talebi ve sıcaklık göstergesi yer alır; hedef talebi ±25 MW içinde karşılamak ve sıcaklığı 200°–900° arasında tutmaktır. Sıcaklık 900°'yi aşarsa verim düşmeye başlar ve aynı güç için daha çok çubuk çekmen gerekir; 1200°'yi aşarsa MELTDOWN olur ve oyun biter. Skorun kararlı çalıştığın her saniye için 1 puan kazanır, bu yüzden uzun süre stabil kalmak yüksek skor için kritiktir. Strateji: tüm çubukları aynı anda hareket ettirme — 4 çubuğu kademeli aç ve her birini farklı seviyede tut, bu sayede bir çubuğun verimi düştüğünde diğerleri telafi eder. Güç talebi aniden yükseldiğinde tek çubuğu çok çekmek yerine 2-3 çubuğu ortalama biraz daha açmak daha güvenlidir, çünkü ısı her çubuğun çevresinde yerel olarak birikir. 1100°'ye yaklaştığında derhal en yüksek çubuğu yarıya indir; sıcaklığı 600° civarında tutmak verim/güvenlik açısından tatlı noktadır.",
   "en": {
     "title": "Reactor",

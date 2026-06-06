@@ -7,9 +7,11 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 const SIZE = 5;
 const STORAGE_BEST = 'lights-out.best';
+const SCORE_DESC = { gameId: 'lights-out', storageKey: STORAGE_BEST, direction: 'lower' as const };
 const SCRAMBLE_MIN = 8;
 const SCRAMBLE_MAX = 12;
 const WIN_DELAY_MS = 420;
@@ -148,6 +150,7 @@ function showWin(winMoves: number): void {
   }
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Tüm ışıklar kapandı!';
   overlayMsg.textContent = `${winMoves} hamlede çözdün.`;
+  reportGameOver(SCORE_DESC, winMoves, { label: 'Hamle' });
   showOverlayEl(overlay);
   overlayRestart.focus({ preventScroll: true });
 }

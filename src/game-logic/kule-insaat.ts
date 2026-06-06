@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const W = 360;
@@ -29,6 +30,7 @@ let restartBtn!: HTMLButtonElement;
 
 // ─── Storage ──────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'kule-insaat.best';
+const SCORE_DESC = { gameId: 'kule-insaat', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type State = 'ready' | 'playing' | 'gameover';
@@ -249,6 +251,7 @@ function drop(): void {
       safeWrite(STORAGE_KEY, best);
     }
     updateHud();
+    reportGameOver(SCORE_DESC, score, { label: 'Kat' });
     return;
   }
 

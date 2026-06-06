@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay, hideOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // PITFALLS guarded here (see docs/PITFALLS.md):
 // - unguarded-storage: best scores go through safeRead/safeWrite.
@@ -30,6 +31,9 @@ const LEVELS: readonly string[][] = [
 ];
 
 const BEST_KEY = 'ayna-ikizler.best';
+// Global leaderboard tracks the first level only (fixed difficulty so move
+// counts are comparable). Fewer moves is better.
+const SCORE_DESC = { gameId: 'ayna-ikizler-1', storageKey: 'ayna-ikizler.best-1', direction: 'lower' as const };
 
 const DELTA: Record<Dir, Pos> = {
   up: { x: 0, y: -1 },
@@ -173,6 +177,7 @@ function checkWin(): void {
     bestMap[k] = moves;
     safeWrite(BEST_KEY, bestMap);
   }
+  if (lvlIndex === 0) reportGameOver(SCORE_DESC, moves, { label: 'Hamle' });
   renderHud();
 
   const isLast = lvlIndex >= LEVELS.length - 1;

@@ -5,10 +5,12 @@ import {
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
 const STORAGE_BEST = 'ip-cambazi.best';
+const SCORE_DESC = { gameId: 'ip-cambazi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const MAX_TILT = (62 * Math.PI) / 180;
 const GRAVITY_K = 3.0;
 const HOLD_RATE = 4.4;
@@ -133,6 +135,7 @@ function fall(): void {
     safeWrite(STORAGE_BEST, best);
     bestEl.textContent = String(best);
   }
+  reportGameOver(SCORE_DESC, finalScore, { label: 'Mesafe', unit: 'm' });
   draw();
   showOverlay(
     'Düştün!',

@@ -5,6 +5,12 @@
   "tags": ["zamanlama", "strateji", "tek-oyunculu"],
   "controls": "Boşluk / ekrana bas: bloğu bırak · R: yeniden başla",
   "thumbnail": "kule-insaat.svg",
+  "scoring": {
+    "storageKey": "kule-insaat.best",
+    "label": "Kat",
+    "direction": "higher",
+    "labelEn": "Floors"
+  },
   "howToPlay": "Kule İnşaatı, klasik kule yapma oyunlarının zamanlama ağırlıklı bir tarayıcı sürümü; amacın gökyüzüne uzanan en yüksek kuleyi blok blok dikmek. Ekranın üstünde bir blok yatay olarak soldan sağa, sağdan sola sürekli kayar; senin işin doğru anı yakalayıp SPACE tuşuna basmak (mobilde ekrana dokunmak). Bloğu bıraktığında, yeni katın alt kattaki tabanla örtüşen kısmı yerinde kalır, dışına taşan kısım kopar ve aşağı düşer — bu yüzden ne kadar geç tepki verirsen bir sonraki kat o kadar daralır. Her başarılı kat sonrası blok daha hızlı kayar, yani üst katlara çıktıkça reflexin sınanır; ufak bir gecikme yumuşak bir hizalama yerine keskin bir kayma demektir. Blok genişliği belirli bir eşiğin altına düştüğünde bina çöker ve oyun biter. Skorun inşa ettiğin kat sayısıdır; en yüksek skorun tarayıcında saklanır, sayfayı kapatsan da gelecek seansta görünür. Strateji ipucu olarak blok yön değiştirirken (kenarda) hızı bir an düştüğü için bu mikro durakta basmak en kolayıdır; ayrıca her kat tam ortaya değil, bir önceki katla mükemmel hizalı düşmeli, böylece kule daralmaz. R tuşu veya 'Yeniden başla' düğmesi yeni bir tur açar; pratik yaptıkça ritim oturur ve 30+ kat çıkmak mümkün hale gelir.",
   "en": {
     "title": "Tower Builder",

@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -13,6 +14,7 @@ let overlayTitle!: HTMLElement;
 let overlayMsg!: HTMLElement;
 
 const STORAGE_KEY = 'pong.best';
+const SCORE_DESC = { gameId: 'pong', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // Logical playfield dimensions (matches the canvas attribute width/height).
 // Hard-coded so geometry constants below can resolve at module load.
@@ -127,6 +129,7 @@ function awardPoint(toCpu: boolean): void {
   if (playerScore >= WIN_SCORE || cpuScore >= WIN_SCORE) {
     gameOver = true;
     const won = playerScore >= WIN_SCORE;
+    reportGameOver(SCORE_DESC, playerScore);
     showOverlay(
       won ? 'Kazandın!' : 'CPU kazandı',
       `${playerScore} - ${cpuScore} · R ile yeniden başla`,

@@ -6,6 +6,12 @@
   "controls": "Tıkla: parsel ile etkileş (dik/sula/topla) · R: yeniden başla",
   "howToPlay": "Bahçevan, Türkçe oynayabileceğin özgün bir bahçe yönetim oyunu; küçük ama yoğun bir tarayıcı simülasyonu olarak altı parselli bir bahçeyi tek tıkla yönetiyorsun. Amacın bitkileri tam zamanında sulayıp olgunlaştırmak ve mümkün olduğunca yüksek skor toplamak — ama her bitkinin görünen susama barı sürekli düşer, beş kuruyan bitkiden sonra bahçe sona erer. Boş bir parsele tıkladığında tohum dikilir; ardından parselin altındaki turuncu susama çubuğu zamanla iner. Bar düşerken parsele tekrar dokunup suluyorsun: ilk sulamadan sonra filiz büyür, ikinci sulamadan sonra bitki olgunlaşır ve üzerine meyve simgesi gelir. Meyveli parsele dokununca topladığın türe göre puan kazanırsın — yabani ot için 5, elma için 15, ender beliren altın çiçek için 50 puan; toplama anında parsel yeniden boş olur ve döngü baştan başlar. Strateji ipucu: susama hızı her parselde farklı, bu yüzden bardaki düşüş hızını gözle ve en hızlı kuruyana öncelik ver; ayrıca aynı anda altı parseli birden açmak yerine üçer üçer kademeli ek, böylece sulama turlarını çakıştırmadan döndürebilirsin. Mantık ve sabır birleştiği için çocuklara mantık oyunu, yetişkinlere kısa mola simülasyonu olarak da uygun. R tuşu veya 'Yeniden başla' düğmesi yeni bir bahçe açar.",
   "thumbnail": "bahcevan.svg",
+  "scoring": {
+    "storageKey": "bahcevan.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Gardener",
     "description": "Plant seeds in 6 plots, water them, harvest the fruit — don't let the thirsty ones dry out.",

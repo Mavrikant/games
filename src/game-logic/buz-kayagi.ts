@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Buz Kayağı — kayan buz bulmacası.
 //
@@ -64,6 +65,9 @@ const LEVELS: string[] = [
 
 const STORAGE_LEVEL = 'buz-kayagi.level';
 const STORAGE_BEST_PREFIX = 'buz-kayagi.best.';
+// Global leaderboard tracks the first level only (fixed difficulty so move
+// counts are comparable). Fewer moves is better.
+const SCORE_DESC = { gameId: 'buz-kayagi-1', storageKey: 'buz-kayagi.best.0', direction: 'lower' as const };
 
 const CANVAS_W = 480;
 const CANVAS_H = 480;
@@ -310,6 +314,7 @@ function handleLevelClear(): void {
   if (prevBest === 0 || moves < prevBest) {
     safeWrite(bestKey(levelIdx), moves);
   }
+  if (levelIdx === 0) reportGameOver(SCORE_DESC, moves, { label: 'Hamle' });
   if (levelIdx + 1 >= LEVELS.length) {
     state = 'gameComplete';
     showOverlay('Tüm seviyeler bitti!', `Son seviye ${moves} hamlede tamam. Baştan oynamak için Sonraki.`);

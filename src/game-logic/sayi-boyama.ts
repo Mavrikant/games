@@ -13,8 +13,12 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay, hideOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 const SIZES = [5, 10] as const;
+// Global leaderboard tracks the 10×10 board only — one fixed size so times are
+// comparable. Lower time (seconds) is better.
+const SCORE_DESC = { gameId: 'sayi-boyama-10', storageKey: 'sayi-boyama.best.10', direction: 'lower' as const };
 const FILL_DENSITY = 0.55;
 
 type CellState = 0 | 1 | 2; // 0 empty, 1 filled, 2 crossed
@@ -288,6 +292,7 @@ function win(): void {
     safeWrite(bestKey(), best);
     renderBest();
   }
+  if (size === 10) reportGameOver(SCORE_DESC, elapsed, { label: 'Süre', unit: 'sn' });
   overlayTitle.textContent = isRecord ? 'Yeni rekor!' : 'Tamamlandı!';
   overlayMsg.textContent = `${size}×${size} bulmacayı ${formatTime(elapsed)} sürede çözdün.`;
   showOverlay(overlay);

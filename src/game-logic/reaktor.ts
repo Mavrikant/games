@@ -4,6 +4,7 @@ import {
   showOverlay as showOverlayEl,
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Reaktör — nükleer reaktör operatörü simülasyonu
 // PITFALLS guarded:
@@ -16,6 +17,7 @@ import {
 //   - unreachable-start-state: Başla butonu + Space/Enter + R aynı geçişi tetikler.
 
 const STORAGE_BEST = 'reaktor.best';
+const SCORE_DESC = { gameId: 'reaktor', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const ROD_COUNT = 4;
 const AMBIENT_T = 25;
@@ -240,6 +242,7 @@ function gameOver(): void {
     best = score;
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   overlayTitle.textContent = '💥 MELTDOWN!';
   overlayMsg.textContent = `Sıcaklık ${MELTDOWN_T}° eşiğini aştı.\nSkor: ${score}   Rekor: ${best}`;
   startBtn.textContent = 'Yeniden başla';

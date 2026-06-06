@@ -6,6 +6,7 @@
   "controls": "Tıkla: satırı şüpheli işaretle · Sonraki: turu bitir · R: yeniden başla",
   "howToPlay": "Amacın bir vergi müfettişi gibi fatura tablolarındaki anomalileri tespit etmek. Her turda 8 satırlık bir tablo açılır ve genelde 3 ile 5 satırda bir hile gizlidir: tutar + KDV toplamı tutmuyor olabilir, tarih gelecekte olabilir, aynı fatura numarası iki satırda birden geçiyor olabilir, tutar diğerlerine göre anormal yüksek olabilir ya da KDV oranı standart %18 yerine garip bir orana çekilmiş olabilir. Şüphelendiğin satıra fareyle tıklayarak işaretle; doğru tespit taban puan artı hızlı oynayışta zaman bonusu kazandırır, temiz bir satırı yanlışlıkla işaretlersen ceza puanı alır ve hata sayacın artar. 3 hataya ulaşırsan müfettişlikten alınır ve oyun biter; turu erken bitirmek için Sonraki tur, baştan başlamak için R tuşunu kullan. İpucu: önce her satırda tutar + KDV = toplam kontrolünü hızlıca yap, sonra tarihlere ve fatura numarası tekrarına göz at; emin değilsen işaretleme, kaçırılan anomali sadece bonus kaybettirir ama yanlış işaret seni koltuğundan eder.",
   "thumbnail": "vergi-denetcisi.svg",
+  "scoring": { "storageKey": "vergi-denetcisi.best", "label": "Skor", "direction": "higher", "labelEn": "Score" },
   "en": {
     "title": "Tax Auditor",
     "description": "Spot the anomalies in the invoices — does the total not add up, is the date odd, is it a duplicate.",

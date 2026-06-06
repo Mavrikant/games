@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Sokoban — kutuları hedef noktalarına itme bulmacası.
 //
@@ -139,6 +140,9 @@ const LEVELS: string[] = [
 
 const STORAGE_BEST = 'sokoban.best';
 const STORAGE_LEVEL = 'sokoban.level';
+// Leaderboard tracks the highest level reached (sokoban.best stores the highest
+// completed level number; higher is better).
+const SCORE_DESC = { gameId: 'sokoban', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const CANVAS_W = 480;
 const CANVAS_H = 480;
@@ -397,6 +401,7 @@ function handleLevelClear(): void {
     safeWriteNumber(STORAGE_BEST, best);
     bestEl.textContent = String(best);
   }
+  reportGameOver(SCORE_DESC, completedLevelNumber, { label: 'Seviye' });
   if (currentLevelIdx + 1 >= LEVELS.length) {
     state = 'gameComplete';
     showOverlay(

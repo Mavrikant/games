@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Rezonans — additive-synthesis tuning puzzle. A hidden target waveform is the
 // sum of K sine harmonics with integer amplitudes; the player rebuilds it by
@@ -8,6 +9,9 @@ import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@sha
 // No timers / no physics → no stale-async or visual-vs-hitbox class bugs.
 
 const STORAGE_BEST = 'rezonans.best';
+// Leaderboard tracks the highest level solved (rezonans.best stores the highest
+// reached level; higher is better).
+const SCORE_DESC = { gameId: 'rezonans', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const W = 480;
 const H = 240;
 const SAMPLES = 240;
@@ -211,6 +215,7 @@ function solve(): void {
     bestEl.textContent = String(best);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
   overlayTitle.textContent = 'Rezonans! ✓';
   overlayMsg.textContent = `Seviye ${level} · ${moves} hamle\nSonraki seviye için Enter'a bas.`;
   showOverlayEl(overlay);

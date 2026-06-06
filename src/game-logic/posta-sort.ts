@@ -21,6 +21,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -66,6 +67,7 @@ const MAX_STRIKES = 3;
 const SWAP_EVERY = 8; // remap two bays every N correct sorts
 
 const STORAGE_KEY = 'posta-sort.best';
+const SCORE_DESC = { gameId: 'posta-sort', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // 5 Turkish cities — short labels (3-letter codes).
 const CITIES = ['IST', 'ANK', 'IZM', 'BUR', 'ADA'] as const;
@@ -555,6 +557,7 @@ function endGame(): void {
     rafId = null;
   }
   draw();
+  reportGameOver(SCORE_DESC, score);
   showOverlay(
     'Posta kapandı',
     `Skor: ${score}<br />En iyi: ${best}<br /><small>Boşluk / 1-5 / tıkla → yeni gün</small>`,

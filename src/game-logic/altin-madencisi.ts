@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Altın Madencisi — claw/grapple oyunu.
 // PITFALLS notları:
@@ -23,6 +24,7 @@ const MIN_LEN = 22; // çengelin dinlenme uzunluğu
 const CLAW_R = 9;
 const LEVEL_TIME = 60; // saniye
 const STORAGE_BEST = 'altin-madencisi.bestLevel';
+const SCORE_DESC = { gameId: 'altin-madencisi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 type Kind = 'goldS' | 'goldM' | 'goldL' | 'diamond' | 'rock' | 'bag';
 type State = 'ready' | 'playing' | 'levelclear' | 'gameover';
@@ -245,6 +247,7 @@ function finishLevelOrGameOver(): void {
   } else {
     state = 'gameover';
     commitBest();
+    reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
     showOverlay(
       'Süre doldu!',
       `Seviye ${level} hedefine ulaşamadın.\nPara: ${money} / ${goal}\nEn iyi seviye: ${best}`,

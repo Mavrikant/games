@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
+import { reportGameOver } from '@shared/leaderboard';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const W = 400;
@@ -14,6 +15,7 @@ const BASE_SCORE = 500;
 const PROBE_COST = 60;
 const MIN_ROUND_SCORE = 50;
 const STORAGE_KEY = 'hazine-avi.best';
+const SCORE_DESC = { gameId: 'hazine-avi', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type State = 'ready' | 'playing' | 'roundEnd' | 'gameover';
@@ -215,6 +217,7 @@ function nextRound(): void {
       best = totalScore;
       safeWrite(STORAGE_KEY, best);
     }
+    reportGameOver(SCORE_DESC, totalScore);
     draw();
   } else {
     round++;

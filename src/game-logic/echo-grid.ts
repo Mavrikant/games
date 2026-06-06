@@ -1,11 +1,13 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'showing' | 'input' | 'gameover';
 type Feedback = 'correct' | 'wrong' | null;
 
 const STORAGE_KEY = 'echo-grid.best';
+const SCORE_DESC = { gameId: 'echo-grid', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let cellEls: HTMLButtonElement[] = [];
 let scoreEl!: HTMLElement;
@@ -179,6 +181,7 @@ function loseRound(): void {
     score === 0
       ? 'İlk turda hata yaptın. Başlat ile yeniden dene.'
       : `${score} tur tamamladın. Başlat ile yeniden dene.`;
+  reportGameOver(SCORE_DESC, score);
   render();
 }
 

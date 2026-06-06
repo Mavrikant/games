@@ -6,6 +6,14 @@
   "controls": "Sol tık: aç · Sağ tık / uzun bas: bayrak · Çift tık: chord · R: yeniden başla",
   "howToPlay": "Amacın, tahtadaki tüm mayınsız hücreleri açarak tarlayı temizlemek; bunu yaparken hiçbir mayına basmamak. Sol tıkla hücre açarsın, sağ tıkla (mobilde uzun basışla) mayın olduğundan şüphelendiğin kareye bayrak koyarsın; açılan bir sayı hücresine çift tıklayınca, etrafındaki bayrak sayısı sayıya eşitse kalan komşuları tek hamlede otomatik açabilirsin (chord). Açılan her sayı, o hücreyi çevreleyen sekiz komşudaki toplam mayın adedini gösterir; boş hücreler ise zincirleme açılır ve sana geniş güvenli alanlar kazandırır. İlk tık asla mayına denk gelmez, ama tek bir yanlış açılış oyunu anında bitirir; bütün güvenli karelere ulaştığında kazanırsın. İpucu: önce sayıların kenarlarındaki bariz mayınları bayrakla işaretle, sonra chord ile hızlıca ilerle; emin değilsen tahmin etmek yerine başka bir köşeden devam et. R tuşu yeniden başlatır.",
   "thumbnail": "minesweeper.svg",
+  "scoring": {
+    "id": "minesweeper-easy",
+    "storageKey": "minesweeper.best.easy",
+    "label": "Süre (kolay)",
+    "unit": "sn",
+    "direction": "lower",
+    "labelEn": "Time (easy)"
+  },
   "en": {
     "title": "Minesweeper",
     "description": "Uncover safe cells without stepping on a mine — the number hints show the way.",

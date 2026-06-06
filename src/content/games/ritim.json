@@ -5,6 +5,12 @@
   "tags": ["ritim", "zamanlama", "tek-oyunculu"],
   "controls": "Boşluk / ekrana bas: darbeyi yakala · R: yeniden başla",
   "thumbnail": "ritim.svg",
+  "scoring": {
+    "storageKey": "ritim.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "howToPlay": "Ritim, ekranın ortasından dışa doğru genişleyen halka ile zamanlama becerini sınayan, klavye veya dokunmatik ile oynanan minimalist bir ritim oyunu. Her tur ortadan büyümeye başlayan parlak altın bir halka sabit duran beyaz bir hedef çemberine doğru ilerler; iki halka tam çakıştığı an doğru vuruş anıdır. Hedefe değdiği saniyede SPACE tuşuna basman (mobilde ekranın herhangi bir yerine dokunman) gerekir. Vuruşun hassasiyetine göre puan değişir: hedef çizgisine ±10 piksel mesafedeysen PERFECT (+3 puan, ekranda yeşil parıltı), ±26 piksel içindeysen GOOD (+1 puan, sarımsı flaş), bu pencereyi kaçırırsan MISS sayılır ve hayat barından bir kayıp alırsın. Üst üste 3 MISS oyunu bitirir; tersine 30 başarılı vuruşu tamamlayınca turu kazanır ve nihai skorla birlikte yüksek skor listesine yazılırsın. Her 8 başarılı vuruşta halkanın genişleme hızı biraz artarak tempo yükselir, böylece sonlara doğru reflexin gerçekten sınanır; ayrıca üst üste isabet ettikçe biriken kombo, puan çarpanını da yukarı çeker ve PERFECT serisi ile büyük sıçramalar yakalanır. Strateji ipucu: gözünü genişleyen halkanın kenarına değil, hedef çemberin kalın beyaz çizgisine sabitle; merkeze odaklanan oyuncular geç tepki verir, sınıra odaklananlar PERFECT yakalar.",
   "en": {
     "title": "Rhythm",

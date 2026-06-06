@@ -5,10 +5,12 @@ import {
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
 const STORAGE_BEST = 'kar-tanesi.best';
+const SCORE_DESC = { gameId: 'kar-tanesi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const W = 480;
 const H = 480;
@@ -185,6 +187,7 @@ function endGame(): void {
     setBest(score);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   setOverlay(
     'Süre bitti',
     `Çözüm: ${score} · Rekor: ${best}\nTekrar denemek için tıkla ya da Boşluk'a bas.`,

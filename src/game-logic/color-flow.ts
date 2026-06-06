@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 /* Color Flow — Flow Free style puzzle: drag from each endpoint to its twin,
    fill every cell, paths never cross. Generation uses random self-avoiding
@@ -55,6 +56,9 @@ const COLOR_PALETTE = [
 
 const STORAGE_LEVEL = 'color-flow.level';
 const STORAGE_BEST_PREFIX = 'color-flow.bestMoves.';
+// Global leaderboard tracks the first level only (fixed difficulty so move
+// counts are comparable). Fewer moves is better.
+const SCORE_DESC = { gameId: 'color-flow-1', storageKey: 'color-flow.bestMoves.0', direction: 'lower' as const };
 
 let boardEl!: HTMLCanvasElement;
 let levelEl!: HTMLElement;
@@ -662,6 +666,7 @@ function win(): void {
     saveBest(levelIndex, moves);
     isBest = true;
   }
+  if (levelIndex === 0) reportGameOver(SCORE_DESC, moves, { label: 'Hamle' });
   renderBest();
   overlayTitle.textContent = isBest ? 'Yeni rekor!' : 'Seviye tamam!';
   overlayMsg.textContent = isBest

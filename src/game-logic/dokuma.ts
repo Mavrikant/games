@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Dokuma — weave the shown pattern by choosing UP/DOWN as the shuttle crosses each warp.
 // Mechanic: shuttle moves left-to-right (and snake-style back) across COLS warp threads.
@@ -28,6 +29,7 @@ const LIVE_BOTTOM = LIVE_TOP + PATTERN_ROWS * LIVE_ROW_H;
 const CELL_W = (CANVAS_W - PAD_X * 2) / COLS;
 
 const STORAGE_BEST = 'dokuma.best';
+const SCORE_DESC = { gameId: 'dokuma', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const STARTING_LIVES = 3;
 
 // Cell choice: '∅' = empty, 'U' = over (üst), 'D' = under (alt), 'X' = wrong
@@ -456,6 +458,7 @@ function enterTileClear(): void {
 
 function doGameOver(): void {
   state = 'gameover';
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Mekik durdu', `Skor: ${score} · Boşluk veya butonla tekrar başla`);
 }
 

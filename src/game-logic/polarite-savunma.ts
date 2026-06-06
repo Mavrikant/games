@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay, hideOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Polarite Savunması — a tower-defense with a polarity twist.
 // Enemies come in two poles (red ● / blue ◆). Towers fire ONLY at enemies of
@@ -24,6 +25,7 @@ import { showOverlay, hideOverlay } from '@shared/overlay';
 //   can end the run; surviving all waves wins.
 
 const STORAGE_BEST = 'polarite-savunma.best';
+const SCORE_DESC = { gameId: 'polarite-savunma', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const W = 480;
 const H = 480;
@@ -635,6 +637,7 @@ function endGame(won: boolean): void {
   gen.bump();
   cancelAnimationFrame(rafId);
   draw();
+  reportGameOver(SCORE_DESC, best, { label: 'Dalga' });
   if (won) {
     overlayTitle.textContent = 'Çekirdek Güvende!';
     overlayMsg.textContent =

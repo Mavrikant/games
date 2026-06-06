@@ -6,6 +6,12 @@
   "controls": "1-5: kata git · ↑/↓: bir kat · Tıkla/dokun: kat seç · Boşluk: başla · R: yeniden başla",
   "howToPlay": "Beş katlı bir binanın asansör operatörüsün; amacın yolcuları başladıkları kattan üzerlerinde yazan hedef kata ulaştırmak. Hangi kata gitmek istiyorsan o kata tıkla ya da dokun; klavyede 1-5 tuşlarıyla doğrudan kat seçebilir, ↑/↓ ile tek kat hareket edebilirsin. Boşluk veya Enter oyunu başlatır, R yeniden başlatır. Asansör hedefe vardığında kapı açılır: o kattaki bekleyenler sıra ile biner (kabin kapasitesi 3) ve hedefi mevcut kat olan yolcular iner — her inen yolcu +1 skor getirir. Her yolcunun başının üstünde bir sabır çubuğu vardır; çubuk dolu yeşil, azaldıkça sarı ve kırmızıya döner. Beklerken sabır hızla, kabindeyken iki kat yavaş tüker; bir yolcunun çubuğu biterse oyun biter. Skor arttıkça yolcular daha sık gelir ve sabırları kısalır. İpucu: yakın katları gruplayıp tek seferde birden çok yolcu al, en kırmızı sabır çubuğuna sahip yolcuya öncelik ver; kabini sürekli aynı yönde sürerek gereksiz dönüşlerden kaçın.",
   "thumbnail": "lift.svg",
+  "scoring": {
+    "storageKey": "lift.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Elevator",
     "description": "Steer the elevator to the right floor — deliver passengers before they lose patience.",

@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay, hideOverlay } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Typing-defense: Turkish words fall toward the city; type a word to lock
 // onto it and finish typing it to destroy it before it lands.
@@ -17,6 +18,7 @@ import { showOverlay, hideOverlay } from '@shared/overlay';
 // - stale-async-callback: a single rAF loop guarded by `state`; no setTimeout.
 
 const STORAGE_BEST = 'kelime-savunmasi.best';
+const SCORE_DESC = { gameId: 'kelime-savunmasi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const WORDS = [
   'kale', 'kalkan', 'ışık', 'rüzgar', 'deniz', 'orman', 'yıldız', 'gezegen',
@@ -186,6 +188,7 @@ function showReady(): void {
 function gameOver(): void {
   state = 'gameover';
   commitBest();
+  reportGameOver(SCORE_DESC, score);
   target = null;
   overlayTitle.textContent = 'Şehir düştü';
   overlayMsg.innerHTML = `Skor: <b>${score}</b> &nbsp;·&nbsp; Rekor: <b>${best}</b><br />Tekrar denemek için Enter.`;

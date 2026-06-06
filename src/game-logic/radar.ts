@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -41,6 +42,7 @@ const NOISE_LIFETIME = 0.7;
 const MISS_PENALTY = 1;
 const NOISE_PENALTY = 2;
 const STORAGE_BEST = 'radar.best';
+const SCORE_DESC = { gameId: 'radar', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 let canvas!: HTMLCanvasElement;
 let ctx!: CanvasRenderingContext2D;
@@ -166,6 +168,7 @@ function endGame(): void {
     setBest(score);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   setOverlay(
     'Tarama bitti',
     `Skor: ${score} · Rekor: ${best}\nYeniden başlamak için tıkla veya R.`,

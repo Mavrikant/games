@@ -6,6 +6,13 @@
   "controls": "Slot tıkla: renk seç · Kontrol Et: tahmin gönder · R: yeniden başla",
   "howToPlay": "Amacın bilgisayarın gizlediği 4 pegli renk kodunu en az denemede çözmek. Kolay modda 6, Zor modda 8 renk vardır ve aynı renk kodda birden fazla kez geçebilir. Aktif satırdaki bir slota tıklayınca açılan paletten renk seç; yanlış koyduğun pegi tekrar tıklayıp değiştirebilir, × ile temizleyebilirsin. Dört slotu da doldurunca \"Kontrol Et\" (veya Enter) ile tahmini gönder. Geri bildirim sağda iki tür peg olarak gelir: dolu siyah peg = doğru renk + doğru pozisyon, içi boş beyaz peg = doğru renk ama yanlış pozisyon; ipuçlarının sırası slotlarla eşleşmez, sadece sayıları önemlidir. 10 denemede tüm pegler siyah olursa kazanırsın, hak biterse gizli kod açığa çıkar. İpucu: ilk iki tahmini farklı renk gruplarıyla yaparak hangi renklerin kodda olduğunu daralt; sonra renkleri sabit tutup yerlerini değiştirerek pozisyonları sabitle. R tuşu yeni oyun başlatır.",
   "thumbnail": "mastermind.svg",
+  "scoring": {
+    "id": "mastermind-easy",
+    "storageKey": "mastermind.best",
+    "label": "Deneme (kolay)",
+    "direction": "lower",
+    "labelEn": "Tries (easy)"
+  },
   "en": {
     "title": "Mastermind",
     "description": "Crack the secret colour code — the feedback pegs guide every guess.",

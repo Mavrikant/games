@@ -5,6 +5,12 @@
   "tags": ["puzzle", "klasik", "mantık"],
   "controls": "Ok tuşları / WASD: hareket · Z: geri al · R: level reset · N: sonraki level",
   "thumbnail": "sokoban.svg",
+  "scoring": {
+    "storageKey": "sokoban.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
   "howToPlay": "Amacın, sahadaki turuncu kutuların tamamını mor halkalarla işaretlenmiş hedef noktalarına itmek; kutu hedefe oturunca yeşile döner ve tüm kutular yerleştiğinde seviye tamamlanır. Karakterini ok tuşları veya WASD ile dört yönde hareket ettirirsin; mobilde alttaki yön düğmelerini kullanabilirsin. Kutuya doğru yürüdüğünde onu önündeki boş kareye itersin, ama Sokoban'da kutu çekmek yoktur: arkanı dönüp çekemez, aynı anda iki kutuyu üst üste itemez ve duvarın ya da başka bir kutunun olduğu kareye kutu süremezsin. Yanlış bir hamle yaparsan Z (Geri al) ile son hareketini iptal et, çıkmaza girersen R ile seviyeyi baştan başlat; N tuşu seviyeyi bitirdikten sonra bir sonrakine geçer. İpuçları: bir kutuyu duvara dayalı köşeye iterek sıkıştırmamaya çok dikkat et, çünkü oradan asla çıkaramazsın; ayrıca birden fazla kutu varken hangi kutuyu hangi hedefe göndereceğini önceden planla, çünkü yanlış sırayla itilen kutular birbirinin yolunu kapatabilir.",
   "en": {
     "title": "Sokoban",

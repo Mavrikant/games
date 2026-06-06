@@ -13,6 +13,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'playing' | 'gameover';
 
@@ -41,6 +42,7 @@ const LETTERS_PER_LEVEL = 8;
 const SPAWN_INTERVAL_FRAMES = 55; // base frames between spawns
 const SPAWN_INTERVAL_MIN = 18; // minimum frames (max difficulty)
 const STORAGE_KEY = 'key-fall.best';
+const SCORE_DESC = { gameId: 'key-fall', storageKey: STORAGE_KEY, direction: 'higher' as const };
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const HIT_FLASH_EXPANSION = 0.8; // ring expansion factor during hit animation
 
@@ -360,6 +362,7 @@ function endGame(): void {
     cancelAnimationFrame(rafId);
     rafId = null;
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Bitti!', `Skor: ${score}<br><small>Boşluk veya R ile yeniden başla</small>`);
 }
 

@@ -4,6 +4,7 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 // Oyuncunun 10 denemesi var. Her tahmin sonrası geri bildirim:
 //   - black peg: doğru renk + doğru pozisyon (code[i] === guess[i])
 //   - white peg: doğru renk, yanlış pozisyon (Knuth: çoklu küme kesişimi - black)
@@ -45,6 +46,9 @@ type Difficulty = 'easy' | 'hard';
 const STORAGE_WINS = 'mastermind.wins';
 const STORAGE_BEST = 'mastermind.best';
 const STORAGE_DIFF = 'mastermind.difficulty';
+// Global leaderboard tracks the "easy" board only — one fixed difficulty so
+// attempt counts are comparable. Fewer attempts is better.
+const SCORE_DESC = { gameId: 'mastermind-easy', storageKey: STORAGE_BEST, direction: 'lower' as const };
 
 // State machine — input handler her transition'da bu enum'a bakar.
 type GameState = 'playing' | 'won' | 'lost';
@@ -409,6 +413,7 @@ function submitGuess(): void {
     currentRow++;
     currentRowPegs = new Array(PEGS).fill(null);
     renderAll();
+    if (difficulty === 'easy') reportGameOver(SCORE_DESC, attemptsUsed, { label: 'Deneme' });
     showWin(attemptsUsed);
     return;
   }

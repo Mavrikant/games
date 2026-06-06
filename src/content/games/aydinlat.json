@@ -5,6 +5,12 @@
   "tags": ["bulmaca", "mantık", "özgün"],
   "controls": "Tıkla/dokun: hücreyi döngüle (boş → lamba → işaret → boş) · Sağ tık veya Shift+tıkla: ters yöne döngüle · R: bölümü sıfırla · N: bir sonraki bölüm",
   "thumbnail": "aydinlat.svg",
+  "scoring": {
+    "storageKey": "aydinlat.cleared",
+    "label": "Bölüm",
+    "direction": "higher",
+    "labelEn": "Levels cleared"
+  },
   "howToPlay": "Aydınlat, koyu hücrelerin (duvarların) böldüğü bir ızgarada lambalar yerleştirerek tüm beyaz hücreleri aydınlatma bulmacasıdır. Her lamba kendi satır ve sütununda bir duvara çarpana kadar ışık yayar; bir hücreye lamba bırakmak için üzerine tıkla (ya da dokun) — tekrar tıklarsan o hücre bir 'işaret' (×) olur (bu sadece kendi notun, ışığı etkilemez), üçüncü tık hücreyi tamamen temizler. Sağ tık veya Shift+tıkla ters yönde döngüler. Üç kural aynı anda sağlanmalı: (1) her beyaz hücre en az bir lamba tarafından aydınlanmalı, (2) hiçbir iki lamba aynı satır/sütunda birbirini görmemeli (aralarında duvar olmalı), (3) sayılı duvarlara komşu olan dik yönlerdeki lamba sayısı tam o sayıya eşit olmalı — örneğin 2 yazan duvarın çevresinde tam 2 lamba olmalı, 0 yazan duvar hiç lamba istemez. Çakışan lambalar kırmızı çerçeveyle, ihlal edilmiş sayılı duvarlar kırmızı sayıyla işaretlenir. R bölümü sıfırlar, N bir sonraki bölüme atlar. Bölümler gittikçe daha karmaşık desenlere ulaşır; ilerleyişin tarayıcında saklanır.",
   "en": {
     "title": "Light Up",

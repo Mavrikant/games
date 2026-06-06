@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 
@@ -21,6 +22,7 @@ interface Pin {
 }
 
 const STORAGE_BEST = 'cilingir.best';
+const SCORE_DESC = { gameId: 'cilingir', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const START_PICKS = 3;
 
 // Track geometry in canvas pixels (single source for draw + hit-test).
@@ -165,6 +167,7 @@ function gameOver(): void {
   }
   updateHud();
   draw();
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Yakalandın!', `Açtığın kilit: ${score}\nRekor: ${best}`, 'Tekrar');
 }
 

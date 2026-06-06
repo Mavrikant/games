@@ -6,6 +6,12 @@
   "controls": "Fare: içecek seç · Backspace: son seçimi geri al · R: yeniden başla",
   "howToPlay": "Bir kafede barista olarak çalışıyorsun. Müşteri tezgâha gelir, siparişini birkaç saniye gösterir, ardından sipariş ekrandan silinir ve senin onu ezberden hazırlaman gerekir. Aşağıdaki içecek düğmelerinden müşterinin istediği içecekleri doğru sırayla tıkla — sıra önemlidir, sıra hatası tam yanlış sayılır. Yanlış bir tıklama yaptığında Backspace tuşuyla son seçimini geri alıp düzeltebilirsin; tüm seçimini onaylamak için 'Sipariş Ver' düğmesine bas. Her başarılı siparişte bir sonraki müşterinin isteği bir içecek daha uzar; ilk müşteri 2 içecek, beşinci müşteri 6 içecek isteyebilir. Toplam üç hata hakkın var, üçü dolunca vardiyan biter ve sonuç ekranı gelir; oyun süresince yaptığın doğru sipariş sayısı skorun olur ve en iyi skor tarayıcında saklanır. Bu bir bellek oyunu olduğu için strateji püf noktaları hafıza tekniklerinden gelir: içecekleri renk veya ikon gruplarına ayır (örneğin sıcaklık: kahve-çay-çikolata sıcak; meşrubat-soda-su soğuk), siparişe sesli olarak 'cappuccino-çay-su' diye tekrar et ya da görsel hafıza için her içeceğin konumunu zihnine sabitle. Uzun siparişleri 'üçer-üçer' parçalara böl (örneğin 7 içecek = 3+3+1), bu insan kısa-süreli belleğinin doğal kapasitesidir ve hata oranını ciddi düşürür. İleri seviyede 8+ içecekli siparişler gelir; bu noktada doğrudan ezber yerine içecek gruplarının sırasını hatırlamak daha etkilidir.",
   "thumbnail": "kafe-gorevlisi.svg",
+  "scoring": {
+    "storageKey": "kafe-gorevlisi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Café Server",
     "description": "Memorise each customer's order and prepare it in the right sequence — a barista memory game.",

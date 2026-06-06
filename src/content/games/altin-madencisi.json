@@ -6,6 +6,12 @@
   "controls": "Boşluk / Enter / aşağı ok / tıkla: çengeli fırlat · R: yeniden başla",
   "howToPlay": "Madenci ekranın üstünde durur ve çengeli sarkaç gibi sürekli sağa sola sallanır. Tek görevin doğru anı yakalayıp çengeli toprağın içindeki ganimetin üzerine fırlatmak: Boşluk, Enter, aşağı ok tuşuna bas, ekrana dokun ya da 'Çengeli Fırlat' düğmesini kullan. Çengel düz bir çizgide uzar; bir nesneye değerse onu kavrar ve yukarı çeker, hiçbir şeye değmezse kenara çarpıp boş döner. Önemli ayrıntı: çekme hızı nesnenin ağırlığına bağlıdır — küçük altın ve elmas hızlıca yukarı gelir, büyük altın külçesi ve kaya ise yavaş yavaş sürünür ve değerli saniyelerini yer. Değerler farklıdır: küçük altın 60, orta 130, büyük külçe 320, elmas 650, '$' torbası rastgele (20–600), kaya ise neredeyse değersiz (12) bir tuzaktır. Her seviyede ekranın üstündeki Hedef parayı 60 saniye içinde toplamalısın; ulaşırsan bir sonraki, daha yüksek hedefli seviyeye geçersin, süre hedefe varmadan biterse oyun sona erer ve ulaştığın en yüksek seviye tarayıcında saklanır. Strateji: önce hızlı ve değerli elmas/küçük altınları topla, büyük külçeyi ancak hedefe yetişmek için zaman varsa dene, kayadan uzak dur. Çengel hedefe tam denk gelene kadar bekle — erken fırlatmak boşa gider ve geri dönmesini beklersin.",
   "thumbnail": "altin-madencisi.svg",
+  "scoring": {
+    "storageKey": "altin-madencisi.bestLevel",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
   "en": {
     "title": "Gold Miner",
     "description": "Fling the swinging claw at the right moment to reel in gold, diamonds and money bags, hitting each level's cash goal before time runs out.",

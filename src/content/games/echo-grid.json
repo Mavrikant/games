@@ -6,6 +6,12 @@
   "controls": "Başlat düğmesi / Boşluk / Enter: turu başlat · 1-9 veya tıkla: kare seç · R: sıfırla",
   "howToPlay": "Amaç, 3x3 ızgarada gösterilen kare desenini hatırlayıp aynı kareleri tam tersi sırayla geri çalmak ve diziyi olabildiğince uzatmaktır. Başlat düğmesine, Boşluk veya Enter tuşuna basarak turu başlatırsın; ardından kareler sırayla yanıp söner. Sıra sende olduğunda kareleri fareyle tıklayabilir ya da klavyeden 1-9 rakamlarını (sol üstten sağ alta) kullanabilirsin: ilk girmen gereken, desende en son yanan karedir; sonuncu girmen gereken ise ilk yanan karedir. Tüm diziyi doğru tamamlarsan skorun artar, yeni bir kare eklenir ve tur uzar; tek bir yanlış seçim oyunu bitirir. En yüksek skorun tarayıcında saklanır; R tuşu her şeyi sıfırlar. İpucu: desen oynanırken kareleri zihninde gruplara böl ve sonu öne alarak içinden tekrar et — uzun dizilerde sondan başa doğru \"film geri sarma\" gibi düşünmek hata oranını ciddi şekilde düşürür.",
   "thumbnail": "echo-grid.svg",
+  "scoring": {
+    "storageKey": "echo-grid.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Echo Grid",
     "description": "Watch the pattern, then play the same cells back in reverse order. Each round the sequence grows a little longer.",

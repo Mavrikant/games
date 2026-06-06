@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 
@@ -25,6 +26,7 @@ const SHAFT_W = 90;
 const ELEVATOR_SPEED = 220;
 const CAPACITY = 3;
 const STORAGE_BEST = 'lift.best';
+const SCORE_DESC = { gameId: 'lift', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const COLOR_VARS = [
   '--lift-p1',
@@ -184,6 +186,7 @@ function gameOver(): void {
     bestEl.textContent = String(best);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Sabırlar tükendi', `Skor: ${score} · Tekrar için bir kata dokun veya R`);
 }
 

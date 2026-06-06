@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead as sharedSafeRead, safeWrite as sharedSafeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // ---------------------------------------------------------------------------
 // Bahçevan — bitki büyüme yönetimi
@@ -45,6 +46,7 @@ interface Plot {
 // ── Constants ───────────────────────────────────────────────────────────────
 const PLOT_COUNT = 6;
 const STORAGE_KEY = 'bahcevan.best';
+const SCORE_DESC = { gameId: 'bahcevan', storageKey: STORAGE_KEY, direction: 'higher' as const };
 const STORAGE_DRIED_KEY = 'bahcevan.dried';
 
 // Thirst dynamics
@@ -517,6 +519,7 @@ function endGame(): void {
     cancelAnimationFrame(rafId);
     rafId = 0;
   }
+  reportGameOver(SCORE_DESC, score);
   showOverlay(
     'Bahçe kurudu!',
     `Skor: <strong>${score}</strong> · En iyi: ${best}<br>` +

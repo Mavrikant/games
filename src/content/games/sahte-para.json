@@ -6,6 +6,12 @@
   "controls": "Paraya dokun: sırayla sol kefe → sağ kefe → boşalt · Tart: seçili kefeleri karşılaştır · Suçla: sahte parayı seç · Yeniden başla / R yok, üstteki düğme",
   "howToPlay": "Her turda ekrandaki paralardan tam olarak biri diğerlerinden bir miktar daha ağırdır; gerisi birbiriyle eştir. Amacın, sınırlı sayıda tartım hakkıyla hangi paranın sahte (ağır) olduğunu mantık yürüterek bulmak. Bir paraya dokununca önce sol kefeye (mavi), tekrar dokununca sağ kefeye (turuncu), bir kez daha dokununca kefeden çıkar. İki kefeye eşit sayıda para koyup Tart'a bastığında terazi eğilir: ağır taraf aşağı iner, sahte para o taraftadır; iki kefe dengede kalırsa sahte para hiç koymadığın paralar arasındadır. Her tartım üstteki sayaca işlenir ve geçmiş listesinde saklanır — bu ipuçlarını birleştirerek aralığı daralt. Kararını verince Suçla'ya basıp sahte olduğunu düşündüğün paraya dokun: doğruysa bir sonraki tura geçersin (daha fazla para, ama tartım hakkı her zaman yeter), yanlışsa oyun biter ve geçtiğin tur sayısı skorun olur. İpucu: paraları üçe bölüp iki eşit grubu tartmak (üçlü arama) en verimli yöntemdir — dengede kalırsa sahte üçüncü gruptadır. En yüksek tur rekorun kaydedilir.",
   "thumbnail": "sahte-para.svg",
+  "scoring": {
+    "storageKey": "sahte-para.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Rounds"
+  },
   "en": {
     "title": "Counterfeit Coin",
     "description": "One coin is heavier than the rest — use the balance scale to find the fake in the fewest weighings.",

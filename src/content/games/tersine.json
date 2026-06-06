@@ -5,6 +5,7 @@
   "tags": ["hafıza", "beyin", "tek-oyunculu"],
   "controls": "Pad'e dokun · 1-9 tuşları · Boşluk/Enter: başla · R: yeniden",
   "thumbnail": "tersine.svg",
+  "scoring": { "storageKey": "tersine.best", "label": "Seviye", "direction": "higher", "labelEn": "Level" },
   "howToPlay": "Tersine, hafızanı alışılmadık bir yönde çalıştıran bir dizi-hatırlama oyunudur: 3x3 ızgaradaki padler sırayla yanıp söner, ama senin görevin bu diziyi gördüğün sırayla değil, tam tersinden geri girmektir. Her tur başında padler tek tek parlar; dizi bittiğinde sıra sana geçer ve en son yanan padden başlayarak ilk yanana kadar geriye doğru dokunursun. Doğru tamamlarsan bir sonraki tura geçersin ve diziye yeni bir pad eklenir, böylece her tur bir öncekinden bir adım daha uzun olur. Tek bir yanlış dokunuş oyunu bitirir; o ana kadar tamamladığın tur sayısı skorundur ve en iyi derecen tarayıcında saklanır. Padlere fareyle/dokunarak ya da klavyede 1-9 tuşlarıyla (sol üst köşe 1, sağ alt köşe 9) basabilirsin; Boşluk veya Enter yeni oyunu başlatır, R tuşu her an sıfırlar. İpucu: diziyi izlerken padleri parlama sırasıyla zihninde numaralandır, sonra o numaraları sondan başa doğru oku — ileriye değil, geriye doğru sayan bir ritim tuttur. Dizi uzadıkça padleri konum yerine renkleriyle hatırlamak işini kolaylaştırır.",
   "en": {
     "title": "Reverse",

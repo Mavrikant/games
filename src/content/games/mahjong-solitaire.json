@@ -6,6 +6,13 @@
   "controls": "Tıkla: taş seç · İkinciye tıkla: eşleştir + kaldır · U: geri al · H: ipucu · N: yeni karışım · R: yeni oyun",
   "howToPlay": "Amaç, 4 katmanlı piramit halinde dizilmiş 60 mahjong taşını ikişer ikişer eşleştirerek tamamen temizlemek. Bir taşı kaldırabilmen için onun 'serbest' olması gerekir: üstünde başka bir taş bulunmamalı VE sol ya da sağ kenarlarından en az biri açık olmalı; iki yanı da komşu taşla kapalıysa veya üzerinde bir taş varsa o taş kilitlidir ve sönük görünür. Oyna: serbest bir taşa tıkla, ardından aynı sembole sahip başka bir serbest taşa tıkla — ikisi de tahtadan kalkar ve altta kalanlar açığa çıkar. Aynı taşa tekrar tıklayarak veya Esc ile seçimini iptal edebilirsin. Yardımcılar: H ile ipucu (3 hak; uygun bir çifti vurgular), U ile son eşleştirmeyi geri al, N veya R ile yeni karışım. Tüm taşları kaldırırsan kazanırsın; eşleşebilecek serbest çift kalmazsa kaybedersin (karışımlar çözülebilir üretilir ama yanlış sırayla açtığın yığınlar seni kilitleyebilir). İpucu: önce üst katmanlardaki taşları kaldırıp altta sıkışmış olanları açığa çıkarmaya çalış; aynı sembolden dört kopya varsa hangi ikisini kaldıracağını seçerken diğer çiftin ileride erişilebilir kalacağından emin ol.",
   "thumbnail": "mahjong-solitaire.svg",
+  "scoring": {
+    "storageKey": "mahjong-solitaire.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "lower",
+    "labelEn": "Time"
+  },
   "en": {
     "title": "Mahjong Solitaire",
     "description": "Match and remove mahjong tiles — peel the stack apart layer by layer.",

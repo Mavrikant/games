@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 import { safeRead, safeWrite } from '@shared/storage';
 import {
   showOverlay as showOverlayEl,
@@ -9,6 +10,7 @@ import { createGenToken } from '@shared/gen-token';
 type State = 'ready' | 'playing' | 'gameover';
 
 const STORAGE_BEST = 'cark.best';
+const SCORE_DESC = { gameId: 'cark', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const W = 480;
 const H = 480;
@@ -180,6 +182,7 @@ function endGame(): void {
     setBest(score);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, score);
   setOverlay(
     'Süre bitti',
     `Skor: ${score} · Rekor: ${best}\nTekrar denemek için tıkla veya boşluğa bas.`,

@@ -6,6 +6,12 @@
   "controls": "↑ ↓ veya W/S · Fare/dokunma: raket · Boşluk: servis · P: duraklat · R: yeniden başla",
   "howToPlay": "Pong, video oyun tarihinin en eski klasiklerinden biridir; 1972'de Atari tarafından duyurulan iki kişilik raket oyununun tarayıcıda ücretsiz, indirmesiz oynanabilen Türkçe sürümü olarak bilgisayara (CPU) karşı tek başına oynayabileceğin bir refleks ve geometri düellosudur. Amacın soldaki mavi raketi yukarı-aşağı oynatarak gelen topu rakibe geri sekmek ve sağdaki CPU raketinin kaçırmasını sağlamak; ilk 7 sayıya ulaşan maçı kazanır. Kontroller esnektir: yukarı/aşağı ok tuşları, W/S klavye kısayolları, fare ya da dokunmatik ekranda parmağı sürükleme — hepsi raketi yumuşak şekilde takip eder, bu yüzden mobil ve masaüstünde aynı deneyim yaşanır. Servis için boşluk tuşuna basabilir ya da oyun alanına tıklayabilirsin; top senin kenarından çıkarsa CPU, rakibin kenarından çıkarsa sen sayı alırsın. Pong'un derinliği basit görünen fizik motorundan gelir: top rakete her çarptığında hızı küçük bir miktar artar ve sekme açısı topun raketin neresine vurduğuna bağlıdır — kenara yakın bir vuruş dik bir açıyla geri döner, ortaya yakın bir vuruş ise yatay bir geri sekme üretir. Stratejik olarak bu açı kontrolü en kritik silahındır: rakibini köşelere çekmek için topu her seferinde raketin uç bölgelerine değdir, böylece CPU'nun ortaya sürüklenme eğilimi onu açıkta bırakır. Pasif bir savunma yerine raket merkezini topun tahmini geliş noktasına önceden taşı; P tuşu maçı duraklatır, R tuşu yeniden başlatır.",
   "thumbnail": "pong.svg",
+  "scoring": {
+    "storageKey": "pong.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Pong",
     "description": "The classic paddle game — don't miss the ball, first to 7 wins. Online, free, in the browser.",

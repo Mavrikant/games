@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 type GameState = 'ready' | 'playing' | 'gameover';
 type Side = -1 | 1;
@@ -39,6 +40,7 @@ const FAIL_GRACE_MS = 450;
 const TILT_EASE = 0.14;
 const DROP_DURATION = 220;
 const STORAGE_BEST = 'terazi.best';
+const SCORE_DESC = { gameId: 'terazi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 const COLOR_VARS = [
   '--terazi-w1',
@@ -212,6 +214,7 @@ function settleFalling(): void {
 
 function gameOver(): void {
   state = 'gameover';
+  reportGameOver(SCORE_DESC, score);
   showOverlay('Devrildi!', `Skor: ${score} · Tekrar için dokun veya R`);
 }
 

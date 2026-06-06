@@ -5,6 +5,13 @@
   "tags": ["puzzle", "bulmaca", "mantık"],
   "controls": "Ok tuşları / WASD: kaydır · Z: geri al · R: seviye reset · N: sonraki seviye",
   "thumbnail": "buz-kayagi.svg",
+  "scoring": {
+    "id": "buz-kayagi-1",
+    "storageKey": "buz-kayagi.best.0",
+    "label": "Hamle (1. seviye)",
+    "direction": "lower",
+    "labelEn": "Moves (level 1)"
+  },
   "howToPlay": "Buz Kayağı düz bir labirent değil: kayakçın buzda duramaz. Bir yön seçtiğinde (ok tuşları, WASD, mobilde alttaki yön düğmeleri ya da kanvasta parmakla kaydırma) o yöne doğru kayarak gider ve ancak bir duvara veya sahanın sınırına çarpınca, tam önündeki karede durur — yani her hamlede nerede duracağını önceden hesaplaman gerekir. Amacın, kayış sırasında sahadaki bütün mavi kristallerin üzerinden geçip onları toplamak, ardından çıkışa ulaşmaktır. Çıkış halkası, sen tüm kristalleri toplayana kadar gri ve pasiftir; son kristali aldığında yeşile döner ve aktifleşir, üzerinden kaydığında seviye tamamlanır. Kristaller toplanmadan çıkışın üzerinden geçersen hiçbir şey olmaz, kayışına devam edersin. Yanlış bir kayış yaptıysan Z ile son hamleni geri al, tıkanırsan R ile seviyeyi baştan başlat. Her seviye için en az hamle rekorun kaydedilir; aynı bölümü daha kısa rotayla bitirmeye çalışmak ekstra bir meydan okumadır. İpucu: bir kristale ulaşmak için çoğu zaman onu doğrudan hedeflemek yerine, kayışını durduracak bir duvarı kullanarak doğru sıraya girmen gerekir; rotayı zihninde duvardan duvara planla.",
   "en": {
     "title": "Ice Slide",

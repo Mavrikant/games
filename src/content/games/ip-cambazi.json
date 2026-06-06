@@ -6,6 +6,13 @@
   "controls": "← / → veya A / D: ağırlığını sola/sağa eğ · Boşluk / Enter: başlat · R: yeniden başla · Mobil: ekranın sol/sağ yarısına bas",
   "howToPlay": "Amacın gün batımında gerili bir ipin üstünde, denge çubuğunu kullanan cambazı düşürmeden olabildiğince uzaklara yürütmek. Cambazı doğrudan hareket ettirmezsin — onun yerine vücudunun eğimini kontrol edersin: sol ok ya da A tuşunu basılı tuttukça (mobilde ekranın sol yarısına dokundukça) cambaz sola, sağ ok / D ya da sağ yarı sağa doğru yatar. Tuşa her bastığın anda küçük bir 'itme' impulse'u verilir, basılı tutmaya devam edersen sürekli bir kuvvet birikir, yani hem ince ayar hem güçlü düzeltme yapabilirsin. Karşındaki düşman yerçekimi gibi davranan kararsız bir tork: cambaz ne kadar yatıksa o kadar hızlı yatmaya devam eder, küçük eğimleri erken düzeltmen şart. Rastgele aralıklarla rüzgar darbeleri gelir; HUD'daki ok (← veya →) ve ekrandaki esinti çizgileri yönünü gösterir, omega'yı (açısal hızı) anında değiştirir ve erken oyunda hafif, ileri turlarda gittikçe sert vurur. Üstteki yatay çubuk eğim göstergesidir: ortadaki beyaz çizgi sıfır eğim, gösterge yeşilken güvendesin, kırmızı bölgeye girince devrilmek üzeresin. Eğim ±62°'yi aşarsa cambaz düşer ve tur biter; o ana kadar yürüdüğün metre kadarı skorun olur, yeni rekorun otomatik kaydedilir. R tuşu, Yeniden başla düğmesi veya gameover ekranındayken herhangi bir yön tuşu seni yeni bir tura sokar. Strateji ipucu: cambazı dümdüz tutmaya çalışma — sürekli mikro düzeltmelerle ağırlığını rüzgarın TERSİ yönde tut, fazla düzeltirsen kendi kuvvetin yeni bir devrilme yaratır; rüzgar geldiğinde paniklemeden tek bir kısa basışla karşı koy, gerekirse iki üç hafif vuruşla nötrle, asla uzun süre basılı tutma.",
   "thumbnail": "ip-cambazi.svg",
+  "scoring": {
+    "storageKey": "ip-cambazi.best",
+    "label": "Mesafe",
+    "unit": "m",
+    "direction": "higher",
+    "labelEn": "Distance"
+  },
   "en": {
     "title": "Tightrope",
     "description": "Keep your balance on the rope — lean your weight left/right against the gusts of wind. How far can you walk without falling?",

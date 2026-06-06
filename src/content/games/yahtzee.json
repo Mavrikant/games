@@ -6,6 +6,7 @@
   "controls": "Zara tıkla: tut/bırak · At (veya Space): kalan zarları at · Kategori tıkla: skor kaydet · R: yeniden başla",
   "howToPlay": "Amaç 13 tur boyunca 5 zarı akıllıca kullanıp skor kartındaki kategorileri en yüksek toplam puana ulaşacak şekilde doldurmak. Her tur \"At\" butonuna (veya Space tuşuna) basarak başlarsın; ilk atıştan sonra istediğin zarlara tıklayıp tutabilir, kalanları en fazla iki kez daha atabilirsin (turda toplam 3 atış hakkı). İstersen daha az atışla da durabilirsin. Sonunda 13 kategoriden birini seçip skorunu kaydedersin: üst bölüm 1'lerden 6'lara o değerdeki zarların toplamını verir, alt bölümde Üçlü/Dörtlü tüm zarların toplamı, Full House 25, Küçük Sıra 30, Büyük Sıra 40, Yahtzee (5 aynı) 50 puan ve Şans tüm zarların toplamıdır. Her kategori yalnızca bir kez kullanılır; uymayan bir kategoriye 0 yazmak zorunda kalabilirsin, bu yüzden kötü turlarda zayıf kategorileri feda etmek mantıklıdır. Üst bölüm toplamın 63'e ulaşırsa +35 bonus kazanırsın, bu yüzden büyük rakamları (5'ler, 6'lar) ihmal etme. 13. tur sonunda genel toplam belirlenir; R tuşu oyunu sıfırlar.",
   "thumbnail": "yahtzee.svg",
+  "scoring": { "storageKey": "yahtzee.best", "label": "Skor", "direction": "higher", "labelEn": "Score" },
   "en": {
     "title": "Yahtzee",
     "description": "Roll 5 dice across 13 turns, fill the highest-scoring categories — the classic dice game.",

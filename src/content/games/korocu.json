@@ -6,6 +6,12 @@
   "controls": "A/S/D/F veya 1-4: grup hit · Dokun: alt buton · R: yeniden başla",
   "howToPlay": "Koro şefi sensin: sol→sağ Soprano (A/1, pembe), Alto (S/2, sarı), Tenor (D/3, yeşil) ve Bas (F/4, mavi) olmak üzere dört şeridin var; üstten düşen renkli notaları sahnenin alt tarafındaki beyaz zon çizgisine değdiği anda kendi şeridinin tuşuna basarak (klavyede A/S/D/F veya 1-4, mobilde altta dört dokunmatik buton) yakalaman gerekiyor. Tam ortayı tutturursan BRAVO 100 puan, biraz şaşarsan iyi 60, sınırda tut 30 puan kazandırır; arka arkaya doğru vuruşların kombo sayacını büyütür ve her 5 komboda bir hem nota düşme tempon hızlanır hem de vuruş başına ekstra bonus puan eklenir. Şeridi boş tuşa basmak ya da notayı zonun dışına kaçırmak akortsuzluk sayılır, komboyu sıfırlar ve yanlış sayacını artırır — 5 yanlışta konser biter. Boşluk veya Enter ile başlat/yeniden başlat, R ile sıfırla; en yüksek skor localStorage'da saklanır. İpucu: gözünü tek bir notaya değil zon çizgisine kilitle ve parmaklarını dört tuşun üzerinde sabit tut; kombo yükselince tempo arttığı için aceleci vuruş yerine ritmi takip eden sabit dokunuşlar perfect oranını yukarı çeker.",
   "thumbnail": "korocu.svg",
+  "scoring": {
+    "storageKey": "korocu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Choir Conductor",
     "description": "Steer the falling rhythm cues to the right group at the right moment — sync them up like a choir conductor.",

@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Hayalet İz — geçtiğin yol 2 sn sonra kırmızıya döner, 1.5 sn ölümcül kalır.
 //
@@ -39,6 +40,7 @@ const GHOST_LIFE_MS = 1500;    // hayaletin ölümcül kalma süresi
 const TICK_FIXED_DT = 1 / 240; // fizik için sabit timestep
 const MAX_FRAME_DT = 1 / 30;   // büyük frame atlamalarını kıs
 const STORAGE_BEST = 'hayalet-iz.best';
+const SCORE_DESC = { gameId: 'hayalet-iz', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const ORB_MIN_DIST_FROM_PLAYER = 80;
 const ORB_MIN_DIST_FROM_GHOST = 24;
 const ORB_PLACE_TRIES = 40;
@@ -272,6 +274,7 @@ function pruneTrail(): void {
 function die(reason: string): void {
   if (state !== 'playing') return;
   state = 'gameover';
+  reportGameOver(SCORE_DESC, score);
   showMsg('Bitti', `Skor: ${score} — ${reason}. Boşluk veya R ile yeniden başla.`);
   draw();
 }

@@ -4,6 +4,7 @@ import {
   showOverlay as showOverlayEl,
   hideOverlay as hideOverlayEl,
 } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 interface GraphNode {
   id: number;
@@ -18,6 +19,9 @@ interface Level {
 }
 
 const STORAGE_BEST = 'tek-cizgi.best';
+// Leaderboard tracks the highest level reached (tek-cizgi.best stores the
+// highest completed level number; higher is better).
+const SCORE_DESC = { gameId: 'tek-cizgi', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 function octagonNodes(): GraphNode[] {
   const out: GraphNode[] = [];
@@ -315,6 +319,7 @@ function tryStep(nodeId: number): void {
       bestEl.textContent = String(best);
       safeWrite(STORAGE_BEST, best);
     }
+    reportGameOver(SCORE_DESC, reached, { label: 'Seviye' });
     const nextName = LEVELS[(levelIdx + 1) % LEVELS.length]!.name;
     showOverlay(
       'Bölüm tamamlandı!',

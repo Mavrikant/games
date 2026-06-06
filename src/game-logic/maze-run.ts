@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Maze Run — procedural maze, drag/swipe + arrow/WASD navigation.
 //
@@ -49,6 +50,7 @@ const MOVE_ANIM_MS = 110;        // pawn movement animation duration
 
 const STORAGE_BEST_LEVEL = 'maze-run.bestLevel';
 const STORAGE_BEST_TIME = 'maze-run.bestTime';
+const SCORE_DESC = { gameId: 'maze-run', storageKey: STORAGE_BEST_LEVEL, direction: 'higher' as const };
 
 // --- State ---
 let mazeSize = START_SIZE;
@@ -245,6 +247,7 @@ function lose(): void {
   state = 'lost';
   timeLeft = 0;
   updateHud();
+  reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
   showOverlay(
     'Süre bitti',
     `Ulaşılan seviye: ${level} · yeniden dene`,

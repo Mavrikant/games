@@ -1,8 +1,10 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 const STORAGE_BEST = 'coban.best';
+const SCORE_DESC = { gameId: 'coban', storageKey: STORAGE_BEST, direction: 'higher' as const };
 
 type State = 'ready' | 'playing' | 'won' | 'gameover';
 
@@ -149,6 +151,7 @@ function nextLevel(): void {
 function gameOver(reason: string): void {
   state = 'gameover';
   commitBest();
+  reportGameOver(SCORE_DESC, level, { label: 'Seviye' });
   stopLoop();
   draw();
   showOverlay(

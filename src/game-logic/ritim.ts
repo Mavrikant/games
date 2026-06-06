@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
+import { reportGameOver } from '@shared/leaderboard';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type State = 'ready' | 'playing' | 'gameover';
@@ -30,6 +31,7 @@ const MAX_MISSES = 3;
 
 // ── Storage helpers ──────────────────────────────────────────────────────────
 const STORAGE_KEY = 'ritim.best';
+const SCORE_DESC = { gameId: 'ritim', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 function loadBest(): number {
   const v = safeRead<number>(STORAGE_KEY, 0);
@@ -88,6 +90,7 @@ function endGame(): void {
     best = score;
     persistBest();
   }
+  reportGameOver(SCORE_DESC, score);
   updateHud();
 }
 

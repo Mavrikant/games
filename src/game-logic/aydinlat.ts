@@ -9,6 +9,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Marker = 'none' | 'lamp' | 'x';
 
@@ -67,6 +68,7 @@ const LEVELS: readonly RawLevel[] = [
 
 const STORAGE_LEVEL = 'aydinlat.level';
 const STORAGE_CLEARED = 'aydinlat.cleared';
+const SCORE_DESC = { gameId: 'aydinlat', storageKey: STORAGE_CLEARED, direction: 'higher' as const };
 const WIN_DELAY_MS = 520;
 
 const gen = createGenToken();
@@ -282,6 +284,7 @@ function rerender(): void {
       cleared = levelIdx + 1;
       safeWrite(STORAGE_CLEARED, cleared);
     }
+    reportGameOver(SCORE_DESC, cleared, { label: 'Bölüm' });
     const myGen = gen.current();
     window.setTimeout(() => {
       if (!gen.isCurrent(myGen)) return;

@@ -6,6 +6,13 @@
   "controls": "Tıkla: boşluğa komşu plakayı kaydır · Ok tuşları: boşluğu hareket ettir · R: yeniden karıştır",
   "howToPlay": "Amacın, karışık duran numaralı plakaları sol-üstten sağ-alta doğru artan sırayla dizmek ve boş hücreyi sağ-alt köşeye getirmek. Varsayılan 4×4 tahtada 1'den 15'e kadar plakalar ve tek bir boşluk vardır; üstteki düğmelerle 3×3 (kolay) veya 5×5 (zor) boyutuna da geçebilirsin. Hamle yapmak için boşluğa yatay ya da dikey komşu olan bir plakaya tıkla — plaka boşluğa kayar, boşluk plakanın yerine geçer; çapraz hareket veya uzak plaka seçimi yoktur. Klavyede ok tuşları boşluğu hareket ettirir (alttaki plaka ters yönde kayar), R tuşu tahtayı yeniden karıştırır. İlk hamleyle birlikte süre ve hamle sayacı başlar; her boyut için en az hamle ve en kısa süreden oluşan rekorun ayrı saklanır. Strateji: üst satırı ve sol sütunu sırayla sabitleyip kalan küçük alanda çalış; bir köşeyi yerleştirirken son iki plakayı önce ters sırada hizalayıp ardından döndürerek yerine oturtmak klasik kilitlenmeyi önler.",
   "thumbnail": "onbes-bulmaca.svg",
+  "scoring": {
+    "id": "onbes-bulmaca-4",
+    "storageKey": "onbes-bulmaca.best-moves",
+    "label": "Hamle (4×4)",
+    "direction": "lower",
+    "labelEn": "Moves (4×4)"
+  },
   "en": {
     "title": "Fifteen Puzzle",
     "description": "Slide the tiles to arrange 1-15 in the correct order — the classic sliding puzzle.",

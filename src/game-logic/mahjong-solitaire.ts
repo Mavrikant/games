@@ -15,6 +15,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 interface Tile {
   id: number;
@@ -28,6 +29,7 @@ interface Tile {
 const SHAPES = ['🀇', '🀈', '🀉', '🀊', '🀋', '🀌', '🀍', '🀎', '🀏', '🀐', '🀑', '🀒', '🀓', '🀔', '🀕', '🀖', '🀗', '🀘'];
 
 const KEY_BEST = 'mahjong-solitaire.best';
+const SCORE_DESC = { gameId: 'mahjong-solitaire', storageKey: KEY_BEST, direction: 'lower' as const };
 
 let boardEl!: HTMLElement;
 let remainingEl!: HTMLElement;

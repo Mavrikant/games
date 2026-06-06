@@ -6,6 +6,12 @@
   "controls": "↑/W/Z: üst · ↓/S/X: alt · Boşluk/Enter: başla · R: yeniden başla · Mobil: alanın üst/alt yarısına dokun",
   "howToPlay": "Amacın, tezgahın üstünde gösterilen ÖRÜNTÜ panelindeki dokuma desenini aşağıdaki TEZGAH'ta birebir kopyalamak. Mekik soldan sağa altı kolonlu çözgü ipliklerinin arasından ilerler, her satır bittiğinde yön değiştirip yılan şeklinde aşağı iner; her kolonda hedef hücre 'üst' (sıcak renk) ise ↑/W/Z ile mekiği çözgünün üstünden, 'alt' (soğuk renk) ise ↓/S/X ile altından geçirmen gerekir. Mobilde tezgahın üst yarısına dokunmak ÜST, alt yarısına dokunmak ALT seçer. Her kolon için kısıtlı bir süre vardır; süre çubuğu altta sayar, doğru seçim puan kazandırır, yanlış seçim veya zamanaşımı bir can götürür. Dört satırlık örüntüyü tamamlarsan bonus puan alır ve bir sonraki daha hızlı, daha karmaşık örüntüye geçersin. Üç canın da biterse oyun sona erer; Boşluk veya Enter ile yeniden başla, R ile sıfırla. İpucu: önce üst paneldeki o anki satırı gözünle tara ve mekiğin hareket yönüne göre sıradaki birkaç hücreyi önceden planla — refleksten çok kısa süreli desen okuma kazandırır.",
   "thumbnail": "dokuma.svg",
+  "scoring": {
+    "storageKey": "dokuma.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Weaving",
     "description": "Guide the shuttle column by column, choosing over/under — reproduce the pattern shown above on your thread.",

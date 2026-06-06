@@ -1,4 +1,5 @@
 import { defineGame } from '@shared/game-module';
+import { reportGameOver } from '@shared/leaderboard';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -16,6 +17,9 @@ const CONFIGS: Record<Difficulty, DiffConfig> = {
 
 const DIFFICULTY_KEY = 'minesweeper.difficulty';
 const bestKey = (d: Difficulty): string => `minesweeper.best.${d}`;
+// Global leaderboard tracks the "easy" board only — one fixed difficulty so
+// times are comparable. Lower time (seconds) is better.
+const SCORE_DESC = { gameId: 'minesweeper-easy', storageKey: 'minesweeper.best.easy', direction: 'lower' as const };
 
 let boardEl!: HTMLDivElement;
 let statusEl!: HTMLElement;
@@ -274,6 +278,7 @@ function endGame(victory: boolean, hitIndex?: number): void {
     } else {
       setStatus(`Kazandın! Süre: ${timer}s`, 'win');
     }
+    if (difficulty === 'easy') reportGameOver(SCORE_DESC, timer, { label: 'Süre', unit: 'sn' });
   } else {
     if (hitIndex !== undefined) revealMinesAfterLoss(hitIndex);
     setFace('😵');

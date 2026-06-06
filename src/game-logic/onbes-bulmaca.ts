@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Onbeş Bulmaca — classic sliding-tile puzzle.
 //
@@ -41,6 +42,9 @@ const STORAGE_BEST = 'onbes-bulmaca.best';
 const STORAGE_BEST_MOVES = 'onbes-bulmaca.best-moves';
 const STORAGE_BEST_TIME = 'onbes-bulmaca.best-time';
 const STORAGE_SIZE = 'onbes-bulmaca.size';
+// Global leaderboard tracks the default 4×4 board only — one fixed size so
+// move counts are comparable. Fewer moves is better.
+const SCORE_DESC = { gameId: 'onbes-bulmaca-4', storageKey: STORAGE_BEST_MOVES, direction: 'lower' as const };
 
 let boardEl!: HTMLElement;
 let movesEl!: HTMLElement;
@@ -398,6 +402,7 @@ function onSolved(): void {
     saveBest();
     renderBest();
   }
+  if (size === DEFAULT_SIZE) reportGameOver(SCORE_DESC, winMoves, { label: 'Hamle' });
   showOverlay(isBest, winMoves, winTime);
 }
 

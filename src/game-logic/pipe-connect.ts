@@ -1,5 +1,6 @@
 import { defineGame } from '@shared/game-module';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Pipe Connect — boru döndürme puzzle.
 // Hedef: kaynak (sol kenar) ile çıkış (sağ kenar) arasında geçerli akışı tamamla.
@@ -53,6 +54,9 @@ interface State {
 
 const STORAGE_BEST = 'pipe-connect.bestMoves';
 const STORAGE_LEVEL = 'pipe-connect.level';
+// Global leaderboard tracks level 1 only — one fixed level so move counts are
+// comparable. Fewer moves is better.
+const SCORE_DESC = { gameId: 'pipe-connect-1', storageKey: `${STORAGE_BEST}.1`, direction: 'lower' as const };
 
 // ---------- DOM bindings ----------
 
@@ -558,6 +562,7 @@ function winCurrentLevel(): void {
     isBest = true;
     saveBest(level, state.moves);
   }
+  if (level === 1) reportGameOver(SCORE_DESC, state.moves, { label: 'Hamle' });
   bestEl.textContent = String(loadBest(level) ?? state.moves);
   overlayTitle.textContent = isBest
     ? `Yeni rekor! · Seviye ${level}`

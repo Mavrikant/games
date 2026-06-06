@@ -1,6 +1,7 @@
 import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
+import { reportGameOver } from '@shared/leaderboard';
 
 // Deduction game: one coin is heavier; find it with the fewest weighings.
 // Turn-based — no animation loop, so no stale-async-callback surface.
@@ -11,6 +12,7 @@ type Pan = 'L' | 'R' | null;
 type Result = 'L' | 'R' | '=';
 
 const STORAGE_BEST = 'sahte-para.best';
+const SCORE_DESC = { gameId: 'sahte-para', storageKey: STORAGE_BEST, direction: 'higher' as const };
 const TILT_DEG = 9;
 
 let state: State = 'ready';
@@ -177,6 +179,7 @@ function gameOver(): void {
     bestEl.textContent = String(best);
     safeWrite(STORAGE_BEST, best);
   }
+  reportGameOver(SCORE_DESC, cleared, { label: 'Tur' });
   setTilt('=');
   showOverlayEl(overlay);
   overlayTitle.textContent = 'Yanlış tahmin!';

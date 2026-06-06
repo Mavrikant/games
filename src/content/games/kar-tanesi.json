@@ -6,6 +6,12 @@
   "controls": "Tıkla: hücreyi 6 yönde aç/kapa · R: yeniden başla",
   "howToPlay": "Amacın 90 saniye boyunca mümkün olduğunca çok kar tanesi desenini doğru biçimde tamamlamak. Oyun alanı altı eşit dilime bölünmüş yuvarlak bir tahtadan oluşur; sağ üst köşede sana hedef kar tanesi gösterilir. Tahtadaki herhangi bir hücreye tıkladığında o hücre açılıp kapanır, ancak burada işin sırrı şu: yaptığın her tıklama altı dilimde aynı anda simetrik olarak yansır, yani tek hücre yerine altı hücreyi aynı anda kontrol ediyorsun. Bu altıgen simetri kar tanelerinin gerçek hayattaki yapısını taklit eder ve aynı zamanda oyunun ana mekanik bulmacasıdır. Mevcut desenin hedef desene tam olarak eşit hâle geldiği anda tahta parlar, puanın artar ve oyun otomatik olarak yeni bir hedef üretir. R tuşu veya yeniden başlat düğmesi süreyi ve skoru sıfırlar; en iyi skorun tarayıcında saklanır ve bir sonraki oturumda görünür. İpucu: hedef desene bakarken yalnızca bir dilimi incele, çünkü diğer beşi onun aynası; ayrıca hücreleri içten dışa doğru ringlere göre çözmek daha hızlıdır, çünkü iç halkalarda hata yapınca dış halkalar etkilenmez. İleri seviyelerde ortalama bir kar tanesini 8-12 tıklamada tamamlamayı hedefle; bu hızı yakalarsan 90 saniyede 7-8 desen çözebilir, en iyi skor listesine girersin.",
   "thumbnail": "kar-tanesi.svg",
+  "scoring": {
+    "storageKey": "kar-tanesi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
   "en": {
     "title": "Snowflake",
     "description": "Click cells — every click mirrors symmetrically across 6 directions. Match the target snowflake; how many can you solve in 90 seconds?",

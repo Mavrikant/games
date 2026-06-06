@@ -2,6 +2,7 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { showOverlay as showOverlayEl, hideOverlay as hideOverlayEl } from '@shared/overlay';
 import { createGenToken } from '@shared/gen-token';
+import { reportGameOver } from '@shared/leaderboard';
 
 type State = 'ready' | 'showing' | 'waiting' | 'gameover';
 
@@ -23,6 +24,7 @@ const DRINKS: Drink[] = [
 const SHOW_DURATION_MS = 2500;
 const MAX_LIVES = 3;
 const STORAGE_KEY = 'kafe-gorevlisi.best';
+const SCORE_DESC = { gameId: 'kafe-gorevlisi', storageKey: STORAGE_KEY, direction: 'higher' as const };
 
 let state: State = 'ready';
 let order: Drink[] = [];
@@ -176,6 +178,7 @@ function submitOrder(): void {
     setDrinkBtnsEnabled(false);
     if (lives <= 0) {
       state = 'gameover';
+      reportGameOver(SCORE_DESC, score);
       gameoverTimer = setTimeout(() => {
         gameoverTimer = null;
         if (myToken !== genToken) return;
