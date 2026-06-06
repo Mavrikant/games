@@ -10,20 +10,40 @@
   gap: 16px;
 }
 
-/* Fullscreen: the whole container fills the screen; HUD + status stay at the
- * top and the board grows to fill the rest. */
+/* Fullscreen / maximize: the container fills the screen; HUD + status stay at
+ * the top and the board grows to fill the rest. `.ea-root--max` is the CSS-only
+ * fallback used where element fullscreen is blocked (notably iOS Safari), so
+ * "fullscreen" works on mobile too. */
 .ea-root:fullscreen,
-.ea-root:-webkit-full-screen {
-  width: 100vw;
-  height: 100vh;
+.ea-root:-webkit-full-screen,
+.ea-root--max {
   box-sizing: border-box;
   padding: 10px;
   gap: 8px;
   background: var(--bg);
 }
 
+.ea-root:fullscreen,
+.ea-root:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+}
+
+.ea-root--max {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh; /* fallback */
+  height: 100dvh; /* track the mobile address bar */
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
 .ea-root:fullscreen .board-wrap,
-.ea-root:-webkit-full-screen .board-wrap {
+.ea-root:-webkit-full-screen .board-wrap,
+.ea-root--max .board-wrap {
   max-width: none;
   width: 100%;
   aspect-ratio: auto;
@@ -207,4 +227,28 @@
   color: var(--text);
   font-variant-numeric: tabular-nums;
   margin-top: 2px;
+}
+
+/* Mobile (primary target): bigger touch targets, thumb-friendly eject, and a
+ * compact leaderboard that doesn't crowd the small screen. */
+@media (pointer: coarse) {
+  .ea-root .hud__btn {
+    min-height: 48px;
+    padding: 12px 14px;
+  }
+
+  .ea-eject {
+    right: max(12px, env(safe-area-inset-right, 0px));
+    bottom: max(14px, env(safe-area-inset-bottom, 0px));
+    min-height: 54px;
+    padding: 14px 22px;
+    font-size: 16px;
+    background: rgba(10, 11, 14, 0.72);
+  }
+
+  .leaders {
+    font-size: 10.5px;
+    max-width: 42%;
+    padding: 6px 8px;
+  }
 }
