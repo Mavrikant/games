@@ -1,0 +1,21 @@
+{
+  "title": "Sarkaç",
+  "description": "Sallanan bir sarkacı pompala, hızlandır, etrafa yerleşmiş hedef tuğlaları kır — fizik tabanlı tempo oyunu.",
+  "dateAdded": "2026-06-08",
+  "tags": ["fizik", "arcade", "zaman", "tek-oyunculu", "özgün"],
+  "controls": "← / A: sola pompala · → / D: sağa pompala · Boşluk: başlat · R: yeniden başla",
+  "thumbnail": "sarkac.svg",
+  "howToPlay": "Sarkaç bir salıncak pompalama oyunudur: tepedeki sabit noktadan asılı duran bir gülle, kendi kendine küçük bir genlikle sallanmaya başlar; senin işin, doğru anda pompalayıp güllenin tepesinin çevresine yayılmış renkli tuğlalara hızla çarpıp kırmak. Pompa kuralı bir çocuk salıncağındakiyle aynı: gülle sola doğru hareket ediyorken Sol Ok (veya A) tuşuna basarsan enerji eklersin, sağa giderken Sağ Ok (veya D) tuşuna basarsan yine enerji eklersin; yanlış zamanda — yani harekete ters yönde — basarsan tam tersine enerjiyi söndürürsün, bu da gizli bir 'fren' olarak işe yarayabilir. Tuğlalar üç tipte: beyaz tuğlalar düşük hızda bile kırılır ve 1 puan verir; sarı tuğlalar belli bir hızın üstünde kırılır ve 3 puan; kırmızı tuğlalar yalnızca güllenin en yüksek hıza yakın olduğunda kırılır ve 5 puan getirir. Tuğlanın renkli halkası gerekli minimum hızı temsil eder; alttaki hız ölçer sana o anki kinetik enerjiyi gösterir. Her kırılan tuğlanın yerine kısa bir gecikmeyle yenisi gelir, bu yüzden enerjini canlı tutmak gerekir; çok genliğe ulaşırsan ipin kopmadan biraz fren yapıp kontrolü geri kazanabilirsin. Tur 60 saniye sürer; süre dolunca skor kaydedilir ve en yüksek skorun tarayıcına saklanır. İpucu: ilk üç-dört pompayı her zaman doğru fazda yap, küçük genlikten büyük genliğe geçişi kazandığında üst arktaki kırmızı tuğlaları teker teker temizle.",
+  "scoring": {
+    "storageKey": "sarkac.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Pendulum",
+    "description": "Pump a swinging pendulum, build speed, and smash colored bricks placed around its arc — a physics-based timing game.",
+    "controls": "← / A: pump left · → / D: pump right · Space: start · R: restart",
+    "howToPlay": "Pendulum is a swing-pumping game: a bob hangs from a pivot at the top and starts swinging with a small amplitude on its own. Your job is to press at the right moment to pump it up and smash the colored bricks placed around its arc. The pumping rule is the same as on a playground swing: while the bob is moving left, press Left (or A) to add energy; while it is moving right, press Right (or D) to add energy. Pressing against the motion drains energy, which can be used as a deliberate brake. Bricks come in three tiers: white bricks shatter at any speed and give 1 point; yellow bricks require a moderate speed and give 3; red bricks only break near the bob's top speed and give 5. The colored ring around each brick is the minimum speed required; the gauge at the bottom shows the bob's current kinetic energy. Each broken brick respawns somewhere new after a short delay, so you must keep your energy up. If you overshoot you can brake by pressing against the motion. A round lasts 60 seconds; your highest score is saved locally. Tip: nail the first three or four pumps cleanly to build amplitude, then sweep through the high-arc red bricks one by one once you reach top speed."
+  }
+}
