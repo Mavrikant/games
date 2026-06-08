@@ -1,0 +1,26 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Tur<span id="round">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div id="board" class="board" aria-label="Kum Saati alanı">
+    <div class="phase" id="phase">Hazırlanılıyor</div>
+    <div class="target" id="target">— sn</div>
+    <button class="bigbtn" id="bigbtn" type="button">Başlat</button>
+    <div class="hint" id="hint">Hedef süre 2 saniye gösterilir. Sonra sezginle ölç.</div>
+    <div class="combo" id="combo" aria-hidden="true"></div>
+    <div class="fakes" id="fakes" aria-hidden="true"></div>
+  </div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Kum Saati</h2>
+      <p id="overlay-msg">Boşluk ile başla — saatsiz tahmin et.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

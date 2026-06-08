@@ -1,0 +1,21 @@
+{
+  "title": "Kum Saati",
+  "description": "Hedef süre 2 saniye gösterilir, kronometre yok — Boşluk ile başlat, tam o anda durdur. Sezginle milisaniyeleri yakala.",
+  "dateAdded": "2026-06-08",
+  "tags": ["puzzle", "özgün", "zamanlama", "sezgi"],
+  "controls": "Boşluk veya tıkla: başlat / durdur · R: yeniden başla",
+  "howToPlay": "Amacın saat, kronometre veya görsel sayaç olmadan, sadece sezginle bir süreyi tam olarak ölçmek. Her tur başında ekranda 2 saniye boyunca bir hedef süre belirir (örneğin 4.7 saniye), sonra kaybolur ve sen \"Hazır\" durumuna geçersin. Boşluk tuşuna ya da merkez butona bastığın an süre çalışmaya başlar — ama hiçbir görsel geri-bildirim almazsın: sayı yok, ilerleyen çubuk yok, arka planda küçük bir nabız bile yok. Sadece kafanda say. Hedefe ulaştığını düşündüğün an tekrar Boşluk'a basarsın; oyun gerçek süreni hedef ile karşılaştırır ve milisaniye cinsinden hatanı gösterir. Puanlama: ±100 ms içinde mükemmel (300 puan), ±300 ms iyi (180 puan), ±700 ms tatmin edici (90 puan), daha fazlası teselli (30 puan). 5 turdan sonra zorluk artar: kısa süreler (1-3 sn) reflexi, uzun süreler (10-15 sn) odağı sınar, ardından dikkat-dağıtıcı sahte sayaçlar belirir — onlara güvenme, yalan söylüyorlar. Üst üste tam isabette (±100 ms) kombo çarpanı devreye girer, puan iki katına kadar çıkar. R tuşu oyunu sıfırlar. İpucu: nefesini ritim olarak kullan — kısa sürelerde \"bir-bin-bir, iki-bin-bir\" diye saymak yaklaşık 1 saniyelik aralık verir; uzun sürelerde 5'erli gruplamak hatayı azaltır. Asıl beceri sahte sayaçlara kapılmamak: gözünü kapatabilirsen kapat, çünkü göz dakika başı yanlış hizalanır.",
+  "thumbnail": "kum-saati.svg",
+  "scoring": {
+    "storageKey": "kum-saati.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Hourglass",
+    "description": "The target time is shown for 2 seconds, no stopwatch — press Space to start, stop at the exact moment. Catch milliseconds with intuition.",
+    "controls": "Space or tap: start / stop · R: restart",
+    "howToPlay": "Your goal is to measure a duration precisely using only your intuition — no clock, stopwatch, or visible counter. At the start of each round a target duration appears on screen for 2 seconds (for example 4.7 seconds), then disappears and you enter the \"Ready\" state. The moment you press Space or tap the centre button, the timer begins — but you get no visual feedback: no number, no progress bar, not even a subtle pulse. Just count in your head. When you think you've reached the target, press Space again; the game compares your actual time to the target and shows your error in milliseconds. Scoring: within ±100 ms is perfect (300 pts), ±300 ms great (180 pts), ±700 ms decent (90 pts), beyond that consolation (30 pts). After 5 rounds difficulty ramps: short durations (1-3 s) test reflex, long ones (10-15 s) test focus, then distracting fake counters appear — don't trust them, they lie. Consecutive perfect hits (±100 ms) trigger a combo multiplier, up to 2× score. R resets the game. Tip: use your breath as a rhythm — at short durations counting \"one-thousand-one, two-thousand-one\" gives roughly one-second intervals; at long durations, grouping by 5s reduces error. The real skill is ignoring fake counters: close your eyes if you can, because the eyes betray you minute by minute."
+  }
+}

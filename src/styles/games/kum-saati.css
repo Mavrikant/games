@@ -1,0 +1,238 @@
+/*
+ * Kum Saati — clockless time-estimation. Visual quiet during the timing
+ * phase is the whole point; the board's background tone shifts only
+ * during the result reveal (data-tone attr on #board).
+ *
+ * Overlay rules at top per missing-overlay-css pitfall.
+ */
+
+:root {
+  --ks-bg: #0f1116;
+  --ks-bg-perfect: #14352a;
+  --ks-bg-great: #1b3045;
+  --ks-bg-good: #36331c;
+  --ks-bg-meh: #3a1c1f;
+  --ks-accent: #f5b748;
+  --ks-accent-soft: rgba(245, 183, 72, 0.18);
+  --ks-go: #34d399;
+  --ks-stop: #f87171;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  min-height: 360px;
+  padding: 28px 20px 24px;
+  background: var(--ks-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: background 0.35s ease;
+  overflow: hidden;
+}
+
+.board[data-tone='perfect'] { background: var(--ks-bg-perfect); }
+.board[data-tone='great']   { background: var(--ks-bg-great); }
+.board[data-tone='good']    { background: var(--ks-bg-good); }
+.board[data-tone='meh']     { background: var(--ks-bg-meh); }
+
+.phase {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.target {
+  font-size: clamp(40px, 14vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ks-accent);
+  text-align: center;
+  min-height: 1em;
+  line-height: 1.05;
+  transition: opacity 0.25s ease;
+}
+
+.target--hidden {
+  opacity: 0.05;
+}
+
+.bigbtn {
+  appearance: none;
+  border: none;
+  background: var(--ks-accent-soft);
+  color: var(--ks-accent);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 22px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  min-width: 220px;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background 0.15s ease,
+    transform 0.08s ease,
+    color 0.15s ease;
+}
+
+.bigbtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.bigbtn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.bigbtn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.bigbtn[data-style='go'] {
+  background: var(--ks-go);
+  color: #07241a;
+}
+
+.bigbtn[data-style='stop'] {
+  background: var(--ks-stop);
+  color: #2a0a0a;
+}
+
+.bigbtn[data-style='idle'] {
+  background: var(--ks-accent-soft);
+  color: var(--ks-accent);
+}
+
+.hint {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted, #aab);
+  max-width: 320px;
+  line-height: 1.4;
+  min-height: 2.2em;
+}
+
+.combo {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ks-accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+.combo--on {
+  opacity: 1;
+}
+
+.fakes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fake {
+  position: absolute;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.32);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  user-select: none;
+}
+
+.fake--a {
+  top: 14px;
+  left: 14px;
+  color: rgba(120, 200, 255, 0.45);
+}
+
+.fake--b {
+  bottom: 14px;
+  right: 14px;
+  color: rgba(255, 180, 180, 0.45);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.overlay__inner h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
