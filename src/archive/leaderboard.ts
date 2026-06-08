@@ -25,11 +25,6 @@ interface Board {
   url: string;
 }
 
-const root = document.querySelector<HTMLElement>('#leaderboard-root');
-if (root && root.dataset.enabled === 'true') {
-  void run();
-}
-
 async function run(): Promise<void> {
   const dataEl = document.querySelector<HTMLElement>('#leaderboard-data');
   const boards = JSON.parse(dataEl?.textContent || '[]') as Board[];
@@ -125,4 +120,13 @@ function escapeHtml(s: string): string {
 // value can never break out of an attribute / selector.
 function escapeAttr(s: string): string {
   return escapeHtml(s);
+}
+
+// Kick off only after every module-level binding above (e.g. HTML_ESCAPES) is
+// initialized — run() executes its synchronous prefix immediately, so invoking
+// it before those `const`s would hit a temporal-dead-zone error and render
+// nothing. (This is why /siralama showed empty.)
+const root = document.querySelector<HTMLElement>('#leaderboard-root');
+if (root && root.dataset.enabled === 'true') {
+  void run();
 }
