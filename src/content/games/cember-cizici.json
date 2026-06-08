@@ -1,0 +1,9 @@
+{
+  "title": "Çember Çizici",
+  "description": "Tek hareketle mükemmel bir daire çizmeye çalış — algoritma yuvarlaklığını ölçer.",
+  "dateAdded": "2026-06-08",
+  "tags": ["beceri", "yaratici"],
+  "controls": "Fare/parmak ile basılı tut, daire çiz, bırak.",
+  "howToPlay": "Tek bir kesintisiz hareketle mümkün olduğunca yuvarlak bir daire çizmeye çalış. Bıraktığında en uygun çember bulunur ve sapma %0–100 arasında puanlanır. Yarım kalan ya da küçük çizimler düşük puan alır.",
+  "thumbnail": "cember-cizici.svg"
+}

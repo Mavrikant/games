@@ -1,0 +1,18 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">—</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Çember çizim alanı"></canvas>
+  <div id="overlay" class="overlay" role="dialog" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çember Çizici</h2>
+      <p id="overlay-msg">Fareyi (veya parmağını) basılı tut, tek hareketle bir tam daire çiz, bırak. Algoritma yuvarlaklığını ölçer.</p>
+    </div>
+  </div>
+</div>

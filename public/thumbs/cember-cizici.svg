@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çember Çizici">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#34d39933" />
+      <stop offset="100%" stop-color="#34d39900" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <circle cx="220" cy="110" r="78" fill="url(#halo)" />
+  <circle cx="220" cy="110" r="58" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="6 6" />
+  <path d="M 220 52 C 250 56 282 78 278 116 C 274 152 244 172 214 168 C 184 164 162 138 168 108 C 173 82 196 64 218 60"
+        fill="none" stroke="#7c93ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Çember Çizici</text>
+  <text x="20" y="58" font-family="ui-sans-serif, system-ui" font-size="13" fill="#a3e635" font-weight="600">%92</text>
+</svg>
