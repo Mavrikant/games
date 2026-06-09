@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Sonar Labirent">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0d141d"/>
+      <stop offset="100%" stop-color="#04060a"/>
+    </radialGradient>
+    <radialGradient id="player" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="exit" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#bg)"/>
+
+  <!-- Sonar wave rings expanding from player -->
+  <g fill="none" stroke="#7dd3fc" stroke-width="1.2">
+    <circle cx="105" cy="115" r="38" opacity="0.55"/>
+    <circle cx="105" cy="115" r="72" opacity="0.32"/>
+    <circle cx="105" cy="115" r="108" opacity="0.16"/>
+  </g>
+
+  <!-- Lit wall segments (where sonar hit) -->
+  <g stroke="#7dd3fc" stroke-linecap="round" stroke-width="2.5">
+    <!-- Inner wall arcs lit by sonar -->
+    <line x1="60" y1="80" x2="60" y2="150" opacity="0.85"/>
+    <line x1="60" y1="80" x2="135" y2="80" opacity="0.7"/>
+    <line x1="135" y1="80" x2="135" y2="115" opacity="0.55"/>
+    <line x1="150" y1="115" x2="150" y2="155" opacity="0.5"/>
+    <line x1="65" y1="160" x2="125" y2="160" opacity="0.45"/>
+    <line x1="180" y1="60" x2="180" y2="100" opacity="0.4"/>
+    <line x1="180" y1="60" x2="225" y2="60" opacity="0.3"/>
+  </g>
+
+  <!-- Player dot with glow -->
+  <circle cx="105" cy="115" r="14" fill="url(#player)"/>
+  <circle cx="105" cy="115" r="3" fill="#ffffff"/>
+
+  <!-- Exit dot with green pulse -->
+  <circle cx="255" cy="145" r="20" fill="url(#exit)"/>
+  <circle cx="255" cy="145" r="3" fill="#34d399"/>
+
+  <!-- Title in corner, subtle -->
+  <text x="16" y="28" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#7dd3fc" opacity="0.85" letter-spacing="0.06em">SONAR</text>
+  <text x="16" y="46" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#e5e7eb" opacity="0.7" letter-spacing="0.06em">LABİRENT</text>
+</svg>

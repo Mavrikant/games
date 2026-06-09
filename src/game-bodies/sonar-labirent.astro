@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Darbe<span id="score">0</span></div>
+  <div class="hud__best">Rekor<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni labirent</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="360"
+    height="360"
+    aria-label="Sonar Labirent oyun alanı"
+  ></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sonar Labirent</h2>
+      <p id="overlay-msg">
+        Boşluk veya tıkla → sonar darbesi gönder. Ok tuşları → bir kare ilerle.
+        Yeşil pulse → çıkış. Az darbeyle ulaş.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="sn-touch" aria-hidden="true">
+  <button class="sn-touch__btn sn-touch__btn--ping" data-act="ping" type="button">
+    Sonar
+  </button>
+  <button class="sn-touch__btn" data-dir="up" type="button" aria-label="Yukarı">▲</button>
+  <div class="sn-touch__row">
+    <button class="sn-touch__btn" data-dir="left" type="button" aria-label="Sol">◀</button>
+    <button class="sn-touch__btn" data-dir="down" type="button" aria-label="Aşağı">▼</button>
+    <button class="sn-touch__btn" data-dir="right" type="button" aria-label="Sağ">▶</button>
+  </div>
+</div>

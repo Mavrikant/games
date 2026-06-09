@@ -1,0 +1,21 @@
+{
+  "title": "Sonar Labirent",
+  "description": "Karanlık bir labirentte sonar darbeleri gönder — duvarlar ses dalgasında bir an aydınlanır. Çıkışa en az darbeyle ulaş.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "labirent", "özgün", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD: hareket · Boşluk veya tıkla: sonar gönder · R: yeni labirent",
+  "howToPlay": "Amacın 10x10'luk karanlık bir labirentte sol üst köşeden sağ alttaki yeşil pulse'ın işaret ettiği çıkışa ulaşmak — ama duvarlar normalde görünmez, sadece sen ve çıkış işaretlenir. Görünür dünyayı sonarla yaratırsın: Boşluk tuşuna bas ya da alana tıkla, bulunduğun konumdan halka şeklinde bir ses dalgası yayılır ve geçtiği duvar parçalarını bir saniye kadar mavi bir parıltıyla aydınlatır. Sonra duvarlar tekrar görünmez olur; gördüklerini hafızanda tutmak ve ona göre adım atmak zorundasın. Ok tuşları veya WASD ile bir kare ilerlersin; eğer önünde duvar varsa yerinden oynamazsın. Her sonar darbesi sayacı bir artırır. Çıkışa ulaşırsan o tur biter ve kullandığın darbe sayısı kaydedilir; en düşük darbe sayın rekor olarak tarayıcında saklanır — yani amaç hızdan çok ekonomi: ne kadar az darbeyle yolu bulabildiğin. R tuşu veya 'Yeni labirent' düğmesi taze rastgele bir labirent açar. İpucu: her darbeyi mümkün olduğunca açık alanda gönder; dar bir köşede patlatırsan dalga küçük bir bölgeyi tarar ve harcadığın enerji boşa gider. Birkaç adımda bir tek darbeyle hem bir koridorun şeklini hem de yakındaki kavşakları yakala; sonra hafızana güvenip görünmez duvarların arasından ilerle.",
+  "thumbnail": "sonar-labirent.svg",
+  "scoring": {
+    "storageKey": "sonar-labirent.best",
+    "label": "Darbe",
+    "direction": "lower",
+    "labelEn": "Pings"
+  },
+  "en": {
+    "title": "Sonar Maze",
+    "description": "Navigate a dark maze using sonar pings — walls flash briefly when the wave hits them. Reach the exit using as few pings as possible.",
+    "controls": "Arrow keys or WASD: move · Space or click: send sonar · R: new maze",
+    "howToPlay": "Your goal is to reach the green pulsing exit in the bottom-right corner of a dark 10x10 maze from the top-left start — but the walls are invisible by default; only you and the exit are marked. You build your map of the world with sonar: press Space or click anywhere on the board to emit a circular wave from your position, and each wall the wave crosses lights up in cyan for about a second before fading back to black. You have to remember what you saw and plan your steps from memory. Use the arrow keys or WASD to step one cell at a time; if a wall blocks you, you stay put. Every sonar pulse increases the counter. Reaching the exit ends the round and saves the ping count you used; your lowest score is kept as your record in the browser — the game is about economy, not speed. The R key or the 'New maze' button generates a fresh random layout. Tip: send each ping from an open spot so the wave covers as much of the maze as possible; pinging in a dead-end wastes most of the wave on a tiny patch. Take a single ping every few steps, capture the shape of the next corridor plus any branches, then trust your memory to walk through the invisible walls."
+  }
+}
