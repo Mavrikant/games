@@ -1,0 +1,21 @@
+{
+  "title": "Havai Fişek",
+  "description": "Farklı yanma süreli fitilleri öyle ateşle ki hepsi tam aynı anda patlasın — mental zamanlama oyunu.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "zamanlama", "özgün", "matematik"],
+  "controls": "Tıkla/dokun veya 1-5: fitili ateşle · Boşluk/Enter: başlat · R: yeniden başla",
+  "thumbnail": "havai-fisek.svg",
+  "howToPlay": "Havai Fişek, fitil-yanma süresi ile patlama zamanını zihninden hesaplayıp tetikleyeceğin özgün bir zamanlama oyunudur. Her turun başında üst tarafta bir 'Hedef' süresi belirir (örneğin 5,0 sn) ve sahnede 3-5 fitil görürsün; her fitilin yanında onun yanma süresi yazar (örn. 1,4 sn / 2,7 sn / 3,3 sn). Tur başlayınca aşağıdaki sayaç sıfırdan ilerlemeye başlar. Görev: her fitili öyle bir anda ateşle ki yanma süresi bittiğinde — yani fitil tükenip roket patladığında — saat tam Hedef'i göstersin. Pratikte her fitil için tek bir hesap yaparsın: ateşleme zamanı = Hedef − fitilin yanma süresi. Bir fitili ateşlemek için üstüne tıkla, dokun veya numarasına denk gelen tuşa (1-5) bas. Ateşlenen fitil görsel olarak kısalmaya başlar; bittiğinde tepede patlama renk patlaması olarak görünür ve o fitilin patlama anı zaman çizelgesinde küçük bir nokta olarak işaretlenir. Tüm fitiller patladığında tur biter ve her bir patlamanın hedef ana ne kadar yakın olduğuna bakılır. Her fitil için sapma tolerans (başlangıçta ±0,30 sn, her tur biraz daralır) içindeyse 'temiz', tolerans iki katına kadar ise 'kabul', daha uzaksa 'kayıp' sayılır. Bütün fitiller temizse tur kazanılır ve skor +1 olur; tek bir kayıp bile olsa bir can düşer. Üç canın bitince oyun sona erer, en yüksek skorun tarayıcına kaydedilir. Ateşlemediğin bir fitil de kayıp sayılır, tur Hedef + 1,5 sn'de zaman aşımına uğrar. İpucu: önce en uzun yanma süreli fitili gözle, çünkü onu en erken ateşlemek zorundasın; sayaç 0'dayken bile geç kalabilirsin. Saatten yanma süresini çıkarmayı bir refleks haline getir, sayacın küsüratlarına çok takılma — birinci ondalık yeterli — ve panik yapma; tolerans cömerttir.",
+  "scoring": {
+    "storageKey": "havai-fisek.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Rounds"
+  },
+  "en": {
+    "title": "Firework Sync",
+    "description": "Light fuses with different burn times so they all explode at exactly the same target moment — a mental timing game.",
+    "controls": "Click/tap or 1-5: light a fuse · Space/Enter: start · R: restart",
+    "howToPlay": "Firework Sync is an original timing game built on a single mental subtraction. Each round shows a 'Target' time at the top (for example 5.0 s) and 3-5 fuses on the stage, each labelled with its burn time (e.g. 1.4 s / 2.7 s / 3.3 s). When the round starts, the clock at the bottom counts up from zero. Your job is to light each fuse at a moment such that when it finishes burning — its rocket detonates — the clock shows exactly the Target. In practice, you compute one number per fuse: light_time = Target − burn_time. To light a fuse, click it, tap it, or press its number key (1-5). A lit fuse visibly shrinks; when it reaches zero, a colourful burst appears at the top and a small dot marks its explosion moment on the timeline. The round ends when all fuses have detonated, then each explosion is compared against the Target. If a fuse's deviation is within tolerance (starts at ±0.30 s, tightens slightly each round), it counts as 'clean'; up to twice tolerance is 'okay'; further is a 'miss'. All clean means you win the round and score +1; a single miss costs one life. After three lives the run ends and your best round count is saved. Unlit fuses also count as a miss and the round times out at Target + 1.5 s. Tip: spot the longest burn-time fuse first, since you must light it earliest — you can be late before the clock even reads 1. Train the Target-minus-burn-time subtraction as a reflex, don't fixate on tiny fractions — one decimal is enough — and don't panic; the tolerance is forgiving."
+  }
+}

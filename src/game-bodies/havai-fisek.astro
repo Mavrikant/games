@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Tur<span id="round">0</span></div>
+  <div class="hud__stat">Can<span id="lives">3</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="420"
+    height="540"
+    aria-label="Havai Fişek — fitil senkron oyun alanı"></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Havai Fişek</h2>
+      <p id="overlay-msg">
+        Fitiller farklı sürelerde yanar. Hepsi tam hedef anda patlasın.
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--accent" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>
