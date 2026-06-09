@@ -1,0 +1,21 @@
+{
+  "title": "Ton Avı",
+  "description": "Renkli dairelerin arasından farklı tonda olanı bul; ızgara büyür, fark azalır, süre kısalır.",
+  "dateAdded": "2026-06-09",
+  "tags": ["dikkat", "algı", "refleks", "tek-oyunculu"],
+  "controls": "Fare/dokunma: farklı daireyi seç · Enter: başla · R: baştan",
+  "howToPlay": "Ekranda hepsi aynı renkte gibi görünen bir daire ızgarası belirir; ama içlerinden tam olarak biri çok az farklı bir tondadır. Görevin bu farklı daireyi süre dolmadan bulup üstüne tıklamak (ya da dokunmak). Doğru daireyi seçtiğinde bir sonraki seviyeye geçersin: ızgara 2x2'den başlayıp her seviyede büyüyerek 8x8'e kadar çıkar, farklı tonun renk farkı giderek azalır ve seviyeye ayrılan süre kısalır; yani oyun ilerledikçe fark neredeyse görünmez hale gelir. Üstteki çubuk kalan süreyi gösterir ve azaldıkça kırmızıya döner. Yanlış bir daireye tıklarsan o seviyeyi kaybetmezsin ama ızgara sarsılır ve süreden bir miktar düşülür, bu yüzden rastgele tıklamak yerine dikkatlice tara. Süre biterse oyun sona erer. Skorun her doğru seçimde artar ve hızlı bulduğunda bonus kazanırsın; en yüksek skorun tarayıcında saklanır. Enter ya da Başla düğmesiyle başlarsın, oyun sırasında R ile baştan başlayabilirsin. İpucu: gözünü tek bir daireye kilitlemek yerine ızgaranın geneline bak; farklı ton çoğu zaman çevresel görüşle daha kolay sırıtır.",
+  "thumbnail": "ton-avi.svg",
+  "scoring": {
+    "storageKey": "ton-avi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Tone Hunt",
+    "description": "Spot the single odd-toned circle among the rest; the grid grows, the colour gap shrinks, and time runs shorter.",
+    "controls": "Mouse/touch: pick the odd circle · Enter: start · R: restart",
+    "howToPlay": "A grid of circles appears that all look the same colour — but exactly one of them is a very slightly different tone. Your job is to find that odd circle and click (or tap) it before time runs out. Each correct pick advances you a level: the grid starts at 2x2 and grows every level up to 8x8, the odd tone's colour gap keeps shrinking, and the time allowed per level gets shorter — so the difference becomes nearly invisible as you go. The bar at the top shows your remaining time and turns red as it drains. A wrong pick doesn't end the level, but the grid shakes and a chunk of time is deducted, so scan carefully instead of guessing. When the timer hits zero the run ends. Your score rises with every correct pick and a speed bonus rewards fast finds; your best score is saved in your browser. Start with Enter or the Start button, and press R to restart mid-run. Tip: instead of staring at one circle, take in the whole grid at once — the odd tone often stands out more in peripheral vision."
+  }
+}

@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+</header>
+
+<div class="timebar" aria-hidden="true">
+  <div id="timefill" class="timebar__fill"></div>
+</div>
+
+<div class="board-wrap">
+  <div id="board" class="board" role="grid" aria-label="Renk ızgarası"></div>
+  <div id="overlay" class="overlay" role="dialog" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Ton Avı</h2>
+      <p id="overlay-text">Dairelerin arasından farklı tonda olanı bul. Her
+        seviyede ızgara büyür, renk farkı azalır ve süre kısalır.</p>
+      <button id="start" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
