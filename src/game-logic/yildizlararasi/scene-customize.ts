@@ -1,14 +1,16 @@
-// Character customization with a live 3D preview. Edit "1. Karakter", then
-// "2. Karakter", then choose which one is you. Options: hair type (incl. curly /
-// bald), hair color, skin tone, eye color, clothing color and an accessory.
+// Character customization with a live 3D preview. The roles are fixed: the 1st
+// character is the founder (who sets the journey up and waits at Earth) and the
+// 2nd is the recipient (who travels and collects). Options: hair type (incl.
+// curly / bald), hair color, skin tone, eye color, clothing color, accessory.
 
 import { ensureAudio, sfxClick } from './audio';
-import { buildAvatarSvg } from './avatar';
 import { ACCESSORIES, CLOTHING_COLORS, EYE_COLORS, HAIR_COLORS, HAIR_TYPES, SKIN_COLORS } from './data';
 import { goto } from './router';
 import { S } from './state';
 import * as three from './three-scene';
 import type { Character, Scene } from './types';
+
+const ROLE = ['1. Karakter · Sen (kuran)', '2. Karakter · Sevgilin (yolcu)'];
 
 function el(): HTMLElement | null {
   return document.getElementById('yi-customize');
@@ -45,29 +47,14 @@ function renderEdit(): void {
   const c = S.data.characters[idx]!;
   host.innerHTML =
     `<div class="yi-sheet yi-panel">` +
-    `<h3 class="yi-edit__title">${idx + 1}. Karakter</h3>` +
+    `<h3 class="yi-edit__title">${ROLE[idx]}</h3>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Saç</span><div class="yi-chips">${chips('hairType', HAIR_TYPES, c.hairType)}</div></div>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Saç rengi</span><div class="yi-swatches">${swatches('hairColor', HAIR_COLORS, c.hairColor)}</div></div>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Ten</span><div class="yi-swatches">${swatches('skinColor', SKIN_COLORS, c.skinColor)}</div></div>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Göz</span><div class="yi-swatches">${swatches('eyeColor', EYE_COLORS, c.eyeColor)}</div></div>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Kıyafet</span><div class="yi-swatches">${swatches('clothingColor', CLOTHING_COLORS, c.clothingColor)}</div></div>` +
     `<div class="yi-edit__row"><span class="yi-edit__lbl">Aksesuar</span><div class="yi-chips">${chips('accessory', ACCESSORIES, c.accessory)}</div></div>` +
-    `<button class="yi-btn yi-btn--pink" type="button" data-action="continue">${idx === 0 ? 'Sonraki karakter' : 'Devam'}</button>` +
-    `</div>`;
-}
-
-function renderChoose(): void {
-  const host = el();
-  if (!host) return;
-  const [a, b] = S.data.characters;
-  host.innerHTML =
-    `<div class="yi-panel yi-choose">` +
-    `<h3 class="yi-edit__title">Hangi karakter sensin?</h3>` +
-    `<div class="yi-choose__row">` +
-    `<button class="yi-choose__card" type="button" data-action="choose" data-val="0">${buildAvatarSvg(a!, 92)}<span>1. Karakter</span></button>` +
-    `<button class="yi-choose__card" type="button" data-action="choose" data-val="1">${buildAvatarSvg(b!, 92)}<span>2. Karakter</span></button>` +
-    `</div>` +
-    `<p class="yi-hint-line">Seçtiğin karakter oyuncu, diğeri seni bekleyen sevgili olur.</p>` +
+    `<button class="yi-btn yi-btn--pink" type="button" data-action="continue">${idx === 0 ? 'Sonraki karakter →' : 'Devam'}</button>` +
     `</div>`;
 }
 
@@ -92,18 +79,14 @@ function onClick(e: MouseEvent): void {
     renderEdit();
     return;
   }
-  const action = t.dataset.action;
-  if (action === 'continue') {
+  if (t.dataset.action === 'continue') {
     if (S.customizeIndex === 0) {
       S.customizeIndex = 1;
       preview();
       renderEdit();
     } else {
-      renderChoose();
+      goto('mode');
     }
-  } else if (action === 'choose') {
-    S.data.playerIndex = (t.dataset.val === '1' ? 1 : 0) as 0 | 1;
-    goto('mode');
   }
 }
 

@@ -4,6 +4,6 @@
   "dateAdded": "2026-06-09",
   "tags": ["macera", "hikaye", "romantik", "3b", "tek-oyunculu"],
   "controls": "Fare/dokunma ile yürü veya WASD / ok tuşları. Anıya ulaşınca çıkan mini oyunu kazan, mesajı oku, galaksi portalından sonraki gezegene geç. ⛶ ile tam ekran.",
-  "howToPlay": "İki 3B karakteri özelleştir (saç tipi — kıvırcık dahil —, ten, göz, kıyafet, aksesuar) ve hangisinin sen olduğunu seç. 'Anıları Gizle' modunda her gezegene bir anı ve aşk mesajı bırak, sonra 'Linki Kopyala' ile sevgiline gönder (Supabase yapılandırılmışsa kısa kod, değilse bağlantıya gömülü). 'Yolculuğa Çık' modunda Plüton'dan Dünya'ya ilerle; her anıyı açmak için rastgele bir mini oyun (refleks, hedef, hafıza, zamanlama) kazanman gerekir. Sonunda Dünya'da buluşmaya ulaş. Kurulum yapılmadıysa örnek bir anı seti ile oynanır.",
+  "howToPlay": "1. karakter (sen) oyunu kurar: iki 3B karakteri özelleştir (saç tipi — kıvırcık dahil —, ten, göz, kıyafet, aksesuar), 'Anıları Gizle' modunda her gezegene bir anı ve aşk mesajı bırak, sonra 'Linki Kopyala' ile sevgiline gönder (Supabase yapılandırılmışsa kısa kod, değilse bağlantıya gömülü). 2. karakter (sevgilin) linki açtığında hiçbir şeyi tekrar ayarlamadan doğrudan yolculuğa başlar: Plüton'dan Dünya'ya ilerler, her anıyı açmak için rastgele bir mini oyun (refleks, hedef, hafıza, zamanlama) kazanır ve sonunda seninle buluşur. Kurulum yapılmadıysa örnek bir anı seti ile oynanır.",
   "thumbnail": "yildizlararasi.svg"
 }

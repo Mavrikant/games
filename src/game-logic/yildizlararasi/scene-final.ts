@@ -4,7 +4,7 @@
 // the warm "earth" theme. All timers are gen-guarded so a restart aborts cleanly.
 
 import { setTheme } from './audio';
-import { gen, S } from './state';
+import { gen, S, travelerChar, waitingChar } from './state';
 import * as three from './three-scene';
 import type { Scene } from './types';
 
@@ -89,8 +89,8 @@ function enter(): void {
   const h = host();
   if (!h) return;
   setTheme('earth');
-  three.setPlayer(S.data.characters[S.data.playerIndex]!);
-  three.setPartner(S.data.characters[S.data.playerIndex === 0 ? 1 : 0]!);
+  three.setPlayer(travelerChar());
+  three.setPartner(waitingChar());
   three.setMode('final');
   three.buildFinal(collectedGlyphs());
   h.innerHTML =
