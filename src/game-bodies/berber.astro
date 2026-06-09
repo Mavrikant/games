@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Müşteri<span id="customer">1/5</span></div>
+  <div class="hud__score">Makas<span id="cuts">8</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="submit" class="hud__btn" type="button">Bitir</button>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="420"
+    aria-label="Berber oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Berber</h2>
+      <p id="overlay-msg">
+        Müşterinin saçını hedef siluete göre kes. <strong>Sürükle</strong> —
+        çizdiğin makas çizgisi geçtiği her teli aynı yükseklikten keser.
+        <br /><small
+          >Her müşteri için 8 makas hakkın var. Tek tık: en yakın tek tel.</small
+        >
+      </p>
+      <button
+        id="overlay-btn"
+        class="hud__btn hud__btn--primary"
+        type="button">Başla</button
+      >
+    </div>
+  </div>
+</div>
