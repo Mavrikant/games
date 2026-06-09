@@ -1,0 +1,19 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Dolu<span id="filled">0%</span></div>
+  <div class="hud__stat">Taşan<span id="spilled">0</span></div>
+  <div class="hud__stat">Kum<span id="ammo">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="360" height="500" aria-label="Tane — kum doldurma oyun alanı"></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tane</h2>
+      <p id="overlay-msg">Kabı doldurmak için bas ve sürükle.</p>
+      <button id="overlay-btn" class="hud__btn hud__btn--accent" type="button">Başla</button>
+    </div>
+  </div>
+</div>

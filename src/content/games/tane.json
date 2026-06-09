@@ -1,0 +1,21 @@
+{
+  "title": "Tane",
+  "description": "Kum tanelerini kabın içine akıt — gravite yığar, dışarı taşırırsan boşa gider.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "fizik", "simulasyon"],
+  "controls": "Bas-tut: kum dök · R: yeniden · N: yeni şekil · Enter/Space: başla",
+  "thumbnail": "tane.svg",
+  "howToPlay": "Bir kabın (vazo, kase ya da şişe) silüetini ekranda görürsün; bunu kum taneleriyle %85 doluluğa kadar yığmaya çalış. Tahta üzerinde bir noktaya bas-tut → parmağının (ya da farenin) altından kum tanesi akmaya başlar. Taneler gerçek kum gibi düşer: önce dik aşağı, alt komşu doluysa diyagonal yana savrulur, böylece doğal piramit/yığın oluşur. Kabın üst ağzından döktüğün taneler içine girer; ağzı kaçırırsan duvara çarpıp yere taşar. Her oyun başında 700 tanelik kum bütçesi var; her tane harcanır, geri gelmez. Dolu yüzdesi hedefe ulaşırsa kazanırsın ve **kullandığın tane sayısı** rekorun olur — yani amaç en az taneyle en hızlı doldurmak. Bütçen biter ama kap %85'i bulamazsa kaybedersin. R tuşu mevcut şekille yeni dener, N tuşu rastgele yeni bir kap getirir. İpucu: tanelerin yan kayışını hesaba kat — kabın ortası yerine ağzına nişan al, en az taşma orada olur; dar boyunlu şişede direkt boyundan dök, kase gibi geniş ağızda kıyıdan başlayıp ortaya doğru kaydır.",
+  "scoring": {
+    "storageKey": "tane.best",
+    "label": "Tane",
+    "direction": "lower",
+    "labelEn": "Grains"
+  },
+  "en": {
+    "title": "Grain",
+    "description": "Pour sand into the vessel — gravity stacks it, but anything you spill is lost.",
+    "controls": "Press & hold: pour · R: retry · N: new shape · Enter/Space: start",
+    "howToPlay": "A vessel silhouette (vase, bowl or bottle) is drawn on the board; your goal is to fill it to 85% with sand grains. Press and hold on the canvas — sand starts pouring from beneath your cursor or finger. Grains behave like real sand: each one falls straight down, and if the cell below is occupied it slips diagonally, forming natural piles. Grains that hit the open top fall inside the vessel; miss the rim and they spill onto the floor as waste. Each round gives you a budget of 700 grains; every spawn spends one. When the fill ratio reaches the target you win, and the number of **grains used** becomes your record — so the goal is to fill the vessel with as few grains as possible. If the budget runs out before 85% you lose. Press R to retry the same shape, N for a fresh random vessel. Tip: account for sideways slip — aim for the rim rather than the centre, where overflow is minimal; on a narrow-necked bottle pour straight down the neck, on a wide bowl start near a rim and sweep toward the middle."
+  }
+}
