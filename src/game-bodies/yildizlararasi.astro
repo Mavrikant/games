@@ -1,0 +1,38 @@
+---
+---
+
+<div id="yi-root" class="yi-root">
+  <header class="yi-hud">
+    <button id="yi-music" class="yi-icon-btn" type="button" aria-pressed="true" aria-label="Müziği aç/kapat">🎵</button>
+    <button id="yi-sfx" class="yi-icon-btn" type="button" aria-pressed="true" aria-label="Ses efektlerini aç/kapat">🔊</button>
+    <button id="restart" class="yi-icon-btn" type="button" aria-label="Baştan başla">↺</button>
+  </header>
+
+  <div id="yi-stage" class="yi-stage">
+    <canvas id="yi-stars" class="yi-stars" aria-hidden="true"></canvas>
+
+    <section id="yi-intro" class="yi-scene yi-scene--active" aria-label="Açılış">
+      <div class="yi-panel yi-intro__panel">
+        <h2 class="yi-title">Yıldızlararası</h2>
+        <p class="yi-intro__tag">Uzayın derinliklerinden başlayan bir aşk yolculuğu.</p>
+        <button id="yi-start" class="yi-btn yi-btn--pink" type="button">Başla</button>
+      </div>
+    </section>
+
+    <section id="yi-customize" class="yi-scene" hidden aria-label="Karakter özelleştirme"></section>
+    <section id="yi-mode" class="yi-scene" hidden aria-label="Mod seçimi"></section>
+    <section id="yi-setup" class="yi-scene" hidden aria-label="Anıları gizle"></section>
+    <section id="yi-play" class="yi-scene" hidden aria-label="Yolculuk"></section>
+    <section id="yi-final" class="yi-scene" hidden aria-label="Kavuşma"></section>
+
+    <div id="yi-popup" class="overlay overlay--hidden" aria-hidden="true" role="dialog" aria-label="Anı">
+      <div class="yi-panel yi-popup__card">
+        <div id="yi-popup-icon" class="yi-popup__icon" aria-hidden="true">📸</div>
+        <p id="yi-popup-msg" class="yi-popup__msg"></p>
+        <button id="yi-popup-close" class="yi-btn yi-btn--turq" type="button">Devam et</button>
+      </div>
+    </div>
+
+    <div id="yi-fade" class="yi-fade" aria-hidden="true"></div>
+  </div>
+</div>
