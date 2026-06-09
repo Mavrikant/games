@@ -144,7 +144,7 @@ const itemListSchema = {
         </svg>
         Her gün yeni oyun
       </span>
-      <h1 class="hero__title">Tarayıcıda oyna.<br />Klon değil.</h1>
+      <h1 class="hero__title">Tarayıcıda oyna.<br /><span class="hero__title-accent">Klon değil.</span></h1>
       <p class="hero__subtitle">
         Klasiklere taze mekanik twistleri ve hiç oynamadığın orijinal
         fikirler. Her oyun tek tıkla başlar — indirme yok, kayıt yok.
@@ -342,6 +342,7 @@ const itemListSchema = {
     display: none;
   }
   .featured__card {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
@@ -354,14 +355,43 @@ const itemListSchema = {
     overflow: hidden;
     text-align: left;
     color: var(--text);
-    transition: transform 0.18s ease, border-color 0.18s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     font: inherit;
+  }
+  /* Signature gradient hairline that fades in on hover so the daily pick
+     reads as the page's hero affordance. */
+  .featured__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--accent-gradient);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
   }
   .featured__card:hover,
   .featured__card:focus-visible {
     transform: translateY(-3px);
-    border-color: var(--accent);
+    border-color: transparent;
     outline: none;
+    box-shadow: 0 22px 50px -22px var(--accent-glow);
+  }
+  .featured__card:hover::before,
+  .featured__card:focus-visible::before {
+    opacity: 1;
+  }
+  .featured__thumb img {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .featured__card:hover .featured__thumb img {
+    transform: scale(1.04);
   }
   .featured__thumb {
     aspect-ratio: 16 / 10;
@@ -393,10 +423,24 @@ const itemListSchema = {
     line-height: 1.5;
   }
   .featured__cta {
-    margin-top: 6px;
+    margin-top: 12px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--accent);
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 7px 15px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .featured__card:hover .featured__cta,
+  .featured__card:focus-visible .featured__cta {
+    background: var(--accent);
+    color: #fff;
   }
   @media (min-width: 720px) {
     .featured__card {

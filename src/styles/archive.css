@@ -34,7 +34,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  background: var(--accent-gradient);
   color: white;
   font-size: 14px;
   font-weight: 700;
@@ -110,9 +110,24 @@ body {
   color: var(--accent);
   padding: 4px 10px;
   background: var(--accent-soft);
+  border: 1px solid rgba(129, 140, 248, 0.2);
   border-radius: 999px;
   margin-bottom: 18px;
   font-weight: 600;
+}
+.hero__eyebrow svg {
+  animation: hero-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hero-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+  }
 }
 
 .hero__title {
@@ -122,6 +137,15 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.05;
   color: var(--text);
+}
+/* Brand tagline highlight — the indigo→sky signature gradient on the second
+   line. Falls back to a solid accent where background-clip is unsupported. */
+.hero__title-accent {
+  color: var(--accent);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero__subtitle {
@@ -174,6 +198,10 @@ body {
   outline: none;
   border-color: var(--accent);
   background: var(--surface-2);
+  box-shadow: var(--ring);
+}
+.search:focus-within .search__icon {
+  color: var(--accent);
 }
 
 .sort {
@@ -192,6 +220,7 @@ body {
 .sort:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: var(--ring);
 }
 
 .tags {
@@ -218,13 +247,15 @@ body {
   background: var(--surface);
 }
 .tag--active {
-  background: var(--text);
-  color: var(--bg);
-  border-color: var(--text);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
 }
 .tag--active:hover {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .grid {
@@ -282,6 +313,11 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card:hover .card__thumb img,
+.card:hover .card__thumb svg {
+  transform: scale(1.06);
 }
 .card__thumb-placeholder {
   font-size: 36px;
