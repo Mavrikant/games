@@ -1,0 +1,214 @@
+/*
+ * Ton Avı — find the differently-toned circle. Per-game styles only.
+ * The overlay rules (.overlay / .overlay--hidden) are required by
+ * @shared/overlay; without them hideOverlay() does nothing visible
+ * (pitfall: missing-overlay-css).
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Time bar sits above the board and drains left-to-right. */
+.timebar {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 14px;
+  height: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.timebar__fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 999px;
+  background: var(--accent, #6ee7b7);
+  transform-origin: left center;
+  transform: scaleX(1);
+  transition: transform 0.08s linear;
+}
+
+.timebar__fill--low {
+  background: #f4655b;
+}
+
+/* Square grid; column count is driven by the --cols custom property the
+   logic sets per level (2 → 8). */
+#board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: clamp(4px, 2.2%, 14px);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: clamp(6px, 2.5%, 16px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  touch-action: manipulation;
+  transition: box-shadow 0.15s ease-out;
+}
+
+#board.board--good {
+  box-shadow: 0 0 0 2px var(--accent, #6ee7b7) inset;
+}
+
+#board.board--shake {
+  animation: ta-shake 0.32s ease-in-out;
+}
+
+.cell {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+/* The visible circle. The hit area is the whole square cell (forgiving),
+   the circle is the rendered tone. */
+.cell::before {
+  content: '';
+  width: 86%;
+  height: 86%;
+  border-radius: 50%;
+  background: var(--dot, #888);
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.1s ease-out;
+}
+
+.cell:hover::before {
+  transform: scale(1.06);
+}
+
+.cell:active::before {
+  transform: scale(0.92);
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--accent, #6ee7b7);
+  outline-offset: 2px;
+}
+
+.cell--wrong::before {
+  box-shadow:
+    inset 0 -2px 6px rgba(0, 0, 0, 0.25),
+    0 0 0 3px #f4655b;
+  animation: ta-pop 0.3s ease-out;
+}
+
+@keyframes ta-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes ta-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.82);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #board.board--shake {
+    animation: none;
+  }
+  .cell--wrong::before {
+    animation: none;
+  }
+}
+
+/* --- Overlay (required by @shared/overlay) --- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 16px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 18px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.overlay__inner .hud__btn {
+  font-size: 16px;
+  padding: 10px 22px;
+}
+
+/* --- HUD score chips --- */
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
