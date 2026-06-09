@@ -1,0 +1,21 @@
+{
+  "title": "Tam Pay",
+  "description": "Çokgeni tek bir düz çizgiyle istenen orana göre kes — geometrik sezgi yarışması.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "geometri", "özgün", "tek-oyunculu"],
+  "controls": "Sürükle: kesme çizgisini çiz · Boşluk / Enter: sonraki tur · R: yeniden başla",
+  "thumbnail": "tam-pay.svg",
+  "howToPlay": "Tam Pay, geometrik sezgini sınayan tek oyunculu bir bulmacadır. Her turda ekranda bir konveks çokgen (kare, üçgen, beşgen, altıgen, ya da düzensiz bir çokgen) ve üstte bir 'hedef oran' görürsün: 1:1, 1:2, 2:3, 1:3 veya 3:5. Görevin: çokgeni tek bir düz çizgiyle, iki parçanın alan oranı hedefe en yakın olacak şekilde ikiye bölmek. Çizgiyi çizmek için kanvas üzerinde herhangi bir noktadan başlayıp sürükle ve bırak — bıraktığın çizgi sonsuza uzatılır ve çokgeni keser, yani çizginin uçlarının tam çokgenin kenarlarına değmesi gerekmez, sadece doğru yönü ve konumu vermen yeter. Sürüklerken iki parçanın canlı yüzdesi her parçanın üzerinde belirir, böylece bırakmadan önce ince ayar yapabilirsin. Bırakınca tur skorun hesaplanır: %0 sapma 100 puan, %10 veya daha fazla sapma 0 puan (lineer). Boşluk veya Sonraki butonuyla bir sonraki tura geç. Oyun 10 tur sürer, üst sınır 1000 puandır; toplam skorun tarayıcında saklanır. Eğer çizgi çokgeni hiç kesmiyorsa (örneğin tamamen dışında bir yere bıraktıysan) atış sayılmaz ve yeniden deneyebilirsin. İpucu: dikdörtgenler için karşılıklı kenarların orta noktalarını birleştiren bir çizgi tam 1:1 verir; düzgün çokgenler ise tepe-merkez ekseninde simetrik bölünür. Düzensiz çokgenlerde alan göz aldatıcıdır — geniş bir köşe her zaman 'büyük' alan demek değildir, içeriden geçen kısa bir kesim de bazen büyük bir parça açabilir.",
+  "scoring": {
+    "storageKey": "tam-pay.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Fair Share",
+    "description": "Slice a polygon with a single straight line to match the target area ratio — a geometric intuition game.",
+    "controls": "Drag: draw the cut line · Space / Enter: next round · R: restart",
+    "howToPlay": "Fair Share is a single-player geometric puzzle. Each round a convex polygon (square, triangle, pentagon, hexagon, or an irregular one) appears, with a target area ratio above it: 1:1, 1:2, 2:3, 1:3, or 3:5. Your job: split the polygon with a single straight line so the two pieces' area ratio is as close to the target as possible. To draw the line, drag anywhere on the canvas and release — the line you release is extended infinitely, so its endpoints don't have to land on the polygon's edges; only the direction and position matter. While dragging, the live percentage of each piece is shown on the piece itself, letting you fine-tune your aim before releasing. On release the round is scored: 0% deviation = 100 points, 10% or worse = 0 points (linear). Press Space or the Next button to advance. The game runs for 10 rounds with a 1000-point ceiling, and your total is saved in your browser. If the line never crosses the polygon (you released entirely outside it) the attempt doesn't count and you can try again. Tip: for rectangles, connecting the midpoints of opposite sides gives a clean 1:1; regular polygons split symmetrically through a vertex and the midpoint of the opposite side. With irregular polygons area is deceiving — a wide corner isn't always the larger area, and a short cut through the interior can sometimes carve off a big chunk."
+  }
+}

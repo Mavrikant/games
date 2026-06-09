@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tam Pay">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- Subtle grid -->
+  <g stroke="#2a2d36" stroke-width="0.5" opacity="0.6">
+    <line x1="0" y1="50" x2="320" y2="50" />
+    <line x1="0" y1="100" x2="320" y2="100" />
+    <line x1="0" y1="150" x2="320" y2="150" />
+    <line x1="80" y1="0" x2="80" y2="200" />
+    <line x1="160" y1="0" x2="160" y2="200" />
+    <line x1="240" y1="0" x2="240" y2="200" />
+  </g>
+
+  <!-- Hexagon centered at (220, 105) radius 65:
+       angles 0, 60, 120, 180, 240, 300 -> screen coords (y-down):
+       (285, 105), (252.5, 161.3), (187.5, 161.3), (155, 105), (187.5, 48.7), (252.5, 48.7) -->
+  <!-- Cut: vertical line at x = 230 -->
+  <!-- Intersects top edge (252.5,48.7)→(187.5,48.7) at (230, 48.7)
+       Intersects bottom edge (252.5,161.3)→(187.5,161.3) at (230, 161.3) -->
+
+  <!-- Larger side (left, orange ~58%) -->
+  <polygon points="230,48.7 187.5,48.7 155,105 187.5,161.3 230,161.3"
+           fill="rgba(251,146,60,0.42)" stroke="none" />
+  <!-- Smaller side (right, green ~42%) -->
+  <polygon points="230,48.7 252.5,48.7 285,105 252.5,161.3 230,161.3"
+           fill="rgba(52,211,153,0.42)" stroke="none" />
+
+  <!-- Hexagon outline -->
+  <polygon points="285,105 252.5,161.3 187.5,161.3 155,105 187.5,48.7 252.5,48.7"
+           fill="none" stroke="#7c93ff" stroke-width="2" />
+
+  <!-- Cut line (extended dashed) -->
+  <line x1="230" y1="12" x2="230" y2="198" stroke="#ffffff" stroke-width="2" stroke-dasharray="6 5" opacity="0.95" />
+
+  <!-- Percentage labels on each piece -->
+  <g font-family="ui-sans-serif, system-ui" font-weight="700" font-size="13" text-anchor="middle">
+    <rect x="184" y="96" width="38" height="20" rx="5" fill="rgba(10,11,14,0.78)" />
+    <text x="203" y="110" fill="#fb923c">%58</text>
+    <rect x="240" y="96" width="38" height="20" rx="5" fill="rgba(10,11,14,0.78)" />
+    <text x="259" y="110" fill="#34d399">%42</text>
+  </g>
+
+  <!-- Title + target label -->
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Tam Pay</text>
+  <text x="20" y="58" font-family="ui-sans-serif, system-ui" font-size="13" fill="#a3e635" font-weight="600">Hedef · 2:3</text>
+</svg>
