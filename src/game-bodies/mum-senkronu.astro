@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Mum Senkronu oyun alanı"></canvas>
+  <div class="meter" aria-hidden="true">
+    <div class="meter__label">Senkron</div>
+    <div class="meter__bar"><div id="sync-fill" class="meter__fill"></div></div>
+  </div>
+  <div id="overlay" class="overlay" role="dialog" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mum Senkronu</h2>
+      <p id="overlay-msg">Her mum kendi hızında söner. Hepsinin alevini aynı anda zirvede tut — bir saniye dayan, seviye atla. Muma tıkla veya dokun ile yak; komşular küçük bir kıvılcım alır.<br/><br/>Başlamak için herhangi bir muma dokun.</p>
+    </div>
+  </div>
+</div>

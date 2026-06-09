@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mum Senkronu">
+  <defs>
+    <linearGradient id="ms-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d160d" />
+      <stop offset="100%" stop-color="#08080c" />
+    </linearGradient>
+    <radialGradient id="ms-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffc560" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ff8c3c" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ff8c3c" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ms-bg)" />
+  <line x1="20" y1="165" x2="300" y2="165" stroke="rgba(170,140,100,0.4)" stroke-width="1.5" />
+  <g>
+    <!-- Candle 1 -->
+    <circle cx="68" cy="78" r="34" fill="url(#ms-glow)" />
+    <rect x="60" y="92" width="16" height="68" rx="3" fill="#f4ecd8" />
+    <line x1="68" y1="92" x2="68" y2="86" stroke="#2c2520" stroke-width="2" />
+    <path d="M 68 86 Q 76 80 68 70 Q 60 80 68 86 Z" fill="#ffaf3c" />
+    <path d="M 68 84 Q 72 80 68 74 Q 64 80 68 84 Z" fill="#fff0c8" />
+    <!-- Candle 2 -->
+    <circle cx="128" cy="76" r="40" fill="url(#ms-glow)" />
+    <rect x="120" y="88" width="16" height="72" rx="3" fill="#f4ecd8" />
+    <line x1="128" y1="88" x2="128" y2="80" stroke="#2c2520" stroke-width="2" />
+    <path d="M 128 80 Q 138 70 128 60 Q 118 70 128 80 Z" fill="#ffaf3c" />
+    <path d="M 128 78 Q 133 72 128 64 Q 123 72 128 78 Z" fill="#fff0c8" />
+    <!-- Candle 3 -->
+    <circle cx="188" cy="80" r="36" fill="url(#ms-glow)" />
+    <rect x="180" y="92" width="16" height="68" rx="3" fill="#f4ecd8" />
+    <line x1="188" y1="92" x2="188" y2="84" stroke="#2c2520" stroke-width="2" />
+    <path d="M 188 84 Q 196 76 188 68 Q 180 76 188 84 Z" fill="#ffaf3c" />
+    <path d="M 188 82 Q 192 76 188 70 Q 184 76 188 82 Z" fill="#fff0c8" />
+    <!-- Candle 4 -->
+    <circle cx="248" cy="82" r="32" fill="url(#ms-glow)" />
+    <rect x="240" y="94" width="16" height="66" rx="3" fill="#f4ecd8" />
+    <line x1="248" y1="94" x2="248" y2="88" stroke="#2c2520" stroke-width="2" />
+    <path d="M 248 88 Q 254 82 248 74 Q 242 82 248 88 Z" fill="#ffaf3c" />
+    <path d="M 248 86 Q 251 82 248 78 Q 245 82 248 86 Z" fill="#fff0c8" />
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f4ecd8">Mum Senkronu</text>
+</svg>

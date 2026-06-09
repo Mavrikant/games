@@ -1,0 +1,21 @@
+{
+  "title": "Mum Senkronu",
+  "description": "Birden çok mumun parlaklığını aynı anda tepede tut — her biri kendi hızında söner; doğru anda doğru mumu yakman gerek.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "zaman", "özgün", "tek-oyunculu"],
+  "controls": "Tıkla / Dokun: mumu yak · 1–7: muma karşılık gelen tuş · Boşluk: başlat · R: yeniden başla",
+  "thumbnail": "mum-senkronu.svg",
+  "howToPlay": "Mum Senkronu, kendi hızında sönen bir dizi mumun parlaklığını aynı anda zirvede tutmaya çalıştığın özgün bir denge oyunudur. Ekranda 4 mum görürsün; her mumun yan tarafında küçük bir ölçek vardır ve o ölçekteki yatay çizgi 'senkron eşiği'ni gösterir. Bir mumun aleve sahip olabilmesi için parlaklığı bu eşiğin üstünde olmalıdır. Her mumun bir sönme hızı vardır ve bu hız mumdan muma farklıdır: bazıları yavaş söner, bazıları hızla kararır. Bir muma tıklarsan veya dokunursan (klavyede 1–7 rakamları da çalışır) o mumun alevi en yüksek seviyeye sıçrar; ayrıca komşu mumlara küçük bir parıltı eklenir, bu yüzden hangi mumu seçtiğin önemlidir. Amacın: bütün mumları aynı anda eşiğin üzerinde tutmak ve onları kısa bir süre öyle tutmaktır. Üstteki 'Senkron' çubuğu doluyken seviye atlarsın; başaramazsan çubuk hızla geri boşalır. Bir mum tamamen söner ve birkaç saniye karanlık kalırsa oyun biter — yani bir mumu fazla unutamazsın. Her yeni seviyede mumlar daha hızlı söner ve birkaç seviyede bir yeni bir mum eklenir, en fazla 7 muma kadar çıkar. İpucu: kenardaki mumlar yalnızca tek komşu bonus aldığı için en kırılgan olanlardır; sönmeye en yakın olanları izle, içerideki bir mumu yakarak iki komşuyu birden boostlamak ekonomik bir hamledir; senkron çubuğu dolmak üzereyken en yavaş sönen mumu en sona bırak ki son yakışın diğerlerini de yukarı çeksin.",
+  "scoring": {
+    "storageKey": "mum-senkronu.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Candle Sync",
+    "description": "Keep a row of candles bright at the same instant — each one fades at its own rate; pick the right one to relight.",
+    "controls": "Click / tap: relight a candle · 1–7: keyboard shortcut for each candle · Space: start · R: restart",
+    "howToPlay": "Candle Sync is an original balance game: a row of candles each fade at their own pace, and your job is to push every flame above a shared threshold at the same moment. Each candle has a tiny gauge on its side with a tick marking the sync threshold; the candle is 'bright enough' when its glow rises above that tick. Click or tap a candle (or press its number key, 1–7) to relight it to full brightness; its two neighbours also receive a small boost, so the order of your taps matters. When every candle is simultaneously above the threshold the Sync bar at the top fills, and if you hold them all bright for about a second you score and level up. Miss the sync and the bar drains twice as fast as it filled. If any candle stays completely dark for too long the game ends — so you can't ignore one for long. Every new level makes the candles fade faster, and a new candle is added every few levels up to seven. Tip: edge candles only have one neighbour to boost them and tend to die first; relighting an interior candle is more economical because two neighbours get the bonus at once. When the Sync bar is near full, save the slowest-fading candle for last so your final tap pulls everything else up with it."
+  }
+}
