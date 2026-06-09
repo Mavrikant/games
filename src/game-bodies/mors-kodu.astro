@@ -1,0 +1,60 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <div class="hud__stat hud__stat--lives">Can<span id="lives" aria-label="Kalan can sayısı">●●●</span></div>
+  <div class="hud__stat">Seviye<span id="level">1</span></div>
+  <button id="chart-toggle" class="hud__btn" type="button" aria-pressed="false">Tablo</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<section class="board" aria-label="Mors Kodu tahtası">
+  <div class="timer" aria-hidden="true">
+    <div id="timer-bar" class="timer__bar"></div>
+  </div>
+
+  <p id="prompt" class="prompt" aria-live="polite">Yayınlanan harfi tanı</p>
+
+  <div class="lamp-wrap">
+    <div id="lamp" class="lamp" aria-label="Sinyal lambası" role="img"></div>
+    <div id="signal-trail" class="signal-trail" aria-hidden="true"></div>
+  </div>
+
+  <div id="options" class="mk-options" role="group" aria-label="Harf seçenekleri">
+    <button class="mk-option" type="button" data-option="0">
+      <span class="mk-option__key">1</span>
+      <span class="mk-option__letter">?</span>
+    </button>
+    <button class="mk-option" type="button" data-option="1">
+      <span class="mk-option__key">2</span>
+      <span class="mk-option__letter">?</span>
+    </button>
+    <button class="mk-option" type="button" data-option="2">
+      <span class="mk-option__key">3</span>
+      <span class="mk-option__letter">?</span>
+    </button>
+    <button class="mk-option" type="button" data-option="3">
+      <span class="mk-option__key">4</span>
+      <span class="mk-option__letter">?</span>
+    </button>
+  </div>
+
+  <button id="replay" class="mk-replay" type="button" disabled>
+    Sinyali tekrarla (Boşluk)
+  </button>
+
+  <div id="chart" class="mk-chart mk-chart--hidden" aria-hidden="true">
+    <div class="mk-chart__title">Mors Alfabesi</div>
+    <div id="chart-grid" class="mk-chart__grid"></div>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Oyun bitti</h2>
+      <p id="overlay-msg">Skor: 0</p>
+      <button id="overlay-restart" class="overlay__btn" type="button">Tekrar oyna</button>
+    </div>
+  </div>
+</section>

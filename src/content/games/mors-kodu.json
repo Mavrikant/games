@@ -1,0 +1,21 @@
+{
+  "title": "Mors Kodu",
+  "description": "Yanıp sönen sinyali çöz — yayınlanan harfi 4 seçenek arasından bul.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "özgün", "eğitici", "morse", "tepki"],
+  "controls": "Tıkla: harf seç · 1-4: harf seç · R: yeniden başla · Boşluk: sinyali tekrarla",
+  "howToPlay": "Bir telgrafçısın. Her turda bir lamba kısa (•) ve uzun (—) sinyaller çakarak tek bir harf yayar; senin işin sinyali çözüp aşağıdaki dört seçenek arasından doğru harfi seçmek. Lamba sönünce dört buton aktif olur: fareyle tıkla ya da 1–4 tuşlarına bas. Sinyali kaçırdıysan Boşluk tuşuyla aynı harfi yeniden yayınlatabilirsin (sadece beklerken). Her doğru cevap skorunu +1 artırır; her beş doğru bir seviye atlatır — yeni seviyede sinyal hızlanır ve harf havuzuna daha karmaşık kodlar eklenir. Yanlış seçim ya da 10 saniye içinde cevap verememek bir can götürür; üç can biterse oyun sona erer ve en iyi skorun kaydedilir. Yardıma ihtiyacın olursa sağ üstteki 'Tablo' butonuyla uluslararası mors alfabesini açıp kapatabilirsin. İpucu: önce kaç sinyal olduğunu say (1, 2, 3 ya da 4 işaret), sonra kısa/uzun deseniyle eşleştir; ilk seviyelerde sadece E, T, A, N gibi tek-iki işaretli harfler gelir, üst seviyelerde 3–4 işaretli harfler de katılır.",
+  "thumbnail": "mors-kodu.svg",
+  "scoring": {
+    "storageKey": "mors-kodu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Morse Code",
+    "description": "Decode the blinking signal — pick the transmitted letter from four options.",
+    "controls": "Click: pick a letter · 1-4: pick a letter · R: restart · Space: replay the signal",
+    "howToPlay": "You're a telegraph operator. Each round a lamp flashes short (•) and long (—) signals to transmit a single letter; your job is to decode it and choose the correct letter from four options below. Once the lamp goes dark the four buttons become active: click with the mouse or press 1–4. If you missed the signal, press Space to replay the same letter (only while waiting). Every correct answer raises your score by +1; every five correct answers levels you up — at higher levels the signal gets faster and the letter pool grows with more complex codes. A wrong choice or failing to answer within 10 seconds costs you a life; the game ends when all three lives are gone, and your best score is saved. Need help? Toggle the 'Chart' button in the top right to show or hide the international Morse alphabet. Tip: first count how many signals there are (1, 2, 3 or 4 marks), then match the short/long pattern; early levels only use simple letters like E, T, A, N, while higher levels add 3–4 mark letters."
+  }
+}
