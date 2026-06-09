@@ -1,0 +1,21 @@
+{
+  "title": "Tek Nefes",
+  "description": "Serbest dalış. Derinlere indikçe daha değerli inciler bekliyor — ama nefesin tükenmeden yüzeye dönmelisin. Açgözlülük seni boğar.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arkad", "özgün", "refleks", "tek-oyunculu"],
+  "controls": "Tıkla / dokun: hedefe yüz · R: yeniden başla",
+  "thumbnail": "tek-nefes.svg",
+  "howToPlay": "Tek Nefes serbest dalış üzerine bir push-your-luck oyunudur: ekranı tıkladığın (ya da dokunduğun) noktaya doğru dalıcı yüzer; yüzeyin üstündeyken nefesin dolar, dipte hızla tükenir. Her incinin üstünde değeri yazar; yüzeye yakın inciler 1 puan, dipteki inciler 8–9 puan getirir — dalıcının değdiği anda toplanır ve yenisi başka bir noktada doğar. Ara sıra yükselen mavi hava kabarcıkları görürsün; onlara dokunmak nefesini bir miktar geri verir, derin dalışlarda hayat kurtarır. Nefes göstergesi yüzde 25'in altına düşünce çubuk kırmızıya döner; bu uyarıyı görür görmez yukarı yön ver, çünkü dipte nefes 100'den 0'a yaklaşık dört saniyede iner. Nefesin sıfırlanırken hâlâ su altındaysan oyun biter ve toplam skorun en iyi rekorla karşılaştırılır. İpucu: dipteki bir inciyi alıp yüzeye yetiştirmek riski yüksek bir bahistir; çoğu zaman iki orta-derinlik incisi (4–5 puanlık) tek bir dip incisinden daha güvenli toplam yapar — kabarcığı yolda görürsen dip dalışını ona göre zamanla.",
+  "scoring": {
+    "storageKey": "tek-nefes.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "One Breath",
+    "description": "Free-diving. Dive deeper for more valuable pearls — but surface before your air runs out. Greed will drown you.",
+    "controls": "Click / tap: swim toward · R: restart",
+    "howToPlay": "One Breath is a push-your-luck free-diving game: the diver swims toward wherever you click or tap; air refills above the waterline and drains fast in the depths. Each pearl shows its value — pearls near the surface are worth 1 point, deep ones reach 8–9; touch one with the diver to collect it and a new pearl spawns elsewhere. Occasional blue air bubbles rise from the bottom; touching one restores some breath and can save a deep dive. When air drops below 25% the gauge turns red — start ascending immediately, because at the deepest point breath falls from 100 to 0 in about four seconds. If air hits zero while you're still submerged the game ends and your total is compared to your best. Tip: chasing a deep pearl and racing back is a high-risk bet; two mid-depth pearls (4–5 points each) usually total more safely than one bottom pearl — time the deep dive around a rising bubble you can grab on the way."
+  }
+}

@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En İyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="air" aria-label="Nefes göstergesi">
+  <span class="air__label">Nefes</span>
+  <div class="air__bar"><div id="air-fill" class="air__fill"></div></div>
+</div>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="540" aria-label="Tek Nefes dalış alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tek Nefes</h2>
+      <p id="overlay-msg">Dalmak için bir noktaya tıkla veya dokun.<br />Derinlik = değer; ama nefesini izle.</p>
+    </div>
+  </div>
+</div>

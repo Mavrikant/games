@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tek Nefes">
+  <defs>
+    <linearGradient id="tn-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86c5ef" />
+      <stop offset="100%" stop-color="#5ea2d5" />
+    </linearGradient>
+    <linearGradient id="tn-water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a5985" />
+      <stop offset="55%" stop-color="#07273f" />
+      <stop offset="100%" stop-color="#010812" />
+    </linearGradient>
+    <radialGradient id="tn-pearl" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="55%" stop-color="#f5fbff" />
+      <stop offset="100%" stop-color="#b9def7" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="40" fill="url(#tn-sky)" />
+  <rect y="40" width="320" height="160" fill="url(#tn-water)" />
+  <path d="M0 40 Q 20 36 40 40 T 80 40 T 120 40 T 160 40 T 200 40 T 240 40 T 280 40 T 320 40" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" />
+  <g opacity="0.08">
+    <rect y="100" width="320" height="1" fill="#ffffff" />
+    <rect y="140" width="320" height="1" fill="#ffffff" />
+    <rect y="180" width="320" height="1" fill="#ffffff" />
+  </g>
+  <g>
+    <circle cx="90" cy="120" r="9" fill="url(#tn-pearl)" />
+    <text x="90" y="124" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#0b132b">3</text>
+  </g>
+  <g>
+    <circle cx="220" cy="170" r="10" fill="url(#tn-pearl)" />
+    <text x="220" y="174" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#0b132b">8</text>
+  </g>
+  <g>
+    <circle cx="260" cy="155" r="6" fill="rgba(174,215,245,0.55)" stroke="#ffffff" stroke-width="1.2" />
+    <circle cx="258" cy="153" r="1.5" fill="#ffffff" />
+  </g>
+  <g>
+    <circle cx="160" cy="85" r="11" fill="#fbbf24" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" />
+    <ellipse cx="160" cy="84" rx="6" ry="3.4" fill="#0b132b" />
+    <rect x="155.5" y="82.6" width="3" height="1.4" fill="#7dd3fc" />
+    <rect x="161" y="82.6" width="3" height="1.4" fill="#7dd3fc" />
+  </g>
+  <text x="20" y="30" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#0b1d33">Tek Nefes</text>
+</svg>
