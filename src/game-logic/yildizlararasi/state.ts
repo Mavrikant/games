@@ -3,17 +3,18 @@
 
 import { createGenToken } from '@shared/gen-token';
 import { safeRead, safeWrite } from '@shared/storage';
+import { cloudEnabled, loadMemories } from './cloud';
 import { DEFAULT_DATA } from './data';
-import { decodeData, readHashPayload } from './share';
+import { coerceData, decodeData, readCloudCode, readHashPayload } from './share';
 import type { GameData, SceneId } from './types';
 
 const STORAGE_KEY = 'yildizlararasi.data';
 
 export const gen = createGenToken();
 
-export interface Vec {
+export interface Vec2 {
   x: number;
-  y: number;
+  z: number;
 }
 
 export interface RuntimeState {
@@ -21,12 +22,13 @@ export interface RuntimeState {
   data: GameData;
   planetIndex: number; // index into PLANETS
   collected: Set<string>; // memory planetIds collected this run
-  pos: Vec; // player position, 0..100 (%)
-  target: Vec; // click-to-move target, 0..100 (%)
+  p3: Vec2; // player world position (x,z)
+  t3: Vec2; // click-to-move target (x,z)
   keys: Set<string>; // held movement keys
   popupOpen: boolean;
   portalActive: boolean;
-  inputLocked: boolean; // blocks movement (popup/portal/transition)
+  minigameActive: boolean;
+  inputLocked: boolean; // blocks movement (popup/portal/minigame/transition)
   customizeIndex: 0 | 1; // which character is being edited
   setupIndex: number; // which planet is being edited in setup
 }
@@ -35,17 +37,27 @@ function clone(data: GameData): GameData {
   return JSON.parse(JSON.stringify(data)) as GameData;
 }
 
+// Synchronous best-effort load: hash (#d) → localStorage → default. The async
+// cloud code (#c) is resolved separately via maybeLoadCloud().
 export function freshData(): GameData {
   const hash = readHashPayload();
   if (hash) {
     const decoded = decodeData(hash);
     if (decoded) return decoded;
   }
-  const stored = safeRead<GameData | null>(STORAGE_KEY, null);
-  if (stored && stored.version === 1 && Array.isArray(stored.memories) && stored.memories.length > 0) {
-    return stored;
-  }
+  const stored = coerceData(safeRead<unknown>(STORAGE_KEY, null));
+  if (stored) return stored;
   return clone(DEFAULT_DATA);
+}
+
+// If the URL carries a cloud code and Supabase is configured, fetch the setup
+// and hand it back. No-op (never calls onLoaded) otherwise.
+export function maybeLoadCloud(onLoaded: (data: GameData) => void): void {
+  const code = readCloudCode();
+  if (!code || !cloudEnabled()) return;
+  void loadMemories(code).then((data) => {
+    if (data) onLoaded(data);
+  });
 }
 
 export function persistData(): void {
@@ -57,11 +69,12 @@ export const S: RuntimeState = {
   data: clone(DEFAULT_DATA),
   planetIndex: 0,
   collected: new Set<string>(),
-  pos: { x: 50, y: 70 },
-  target: { x: 50, y: 70 },
+  p3: { x: 0, z: 4.6 },
+  t3: { x: 0, z: 4.6 },
   keys: new Set<string>(),
   popupOpen: false,
   portalActive: false,
+  minigameActive: false,
   inputLocked: false,
   customizeIndex: 0,
   setupIndex: 0,
@@ -71,11 +84,12 @@ export const S: RuntimeState = {
 export function resetRun(): void {
   S.planetIndex = 0;
   S.collected = new Set<string>();
-  S.pos = { x: 50, y: 72 };
-  S.target = { x: 50, y: 72 };
+  S.p3 = { x: 0, z: 4.6 };
+  S.t3 = { x: 0, z: 4.6 };
   S.keys.clear();
   S.popupOpen = false;
   S.portalActive = false;
+  S.minigameActive = false;
   S.inputLocked = false;
   S.customizeIndex = 0;
   S.setupIndex = 0;

@@ -1,11 +1,11 @@
-// Earth reunion cutscene: the player approaches the waiting partner; collected
-// items orbit, flowers bloom, hearts rise, and the closing message appears.
-// Music switches to the warm "earth" theme. All timers are gen-guarded so a
-// restart mid-cutscene aborts cleanly.
+// Earth reunion cutscene. The 3D scene shows the bright meadow, the waiting
+// partner, the player and the collected memories orbiting overhead. A DOM overlay
+// adds blooming flowers, rising hearts and the closing message. Music switches to
+// the warm "earth" theme. All timers are gen-guarded so a restart aborts cleanly.
 
 import { setTheme } from './audio';
-import { buildAvatarSvg } from './avatar';
 import { gen, S } from './state';
+import * as three from './three-scene';
 import type { Scene } from './types';
 
 const FLOWER_GLYPHS = ['🌸', '🌷', '🌼', '🌹', '🌻'];
@@ -28,48 +28,29 @@ function reduced(): boolean {
 
 function later(fn: () => void, ms: number): void {
   const myGen = gen.current();
-  const id = window.setTimeout(() => {
-    if (gen.isCurrent(myGen)) fn();
-  }, ms);
-  timers.push(id);
+  timers.push(
+    window.setTimeout(() => {
+      if (gen.isCurrent(myGen)) fn();
+    }, ms),
+  );
 }
 
-function collectedItems(): string[] {
+function collectedGlyphs(): string[] {
   return S.data.memories.filter((m) => S.collected.has(m.planetId)).map((m) => m.item);
-}
-
-function addOrbit(): void {
-  const wrap = host()?.querySelector('.yi-orbit');
-  if (!wrap) return;
-  const items = collectedItems();
-  const n = Math.max(items.length, 1);
-  wrap.innerHTML = items
-    .map((glyph, i) => {
-      const r = 56 + (i % 2) * 26;
-      const delay = (-6 * (i / n)).toFixed(2);
-      return (
-        `<div class="yi-orbit__wrap" style="animation-delay:${delay}s">` +
-        `<div class="yi-orbit__arm" style="--r:${r}px">` +
-        `<span class="yi-orbit__glyph" style="animation-delay:${delay}s">${glyph}</span></div></div>`
-      );
-    })
-    .join('');
 }
 
 function bloomFlowers(): void {
   const field = host()?.querySelector('.yi-flowers');
   if (!field) return;
-  const count = reduced() ? 24 : 80;
+  const count = reduced() ? 22 : 70;
   let html = '';
   for (let i = 0; i < count; i++) {
     const x = Math.random() * 100;
-    const y = 58 + Math.random() * 38;
+    const y = 64 + Math.random() * 32;
     const g = FLOWER_GLYPHS[Math.floor(Math.random() * FLOWER_GLYPHS.length)]!;
     const delay = (Math.random() * 1.6).toFixed(2);
     const scale = (0.6 + Math.random() * 0.8).toFixed(2);
-    html +=
-      `<span class="yi-flower" style="left:${x}%;top:${y}%;` +
-      `animation-delay:${delay}s;font-size:${scale}rem">${g}</span>`;
+    html += `<span class="yi-flower" style="left:${x}%;top:${y}%;animation-delay:${delay}s;font-size:${scale}rem">${g}</span>`;
   }
   field.innerHTML = html;
 }
@@ -77,8 +58,7 @@ function bloomFlowers(): void {
 function spawnHearts(): void {
   const field = host()?.querySelector('.yi-hearts');
   if (!field) return;
-  const burst = 3;
-  for (let i = 0; i < burst; i++) {
+  for (let i = 0; i < 3; i++) {
     const h = document.createElement('span');
     h.className = 'yi-heart';
     h.textContent = HEART_GLYPHS[Math.floor(Math.random() * HEART_GLYPHS.length)]!;
@@ -109,23 +89,15 @@ function enter(): void {
   const h = host();
   if (!h) return;
   setTheme('earth');
-  const partner = S.data.characters[S.data.playerIndex === 0 ? 1 : 0]!;
-  const player = S.data.characters[S.data.playerIndex]!;
+  three.setPlayer(S.data.characters[S.data.playerIndex]!);
+  three.setPartner(S.data.characters[S.data.playerIndex === 0 ? 1 : 0]!);
+  three.setMode('final');
+  three.buildFinal(collectedGlyphs());
   h.innerHTML =
-    `<div class="yi-earth">` +
     `<div class="yi-flowers" aria-hidden="true"></div>` +
     `<div class="yi-hearts" aria-hidden="true"></div>` +
-    `<div class="yi-reunion">` +
-    `<div class="yi-orbit" aria-hidden="true"></div>` +
-    `<div class="yi-partner">${buildAvatarSvg(partner, 92)}</div>` +
-    `</div>` +
-    `<div class="yi-final-player">${buildAvatarSvg(player, 72)}</div>` +
-    `<div class="yi-panel yi-final-msg">Tüm evreni gezdim ama en güzel durak sendin.<br><b>Seni Çok Seviyorum!</b></div>` +
-    `</div>`;
-  // Player approaches the partner.
-  requestAnimationFrame(() => h.querySelector('.yi-final-player')?.classList.add('yi-final-player--in'));
+    `<div class="yi-panel yi-final-msg">Tüm evreni gezdim ama en güzel durak sendin.<br><b>Seni Çok Seviyorum!</b></div>`;
   later(() => {
-    addOrbit();
     bloomFlowers();
     startHearts();
   }, 1300);

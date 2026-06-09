@@ -161,6 +161,12 @@ export function sfxPortal(): void {
   tone(840, 0.5, 'sine', 0.06, 0.05, 220);
 }
 
+export function sfxFail(): void {
+  // gentle descending "try again" cue
+  tone(330, 0.28, 'sawtooth', 0.12, 0, 150);
+  tone(247, 0.3, 'sine', 0.09, 0.08);
+}
+
 // ---- Ambient music ----
 const SPACE_DRONE = [98, 147];
 const SPACE_SCALE = [196, 220, 262, 294, 349, 392, 440]; // calm pentatonic-ish

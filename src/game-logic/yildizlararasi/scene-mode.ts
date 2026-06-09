@@ -2,6 +2,7 @@
 
 import { ensureAudio, sfxClick } from './audio';
 import { goto } from './router';
+import * as three from './three-scene';
 import type { Scene } from './types';
 
 function el(): HTMLElement | null {
@@ -19,6 +20,7 @@ function onClick(e: MouseEvent): void {
 function enter(): void {
   const host = el();
   if (!host) return;
+  three.setMode('space');
   host.innerHTML =
     `<div class="yi-panel yi-mode">` +
     `<h3 class="yi-edit__title">Ne yapmak istersin?</h3>` +
