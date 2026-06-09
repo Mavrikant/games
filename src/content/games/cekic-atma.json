@@ -1,0 +1,22 @@
+{
+  "title": "Çekiç Atma",
+  "description": "Çekici döndür, en uygun anda bırak — kuvvet ve açı her şey. 5 atış, en uzak toplam mesafe sende.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arcade", "fizik", "özgün", "zamanlama"],
+  "controls": "Boşluk / tıkla: ilk basışta döndürmeye başla, ikincide bırak · R: tüm seriyi sıfırla",
+  "howToPlay": "Çekiç Atma, olimpik çekiç atışının iki dokunuşluk minimalist arcade halidir: bir atlet sahanın sol kenarında durur, ucuna çelik bir top bağlı zinciri dönmeye hazırlar. İlk SPACE basışında (mobilde ekrana ilk dokunuş) çekiç başlangıç açısal hızıyla saat yönünde dönmeye başlar; sen pasif beklerken her saniyede ω biraz daha artar ve kollar gerilir, gücün yeşil bara doğru tırmanır. İkinci SPACE basışında çekici bırakırsın — bırakıldığı andaki konuma teğet olan hız vektörü top'u savururken, ω ne kadar yüksekse o kadar uzağa fırlatma kuvvetin olur. İşte oyunun ana sırrı: top'un üst-sol yörünge bölümünde (yeşil ile vurgulanmış yay) bırakırsan vektör tam 45°'ye yakın yukarı-sağ hücumu yapar ve maksimum menzili yakalarsın; top başka bir konumda — örneğin tam tepedeyken ya da altta — bırakılırsa hız vektörü ya yatay ya aşağı yönlüdür ve top kısa düşer veya negatif yöne gider, mesafe 0 sayılır. Power çubuğu için biraz beklemen gerek ama çok bekleyip de açıyı kaçırırsan kuvvetli ama yanlış yönlü bir atış yaparsın; ω'yı yeterince doldurup hemen ardından top yıldız işaretinin yakınından geçerken bırakmak idealdir. Her atışından sonra sahanın zeminine altın bir × işareti düşer ve önceki atışlarının nereye geldiğini görebilirsin. 5 atışın sonunda toplam metre skorun olur ve bu, tarayıcında saklanan rekorla karşılaştırılır.",
+  "thumbnail": "cekic-atma.svg",
+  "scoring": {
+    "storageKey": "cekic-atma.best",
+    "label": "Toplam mesafe",
+    "unit": "m",
+    "direction": "higher",
+    "labelEn": "Total distance"
+  },
+  "en": {
+    "title": "Hammer Throw",
+    "description": "Spin the hammer, release at the perfect moment — power and angle decide everything. 5 throws, best total distance wins.",
+    "controls": "Space / tap: first press starts the spin, second releases · R: reset the series",
+    "howToPlay": "Hammer Throw is a two-tap minimalist arcade take on the Olympic hammer event: an athlete stands at the left edge of the field, the steel ball at the end of the chain ready to wind up. On the first SPACE press (first tap on mobile) the hammer begins spinning clockwise at a starting angular velocity; as you wait passively, ω rises a little every second, the arms tense, and your power bar climbs toward the green. On the second SPACE press you release the hammer — the velocity vector tangent to its position at that instant slings the ball, and the higher ω is, the more force you launch with. Here is the game's core trick: if you release while the ball is in the upper-left arc of its orbit (highlighted in green), the vector hits close to a perfect 45° upper-right launch and you catch maximum range; release at any other point — say at the very top, or at the bottom — and the vector is either horizontal or downward, the ball falls short or even backward, and the distance counts as 0. The power bar wants you to wait, but waiting too long and missing the angle gives you a strong but mis-aimed throw; the ideal is to fill ω enough, then release as the ball sweeps past the green star. After every throw a golden × lands on the ground and you can see where your previous throws fell. After 5 throws your total metres become your score and are compared against your best in the browser."
+  }
+}
