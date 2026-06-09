@@ -1,0 +1,19 @@
+{
+  "title": "Atın Turu",
+  "description": "Satranç atıyla tahtadaki her kareyi tam bir kez ziyaret et — sıkışırsan kaybedersin.",
+  "dateAdded": "2026-06-09",
+  "tags": ["bulmaca", "strateji", "tek-oyunculu"],
+  "controls": "Kareye tıkla · R: yeniden başla · 5/6/7/8: tahta boyu",
+  "howToPlay": "Bir satranç atını kontrol ediyorsun. Önce başlangıç karesini seç, sonra at her hamlede 'L' şeklinde (iki kare bir yöne, sonra bir kare dik yöne) ilerler. Hedefin: tahtadaki **her kareyi tam bir kez** ziyaret etmek. Bir kareye iki kez basamazsın; geçerli hamleler ekranda yeşil noktalarla işaretlenir. Tüm kareleri ziyaret ederse tur tamamlanmıştır; geçerli hamle kalmayınca sıkışırsın ve el biter. Üst kısımdaki 5/6/7/8 düğmeleri tahta boyunu değiştirir — küçük tahta kolay, büyük tahta zor. İpucu (Warnsdorff sezgisi): her hamlede önündeki seçeneklerden **sonraki hamle sayısı en az** olana git; köşelere ve duvarlara erken zaman ayır, ortayı sona sakla.",
+  "scoring": {
+    "storageKey": "atin-turu.best.6",
+    "label": "Ziyaret",
+    "direction": "higher"
+  },
+  "en": {
+    "title": "Knight's Tour",
+    "description": "Move a chess knight so it visits every square on the board exactly once — get stuck and you lose.",
+    "controls": "Click a square · R: restart · 5/6/7/8: board size",
+    "howToPlay": "You control a chess knight. First pick a starting square, then on every move the knight jumps in an 'L' shape (two squares one way, one square perpendicular). Your goal: visit every square on the board exactly once. You can't revisit a cell; legal moves are marked with green dots. Visit them all to complete the tour; run out of legal moves and the round ends. The 5/6/7/8 buttons up top change the board size — small is easy, big is hard. Tip (Warnsdorff's heuristic): on every move, prefer the square that itself has the **fewest onward moves**; deal with corners and walls early and save the centre for last."
+  }
+}

@@ -1,0 +1,146 @@
+/*
+ * Per-game styles. The scaffold ships with the standard board-wrap +
+ * overlay positioning that @shared/overlay's helpers expect; do not
+ * delete these unless your game has no overlay at all. The helper sets
+ * the `.overlay--hidden` class and aria-hidden, but the visual effect
+ * (opacity 0 + pointer-events none) comes from CSS — without these
+ * rules, hideOverlay() does nothing visible.  pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+:root {
+  --at-light: #334155;
+  --at-dark: #1e293b;
+  --at-visited: #fbbf24;
+  --at-last: #f97316;
+  --at-move: #34d399;
+  --at-start: #a78bfa;
+}
+
+.board-wrap {
+  max-width: 520px;
+  aspect-ratio: 1;
+}
+
+#board {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--at-dark);
+  border: 1px solid var(--border);
+}
+
+.size-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto 10px;
+  max-width: 520px;
+  flex-wrap: wrap;
+}
+
+.size-btn {
+  flex: 1 1 0;
+  min-width: 60px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.size-btn:hover {
+  border-color: var(--accent, #a78bfa);
+  color: var(--text);
+}
+
+.size-btn--active {
+  background: var(--at-start);
+  color: #0a0b0e;
+  border-color: var(--at-start);
+}
+
+#status {
+  text-align: center;
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--text-dim);
+}

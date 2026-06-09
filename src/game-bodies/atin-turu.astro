@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Ziyaret<span id="score">0</span></div>
+  <div class="hud__score">Hedef<span id="target">36</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="size-row" role="group" aria-label="Tahta boyu">
+  <button class="size-btn" data-size="5" type="button">5×5</button>
+  <button class="size-btn" data-size="6" type="button">6×6</button>
+  <button class="size-btn" data-size="7" type="button">7×7</button>
+  <button class="size-btn" data-size="8" type="button">8×8</button>
+</div>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Atın Turu tahtası"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Atın Turu</h2>
+      <p id="overlay-msg">Başlamak için bir kareye tıkla.</p>
+    </div>
+  </div>
+</div>
+<p class="hint" id="status">Başlangıç karesini seç</p>
