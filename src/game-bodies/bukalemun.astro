@@ -1,0 +1,51 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div class="bk-meta">
+    <div class="bk-meta__chip">Tur <span id="round">1</span></div>
+    <div class="bk-meta__chip bk-meta__chip--lives" id="lives" aria-label="Kalan can">♥♥♥</div>
+    <div class="bk-meta__chip bk-meta__chip--timer">
+      <div class="bk-timer" aria-hidden="true">
+        <div class="bk-timer__bar" id="timer-bar"></div>
+      </div>
+    </div>
+  </div>
+  <div class="bk-scene">
+    <canvas id="canvas" width="480" height="320" aria-label="Bukalemun sahnesi"></canvas>
+  </div>
+  <div class="bk-sliders" role="group" aria-label="Renk kanalları">
+    <div class="bk-slider" data-ch="r">
+      <label for="r-input">Kırmızı</label>
+      <input id="r-input" class="bk-range bk-range--r" type="range" min="0" max="255" value="128" aria-label="Kırmızı kanal" />
+      <span class="bk-slider__val" id="r-val">128</span>
+    </div>
+    <div class="bk-slider" data-ch="g">
+      <label for="g-input">Yeşil</label>
+      <input id="g-input" class="bk-range bk-range--g" type="range" min="0" max="255" value="128" aria-label="Yeşil kanal" />
+      <span class="bk-slider__val" id="g-val">128</span>
+    </div>
+    <div class="bk-slider" data-ch="b">
+      <label for="b-input">Mavi</label>
+      <input id="b-input" class="bk-range bk-range--b" type="range" min="0" max="255" value="128" aria-label="Mavi kanal" />
+      <span class="bk-slider__val" id="b-val">128</span>
+    </div>
+  </div>
+  <button id="commit" class="bk-commit" type="button">Kamufle ol (Boşluk)</button>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Bukalemun</h2>
+      <p id="overlay-msg">
+        Avcı görmeden önce sürgüleri ayarla, bukalemunu arka planın rengine kamufle et.
+        Klavye: 1/2/3 → kanal seç, ←→ veya ↑↓ → ayarla, Boşluk → onayla.
+        3 başarısızlıkta oyun biter.
+      </p>
+      <button id="overlay-btn" class="bk-commit bk-commit--overlay" type="button">Başla</button>
+    </div>
+  </div>
+</div>

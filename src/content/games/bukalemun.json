@@ -1,0 +1,21 @@
+{
+  "title": "Bukalemun",
+  "description": "Avcı görmeden önce RGB kanallarını ayarla, bukalemunu arka planın rengine kamufle et. Her tur daha sıkı tolerans, daha kısa süre.",
+  "dateAdded": "2026-06-09",
+  "tags": ["renk", "algı", "refleks", "tek-oyunculu"],
+  "controls": "Sürgüler: fare/dokunma · 1/2/3: kanal seç · ←→ veya ↑↓: ayarla · Boşluk: onayla · R: yeniden başla",
+  "thumbnail": "bukalemun.svg",
+  "howToPlay": "Sahnenin arka planı her tur rastgele bir renge boyanır; bukalemun ortada onun üzerinde durur. Görevin, RGB sürgülerini (Kırmızı, Yeşil, Mavi) kaydırarak bukalemunun derisini olabildiğince arka plana yakın bir renge getirmek ve süre bitmeden 'Kamufle ol' düğmesine (ya da Boşluk tuşuna) basmak. Sürgüleri fare/dokunma ile sürükleyebilir veya klavyeden 1/2/3 ile kanal seçip ←→ (veya ↑↓) ile değer değiştirebilirsin; Shift'e basılı tutarsan adım 32 olur, yoksa 8. Süre dolmadan onaylamazsan otomatik onay verilir. Renk eşleşmesinin yakınlığına göre puan kazanırsın; çok zayıf bir eşleşmede avcı seni görür ve bir can kaybedersin. 3 başarısızlıkta oyun biter. Tur ilerledikçe paletler daha pastele, tolerans daha sıkıya, süre daha kısaya kayar — ilk turlar bol doygunluklu bariz renkler, ileri turlar ise birbirine yakın yumuşak tonlardır. Strateji ipucu: önce hangi ana ton (kırmızı/yeşil/mavi) baskın bak, o kanalı kabaca ayarla; sonra diğer ikisini hassas dengele. Doygunluk düşük (gri-mat) sahnelerde üç kanalı birbirine yakın tut; canlı sahnelerde ise bir kanalı uca, birini orta, birini dibe taşı.",
+  "scoring": {
+    "storageKey": "bukalemun.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Chameleon",
+    "description": "Match the chameleon's skin to the backdrop by tuning RGB sliders before the predator spots you. Each round gets tighter tolerance and a shorter timer.",
+    "controls": "Sliders: mouse/touch · 1/2/3: pick channel · ←→ or ↑↓: adjust · Space: commit · R: restart",
+    "howToPlay": "Each round paints the scene with a new random backdrop color and places the chameleon at center. Drag the R/G/B sliders (or press 1/2/3 to focus a channel and ←→ / ↑↓ to nudge it; hold Shift for bigger steps of 32 instead of 8) until the chameleon's color closely matches the backdrop, then hit 'Kamufle ol' or Space to commit. If the timer runs out you commit automatically. The closer the match, the more points you score; a poor match means the predator spots you and you lose a life. Three failures end the run. As you climb rounds, palettes get more pastel, tolerance shrinks, and the timer compresses — early rounds are saturated and obvious, late rounds are subtle and close. Tip: identify which channel dominates first and set that coarsely, then fine-tune the other two. For desaturated grey-ish backdrops, keep all three channels near each other; for vivid backdrops, push one channel high, one mid, one low."
+  }
+}

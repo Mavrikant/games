@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Bukalemun">
+  <defs>
+    <linearGradient id="bk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f3a2e" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="bk-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6ee7b7" />
+      <stop offset="100%" stop-color="#34a674" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bk-bg)" />
+  <g transform="translate(160 118)">
+    <ellipse cx="0" cy="40" rx="80" ry="9" fill="rgba(0,0,0,0.3)" />
+    <path d="M-40 6 C -76 -8 -100 14 -86 36 C -74 56 -52 54 -48 36 C -45 22 -54 12 -60 10 Z"
+          fill="url(#bk-body)" stroke="rgba(0,0,0,0.55)" stroke-width="1.6" />
+    <path d="M-40 6 C -48 -38 0 -54 40 -38 C 67 -32 86 -18 89 0 C 90 14 76 14 75 14 C 60 20 24 22 -10 24 C -34 28 -48 26 -40 6 Z"
+          fill="url(#bk-body)" stroke="rgba(0,0,0,0.55)" stroke-width="1.6" />
+    <path d="M-7 -47 L4 -54 L14 -47 L26 -53 L37 -44 L28 -40 L13 -42 Z"
+          fill="url(#bk-body)" stroke="rgba(0,0,0,0.55)" stroke-width="1.4" />
+    <ellipse cx="-9" cy="25" rx="6" ry="11" fill="url(#bk-body)" stroke="rgba(0,0,0,0.55)" stroke-width="1.4" />
+    <ellipse cx="40" cy="23" rx="6" ry="11" fill="url(#bk-body)" stroke="rgba(0,0,0,0.55)" stroke-width="1.4" />
+    <circle cx="67" cy="-15" r="8" fill="#fff" stroke="rgba(0,0,0,0.6)" stroke-width="1.4" />
+    <circle cx="69" cy="-14" r="3.5" fill="#0a0b0e" />
+    <circle cx="68" cy="-15.5" r="1.1" fill="#fff" />
+  </g>
+  <g transform="translate(28 22)">
+    <rect x="0" y="0" width="22" height="22" rx="3" fill="#ff5959" />
+    <rect x="26" y="0" width="22" height="22" rx="3" fill="#6cdb73" />
+    <rect x="52" y="0" width="22" height="22" rx="3" fill="#5da6ff" />
+  </g>
+  <text x="28" y="68" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Bukalemun</text>
+</svg>
