@@ -6,8 +6,8 @@ import { defineGame } from '@shared/game-module';
 import { hideOverlay } from '@shared/overlay';
 import { ensureAudio, setMusicEnabled, setSfxEnabled, setTheme } from './yildizlararasi/audio';
 import { goto } from './yildizlararasi/router';
-import { freshData, gen, resetRun, S } from './yildizlararasi/state';
-import { initStarfield, restartStarfield } from './yildizlararasi/starfield';
+import { freshData, gen, maybeLoadCloud, resetRun, S } from './yildizlararasi/state';
+import * as three from './yildizlararasi/three-scene';
 
 let musicOn = true;
 let sfxOn = true;
@@ -25,23 +25,76 @@ function bindToggle(id: string, get: () => boolean, set: (v: boolean) => void, o
   });
 }
 
+function setupFullscreen(): void {
+  const stage = document.getElementById('yi-stage');
+  const btn = document.getElementById('yi-fullscreen');
+  if (!stage || !btn) return;
+  const active = (): boolean =>
+    document.fullscreenElement === stage || stage.classList.contains('yi-stage--max');
+  const sync = (): void => {
+    btn.textContent = active() ? '🗗' : '⛶';
+    three.resize();
+  };
+  const toggle = (): void => {
+    if (document.fullscreenElement === stage) {
+      void document.exitFullscreen?.();
+      return;
+    }
+    if (stage.classList.contains('yi-stage--max')) {
+      stage.classList.remove('yi-stage--max');
+      sync();
+      return;
+    }
+    const req = stage.requestFullscreen?.();
+    if (req && typeof req.then === 'function') {
+      req.then(sync).catch(() => {
+        stage.classList.add('yi-stage--max'); // iOS Safari fallback
+        sync();
+      });
+    } else if (!stage.requestFullscreen) {
+      stage.classList.add('yi-stage--max');
+      sync();
+    } else {
+      sync();
+    }
+  };
+  btn.addEventListener('click', () => {
+    ensureAudio();
+    toggle();
+  });
+  document.addEventListener('fullscreenchange', sync);
+}
+
 function reset(): void {
-  gen.bump(); // cancel in-flight portal/cutscene/fly callbacks + old RAF loops
+  gen.bump(); // cancel in-flight portal/cutscene/mini-game callbacks + old loops
   resetRun();
   setTheme('space');
   const popup = document.getElementById('yi-popup');
   if (popup) hideOverlay(popup);
+  const mg = document.getElementById('yi-minigame');
+  if (mg) hideOverlay(mg);
   document.getElementById('yi-fade')?.classList.remove('yi-fade--on');
-  restartStarfield();
+  three.restartLoop();
   goto('intro');
 }
 
 function init(): void {
-  const canvas = document.querySelector<HTMLCanvasElement>('#yi-stars');
+  const canvas = document.querySelector<HTMLCanvasElement>('#yi-gl');
   S.data = freshData();
   resetRun();
 
-  if (canvas) initStarfield(canvas);
+  if (canvas) {
+    three.init(canvas);
+    three.startLoop();
+  }
+
+  // Pull a cloud-stored setup (#c=…) when Supabase is configured. Adopt fully
+  // while still on the intro; later, only refresh the memories so an in-progress
+  // customization isn't clobbered.
+  maybeLoadCloud((data) => {
+    if (S.scene === 'intro') S.data = data;
+    else S.data.memories = data.memories;
+  });
 
   document.getElementById('restart')?.addEventListener('click', () => {
     ensureAudio();
@@ -50,9 +103,11 @@ function init(): void {
 
   bindToggle('yi-music', () => musicOn, (v) => { musicOn = v; setMusicEnabled(v); }, '🎵', '🔇');
   bindToggle('yi-sfx', () => sfxOn, (v) => { sfxOn = v; setSfxEnabled(v); }, '🔊', '🔈');
+  setupFullscreen();
 
-  // Lazy-init audio on the first user gesture (autoplay policy + smoke never
-  // gestures, so audio never inits during the headless test).
+  window.addEventListener('resize', () => three.resize());
+  window.addEventListener('orientationchange', () => three.resize());
+
   const firstGesture = (): void => ensureAudio();
   window.addEventListener('pointerdown', firstGesture, { once: true });
   window.addEventListener('keydown', firstGesture, { once: true });

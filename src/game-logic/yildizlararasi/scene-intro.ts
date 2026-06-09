@@ -3,9 +3,11 @@
 
 import { ensureAudio, sfxClick } from './audio';
 import { goto } from './router';
+import * as three from './three-scene';
 import type { Scene } from './types';
 
 function enter(): void {
+  three.setMode('space');
   const btn = document.getElementById('yi-start');
   if (!btn) return;
   // onclick assignment (not addEventListener) so re-entering intro after a

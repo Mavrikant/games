@@ -1,13 +1,16 @@
 // Pure types for Yıldızlararası. No imports, no side effects.
 
-export type HairType = 'kisa' | 'uzun' | 'toplu';
+export type HairType = 'kisa' | 'uzun' | 'toplu' | 'kivircik' | 'kel';
 export type SceneId = 'intro' | 'customize' | 'mode' | 'setup' | 'play' | 'final';
+export type MiniGameId = 'refleks' | 'hedef' | 'hafiza' | 'zamanlama';
 
 export interface Character {
   hairType: HairType;
   hairColor: string; // hex
   eyeColor: string; // hex
+  skinColor: string; // hex
   clothingColor: string; // hex
+  accessory: 'yok' | 'gozluk' | 'sapka' | 'tac'; // none / glasses / hat / crown
 }
 
 export interface Memory {
@@ -30,6 +33,7 @@ export interface PlanetDef {
   gradTop: string; // scene bg gradient top
   gradBot: string; // scene bg gradient bottom
   ground: string; // surface band color
+  planetColor: string; // 3D planet sphere color
   brightness: number; // 0 (Pluto) .. 1 (Earth)
   collectible: boolean; // false only for Earth (the reunion finale)
 }

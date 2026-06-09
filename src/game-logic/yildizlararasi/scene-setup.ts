@@ -2,10 +2,12 @@
 // copies a share link (the data is base64-encoded into the URL hash).
 
 import { ensureAudio, sfxClick, sfxPickup } from './audio';
+import { cloudEnabled, saveMemories } from './cloud';
 import { COLLECTIBLE_PLANETS, ITEM_CHOICES } from './data';
 import { goto } from './router';
 import { persistData, S } from './state';
-import { buildShareUrl, copyToClipboard } from './share';
+import { buildCodeUrl, buildHashUrl, copyToClipboard } from './share';
+import * as three from './three-scene';
 import type { Memory, Scene } from './types';
 
 let editing: string | null = null; // planetId being edited
@@ -79,7 +81,16 @@ function renderEdit(): void {
 
 async function doCopy(): Promise<void> {
   const note = document.getElementById('yi-copy-note');
-  const ok = await copyToClipboard(buildShareUrl(S.data));
+  if (note) note.textContent = 'Hazırlanıyor…';
+  // Prefer a short cloud code when Supabase is configured; otherwise fall back
+  // to the dependency-free base64 URL hash.
+  let url = '';
+  if (cloudEnabled()) {
+    const code = await saveMemories(S.data);
+    if (code) url = buildCodeUrl(code);
+  }
+  if (!url) url = buildHashUrl(S.data);
+  const ok = await copyToClipboard(url);
   if (note) note.textContent = ok ? 'Kopyalandı! 💌' : 'Kopyalanamadı';
 }
 
@@ -128,6 +139,7 @@ function onClick(e: MouseEvent): void {
 function enter(): void {
   const host = el();
   if (!host) return;
+  three.setMode('space');
   editing = null;
   COLLECTIBLE_PLANETS.forEach((p) => memoryFor(p.id)); // ensure entries exist
   host.addEventListener('click', onClick);

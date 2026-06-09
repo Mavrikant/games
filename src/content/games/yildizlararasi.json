@@ -1,9 +1,9 @@
 {
   "title": "Yıldızlararası",
-  "description": "Plüton'dan Dünya'ya uzanan romantik bir yolculuk. Sevgilin için her gezegene bir anı ve mesaj sakla; o da uzayı gezip anıları toplayarak sana ulaşsın.",
+  "description": "Plüton'dan Dünya'ya uzanan 3B romantik bir yolculuk. Sevgilin için her gezegene bir anı ve mesaj sakla; o da uzayı gezip mini oyunları kazanarak anıları toplasın ve sana ulaşsın.",
   "dateAdded": "2026-06-09",
-  "tags": ["macera", "hikaye", "romantik", "tek-oyunculu"],
-  "controls": "Fare/dokunma ile karaktere yön ver veya WASD / ok tuşlarını kullan. Parlayan anıya ulaş, mesajı oku, galaksi portalından sonraki gezegene geç.",
-  "howToPlay": "İki karakteri özelleştir ve hangisinin sen olduğunu seç. 'Anıları Gizle' modunda her gezegene bir anı ve aşk mesajı bırak, sonra 'Linki Kopyala' ile sevgiline gönder. 'Yolculuğa Çık' modunda Plüton'dan Dünya'ya ilerle, her gezegende parlayan anıyı topla ve sonunda buluşmaya ulaş. Kurulum yapılmadıysa örnek bir anı seti ile oynanır.",
+  "tags": ["macera", "hikaye", "romantik", "3b", "tek-oyunculu"],
+  "controls": "Fare/dokunma ile yürü veya WASD / ok tuşları. Anıya ulaşınca çıkan mini oyunu kazan, mesajı oku, galaksi portalından sonraki gezegene geç. ⛶ ile tam ekran.",
+  "howToPlay": "İki 3B karakteri özelleştir (saç tipi — kıvırcık dahil —, ten, göz, kıyafet, aksesuar) ve hangisinin sen olduğunu seç. 'Anıları Gizle' modunda her gezegene bir anı ve aşk mesajı bırak, sonra 'Linki Kopyala' ile sevgiline gönder (Supabase yapılandırılmışsa kısa kod, değilse bağlantıya gömülü). 'Yolculuğa Çık' modunda Plüton'dan Dünya'ya ilerle; her anıyı açmak için rastgele bir mini oyun (refleks, hedef, hafıza, zamanlama) kazanman gerekir. Sonunda Dünya'da buluşmaya ulaş. Kurulum yapılmadıysa örnek bir anı seti ile oynanır.",
   "thumbnail": "yildizlararasi.svg"
 }
