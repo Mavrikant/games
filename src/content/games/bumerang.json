@@ -1,0 +1,21 @@
+{
+  "title": "Bumerang",
+  "description": "Bumerangı doğru açı ve güçle fırlat — eğri yörüngede balonları patlatıp geri gelirken yeşil halka içinde tıkla, yakala.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arcade", "özgün", "fizik", "refleks", "zamanlama"],
+  "controls": "Fare/parmak: nişan al · Tıkla/dokun ve tut: güç şarjı · Bırak: fırlat · Bumerang dönerken yeşil halka içinde tıkla: yakala · R: yeniden başla",
+  "thumbnail": "bumerang.svg",
+  "howToPlay": "Sahnede üç can ile başlarsın ve her elinde tek bir bumerangın vardır. Fareyle ekranın üst yarısında istediğin yöne nişan alırsın; oyuncunun (alttaki camgöbeği daire) tepesinden çıkan kesik çizgi nişan yönünü gösterir. Sol tuşa basıp basılı tuttuğunda altta sarı bir güç çubuğu birikir — kısa basış küçük yarıçaplı dar bir loop, uzun basış geniş bir loop verir. Tuşu bıraktığın anda bumerang seçtiğin yönde fırlar ve sabit dönme hızıyla sürekli sola eğilerek bir tam tur attıktan sonra oyuncunun yanına geri döner. Yörüngede balonlardan herhangi birine değdiğinde balon patlar: kırmızı +10, mavi +20, altın +50 puan. Aynı atışta birden fazla balonu vurursan yakalama bonusun katlanarak büyür. Bumerang geri gelirken oyuncunun çevresinde yeşil bir 'yakala' halkası belirir — bumerang bu halka içine girdiği anda fare sol tuşuna tıklarsan yakaladın demektir; +25 ve vurduğun her balon için +15 ekstra bonus alırsın ve hemen tekrar atış yapabilirsin. Halka kapanmadan yakalayamazsan veya bumerang halkanın dışından geçerek kaybolursa bir can kaybedersin. Stratejinin özü: nişan açısı ve gücü, bumerangın çizeceği dairenin merkezinin nereye düşeceğini belirler — küçük açı ile geniş bir balon kümesini biçerken büyük açı ile uzak köşelerdeki altın balonlara ulaşabilirsin. Hangi açıdan atarsan at, dönüş eğrisi her zaman aynı yöne büküldüğü için 'sağ üst köşeye nişan al, sol üst köşeden geri dönsün' şeklinde planlama yapman gerekir. Mobil cihazda tıkla-tut-bırak yerine dokun-tut-bırak ile aynı kontrol çalışır. R tuşu veya 'Yeniden başla' düğmesi oyunu sıfırlar; en yüksek skorun otomatik kaydedilir.",
+  "scoring": {
+    "storageKey": "bumerang.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Boomerang",
+    "description": "Throw the boomerang with the right angle and power — pop balloons along its curving loop and click inside the green ring when it returns to catch it.",
+    "controls": "Mouse/finger: aim · Click/tap and hold: charge power · Release: throw · Click while boomerang is inside the green ring: catch · R: restart",
+    "howToPlay": "You start with three lives and a single boomerang in hand. Use the mouse to aim into the upper half of the screen; a dashed line from the cyan player at the bottom shows your aim direction. Click and hold to charge a yellow power bar at the bottom — a short hold gives a small tight loop, a long hold a wide one. Releasing the button throws the boomerang in your chosen direction; with a constant spin it always curves to the left, making a full loop before returning near the player. While in flight, the boomerang pops any balloon it touches: red +10, blue +20, gold +50. Hitting multiple balloons on one throw multiplies your catch bonus. As the boomerang comes back, a green 'catch' ring appears around the player — click while the boomerang is inside that ring to catch it: +25 plus +15 for every balloon you popped, then you can throw again immediately. If you miss the ring or the boomerang flies off without being caught, you lose a life. The trick is that the angle and power decide where the center of the circular trajectory falls — a low angle slices a big balloon cluster, a high angle reaches far corners. Because the curve always twists the same way, you have to plan 'aim upper right so it comes back from upper left'. On mobile, tap-hold-release replaces click-hold-release. R or Restart resets the game; the highest score is saved automatically."
+  }
+}

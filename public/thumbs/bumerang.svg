@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Bumerang">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="70%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+    <radialGradient id="ring" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="80%" stop-color="rgba(74,222,128,0)" />
+      <stop offset="100%" stop-color="rgba(74,222,128,0.7)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <!-- arc trajectory -->
+  <path d="M 60 170 Q 110 30 230 80" stroke="rgba(251,191,36,0.5)" stroke-width="2" stroke-dasharray="5 4" fill="none" />
+  <!-- balloons -->
+  <g>
+    <circle cx="120" cy="60" r="14" fill="#f87171" stroke="rgba(0,0,0,0.3)" />
+    <circle cx="115" cy="55" r="3" fill="rgba(255,255,255,0.5)" />
+    <line x1="120" y1="74" x2="120" y2="92" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+  </g>
+  <g>
+    <circle cx="190" cy="50" r="14" fill="#60a5fa" stroke="rgba(0,0,0,0.3)" />
+    <circle cx="185" cy="45" r="3" fill="rgba(255,255,255,0.5)" />
+    <line x1="190" y1="64" x2="190" y2="82" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+  </g>
+  <g>
+    <circle cx="240" cy="80" r="14" fill="#fbbf24" stroke="rgba(0,0,0,0.3)" />
+    <circle cx="235" cy="75" r="3" fill="rgba(255,255,255,0.5)" />
+    <line x1="240" y1="94" x2="240" y2="112" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+  </g>
+  <!-- catch ring -->
+  <circle cx="60" cy="170" r="32" fill="none" stroke="#4ade80" stroke-width="3" opacity="0.85" />
+  <!-- player -->
+  <circle cx="60" cy="170" r="11" fill="#22d3ee" />
+  <!-- boomerang -->
+  <g transform="translate(165,55) rotate(35)">
+    <path d="M 0 -10 L 9 2 L 3 5 L 0 0 L -3 5 L -9 2 Z" fill="#fde047" stroke="#92400e" stroke-width="1.2" />
+  </g>
+  <text x="20" y="30" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Bumerang</text>
+</svg>
