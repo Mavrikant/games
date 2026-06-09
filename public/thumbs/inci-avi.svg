@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="İnci Avı">
+  <defs>
+    <linearGradient id="sea-vert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7dd3fc" />
+      <stop offset="14%" stop-color="#0c4a6e" />
+      <stop offset="45%" stop-color="#0e7490" />
+      <stop offset="75%" stop-color="#164e63" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <radialGradient id="pearl-shine" cx="0.35" cy="0.35" r="0.6">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="55%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </radialGradient>
+    <radialGradient id="pearl-pink" cx="0.35" cy="0.35" r="0.6">
+      <stop offset="0%" stop-color="#fff1f2" />
+      <stop offset="55%" stop-color="#fda4af" />
+      <stop offset="100%" stop-color="#be123c" />
+    </radialGradient>
+    <radialGradient id="pearl-violet" cx="0.35" cy="0.35" r="0.6">
+      <stop offset="0%" stop-color="#f5f3ff" />
+      <stop offset="55%" stop-color="#c4b5fd" />
+      <stop offset="100%" stop-color="#5b21b6" />
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#sea-vert)" />
+
+  <!-- Sun rays (faint) -->
+  <g fill="#fef9c3" opacity="0.08">
+    <polygon points="70,28 56,160 86,160" />
+    <polygon points="150,28 138,160 166,160" />
+    <polygon points="240,28 226,160 256,160" />
+  </g>
+
+  <!-- Surface wave line -->
+  <path
+    d="M0,30 Q20,26 40,30 T80,30 T120,30 T160,30 T200,30 T240,30 T280,30 T320,30"
+    stroke="#bae6fd"
+    stroke-width="1.5"
+    fill="none"
+    opacity="0.7"
+  />
+
+  <!-- Boat -->
+  <g transform="translate(160 22)">
+    <polygon points="-22,0 22,0 16,8 -16,8" fill="#78350f" />
+    <rect x="-18" y="2" width="36" height="2" fill="#fde68a" />
+    <line x1="0" y1="-14" x2="0" y2="0" stroke="#fde047" stroke-width="2" />
+    <polygon points="0,-14 7,-11 0,-8" fill="#ef4444" />
+  </g>
+
+  <!-- Seabed -->
+  <rect x="0" y="178" width="320" height="22" fill="#1c1917" />
+  <g fill="#3f3424">
+    <ellipse cx="30" cy="180" rx="14" ry="6" />
+    <ellipse cx="110" cy="180" rx="18" ry="7" />
+    <ellipse cx="190" cy="180" rx="12" ry="5" />
+    <ellipse cx="280" cy="180" rx="16" ry="6" />
+  </g>
+
+  <!-- Bubble trail -->
+  <g fill="#bae6fd" opacity="0.7">
+    <circle cx="155" cy="92" r="2.4" />
+    <circle cx="158" cy="80" r="2" opacity="0.55" />
+    <circle cx="153" cy="68" r="1.6" opacity="0.4" />
+  </g>
+
+  <!-- Diver -->
+  <g transform="translate(160 110)">
+    <circle r="11" fill="#fb923c" />
+    <circle cy="-1" r="7.5" fill="#0f172a" />
+    <circle cx="-1" cy="-2" r="5.5" fill="#7dd3fc" />
+    <circle cx="-2" cy="-3" r="1.5" fill="#f0f9ff" />
+    <!-- flipper hint -->
+    <ellipse cx="-9" cy="9" rx="5" ry="2.5" fill="#ea580c" transform="rotate(-20 -9 9)" />
+    <ellipse cx="9" cy="9" rx="5" ry="2.5" fill="#ea580c" transform="rotate(20 9 9)" />
+  </g>
+
+  <!-- Pearls in clams - shallow (white, +1) -->
+  <g transform="translate(60 88)">
+    <path d="M-10,2 A10,10 0 0,1 10,2 Z" fill="#ca8a04" />
+    <path d="M-10,-1 A10,10 0 0,0 10,-1 Z" fill="#a16207" />
+    <circle r="6" fill="url(#pearl-shine)" />
+  </g>
+
+  <!-- Pearls - mid (pink, +3) -->
+  <g transform="translate(230 130)">
+    <path d="M-10,2 A10,10 0 0,1 10,2 Z" fill="#ca8a04" />
+    <path d="M-10,-1 A10,10 0 0,0 10,-1 Z" fill="#a16207" />
+    <circle r="6" fill="url(#pearl-pink)" />
+  </g>
+
+  <!-- Pearls - deep (violet, +5) -->
+  <g transform="translate(80 168)">
+    <path d="M-10,2 A10,10 0 0,1 10,2 Z" fill="#ca8a04" />
+    <path d="M-10,-1 A10,10 0 0,0 10,-1 Z" fill="#a16207" />
+    <circle r="6.5" fill="url(#pearl-violet)" />
+  </g>
+  <g transform="translate(250 170)">
+    <path d="M-10,2 A10,10 0 0,1 10,2 Z" fill="#ca8a04" />
+    <path d="M-10,-1 A10,10 0 0,0 10,-1 Z" fill="#a16207" />
+    <circle r="6.5" fill="url(#pearl-violet)" />
+  </g>
+
+  <!-- Jellyfish (pink hazard) -->
+  <g transform="translate(110 132)" opacity="0.92">
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="#f472b6" opacity="0.18" />
+    <path d="M-14,0 A14,14 0 0,1 14,0 Z" fill="#f472b6" opacity="0.85" />
+    <path d="M-14,0 A14,14 0 0,1 14,0" stroke="#fb7185" stroke-width="1.4" fill="none" />
+    <g stroke="#f472b6" stroke-width="1.2" fill="none" opacity="0.85">
+      <path d="M-8,0 Q-9,8 -10,16" />
+      <path d="M-3,0 Q-2,8 -3,16" />
+      <path d="M2,0 Q3,8 2,16" />
+      <path d="M8,0 Q9,8 8,16" />
+    </g>
+  </g>
+
+  <!-- Oxygen bar (left edge) -->
+  <g>
+    <rect x="6" y="38" width="6" height="130" fill="rgba(15,23,42,0.7)" />
+    <rect x="6" y="78" width="6" height="90" fill="#22d3ee" />
+    <text x="9" y="34" font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#cbd5e1" text-anchor="middle">O₂</text>
+  </g>
+
+  <!-- Depth value markers (right) -->
+  <g font-family="ui-sans-serif, system-ui" font-size="9" font-weight="700" fill="#94a3b8" text-anchor="end">
+    <text x="314" y="50">+1</text>
+    <text x="314" y="106">+3</text>
+    <text x="314" y="158">+5</text>
+  </g>
+
+  <!-- Title -->
+  <text x="14" y="190" font-family="ui-sans-serif, system-ui" font-size="13" font-weight="700" fill="#e4e4ed">İnci Avı</text>
+</svg>

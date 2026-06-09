@@ -1,0 +1,35 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">O₂<span id="oxygen">100%</span></div>
+  <div class="hud__score">Nefes<span id="lives">●●●</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="640"
+    aria-label="İnci Avı oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">İnci Avı</h2>
+      <p id="overlay-msg">
+        Sığ inciler 1, orta 3, derin 5 puan değerinde.<br />
+        Pembe denizanaları oksijenini yer.<br />
+        Yüzeye çıkınca nefesin tazelenir, boğulursan bir nefes hakkın gider.<br
+        />
+        <small>Ok tuşları veya WASD · 3 nefes hakkın var</small>
+      </p>
+      <button
+        id="overlay-btn"
+        class="hud__btn hud__btn--primary"
+        type="button">Başla</button
+      >
+    </div>
+  </div>
+</div>

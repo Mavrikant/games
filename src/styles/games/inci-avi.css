@@ -1,0 +1,96 @@
+/*
+ * İnci Avı — pearl-diving game styles. Portrait canvas (480x640) so the
+ * board-wrap uses a 3/4 aspect ratio to keep the surface-to-seabed column
+ * tall on every viewport.
+ *
+ * Overlay block (position absolute + .overlay--hidden visuals) must stay —
+ * @shared/overlay only toggles class + aria; visual collapse is here.
+ * pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
+  background: #020617;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f0f9ff;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.overlay__inner p strong {
+  color: #fde047;
+  font-size: 18px;
+}
+
+.overlay__inner small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

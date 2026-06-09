@@ -1,0 +1,21 @@
+{
+  "title": "İnci Avı",
+  "description": "Nefesini ölç, derine dal, incileri topla. Derin sular daha değerli ama oksijen kıt.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arcade", "strateji", "risk-odul", "tek-oyunculu"],
+  "controls": "← ↑ ↓ → veya WASD · R: yeniden başla · Boşluk: başla / tekrar dal",
+  "howToPlay": "Tepedeki tekneden suya dal, deniz tabanına dağılmış inci kabuklarını toplayıp yüzeye çıkmadan oksijen barını yönet. Sığ sularda (üst bölge) inciler 1 puan, orta sularda 3 puan, dipte ise 5 puan değerinde — değer arttıkça oksijen tüketimi de hızlanır, bu yüzden 'tek dalışta kaç inci' kararı her seferinde risk/ödül hesabı. Yüzeye (üst dalga çizgisinin üstüne) çıkarsan oksijenin hızla tazelenir; boğulursan üç nefes hakkından biri gider ve oyun bittiğinde rekorun tarayıcına kaydedilir. Pembe denizanaları orta ve derin bölgede yatay süzülür — değdiğinde oksijenin %22 birden düşer ve geri tepilirsin, bu yüzden onları sayarak dolaş. Topladığın her inci 5 saniye sonra yeni bir konumda yeniden doğar, yani yüzey-derin döngüsünü ne kadar verimli kursan o kadar puan birikir. Strateji ipucu: ilk dalışta sığ inciler için tur at, oksijen kullanımı hissini yakalayınca derin bölgeye 'dal-yakala-fırla' formunda inip çıkmayı dene; bir denizanasının yörüngesini iki saniye izleyip patternini gör — sallanan yolu üzerinden değil, dönüş noktasından geç.",
+  "thumbnail": "inci-avi.svg",
+  "scoring": {
+    "storageKey": "inci-avi.best",
+    "label": "İnci puanı",
+    "direction": "higher",
+    "labelEn": "Pearl score"
+  },
+  "en": {
+    "title": "Pearl Hunt",
+    "description": "Time your breath, dive deep, collect pearls. Deeper water pays more but burns oxygen faster.",
+    "controls": "← ↑ ↓ → or WASD · R: restart · Space: start / re-dive",
+    "howToPlay": "Dive from the boat at the surface and collect pearl-bearing clams scattered across the seabed while watching your oxygen meter. Pearls in the shallow band (top) are worth 1 point, the middle band pays 3, and the deepest band pays 5 — but oxygen drains faster the deeper you go, so every dive is a risk/reward call on how many pearls to grab before surfacing. Cross the wave line at the top to refill oxygen instantly; if you drown, you spend one of your three breaths and the high score is saved to your browser. Pink jellyfish drift across the mid and deep bands — touching one costs you 22% oxygen and shoves you away, so plan your route around their swing. Each collected pearl re-spawns at a fresh location after 5 seconds, so an efficient surface-to-deep rhythm keeps the score climbing. Tip: do an opening lap of the shallow band to calibrate your oxygen budget, then start 'dive-grab-rocket back up' runs on the deep zone; watch a jellyfish for two seconds and you'll see its swing turnaround — cross there, not through the swing."
+  }
+}
