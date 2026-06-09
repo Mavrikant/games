@@ -1,0 +1,21 @@
+{
+  "title": "Şimşek Tutucu",
+  "description": "Şarj olan fırtına bulutlarının altında paratoneri konumlandır, şimşekleri yakala. Bulutlar yatay hareket ettiği için reaktif değil tahminci olmak gerek.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arcade", "refleks", "tek-oyunculu"],
+  "controls": "Mouse veya ←/→ (A/D) · Boşluk: enerji patlaması · R: yeniden başla",
+  "howToPlay": "Tepedeki fırtına bulutları yatay olarak süzülürken üzerlerindeki şarj çubuğu dolar. Çubuk dolduğunda bulut, o anki X konumundan dikey bir şimşek bırakır — bulut hareket ettiği için 'şarj başladığında neredeydi' değil, 'tam patlayacakken nerede olacak' önemlidir. Tabandaki paratoneri farenle veya ←/→ (alternatif A/D) ile hareket ettir; şimşek paratonere değdiğinde +1 puan kazanır ve enerji barın bir bölme dolar, kaçırırsan yere düşer ve bir can gider. Üç çeşit bulut var: griler standart, sarı bulutlar daha hızlı şarj olur ve +3 puan değerinde, mavi bulutlar yavaş şarj olur ama paratonerin yakalama alanını geçici olarak iki katına çıkarır. Enerji barı tam dolduğunda Boşluk'a basarak yatay enerji dalgası salarsın; o anda inmekte olan tüm şimşekleri yakalar, yoğun anlarda kurtarıcıdır. Üç can biter bitmez oyun sona erer ve rekor tarayıcında saklanır. Strateji ipucu: aynı anda iki bulutu birden takip ederken hangisinin önce patlayacağını çubuk hızından oku, sarı bulutu kovala, mavi bulutu sakın kaçırma — yakalama alanı genişlemesi bir sonraki üçlü dalgayı götürür.",
+  "thumbnail": "simsek-tutucu.svg",
+  "scoring": {
+    "storageKey": "simsek-tutucu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Lightning Catcher",
+    "description": "Position the lightning rod under charging storm clouds to catch their bolts. Clouds drift horizontally, so anticipation beats reaction.",
+    "controls": "Mouse or ←/→ (A/D) · Space: energy burst · R: restart",
+    "howToPlay": "Storm clouds drift horizontally across the top of the canvas while a charge bar fills above each one. When the bar fills, the cloud releases a vertical bolt from its current X position — because the cloud is moving, the question is not 'where was it when the charge started' but 'where will it be the instant it fires'. Steer the rod at the bottom with the mouse or ←/→ (A/D as fallback); a bolt that strikes the rod scores +1 and fills one segment of your energy meter, a miss drops to the ground and costs a life. Three cloud kinds appear: gray ones are standard, yellow clouds charge faster and award +3, blue clouds charge slowly but temporarily double the rod's catch width when caught. With a full energy meter, hit Space to release a horizontal surge that catches every falling bolt at once — a lifesaver in dense waves. Three misses ends the run and your best score is stored in the browser. Tip: when two clouds are charging at once, read the bar speeds to choose which to chase, never let yellow escape, and treat the blue cloud as setup — the widened rod scoops up the next burst with ease."
+  }
+}
