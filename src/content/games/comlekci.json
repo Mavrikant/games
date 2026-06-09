@@ -1,0 +1,14 @@
+{
+  "title": "Çömlekçi",
+  "description": "Tornadaki kil sütununu hedef siluete uyacak şekilde halka halka şekillendir.",
+  "dateAdded": "2026-06-09",
+  "tags": ["puzzle", "zanaat", "orijinal"],
+  "controls": "↑/↓ veya W/S bant seç • ←/→ veya A/D yarıçap • Enter doğrula • R sıfırla • Mouse: bandın sol/sağ yarısına tıkla",
+  "howToPlay": "Hedef çömleğin silüeti kesik mavi çizgi olarak görünür. Her yatay bandın yarıçapını yukarı/aşağı seçip sol/sağ ile inceltip kalınlaştırabilirsin. Sınırlı hamle hakkın var; ne kadar az hamleyle tam isabet yaparsan o kadar yüksek puan alırsın. Enter ile çömleği doğrular ve sonraki seviyeye geçersin.",
+  "thumbnail": "comlekci.svg",
+  "scoring": {
+    "storageKey": "comlekci.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}

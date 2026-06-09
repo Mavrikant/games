@@ -1,0 +1,35 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1/5</span></div>
+  <div class="hud__score">Hamle<span id="strokes">0</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+<div class="ck-title">
+  <span class="ck-title__label">Hedef</span>
+  <span id="level-name" class="ck-title__name">Bardak</span>
+</div>
+<div class="board-wrap">
+  <canvas
+    id="stage"
+    width="480"
+    height="560"
+    aria-label="Çömlek tornası"></canvas>
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çömlekçi</h2>
+      <p id="overlay-body">
+        Tornada dönen kile şekil ver. Hedef silüetine (kesik mavi çizgi)
+        uyacak şekilde her bant'ın yarıçapını ayarla.
+      </p>
+      <button
+        id="overlay-action"
+        class="hud__btn hud__btn--primary"
+        type="button">Tezgaha başla</button
+      >
+    </div>
+  </div>
+</div>
