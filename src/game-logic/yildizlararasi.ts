@@ -6,7 +6,8 @@ import { defineGame } from '@shared/game-module';
 import { hideOverlay } from '@shared/overlay';
 import { ensureAudio, setMusicEnabled, setSfxEnabled, setTheme } from './yildizlararasi/audio';
 import { goto } from './yildizlararasi/router';
-import { freshData, gen, maybeLoadCloud, resetRun, S } from './yildizlararasi/state';
+import { refreshStart } from './yildizlararasi/scene-intro';
+import { freshData, gen, hasLink, maybeLoadCloud, resetRun, S } from './yildizlararasi/state';
 import * as three from './yildizlararasi/three-scene';
 
 let musicOn = true;
@@ -88,12 +89,15 @@ function init(): void {
     three.startLoop();
   }
 
-  // Pull a cloud-stored setup (#c=…) when Supabase is configured. Adopt fully
-  // while still on the intro; later, only refresh the memories so an in-progress
-  // customization isn't clobbered.
-  maybeLoadCloud((data) => {
-    if (S.scene === 'intro') S.data = data;
-    else S.data.memories = data.memories;
+  // Opened from a share link → the visitor is the recipient (2. karakter): they
+  // skip customization/mode and start the journey directly (see scene-intro).
+  S.fromLink = hasLink();
+
+  // A #c= cloud code needs an async fetch; gate the "start" until it settles.
+  S.cloudLoading = maybeLoadCloud((data) => {
+    if (data) S.data = data; // adopt the founder's full setup
+    S.cloudLoading = false;
+    refreshStart();
   });
 
   document.getElementById('restart')?.addEventListener('click', () => {

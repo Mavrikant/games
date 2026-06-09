@@ -31,6 +31,22 @@ export interface RuntimeState {
   inputLocked: boolean; // blocks movement (popup/portal/minigame/transition)
   customizeIndex: 0 | 1; // which character is being edited
   setupIndex: number; // which planet is being edited in setup
+  fromLink: boolean; // opened via a share link → recipient goes straight to play
+  cloudLoading: boolean; // awaiting a #c= cloud fetch before the journey can start
+}
+
+// True when the page was opened from a share link (#c= cloud code or #d= hash).
+export function hasLink(): boolean {
+  return readCloudCode() !== null || readHashPayload() !== null;
+}
+
+// The traveler is always the 2nd character (the recipient who plays); the 1st
+// character (the founder who set the journey up) waits at Earth.
+export function travelerChar() {
+  return S.data.characters[1];
+}
+export function waitingChar() {
+  return S.data.characters[0];
 }
 
 function clone(data: GameData): GameData {
@@ -50,14 +66,14 @@ export function freshData(): GameData {
   return clone(DEFAULT_DATA);
 }
 
-// If the URL carries a cloud code and Supabase is configured, fetch the setup
-// and hand it back. No-op (never calls onLoaded) otherwise.
-export function maybeLoadCloud(onLoaded: (data: GameData) => void): void {
+// If the URL carries a cloud code and Supabase is configured, fetch the setup.
+// Returns true if a fetch was started; onDone fires with the data (or null on
+// miss/failure) when it settles. Returns false (no fetch) otherwise.
+export function maybeLoadCloud(onDone: (data: GameData | null) => void): boolean {
   const code = readCloudCode();
-  if (!code || !cloudEnabled()) return;
-  void loadMemories(code).then((data) => {
-    if (data) onLoaded(data);
-  });
+  if (!code || !cloudEnabled()) return false;
+  void loadMemories(code).then((data) => onDone(data));
+  return true;
 }
 
 export function persistData(): void {
@@ -78,6 +94,8 @@ export const S: RuntimeState = {
   inputLocked: false,
   customizeIndex: 0,
   setupIndex: 0,
+  fromLink: false,
+  cloudLoading: false,
 };
 
 // Reset per-run play state (not the configured data).

@@ -9,7 +9,7 @@ import { ensureAudio, sfxClick, sfxPortal } from './audio';
 import { PLANETS } from './data';
 import { cancelMiniGame, playRandomMiniGame } from './minigames';
 import { goto } from './router';
-import { gen, S } from './state';
+import { gen, S, travelerChar, waitingChar } from './state';
 import * as three from './three-scene';
 import type { Memory, Scene } from './types';
 
@@ -249,8 +249,8 @@ function enter(): void {
   S.portalActive = false;
   S.minigameActive = false;
   S.inputLocked = false;
-  three.setPlayer(S.data.characters[S.data.playerIndex]!);
-  three.setPartner(S.data.characters[S.data.playerIndex === 0 ? 1 : 0]!);
+  three.setPlayer(travelerChar());
+  three.setPartner(waitingChar());
   three.setMode('space');
   loadPlanet(S.planetIndex);
   three.setFrameCallback(frameCb);

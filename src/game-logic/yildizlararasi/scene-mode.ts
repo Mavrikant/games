@@ -27,7 +27,7 @@ function enter(): void {
     `<button class="yi-bigbtn yi-bigbtn--pink" type="button" data-action="setup">` +
     `<span class="yi-bigbtn__icon">🎁</span><span class="yi-bigbtn__t">Anıları Gizle</span><span class="yi-bigbtn__s">Oyunu kur</span></button>` +
     `<button class="yi-bigbtn yi-bigbtn--turq" type="button" data-action="play">` +
-    `<span class="yi-bigbtn__icon">🚀</span><span class="yi-bigbtn__t">Yolculuğa Çık</span><span class="yi-bigbtn__s">Oyunu başlat</span></button>` +
+    `<span class="yi-bigbtn__icon">🚀</span><span class="yi-bigbtn__t">Yolculuğa Çık</span><span class="yi-bigbtn__s">Önizle</span></button>` +
     `</div>`;
   host.addEventListener('click', onClick);
 }

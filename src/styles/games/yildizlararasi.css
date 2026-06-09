@@ -164,6 +164,11 @@
 .yi-btn:active {
   transform: scale(0.96);
 }
+.yi-btn:disabled {
+  opacity: 0.5;
+  filter: none;
+  cursor: default;
+}
 .yi-btn--pink {
   background: var(--yi-pink);
 }
