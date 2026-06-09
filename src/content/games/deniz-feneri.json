@@ -1,0 +1,22 @@
+{
+  "title": "Deniz Feneri",
+  "description": "Dönen fener ışığını gelen gemilere tut: aydınlattığın rotasını kayalıklardan kırar, görmediğin paramparça olur. Aktif uyarı + dönüş zamanlaması — refleks değil tahmin.",
+  "dateAdded": "2026-06-09",
+  "tags": ["arcade", "refleks", "tek-oyunculu", "orijinal"],
+  "controls": "Fare/dokunma: ışını hedefle · ←/→ (A/D): elle döndür · Boşluk: başla / sis düdüğü · R: yeniden başla",
+  "howToPlay": "Ekranın merkezinde bir fener, çevresinde kayalık halka, dışında karanlık deniz var. Karanlığın kıyısından gemiler doğrudan kayalıklara doğru süzülerek girer; her geminin pruvasında küçük bir uyanma göstergesi vardır. Işın geminin üstünde yeterince kalırsa gösterge dolar, kaptan tehlikeyi görür ve rotasını 90 derece kırarak kayalıktan uzaklaşır — bundan sonra ekranın kıyısına ulaşırsa +1 puan kazanırsın. Aydınlatmadığın gemi kayalık halkaya girer girmez parçalanır, bir can gider. Üç can biterse oyun sona erer. Işın 24 derecelik dar bir koni; fare imlecini tut, koni o yöne doğru yumuşakça döner — ya da ←/→ (A/D) ile elle çevir. Sarı tekneler hızlıdır ve daha kısa uyarı süresi ister, sis bayraklı mavi tekneler yavaştır ama uyarıldığında yakındaki başka bir gemiyi de telsizle uyarır; siyah gemiler 'sağır'dır, uyanmaları için ışını iki kat uzun tutman gerekir. Tehlike: aynı anda birkaç gemi farklı yönlerden gelir, sis basar (görüş alanı daralır) ve enerji barın dolduğunda Boşluk ile sis düdüğünü çalıp 0.6 saniyeliğine ekrandaki tüm uyarılmamış gemileri tehlikeden haberdar edebilirsin. Strateji: kayalığa en yakın olanı değil, koniye girmesi en uzun sürecek olan 'sağır siyah' gemiyi önce yakala; çabuk olanı kıyıya en yakın anında yumuşak bir tarama ile geç. Rekor tarayıcında saklanır.",
+  "thumbnail": "deniz-feneri.svg",
+  "scoring": {
+    "storageKey": "deniz-feneri.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Lighthouse",
+    "description": "Sweep the rotating beam onto incoming ships: those you illuminate veer away from the rocks; those you miss splinter. Active warning + turning timing — anticipation, not reflex.",
+    "controls": "Mouse/touch: aim the beam · ←/→ (A/D): manual rotate · Space: start / foghorn · R: restart",
+    "howToPlay": "A lighthouse stands at the center of the screen, ringed by a rocky reef, surrounded by dark sea. Ships drift in from the edge of the dark sea, heading straight for the reef; each one carries a tiny wake-up gauge on its bow. Keep the beam on a ship long enough and the gauge fills, the captain sees the danger and turns 90° to escape the rocks — once a warned ship reaches the screen edge again, +1 point. A ship you do not light up shatters the instant it enters the reef ring, costing a life. Three lives and the run ends. The beam is a narrow 24° cone; hold the mouse pointer where you want it and the cone eases toward that bearing — or rotate it manually with ←/→ (A/D). Yellow speedboats arrive quickly and demand a shorter exposure, slower blue fog-flag ships warn a nearby vessel by radio once you light them, and black ships are 'deaf' — you must hold the beam on them for twice as long. Multiple ships approach from different bearings, fog rolls in (cutting visibility), and when your energy meter fills you can hit Space to sound the foghorn, briefly alerting every unwarned ship on the screen. Strategy: light the deaf black ship first (not the closest one) and brush the speedboat last with a tight sweep right before the reef. Best score is saved.",
+    "labelEn": "Score"
+  }
+}

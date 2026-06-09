@@ -1,0 +1,34 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Can<span id="lives">♥♥♥</span></div>
+  <div class="hud__score">Düdük<span id="energy">0/5</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <canvas
+    id="board"
+    width="640"
+    height="480"
+    aria-label="Deniz Feneri oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Deniz Feneri</h2>
+      <p id="overlay-msg">
+        Gemiler kayalığa süzülüyor. Işını üzerlerinde tut, uyanıp rota
+        kırsınlar — geç kalanı kayalık öğütür.<br /><small
+          >Fare ile hedefle · ←/→ elle döndür · Boşluk: sis düdüğü</small
+        >
+      </p>
+      <button
+        id="overlay-btn"
+        class="hud__btn hud__btn--primary"
+        type="button">Başla</button
+      >
+    </div>
+  </div>
+</div>
