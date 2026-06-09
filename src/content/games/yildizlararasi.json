@@ -1,0 +1,9 @@
+{
+  "title": "Yıldızlararası",
+  "description": "Plüton'dan Dünya'ya uzanan romantik bir yolculuk. Sevgilin için her gezegene bir anı ve mesaj sakla; o da uzayı gezip anıları toplayarak sana ulaşsın.",
+  "dateAdded": "2026-06-09",
+  "tags": ["macera", "hikaye", "romantik", "tek-oyunculu"],
+  "controls": "Fare/dokunma ile karaktere yön ver veya WASD / ok tuşlarını kullan. Parlayan anıya ulaş, mesajı oku, galaksi portalından sonraki gezegene geç.",
+  "howToPlay": "İki karakteri özelleştir ve hangisinin sen olduğunu seç. 'Anıları Gizle' modunda her gezegene bir anı ve aşk mesajı bırak, sonra 'Linki Kopyala' ile sevgiline gönder. 'Yolculuğa Çık' modunda Plüton'dan Dünya'ya ilerle, her gezegende parlayan anıyı topla ve sonunda buluşmaya ulaş. Kurulum yapılmadıysa örnek bir anı seti ile oynanır.",
+  "thumbnail": "yildizlararasi.svg"
+}
