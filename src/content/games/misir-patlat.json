@@ -1,0 +1,14 @@
+{
+  "title": "Mısır Patlat",
+  "description": "Tencerenin altındaki ateşi basılı tutarak ısıtırsın — ama 80'in üstüne çıkarsan mısır yanar. Ritmi tuttur, hepsini patlat.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "refleks", "orijinal"],
+  "controls": "Basılı tut / Space: ısıt · Bırak: soğur · R: yeniden başla",
+  "thumbnail": "misir-patlat.svg",
+  "howToPlay": "Tencerede 30 ham mısır var ve 45 saniyen. Tencerenin altındaki ateşi sen kontrol ediyorsun: kanvasa fareyle basılı tuttuğun (ya da Space tuşunu basılı tuttuğun) sürece ısı yükselir, bıraktığında düşer. Mısırlar ısıya göre içeride birikim yapar: ısı 55'in altındayken hiçbir şey olmaz, 55-80 arası tatlı bölgedir — burada birikim hızlıdır ve mısırlar yumuşacık patlar. Ama ısıyı 80'in üstüne çıkarırsan mısırlar yanmaya başlar; 85+ tehlikeli, 95+ neredeyse anında karartır. Her patlayan mısır +1, her yanan -1 puandır. Strateji: ısıyı sürekli açıp kapatarak 70 civarında tut — fazla soğursan zaman kaybedersin, fazla ısıtırsan ürün ziyan olur. Sol kenardaki termometre anlık ısıyı gösterir, yeşil bant tatlı bölgedir. Tencere içindeki kahverengi mısırlar “neredeyse patlamak üzere” demektir; o anda ısıyı kısarsan yanmazlar. Tüm mısırlar bitince oyun erken biter. R ile yeniden başlarsın; en iyi skorun localStorage'a kayıtlıdır.",
+  "scoring": {
+    "storageKey": "misir-patlat.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}

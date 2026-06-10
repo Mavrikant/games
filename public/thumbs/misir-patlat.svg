@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#2a1e0a"/>
+      <stop offset="60%" stop-color="#140c08"/>
+      <stop offset="100%" stop-color="#0a0b0e"/>
+    </radialGradient>
+    <linearGradient id="pot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4150"/>
+      <stop offset="100%" stop-color="#0e1216"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="100%" r="55%">
+      <stop offset="0%" stop-color="rgba(255,180,80,0.55)"/>
+      <stop offset="100%" stop-color="rgba(255,120,40,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <ellipse cx="160" cy="180" rx="120" ry="40" fill="url(#glow)"/>
+
+  <!-- Flames -->
+  <g opacity="0.95">
+    <path d="M120 168 Q128 130 138 168 Z" fill="#f59e0b"/>
+    <path d="M138 168 Q150 110 162 168 Z" fill="#fbbf24"/>
+    <path d="M162 168 Q174 118 186 168 Z" fill="#fbbf24"/>
+    <path d="M186 168 Q196 130 204 168 Z" fill="#f59e0b"/>
+    <ellipse cx="160" cy="155" rx="14" ry="22" fill="#fff5c8" opacity="0.55"/>
+  </g>
+
+  <!-- Pot body -->
+  <path d="M70 90 L250 90 L240 168 Q160 188 80 168 Z" fill="url(#pot)"/>
+  <rect x="62" y="82" width="196" height="14" rx="2" fill="#3a4150"/>
+  <rect x="62" y="92" width="196" height="3" fill="#1c2027"/>
+
+  <!-- Handles -->
+  <path d="M64 110 q-14 0 -14 16 q0 16 14 16" fill="none" stroke="#3a4150" stroke-width="5"/>
+  <path d="M256 110 q14 0 14 16 q0 16 -14 16" fill="none" stroke="#3a4150" stroke-width="5"/>
+
+  <!-- Popcorn puffs above pot -->
+  <g fill="#fff8e6">
+    <circle cx="118" cy="62" r="10"/>
+    <circle cx="126" cy="56" r="8"/>
+    <circle cx="118" cy="50" r="9"/>
+    <circle cx="110" cy="56" r="8"/>
+    <circle cx="118" cy="58" r="9"/>
+  </g>
+  <g fill="#fff8e6">
+    <circle cx="172" cy="40" r="11"/>
+    <circle cx="180" cy="34" r="9"/>
+    <circle cx="172" cy="28" r="10"/>
+    <circle cx="164" cy="34" r="9"/>
+  </g>
+  <g fill="#fff3d6">
+    <circle cx="216" cy="64" r="9"/>
+    <circle cx="224" cy="58" r="7"/>
+    <circle cx="216" cy="52" r="8"/>
+    <circle cx="208" cy="58" r="7"/>
+  </g>
+
+  <!-- Raw kernels inside pot -->
+  <g fill="#fbbf24">
+    <ellipse cx="100" cy="125" rx="5" ry="4"/>
+    <ellipse cx="120" cy="135" rx="5" ry="4"/>
+    <ellipse cx="142" cy="128" rx="5" ry="4"/>
+    <ellipse cx="160" cy="138" rx="5" ry="4"/>
+    <ellipse cx="180" cy="130" rx="5" ry="4"/>
+    <ellipse cx="200" cy="138" rx="5" ry="4"/>
+    <ellipse cx="220" cy="128" rx="5" ry="4"/>
+  </g>
+</svg>
