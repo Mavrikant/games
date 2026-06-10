@@ -1,0 +1,21 @@
+{
+  "title": "Çatlak",
+  "description": "Seramik tabakta dallanan bir çatlak yayılıyor — uçlarına dokunup mühürle, kenara ulaşmasına izin verme.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "refleks", "özgün", "hassasiyet"],
+  "controls": "Tıkla/dokun: çatlak ucunu mühürle · Boşluk/Enter: başla · R: yeniden başla",
+  "thumbnail": "catlak.svg",
+  "howToPlay": "Çatlak, sakin bir seramik tabağın sessizce çatırdayışını yöneten bir hassasiyet-refleksi oyunudur. Tabağın bir kenarından minik bir çatlak doğar ve canlı bir kök gibi içeri ilerler; sabit bir hızla uzar, küçük ama beklenmedik açılarla salınır ve belirli bir uzunluğa ulaştığında ikiye ayrılarak ayrı yollara dağılır. Her dakika her şeyin ucu artar — bir tohum çatlak iki olur, iki olur dört olur, kontrolden çıkar. İşin tek: aktif uçların etrafındaki küçük halkalara dokun. Doğru anda dokunduğunda o uç mühürlenir, durur ve bir daha asla büyümez; çatlağın geri kalanı orada kalır, görüntüsünü kaybetmez ama büyümez. Mühürlediğin her uç skorunu bir yukarı taşır. Sadece uca dokunabilirsin: gövdeye veya boşluğa dokunmak bir 'kaçırma' sayılır ve bir can kaybedersin. Aynı şekilde, herhangi bir çatlak ucu tabağın kenarına ulaşırsa tabak çatlamış sayılır ve oyun biter. Zaman ilerledikçe büyüme hızlanır; daha sık çatallanma, daha yüksek hız. Skor yükseldikçe yeni bir tohum çatlak rastgele bir kenardan doğabilir — dikkatini bölmek zorunda kalırsın. Her yakaladığın uç +1 puan getirir; özellikle uzun süredir büyüyen, kenara yakın bir ucu son anda mühürlersen oyun durumunu kurtarmış olursun, ekstra ödül yok ama nefes alırsın. Üç kaçırma veya bir kenara ulaşma ile oyun biter; rekor tarayıcına kaydedilir. Strateji: bir uç çatallanıp ikiye çıkmadan önce yakala — bekleyip ikisi de büyürse iki hamle harcarsın; uzun ve hızlı olanı önce hedefle çünkü en kısa sürede o kenara varır; mühürlü uçların görsel olarak donuk kalır, korkma, oyunu bitirmezler.",
+  "scoring": {
+    "storageKey": "catlak.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Crack",
+    "description": "A branching crack creeps across a ceramic plate. Tap its tips to seal them — don't let one reach the edge.",
+    "controls": "Click/tap: seal a crack tip · Space/Enter: start · R: restart",
+    "howToPlay": "Crack is a precision-reflex game about taming a fracture as it spreads through a quiet ceramic plate. A tiny crack sprouts from one edge and inches inward like a living root: it advances at a steady speed, drifts in small but unpredictable angles, and after growing a certain length it forks in two and sends the branches down separate paths. Over time everything multiplies — one seed becomes two, two becomes four, the network races for the rim. Your only move is to tap a tiny ring that hovers at each active tip. Tap the ring in time and that tip is sealed — it freezes, never grows again, and the rest of the crack stays put but cannot extend from that point. Each sealed tip adds one to your score. You may only tap the tip itself: tapping the body or the empty plate counts as a miss and costs a life. Likewise, if any active tip reaches the rim, the plate is considered broken and the run ends. As your score climbs, growth speeds up: branches fork sooner, tips move faster. Past certain thresholds a fresh seed crack may sprout from a random edge, splitting your attention. Every sealed tip scores +1; sealing a long, fast tip at the very brim doesn't pay extra but rescues the run. Three misses or a single edge hit ends the game; the high score is saved in your browser. Strategy: catch a tip before it forks — if you wait, two new tips will demand two taps; prioritise the longest, fastest tip because it will hit the rim soonest; sealed tips look dim but are harmless, leave them alone."
+  }
+}

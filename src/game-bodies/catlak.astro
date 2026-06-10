@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Can<span id="lives">3</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="540"
+    aria-label="Çatlak — seramik tabakta dallanan çatlak oyun alanı"></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çatlak</h2>
+      <p id="overlay-msg" data-msg="ready">
+        Tabağın kenarından bir çatlak doğar ve içeri ilerler.
+        Aktif uçtaki halkaya dokun — uç mühürlenir, büyümez.
+        Çatallanır, hızlanır; bir uç kenara değerse tabak çatlar.
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--accent" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>

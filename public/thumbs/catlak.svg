@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çatlak">
+  <defs>
+    <radialGradient id="plate" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#f3ead5" />
+      <stop offset="60%" stop-color="#e7d9b8" />
+      <stop offset="100%" stop-color="#c9b78d" />
+    </radialGradient>
+    <radialGradient id="tipPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(34,34,34,0.55)" />
+      <stop offset="100%" stop-color="rgba(34,34,34,0)" />
+    </radialGradient>
+    <radialGradient id="rimPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(220,70,70,0.7)" />
+      <stop offset="100%" stop-color="rgba(220,70,70,0)" />
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="#1a1a20" />
+  <rect width="320" height="200" fill="url(#plate)" />
+
+  <!-- plate rim -->
+  <ellipse cx="160" cy="100" rx="142" ry="82"
+           fill="none" stroke="#a8946a" stroke-width="3" />
+  <ellipse cx="160" cy="100" rx="132" ry="72"
+           fill="none" stroke="rgba(168,148,106,0.45)" stroke-width="1" />
+
+  <!-- branching crack from the left rim -->
+  <g stroke="#2b2620" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- trunk -->
+    <path d="M22 100 L48 96 L72 102 L96 94 L118 100" stroke-width="3" />
+    <!-- upper branch -->
+    <path d="M118 100 L138 84 L158 76 L178 64" stroke-width="2.5" />
+    <path d="M178 64 L196 50 L214 44" stroke-width="2" />
+    <path d="M178 64 L196 70 L210 76" stroke-width="2" />
+    <!-- lower branch -->
+    <path d="M118 100 L142 116 L168 124 L196 128" stroke-width="2.5" />
+    <path d="M196 128 L218 134 L240 132" stroke-width="2" />
+    <path d="M196 128 L210 144 L228 156" stroke-width="2" />
+  </g>
+
+  <!-- sealed tips (small dim dots) -->
+  <circle cx="214" cy="44" r="3" fill="rgba(60,130,90,0.7)" />
+  <circle cx="210" cy="76" r="3" fill="rgba(60,130,90,0.7)" />
+
+  <!-- active tips with pulse rings -->
+  <circle cx="240" cy="132" r="22" fill="url(#tipPulse)" />
+  <circle cx="240" cy="132" r="14" fill="none" stroke="rgba(34,34,34,0.9)" stroke-width="2" />
+  <circle cx="240" cy="132" r="3" fill="#222" />
+
+  <!-- rim-near tip in alarm red -->
+  <circle cx="228" cy="156" r="22" fill="url(#rimPulse)" />
+  <circle cx="228" cy="156" r="14" fill="none" stroke="rgba(220,70,70,0.95)" stroke-width="2" />
+  <circle cx="228" cy="156" r="3" fill="#dc4646" />
+
+  <text x="22" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#2b2620">Çatlak</text>
+  <text x="22" y="50" font-family="ui-sans-serif, system-ui" font-size="11" fill="#5b4a32">uçları mühürle, kenara değme</text>
+</svg>
