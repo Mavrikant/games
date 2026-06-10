@@ -1,0 +1,15 @@
+{
+  "title": "Sek-Sek",
+  "description": "Geleneksel sek-sek deseninde sırayla 1'den 8'e kadar her kareye taşı doğru güç ve açıyla fırlat.",
+  "dateAdded": "2026-06-10",
+  "tags": ["beceri", "nostalji", "timing", "fizik"],
+  "controls": "Fare/dokunma: oyuncudan tut, geriye sürükle, bırak — slingshot",
+  "howToPlay": "Sarı çerçeveli kare o turun hedefi. Aşağıdaki mavi oyuncudan tut, geriye doğru sürükle ve bırak — taş ters yöne fırlar, sürüklediğin kadar uzağa gider. Hedef karenin tam merkezine yakın düşürürsen bonus puan kazanırsın. Yanlış kareye düşmek veya tahtayı tamamen ıskalamak 1 ıska sayılır; 3 ıska oyunu bitirir. 8 turun hepsini başarırsan üst düzey skoru yakalarsın.",
+  "thumbnail": "sek-sek.svg",
+  "en": {
+    "title": "Hopscotch Toss",
+    "description": "Sling a stone onto the highlighted square on the traditional hopscotch grid — 8 rounds, 3 misses end the game.",
+    "controls": "Mouse/touch: pull back from the player and release to throw",
+    "howToPlay": "The yellow-outlined square is this round's target. Grab the blue player, drag backward and release — the stone flies in the opposite direction; the further you pull, the further it travels. Landing near the center of the target square earns a bonus. Wrong square or off-grid counts as a miss; 3 misses end the run. Clear all 8 squares for the top score."
+  }
+}

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sek-Sek">
+  <defs>
+    <linearGradient id="seksekBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2f24" />
+      <stop offset="100%" stop-color="#1d1610" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#seksekBg)" />
+  <g fill="none" stroke="#f4ecd8" stroke-width="2">
+    <rect x="200" y="140" width="42" height="42" rx="2" />
+    <rect x="200" y="92" width="42" height="42" rx="2" />
+    <rect x="200" y="44" width="42" height="42" rx="2" />
+    <rect x="152" y="44" width="42" height="42" rx="2" fill="rgba(253,224,71,0.12)" stroke="#fde047" stroke-width="3" />
+    <rect x="104" y="44" width="42" height="42" rx="2" />
+    <rect x="104" y="92" width="42" height="42" rx="2" />
+    <rect x="56" y="92" width="42" height="42" rx="2" />
+  </g>
+  <g font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">
+    <text x="221" y="167" fill="#f4ecd8">1</text>
+    <text x="221" y="119" fill="#f4ecd8">2</text>
+    <text x="221" y="71" fill="#f4ecd8">3</text>
+    <text x="173" y="71" fill="#fde047">4</text>
+    <text x="125" y="71" fill="#f4ecd8">5</text>
+    <text x="125" y="119" fill="#f4ecd8">6</text>
+    <text x="77" y="119" fill="#f4ecd8">7</text>
+  </g>
+  <circle cx="262" cy="161" r="9" fill="#38bdf8" stroke="#fff" stroke-opacity="0.5" stroke-width="2" />
+  <line x1="262" y1="161" x2="195" y2="80" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="5 4" />
+  <polygon points="195,80 203,83 200,75" fill="#fb923c" />
+  <circle cx="173" cy="65" r="6" fill="#d6d3d1" stroke="#57534e" stroke-width="1.5" />
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Sek-Sek</text>
+</svg>
