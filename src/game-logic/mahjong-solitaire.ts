@@ -368,6 +368,7 @@ function win(): void {
   if (best === 0 || elapsed < best) {
     persistBest(elapsed);
   }
+  reportGameOver(SCORE_DESC, elapsed, { label: 'Süre', unit: 'sn' });
   showOverlay('Tebrikler!', `Süren: ${timerEl.textContent}${best ? ' · En iyi: ' + Math.floor(best / 60) + ':' + (best % 60).toString().padStart(2, '0') : ''}`);
 }
 
