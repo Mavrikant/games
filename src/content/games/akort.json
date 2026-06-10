@@ -1,0 +1,22 @@
+{
+  "title": "Akort",
+  "description": "Gitarın 6 telini sırayla akort et. Sol/sağ ok ile vidayı çevir, ibreyi hedef bölgede sabit tut.",
+  "dateAdded": "2026-06-10",
+  "tags": ["muzik", "hassas", "olcum", "tek-oyunculu"],
+  "controls": "Sol/Sağ ok: ince ayar · A/D: kaba ayar · Space: pas geç · R: yeniden",
+  "howToPlay": "Bir gitar tunerini simüle ediyorsun: standart E akort altı teli sırayla doğru frekansa getirmen lazım. Üst sıradaki altı kutu telleri (E2, A2, D3, G3, B3, E4) gösterir; aktif olan vurgulu, akortlananlar yeşil tikle işaretlenir. Ekranın ortasındaki büyük yatay gösterge bir tuner çubuğudur — yeşil dikdörtgen hedef bölge, hareketli ibre ise telin anlık frekansıdır. Sol/sağ ok tuşları vidayı 0.4 Hz çevirir (ince ayar), A ve D tuşları 1.6 Hz çevirir (kaba ayar). Yeşil bölgeye geldiğinde altta ilerleme barı dolmaya başlar; bir saniye boyunca yeşil bölgede sabit kalırsan tel akortlanır ve sıradakine geçer. İbre bölge dışına çıkarsa bar geri eriyor, sıfırdan başlamış olmuyorsun. Cents sapması (¢) tam altta yazar: +50 ¢ demek hedeften yarım ton mesafede daha yüksek demek, 0 ¢ tam akort. Telleri zor bulunca Space ile pas geçip sonrakine bakabilirsin — atlanan tel listeden silinmez, sona kalır. Süre saniye olarak HUD'da işler; tüm altı tel akortlanınca süre kilitlenir ve en kısa süre kaydedilir. Strateji: önce kaba ayarla yeşil bölgeye yaklaş, sonra ince ayar ile sabitle; ibre vibrato gibi hafifçe salınıyor, bu yüzden tam yeşil bölgenin ortasına gelmek hold süresince güvenli kalır. R ile her zaman yeni bir tur açabilirsin.",
+  "thumbnail": "akort.svg",
+  "scoring": {
+    "storageKey": "akort.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "lower",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Tune Up",
+    "description": "Tune all six guitar strings in turn — turn the peg, hold the needle inside the green target zone.",
+    "controls": "Left/Right arrow: fine tune · A/D: coarse tune · Space: skip string · R: restart",
+    "howToPlay": "You're operating a guitar tuner: bring each of six standard E-tuned strings (E2, A2, D3, G3, B3, E4) into the green target band. The six tiles up top track string status — active one is highlighted, tuned ones get a green check. The big horizontal bar in the middle is the tuner: the green rectangle marks the target window, the moving needle is the string's current frequency. Left/Right arrows turn the peg by 0.4 Hz (fine), A and D turn by 1.6 Hz (coarse). When the needle enters the green band, the progress bar at the bottom starts filling; hold the needle inside the band for one second and the string locks in, advancing to the next. If the needle leaves the band the bar decays — but you don't reset to zero. The cents display below shows the deviation: +50 ¢ means half a semitone sharp, 0 ¢ is perfect pitch. Stuck on a string? Press Space to skip it and try later; skipped strings stay on the list. Your time ticks up in the HUD; once all six lock in, the timer freezes and your best time is saved. Strategy: coarse-adjust into the green zone first, then fine-tune to the center — the needle vibrates slightly, so sitting in the middle gives you a safety margin during the hold. R restarts at any time."
+  }
+}

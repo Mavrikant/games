@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Akort">
+  <defs>
+    <linearGradient id="ak-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10182a" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="ak-zone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ak-bg)" />
+  <!-- Title -->
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Akort</text>
+  <text x="20" y="52" font-family="ui-sans-serif, system-ui" font-size="11" fill="#34d399" font-weight="600" letter-spacing="2">E2 A2 D3 G3 B3 E4</text>
+  <!-- Tuner bar -->
+  <rect x="40" y="100" width="240" height="46" rx="6" fill="#0c1320" stroke="#2a313d" stroke-width="1" />
+  <!-- Tick marks -->
+  <g stroke="#2a313d" stroke-width="1">
+    <line x1="64" y1="100" x2="64" y2="110" />
+    <line x1="112" y1="100" x2="112" y2="110" />
+    <line x1="160" y1="100" x2="160" y2="114" />
+    <line x1="208" y1="100" x2="208" y2="110" />
+    <line x1="256" y1="100" x2="256" y2="110" />
+    <line x1="64" y1="146" x2="64" y2="136" />
+    <line x1="112" y1="146" x2="112" y2="136" />
+    <line x1="160" y1="146" x2="160" y2="132" />
+    <line x1="208" y1="146" x2="208" y2="136" />
+    <line x1="256" y1="146" x2="256" y2="136" />
+  </g>
+  <!-- Green target zone -->
+  <rect x="148" y="101" width="24" height="44" rx="3" fill="url(#ak-zone)" stroke="#34d399" stroke-width="1.5" />
+  <!-- Needle (slightly off-center for visual interest) -->
+  <line x1="166" y1="92" x2="166" y2="154" stroke="#6ee7b7" stroke-width="3" stroke-linecap="round" />
+  <polygon points="158,86 174,86 166,98" fill="#6ee7b7" />
+  <polygon points="158,160 174,160 166,148" fill="#6ee7b7" />
+  <!-- Cents display -->
+  <text x="160" y="184" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#34d399">+8 ¢</text>
+  <!-- String tiles up top -->
+  <g font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" text-anchor="middle">
+    <rect x="40" y="62" width="34" height="24" rx="4" fill="#0f3a22" stroke="#34d399" stroke-width="1" />
+    <text x="57" y="78" fill="#34d399">E2</text>
+    <rect x="80" y="62" width="34" height="24" rx="4" fill="#0f3a22" stroke="#34d399" stroke-width="1" />
+    <text x="97" y="78" fill="#34d399">A2</text>
+    <rect x="120" y="62" width="34" height="24" rx="4" fill="#1a2230" stroke="#6ee7b7" stroke-width="2" />
+    <text x="137" y="78" fill="#e8ecf3">D3</text>
+    <rect x="160" y="62" width="34" height="24" rx="4" fill="#10141c" stroke="#2a313d" stroke-width="1" />
+    <text x="177" y="78" fill="#9aa0aa">G3</text>
+    <rect x="200" y="62" width="34" height="24" rx="4" fill="#10141c" stroke="#2a313d" stroke-width="1" />
+    <text x="217" y="78" fill="#9aa0aa">B3</text>
+    <rect x="240" y="62" width="34" height="24" rx="4" fill="#10141c" stroke="#2a313d" stroke-width="1" />
+    <text x="257" y="78" fill="#9aa0aa">E4</text>
+  </g>
+</svg>

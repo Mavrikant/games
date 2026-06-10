@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">0.0s</span></div>
+  <div class="hud__score">Akortlu<span id="progress">0 / 6</span></div>
+  <div class="hud__score">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Akort oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Akort</h2>
+      <p id="overlay-msg">Sol/sağ ok ile vidayı çevir, telin frekansını yeşil hedef bölgesine getir. Başlamak için bir tuşa bas ya da bu yazıya tıkla.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <div class="touch__row">
+    <button class="touch__btn" data-act="coarse-down" type="button">−−</button>
+    <button class="touch__btn" data-act="fine-down" type="button">−</button>
+    <button class="touch__btn touch__btn--skip" data-act="skip" type="button">Pas</button>
+    <button class="touch__btn" data-act="fine-up" type="button">+</button>
+    <button class="touch__btn" data-act="coarse-up" type="button">++</button>
+  </div>
+</div>
