@@ -1,0 +1,21 @@
+{
+  "title": "Hokkabaz",
+  "description": "Üç topla başla, havada tut — düşen topu sahnenin dibine ulaşmadan yakala, her birkaç yakalamada bir top daha eklenir.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "refleks", "tek-oyunculu", "özgün"],
+  "controls": "← → veya A/D: hokkabazı kaydır · Fare/dokunma: imleci takip et · Boşluk/Enter: başlat · R: yeniden başla",
+  "thumbnail": "hokkabaz.svg",
+  "howToPlay": "Hokkabaz, klasik bir sirk numarasını sade bir refleks oyununa indirgeyen özgün bir arcade. Sahnede aşağıda kayan iki avuçlu bir hokkabaz var; üstte ise birer parabol çizerek havada kalan renkli toplar. Görevin tek: hiçbir top sahnenin dibine düşmesin. Her top yerçekiminin etkisiyle aşağı iner; avuçların hizasına geldiğinde hokkabaz onun altındaysa otomatik yakalanır, ters tarafa hafifçe savrularak yeniden yukarı fırlatılır. Bu cascade adı verilen klasik üçlü hokkabazlık desenidir — sağ avuçtan atılan top sola düşer, sol avuçtan atılan sağa, ve sen ortada gidip gelerek hepsini sırayla altta tutarsın. Hokkabazı sol-sağ ok tuşları veya A/D ile sürekli kaydırabilir, ya da farenin imlecini ve dokunmatik ekranda parmağını takip ettirebilirsin; fare yumuşak ama hassas, tuş kontrolü ise sabit hızlı ve tahmin edilebilir. Başlangıçta sahnede üç top vardır ve üç canın olur; bir top avucunu kaçırıp zemini geçerse bir can yiter ve top yeniden tepeden iner. Her 8 yakalamada sahneye bir top daha katılır, üst sınır altı toptur — bu noktadan sonra zorluk yalnızca senin reflekslerinden gelir. Skor toplam yakalama sayısıdır; en yüksek skorun tarayıcına kaydedilir. Üç can da bitince oyun sona erer; R tuşu veya alttaki düğme yeni bir tur açar. İpucu: kaybedeceğin top genellikle aklını dağıttığın andır — gözünü en yüksekte değil, en aşağıda olan topa kilitle, çünkü bir sonraki yakalama hep o olacak. Cascade düzeninde ortayı boş tutmak ve hokkabazı düşüş çizgisinin merkezine getirmek 'iyi bir savurma' demektir; köşeye sürüklenirsen toplar köşeye birikir ve yetişemezsin. Sabit ritimle nefes al ve 'gözüm — adım — yakalama' üçlüsünü ayrıştır.",
+  "scoring": {
+    "storageKey": "hokkabaz.best",
+    "label": "Yakalama",
+    "direction": "higher",
+    "labelEn": "Catches"
+  },
+  "en": {
+    "title": "Juggler",
+    "description": "Start with three balls and keep them airborne — catch each falling ball before it hits the floor, with another ball joining every few catches.",
+    "controls": "← → or A/D: slide the juggler · Mouse/touch: follow the cursor · Space/Enter: start · R: restart",
+    "howToPlay": "Juggler is a circus act reduced to one reflex loop. A small juggler with two hands slides along the bottom of the stage while colourful balls trace parabolas above. Your only job is to keep every ball in the air. Gravity pulls each ball down; when it reaches the hand line and the juggler is underneath, it is caught automatically and tossed back up — angled slightly toward the opposite hand. That is the classic three-ball cascade: balls thrown from the right hand land on the left, balls thrown from the left hand land on the right, and you slide back and forth catching them in turn. Move the juggler with the left/right arrows or A/D for steady, predictable speed, or let it follow the mouse/touch position for smooth fine control. You start with three balls and three lives; if any ball passes the floor, you lose a life and it respawns from the top. Every 8 successful catches a new ball joins the act, up to a cap of six — past that, the difficulty comes purely from your reflexes. The score is your total catches, with your best run saved locally. Three lost balls end the run; press R or the on-screen button for a fresh attempt. Tip: most drops happen when you lose focus, so lock your eyes on the lowest ball — that is always the next catch. In the cascade pattern, staying near the middle and stepping into the centre of the falling arc is what good jugglers call 'good placement'; drift to a corner and the balls pile up there. Find a steady rhythm and separate the three phases of each catch: eye-track, step, hand."
+  }
+}
