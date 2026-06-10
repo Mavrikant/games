@@ -7,8 +7,16 @@
 //   3. The level-select map renders all 60 cells with level 1 unlocked.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot } from './_boot.mjs';
 
 export default async function kusatma(page) {
+  // #intro defaults to aria-hidden="true" in the markup; boot flips it to
+  // "false". Poll for that flip — the module import can resolve after load.
+  await waitForBoot(
+    page,
+    () => document.querySelector('#intro')?.getAttribute('aria-hidden') === 'false',
+  );
+
   const intro = page.locator('#intro');
   assert.equal(await intro.getAttribute('aria-hidden'), 'false', 'intro overlay should show on boot');
 

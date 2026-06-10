@@ -11,6 +11,7 @@
 // mutate gameplay state.
 
 import { strict as assert } from 'node:assert';
+import { pressUntil } from './_boot.mjs';
 
 export default async function mumSenkronu(page) {
   const overlayHiddenAtBoot = await page
@@ -19,15 +20,16 @@ export default async function mumSenkronu(page) {
   assert.equal(overlayHiddenAtBoot, false, 'cold boot overlay should be visible');
 
   await page.locator('body').focus();
-  await page.keyboard.press('Space');
-
-  // Give the next RAF tick room to hide the overlay.
-  await page.waitForTimeout(60);
-
-  const overlayHiddenAfterStart = await page
-    .locator('#overlay')
-    .evaluate((el) => el.classList.contains('overlay--hidden'));
-  assert.equal(overlayHiddenAfterStart, true, 'overlay should hide after Space');
+  // The keydown listener attaches only after the code-split module import
+  // resolves, which can be after the harness settle — a single early Space
+  // would be lost. Space is a no-op while state==='playing', so retrying is
+  // safe; the loop exits as soon as the overlay hides.
+  const started = await pressUntil(
+    page,
+    'Space',
+    () => document.querySelector('#overlay')?.classList.contains('overlay--hidden') ?? false,
+  );
+  assert.equal(started, true, 'overlay should hide after Space');
 
   // Spam-light all candles quickly so they all clear the threshold simultaneously,
   // then wait long enough (>800ms hold) for the sync bar to fill.

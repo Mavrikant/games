@@ -187,6 +187,12 @@ uygula. Curl smoke test artık yeterli değil.
 **Tespit**: Env boşken `npm run test:smoke` yeşil mi? Oyun çevrimdışı (bot/tek-oyunculu) tam oynanabilir mi? `console.error` sıfır mı?
 **Önlem**: `@shared/leaderboard-client` desenini izle: `*Enabled()` flag'i + lazy `import()` (env boşsa SDK hiç yüklenmez) + her hata `catch` ile yutulur, `null` döner. Oyun `null`'ı "çevrimdışı oyna" olarak ele alsın.
 
+### smoke-scenario-races-module-boot
+**Vaka**: Dual-viewport (`SMOKE_VIEWPORTS=mobile,desktop`, 24 eşzamanlı sayfa) smoke koşusunda her seferinde **farklı** oyunlar düştü: 2048 ("0 tile"), kusatma ("intro görünmüyor"), tek-cizgi ("kalan=0"). Oyun kodu doğruydu; senaryolar `load` + sabit 250ms settle sonrası **anında** assert ediyordu. Oyun modülleri code-split dynamic import ile yüklenir ve `load` event'inden **sonra** resolve olabilir — CI yükü altında init() yüzlerce ms gecikir.
+**Pattern**: Test senaryosu, JS'in boot'ta yazdığı DOM durumunu (tile sayısı, aria-hidden flip, HUD değeri) sabit bir bekleme sonrası snapshot'layıp assert ediyor. Yük arttıkça boot yarışı kaybedilir → flaky fail; tek koşuda yeşil görünür. Aynı sınıfta: erken basılan tuş/tıklama daha listener attach edilmeden **sessizce kaybolur** (havai-fisek/mum-senkronu Space, erime-arena #start).
+**Tespit**: Smoke'u eşzamanlılığı artırarak (iki viewport, `SMOKE_CONCURRENCY` yüksek) art arda 2-3 kez koş. Farklı oyunların değişen assert'lerle düşmesi = boot yarışı, oyun bug'ı değil.
+**Önlem**: Senaryonun ilk işi `scripts/smoke-scenarios/_boot.mjs` içindeki `waitForBoot(page, predicate)` ile **JS'in yazdığı** bir boot sinyalini poll'lamak (markup default'undan farklı bir değer seç: `#tiles` çocuk sayısı, `aria-hidden` flip'i, init'in yazdığı status metni). İlk input'un kendisi sinyal ise `pressUntil(page, key, predicate)` kullan — tuşu listener cevap verene kadar tekrarla (tuşun oyun-içi state'te no-op olduğunu doğrula). Sabit `waitForTimeout` + anında assert yazma.
+
 ---
 
 ## Bu dosya ne zaman güncellenir?

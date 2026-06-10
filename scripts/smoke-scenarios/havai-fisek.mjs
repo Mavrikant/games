@@ -10,8 +10,17 @@
 // counters being synced only at lifecycle edges.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot, pressUntil } from './_boot.mjs';
 
 export default async function havaiFisek(page) {
+  // Boot signal: showStartOverlay() appends the "[1-5]" control hint that
+  // the static markup doesn't have. Until then the keydown listener may not
+  // be attached yet (code-split module import resolves after `load`).
+  await waitForBoot(
+    page,
+    () => /\[1-5\]/.test(document.querySelector('#overlay-msg')?.textContent ?? ''),
+  );
+
   const overlayHiddenAtBoot = await page
     .locator('#overlay')
     .evaluate((el) => el.classList.contains('overlay--hidden'));
@@ -22,17 +31,13 @@ export default async function havaiFisek(page) {
   );
 
   await page.locator('body').focus();
-  await page.keyboard.press('Space');
-  await page.waitForTimeout(80);
-
-  const overlayHiddenAfterStart = await page
-    .locator('#overlay')
-    .evaluate((el) => el.classList.contains('overlay--hidden'));
-  assert.equal(
-    overlayHiddenAfterStart,
-    true,
-    'overlay should hide after Space',
+  // Space is ignored while state==='playing', so retry-pressing is safe.
+  const started = await pressUntil(
+    page,
+    'Space',
+    () => document.querySelector('#overlay')?.classList.contains('overlay--hidden') ?? false,
   );
+  assert.equal(started, true, 'overlay should hide after Space');
 
   // We don't know the exact target/burn times (they're random), but we can
   // light every fuse in order at small intervals. With BASE_TOLERANCE = 0.30s

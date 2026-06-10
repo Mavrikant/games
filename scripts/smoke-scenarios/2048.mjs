@@ -11,8 +11,13 @@
 // always hit reset() and the 2-tile invariant holds.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot } from './_boot.mjs';
 
 export default async function twentyFortyEight(page) {
+  // The game module is a code-split import; #tiles stays empty until init()
+  // has run. Poll for the first spawned tile before asserting the pair.
+  await waitForBoot(page, () => (document.querySelector('#tiles')?.children.length ?? 0) > 0);
+
   const state = await page.locator('#tiles').evaluate((el) => ({
     tileCount: el.children.length,
     scoreText: document.querySelector('#score')?.textContent ?? '',
