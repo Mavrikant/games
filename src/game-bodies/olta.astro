@@ -1,0 +1,33 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">90</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="640" aria-label="Olta oyun alanı"></canvas>
+  <div class="meters" aria-hidden="true">
+    <div class="meter meter--stamina">
+      <div class="meter__label">Balık</div>
+      <div class="meter__bar"><div id="stamina-fill" class="meter__fill"></div></div>
+    </div>
+    <div class="meter meter--tension">
+      <div class="meter__label">Gerilim</div>
+      <div class="meter__bar"><div id="tension-fill" class="meter__fill"></div></div>
+    </div>
+  </div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Olta</h2>
+      <p id="overlay-msg">↑/↓ ile oltayı indir-çıkar. Balık ısırınca Boşluk'a bas, sonra Boşluk'u tutup çek — gerilim kırmızıya dayanırsa misina kopar.<br/>Başlamak için Boşluk'a bas.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-act="up" type="button">▲ Çek</button>
+  <button class="touch__btn touch__btn--primary" data-act="hook" type="button">Yakala / Çek</button>
+  <button class="touch__btn" data-act="down" type="button">▼ İndir</button>
+</div>

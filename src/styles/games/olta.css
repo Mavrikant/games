@@ -1,0 +1,187 @@
+/*
+ * Olta — fishing game styles. Standard board-wrap + overlay positioning
+ * for @shared/overlay (pitfall: missing-overlay-css). Custom palette
+ * variables (--olta-*) are read by canvas via getComputedStyle.
+ */
+
+:root {
+  --olta-sky-top: #1a2238;
+  --olta-sky-bot: #2d3a5a;
+  --olta-water-top: #2a5a82;
+  --olta-water-bot: #0e2438;
+  --olta-surface-line: #7ec3e8;
+  --olta-zone-line: #6a8fb0;
+  --olta-boat: #6f3d1e;
+  --olta-boat-cabin: #bfa46b;
+  --olta-rod: #1a1a1a;
+  --olta-line: #f0f0f0;
+  --olta-bait: #e76a3c;
+  --olta-bait-hot: #ffe14a;
+  --olta-fish-small: #9bd6ff;
+  --olta-fish-medium: #f97f4d;
+  --olta-fish-large: #f5c542;
+  --olta-jelly: #d77bff;
+  --olta-tension-ok: #5ee29a;
+  --olta-tension-warn: #f5b54a;
+  --olta-tension-hot: #ff5252;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  background: #0e2438;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.meters {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.meter {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.meter__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.meter__bar {
+  position: relative;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.meter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--olta-tension-ok);
+  border-radius: 4px;
+  transition: width 60ms linear;
+}
+
+.meter--stamina .meter__fill {
+  background: var(--olta-fish-large);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.touch {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.touch__btn {
+  padding: 14px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.touch__btn:active {
+  background: var(--border);
+}
+
+.touch__btn--primary {
+  background: var(--olta-bait);
+  color: #fff;
+  border-color: var(--olta-bait);
+}
+
+.touch__btn--primary:active {
+  background: var(--olta-bait-hot);
+  color: #111;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .touch {
+    display: none;
+  }
+}

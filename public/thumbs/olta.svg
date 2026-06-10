@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Olta">
+  <defs>
+    <linearGradient id="skyOlta" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2238" />
+      <stop offset="100%" stop-color="#2d3a5a" />
+    </linearGradient>
+    <linearGradient id="waterOlta" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a5a82" />
+      <stop offset="100%" stop-color="#0e2438" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="320" height="70" fill="url(#skyOlta)" />
+  <!-- Water -->
+  <rect x="0" y="70" width="320" height="130" fill="url(#waterOlta)" />
+
+  <!-- Surface wave -->
+  <path d="M 0,70 Q 20,66 40,70 T 80,70 T 120,70 T 160,70 T 200,70 T 240,70 T 280,70 T 320,70" stroke="#7ec3e8" stroke-width="1.5" fill="none" opacity="0.7" />
+
+  <!-- Boat -->
+  <g transform="translate(160 64)">
+    <polygon points="-32,0 32,0 24,12 -24,12" fill="#6f3d1e" />
+    <rect x="-12" y="-12" width="24" height="12" fill="#bfa46b" />
+    <line x1="6" y1="-2" x2="20" y2="-14" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- Fishing line -->
+  <line x1="180" y1="50" x2="172" y2="140" stroke="#f0f0f0" stroke-width="1.2" opacity="0.85" />
+  <!-- Bait -->
+  <circle cx="172" cy="140" r="4" fill="#e76a3c" stroke="#000" stroke-width="0.6" opacity="0.95" />
+  <!-- Bite ring -->
+  <circle cx="172" cy="140" r="11" fill="none" stroke="#ffe14a" stroke-width="1.6" opacity="0.9" />
+
+  <!-- Big fish (gold) approaching bait -->
+  <g transform="translate(220 144) scale(-1 1)">
+    <ellipse cx="0" cy="0" rx="22" ry="12" fill="#f5c542" />
+    <polygon points="-22,0 -34,-9 -34,9" fill="#f5c542" />
+    <circle cx="12" cy="-3" r="2.8" fill="#fff" />
+    <circle cx="13" cy="-3" r="1.4" fill="#111" />
+  </g>
+
+  <!-- Medium fish (orange) deeper-right -->
+  <g transform="translate(60 172)">
+    <ellipse cx="0" cy="0" rx="14" ry="8" fill="#f97f4d" />
+    <polygon points="-14,0 -22,-6 -22,6" fill="#f97f4d" />
+    <circle cx="7" cy="-2" r="2" fill="#fff" />
+    <circle cx="8" cy="-2" r="1" fill="#111" />
+  </g>
+
+  <!-- Small fish (blue) near surface -->
+  <g transform="translate(40 110)">
+    <ellipse cx="0" cy="0" rx="9" ry="5" fill="#9bd6ff" />
+    <polygon points="-9,0 -14,-4 -14,4" fill="#9bd6ff" />
+  </g>
+
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">Olta</text>
+  <text x="20" y="52" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" fill="#98a0ad">Isır, çek, koparma</text>
+</svg>
