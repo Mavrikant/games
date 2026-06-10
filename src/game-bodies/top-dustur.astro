@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Top<span id="balls">10</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="640" aria-label="Top Düşür oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Top Düşür</h2>
+      <p id="overlay-msg">Topu vurgulanan HEDEF kovaya indir.</p>
+      <button id="start-btn" class="hud__btn td-start" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="td-touch" aria-hidden="true">
+  <button id="drop" class="hud__btn td-drop" type="button">Topu Bırak</button>
+</div>

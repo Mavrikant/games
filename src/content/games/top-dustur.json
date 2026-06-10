@@ -1,0 +1,8 @@
+{
+  "title": "Top Düşür",
+  "description": "Topu çivili tahtadan geçirip vurgulanan hedef kovaya indir.",
+  "dateAdded": "2026-06-10",
+  "tags": ["puzzle", "fizik", "refleks"],
+  "controls": "Fare/Sol-Sağ: nişan al · Boşluk veya tıkla: bırak · R: yeniden",
+  "howToPlay": "Her atışta tahtanın altındaki bir kova HEDEF olarak vurgulanır. Üstte fareyi gezdirerek (veya ok tuşlarıyla) nişan al ve topu bırak. Çiviler topun yönünü değiştirir. Tam hedefte +100, komşu kovada +50, ikinci komşuda +20, daha uzakta +5 puan. Üst üste tam isabet yaparsan seri bonusu kazanırsın. 10 hak."
+}
