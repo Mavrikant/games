@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Can<span id="lives">3</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="540"
+    aria-label="Sönen Yıldız — sönen yıldızlara dokunma oyun alanı"></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sönen Yıldız</h2>
+      <p id="overlay-msg" data-msg="ready">
+        Yıldızlar gökyüzünde belirir ve sönmeye başlar.
+        Geç dokunduğunda daha çok puan alırsın —
+        ama sönmesine izin verirsen bir can kaybedersin.
+        Düşen yıldızlar nadirdir, hızla kaçar ve çoklu puan değerindedir.
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--accent" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>

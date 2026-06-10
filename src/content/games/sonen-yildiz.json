@@ -1,0 +1,21 @@
+{
+  "title": "Sönen Yıldız",
+  "description": "Gökyüzünde beliren yıldızlar saniyeler içinde söner. Geç dokunan çok puan alır, geciken cana yazar — risk/ödül refleks oyunu.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "refleks", "özgün", "risk-ödül"],
+  "controls": "Tıkla/dokun: yıldıza dokun · Boşluk/Enter: başla · R: yeniden başla",
+  "howToPlay": "Sönen Yıldız bir gözlem-refleks-risk üçgenidir. Karanlık gökyüzünde rastgele konumlarda yıldızlar belirir; her yıldız doğduğu anda en parlak hâlindedir ve birkaç saniye içinde sönüp kaybolur. Bir yıldıza dokunduğunda o anki parlaklığına göre puan kazanırsın: erken (parlak) dokunmak güvenlidir ama az puan getirir, son anda (zar zor görünürken) dokunmak ise puanı katlar — formül parlaklığın karesini ters çevirir, yani dim olduğu kadar tatlı. Bir yıldız sönmeden tutmazsan bir can kaybedersin; sönmek üzere olan yıldızların etrafında kırmızı titrek bir uyarı halkası belirir, bu son şanstır. Skor yükseldikçe yıldızların ömrü kısalır ve doğma sıklığı artar; eş zamanlı birden fazla sönecek yıldızı izlemek zorunda kalırsın. Ara ara nadir bir düşen yıldız ekranın bir kenarından girer, yatay olarak süzülür ve sadece ~1.8 saniyede karşı kenardan kaçar — yakalarsan üç kat puan, kaçırırsan ona da can yazılır. Üç can bittiğinde oyun biter ve en yüksek skorun tarayıcına yazılır. Strateji: önce ekrandaki en yaşlı yıldızı saptamayı alışkanlık edin; aceleyle parlak yıldıza dalmak yerine, birkaç yıldız aynı anda görünüyorsa söneni öncele. Düşen yıldız belirdiğinde kalabalık yer-yıldızlarını birkaç yüz milisaniye bekletip önce kayan ışığı yakala; çoğu zaman bu sıçrama oyunu tek başına satar. Skor 30'u geçtiğinde ekrandaki yıldız sayısı 3-4'ü bulur — bu noktada gözünü tek bir noktaya kilitleme, tüm gökyüzünü tarayan geniş bir farkındalık daha çok puan getirir.",
+  "thumbnail": "sonen-yildiz.svg",
+  "scoring": {
+    "storageKey": "sonen-yildiz.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Fading Star",
+    "description": "Stars appear in the sky and fade within seconds. Late taps score big, missed stars cost a life — a risk/reward reflex game.",
+    "controls": "Click/tap: hit a star · Space/Enter: start · R: restart",
+    "howToPlay": "Fading Star is a triangle of observation, reflex, and risk. Stars appear at random positions on a dark sky; each star is at full brightness the moment it spawns, and fades to nothing over a few seconds. When you tap a star you score points based on its brightness at that instant — tapping early (bright) is safe but pays little, tapping at the very last moment (barely visible) multiplies the reward since the formula squares the inverted brightness. Letting a star burn out without tapping costs you a life; a star about to fade gets a flickering red ring as a final warning. As your score climbs, lifetimes shrink and the spawn cadence shortens, forcing you to track several dying stars at once. Occasionally a rare shooting star streaks in from one side and crosses the canvas in only ~1.8 seconds — catching it pays triple, missing it also costs a life. After three lost lives the game ends and your high score is saved in the browser. Strategy: train yourself to spot the OLDEST star on screen first; don't dive at the brightest one. When a shooting star appears, briefly delay the static stars and grab the streak — it often pays for the whole round. Past score 30 you'll juggle three or four stars at once — stop focusing on one spot and use peripheral vision across the whole sky."
+  }
+}
