@@ -12,8 +12,16 @@
 // 3. Overlay carries the level-specific intro copy referencing wells.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot } from './_boot.mjs';
 
 export default async function yorunge(page) {
+  // #wells is "0/0" in the template markup; boot writes the level-1 "0/1".
+  // Poll for that write — the module import can resolve after load.
+  await waitForBoot(
+    page,
+    () => document.querySelector('#wells')?.textContent !== '0/0',
+  );
+
   const state = await page.evaluate(() => ({
     score: document.querySelector('#score')?.textContent ?? '',
     best: document.querySelector('#best')?.textContent ?? '',

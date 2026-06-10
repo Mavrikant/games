@@ -9,10 +9,14 @@
 // day headers), and each shift-label cell should appear on its own row.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot } from './_boot.mjs';
 
 export default async function vardiya(page) {
-  // Grid renders synchronously inside init() — already painted after the
-  // 600ms settle the smoke harness gives us.
+  // Grid renders synchronously inside init(), but init() itself runs only
+  // after the code-split module import resolves — which can be after the
+  // harness settle under load. Poll for the first grid children.
+  await waitForBoot(page, () => (document.querySelector('#grid')?.children.length ?? 0) > 0);
+
   const grid = await page.locator('#grid').evaluate((el) => {
     const cols = getComputedStyle(el).getPropertyValue('--vd-cols').trim();
     const children = el.children.length;

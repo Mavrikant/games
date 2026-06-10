@@ -1,7 +1,18 @@
 // Erime Arena: verify the start flow and guard the "typing starts the game"
 // regression. Deterministic checks only (no exact mass/eat assertions — the
 // sim is stochastic).
+import { waitForBoot } from './_boot.mjs';
+
 export default async function (page) {
+  // Boot signal: init() rewrites #status from the static "⚪ Çevrimdışı" to a
+  // longer "… · botlarla oyna" variant. Without this wait the typing check
+  // below passes trivially (no listener attached yet) and the #start click
+  // can be lost while the code-split module import is still resolving.
+  await waitForBoot(
+    page,
+    () => (document.querySelector('#status')?.textContent ?? '').includes('·'),
+  );
+
   // Regression guard: typing WASD letters into the name field must NOT start
   // the game (the keydown handler must ignore keys while an input is focused).
   await page.click('#name');

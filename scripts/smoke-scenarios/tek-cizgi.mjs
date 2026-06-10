@@ -9,8 +9,16 @@
 // 3. Canvas is the standard 480 logical size.
 
 import { strict as assert } from 'node:assert';
+import { waitForBoot } from './_boot.mjs';
 
 export default async function tekCizgi(page) {
+  // #remaining is "0" in the template markup; loadLevel() writes the level's
+  // edge count on boot. Poll for that write before snapshotting.
+  await waitForBoot(
+    page,
+    () => document.querySelector('#remaining')?.textContent !== '0',
+  );
+
   const state = await page.evaluate(() => ({
     score: document.querySelector('#score')?.textContent ?? '',
     best: document.querySelector('#best')?.textContent ?? '',
