@@ -1,0 +1,21 @@
+{
+  "title": "Pamuk Şeker",
+  "description": "Çubuğunu makinenin etrafında döndürerek fışkıran şeker partiküllerini topla; çok hızlı dönersen savrulur.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "zamanlama", "orijinal"],
+  "controls": "← → veya A/D: yön · Space: dur · R: yeniden başla",
+  "howToPlay": "Ortadaki pamuk şeker makinesi her saniye rastgele yönlere şeker partikülleri fışkırtır; bir yörünge üzerinde dönen küçük bir çubuğu yönetip bu partikülleri çubuğun ucuna yapıştırarak ağırlık biriktirirsin. Sol-Sağ okları (veya A/D) çubuğa açısal ivme verir — basılı tuttukça çubuk hızlanır, bıraktığında yavaşça yavaşlar. Space tuşu el frenidir, çubuğu hızla durdurur. Dikkat: yörüngenin altındaki yeşil bant 'güvenli' dönüş hızıdır; bu bandın dışına çıktığın anda merkezkaç kuvvet topladığın şekerin bir kısmını savurmaya başlar — gösterge kırmızı olur, ekran kısaca kırmızıya çalar. Pembe partiküller 4g, mavi 9g, mor 16g getirir; mor olanlar daha nadirdir. 60 saniyelik turda en ağır pamuk şekeri sarmaya çalış. Strateji: çubuğu sürekli aynı yönde hızla döndürmek yerine, partikülün geleceği yöne göre yön değiştir; tahmin et, ön-pozisyona geç ve son anda hız azalt — güvenli bantta dur ve şekeri kaptır.",
+  "thumbnail": "pamuk-seker.svg",
+  "scoring": {
+    "storageKey": "pamuk-seker.best",
+    "label": "Ağırlık",
+    "unit": "g",
+    "direction": "higher"
+  },
+  "en": {
+    "title": "Cotton Candy",
+    "description": "Spin a stick around the sugar machine and catch the radial sugar bursts — too fast and your candy flings off.",
+    "controls": "← → or A/D: spin · Space: brake · R: restart",
+    "howToPlay": "The cotton candy machine in the center spits sugar particles outward in random directions. You orbit a stick around it; particles that cross the orbit at your stick's angle stick to the tip and add weight. Left/Right arrows (or A/D) add angular acceleration — hold to spin faster; release and the stick coasts down. Space is a hard brake. Watch the green safety band at the bottom: spinning past it triggers centrifugal force that flings off some of your stored candy (the gauge turns red and the screen pulses). Pink particles give 4g, blue 9g, purple 16g; purple is rare. You have 60 seconds per round — beat your best weight. Tip: don't just spin one way fast; anticipate where a particle will cross orbit, glide there, brake into the safe band, and let it stick."
+  }
+}

@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Ağırlık<span id="score">0g</span></div>
+  <div class="hud__score">Rekor<span id="best">0g</span></div>
+  <div class="hud__score">Süre<span id="timer">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Pamuk şeker oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Pamuk Şeker</h2>
+      <p id="overlay-msg">Çubuğu çevirmek için ← → · Dur: Space</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-act="left" type="button">◀ Sol</button>
+  <button class="touch__btn" data-act="brake" type="button">■ Dur</button>
+  <button class="touch__btn" data-act="right" type="button">Sağ ▶</button>
+</div>
