@@ -1,0 +1,266 @@
+/*
+ * Yılan Düellosu — 2-player online snake duel.
+ * Overlay positioning + .overlay--hidden are required by @shared/overlay
+ * (pitfall: missing-overlay-css). Do not delete them.
+ */
+
+.yd-root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.yd-status {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  min-height: 1.2em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+#board {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  touch-action: none;
+}
+
+/* Two-tone HUD chips so each player can find their score at a glance. */
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.hud__score--p1 {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+.hud__score--p1 span {
+  color: #4ade80;
+}
+.hud__score--p2 {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+.hud__score--p2 span {
+  color: #60a5fa;
+}
+
+/* ---- overlay ---- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.85);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+  width: 320px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.yd-name {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 14px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  text-align: center;
+}
+
+.yd-name:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.yd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.yd-actions--hidden,
+.yd-share--hidden {
+  display: none;
+}
+
+.yd-btn {
+  width: 100%;
+  max-width: 240px;
+  padding: 12px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.yd-btn:hover {
+  background: var(--surface);
+  filter: brightness(1.1);
+}
+
+.yd-btn--primary {
+  background: var(--accent-strong);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.yd-btn--small {
+  width: auto;
+  max-width: none;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+/* ---- share panel ---- */
+.yd-share {
+  margin-top: 4px;
+}
+
+.yd-share__label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.yd-share__row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.yd-share__input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.yd-share__input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- touch d-pad ---- */
+.yd-dpad {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 4;
+  display: none;
+  grid-template-columns: repeat(3, 44px);
+  grid-template-rows: repeat(3, 44px);
+  gap: 4px;
+}
+
+.yd-dpad__btn {
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: rgba(10, 11, 14, 0.6);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.yd-dpad__btn:active {
+  background: var(--accent-strong);
+  color: #fff;
+}
+
+.yd-dpad__btn--up {
+  grid-column: 2;
+  grid-row: 1;
+}
+.yd-dpad__btn--left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.yd-dpad__btn--right {
+  grid-column: 3;
+  grid-row: 2;
+}
+.yd-dpad__btn--down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+@media (pointer: coarse) {
+  .yd-dpad {
+    display: grid;
+  }
+  .yd-root .hud__btn {
+    min-height: 48px;
+  }
+}

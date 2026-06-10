@@ -1,0 +1,62 @@
+---
+---
+
+<div id="yd-root" class="yd-root">
+  <header class="hud">
+    <div class="hud__score hud__score--p1">
+      Yeşil<span id="score-p1">0</span>
+    </div>
+    <div class="hud__score hud__score--p2">
+      Mavi<span id="score-p2">0</span>
+    </div>
+    <button id="restart" class="hud__btn" type="button">Menü</button>
+  </header>
+  <div id="status" class="yd-status" aria-live="polite">Çevrimdışı</div>
+  <div class="board-wrap">
+    <canvas id="board" aria-label="Yılan Düellosu oyun alanı"></canvas>
+
+    <!-- Touch d-pad: shown only on coarse pointers via CSS. -->
+    <div id="dpad" class="yd-dpad">
+      <button class="yd-dpad__btn yd-dpad__btn--up" data-dir="up" type="button" aria-label="Yukarı">▲</button>
+      <button class="yd-dpad__btn yd-dpad__btn--left" data-dir="left" type="button" aria-label="Sol">◀</button>
+      <button class="yd-dpad__btn yd-dpad__btn--right" data-dir="right" type="button" aria-label="Sağ">▶</button>
+      <button class="yd-dpad__btn yd-dpad__btn--down" data-dir="down" type="button" aria-label="Aşağı">▼</button>
+    </div>
+
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Yılan Düellosu</h2>
+        <p id="overlay-msg">İki kişilik çevrimiçi yılan. Bir oda kur, bağlantıyı arkadaşına yolla.</p>
+
+        <input
+          id="name"
+          class="yd-name"
+          type="text"
+          maxlength="12"
+          placeholder="Takma adın"
+          aria-label="Takma ad"
+        />
+
+        <!-- Menu actions -->
+        <div id="menu-actions" class="yd-actions">
+          <button id="create" class="yd-btn yd-btn--primary" type="button">Oda Oluştur</button>
+          <button id="ai" class="yd-btn" type="button">Yapay Zekâya Karşı</button>
+        </div>
+
+        <!-- Share panel (host, while waiting for the guest) -->
+        <div id="share" class="yd-share yd-share--hidden">
+          <p class="yd-share__label">Bu bağlantıyı 2. oyuncuya gönder:</p>
+          <div class="yd-share__row">
+            <input id="share-link" class="yd-share__input" type="text" readonly aria-label="Oda bağlantısı" />
+            <button id="copy" class="yd-btn yd-btn--small" type="button">Kopyala</button>
+          </div>
+        </div>
+
+        <!-- Game-over actions (host) -->
+        <div id="over-actions" class="yd-actions yd-actions--hidden">
+          <button id="rematch" class="yd-btn yd-btn--primary" type="button">Yeniden Oyna</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
