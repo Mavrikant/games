@@ -1,0 +1,9 @@
+{
+  "title": "Yılan Düellosu",
+  "description": "İki kişilik çevrimiçi yılan: bir oda kur, bağlantıyı arkadaşına gönder, o katılınca düello başlasın. Sunucu yoksa yapay zekâya karşı oyna.",
+  "dateAdded": "2026-06-10",
+  "tags": ["arcade", "çok-oyunculu", "yılan"],
+  "controls": "Ok tuşları veya WASD ile yön ver · Mobilde kaydır ya da d-pad · Oda Oluştur → bağlantıyı paylaş · Menü düğmesiyle başa dön",
+  "thumbnail": "yilan-duello.svg",
+  "howToPlay": "Yılan Düellosu, klasik yılanın iki kişilik rekabetçi sürümüdür: aynı tahtada yeşil ve mavi iki yılan, yemleri kapışır ve birbirine tuzak kurar. İlk oyuncu “Oda Oluştur”a basar; ekranda beliren bağlantıyı (Kopyala düğmesiyle) ikinci oyuncuya gönderir. İkinci oyuncu bu bağlantıyı açtığında otomatik olarak odaya katılır ve kısa bir geri sayımın ardından düello başlar. Yeşil yılanı odayı kuran, mavi yılanı katılan oyuncu yönetir. Yön vermek için ok tuşlarını veya WASD'yi kullan; mobilde tahtada parmağını kaydır ya da sol alttaki d-pad düğmelerine bas. Yön değiştirirken 180 derece geri dönemezsin. Duvara, kendi gövdene ya da rakibinin gövdesine çarpan yılan ölür ve diğer oyuncu kazanır; iki kafa aynı kareye girerse berabere olur. Her yem yediğinde yılanın bir kare uzar ve skorun artar — yani uzadıkça hem güçlenir hem de kendine daha çok yer kaplarsın. Oyun, site için bir Supabase Realtime projesi yapılandırıldıysa gerçek zamanlı çevrimiçi oynanır; yapılandırılmadıysa ya da bağlantı kurulamazsa “Yapay Zekâya Karşı” seçeneğiyle tek başına, mavi yılanı bir bot sürerken oynayabilirsin. Çevrimiçi modelde oda kurucu otomatik olarak hakemdir: tüm dünya durumunu o hesaplayıp yayınlar, katılan oyuncu yalnızca yön bilgisini gönderir — böylece iki ekran asla birbirinden ayrışmaz."
+}
