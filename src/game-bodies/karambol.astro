@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="score">1</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="320"
+    aria-label="Karambol bilardo masası"></canvas>
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Karambol</h2>
+      <p id="overlay-msg">Beyaz topa tıkla, sürükle, bırak — tek atışta tüm renkli topları cebe sok.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="meter" aria-hidden="true">
+  <div class="meter__label">Güç</div>
+  <div class="meter__bar"><div id="power-fill" class="meter__fill"></div></div>
+</div>

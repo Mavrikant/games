@@ -1,0 +1,21 @@
+{
+  "title": "Karambol",
+  "description": "Beyaz topu duvarlardan sektir — tek atışta tüm renkli topları yakala. Açı, güç ve sürtünme zinciri.",
+  "dateAdded": "2026-06-10",
+  "tags": ["puzzle", "fizik", "özgün", "nişan"],
+  "controls": "Fare/dokunma: nişan al · Sürükle: güç ayarı · Bırak: atış · R: yeniden başla · N: sıradaki seviye (kazandıysan)",
+  "thumbnail": "karambol.svg",
+  "howToPlay": "Karambol, bilardo sezgisini saf bir tek-atış bulmacasına indirgeyen orijinal bir nişan oyunudur. Her seviyenin başında dikdörtgen masa üzerinde merkezde beyaz vuruş topu ve 3-5 renkli hedef top dizilir. Amacın bir atış başına ne kadar çok hedefe değdirebileceğini maksimize etmek değil; tek bir atışla tüm renkli topları cebe sokmak. Beyaz topa tıklayıp basılı tuttuğunda nişan modu açılır: fareyi/parmağını masada gezdirdikçe topun çıkışından imlecine kesik bir çizgi uzanır ve aradaki uzaklık güç olarak okunur — kısa mesafe yumuşak vuruş, uzun mesafe sert vuruş. Sol alt köşedeki güç çubuğu bu mesafeyi 0 ile 100 arası bir değere çevirir. Bıraktığın anda beyaz top ekrandaki çizginin tersi yönde fırlar (sapanı geriye çekip bırakır gibi). Top duvarlara çarpınca tam yansıma yapar (geliş açısı = dönüş açısı), her saniyede hızının küçük bir oranını sürtünmeye bırakır ve sonunda durur. Yörüngede karşılaştığı her renkli topu tıpkı bir cep gibi yakalar — top kaybolur, bir yakalama eklenir. Beyaz top durduğunda tur biter; o anda kalan renkli top varsa atış kaçırılmıştır ve canlardan biri eksilir, kalan yoksa seviyeyi geçersin. Üç canın bitince oyun sona erer. Her seviyenin tasarımı farklıdır: kimisinde topları sıkı bir kümeye sok, kimisinde köşeden köşeye sıçra; ileri seviyelerde sabit kara delikler (engeller) beyaz topu yutar, dikkat et. Skor = geçtiğin seviye sayısıdır; rekor tarayıcına kaydedilir. Strateji: önce hedeflerin geometrisini incele, beyaz top için tek bir akış yolu hayal et — gerekirse iki duvar sektirmesi planla; gücü yüksek tut ki sürtünme yolun ortasında öldürmesin, ama çok yüksek tutarsan açıyı kontrol etmek zorlaşır. Mobilde aynı topa dokun → sürükle → bırak kontrolü çalışır.",
+  "scoring": {
+    "storageKey": "karambol.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Carom",
+    "description": "Ricochet the cue ball off the walls — sink every coloured ball in a single shot. Angle, power, and friction chained together.",
+    "controls": "Mouse/touch: aim · Drag: set power · Release: shoot · R: restart · N: next level (after a win)",
+    "howToPlay": "Carom distils billiards intuition into a pure single-shot puzzle. Each level lays out a white cue ball at the centre of a rectangular table and 3-5 coloured target balls. The goal isn't to maximise hits per shot; it's to sink every coloured ball in a single shot. Click and hold the cue ball to enter aim mode: dragging the mouse/finger across the table draws a dashed line from the cue to your cursor, and the distance is read as power — short distance is a soft strike, long is a hard one. The power bar in the bottom-left maps this distance to a 0-100 value. When you release, the cue flies in the direction opposite to the dashed line (like pulling a slingshot back and releasing). Walls reflect the ball perfectly (angle of incidence = angle of reflection); each second a small fraction of the speed is lost to friction, until the ball finally stops. Any coloured ball along the path is pocketed on contact: it disappears, and a hit is tallied. The round ends when the cue stops; if any coloured ball remains, the shot is missed and one life is lost; if none remain, you advance. Three lives and you're done. Each level has a unique layout: some demand a tight cluster, others require corner-to-corner ricochets; later levels add static black holes (obstacles) that swallow the cue, so beware. Score = level reached; best is saved in your browser. Strategy: study the geometry first, then imagine a single flow path for the cue — plan two wall bounces if needed; keep power high so friction doesn't kill the run mid-table, but not so high that you can't control the angle. On mobile the same 'touch ball → drag → release' control works."
+  }
+}
