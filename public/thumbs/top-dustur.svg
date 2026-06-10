@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#16203a"/>
+      <stop offset="60%" stop-color="#0e1322"/>
+      <stop offset="100%" stop-color="#0a0b0e"/>
+    </radialGradient>
+    <radialGradient id="ball" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#fda4af"/>
+      <stop offset="55%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </radialGradient>
+    <linearGradient id="bucket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d2738"/>
+      <stop offset="100%" stop-color="#0e1216"/>
+    </linearGradient>
+    <linearGradient id="target" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34d39955"/>
+      <stop offset="100%" stop-color="#10b98122"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+
+  <!-- Peg grid -->
+  <g fill="#475569">
+    <circle cx="80" cy="60" r="4"/>
+    <circle cx="140" cy="60" r="4"/>
+    <circle cx="200" cy="60" r="4"/>
+    <circle cx="260" cy="60" r="4"/>
+    <circle cx="110" cy="92" r="4"/>
+    <circle cx="170" cy="92" r="4"/>
+    <circle cx="230" cy="92" r="4"/>
+    <circle cx="80" cy="124" r="4"/>
+    <circle cx="140" cy="124" r="4"/>
+    <circle cx="200" cy="124" r="4"/>
+    <circle cx="260" cy="124" r="4"/>
+  </g>
+
+  <!-- Falling ball with trail -->
+  <circle cx="152" cy="22" r="6" fill="#fb7185" opacity="0.18"/>
+  <circle cx="158" cy="44" r="7" fill="#fb7185" opacity="0.35"/>
+  <circle cx="166" cy="70" r="9" fill="url(#ball)"/>
+
+  <!-- Bounce sparks -->
+  <g stroke="#fbbf24" stroke-width="2" stroke-linecap="round" opacity="0.8">
+    <line x1="172" y1="88" x2="178" y2="82"/>
+    <line x1="176" y1="94" x2="184" y2="92"/>
+  </g>
+
+  <!-- Buckets -->
+  <g>
+    <path d="M40 160 L72 160 L68 188 L44 188 Z" fill="url(#bucket)" stroke="#2b3648" stroke-width="1.5"/>
+    <path d="M104 160 L136 160 L132 188 L108 188 Z" fill="url(#bucket)" stroke="#2b3648" stroke-width="1.5"/>
+    <path d="M168 160 L200 160 L196 188 L172 188 Z" fill="url(#target)" stroke="#34d399" stroke-width="2"/>
+    <path d="M232 160 L264 160 L260 188 L236 188 Z" fill="url(#bucket)" stroke="#2b3648" stroke-width="1.5"/>
+  </g>
+
+  <!-- Target label -->
+  <text x="184" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#34d399">100</text>
+</svg>
