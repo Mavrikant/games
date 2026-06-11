@@ -1,0 +1,63 @@
+---
+---
+
+<div id="ak-root" class="ak-root">
+  <header class="hud">
+    <div class="hud__score">Skor<span id="score">0</span></div>
+    <div class="hud__score">Süre<span id="time">2:00</span></div>
+    <div class="hud__score">Rekor<span id="best">0</span></div>
+    <button id="fs" class="hud__btn" type="button" aria-label="Tam ekran">⛶</button>
+    <button id="restart" class="hud__btn" type="button">Menü</button>
+  </header>
+  <div id="status" class="ak-status" aria-live="polite">Çevrimdışı</div>
+  <div class="board-wrap">
+    <canvas id="gl" aria-label="AeroKanca 3B arena"></canvas>
+
+    <ul id="feed" class="ak-feed"></ul>
+
+    <!-- Touch controls: shown only on coarse pointers via CSS. -->
+    <div id="stick" class="ak-stick"><div id="stick-nub" class="ak-stick__nub"></div></div>
+    <button id="hook" class="ak-hook" type="button" aria-label="Kanca fırlat">Kanca</button>
+
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">AeroKanca</h2>
+        <p id="overlay-msg">Kancanı kayalara saplayıp savrul, rakipleri boşluğa fırlat.</p>
+
+        <input
+          id="name"
+          class="ak-name"
+          type="text"
+          maxlength="14"
+          placeholder="Takma adın"
+          aria-label="Takma ad"
+        />
+
+        <!-- Menu actions -->
+        <div id="menu-actions" class="ak-actions">
+          <button id="bots" class="ak-btn ak-btn--primary" type="button">Botlarla Oyna</button>
+          <button id="create" class="ak-btn" type="button">Oda Oluştur</button>
+        </div>
+
+        <!-- Share panel (host, while waiting for guests) -->
+        <div id="share" class="ak-share ak-share--hidden">
+          <p class="ak-share__label">Bu bağlantıyı arkadaşlarına gönder:</p>
+          <div class="ak-share__row">
+            <input id="share-link" class="ak-share__input" type="text" readonly aria-label="Oda bağlantısı" />
+            <button id="copy" class="ak-btn ak-btn--small" type="button">Kopyala</button>
+          </div>
+          <button id="solo-start" class="ak-btn ak-btn--primary" type="button">Beklemeden başla</button>
+        </div>
+
+        <!-- Match-end scoreboard -->
+        <div id="over-panel" class="ak-over ak-over--hidden">
+          <ol id="board-list" class="ak-board"></ol>
+          <div id="over-actions" class="ak-actions">
+            <button id="rematch" class="ak-btn ak-btn--primary" type="button">Yeniden Oyna</button>
+            <button id="to-menu" class="ak-btn" type="button">Menü</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

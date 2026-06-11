@@ -1,0 +1,371 @@
+/*
+ * AeroKanca — 3D hovercraft hook arena.
+ * Overlay positioning + .overlay--hidden are required by @shared/overlay
+ * (pitfall: missing-overlay-css). Do not delete them.
+ */
+
+.ak-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ak-status {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  min-height: 1.2em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 720px) {
+  .board-wrap {
+    max-width: 760px;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+#gl {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #2b3a55;
+  border: 1px solid var(--border);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ---- HUD chips ---- */
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* ---- KO feed ---- */
+.ak-feed {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ak-feed li {
+  font-size: 12px;
+  color: #e2e8f0;
+  background: rgba(10, 11, 14, 0.55);
+  border-radius: 8px;
+  padding: 4px 9px;
+  max-width: 70vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- overlay ---- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.72);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+  width: 340px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ak-name {
+  display: block;
+  width: 100%;
+  max-width: 230px;
+  margin: 0 auto 14px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  text-align: center;
+}
+
+.ak-name:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ak-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.ak-actions--hidden,
+.ak-share--hidden,
+.ak-over--hidden {
+  display: none;
+}
+
+.ak-btn {
+  width: 100%;
+  max-width: 250px;
+  padding: 12px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.ak-btn:hover {
+  background: var(--surface);
+  filter: brightness(1.1);
+}
+
+.ak-btn--primary {
+  background: var(--accent-strong);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ak-btn--small {
+  width: auto;
+  max-width: none;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+/* ---- share panel ---- */
+.ak-share {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.ak-share--hidden {
+  display: none;
+}
+
+.ak-share__label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.ak-share__row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.ak-share__input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.ak-share__input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- match-end scoreboard ---- */
+.ak-over {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+/* Must come AFTER .ak-over: equal specificity, last rule wins. */
+.ak-over--hidden {
+  display: none;
+}
+
+.ak-board {
+  margin: 0;
+  padding: 0 0 0 22px;
+  text-align: left;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.ak-board__me {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ---- touch controls (coarse pointers only) ---- */
+.ak-stick {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(125, 211, 252, 0.45);
+  background: rgba(10, 11, 14, 0.25);
+  z-index: 4;
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.ak-stick--live {
+  opacity: 1;
+}
+
+.ak-stick__nub {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(125, 211, 252, 0.55);
+}
+
+.ak-hook {
+  position: absolute;
+  right: max(12px, env(safe-area-inset-right, 0px));
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  display: none;
+  min-width: 76px;
+  min-height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(125, 211, 252, 0.6);
+  background: rgba(10, 11, 14, 0.55);
+  color: #bae6fd;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.ak-hook:active {
+  background: rgba(125, 211, 252, 0.35);
+  color: #fff;
+}
+
+@media (pointer: coarse) {
+  .ak-stick {
+    display: block;
+  }
+  .ak-hook {
+    display: block;
+  }
+  .ak-root .hud__btn {
+    min-height: 48px;
+  }
+}
+
+/* ---- fullscreen (erime-arena pattern: native + .ak-root--max iOS fallback) ---- */
+.ak-root:fullscreen,
+.ak-root:-webkit-full-screen,
+.ak-root--max {
+  box-sizing: border-box;
+  padding: 10px;
+  gap: 8px;
+  background: var(--bg);
+}
+
+.ak-root:fullscreen,
+.ak-root:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+}
+
+.ak-root--max {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh; /* fallback */
+  height: 100dvh; /* track the mobile address bar */
+}
+
+.ak-root:fullscreen .board-wrap,
+.ak-root:-webkit-full-screen .board-wrap,
+.ak-root--max .board-wrap {
+  max-width: none;
+  width: 100%;
+  aspect-ratio: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}
