@@ -33,7 +33,9 @@ Entry formatı (zorunlu alanlar):
 ### visual-vs-hitbox
 **Vaka**: [#10 breakout](https://github.com/Mavrikant/games/pull/10) tuğla yan çarpışması yanlış eksene yansıyordu; çarpışan top tuğlanın
 içinde sıkışıp salınıyordu. [#11 flappy](https://github.com/Mavrikant/games/pull/11) borunun çizilen "kap" dikdörtgenleri hitbox'a dahil
-değildi; kuş kap'tan içeri girip ölmüyordu.
+değildi; kuş kap'tan içeri girip ölmüyordu. [#146 catlak](https://github.com/Mavrikant/games/pull/146) tabak **elips** olarak çiziliyordu ama
+`distToRim` + tohum spawn **dikdörtgen** sınır kullanıyordu; çatlak köşelerde
+görünür tabağın dışına taşıyor, tohumlar tabak dışında doğuyordu.
 **Pattern**: `draw()` ile `collide()` farklı sayılardan besleniyor.
 Görüntü doğru çıkıyor, fizik yanlış. Smoke test sırasında oyun "görsel
 olarak" iyi göründüğü için fark edilmiyor.
@@ -62,7 +64,10 @@ geçişlerini diagram olarak kafanda çiz.
 
 ### stale-async-callback
 **Vaka**: [#9 2048](https://github.com/Mavrikant/games/pull/9) restart sırasında animasyon bitirme callback'i (eski setTimeout)
-hâlâ tetikleniyor, fresh grid'e fazladan bir tile ekliyordu.
+hâlâ tetikleniyor, fresh grid'e fazladan bir tile ekliyordu. [#146 catlak](https://github.com/Mavrikant/games/pull/146) gen-token yanlış uygulanmıştı: `loop()` token'ı **çağrı anında**
+`gen.current()`'tan okuyordu; aynı frame içinde iki `reset()` (R spam) iki
+kalıcı paralel RAF zinciri bırakıyordu. Token, zincir schedule edilirken
+bağlanmalı ve parametre olarak taşınmalı.
 **Pattern**: `setTimeout` / `requestAnimationFrame` / promise zinciri
 reset'i hayatta kalıyor. Reset yeni state kuruyor; eski callback bittiğinde
 yeni state'i mutate ediyor.
@@ -144,7 +149,10 @@ zaten layout'tadır. Şüphedeysen mevcut bir basit oyunun (`snake.astro`,
 **Önlem**: `npm run new-game` scaffold'u `thumbnail` alanını JSON'a koymuyor; sonradan polish-PR ile thumbnail eklenirken **ikisini birden** yap: hem `public/thumbs/<slug>.svg` dosyasını oluştur, hem JSON'a `"thumbnail": "<slug>.svg"` ekle. Audit her iki tarafı da görür — bir taraf eksik kalırsa CI fail eder.
 
 ### unreachable-start-state
-**Vaka**: [#76 kafe-gorevlisi](https://github.com/Mavrikant/games/pull/76) `reset()` fonksiyonu `setDrinkBtnsEnabled(false)` çağırdı ve overlay mesajına "Başlamak için aşağıdan bir içecek seç" yazdı. Ama drink button'lar `disabled=true` durumdayken tıklama event'i fire etmez — kullanıcı overlay mesajını okuyup tıkladığında hiçbir şey olmadı. Aynı state'e başka bir giriş yolu da yoktu (Space, Enter, restart butonu, hepsi reset()'i çağırıyor). Oyun tamamen oynanamaz.
+**Vaka**: [#146 catlak](https://github.com/Mavrikant/games/pull/146) gameover overlay'i "tabağa dokun" vaat ediyordu ama overlay canvas'ı
+kapladığı için canvas'taki pointerdown handler'ın ready/gameover dalları hiç
+tetiklenemiyordu — backdrop tıklaması sessizce yutuluyordu (fix: overlay'in
+kendisine pointerdown handler). [#76 kafe-gorevlisi](https://github.com/Mavrikant/games/pull/76) `reset()` fonksiyonu `setDrinkBtnsEnabled(false)` çağırdı ve overlay mesajına "Başlamak için aşağıdan bir içecek seç" yazdı. Ama drink button'lar `disabled=true` durumdayken tıklama event'i fire etmez — kullanıcı overlay mesajını okuyup tıkladığında hiçbir şey olmadı. Aynı state'e başka bir giriş yolu da yoktu (Space, Enter, restart butonu, hepsi reset()'i çağırıyor). Oyun tamamen oynanamaz.
 **Pattern**: "Ready" state'inde **hiçbir input** o state'ten çıkmıyor. Overlay mesajı bir aksiyon vaat ediyor (örn. "X'e tıkla") ama o aksiyon mevcut state'te disabled veya yok. Agent overlay'in ne dediğini yazdı ama mesajda söz verilen davranışı runtime'da implement etmedi.
 **Tespit**: Cold boot sonrası sayfayı aç. Overlay'in vaat ettiği aksiyonu **tam olarak** yap — gerçekten o şeyi tıkla veya o tuşa bas. State değişti mi? Değişmediyse "ready unreachable". Aynı kontrol gameover sonrası restart için de.
 **Önlem**: Her overlay mesajının vaat ettiği aksiyona en az iki giriş yolu olsun: (a) overlay üzerinde explicit bir "Başla" butonu, (b) klavye fallback (Enter/Space). Drink/option button gibi gameplay input'larını **dual-purpose** yapma — ready state'te "start" anlamına gelmesi user için kafa karıştırıcı; ayrı bir entry point ekle. State enum'unda her state'in en az bir explicit transition'ı olmalı; review sırasında kafanda diyagramı çiz.
@@ -186,6 +194,28 @@ uygula. Curl smoke test artık yeterli değil.
 **Pattern**: 3rd-party/ağ bağımlı özellik, env yokken (varsayılan/dev/smoke) sessizce no-op olmazsa tüm oyunları düşüren bir CI kırığına dönüşür. Statik proje + ağ = her zaman opsiyonel olmalı.
 **Tespit**: Env boşken `npm run test:smoke` yeşil mi? Oyun çevrimdışı (bot/tek-oyunculu) tam oynanabilir mi? `console.error` sıfır mı?
 **Önlem**: `@shared/leaderboard-client` desenini izle: `*Enabled()` flag'i + lazy `import()` (env boşsa SDK hiç yüklenmez) + her hata `catch` ile yutulur, `null` döner. Oyun `null`'ı "çevrimdışı oyna" olarak ele alsın.
+
+### cap-counts-dead-entities
+**Vaka**: [#146 catlak](https://github.com/Mavrikant/games/pull/146) çatallanma limiti `tips.length + newTips.length < MAX_ACTIVE_TIPS + 4`
+ile kontrol ediliyordu; `tips` dizisi mühürlü ve fork-edilmiş (ölü) uçları
+çizim için süresiz sakladığından, ~18 **ömür boyu** uçtan sonra fork kalıcı
+olarak durdu. Üstelik `tip.alive = false` cap kontrolünden **önce**
+yazıldığı için cap'e takılan dal çocuk üretmeden sessizce yok oluyordu —
+ekran yavaşça boşalıyor, core loop kopuyordu. Build/smoke yeşildi; bug
+ancak skor 15-20'ye ulaşan bir seansta görünüyordu.
+**Pattern**: "Aktif varlık sayısı" cap'i, ölü/pasif kayıtları tarihçe veya
+render için saklayan birikimli bir dizinin `length`'ine bakıyor. Cap erken
+ve kalıcı devreye girer. İkinci yarısı: cap'e takılan varlık explicit bir
+davranış yerine sessizce siliniyorsa (PITFALLS#designed-lose-condition-not-wired'in
+kuzeni) oyun döngüsü farkedilmeden ölür.
+**Tespit**: Uzun bir seans oyna (skor 15+ / birkaç dakika). Varlık üretimi
+(fork, spawn, dalga) hâlâ çalışıyor mu, ekran boşalıyor mu? Kod tarafında:
+`length` ile yapılan her cap karşılaştırması için "bu dizi ölü kayıt tutuyor
+mu?" sorusunu sor.
+**Önlem**: Cap karşılaştırmasını canlı-filtreli bir sayaçtan
+(`activeCount()`) geçir; mutasyonu (kill/remove) cap kontrolünün **sonrasına**
+koy. Cap'e takılan varlık için sessiz silme yerine açık bir davranış seç:
+büyümeye devam, kuyruğa alma, en eskiyi dondurma vb.
 
 ### smoke-scenario-races-module-boot
 **Vaka**: Dual-viewport (`SMOKE_VIEWPORTS=mobile,desktop`, 24 eşzamanlı sayfa) smoke koşusunda her seferinde **farklı** oyunlar düştü: 2048 ("0 tile"), kusatma ("intro görünmüyor"), tek-cizgi ("kalan=0"). Oyun kodu doğruydu; senaryolar `load` + sabit 250ms settle sonrası **anında** assert ediyordu. Oyun modülleri code-split dynamic import ile yüklenir ve `load` event'inden **sonra** resolve olabilir — CI yükü altında init() yüzlerce ms gecikir.

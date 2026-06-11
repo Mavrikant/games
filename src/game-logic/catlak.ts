@@ -11,14 +11,19 @@
 // PITFALLS guarded:
 // - module-level-dom-access: all DOM/storage access lives in init().
 // - unguarded-storage: safeRead/safeWrite wrap localStorage.
-// - stale-async-callback: gen.bump() in reset() cancels the RAF loop.
+// - stale-async-callback: each RAF chain carries the gen it was started
+//   with; reset() bumps it, so older chains die even when two resets land
+//   inside the same frame.
 // - overlay-input-leak: pointer + key handlers gate on `state`.
 // - missing-overlay-css: per-game CSS defines .overlay--hidden visual.
-// - unreachable-start-state: overlay has both a Start button and Space/Enter.
+// - unreachable-start-state: overlay reacts to tap-anywhere, its Start
+//   button, and Space/Enter.
 // - hud-counter-synced-only-at-lifecycle-edges: setScore/setLives push
 //   the new value to the DOM the same instant the model changes.
 // - visual-vs-hitbox: TIP_HIT_RADIUS is shared by render + hitTest, and
 //   TIP_FORGIVE adds the same forgiveness used to draw the outer ring.
+//   The rim ellipse from plateEllipse() feeds drawPlate, distToRim and
+//   seed spawning alike.
 // - stale-dom-from-prev-state: reset clears crack arrays before render.
 // - designed-lose-condition-not-wired: edge-hit and miss both call loseLife.
 
@@ -141,49 +146,48 @@ function activeTipCount(): number {
   return n;
 }
 
+function plateEllipse(): { cx: number; cy: number; rx: number; ry: number } {
+  return {
+    cx: (plateBounds.left + plateBounds.right) / 2,
+    cy: (plateBounds.top + plateBounds.bottom) / 2,
+    rx: (plateBounds.right - plateBounds.left) / 2,
+    ry: (plateBounds.bottom - plateBounds.top) / 2,
+  };
+}
+
 function spawnSeedFromRim(): void {
   if (activeTipCount() >= MAX_ACTIVE_TIPS) return;
-  // Pick a random side and point along it, then point inward.
-  const side = Math.floor(rand(0, 4)); // 0=top, 1=right, 2=bottom, 3=left
-  let x = 0;
-  let y = 0;
-  let angle = 0;
-  const inset = RIM_INSET + 2;
-  if (side === 0) {
-    x = rand(plateBounds.left + 40, plateBounds.right - 40);
-    y = plateBounds.top + 2;
-    angle = Math.PI / 2 + rand(-0.35, 0.35);
-  } else if (side === 1) {
-    x = plateBounds.right - 2;
-    y = rand(plateBounds.top + 40, plateBounds.bottom - 40);
-    angle = Math.PI + rand(-0.35, 0.35);
-  } else if (side === 2) {
-    x = rand(plateBounds.left + 40, plateBounds.right - 40);
-    y = plateBounds.bottom - 2;
-    angle = -Math.PI / 2 + rand(-0.35, 0.35);
-  } else {
-    x = plateBounds.left + 2;
-    y = rand(plateBounds.top + 40, plateBounds.bottom - 40);
-    angle = 0 + rand(-0.35, 0.35);
-  }
+  // Pick a random point on the elliptical rim and aim roughly at the
+  // centre, with jitter so seeds don't all race straight for the middle.
+  const { cx, cy, rx, ry } = plateEllipse();
+  const theta = rand(0, Math.PI * 2);
+  let x = cx + Math.cos(theta) * rx;
+  let y = cy + Math.sin(theta) * ry;
+  const angle = Math.atan2(cy - y, cx - x) + rand(-0.35, 0.35);
   // Push the spawn point a generous distance inside the rim so the first
   // tip ring spawns in safe territory and the player has time to react.
-  const inwardPush = inset * 1.8;
+  const inwardPush = (RIM_INSET + 2) * 1.8;
   x += Math.cos(angle) * inwardPush;
   y += Math.sin(angle) * inwardPush;
   tips.push({ x, y, angle, branchLen: 0, alive: true, sealed: false, age: 0 });
 }
 
 function distToRim(x: number, y: number): number {
-  const dx = Math.min(x - plateBounds.left, plateBounds.right - x);
-  const dy = Math.min(y - plateBounds.top, plateBounds.bottom - y);
-  return Math.min(dx, dy);
+  // Distance to the same ellipse drawPlate() renders, approximated via the
+  // normalized radius scaled by the short semi-axis — close enough at rim
+  // scale, and keeps draw + collide fed by the same numbers.
+  const { cx, cy, rx, ry } = plateEllipse();
+  const rho = Math.hypot((x - cx) / rx, (y - cy) / ry);
+  return (1 - rho) * Math.min(rx, ry);
 }
 
 function growTips(dt: number): void {
   const speed = currentSpeed();
   const forkLen = currentForkLen();
   const newTips: Tip[] = [];
+  // Count only live, unsealed tips — `tips` keeps sealed/forked entries
+  // around for drawing, so its length is not the on-screen tip count.
+  let active = activeTipCount();
   for (const tip of tips) {
     tip.age += dt;
     if (!tip.alive || tip.sealed) continue;
@@ -212,12 +216,11 @@ function growTips(dt: number): void {
       }
       // Fork?
       if (tip.branchLen >= forkLen) {
-        tip.alive = false;
         const spread = rand(0.5, 0.9);
-        if (
-          tips.length + newTips.length <
-          MAX_ACTIVE_TIPS + 4
-        ) {
+        if (active < MAX_ACTIVE_TIPS) {
+          // The parent dies and two children take over: net +1 active tip.
+          tip.alive = false;
+          active += 1;
           newTips.push({
             x: tip.x,
             y: tip.y,
@@ -236,6 +239,11 @@ function growTips(dt: number): void {
             sealed: false,
             age: 0,
           });
+        } else {
+          // At the tip cap: kink and keep growing as a single branch — a
+          // tip must never vanish without being sealed or reaching the rim.
+          tip.branchLen = 0;
+          tip.angle += Math.random() < 0.5 ? spread : -spread;
         }
         break;
       }
@@ -307,10 +315,7 @@ function tryTap(cx: number, cy: number): void {
 
 function drawPlate(): void {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const rx = (plateBounds.right - plateBounds.left) / 2;
-  const ry = (plateBounds.bottom - plateBounds.top) / 2;
+  const { cx, cy, rx, ry } = plateEllipse();
   ctx.save();
   ctx.strokeStyle = '#a8946a';
   ctx.lineWidth = 3;
@@ -406,8 +411,9 @@ function update(dt: number): void {
   pops = pops.filter((p) => nowSec - p.born < 0.85);
 }
 
-function loop(timestamp: number): void {
-  const myGen = gen.current();
+function loop(myGen: number, timestamp: number): void {
+  // The gen is bound when the chain is scheduled, not read at call time —
+  // otherwise two resets inside one frame leave two live RAF chains.
   if (!gen.isCurrent(myGen)) return;
   const t = timestamp / 1000;
   const raw = lastFrame === 0 ? 0 : t - lastFrame;
@@ -418,11 +424,7 @@ function loop(timestamp: number): void {
   if (state !== 'playing') nowSec += dt;
   update(dt);
   draw();
-  if (gen.isCurrent(myGen)) {
-    requestAnimationFrame((ts) => {
-      if (gen.isCurrent(myGen)) loop(ts);
-    });
-  }
+  requestAnimationFrame((ts) => loop(myGen, ts));
 }
 
 function startGame(): void {
@@ -458,7 +460,8 @@ function reset(): void {
   overlayBtn.textContent = 'Başla';
   showOverlay(overlay);
   draw();
-  requestAnimationFrame(loop);
+  const myGen = gen.current();
+  requestAnimationFrame((ts) => loop(myGen, ts));
 }
 
 function computePlateBounds(): void {
@@ -530,6 +533,13 @@ function init(): void {
   window.addEventListener('keydown', onKey);
   restartBtn.addEventListener('click', reset);
   overlayBtn.addEventListener('click', () => {
+    if (state === 'ready') startGame();
+    else if (state === 'gameover') reset();
+  });
+  // The overlay covers the canvas while visible, so canvas pointerdown
+  // never fires in ready/gameover — honor the "tap the plate" promise here.
+  overlay.addEventListener('pointerdown', (e) => {
+    if (overlayBtn.contains(e.target as Node)) return;
     if (state === 'ready') startGame();
     else if (state === 'gameover') reset();
   });
