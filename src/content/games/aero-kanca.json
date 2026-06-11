@@ -1,0 +1,21 @@
+{
+  "title": "AeroKanca",
+  "description": "Gökte süzülen adaların üzerinde hoverkraft arenası: enerji kancanı kayalara saplayıp sapan gibi savrul, rakiplerini kancala ve boşluğa fırlat — adalar çökerken ayakta kal.",
+  "dateAdded": "2026-06-11",
+  "tags": ["arcade", "aksiyon", "fizik", "çok-oyunculu", "3b", "özgün"],
+  "controls": "WASD / ok tuşları: hareket · Fare: nişan · Sol tık basılı: kanca fırlat + çek (bırakınca çözülür) · Mobil: sol yarı joystick, sağ yarıya dokun = kanca · ⛶ Tam ekran",
+  "howToPlay": "AeroKanca, gökyüzünde asılı alçak-poligon adaların üzerinde geçen 3B bir fizik arenasıdır. Hoverkraftın ada yüzeyinin üstünde süzülür; adadan çıkarsan boşluğa düşersin. Asıl silahın enerji kancası: fareyle nişan alıp sol tıkla fırlat. Kanca bir kayaya saplanırsa halat gerilir — tuşu basılı tutarak kendini çekersin ve sapan gibi hız kazanırsın; adalar arasında böyle uçulur. Kanca bir rakibe isabet ederse ona kenetlenirsin ve kendi momentumunla onu savurursun. Çarpışmalar tampon araba gibidir: hızlı gelen, yavaş olanı iter. Bir rakibi boşluğa düşürmek 3 puan, adalardaki enerji küresini toplamak 1 puandır; düşen oyuncu kısa bir süre sonra rastgele bir adada yeniden doğar. Maç 2 dakika sürer ve süre ilerledikçe adalar sallanıp çöker — oyun alanı daralır, son saniyeler merkez adada biter. En yüksek puan kazanır. \"Oda Oluştur\" ile bir bağlantı alıp arkadaşlarına gönderebilirsin (en fazla 5 kişi); boş kalan yerleri her zaman yapay zekâlı botlar doldurur. Sunucu yapılandırılmamışsa ya da bağlantı kurulamazsa tamamen botlara karşı oynarsın.",
+  "thumbnail": "aero-kanca.svg",
+  "scoring": {
+    "storageKey": "aero-kanca.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "AeroHook",
+    "description": "Hovercraft arena over floating sky islands: harpoon the rocks with your energy hook to slingshot around, latch onto rivals and fling them into the void — and stay standing as the islands collapse.",
+    "controls": "WASD / arrow keys: move · Mouse: aim · Hold left click: fire + reel the hook (release to let go) · Mobile: left-half joystick, tap right side to hook · ⛶ Fullscreen",
+    "howToPlay": "AeroHook is a 3D physics arena set on low-poly islands floating in the sky. Your hovercraft glides above island surfaces; stray off the edge and you fall into the void. Your weapon is the energy hook: aim with the mouse and fire with left click. Hit a rock and the rope goes taut — hold the button to reel in and slingshot yourself between islands. Hit a rival and you latch on, flinging them with your own momentum. Collisions work like bumper cars: the faster craft shoves the slower one. Knocking a rival into the void scores 3 points, collecting an energy orb scores 1; a fallen player respawns on a random island after a short delay. A match lasts 2 minutes, and as time passes the islands shake and collapse — the arena shrinks toward a final showdown on the central island. Highest score wins. \"Create Room\" gives you a link to share with friends (up to 5 players); AI bots always fill the empty slots, and if no server is configured or the connection fails you play a full match against bots."
+  }
+}
