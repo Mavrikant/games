@@ -1,0 +1,21 @@
+{
+  "title": "Hava Balonu",
+  "description": "Sıcak hava balonunu farklı yüksekliklerdeki rüzgar bantlarıyla yönlendir, bayrakları topla. İrtifa = dümen.",
+  "dateAdded": "2026-06-14",
+  "tags": ["özgün", "fizik", "reflex"],
+  "controls": "Boşluk / ↑ / Tıkla: brülör · R: yeniden başla",
+  "howToPlay": "Direkt yatay kontrol yok — yön sadece rüzgardan. Gökyüzü dört yatay rüzgar bandına bölünmüş: en üst hızlı sağa, üst-orta yavaş sola, alt-orta yavaş sağa, en alt hızlı sola. Balonun nereye gideceğini seçmek için doğru irtifaya çıkıp doğru bandın akıntısına bırakıyorsun. Brülör tek kontrol: Boşluk veya ↑ tuşunu basılı tut, ısı artar, balon yükselir; bırak — ısı düşer, balon iner. Sağ kenardaki ısı göstergesinde tarafsız işaret yan çizgi olarak görünür; o işaretin üstünde balon yükseliyor, altında alçalıyor. Ekrandaki sarı bayrakları topla — her bayrak +1 skor ve +22 yakıt verir, yeni bayrak başka bir konumda belirir. Brülör yakıt yakar; ısıyı kullanma stratejik olmalı, çünkü yakıt sıfıra inerse oyun biter. Balon ekranın yan kenarından çıkarsa diğer kenardan girer (sarmalama); bayrak sırası tükenmez. Kullanılabilir taktikler: yakın bayrak için sadece bir bandı kullan, uzaktaki bayrak için iki bandı zincirle (önce sağa hızlı bant, sonra alçalıp sola yavaş bantta dur). En iyi skor tarayıcıda saklanır.",
+  "thumbnail": "hava-balonu.svg",
+  "scoring": {
+    "storageKey": "hava-balonu.best",
+    "label": "Bayrak",
+    "direction": "higher",
+    "labelEn": "Flags"
+  },
+  "en": {
+    "title": "Hot Air Balloon",
+    "description": "Pilot a hot air balloon using altitude-based wind bands to collect flags. Altitude is your rudder.",
+    "controls": "Space / ↑ / Tap: burner · R: restart",
+    "howToPlay": "There is no direct horizontal control — your only steering tool is altitude. The sky is split into four horizontal wind bands: top fast-right, upper-middle slow-left, lower-middle slow-right, bottom fast-left. You pick where to drift by climbing to the right altitude and letting that band's current carry you. Hold Space or the Up arrow to fire the burner: heat rises, balloon climbs; release and heat decays so the balloon descends. The gauge on the right edge shows your heat level with a small neutral tick — above it you ascend, below you sink. Collect the yellow flags that appear on screen; each flag is +1 score and +22 fuel, and a new flag spawns elsewhere. Running the burner burns fuel quickly, so heat usage has to be strategic — when fuel hits zero, the run ends. The balloon wraps around the edges, so going off the side puts you back on the opposite side. Tactics: chain bands for distant flags (climb on a fast-right band, then drop into the slow-left band to brake). Your best is saved in your browser."
+  }
+}
