@@ -1,0 +1,21 @@
+{
+  "title": "Krep",
+  "description": "Dört tavada krepler kızarıyor — ne erken ne geç çevir, ne yanmadan servis et.",
+  "dateAdded": "2026-06-14",
+  "tags": ["tempo", "dikkat", "tıklama", "tek-oyunculu", "özgün"],
+  "controls": "Fare/dokunma: tavaya tıkla — çevir veya servis et · 1-4: tavayı seç · R: yeniden başla · Boşluk/Enter: başlat",
+  "thumbnail": "krep.svg",
+  "howToPlay": "Krep, eş zamanlı dört tavada krep pişirme oyunudur. Belirli aralıklarla boş bir tavaya hamur belirir ve kızarmaya başlar. Krep önce A yüzünde pişer, sarı tonundan kahverengiye döner. Pişme tamamlandığında tavanın çevresinde yeşil bir halka belirir ve 'ÇEVİR' yazısı çıkar — bu pencere içinde tavaya tıkla, krep diğer yüzüne dönsün. Şimdi B yüzü pişmeye başlar; aynı şekilde yeşil halka çıkınca tıkla, 'SERVİS' yapılır ve +1 puan alırsın. Yeşil halka kızarınca beklemen halinde halka kırmızıya döner; tepeden duman çıkar ve krep yanar — bir can kaybedersin. Halka çıkmadan tıklarsan krepi erken çevirip mahvedersin, yine bir can kaybedersin. 3 can ile başlarsın; her can kaybında devam edebilir, sıfırlanınca oyun biter. Skor yükseldikçe yeni hamur daha sık gelir ve yeşil pencere kısalır — refleksin ve dikkat dağıtmadan paralel düşünme yeteneğin test edilir. Yanan tavayı manuel boşaltmak istersen üzerine tıklayabilirsin. Klavye kullananlar 1-4 tuşlarıyla doğrudan tavayı seçebilir.",
+  "scoring": {
+    "storageKey": "krep.best",
+    "label": "Krep",
+    "direction": "higher",
+    "labelEn": "Pancakes"
+  },
+  "en": {
+    "title": "Pancake Pan",
+    "description": "Four pans, four pancakes — flip and plate at the right moment, never let them burn.",
+    "controls": "Mouse/touch: tap a pan — flip or plate · 1-4: select pan · R: restart · Space/Enter: start",
+    "howToPlay": "Pancake Pan is a parallel four-pan cooking game. Batter periodically appears on an empty pan and starts cooking; the pancake darkens from pale yellow toward brown as side A cooks. When it's ready a green ring pulses around the pan and 'ÇEVİR' (Flip) appears — tap inside this window to flip to side B. Side B then cooks the same way; tap when the green ring appears to 'SERVİS' (Serve) and score +1. Wait too long and the ring turns red, smoke rises, the pancake burns and you lose a life. Tap before the ring shows and you ruin a raw pancake, also losing a life. You start with 3 lives; as your score climbs new batter spawns faster and the green window shrinks. You can clear a burnt pan manually by tapping it. Keyboard players can select pans directly with keys 1-4."
+  }
+}
