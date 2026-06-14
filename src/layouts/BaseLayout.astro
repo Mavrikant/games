@@ -70,7 +70,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0a0b0e" />
+    <meta name="theme-color" content="#15122e" />
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
     {hreflangs.map((alt) => (
@@ -242,9 +242,9 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
           bar.id = 'pwa-install';
           bar.style.cssText =
             'position:fixed;left:16px;bottom:' + bottom + 'px;z-index:9998;max-width:340px;' +
-            'display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;' +
-            'background:#14171c;color:#f5f6f8;border:1px solid #2f3540;' +
-            'box-shadow:0 8px 30px rgba(0,0,0,.45);font:500 13.5px/1.35 ui-sans-serif,system-ui,sans-serif';
+            'display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;' +
+            'background:#211d44;color:#f9f7ff;border:1px solid #534a98;' +
+            'box-shadow:0 8px 30px rgba(10,6,30,.5);font:500 13.5px/1.35 ui-sans-serif,system-ui,sans-serif';
 
           var icon = document.createElement('img');
           icon.src = '/games/icon-192.png';
@@ -264,8 +264,8 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
             add.type = 'button';
             add.textContent = 'Ekle';
             add.style.cssText =
-              'cursor:pointer;border:0;border-radius:8px;padding:8px 14px;font:inherit;' +
-              'font-weight:600;color:#fff;background:#6366f1;flex:0 0 auto';
+              'cursor:pointer;border:0;border-radius:10px;padding:8px 14px;font:inherit;' +
+              'font-weight:600;color:#fff;background:#b15cff;flex:0 0 auto';
             add.addEventListener('click', triggerInstall);
             bar.appendChild(add);
           }
@@ -275,7 +275,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
           close.setAttribute('aria-label', 'Kapat');
           close.textContent = '×';
           close.style.cssText =
-            'cursor:pointer;border:0;background:transparent;color:#98a0ad;font-size:20px;' +
+            'cursor:pointer;border:0;background:transparent;color:#bcb4e6;font-size:20px;' +
             'line-height:1;padding:2px 4px;flex:0 0 auto';
           close.addEventListener('click', dismissBanner);
           bar.appendChild(close);
