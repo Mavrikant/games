@@ -1,0 +1,20 @@
+{
+  "title": "Buharlı Lokomotif",
+  "description": "Lokomotifi sür: yakıtı koru, istasyonlarda peronun tam ortasında dur, yolcuyu kaçırma.",
+  "dateAdded": "2026-06-14",
+  "tags": ["arcade", "özgün", "refleks", "zamanlama"],
+  "controls": "↑/W: gaz · ↓/S: fren · Boşluk: düdük · R: yeniden başla",
+  "howToPlay": "Buharlı Lokomotif, makinist koltuğunda oturduğun bir tren işletme oyunudur; tek sıralı bir hat boyunca art arda gelen istasyonlarda yolcu almak için lokomotifi tam doğru noktada durdurmaya çalışırsın. Üç temel kontrolün var: yukarı ok (veya W ya da yeşil Gaz düğmesi) buharı açıp treni ivmelendirir, aşağı ok (veya S, kırmızı Fren düğmesi) basınçlı freni devreye alır, boşluk veya düdük düğmesi ise sadece bir kabin selamı verir. Her peronun ortasında altın bir orta çizgi ve etrafında geniş bir yeşil bant vardır: trenin ön burnu hızı sıfıra düşerken altın çizgide olursa 'TAM ORTA!' iki puan ve 28% yakıt kazandırır, yalnızca yeşil bant içinde durursan 'iyi duruş' bir puan ve 14% yakıt verir; yeşil bandın dışında peronu hareket halinde geçersen istasyon kaçırılmış sayılır ve canlardan biri yanar — üç kaçırmada sefer biter. Yakıtın hem gaz bastıkça hem de pasif kazan tüketimiyle azalır; sıfıra düşüp tamamen durursan yine sefer biter. İstasyonlar ileri yöndeki sahaya rastgele aralıklarla yerleşir; üst sol köşedeki '→ İstasyon: X m' göstergesi bir sonraki perona kalan mesafeyi söyler. Strateji: gaza hep tepeden bastırmak yerine treni orta hızda demirleyip peron yaklaşırken erken fren al, çünkü tam fren mesafesi yaklaşık 150 metredir — peron önünde gaz kesip kısa fren darbeleriyle hızı sıfıra yakın çekerek altın çizgide yumuşakça dur. Yakıt artışı için TAM duruş peşinde koş; iyi duruş yalnız idame eder.",
+  "scoring": {
+    "storageKey": "lokomotif.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Steam Locomotive",
+    "description": "Drive the locomotive: manage fuel, stop exactly on the platform's centre line, don't miss a station.",
+    "controls": "↑/W: throttle · ↓/S: brake · Space: whistle · R: restart",
+    "howToPlay": "Steam Locomotive puts you in the engineer's seat of a single-line steam train; your job is to stop precisely at each oncoming station to board passengers. There are three controls: up arrow (or W, or the green Throttle button) opens steam and accelerates the train, down arrow (or S, the red Brake) engages the air brake, and space or the whistle button is just a salute from the cab. Every platform has a gold centre line surrounded by a wider green band: stop on the gold line with the train's front nose and you score 'TAM ORTA!' for +2 points and +28% fuel; stop anywhere in the green band but off-centre for a 'good stop' worth +1 point and +14% fuel; roll past the platform without stopping in the green band and the station is missed — three misses end the run. Fuel drains both with the throttle and from a passive boiler burn; if it hits zero and you're fully stopped, the run also ends. Stations spawn ahead at varying intervals; the top-left '→ Station: X m' tells you how far the next platform is. Strategy: don't pin the throttle — settle the train at a moderate speed and start braking early as a platform nears, because the full braking distance is around 150 metres. Cut the steam ahead of the platform and feather the brake to glide to a near-zero stop on the gold line. Chase TAM stops for fuel; good stops only break even."
+  }
+}

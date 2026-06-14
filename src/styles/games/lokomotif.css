@@ -1,0 +1,198 @@
+:root {
+  --loko-sky-top: #1f3a4d;
+  --loko-sky-bottom: #f6a96b;
+  --loko-ground: #4e342e;
+  --loko-rail: #1c1c1c;
+  --loko-sleeper: #2d1b13;
+  --loko-train-body: #b71c1c;
+  --loko-train-trim: #f5d76e;
+  --loko-train-cabin: #4a1e1e;
+  --loko-platform: #cfa674;
+  --loko-platform-roof: #5d3a1f;
+  --loko-zone-good: rgba(120, 200, 80, 0.32);
+  --loko-zone-perfect: #f5c542;
+  --loko-mountain-far: #2a4055;
+  --loko-mountain-near: #1f2f3d;
+  --loko-text: #fff;
+}
+
+.hud {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.hud__score,
+.hud__best,
+.hud__fuel,
+.hud__speed {
+  flex: 1 1 90px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span,
+.hud__fuel span,
+.hud__speed span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__fuel span { color: var(--loko-train-trim); }
+.hud__speed span { color: #7dd3fc; }
+
+.hud__lives {
+  flex: 0 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  color: var(--loko-train-trim);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+}
+
+#restart.hud__btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: 16px;
+  touch-action: manipulation;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  aspect-ratio: 720 / 360;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--loko-sky-top) 0%, var(--loko-sky-bottom) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.7);
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity 0.18s ease-out;
+  pointer-events: none;
+}
+
+.overlay--hidden {
+  opacity: 0;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 480px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--loko-text);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.loko-touch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.loko-touch__btn {
+  flex: 1 1 110px;
+  min-height: 56px;
+  max-width: 220px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.05s, background 0.08s;
+}
+
+.loko-touch__btn:active {
+  transform: translateY(1px);
+  background: var(--loko-train-cabin);
+}
+
+.loko-touch__btn--throttle {
+  background: #1f5d3a;
+  border-color: #2a7a4d;
+  color: #e6ffe6;
+}
+
+.loko-touch__btn--brake {
+  background: #5d1f1f;
+  border-color: #7a2a2a;
+  color: #ffe6e6;
+}
+
+.loko-touch__btn--whistle {
+  flex: 0 0 70px;
+  font-size: 22px;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage { padding-block: 10px; gap: 8px; }
+  .hud { gap: 6px; }
+  .hud__score, .hud__best, .hud__fuel, .hud__speed {
+    padding: 6px 10px; font-size: 10px;
+  }
+  .hud__score span, .hud__best span, .hud__fuel span, .hud__speed span {
+    font-size: 16px;
+  }
+  .hud__lives { padding: 6px 10px; font-size: 14px; }
+  .loko-touch { margin-top: 6px; }
+  .loko-touch__btn { min-height: 44px; font-size: 14px; }
+}

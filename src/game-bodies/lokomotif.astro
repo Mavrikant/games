@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">En iyi<span id="best">0</span></div>
+  <div class="hud__fuel">Yakıt<span id="fuel">100%</span></div>
+  <div class="hud__speed">Hız<span id="speed">0</span></div>
+  <div class="hud__lives" id="lives" aria-label="Kalan kaçırma hakkı">★★★</div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="720" height="360" aria-label="Buharlı Lokomotif oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Buharlı Lokomotif</h2>
+      <p id="overlay-msg">↑ ile gaz, ↓ ile fren. Peronun ortasındaki altın çizgide tam dur.</p>
+    </div>
+  </div>
+</div>
+<div class="loko-touch" aria-hidden="true">
+  <button class="loko-touch__btn loko-touch__btn--brake" data-action="brake" type="button">▼ Fren</button>
+  <button class="loko-touch__btn loko-touch__btn--whistle" data-action="whistle" type="button">♪</button>
+  <button class="loko-touch__btn loko-touch__btn--throttle" data-action="throttle" type="button">▲ Gaz</button>
+</div>
