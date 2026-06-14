@@ -1,0 +1,22 @@
+{
+  "title": "Kar Topu",
+  "description": "Yokuş aşağı yuvarlanan kar topunu büyüt, ağaçlardan kaç. Topun büyüdükçe yavaşlarsın — büyüme ile manevra arasında seç.",
+  "dateAdded": "2026-06-14",
+  "tags": ["arcade", "kar", "kaçınma", "orijinal"],
+  "controls": "Sol/Sağ ok · A/D · sürükle · R: yeniden başla",
+  "thumbnail": "kar-topu.svg",
+  "howToPlay": "Kar topu yokuştan aşağı yuvarlanır; sen sadece yan yatışını kontrol edersin. Sol/sağ ok tuşları veya A/D ile topu çevir; mobilde sahneyi yatay sürükleyerek de aynı şeyi yaparsın. Beyaz kar yığınlarına değdikçe topun büyür ve ekrandaki skorun da o oranda hızlanır — ama büyüdükçe dönüş yarıçapı belirgin biçimde uzar, yani manevra payın azalır. Yeşil çamlar ölümcüldür; topun çevresi (yarıçap + ağaç gövdesi) çakıştığı an oyun biter. Ortada kalmaya çalış: küçük top hızla yön değiştirir ama puan az kazanır, dev top tek bir ağaca takılır. Skor metre cinsindendir; her geçen saniye temel bir kazanç verir ve top büyüdükçe bu kazanç artar. R tuşu veya Yeniden başla butonu ile her an sıfırlayabilirsin; en iyi mesafe localStorage'da saklanır.",
+  "scoring": {
+    "storageKey": "kar-topu.best",
+    "label": "Mesafe",
+    "unit": "m",
+    "direction": "higher",
+    "labelEn": "Distance"
+  },
+  "en": {
+    "title": "Snowball",
+    "description": "Steer a snowball rolling downhill, dodge the pines, gather snow to grow — but a bigger ball turns slower.",
+    "controls": "Left/Right · A/D · drag · R: restart",
+    "howToPlay": "The snowball rolls downhill on its own; you only steer it sideways. Use the left/right arrow keys or A/D to lean the ball; on touch screens drag horizontally for the same effect. Brushing white snow patches grows the ball and accelerates your score gain, but every centimetre of radius lengthens your turning arc, so the bigger you get the harder it is to dodge. Green pines are deadly: if your radius overlaps a trunk you crash. Pick your line — a small ball reacts instantly but scores slowly, while a giant ball racks up distance fast and dies to a single mistimed turn. Score is measured in metres and scales with current size; press R or Restart any time to reset. The longest run is kept in localStorage."
+  }
+}
