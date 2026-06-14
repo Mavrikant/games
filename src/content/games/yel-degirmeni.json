@@ -1,0 +1,21 @@
+{
+  "title": "Yel Değirmeni",
+  "description": "Beş yel değirmenini değişen rüzgâr yönüne çevir, üretilen enerjiyi 60 saniye boyunca en yüksek tutmaya çalış.",
+  "dateAdded": "2026-06-14",
+  "tags": ["strateji", "tempo", "tıklama", "tek-oyunculu", "özgün"],
+  "controls": "Tıkla / dokun: değirmeni 45° saat yönünde çevir · 1-5: ilgili değirmeni çevir · Boşluk: başlat · R: yeniden başla",
+  "thumbnail": "yel-degirmeni.svg",
+  "howToPlay": "Yel Değirmeni, bir rüzgâr çiftliği işletmecisi olduğun bir hizalama oyunudur. Ekranda beş ayrı değirmen, üzerinde rüzgârın yönünü gösteren akış çizgileri var. Her değirmen sekiz yönden birine bakar (kuzey, kuzeydoğu, doğu, … gibi 45° aralıklarla). Bir değirmene tıkladığında veya dokunduğunda 45° saat yönünde döner. Klavyede 1-5 tuşları sırasıyla aynı değirmenleri çevirir. Üretilen güç değirmenin kanatlarının rüzgâra ne kadar dik baktığına bağlıdır: rüzgârla aynı yöne bakıyorsa tam güç, dik açıyla bakıyorsa sıfır, ters yöne bakıyorsa yine sıfır üretir. Tüm değirmenlerin anlık gücü üstteki çizgide canlı olarak görünür, biriken toplam ise skoru artırır. Rüzgâr sabit durmaz: birkaç saniyede bir yeni bir yöne yumuşak biçimde döner, ekranın üst köşesindeki pusula sana mevcut yönü gösterir. Hedefin 60 saniye boyunca olabildiğince çok enerji biriktirmek; her değirmenin renk halkası ne kadar verimli ürettiğini gösterir — yeşil tam güç, sarı yarım, kırmızı ise neredeyse boşa. İpucu: rüzgâr döndüğünde önce en kötü hizalanmış değirmeni düzelt; bir değirmen tam tersine bakıyorsa dört tıklama gerekir ama yarım kalsa bile fark eder. Skor kalıcı en iyi rekor olarak kaydedilir.",
+  "scoring": {
+    "storageKey": "yel-degirmeni.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Windmill Farm",
+    "description": "Rotate five windmills to align with shifting wind and harvest as much energy as you can in 60 seconds.",
+    "controls": "Click / tap: rotate windmill 45° clockwise · 1-5: rotate matching windmill · Space: start · R: restart",
+    "howToPlay": "Windmill Farm is an alignment game where you operate a small wind farm. Five windmills sit on the field while animated streamlines show the wind direction. Each windmill faces one of eight directions (N, NE, E, … in 45° steps). Click or tap a windmill (or press 1-5) to rotate it 45° clockwise. Power output depends on how directly the blades face the wind: full power when aligned, zero at right angles or when facing the opposite way. The live total of all windmills feeds the meter at the top, and the running total drives your score. The wind does not sit still — every few seconds it smoothly turns to a new direction shown on the small compass. Your goal is to harvest as much energy as you can in 60 seconds. Each windmill has a colored ring that tells you how well it is producing — green means full output, yellow half, red almost nothing. Tip: when the wind shifts, fix the worst-aligned windmill first; if one is facing the opposite way it needs four clicks, but every partial turn already helps. Your best score is saved locally."
+  }
+}
