@@ -1,0 +1,21 @@
+{
+  "title": "Ütücü",
+  "description": "Buruşuk gömlekleri zamanında ütüle, ama ütüyü fazla bekletme — kumaşı yakarsın.",
+  "dateAdded": "2026-06-14",
+  "tags": ["tempo", "dikkat", "sürükleme", "tek-oyunculu", "özgün"],
+  "controls": "Fare/dokunma: ütüyü basılı tutarak sürükle · Bırak: ütüyü kaldır (soğutur) · R: yeniden başla · Boşluk/Enter: başlat",
+  "thumbnail": "utucu.svg",
+  "howToPlay": "Ütücü, 90 saniyelik bir ütüleme yarışıdır. Ekrandaki ütü masasında, üzerinde sekiz adet buruşuk olan bir gömlek görürsün. Hedefin tüm buruşukları açıp gömleği tamamlamak; süre dolana kadar olabildiğince çok gömlek ütülemek. Fareyi (veya parmağını) gömleğe basılı tutarsan ütü o noktaya iner ve ısınmaya başlar. Sağ kenardaki ısı göstergesi mavi (soğuk) → açık yeşil (sıcak) → turuncu → kırmızı sırasıyla yükselir. Ütü 'Sıcak' çizgisinin altındayken hiçbir buruşuğu açamaz; sıcak şeritteyken buruşukları yavaşça düzeltir. Ama 'Yanık' çizgisinin üstüne çıkarsa altında kalan kumaş yanar — kalıcı bir is lekesi bırakır ve puan kaybedersin. Çözüm: ütüyü ısıt, buruşuğu birkaç saniye fırçalar gibi geç, sonra parmağını kaldırıp soğut, başka buruşuğa geç. Her açılan buruşuk +1 puan, her yakılan -2 puan, tamamlanan her gömlek için bonus +3 puan. Gömlekteki tüm buruşuklar açıldığında veya yandığında yeni bir gömlek belirir. Skor canlı olarak hud'da görünür ve en iyi rekor yerelde saklanır.",
+  "scoring": {
+    "storageKey": "utucu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "The Ironer",
+    "description": "Iron wrinkled shirts in 90 seconds — but don't let the iron overheat or you'll scorch the fabric.",
+    "controls": "Mouse/touch: press and drag the iron · Release: lift to cool · R: restart · Space/Enter: start",
+    "howToPlay": "The Ironer is a 90-second ironing rush. A wrinkled shirt sits on an ironing board with eight visible wrinkles. Your goal is to smooth them all out and complete as many shirts as possible before time runs out. Press and hold (mouse or finger) on the shirt and the iron lowers there and begins to heat up. The right-edge gauge climbs from blue (cold) to light green (warm) to orange to red. Below the 'Warm' line the iron cannot smooth anything; in the warm band it gradually flattens wrinkles under it. Cross the 'Burn' line and the fabric under the iron scorches — a permanent dark mark that costs points. The trick is to heat up, sweep over a wrinkle for a couple of seconds, then lift to cool before moving on. Each smoothed wrinkle is +1, each scorch is −2, and finishing all wrinkles on a shirt earns a +3 bonus before a fresh shirt appears. Your best score is saved locally."
+  }
+}

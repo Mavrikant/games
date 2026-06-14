@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Ütücü">
+  <defs>
+    <linearGradient id="ut-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#243049" />
+      <stop offset="100%" stop-color="#0e1424" />
+    </linearGradient>
+    <radialGradient id="ut-halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ff9a52" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ff7032" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ff5028" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="ut-iron" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffae5a" />
+      <stop offset="100%" stop-color="#df5630" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ut-bg)" />
+
+  <!-- Ironing board (wood + fabric cover) -->
+  <g>
+    <rect x="22" y="62" width="276" height="116" rx="58" fill="#caa178" />
+    <rect x="32" y="72" width="256" height="96" rx="50" fill="#f1e1c8" />
+  </g>
+
+  <!-- Shirt on board -->
+  <g>
+    <!-- Body -->
+    <path d="M88 80 L78 80 L72 110 L88 116 L88 156 L232 156 L232 116 L248 110 L242 80 L232 80
+             L232 92 L210 92
+             A22 22 0 0 1 166 92
+             L166 92 L88 92 Z"
+          fill="#fdfdfd" stroke="#7f8aa0" stroke-width="2" />
+    <!-- Placket line -->
+    <line x1="188" y1="100" x2="188" y2="150" stroke="#d6dbe3" stroke-width="1" />
+    <!-- Buttons -->
+    <g fill="#c2cad8">
+      <circle cx="188" cy="110" r="2.4" />
+      <circle cx="188" cy="124" r="2.4" />
+      <circle cx="188" cy="138" r="2.4" />
+    </g>
+  </g>
+
+  <!-- Wrinkles still showing -->
+  <g stroke="#8993a8" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.8">
+    <path d="M100 110 q 4 -2 8 0 q 4 2 8 0" />
+    <path d="M100 115 q 4 -2 8 0 q 4 2 8 0" />
+    <path d="M100 120 q 4 -2 8 0 q 4 2 8 0" />
+    <path d="M120 134 q 4 -2 8 0 q 4 2 8 0" />
+    <path d="M120 139 q 4 -2 8 0 q 4 2 8 0" />
+    <path d="M148 148 q 4 -2 8 0 q 4 2 8 0" />
+  </g>
+
+  <!-- Scorch mark example -->
+  <circle cx="216" cy="128" r="9" fill="#5e2a10" opacity="0.85" />
+  <circle cx="216" cy="128" r="14" fill="#7a4220" opacity="0.35" />
+
+  <!-- Iron with heat halo -->
+  <g transform="translate(170,120)">
+    <circle cx="0" cy="0" r="36" fill="url(#ut-halo)" />
+    <!-- Body -->
+    <path d="M-28 -14 L28 -14 L20 14 L-20 14 Z" fill="url(#ut-iron)" stroke="rgba(0,0,0,0.4)" stroke-width="1.4" />
+    <!-- Sole plate -->
+    <path d="M-20 14 L20 14 L14 22 L-14 22 Z" fill="#ffc26a" />
+    <!-- Handle -->
+    <path d="M-16 -14 L-12 -28 L12 -28 L16 -14 Z" fill="#2a2f3a" stroke="rgba(0,0,0,0.4)" stroke-width="1" />
+    <!-- Steam puffs -->
+    <g fill="rgba(255,255,255,0.7)">
+      <circle cx="-12" cy="-38" r="3.5" />
+      <circle cx="2" cy="-44" r="4" />
+      <circle cx="14" cy="-38" r="3" />
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="160" y="42" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+        font-size="18" font-weight="700" fill="#f4f6fb" text-anchor="middle">Ütücü</text>
+</svg>
