@@ -19,6 +19,22 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
     <span class="brand__path">{t('site.brandPath', lang)}</span>
   </a>
   <nav class="nav__meta">
+    <button
+      class="nav__theme"
+      type="button"
+      data-theme-toggle
+      aria-pressed="false"
+      aria-label={lang === 'en' ? 'Switch to light theme' : 'Açık temaya geç'}
+      title={lang === 'en' ? 'Light theme' : 'Açık tema'}
+    >
+      <svg class="ico-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+      <svg class="ico-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </svg>
+    </button>
     <span class="nav__streak" data-streak hidden title={lang === 'en' ? 'Consecutive visit days' : 'Üst üste ziyaret günleri'}>
       <span aria-hidden="true">🔥</span>
       <span class="nav__streak-count" data-streak-count>0</span>
@@ -35,6 +51,60 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
     <span class="nav__count">{t('games.count', lang, { n: count })}</span>
   </nav>
 </header>
+
+<script is:inline>
+  // Light/dark toggle. The chosen theme is restored before paint by the
+  // inline init in BaseLayout; here we just handle clicks, persist the
+  // choice, keep the theme-color meta in sync, and label the button.
+  (function () {
+    var KEY = 'theme';
+    function current() {
+      return document.documentElement.getAttribute('data-theme') === 'light'
+        ? 'light'
+        : 'dark';
+    }
+    function label(t) {
+      var toLight = t === 'dark';
+      var en = (document.documentElement.lang || '').slice(0, 2) === 'en';
+      var aria = toLight
+        ? en
+          ? 'Switch to light theme'
+          : 'Açık temaya geç'
+        : en
+          ? 'Switch to dark theme'
+          : 'Koyu temaya geç';
+      var title = toLight
+        ? en
+          ? 'Light theme'
+          : 'Açık tema'
+        : en
+          ? 'Dark theme'
+          : 'Koyu tema';
+      var btns = document.querySelectorAll('[data-theme-toggle]');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].setAttribute('aria-label', aria);
+        btns[i].setAttribute('title', title);
+        btns[i].setAttribute('aria-pressed', String(t === 'light'));
+      }
+    }
+    function apply(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      try {
+        localStorage.setItem(KEY, t);
+      } catch (e) {}
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'light' ? '#fbf7ff' : '#15122e');
+      label(t);
+    }
+    document.addEventListener('click', function (e) {
+      var b =
+        e.target && e.target.closest && e.target.closest('[data-theme-toggle]');
+      if (!b) return;
+      apply(current() === 'light' ? 'dark' : 'light');
+    });
+    label(current());
+  })();
+</script>
 
 <script>
   import { updateStreak } from '../shared/daily';
@@ -69,6 +139,42 @@ const otherLangHref = lang === 'en' ? base : `${base}en/`;
   }
   .nav__streak-count {
     font-variant-numeric: tabular-nums;
+  }
+  .nav__theme {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-right: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s,
+      background 0.15s;
+  }
+  .nav__theme:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .nav__theme .ico-sun {
+    display: inline-flex;
+  }
+  .nav__theme .ico-moon {
+    display: none;
+  }
+  /* Light active → offer the moon (back to dark); dark active → offer the sun. */
+  :global(html[data-theme='light']) .nav__theme .ico-sun {
+    display: none;
+  }
+  :global(html[data-theme='light']) .nav__theme .ico-moon {
+    display: inline-flex;
   }
   .nav__lang {
     color: var(--text-muted);

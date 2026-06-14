@@ -12,7 +12,7 @@ body {
   justify-content: space-between;
   gap: 16px;
   padding: 14px 32px;
-  background: rgba(10, 11, 14, 0.7);
+  background: var(--chrome-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -458,7 +458,7 @@ body {
   align-items: center;
   gap: 14px;
   padding: 10px 18px;
-  background: rgba(10, 11, 14, 0.85);
+  background: var(--chrome-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);

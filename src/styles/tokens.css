@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   /* Playful "candy night-sky" base — a deep violet rather than near-black so
      the page feels warm and magical instead of corporate. */
   --bg: #15122e;
@@ -29,6 +30,9 @@
   --surface: #211d44;
   --surface-2: #2a2557;
   --surface-3: #342e6a;
+  /* Translucent chrome behind the sticky nav / player bar — tokenised so the
+     light theme can flip it without leaving a dark band. */
+  --chrome-bg: rgba(21, 18, 46, 0.72);
   --border: #352f63;
   --border-strong: #534a98;
   --text: #f9f7ff;
@@ -74,4 +78,66 @@
   font-family:
     'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-feature-settings: 'cv11', 'ss01';
+}
+
+/* Light "candy daylight" theme — opt-in via the nav toggle (persisted in
+   localStorage). Applied only on browsing pages (the nav-bearing archive /
+   marketing pages); game play surfaces stay dark by design, since the 120
+   games read --bg / --surface to paint their boards. Accents and the crayon
+   category palette are deepened so they stay legible on a near-white page. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #fbf7ff;
+  --bg-radial:
+    radial-gradient(
+      820px 520px at 90% -120px,
+      rgba(255, 110, 199, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      720px 520px at 4% 6%,
+      rgba(56, 189, 248, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      1200px 720px at 50% -220px,
+      rgba(168, 85, 247, 0.14),
+      transparent 62%
+    ),
+    radial-gradient(
+      680px 460px at 82% 104%,
+      rgba(52, 211, 153, 0.16),
+      transparent 60%
+    );
+  --surface: #ffffff;
+  --surface-2: #f5efff;
+  --surface-3: #ece3ff;
+  --chrome-bg: rgba(255, 255, 255, 0.74);
+  --border: #e7ddfb;
+  --border-strong: #cdbcf2;
+  --text: #281b46;
+  --text-muted: #6a5f93;
+  --text-dim: #998fbe;
+  --accent: #d6258a;
+  --accent-strong: #9333ea;
+  --accent-2: #0891b2;
+  --accent-soft: rgba(214, 37, 138, 0.12);
+  --accent-glow: rgba(147, 51, 234, 0.3);
+  --accent-gradient: linear-gradient(120deg, #ff4fb0, #9333ea 48%, #0ea5e9);
+  --success: #16a34a;
+  --c-pink: #db2777;
+  --c-purple: #9333ea;
+  --c-blue: #0284c7;
+  --c-cyan: #0891b2;
+  --c-green: #059669;
+  --c-yellow: #b45309;
+  --c-orange: #ea580c;
+  --c-red: #e11d48;
+  --shadow-card:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 2px 6px rgba(80, 40, 140, 0.08);
+  --shadow-hover:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 20px 44px -18px rgba(147, 51, 234, 0.35),
+    0 0 0 1px var(--border-strong);
 }

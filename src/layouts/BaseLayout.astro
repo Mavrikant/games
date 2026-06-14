@@ -19,6 +19,10 @@ interface Props {
   ogImage?: string;
   lang?: Lang;
   hreflangs?: HreflangLink[];
+  // Game play pages set this so they always render the dark "candy night-sky"
+  // theme: the 120 games paint their boards from --bg / --surface and would
+  // break on light. Browsing pages leave it false to honour the user's toggle.
+  playSurface?: boolean;
 }
 
 const {
@@ -29,6 +33,7 @@ const {
   ogImage,
   lang = 'tr',
   hreflangs = [],
+  playSurface = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
@@ -71,6 +76,14 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#15122e" />
+    {/* Restore the saved light/dark choice before first paint (no FOUC).
+        Only on browsing pages — play surfaces stay dark. */}
+    {!playSurface && (
+      <script
+        is:inline
+        set:html={`(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name=\\'theme-color\\']');if(m)m.setAttribute('content',t==='light'?'#fbf7ff':'#15122e');}}catch(e){}})();`}
+      />
+    )}
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
     {hreflangs.map((alt) => (
