@@ -1,0 +1,9 @@
+{
+  "title": "Çay Demleme",
+  "description": "Suyu doğru sıcaklığa getir, kupayı tam süresinde demle, vardiyayı en yüksek puanla bitir.",
+  "dateAdded": "2026-06-14",
+  "tags": ["mutfak", "zamanlama", "tek-oyunculu"],
+  "controls": "Boşluk: ocağı tut · 1/2/3 veya tıklama: kupayı seç · R: yeniden başla",
+  "howToPlay": "Tek bir çaydanlığın altındaki ocağı yönetiyor, üç farklı çay siparişini paralel demliyorsun. Her sipariş bir çay türü (yeşil, beyaz, Earl Grey, demli siyah, oolong, papatya) ile birlikte hedef sıcaklık ve hedef demleme süresi gösterir. Boşluk tuşunu basılı tut (mobilde ocak alanına dokun) — su +4°C/sn ısınır; bıraktığında 1.6°C/sn soğuyup oda sıcaklığına döner. Bir kupayı seçtiğinde (1/2/3 veya tıklama) o anki su sıcaklığı 'dök sıcaklığı' olarak kilitlenir, demleme zamanlayıcısı başlar; aynı tuşa tekrar basmak kupayı serv eder. Puanlama iki bileşenden gelir: dök sıcaklığı hedefe ne kadar yakınsa pour skoru o kadar yüksektir (sapma başına -5 puan), demleme süresi de hedefe yakınsa süre skoru artar (saniye sapma başına -28 puan). Maksimum 100 puan/kupa; servis edilen her kupanın yerine yeni bir sipariş gelir. 60 saniyelik vardiyada toplam puanı en yükseğe çıkarmak amacın. Strateji: sıcak çayları (95-100°C) önce dök, soğuma sırasında düşük sıcaklıklı olanları sıraya al; bir kupayı uzun bekletmek süre puanını sıfırlar — sip etap haline geldiğinde derhal serv et. Termometrenin sol kenarındaki numaralı oklar, hangi siparişin hangi sıcaklığı hedeflediğini gösterir; bunları zihinsel olarak yukarıdan aşağıya bir çekim listesi gibi düşün. En iyi skorun tarayıcında saklanır.",
+  "thumbnail": "cay-demleme.svg"
+}

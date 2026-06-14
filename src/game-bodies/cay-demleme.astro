@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Süre<span id="timer">60</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="640"
+    aria-label="Çay Demleme — sıcaklık ve süre yönetimi"></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çay Demleme</h2>
+      <p id="overlay-msg">
+        Suyu hedef sıcaklığa getir, kupayı seç, doğru süreyi bekleyip tekrar bas.
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--accent" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>
