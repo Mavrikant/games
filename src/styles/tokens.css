@@ -1,46 +1,75 @@
 :root {
-  --bg: #0a0b0e;
-  /* Layered ambient wash — a cool indigo bloom at the top with a faint sky
-     accent off to the side gives the page depth without distracting from
-     the cards. */
+  /* Playful "candy night-sky" base — a deep violet rather than near-black so
+     the page feels warm and magical instead of corporate. */
+  --bg: #15122e;
+  /* Multi-colour ambient bloom — pink, sky, violet and mint glows drift in
+     from the corners so the backdrop feels alive and arcade-bright without
+     stealing attention from the cards. */
   --bg-radial:
     radial-gradient(
-      900px 480px at 88% -160px,
-      rgba(56, 189, 248, 0.05),
+      820px 520px at 90% -120px,
+      rgba(255, 110, 199, 0.14),
       transparent 55%
     ),
     radial-gradient(
-      1200px 640px at 50% -220px,
-      rgba(99, 102, 241, 0.1),
+      720px 520px at 4% 6%,
+      rgba(56, 210, 255, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      1200px 720px at 50% -220px,
+      rgba(168, 85, 247, 0.18),
       transparent 62%
+    ),
+    radial-gradient(
+      680px 460px at 82% 104%,
+      rgba(52, 232, 158, 0.1),
+      transparent 60%
     );
-  --surface: #14171c;
-  --surface-2: #1c2027;
-  --surface-3: #232830;
-  --border: #1f242c;
-  --border-strong: #2f3540;
-  --text: #f5f6f8;
-  --text-muted: #98a0ad;
-  --text-dim: #5a6473;
-  --accent: #818cf8;
-  --accent-strong: #6366f1;
-  --accent-2: #38bdf8;
-  --accent-soft: rgba(129, 140, 248, 0.14);
-  --accent-glow: rgba(129, 140, 248, 0.35);
-  /* Signature indigo → sky gradient reused by the logo, hero highlight,
-     featured spotlight and primary CTAs so the brand reads as one system. */
-  --accent-gradient: linear-gradient(120deg, var(--accent-strong), var(--accent) 45%, var(--accent-2));
-  --success: #34d399;
-  --radius: 14px;
-  --radius-sm: 8px;
-  --radius-xs: 6px;
+  --surface: #211d44;
+  --surface-2: #2a2557;
+  --surface-3: #342e6a;
+  --border: #352f63;
+  --border-strong: #534a98;
+  --text: #f9f7ff;
+  --text-muted: #bcb4e6;
+  --text-dim: #8079b8;
+  /* Bubblegum pink lead, vivid violet for solid fills, electric sky as the
+     third voice — a candy trio kids respond to. */
+  --accent: #ff79c6;
+  --accent-strong: #b15cff;
+  --accent-2: #34d2ff;
+  --accent-soft: rgba(255, 121, 198, 0.16);
+  --accent-glow: rgba(177, 92, 255, 0.45);
+  /* Signature candy rainbow reused by the logo, hero highlight, featured
+     spotlight and primary CTAs so the brand reads as one joyful system. */
+  --accent-gradient: linear-gradient(
+    120deg,
+    var(--accent),
+    var(--accent-strong) 48%,
+    var(--accent-2)
+  );
+  --success: #3ee686;
+  /* Fun category palette — rotated through tags, cards and shelves so the
+     archive feels like a box of crayons rather than one flat hue. */
+  --c-pink: #ff6ec7;
+  --c-purple: #a855f7;
+  --c-blue: #38bdf8;
+  --c-cyan: #22d3ee;
+  --c-green: #34e89e;
+  --c-yellow: #ffd166;
+  --c-orange: #ff8a4c;
+  --c-red: #ff6b81;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
   --ring: 0 0 0 3px var(--accent-soft);
   --shadow-card:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 1px 2px rgba(0, 0, 0, 0.3);
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 2px 4px rgba(10, 6, 30, 0.4);
   --shadow-hover:
-    0 1px 0 rgba(255, 255, 255, 0.07) inset,
-    0 18px 40px -16px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.09) inset,
+    0 20px 44px -16px rgba(122, 40, 200, 0.6),
     0 0 0 1px var(--border-strong);
   font-family:
     'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
