@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="timer">60</span></div>
+  <div class="hud__score">Kombo<span id="combo">–</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="600"
+    aria-label="Ateş böceği oyun alanı"
+  ></canvas>
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Ateş Böceği</h2>
+      <p id="overlay-msg">
+        Ekrana dokunarak ışık yak ve ateş böceklerini kavanoza çek.
+      </p>
+      <button id="overlay-btn" type="button" class="hud__btn">Başla</button>
+    </div>
+  </div>
+</div>

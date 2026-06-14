@@ -1,0 +1,21 @@
+{
+  "title": "Ateş Böceği",
+  "description": "Gece sahnesinde dolaşan ateş böceklerini ışık halkalarıyla cezbet, alttaki kavanozun ağzına yönlendir. 60 saniyede ne kadar çok yakalayabilirsin?",
+  "dateAdded": "2026-06-14",
+  "tags": ["refleks", "arcade", "gece", "kovalama"],
+  "controls": "Fare/Dokunma: ışık halkası yak · R: yeniden başla · Boşluk/Enter: başla",
+  "howToPlay": "Yıldızlı bir gökyüzünde rastgele yörüngeler çizen ateş böceklerini, altındaki cam kavanozun ağzına çekerek 60 saniye içinde olabildiğince çok yakalamaya çalışıyorsun. Canvas'ın herhangi bir noktasına dokunduğunda kısa ömürlü bir ışık halkası yanıyor; halkanın menzilindeki böcekler ışığa doğru hızlanıp doğal salınımlarını kaybediyor. Halka 1.2 saniye boyunca parlıyor ve yarıçapı yaklaşık 96 piksel — yani böcekleri tek tek değil, bir kümeyi birden kavanoza doğru süpürmen mümkün. Ardışık ışıklar arasında yarım saniyelik bir soğuma süresi var, sağ üstteki ince çubuk geri sayımı gösteriyor; bu süreden önce dokunursan oyun kırmızıya titreyerek seni uyarır ama vakit kaybeden sensin. Kavanozun ağzı ekranın altında belirgin bir parlak çizgi olarak görünür; ağız bölgesinin dışına temas eden böcek yumuşakça sıçrayarak geri döner, ağza giren ise kıvılcımlı bir yay çizerek içeri akar ve kavanozda küçük bir noktaya dönüşür. Hızlı tempo için ardışık yakalamalar 1.8 saniye içinde gerçekleşirse kombo sayacı artar; ikinci yakalama +2, üçüncü +3 puan getirir ve böylece zincirleme bir bonus oluşur — kombo HUD'da \"×N\" olarak görünür ve zincir kırılır kırılmaz \"–\" işaretine döner. Strateji: tek bir böceği kovalamak yerine birden fazlasının yörüngesini önceden tahmin et, ortak yakınsama noktasında ışık yak; halkayı kavanozun hemen üstünde değil de biraz daha yukarıda yakarsan böcekler doğrudan kavanoza akmak yerine ışığın etrafında daha fazla zaman geçirip senin için \"oyalanır\", bu da hatalı bir tıklama olduğunda toparlanma şansı verir. Süre dolduğunda toplam yakalanan böcek sayısı ve toplam skorun (komboyla) ekrana gelir; rekorun tarayıcında saklanır ve geçildiğinde \"Yeni rekor!\" notu görünür.",
+  "thumbnail": "atesbocegi.svg",
+  "scoring": {
+    "storageKey": "atesbocegi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Firefly",
+    "description": "Lure wandering fireflies into the jar at the bottom using brief rings of light. How many can you catch in 60 seconds?",
+    "controls": "Mouse/Tap: cast a light ring · R: restart · Space/Enter: start",
+    "howToPlay": "In a starry night sky, fireflies drift on random orbits. Tap anywhere on the canvas to cast a short-lived ring of light; fireflies within range are drawn toward the ring and accelerate out of their natural wander. The ring glows for about 1.2 seconds and reaches roughly 96 pixels, so you can sweep a whole cluster toward the jar instead of chasing one bug at a time. There is a half-second cooldown between rings — the thin bar at the top right is the countdown; clicking before it fills flashes a red warning and just wastes time. The jar's mouth is the bright line at the bottom: a firefly touching the mouth region is drawn in with a sparkling arc and shrinks into a tiny dot inside the jar, while one that hits the floor outside the mouth bounces gently back up. Consecutive catches within 1.8 seconds extend your combo: the 2nd is worth +2, the 3rd +3, and so on — the HUD shows \"×N\" while the chain is alive and reverts to \"–\" the moment you break it. Tip: don't chase a single bug — predict where two or three orbits intersect and cast the ring at that convergence point. Casting slightly above the jar (rather than right on the mouth) lets the swarm orbit the light a bit longer, giving you room to recover from a bad tap. When the timer hits zero you see the total catches and the combo-boosted score; your best is saved locally and you'll get a \"New record!\" note when you beat it."
+  }
+}

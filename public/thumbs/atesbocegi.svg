@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Ateş Böceği">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1130" />
+      <stop offset="100%" stop-color="#1b134a" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fff4aa" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffc24f" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffb43c" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="fly" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fff6c8" stop-opacity="1" />
+      <stop offset="60%" stop-color="#ffd86b" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ffb43c" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#sky)" />
+  <rect y="160" width="320" height="40" fill="#070818" />
+
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="30" cy="28" r="1" />
+    <circle cx="60" cy="50" r="1.4" />
+    <circle cx="100" cy="22" r="0.9" />
+    <circle cx="150" cy="40" r="1" />
+    <circle cx="210" cy="28" r="1.4" />
+    <circle cx="250" cy="56" r="1" />
+    <circle cx="290" cy="36" r="0.9" />
+    <circle cx="40" cy="90" r="0.9" />
+    <circle cx="200" cy="85" r="1" />
+    <circle cx="280" cy="100" r="1.2" />
+  </g>
+
+  <circle cx="120" cy="80" r="56" fill="url(#glow)" />
+
+  <g>
+    <circle cx="60" cy="60" r="14" fill="url(#fly)" />
+    <circle cx="60" cy="60" r="2.5" fill="#fff7b3" />
+    <circle cx="120" cy="80" r="16" fill="url(#fly)" />
+    <circle cx="120" cy="80" r="3" fill="#fff7b3" />
+    <circle cx="155" cy="60" r="12" fill="url(#fly)" />
+    <circle cx="155" cy="60" r="2.5" fill="#fff7b3" />
+    <circle cx="230" cy="70" r="13" fill="url(#fly)" />
+    <circle cx="230" cy="70" r="2.5" fill="#fff7b3" />
+    <circle cx="275" cy="120" r="12" fill="url(#fly)" />
+    <circle cx="275" cy="120" r="2.5" fill="#fff7b3" />
+  </g>
+
+  <g fill="rgba(140,200,230,0.18)" stroke="rgba(180,220,245,0.7)" stroke-width="2">
+    <path d="M 122 150 L 198 150 L 206 162 L 206 188 Q 206 196 198 196 L 122 196 Q 114 196 114 188 L 114 162 Z" />
+  </g>
+  <line x1="118" y1="150" x2="202" y2="150" stroke="#e6f5ff" stroke-width="3" stroke-linecap="round" />
+
+  <g fill="#ffde82" opacity="0.85">
+    <circle cx="140" cy="178" r="2.5" />
+    <circle cx="160" cy="168" r="2.5" />
+    <circle cx="180" cy="182" r="2.5" />
+    <circle cx="150" cy="190" r="2.2" />
+    <circle cx="172" cy="175" r="2.2" />
+  </g>
+
+  <text x="18" y="32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" fill="#fff7c4">Ateş Böceği</text>
+</svg>
