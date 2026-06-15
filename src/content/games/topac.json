@@ -1,0 +1,22 @@
+{
+  "title": "Topaç",
+  "description": "Tahta topacı kırbaçla canlı tut — sürtünme yavaşlatır, rüzgâr esintisi yana yatırır; devrilmeden dur.",
+  "dateAdded": "2026-06-15",
+  "tags": ["refleks", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk veya tıkla: kırbaçla · R: yeniden başla",
+  "howToPlay": "Tahta zeminde dönen bir topacı mümkün olduğunca uzun süre ayakta tutmaya çalışırsın. Sağ üstteki RPM göstergesi topacın dönme hızını, altındaki YATIK çubuğu ise topacın o anki eğimini gösterir; RPM her saniye sabit bir oranla erir, ekran kenarından zaman zaman gelen rüzgâr esintileri (kırmızı ok) topacı bir yana yatırır. Her iki başarısızlık koşulu da oyunu bitirir: RPM sıfıra inerse topaç sürtünmeden durur, YATIK çubuk tam dolarsa topaç yere kapaklanır. Boşluk tuşuna basarak ya da alana tıklayarak kırbacı çek — vuruşun iki etkisi vardır: RPM'i 22 puan kadar yukarı iter (üst sınır 100) ve mevcut yatık miktarını yarıya indirir, yani hem hızı hem dengeyi aynı anda toparlar. Ama her kırbaç kısa bir 'soluklan' süresiyle birlikte gelir (yaklaşık 0.4 saniye), bu yüzden art arda spam atmak işe yaramaz; bekleyip RPM gerçekten düştüğünde vurmak en verimlisi. Rüzgâr esintisinden korunmanın tek yolu esinti başladığı anda kırbacı zamanında çekmek; geç kalırsan yatık çubuğu hızla dolar. Skor saniye cinsindendir ve oyunu ne kadar uzun süre ayakta tutarsan rekorun o kadar yüksek olur; en yüksek süren tarayıcında saklanır. İpucu: RPM'i hep tam dolu tutmaya çalışma — kırbacı 40-60 bandında atmak en ekonomik vuruştur, çünkü 100'ün üstüne çıkamaz, sadece soluklan süresini boşa harcarsın. Rüzgâr okunu görünce hemen vur, RPM zaten yüksekse aynı vuruş yatığı yine yarıya indirir; sadece düz sürtünmeyi kovalamak yerine esintiyle yarışmak daha çok zaman kazandırır.",
+  "thumbnail": "topac.svg",
+  "scoring": {
+    "storageKey": "topac.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Spinning Top",
+    "description": "Crack the whip to keep the wooden top alive — friction slows it, wind gusts tilt it sideways; stay upright as long as you can.",
+    "controls": "Space or click: crack the whip · R: restart",
+    "howToPlay": "You're trying to keep a wooden top spinning on a hardwood floor for as long as possible. The RPM gauge on the right shows the spin speed and the TILT bar below it shows how far the top is leaning; RPM bleeds off at a steady rate, and from time to time a wind gust (red arrow) blows in from a screen edge and pushes the top sideways. Either failure ends the round: if RPM hits zero the top stops from friction, and if the TILT bar fills it tips over onto the floor. Press Space or click the playfield to crack the whip — every snap does two things: it pushes RPM up by about 22 points (capped at 100) and halves the current tilt, so it recovers both speed and balance at the same time. But each whip comes with a short 'breathing' cooldown (roughly 0.4 seconds), so spamming buys you nothing; wait until the RPM has actually dropped, then strike. The only defense against a gust is to whip on time as it begins — if you're late the tilt bar fills fast. The score is in seconds and the longer you stay upright the higher your record; your best time is saved in your browser. Tip: don't try to keep RPM topped at 100 — whipping in the 40–60 band is the most economical snap, because anything above the ceiling is wasted on the cooldown. When you see the wind arrow strike immediately, the same snap halves the tilt even if RPM is already high; chasing only the friction loss leaves you short when the next gust lands."
+  }
+}
