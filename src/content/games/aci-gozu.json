@@ -1,0 +1,15 @@
+{
+  "title": "Açı Gözü",
+  "description": "İki ışının arasındaki açıyı sadece gözünle tahmin et — 10 turda toplam skorun rekorun olur.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "tahmin", "geometri", "özgün", "tek-oyunculu"],
+  "controls": "← / →: tahmin (Shift +5°) · Enter: onayla · R: yeniden",
+  "thumbnail": "aci-gozu.svg",
+  "howToPlay": "Amacın, ekranın merkezinden çıkan iki sarı ışının arasındaki açıyı (1°–179°) sadece gözünle tahmin etmek. Her turda iki ışın rastgele bir yöne döndürülerek çizilir; ekranda yatay-dikey referans yoktur, bu yüzden açıyı sıfırdan kestirmen gerekir. Alttaki kaydırıcıyı fareyle sürükle, parmağınla kaydır ya da sol/sağ ok tuşlarıyla ince ayarla (Shift basılıyken her adım beş derece olur); yanındaki sayı senin o anki tahminindir. Karar verdiğinde Onayla butonuna bas veya Enter tuşuna dokun: gerçek açı sarı yay üstünde sayı olarak açıklanır ve senin tahminin yeşil kesik çizgi olarak çizilir. Her tur için sapmanın her derecesi 5 puan götürür (0° sapma → 100 puan, 20° → 0 puan), yani küçük farklar büyük ödüllendirilir. 10 tur boyunca biriken toplam skorun (en fazla 1000) tarayıcında rekor olarak saklanır; oyunun sonundaki ekrandan Tekrar oyna butonuyla yeniden başlayabilir veya R tuşuna basabilirsin. İpucu: 90°'yi zihninde mükemmel bir dik açı olarak sabitle, sonra 45°'yi (yarısı) ve 135°'yi (90° + 45°) çapa olarak kullan; çok dar (20° altı) veya çok geniş (160° üstü) açılarda gözün sapmayı abartmaya eğilimli olduğunu unutma ve uçlarda kaydırıcıyı küçük adımlarla yokla.",
+  "en": {
+    "title": "Eye for Angles",
+    "description": "Estimate the angle between two rays by eye — across 10 rounds your total score becomes your record.",
+    "controls": "← / →: adjust (Shift +5°) · Enter: confirm · R: restart",
+    "howToPlay": "Your goal is to estimate, by eye alone, the angle (1°–179°) between two yellow rays that meet at the centre of the screen. In each round the rays are drawn at a random orientation with no horizontal or vertical reference, so you have to gauge the angle from scratch. Drag the slider with the mouse, swipe it on touch, or fine-tune it with the left/right arrow keys (hold Shift for five-degree steps); the number next to the slider is your current guess. When you're ready, press Confirm or hit Enter: the real angle is revealed on a yellow arc with its degree label, and your guess is overlaid as a dashed green line. Each degree of error costs you 5 points (0° off → 100, 20° → 0), so small differences are rewarded heavily. Your total over 10 rounds (max 1000) is saved as your personal best in the browser; from the end-of-game screen press Play again or hit R to start over. Tip: anchor 90° in your mind as a perfect right angle, then use 45° (half) and 135° (90° + 45°) as reference points. Your eye tends to exaggerate the error on very narrow (<20°) or very wide (>160°) angles, so nudge the slider in small steps at the extremes."
+  }
+}

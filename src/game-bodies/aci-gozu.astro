@@ -1,0 +1,48 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Tur<span id="round">1/10</span></div>
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<section class="board-wrap" aria-label="Açı tahmini tahtası">
+  <canvas
+    id="board"
+    width="480"
+    height="320"
+    aria-label="İki ışın arasındaki açıyı tahmin et"
+  ></canvas>
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Açı Gözü</h2>
+      <p id="overlay-msg">
+        İki ışının arasındaki açıyı tahmin et. 10 tur boyunca biriken toplam skorun rekorun olur.
+      </p>
+      <button id="overlay-btn" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</section>
+
+<div class="guess" role="group" aria-label="Açı tahmini">
+  <label for="guess-range" class="guess__label">
+    Tahmin <span id="guess-val">90</span>°
+  </label>
+  <input
+    id="guess-range"
+    type="range"
+    min="1"
+    max="179"
+    value="90"
+    class="guess__slider"
+    aria-label="Tahmin (derece)"
+    disabled
+  />
+  <button id="submit-btn" class="guess__submit" type="button" disabled>
+    Onayla (Enter)
+  </button>
+</div>
+
+<p id="feedback" class="feedback" aria-live="polite"></p>
