@@ -1,0 +1,34 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Enerji<span id="energy">0/0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="kz-tools" role="toolbar" aria-label="Aletler">
+  <button id="tool-brush" class="kz-tool kz-tool--active" type="button" data-tool="brush" aria-pressed="true">
+    <span class="kz-tool__icon" aria-hidden="true">🪥</span>
+    <span class="kz-tool__name">Fırça</span>
+    <span class="kz-tool__hint">−1 toprak · güvenli (1)</span>
+  </button>
+  <button id="tool-pick" class="kz-tool" type="button" data-tool="pick" aria-pressed="false">
+    <span class="kz-tool__icon" aria-hidden="true">⛏️</span>
+    <span class="kz-tool__name">Kazma</span>
+    <span class="kz-tool__hint">tamamen aç · riskli (2)</span>
+  </button>
+</div>
+
+<div class="board-wrap">
+  <canvas id="board" width="560" height="400" aria-label="Kazı sahası"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Kazı</h2>
+      <p id="overlay-msg">Toprağın altında bir tablet gömülü. Önce fırça ile sahayı tara (altın ışıltı = tablet ipucu), sonra kazma ile doğrulanmış hücreleri hızla aç. Enerji bitmeden tamamla.</p>
+      <button id="overlay-start" class="kz-start" type="button">Başla</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+/*
+ * Kazı — per-game styles.
+ * board-wrap + overlay block kept for the @shared/overlay contract:
+ * `.overlay--hidden` must define the visual hide, otherwise
+ * hideOverlay() is a no-op. pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  background: #1a1108;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border, #2a2a32);
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  cursor: crosshair;
+  background: #2a1c0d;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.84);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f5c542;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.kz-start {
+  appearance: none;
+  border: 1px solid #d6a02f;
+  background: linear-gradient(180deg, #f5c542 0%, #cf9320 100%);
+  color: #2a1c0d;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 9px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: transform 0.08s ease-out, box-shadow 0.15s ease-out;
+  box-shadow: 0 4px 14px rgba(245, 197, 66, 0.18);
+}
+
+.kz-start:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(245, 197, 66, 0.28);
+}
+
+.kz-start:active {
+  transform: translateY(0);
+}
+
+.kz-tools {
+  display: flex;
+  gap: 10px;
+  max-width: 560px;
+  margin: 12px auto;
+}
+
+.kz-tool {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #2a2a32);
+  background: var(--surface, #14151a);
+  color: var(--text, #e6e6ea);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: border-color 0.12s ease-out, background 0.12s ease-out, transform 0.05s ease-out;
+}
+
+.kz-tool:hover {
+  border-color: #d6a02f;
+}
+
+.kz-tool:active {
+  transform: translateY(1px);
+}
+
+.kz-tool--active {
+  border-color: #f5c542;
+  background: rgba(245, 197, 66, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(245, 197, 66, 0.4);
+}
+
+.kz-tool__icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.kz-tool__name {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.kz-tool__hint {
+  font-size: 11px;
+  color: var(--text-dim, #8b8b95);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

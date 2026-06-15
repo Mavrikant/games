@@ -1,0 +1,21 @@
+{
+  "title": "Kazı",
+  "description": "Arkeolog ol — gömülü tableti fırça ve kazmayla, enerji bitmeden, kırmadan ortaya çıkar.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "strateji", "özgün", "tek-oyunculu"],
+  "controls": "Tıkla / dokun: aleti uygula · 1: Fırça · 2: Kazma · Boşluk/Enter: başla · R: yeniden",
+  "thumbnail": "kazi.svg",
+  "scoring": {
+    "storageKey": "kazi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Kazı, bir kazı sahasını minimum hasarla ortaya çıkarmaya çalıştığın özgün bir kaynak-yönetim bulmacasıdır. Önünde 7×5'lik bir kazı alanı vardır; her hücrede üç kat toprak (3 = dokunulmamış, 0 = açık) ve altında ya gömülü tabletin bir parçası ya da boş zemin bulunur. Her seviye, rastgele yerleştirilmiş, bitişik hücrelerden oluşan bir tablet siluetidir; başlangıçta yerini bilmezsin. İki alet vardır: 'Fırça' (kısayol 1) hücrenin toprak seviyesini bir kat indirir, asla tablete zarar vermez ve hücreyi 'eşelenmiş' olarak işaretler — eşelenmiş hücreler altta tablet varsa hafif altın bir ipucu yayar, boş ise gri kalır. 'Kazma' (kısayol 2) hücreyi tek hamlede tamamen temizler, çok daha hızlıdır, ama daha önce hiç eşelenmemiş bir hücreye vurur ve altta tablet varsa o parça çatlar — gene sayılır ama puanın düşer. Her hamle bir 'enerji' birimi yer; enerji bittiğinde tablet eksikse oyun biter. Strateji: önce fırça ile hızlıca alanı tara (her hücreye bir vuruş yeterli ipucu verir), olası tablet konumunu daralt, geriye kalan toprağı doğrulanmış hücreler üzerinde kazma ile hızla temizle. Bir seviyeyi tamamlamak için tüm tablet hücrelerinin tamamen ortaya çıkması (toprak=0) gerekir; her hatasız parça +10, her çatlatılan parça −15 puandır. Seviye atladıkça tablet bir hücre daha büyür ve enerji 4 birim artar — kümülatif skorun en yüksek skor olarak saklanır.",
+  "en": {
+    "title": "Dig",
+    "description": "Be the archaeologist — uncover a buried tablet with brush and pick before the energy runs out, without cracking it.",
+    "controls": "Click / tap: apply tool · 1: Brush · 2: Pick · Space/Enter: start · R: restart",
+    "howToPlay": "Dig is an original resource-management puzzle where you have to uncover an excavation site with minimum damage. In front of you is a 7×5 dig area; each cell has three dirt layers (3 = untouched, 0 = exposed) and below the dirt lies either a fragment of a buried tablet or empty bedrock. Every level the tablet is a randomly placed, contiguous silhouette whose location you do not know up front. You have two tools. The 'Brush' (hotkey 1) removes one dirt layer and never damages the tablet, marking the cell as 'sifted' — sifted cells give off a faint golden tint when there is tablet underneath, and stay grey when empty. The 'Pick' (hotkey 2) clears a cell completely in a single blow, much faster, but if it strikes a previously untouched cell that hides a tablet fragment that fragment cracks — still counts as exposed but reduces your score. Every move costs one energy unit, and if your energy runs out before the tablet is fully revealed the game ends. Strategy: brush the area quickly first (one stroke per cell is enough to read a hint), narrow down where the tablet sits, then use the pick on cells you have confirmed to be tablet to clear the remaining dirt fast. To complete a level the entire tablet must be fully exposed (dirt=0); each clean fragment is +10 points, each cracked fragment is −15. Each new level grows the tablet by one cell and grants four more energy — your cumulative score is saved as your high score."
+  }
+}

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kazı">
+  <defs>
+    <linearGradient id="dirt-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1208" />
+      <stop offset="100%" stop-color="#0a0703" />
+    </linearGradient>
+    <linearGradient id="tile-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5c542" />
+      <stop offset="100%" stop-color="#c98a1c" />
+    </linearGradient>
+    <linearGradient id="dirt-warm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9a623c" />
+      <stop offset="100%" stop-color="#6b3d20" />
+    </linearGradient>
+    <linearGradient id="dirt-mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a4a26" />
+      <stop offset="100%" stop-color="#553216" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#dirt-bg)" />
+  <!-- 7x5 mock grid -->
+  <g>
+    <!-- Row 0 -->
+    <rect x="20"  y="40"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="60"  y="40"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="100" y="40"  width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="140" y="40"  width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="180" y="40"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="220" y="40"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="260" y="40"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <!-- Row 1 -->
+    <rect x="20"  y="72"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="60"  y="72"  width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="100" y="72"  width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="140" y="72"  width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="180" y="72"  width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="220" y="72"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="260" y="72"  width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <!-- Row 2 -->
+    <rect x="20"  y="104" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="60"  y="104" width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="100" y="104" width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="140" y="104" width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="180" y="104" width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="220" y="104" width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="260" y="104" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <!-- Row 3 -->
+    <rect x="20"  y="136" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="60"  y="136" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="100" y="136" width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="140" y="136" width="38" height="28" rx="5" fill="url(#tile-gold)" />
+    <rect x="180" y="136" width="38" height="28" rx="5" fill="url(#dirt-mid)" />
+    <rect x="220" y="136" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+    <rect x="260" y="136" width="38" height="28" rx="5" fill="url(#dirt-warm)" />
+  </g>
+  <!-- Pick icon -->
+  <g transform="translate(240 26) rotate(20)" stroke="#f5c542" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M0 12 L26 12" />
+    <path d="M-10 4 Q14 0 38 4" />
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5c542">Kazı</text>
+</svg>
