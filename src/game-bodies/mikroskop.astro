@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Numune<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <div class="hud__stat">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="target-panel" aria-live="polite">
+  <span class="target-panel__label">Aranan</span>
+  <canvas id="target" width="64" height="64" aria-label="Aranan mikrop"></canvas>
+  <span id="target-text" class="target-panel__text">turkuaz · yuvarlak</span>
+</div>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Mikroskop görüş alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mikroskop</h2>
+      <p id="overlay-msg">Aranan numuneyi tıkla. Başlamak için Boşluk veya kaba dokun.</p>
+    </div>
+  </div>
+</div>

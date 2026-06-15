@@ -1,0 +1,21 @@
+{
+  "title": "Mikroskop",
+  "description": "Mikroskop altında yüzen mikroplar arasından aranan numuneyi süre dolmadan tıkla — renk ve şekil eşleşmeli.",
+  "dateAdded": "2026-06-15",
+  "tags": ["refleks", "dikkat", "özgün", "tek-oyunculu"],
+  "controls": "Fare / dokun: numuneyi tıkla · Boşluk / Enter: başla veya yeniden başla · R: yeniden başla",
+  "howToPlay": "Mikroskop, bir mikroskobun altında yüzen mikropları gerçek zamanlı sınıflandırma oyunudur. Dairesel petri kabında ~16 mikrop Brown hareketiyle (rastgele kıvrılarak) dolaşır. HUD'un üstündeki 'Numune' panelinde aranan mikrobun iki özelliği gösterilir: rengi (turkuaz, macenta veya limon) ve şekli (yuvarlak hücre, çubuk bakteri, ya da kuyruklu — flagellumlu). Dolayısıyla 3×3=9 farklı tip vardır; her an kapta o tipten bir veya birkaç eşleşme bulunur. Eşleşen bir mikroba tıkladığında +1 puan alırsın, mikrop yumuşak bir parıltıyla 'incelenir' ve kaybolur, yerine kapta yeni bir mikrop spawn olur ve **yeni bir hedef** seçilir — yani üst üste aynı türü kovalamak garanti değil, gözünü güncel hedefe sabitle. Yanlış mikroba tıklarsan -1 puan (asgari 0) ve kısa bir kırmızı parıltıyla yaklaşık yarım saniye duraklatma cezası yersin: yanlış sürü-tıklama puanını eritir. 60 saniye boyunca olabildiğince çok numune topla; her 5 doğru atışta mikroplar biraz hızlanır, böylece geç oyunda 'aynı renkte üç tane var, en yakındakini seç' kararını hızla vermen gerekir. Skor süresi bittiğinde yerel rekorun saklanır ve overlay açılır. İpucu: önce renkle filtrele (3 renk var, görsel olarak ayırt etmek kolay), sonra şekille daralt; hedef değiştiğinde önceki hedefe alışkanlıkla tıklamamak için bir an dur, panelin üstündeki büyük örneğe bak.",
+  "thumbnail": "mikroskop.svg",
+  "scoring": {
+    "storageKey": "mikroskop.best",
+    "label": "Numune",
+    "direction": "higher",
+    "labelEn": "Specimens"
+  },
+  "en": {
+    "title": "Microscope",
+    "description": "Spot the wanted microbe among the drifting specimens under the lens — color and shape must match.",
+    "controls": "Mouse / touch: click a specimen · Space / Enter: start or restart · R: restart",
+    "howToPlay": "Microscope is a real-time classification game played under a circular Petri dish. About 16 microbes drift around with Brownian motion (random curving paths). The 'Specimen' panel above the lens shows two attributes of the wanted microbe: its color (cyan, magenta, or lime) and its shape (round cell, rod bacterium, or tailed — flagellated). That gives 3×3=9 distinct types, with one or several of the wanted type present in the dish at any moment. Click a matching microbe and you score +1, the microbe blooms with a soft glow as it's 'examined', a fresh one spawns elsewhere in the dish, and a **new target** is picked — so don't lock onto one type for long, keep your eye on the current spec. Click a mismatch and you lose a point (floor: 0) with a half-second red flash penalty: spamming clicks burns your score down. You have 60 seconds; every 5 successful hits the microbes accelerate a little so by the late game you have to commit to the closest matching specimen quickly. When the timer ends your local best is saved and the overlay reopens. Tip: filter by color first (three are clearly distinguishable), then narrow by shape; when the target changes, pause for a heartbeat and look at the big reference in the panel so you don't reflex-click the previous target."
+  }
+}
