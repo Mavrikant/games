@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Tur<span id="round">1/5</span></div>
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Arı dansı sahnesi"></canvas>
+  <div id="phase" class="phase-tag" aria-live="polite">İzle</div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Arı Dansı</h2>
+      <p id="overlay-msg">Arı petekteki figure-8 dansı ile çiçeğin yerini söylüyor.
+Düz koşunun açısı yönü, uzunluğu uzaklığı kodluyor.
+Dansı izle, sonra tarlada çiçeği işaretle.
+Başlamak için tıkla veya boşluk.</p>
+    </div>
+  </div>
+</div>
