@@ -1,0 +1,8 @@
+{
+  "title": "Mıknatıs",
+  "description": "Mıknatısı sürükle, renkli metal kırıntılarını topla — sadece hedef renk kasaya girmeli, yanlış renk canına mal olur.",
+  "dateAdded": "2026-06-15",
+  "tags": ["fizik","puzzle","refleks"],
+  "controls": "Fare/dokunma · SPACE: süper çekim · R: yeniden başla",
+  "thumbnail": "miknatis.svg"
+}
