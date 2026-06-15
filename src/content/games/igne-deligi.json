@@ -1,0 +1,21 @@
+{
+  "title": "İğne Deliği",
+  "description": "Esen rüzgârda titreyen iğnenin gözünden ipi geçir — her başarılı geçişte göz küçülür, rüzgâr sertleşir.",
+  "dateAdded": "2026-06-15",
+  "tags": ["refleks", "özgün", "zamanlama", "hassasiyet"],
+  "controls": "Fare / dokun: ip ucunu hareket ettir, gözden bir tarafından girip diğer tarafından çık · Boşluk / Enter: başla veya yeniden başla · R: yeniden başla",
+  "howToPlay": "Sen elinde ipliğin ucunu tutuyorsun ve karşında yatay duran bir iğne sallanıyor. İğnenin tam ortasında küçük bir delik (göz) var; rüzgâr iğneyi yukarı-aşağı oynatır ve oynama miktarı her seviye artar. Fareni (ya da dokunmatik ekranda parmağını) sahnede gezdirdiğinde ip ucu seninle birlikte hareket eder ve ardında ince bir iz bırakır. Bir geçiş sayılması için ip ucunun iğneyi üstten alta ya da alttan üste **gözün içinde** kesmesi gerekir — kesişme noktası gözden uzaktaysa iğneye değdin, sayılmaz ve eline kısa bir uyarı titremesi gelir. Her başarılı geçişte +1 puan alırsın, kısa bir 'çıt' parlamasıyla iğne sağa doğru kayar ve yerine yenisi gelir. 60 saniye boyunca geçirebildiğin kadar çok ipi geçir; süre bitince yerel rekorun otomatik kaydedilir. Zorluk kademe kademe artar: ilk gözler büyük ve rüzgâr neredeyse yok, sonra göz hızla küçülür, rüzgâr daha hızlı ve daha geniş bir aralıkta savrulur, ileri seviyelerde ani 'gust'lar (anlık şok salınımları) iğneyi yerinden fırlatır. İpucu: gözün üstündeyken bekleme, iğnenin salınımını izle ve bir sonraki yön değişiminden hemen önce sallı bir 'S' çiziyle geç — duraklayıp tek noktadan dürtmeye çalışmak rüzgâr arttıkça neredeyse imkânsız hale gelir; sürekli hareket ip yaparak iğnenin senkronuna bin.",
+  "thumbnail": "igne-deligi.svg",
+  "scoring": {
+    "storageKey": "igne-deligi.best",
+    "label": "İplik",
+    "direction": "higher",
+    "labelEn": "Threads"
+  },
+  "en": {
+    "title": "Needle Eye",
+    "description": "Thread a needle that won't stay still — the eye shrinks and the wind picks up after every pass.",
+    "controls": "Mouse / touch: move the thread tip, sweep through the eye · Space / Enter: start or restart · R: restart",
+    "howToPlay": "You hold the tip of a thread while a horizontal needle floats in front of you. There's a tiny eye at its middle, and the wind nudges the needle up and down — gently at first, then harder every level. Move your mouse (or your finger on touch screens) and the thread tip tracks you with a faint trailing line behind it. A pass only counts when the tip crosses the needle from above to below (or below to above) **inside the eye** — clip the needle outside the eye and a little tremor warns you that you missed. Each successful pass scores +1, the eye flashes, the needle slides off to the right and a fresh one floats in. Survive 60 seconds; your local best is saved automatically. Difficulty ramps quickly: the eye starts comfortably wide with almost no wind, then the eye shrinks, the wind swings the needle faster and wider, and from around six threads on a sudden gust shakes the needle. Tip: don't hover over the eye and wait — watch the needle's swing and pass through it just before it changes direction with a small 'S' sweep; trying to poke straight through one point gets nearly impossible once the wind ramps up, so ride the rhythm with continuous motion."
+  }
+}
