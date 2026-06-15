@@ -223,6 +223,12 @@ büyümeye devam, kuyruğa alma, en eskiyi dondurma vb.
 **Tespit**: Smoke'u eşzamanlılığı artırarak (iki viewport, `SMOKE_CONCURRENCY` yüksek) art arda 2-3 kez koş. Farklı oyunların değişen assert'lerle düşmesi = boot yarışı, oyun bug'ı değil.
 **Önlem**: Senaryonun ilk işi `scripts/smoke-scenarios/_boot.mjs` içindeki `waitForBoot(page, predicate)` ile **JS'in yazdığı** bir boot sinyalini poll'lamak (markup default'undan farklı bir değer seç: `#tiles` çocuk sayısı, `aria-hidden` flip'i, init'in yazdığı status metni). İlk input'un kendisi sinyal ise `pressUntil(page, key, predicate)` kullan — tuşu listener cevap verene kadar tekrarla (tuşun oyun-içi state'te no-op olduğunu doğrula). Sabit `waitForTimeout` + anında assert yazma.
 
+### smoke-asserts-throttled-raf-one-shot
+**Vaka**: aero-kanca smoke senaryosu maç saatinin geri saydığını kanıtlamak için `#bots`'a tıklayıp overlay gizlenince **sabit 1500ms** bekliyor, sonra `#time`'ı **tek seferde** okuyup `=== '2:00'` ise hata atıyordu. Deploy job'ı tekrar tekrar bu yüzden düştü (commit'lerde "aero-kanca smoke flake, attempt N" retry'ları). Oyun kodu doğruydu: 12 eşzamanlı sayfada headless Chromium arka plan sekmelerin `requestAnimationFrame`'ini throttle eder; sayaç o tek anlık örnekte henüz "2:00"dan kıpırdamamış olabiliyor. Sonraki bir frame saati düşürse de iş çoktan fail olmuş oluyordu.
+**Pattern**: `smoke-scenario-races-module-boot`'un boot-sonrası kuzeni. Senaryo, **sürekli ilerleyen** bir durumu (sayaç, animasyon karesi, fizik adımı) sabit `waitForTimeout` + **anında tek örnekleme** ile assert ediyor. Boot yarışı değil — modül çoktan ayakta; ama rAF throttle/jank altında "şu an" örneklemesi yarışı kaybeder. Tek koşuda yeşil, yük altında flaky.
+**Tespit**: Smoke'u yüksek eşzamanlılıkla art arda koş. Bir assert'in "değer henüz değişmemiş" diye düşmesi (ama mantıken değişmesi gereken) = anlık örnekleme yarışı.
+**Önlem**: Sabit bekleme + tek `evaluate` yerine `waitForBoot(page, predicate, timeout)` ile **hedef duruma ulaşılana kadar poll'la** (ör. `#time` boş değil ve `!== '2:00'`). Pencere içinde herhangi bir karenin tetiklenmesi simülasyonu kanıtlar; throttle'a dayanıklıdır.
+
 ---
 
 ## Bu dosya ne zaman güncellenir?

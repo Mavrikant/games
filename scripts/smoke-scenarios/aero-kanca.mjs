@@ -32,9 +32,20 @@ export default async function (page) {
   if (!hidden) throw new Error('overlay should hide after the countdown');
 
   // The match clock must tick down from 2:00 (proves the sim advances).
-  await page.waitForTimeout(1500);
-  const time = await page.evaluate(() => document.querySelector('#time')?.textContent ?? '');
-  if (!time || time === '2:00') {
+  // Under CI load (many concurrent pages) headless Chromium throttles rAF, so
+  // the clock may not have moved off "2:00" at any single fixed instant — a
+  // one-shot sample after a fixed wait races the throttle and flakes. Poll for
+  // the tick instead; a frame firing any time within the window proves the sim.
+  const ticked = await waitForBoot(
+    page,
+    () => {
+      const t = document.querySelector('#time')?.textContent ?? '';
+      return t !== '' && t !== '2:00';
+    },
+    8000,
+  );
+  if (!ticked) {
+    const time = await page.evaluate(() => document.querySelector('#time')?.textContent ?? '');
     throw new Error(`match timer should be counting down, got "${time}"`);
   }
 }
