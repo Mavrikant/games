@@ -1,0 +1,22 @@
+{
+  "title": "Şemsiye",
+  "description": "Rüzgârla savrulan yağmur damlalarını şemsiyenle yakala — sırılsıklam olmadan dayan.",
+  "dateAdded": "2026-06-15",
+  "tags": ["arcade", "fizik", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "← → veya A/D: yer değiştir · Boşluk/Enter: başla · R: yeniden başla · Dokunmatik: ekranın yarısına bas-tut",
+  "thumbnail": "semsiye.svg",
+  "howToPlay": "Karanlık bir gecede sokakta dururken üstüne yağmur yağıyor; tek korunağın elindeki kırmızı şemsiye. Sahnede aşağıda küçük bir karakter ve onunla birlikte hareket eden bir şemsiye var; tepede ise o anki rüzgârın yönünü ve şiddetini gösteren bir ok bulunuyor. Damlalar dik düşmüyor — rüzgâr ne kadar güçlüyse o kadar fazla yana savruluyor. Sol ve sağ ok tuşlarıyla (ya da A/D) karakteri yatay olarak kaydır; şemsiye her zaman karakterin üstünde durduğu için, doğru tarafa kayarak savrulan damlaların altına şemsiyenin geçmesini sağlamak senin işin. Şemsiyenin elips kanopisine değen damla zararsız söner; karakterin gövdesine ya da kafasına değen damla ıslaklığını artırır. Sağ üstte ıslaklık göstergesi var — %100'e ulaşırsan sırılsıklam olursun ve tur biter. Skor, kuru kaldığın saniye sayısıdır (onda bir hassasiyetiyle). Zaman geçtikçe yağmur sıklaşır ve rüzgâr daha keskin değişir. Rüzgâr soldan eserse damla sağa savrulur — bu yüzden damlanın indiği noktanın hafif solunda durmak ister, ama tam altına sığabilmek için karakteri biraz erken konumlandırman gerekir. Rüzgâr 4-6 saniyede bir değişir ve geçiş yumuşaktır, yani okun anlık değil sürekli kaymasına bak. R tuşu her an yeni tur başlatır; en iyi süren tarayıcına kaydedilir.",
+  "scoring": {
+    "storageKey": "semsiye.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Umbrella",
+    "description": "Catch the wind-blown raindrops with your umbrella — survive without getting drenched.",
+    "controls": "← → or A/D: move · Space/Enter: start · R: restart · Touch: press the canvas's left or right half",
+    "howToPlay": "You stand outside on a stormy night; your only shelter is the red umbrella in your hand. A small figure with an umbrella above sits at the bottom of the scene; at the top, an arrow shows the wind's current direction and strength. Raindrops don't fall straight down — the stronger the wind, the more they drift sideways. Use the left/right arrows (or A/D) to walk the character horizontally; the umbrella always travels with you, so your job is to step to the right place so the umbrella catches the drifting drops. A drop that lands on the elliptical canopy is harmlessly blocked; a drop that hits the body or head raises your wetness. The wetness bar in the top-right fills with each hit — reach 100% and the round ends. Your score is the time you stayed dry (tenths of a second). As time passes, rain falls denser and the wind shifts more sharply. With a leftward wind drops drift rightward — meaning you want to sit slightly right of where the drop appears, but you must position early enough to be under it. The wind changes every 4-6 seconds with a smooth transition; watch the arrow slide rather than snap. R restarts at any time; your best run is stored in your browser."
+  }
+}

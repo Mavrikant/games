@@ -1,0 +1,104 @@
+/*
+ * Per-game styles. @shared/overlay sets `.overlay--hidden` + aria-hidden,
+ * but the visual hide (opacity + pointer-events) is per-game CSS.
+ * pitfall: missing-overlay-css.
+ */
+
+:root {
+  --semsiye-sky-top: #1c2533;
+  --semsiye-sky-bot: #0c121b;
+  --semsiye-ground: #1a1f29;
+  --semsiye-drop: #7dd3fc;
+  --semsiye-canopy: #ef4444;
+  --semsiye-canopy-rim: #7f1d1d;
+  --semsiye-body: #cbd5e1;
+  --semsiye-stick: #94a3b8;
+  --semsiye-wet-ok: #22c55e;
+  --semsiye-wet-mid: #fbbf24;
+  --semsiye-wet-bad: #ef4444;
+  --semsiye-wind-calm: #475569;
+  --semsiye-wind-mild: #94a3b8;
+  --semsiye-wind-strong: #fbbf24;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: var(--semsiye-sky-bot);
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+#start {
+  margin-top: 12px;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
