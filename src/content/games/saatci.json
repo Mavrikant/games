@@ -1,0 +1,21 @@
+{
+  "title": "Saatçi",
+  "description": "Üç çarklı saat — her ileri düğme bir kolu hedefe taşır ama yandaki kolu da nudge'lar. Bağlı modüler aritmetikle hedef saate kilitlen.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "zaman", "özgün", "tek-oyunculu", "klavye", "mobil"],
+  "controls": "Düğmeler: −1H +1H −1M +1M −1S +1S · Klavye: Q/W saat, A/S dakika, Z/X saniye · Boşluk: başla · R: yeniden başla",
+  "howToPlay": "Saatçi bir pocket-watch'un kurma çarklarını taklit eder: saat kadranında üç kol (saat / dakika / saniye) ve aynı kadrana hayalet bir 'hedef' takım kol bindirilmiştir. Üç kurma çarkın var; her birinin bir azaltma (−) ve bir artırma (+) düğmesi mevcut. Tek özellik: ileri kurma, gerçek bir saat gibi yandaki çarkı da nudge'lar — yani +1H bir saat ileri sarar **ama dakikaya 5 ekler**, +1M bir dakika ileri sarar **ama saniyeye 12 ekler**, +1S yalnız çalışır. Geriye (−) düğmeleri eskimiş eşapmandır: nudge yok, tek başına çekerler. Üç kolu da hedefe oturttuğun an seviye çözülür, hedef yenilenir ama kollar olduğu yerde kalır — yani bir sonraki seviye senin kaldığın noktadan başlar. 60 saniye boyunca en çok kaç hedef kilitleyebilirsin? Skor seviyeye eşit; yerel rekor saklanır. Strateji ipucu: +1H **5 dakikalık** bedavası bazen sana yardım eder — hedef dakikası tam o aralıkta düşüyorsa tek bir +1H, hem saati hem dakikayı doğrular. Hedef dakikası nudge'tan uzaktaysa önce −1M ile geri çevirmek yerine; +1H'i 12 kere basıp 60 dakika nudge'unu mod 60'ta sıfırlamak daha verimli olabilir — ya da öyle olmayabilir, hesap sende. Klavye kombinasyonu Q W (saat), A S (dakika), Z X (saniye) düğmelerle birebir aynı; mobilde altı düğme parmakla da gayet erişilebilir. Süre dolunca skor güncellenir ve yeniden oynama overlay'i açılır; R her zaman çark sıfırlar.",
+  "thumbnail": "saatci.svg",
+  "scoring": {
+    "storageKey": "saatci.best",
+    "label": "Hedef",
+    "direction": "higher",
+    "labelEn": "Targets"
+  },
+  "en": {
+    "title": "Watchmaker",
+    "description": "A coupled three-hand clock — every forward winder also nudges the next hand. Use modular arithmetic to lock the target time.",
+    "controls": "Buttons: −1H +1H −1M +1M −1S +1S · Keys: Q/W hour, A/S minute, Z/X second · Space: start · R: restart",
+    "howToPlay": "Watchmaker mimics the winders of a pocket watch: a clock face shows three real hands (hour / minute / second) overlaid by a ghost 'target' set. You have three winders, each with a decrement (−) and increment (+) button. The catch: winding **forward** drags the neighbouring hand the way real gears would — +1H steps the hour by one **and pushes the minute by +5**, +1M steps the minute **and pushes the second by +12**, +1S is solo. The − buttons are escapement clicks: clean, no nudge. Lock all three hands onto the target and the level clears, a fresh target appears, and the hands stay where they are — the next puzzle starts from your current position. How many targets can you lock in 60 seconds? The score equals the level reached; your local best is saved. Strategy: the +1H 'free 5 minutes' nudge sometimes saves work — if the target minute is in that band, a single +1H solves both at once. If it isn't, you might prefer 12 consecutive +1H presses to roll the minute nudge back to 0 (mod 60). Keyboard mapping Q W (hour), A S (minute), Z X (second) mirrors the on-screen buttons one-to-one, and the layout is touch-friendly on mobile. When the timer runs out the score is committed and the play-again overlay opens; R resets the winders at any time."
+  }
+}

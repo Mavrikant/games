@@ -1,0 +1,238 @@
+:root {
+  --sa-face: #0c1626;
+  --sa-accent: #5eead4;
+  --sa-ghost: rgba(248, 113, 113, 0.55);
+  --sa-target: #f87171;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__stat {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.time-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 12px auto 12px;
+  max-width: 360px;
+}
+
+.time-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.time-cell__label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.time-cell__val {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+  letter-spacing: 0.01em;
+}
+
+.time-cell--target .time-cell__val {
+  color: var(--sa-target);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: var(--sa-face);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 17, 30, 0.86);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 320px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.overlay__btn {
+  appearance: none;
+  background: var(--sa-accent);
+  border: none;
+  color: #0b1018;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.overlay__btn:hover {
+  filter: brightness(1.05);
+}
+
+.overlay__btn:active {
+  transform: scale(0.97);
+}
+
+.winders {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 14px auto 8px;
+  max-width: 480px;
+}
+
+.winder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.winder__head {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.winder__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.winder__btn {
+  appearance: none;
+  background: #0e1a2b;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.05s ease, background 0.1s ease, border-color 0.1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 48px;
+}
+
+.winder__btn:hover {
+  background: #142539;
+  border-color: var(--sa-accent);
+}
+
+.winder__btn:active {
+  transform: translateY(1px);
+}
+
+.winder__btn small {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--sa-target);
+  letter-spacing: 0.04em;
+}
+
+.winder__btn--plus {
+  background: #11243a;
+}
+
+.winder__hint {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 460px) {
+  .time-cell__val {
+    font-size: 16px;
+  }
+  .winder__btn {
+    font-size: 13px;
+    padding: 10px 2px;
+  }
+  .winder__btn small {
+    font-size: 9px;
+  }
+}

@@ -1,0 +1,62 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <div class="hud__stat">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="time-panel" aria-live="polite">
+  <div class="time-cell">
+    <span class="time-cell__label">Şu an</span>
+    <span id="current" class="time-cell__val">12:00:00</span>
+  </div>
+  <div class="time-cell time-cell--target">
+    <span class="time-cell__label">Hedef</span>
+    <span id="target" class="time-cell__val">00:00:00</span>
+  </div>
+  <div class="time-cell">
+    <span class="time-cell__label">Hamle</span>
+    <span id="moves" class="time-cell__val">0</span>
+  </div>
+</div>
+
+<div class="board-wrap">
+  <canvas id="board" width="360" height="360" aria-label="Saat kadranı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Saatçi</h2>
+      <p id="overlay-msg">Çarkları çevirerek saati hedefe getir. Başlamak için Boşluk'a bas.</p>
+      <button id="overlay-start" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+
+<div class="winders" aria-label="Kurma çarkları">
+  <div class="winder">
+    <div class="winder__head">SAAT</div>
+    <div class="winder__row">
+      <button id="btn-h-minus" class="winder__btn" type="button" aria-label="Saati bir azalt">−1H</button>
+      <button id="btn-h-plus" class="winder__btn winder__btn--plus" type="button" aria-label="Saati bir artır, dakikaya beş ekle">+1H<small>+5M</small></button>
+    </div>
+    <div class="winder__hint">Q · W</div>
+  </div>
+  <div class="winder">
+    <div class="winder__head">DAKİKA</div>
+    <div class="winder__row">
+      <button id="btn-m-minus" class="winder__btn" type="button" aria-label="Dakikayı bir azalt">−1M</button>
+      <button id="btn-m-plus" class="winder__btn winder__btn--plus" type="button" aria-label="Dakikayı bir artır, saniyeye on iki ekle">+1M<small>+12S</small></button>
+    </div>
+    <div class="winder__hint">A · S</div>
+  </div>
+  <div class="winder">
+    <div class="winder__head">SANİYE</div>
+    <div class="winder__row">
+      <button id="btn-s-minus" class="winder__btn" type="button" aria-label="Saniyeyi bir azalt">−1S</button>
+      <button id="btn-s-plus" class="winder__btn winder__btn--plus" type="button" aria-label="Saniyeyi bir artır">+1S</button>
+    </div>
+    <div class="winder__hint">Z · X</div>
+  </div>
+</div>
