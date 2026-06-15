@@ -1,0 +1,63 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0₺</span></div>
+  <div class="hud__score">Rekor<span id="best">0₺</span></div>
+  <div class="hud__score">Mal<span id="item-counter">1/8</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<section class="board-wrap" aria-label="Mezat tahtası">
+  <div class="board mezat">
+    <div class="round-bar" aria-hidden="true">
+      <div id="round-bar-fill" class="round-bar__fill"></div>
+    </div>
+
+    <div class="item-card">
+      <div id="item-icon" class="item-card__icon" aria-hidden="true"></div>
+      <div class="item-card__meta">
+        <h2 id="item-name" class="item-card__name">—</h2>
+        <p class="item-card__floor">Baz: <span id="item-floor">0₺</span></p>
+      </div>
+    </div>
+
+    <div class="bid-stage">
+      <div class="bid-stage__history-col" aria-hidden="true">
+        <div class="bid-stage__history-label">Son teklifler</div>
+        <div id="bid-history" class="bid-history"></div>
+      </div>
+
+      <div class="bid-stage__main">
+        <div class="bid-stage__label">Son teklif</div>
+        <div id="bid-floater" class="bid-floater" aria-hidden="true"></div>
+        <div id="bid-value" class="bid-value">0₺</div>
+        <div id="status-text" class="status" aria-live="polite">Bidler geliyor…</div>
+      </div>
+
+      <div class="bid-stage__excitement-col" aria-hidden="true">
+        <div class="excitement-label">Heyecan</div>
+        <div class="excitement-track">
+          <div id="excitement-bar" class="excitement-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <button id="gavel" class="gavel" type="button">
+      <svg class="gavel__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="9" width="14" height="6" rx="1" transform="rotate(-25 9 12)" fill="currentColor"/>
+        <rect x="13" y="11" width="9" height="2" rx="1" transform="rotate(-25 17 12)" fill="currentColor"/>
+        <rect x="3" y="19" width="18" height="3" rx="1.5" fill="currentColor"/>
+      </svg>
+      <span class="gavel__label">TOKMAK!</span>
+    </button>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Vardiya bitti</h2>
+      <p id="overlay-msg">Toplam: 0₺</p>
+      <button id="overlay-restart" class="overlay__btn" type="button">Yeni vardiya</button>
+    </div>
+  </div>
+</section>

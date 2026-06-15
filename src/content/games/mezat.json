@@ -1,0 +1,22 @@
+{
+  "title": "Mezat",
+  "description": "Müzayedeci ol — bidler yağarken tokmağı tam zirvede indir; bir saniye geç kalırsan satış uçar.",
+  "dateAdded": "2026-06-15",
+  "tags": ["zamanlama", "refleks", "strateji", "özgün"],
+  "controls": "Boşluk / Enter: tokmağı indir · Tokmak butonu: dokunmatik · R: yeniden başla",
+  "howToPlay": "Bir mezat salonunun müzayedecisisin: önünde 8 antik mal var ve her birini en yüksek fiyata satmak zorundasın. Mal sahneye çıkar çıkmaz tellaller bidleri (teklif) art arda atmaya başlar — her bid 5 ile 25 lira arasında fiyatı yukarı çeker, ekrandaki büyük sayı her bidde parıldar ve sağdaki 'Heyecan' barı yeniden tepeye fırlar. Senin tek görevin tokmak butonuna basarak (klavyede Boşluk veya Enter) artırmayı kapatmak; o anki fiyat satış bedeli olur ve skoruna eklenir. Anahtar şu: bidlerin gelme hızı her teklifle yavaşlar çünkü tellaller malın 'gerçek değer'ine yaklaştıkça temkinli olur — yani fiyat zirveye yakınken bidler 2-3 saniye seyrek gelmeye başlar. Heyecan barı son tekliften beri geçen zamanı gösteriyor: bar yüksekken (kırmızı-turuncu) hâlâ tellal sırasında demektir, bar düşmeye başladığında (mavi) tepe noktada satışı kapatma vakti. Üstte ince bir zaman çubuğu her mal için 14 saniyelik tavanı sayar. Tokmağa hiç vurmazsan ya da 3 saniye boyunca yeni bid gelmezse satış 'kalabalık dağıldı' diye otomatik kapanır ve son fiyatın %60'ı eline geçer — yani gecikme her zaman cezalı. Strateji: ilk 2-3 bidde acele etme, kabaca baz fiyatın 2 katına ulaşmadan tokmaklamak skoru sınırlar; bidler arası boşluk birden uzadığında ve heyecan barı yarıya inerken vur. Sol kolondaki 'Son teklifler' geçmişi son 6 bidin yüksekliklerini gösterir — eğer artışlar küçülüyorsa zirveye yaklaşıyorsundur. 8 maldan sonra toplam skor karşılaştırılır; en iyi vardiya bakiyen tarayıcında saklanır.",
+  "thumbnail": "mezat.svg",
+  "scoring": {
+    "storageKey": "mezat.best",
+    "label": "Bakiye",
+    "unit": "₺",
+    "direction": "higher",
+    "labelEn": "Total"
+  },
+  "en": {
+    "title": "Auction",
+    "description": "Be the auctioneer — drop the gavel right at the peak; lose a second of attention and the sale is gone.",
+    "controls": "Space / Enter: drop the gavel · Gavel button: touch · R: restart",
+    "howToPlay": "You are the auctioneer in a salesroom: 8 antiques cross the stage one after another and you need to sell each for as much as possible. The moment an item appears, the floor bidders start throwing bids — each one pushes the price up by 5 to 25 lira, the big number flashes on every bid, and the 'Excitement' bar on the right springs back to the top. Your only job is to press the gavel (Space, Enter, or the on-screen button) to close the bidding; the current price becomes the sale price and is added to your score. The key: bids arrive more slowly with each round because the floor grows cautious as the price approaches the item's 'true value' — so near the peak you'll see gaps of 2-3 seconds between bids. The excitement bar visualizes the time since the last bid: high (red-orange) means the floor is still hot, falling (blue) means it's the moment to drop the gavel. A thin timer at the top counts the 14-second ceiling per item. If you never hit the gavel, or no new bid arrives for 3 seconds, the sale auto-closes as 'crowd dispersed' and you collect only 60% of the last price — so hesitation always costs. Strategy: don't rush the first 2-3 bids — gaveling before roughly twice the base price caps your score; wait until the spacing between bids widens and the excitement bar drops to about half, then strike. The 'Recent bids' column on the left shows the heights of the last 6 bids — if the increments are shrinking you're near the peak. After 8 items your total balance is compared with your best; the best shift balance is saved in your browser."
+  }
+}
