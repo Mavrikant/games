@@ -1,0 +1,21 @@
+{
+  "title": "Deklanşör",
+  "description": "Vahşi yaşam fotoğrafçısı: kuş ekranı geçerken kısa bir poz anında yavaşlar — vizör merkezinde o anı yakalayıp deklanşöre basarsan keskin, kadrajlı kare alırsın.",
+  "dateAdded": "2026-06-15",
+  "tags": ["refleks", "zamanlama", "özgün"],
+  "controls": "Boşluk/Tıkla: deklanşör · R: yeniden başla",
+  "thumbnail": "deklansor.svg",
+  "scoring": {
+    "storageKey": "deklansor.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Deklanşör seni bir vahşi yaşam fotoğrafçısı yapar: ormanda canlı, sürekli görünen bir kuş çerçeveden geçer ve sen yalnızca BIR fotoğraf hakkın olduğu için anı doğru yakalamak zorundasın. Kuşun etrafındaki fokus halkası kuşun anlık hızına göre büyüyüp küçülür — kuş hızlandıkça halka büyür, kuş yavaşladıkça küçülür. Her geçişte kuşun rotası üzerinde kısa bir POZ ANI vardır: kuş aniden yavaşlar (sanki kanat kırpıp süzülür), fokus halkası yeşile döner ve gözle görülür biçimde küçülür — işte bu, ekrandaki en keskin karenin alınabileceği yarım saniyelik penceredir. Aynı anda kuşun merkezdeki vizör karelerinin içine de yakın olması gerekir; puan formülü basitçe \"konum × keskinlik\". Boşluk veya tıklama deklanşöre basar; kuş poz anında merkezde ise yüksek puan (\"Mükemmel kare!\"), poz dışında veya kenarda ise düşük puan, vizörden tamamen uzakta veya hızdayken \"bulanık\" sonucu çıkar ve bir can gider. Hiç basmadan kuşun kareyi terk etmesine izin verirsen de bir can kaybedersin: kuşlar sessizce kaçar. Üç can biterse oyun biter, albüm dolar. Her beş kuşta tur ilerler ve sonraki turda kuşlar daha hızlı uçar, poz anı kısalır — keskinlik penceresi daraldıkça refleksin sınanır. R tuşu her an oyunu sıfırlar; en yüksek skorun tarayıcına kaydedilir. İpucu: tetiğe basmak için acele etme, fokus halkasının yeşile döndüğü kısa anı bekle; iyi bir fotoğraf sabırla çekilir.",
+  "en": {
+    "title": "Shutter",
+    "description": "Wildlife photographer: a bird crosses the frame and briefly poses (slows down) mid-flight — when it's centered in the viewfinder during the pose, hit the shutter for a sharp, well-framed shot.",
+    "controls": "Space/Click: shutter · R: restart",
+    "howToPlay": "Shutter puts you behind a wildlife camera: a bird crosses the forest scene fully visible at all times, and because you only have ONE shot per bird you have to nail the moment. A focus ring around the bird scales with its instantaneous speed — fast wings make the ring large (blur), slow gliding makes it small (sharp). Each pass has a brief POSE MOMENT where the bird abruptly slows down, the focus ring turns green and visibly shrinks: that's the half-second window in which the cleanest possible frame is available. At the same moment the bird also needs to be inside the central viewfinder square; your score is simply \"position × sharpness\". Press Space or click to fire the shutter; a centered, posed bird gives you a high-score frame (\"Perfect shot!\"), an edge or motion-blurred frame gives fewer points, and a fully off-target or fast bird counts as blurry — you lose a life. If you let a bird leave the frame without firing, that's also a missed opportunity and costs a life. Three lives lost ends the run. Every five birds you advance a round and the birds get faster while the pose window shrinks — the sharpness gate narrows as your reflexes are pushed. R resets the run at any time and your highest score is saved in the browser. Tip: don't rush the trigger — wait for the focus ring to go green; a good photograph is a patient one."
+  }
+}

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Deklanşör">
+  <defs>
+    <linearGradient id="dk-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e1a18" />
+      <stop offset="55%" stop-color="#16302a" />
+      <stop offset="100%" stop-color="#0a1310" />
+    </linearGradient>
+    <radialGradient id="dk-focus" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#dk-bg)" />
+
+  <!-- Distant tree silhouettes -->
+  <g fill="rgba(0,0,0,0.55)">
+    <polygon points="0,200 18,150 36,200" />
+    <polygon points="34,200 56,140 78,200" />
+    <polygon points="76,200 96,158 116,200" />
+    <polygon points="116,200 138,144 160,200" />
+    <polygon points="160,200 180,154 200,200" />
+    <polygon points="202,200 222,146 242,200" />
+    <polygon points="242,200 264,156 286,200" />
+    <polygon points="286,200 306,150 320,200" />
+  </g>
+
+  <!-- Mist band -->
+  <rect x="0" y="100" width="320" height="56" fill="rgba(255,255,255,0.05)" />
+
+  <!-- Viewfinder corner brackets centered -->
+  <g stroke="rgba(255,255,255,0.55)" stroke-width="2" fill="none">
+    <polyline points="100,86 100,76 110,76" />
+    <polyline points="220,76 230,76 230,86" />
+    <polyline points="100,124 100,134 110,134" />
+    <polyline points="220,134 230,134 230,124" />
+  </g>
+  <g stroke="rgba(255,255,255,0.35)" stroke-width="1">
+    <line x1="160" y1="100" x2="170" y2="100" />
+    <line x1="165" y1="95" x2="165" y2="105" />
+  </g>
+
+  <!-- Focus halo (posed moment) -->
+  <circle cx="178" cy="98" r="40" fill="url(#dk-focus)" />
+  <circle cx="178" cy="98" r="18" stroke="#22c55e" stroke-width="2.2" fill="none" />
+  <!-- Cardinal ticks -->
+  <g stroke="#22c55e" stroke-width="2">
+    <line x1="178" y1="74" x2="178" y2="70" />
+    <line x1="178" y1="122" x2="178" y2="126" />
+    <line x1="154" y1="98" x2="150" y2="98" />
+    <line x1="202" y1="98" x2="206" y2="98" />
+  </g>
+
+  <!-- Bird (centered) -->
+  <g transform="translate(178 98)">
+    <!-- Tail -->
+    <polygon points="-10,-2 -17,-5 -17,3 -10,3" fill="#f59e0b" />
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="12" ry="8" fill="#fbbf24" />
+    <!-- Wing -->
+    <ellipse cx="-2" cy="-3" rx="8" ry="4" transform="rotate(-17 -2 -3)" fill="#d97706" />
+    <!-- Head -->
+    <circle cx="10" cy="-2" r="6" fill="#fcd34d" />
+    <!-- Beak -->
+    <polygon points="15,-2 21,-1 15,2" fill="#92400e" />
+    <!-- Eye -->
+    <circle cx="11" cy="-3" r="1.3" fill="#0a0b0e" />
+  </g>
+
+  <!-- Shutter / camera glyph corner -->
+  <g transform="translate(280 156)" fill="none" stroke="#fbbf24" stroke-width="1.8">
+    <circle cx="0" cy="0" r="11" />
+    <circle cx="0" cy="0" r="4" />
+  </g>
+
+  <!-- Title -->
+  <g font-family="ui-sans-serif, system-ui" font-weight="700">
+    <text x="16" y="32" font-size="20" fill="#fbbf24">Deklanşör</text>
+    <text x="16" y="50" font-size="11" fill="rgba(255,255,255,0.6)">
+      Poz anında, vizör ortasında bas
+    </text>
+  </g>
+</svg>
