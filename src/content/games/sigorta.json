@@ -1,0 +1,22 @@
+{
+  "title": "Sigorta",
+  "description": "Dört devre, yükselen yükler. Yanan devreyi boşalt — ama boşaltılan akım komşu devrelere bölünür. Hiçbir devre %100'e dayanmadan ne kadar dayanabilirsin?",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "refleks", "strateji", "özgün"],
+  "controls": "1-4: ilgili devreyi boşalt · Boşluk / Enter: başlat veya yeniden başla · R: yeniden başla · Mobil: barlara dokun",
+  "howToPlay": "Sen bir santral teknisyenisin: önündeki kontrol panosunda 1'den 4'e kadar numaralı dört devre var, her birinin yük seviyesi alttan üste doğru dolup duran dikey bir bardır. Hiçbir bar tepeye dayanmadan mümkün olduğunca uzun süre dayanmak ana hedefin. Her devrenin kendi rastgele temel yük hızı vardır ve oyun ilerledikçe bu hızlar hep birlikte artar; bunun üstüne bazen bir devreye ani bir 'dalga' (anlık yük sıçraması) gelir. Bir devreyi boşaltmak için klavyede 1, 2, 3 veya 4 tuşuna bas (ya da o devrenin barına/butonuna dokun); o devrenin yükü hemen 40 puan düşer. Ama burada bir bedel var: boşalttığın akımın yarısı sol komşu devreye, yarısı sağ komşu devreye aktarılır (kenar devrelerde tüm aktarım tek mevcut komşuya gider) — bu yüzden gözü kapalı en yüksek barı boşaltmak çoğu zaman komşusunu patlatır. Her devrenin altında bir 1.4 saniyelik geri-yükleme çubuğu var; bu çubuk dolana kadar o devreyi tekrar boşaltamazsın, dolayısıyla aynı devreyi peş peşe ezmek mümkün değil. Devrelerden herhangi biri %100'ü geçer geçmez sigorta atar ve oyun biter; o ana kadar saniye olarak dayandığın süre skorun olur ve tarayıcına en iyi süren kaydedilir. Strateji: bir bar tepeye yaklaştığında, hangi komşusunun emniyetli olduğuna bak — bleed akımı zaten dolu bir komşuya giderse zincirleme atar; önce o komşuyu boşalt, sonra hedef devreyi vur. Düşük yüklü iki komşusu olan ortadaki devreler için (2 ve 3) bleed neredeyse bedavadır; kenar devreleri (1 ve 4) bedeli tek komşusuna fatura eder, o yüzden onları erken yakala. Cooldown'ları kafanda takip et: panik anında dört tuşa aynı anda basamadığın sırada zaten oyun bitmiştir.",
+  "thumbnail": "sigorta.svg",
+  "scoring": {
+    "storageKey": "sigorta.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Fuse",
+    "description": "Four circuits, rising loads. Vent the burning one — but the dumped current splits to its neighbors. How long can you keep every circuit under 100%?",
+    "controls": "1-4: vent that circuit · Space / Enter: start or restart · R: restart · Mobile: tap a bar",
+    "howToPlay": "You're the technician at a substation: the control board in front of you has four circuits numbered 1 through 4, each shown as a vertical bar filling from bottom to top with its current load. Your job is to keep every bar from reaching the top for as long as possible. Each circuit has its own random baseline load rate, all of which climb together as the round progresses, and on top of that a circuit will occasionally take a 'surge' — a sudden load spike. To vent a circuit, press 1, 2, 3 or 4 on the keyboard (or tap its bar/button on touch); that circuit's load drops by 40 points instantly. The catch: half of the vented current is pushed to the left neighbor and half to the right neighbor (on edge circuits, the full amount goes to the only adjacent one), so blindly venting the highest bar often blows up its neighbor. Each circuit has a 1.4-second cooldown bar underneath; until it refills you can't vent that circuit again, so spamming one circuit isn't a strategy. The moment any circuit's load passes 100%, the fuse blows and the round ends; the seconds you survived become your score and your best time is saved locally. Strategy: before venting a hot bar, check which neighbor is safe — bleed going into an already-full neighbor blows the chain; vent that neighbor first, then hit the target. For the middle circuits (2 and 3) with two low neighbors the bleed is almost free; the edge circuits (1 and 4) dump the whole bleed onto a single neighbor, so catch them early. Track your cooldowns in your head — by the moment you need all four keys at once, the round is already over."
+  }
+}

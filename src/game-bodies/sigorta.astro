@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Süre<span id="time">0.0</span></div>
+  <div class="hud__stat">En iyi<span id="best">0.0</span></div>
+  <div class="hud__stat" aria-label="En yüksek yük">Tepe<span id="peak">0%</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="640" aria-label="Sigorta paneli"></canvas>
+  <div class="vent-row" role="group" aria-label="Devre boşaltma butonları">
+    <button id="vent-1" class="vent-btn" type="button" aria-label="1. devreyi boşalt">1</button>
+    <button id="vent-2" class="vent-btn" type="button" aria-label="2. devreyi boşalt">2</button>
+    <button id="vent-3" class="vent-btn" type="button" aria-label="3. devreyi boşalt">3</button>
+    <button id="vent-4" class="vent-btn" type="button" aria-label="4. devreyi boşalt">4</button>
+  </div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sigorta</h2>
+      <p id="overlay-msg">Başlamak için bir devre düğmesine bas (1-4) veya Boşluk.</p>
+    </div>
+  </div>
+</div>
