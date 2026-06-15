@@ -1,0 +1,21 @@
+{
+  "title": "Yufka",
+  "description": "Hamuru merdane ile yay — bastır ve sürükle, her hücreyi yeşil kalınlık bandına taşı, yırtmadan seviye geç.",
+  "dateAdded": "2026-06-15",
+  "tags": ["fizik", "özgün", "fare", "tek-oyunculu", "mobil"],
+  "controls": "Fare/dokunma: merdaneyi sürükle (basılı tut = bastır) · R: yeniden başla · Boşluk/Enter: başla",
+  "thumbnail": "yufka.svg",
+  "howToPlay": "Yufka, Türk mutfağından doğrudan ödünç alınmış, ana mekaniği gerçek bir hamur açma hareketine dayandığım özgün bir tarayıcı oyunudur. Ekranda yan kesit halinde sıralanmış on altı dikey hücre görürsün — bunlar hamurun farklı noktalarındaki kalınlığıdır. Üstte sarımsı yeşil ince bir şerit vardır: 'hedef kalınlık bandı'. Amacın, ahşap merdaneyi hamurun üzerinde sürükleyerek her hücrenin yüksekliğini bu yeşil banda taşımak; tüm hücreler banda aynı anda kısa bir süre oturduğunda seviye geçer. Mekanik fiziksel: merdaneyi basılı tutup yana hareket ettirdiğinde, altındaki hücredeki hamur kütlesi gittiğin yöne doğru akar — yani sağa sürüklemek o hücreyi inceltir ama sağ komşusunu kalınlaştırır. Bu, gerçek hayatta merdanenin yaptığı 'kütleyi yayma' işidir; oyunun stratejik özü de buradadır. Bir tepeyi düzleştirmek için tepeden iki yana sıvazlamak, vadiyi doldurmak için kenarlardan ortaya doğru bastırarak yürümek gerekir. Hamurun kenarından dışarı kütle ittiğinde küçük bir miktar 'una' kaçar (kütle kaybı), yani yufkayı sonsuza kadar kalınlaştıramazsın; her seviye için yeterli ama dar bir kütle bütçesi vardır. Hücre kırmızı kesik çizginin altına düşerse 'yırtık' olur ve oyun biter — bu yüzden çok inceltmemek, kalınla incenin oranını sürekli düşünmek gerek. 90 saniyen var; her seviye geçtikçe 8 saniye bonus eklenir. Altı farklı başlangıç şekli döngüsel olarak gelir: ortada tepe, yanda tepe, çift tümsek, eğim, sivri yüksek tepe, ve sadece kenarlardan inceltebileceğin homojen kalın levha. Skor, geçtiğin seviye sayısıdır; rekor yerel olarak saklanır. Fare ile masaüstünde de, dokunmatik ile mobilde de oynanır — dokunup parmağı kaldırmadan sürüklemek bastırmak demektir.",
+  "scoring": {
+    "storageKey": "yufka.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Levels"
+  },
+  "en": {
+    "title": "Phyllo Roll",
+    "description": "Roll out the dough — press and drag the pin to push mass sideways, settle every cell into the green band, don't tear it.",
+    "controls": "Mouse/touch: drag the rolling pin (hold = press) · R: restart · Space/Enter: start",
+    "howToPlay": "Phyllo Roll borrows its core mechanic from the real act of rolling out Turkish phyllo dough. The screen shows the dough in side profile — sixteen vertical cells, each one a slice of thickness across the sheet. A faint green band marks the 'target thickness' you're aiming for; level up when every cell settles inside that band at the same time. The mechanic is physical: while you press and drag the wooden pin sideways, mass under the pin flows in the direction you move — dragging right thins the current cell but thickens its right neighbour. That's exactly what a rolling pin does in real life, and the strategy follows from it. Flatten a hump by rolling outward from its peak; fill a valley by walking in from the edges. Push mass off the edge of the dough and a tiny fraction is lost as 'flour', so you can't endlessly thicken — every level has a tight mass budget. If a cell drops below the red dashed tear line the dough rips and the run ends, so balancing thin and thick is the whole skill. You have 90 seconds; each cleared level grants +8 seconds. Six starting shapes cycle through: a center hump, an off-center hump, twin bumps, a slope, a tall narrow peak, and a uniformly thick slab you can only thin by rolling off the edges. Score is the number of levels cleared; your best is saved locally. Works with both mouse and touch — on touch, dragging a finger without lifting counts as pressing."
+  }
+}
