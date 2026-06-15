@@ -1,0 +1,20 @@
+{
+  "title": "Kahve Falı",
+  "description": "Fincanın dibindeki şekilleri tanı — kuş mu, balık mı, anahtar mı? Zaman daralırken sembolleri eşleştir, fal puanını topla.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "sembol", "kultur"],
+  "controls": "Şekle dokun · Sembol seç (veya 1-6 tuşları) · Boşluk/Enter: başla · R: sıfırla",
+  "howToPlay": "Türk kahvesi falı geleneğine bir göz kırpma: önünde dibindeki tortular henüz kuruyan bir fincan var ve sen falcısın. Her fincanın içinde dört adet koyu kahverengi şekil belirir; bunların her biri altı arketipten birine benziyor: kuş, balık, yılan, kalp, anahtar veya ay. Sıra falı okumakta — bir şekle tıklayarak (etrafında turuncu kesik çizgili halka belirir) önce hangisini yorumlayacağını seç, sonra ekranın altındaki sembol panelinden ona en çok benzeyeni tıkla (klavyede 1-6 rakamları sırasıyla aynı sembollere kısayoldur). Seçimini değiştirmek istersen aynı şekle tekrar dokunup farklı bir sembol seçebilirsin. Dört şekli de etiketlediğinde fal otomatik açılır: doğru tahminler yeşile, yanlışlar kırmızıya boyanır ve gerçek sembol etiket olarak gösterilir. Her doğru şekil 10 puan, dördünü birden okursan 20 puan 'tam isabet' bonusu kazandırır — sonra yeni bir fincan getirilir. Süre 90 saniyedir ve fal okurken de işlemeye devam eder; süre dolunca biriken puanların skorun olur, en yüksek skorun tarayıcında saklanır. Boşluk veya Enter falı açar, R her şeyi sıfırlar. İpucu: ay krepine benzeyen yarımayla yılanın eğrisini karıştırma — yılanın ucunda küçük bir kafa noktası vardır; anahtarın halkasındaki delik onu kuştan ayırt eden en güvenilir işaret; kalp ile balığın silüetleri uzaktan benzese de balığın üçgen kuyruğu net çıkar.",
+  "scoring": {
+    "storageKey": "kahve-fali.best",
+    "label": "Puan",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Coffee Fortune",
+    "description": "Identify the shapes at the bottom of the cup — is it a bird, a fish, a key? Match the symbols against the clock and collect fortune points.",
+    "controls": "Tap a shape · Pick a symbol (or keys 1-6) · Space/Enter: start · R: reset",
+    "howToPlay": "A playful nod to Turkish coffee fortune reading: a half-dried cup sits in front of you and you are the falcı (fortune teller). Each cup shows four dark coffee shapes; every one of them resembles one of six archetypes — bird, fish, snake, heart, key, or moon. Tap a shape to select it (an orange dashed ring appears around it), then tap whichever symbol on the bottom panel it looks closest to (keys 1-6 are shortcuts to the same six symbols in order). You can change a label by tapping the same shape again and picking a different symbol. Once all four shapes are labelled the cup is read automatically: correct guesses flash green, wrong ones flash red, and the true symbol shows up as a label. Every correct shape is 10 points, and reading all four right earns a 20-point 'perfect reading' bonus; then a fresh cup is poured. The game runs for 90 seconds and the timer keeps ticking while a cup is revealed; when time is up your accumulated score is final and the best score is stored in your browser. Space or Enter starts the round, R resets. Tip: don't confuse the crescent moon with the snake's curve — the snake has a small head dot at one end; the hole inside the key's bow is the most reliable way to tell it from a bird; and although the heart and fish silhouettes look similar from a distance, the fish has a clear triangular tail."
+  }
+}

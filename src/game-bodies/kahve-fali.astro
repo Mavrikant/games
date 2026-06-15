@@ -1,0 +1,75 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Skor<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <div class="hud__stat">Süre<span id="time">90</span></div>
+  <div class="hud__stat">Fincan<span id="cup-num">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="kf-stage">
+  <div class="board-wrap">
+    <canvas id="board" width="360" height="360" aria-label="Kahve fincanı"></canvas>
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Kahve Falı</h2>
+        <p id="overlay-msg">Fincanın dibindeki şekilleri tanı. Önce bir şekle dokun, sonra alttaki sembollerden hangisine benziyorsa seç. 90 saniyede en çok fincan oku.</p>
+        <button id="overlay-start" class="overlay__btn" type="button">Falı Aç</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="symbols" aria-label="Sembol seçimi">
+  <button id="sym-kus" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <path d="M-26,4 Q-18,-14 -6,-4 Q-4,2 0,2 Q4,2 6,-4 Q18,-14 26,4 Q20,-4 12,-2 Q6,0 0,8 Q-6,0 -12,-2 Q-20,-4 -26,4 Z" fill="currentColor"></path>
+      <circle cx="0" cy="6" r="4" fill="currentColor"></circle>
+    </svg>
+    <span class="sym__name">Kuş</span>
+    <kbd class="sym__num">1</kbd>
+  </button>
+  <button id="sym-balik" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <ellipse cx="-4" cy="0" rx="18" ry="11" fill="currentColor"></ellipse>
+      <path d="M12,0 L28,-10 L28,10 Z" fill="currentColor"></path>
+    </svg>
+    <span class="sym__name">Balık</span>
+    <kbd class="sym__num">2</kbd>
+  </button>
+  <button id="sym-yilan" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <path d="M-24,10 C-14,-16 -4,18 4,-8 C10,-24 22,-2 26,6" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+      <circle cx="26" cy="6" r="4.5" fill="currentColor"></circle>
+    </svg>
+    <span class="sym__name">Yılan</span>
+    <kbd class="sym__num">3</kbd>
+  </button>
+  <button id="sym-kalp" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <path d="M0,18 C-26,4 -22,-16 -10,-16 C-2,-16 0,-8 0,-6 C0,-8 2,-16 10,-16 C22,-16 26,4 0,18 Z" fill="currentColor"></path>
+    </svg>
+    <span class="sym__name">Kalp</span>
+    <kbd class="sym__num">4</kbd>
+  </button>
+  <button id="sym-anahtar" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <circle cx="-14" cy="0" r="10" fill="currentColor"></circle>
+      <circle cx="-14" cy="0" r="4" fill="var(--surface)"></circle>
+      <rect x="-4" y="-3" width="24" height="6" fill="currentColor"></rect>
+      <rect x="14" y="3" width="4" height="7" fill="currentColor"></rect>
+      <rect x="20" y="3" width="3" height="5" fill="currentColor"></rect>
+    </svg>
+    <span class="sym__name">Anahtar</span>
+    <kbd class="sym__num">5</kbd>
+  </button>
+  <button id="sym-ay" class="sym" type="button">
+    <svg viewBox="-32 -32 64 64" class="sym__icon" aria-hidden="true">
+      <path d="M -2,-18 A 18 18 0 1 0 -2,18 A 14 14 0 1 1 -2,-18 Z" fill="currentColor"></path>
+    </svg>
+    <span class="sym__name">Ay</span>
+    <kbd class="sym__num">6</kbd>
+  </button>
+</div>
