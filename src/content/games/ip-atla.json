@@ -1,0 +1,21 @@
+{
+  "title": "İp Atla",
+  "description": "Sallanan ipi tam zamanında atla — hız arttıkça pencere daralır.",
+  "dateAdded": "2026-06-15",
+  "tags": ["arcade", "refleks", "timing"],
+  "controls": "Space / ↑ / W: zıpla · Ekrana dokun: zıpla · R: yeniden başla",
+  "howToPlay": "Amacın, ortadaki çocuğa iki kişinin çevirdiği ipin altından geçmesini sağlamadan ipi atlayarak peş peşe başarılı atlama sayısını yükseltmek. Oyun başlayınca ip tepede durur ve aşağı inmeye başlar; sen Space, yukarı ok veya W tuşuna basarak ya da ekrana dokunarak çocuğu zıplatırsın. Zıplama bir parabol gibi yaklaşık 360 ms sürer; ip alttan geçerken çocuğun yerden 28 pikselden fazla yükseklikte olması gerekir. Çok erken zıplarsan ip henüz inmeden yere düşersin; çok geç zıplarsan ip ayağına takılır ve oyun biter. Her 5 başarılı atlamada ip dönüş süresi yaklaşık %8 kısalır, yani giderek daha hızlı zamanlama gerekir. HUD'un üstündeki ince çubuk şu anki hızı gösterir: yeşilden sarıya, oradan kırmızıya geçtikçe işin zorlaşır. Rekorun tarayıcıda saklanır; R tuşu veya 'Yeniden başla' düğmesi her zaman tur açar. Strateji: ipin tepeden inmeye başladığı anı yakala ve düşüş süresinin yaklaşık üçte ikisinde zıpla — zıplamanın doruğu ipin geçiş anına denk gelir. Üst hızlarda zıplamayı yere inip kalkmadan hemen zincirlemen gerek; iniş sesini dinler gibi ritmi hisset.",
+  "thumbnail": "ip-atla.svg",
+  "scoring": {
+    "storageKey": "ip-atla.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Rope Jump",
+    "description": "Jump over the swinging rope at exactly the right moment — the window narrows as speed climbs.",
+    "controls": "Space / ↑ / W: jump · Tap the screen: jump · R: restart",
+    "howToPlay": "Your goal is to keep the kid in the middle clearing the rope swung by the two side spinners, racking up consecutive successful jumps. The round starts with the rope at the top and swinging down; you press Space, up arrow or W, or tap the screen, to make the kid jump. The jump is a 360 ms parabola; when the rope passes the bottom, the kid must be at least 28 pixels above the ground. Jump too early and you land before the rope arrives; jump too late and the rope catches your feet — game over. Every 5 successful jumps the cycle gets about 8% shorter, so the timing window keeps shrinking. The thin bar at the top shows current speed: green → yellow → red as it tightens. The best score is saved in the browser; R or the Restart button always opens a new round. Strategy: spot the rope leaving the top and jump about two thirds into its descent — your jump peak aligns with the rope's bottom pass. At top speeds, you must chain jumps without barely touching the ground; feel the rhythm like a heartbeat."
+  }
+}
