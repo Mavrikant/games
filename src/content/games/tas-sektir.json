@@ -1,0 +1,20 @@
+{
+  "title": "Taş Sektir",
+  "description": "Göletin kıyısından taşı fırlat — düşük açıyla suya değdikçe sek, nilüfere değersen bonus, dik düşersen taş batar.",
+  "dateAdded": "2026-06-15",
+  "tags": ["arcade", "fizik", "özgün", "refleks"],
+  "controls": "Sürükle ve bırak: yön + güç · Tıkla (tur bitince): yeni tur · R: yeniden başla",
+  "howToPlay": "Taş Sektir, yan görünüşte sakin bir gölü konu alan kısa ve hassas bir fizik oyunudur. Sol sahildeki avucunda bir taş duruyor; her turda beş taş hakkın var. Bir taşı atmak için canvas üzerinde tıkla ve atmak istediğin yöne sürükle — mouse'unun çizdiği yön taşın gideceği yöndür, çektiğin mesafe ise atış gücüdür. Sürüklerken canvas'ta soluk bir yörünge önizlemesi ve sol üstte küçük bir güç çubuğu belirir; geriye doğru sürüklersen kırmızı bir 'X' uyarısı görürsün ve atış iptal olur (taşlar sadece sağa atılabilir). Parmağını/fareyi bıraktığın anda taş havalanır, yerçekimi etkisiyle alçalmaya başlar ve su yüzeyine değdiğinde iki şey olabilir: yeterince düz bir açıyla ve yeterince hızlı vurursa sekme sayacın bir artar ve taş bir miktar enerji kaybederek tekrar yukarı sıçrar; eğer açı çok dik ya da hızı çok düşük olursa taş batar ve o atış biter. Sekme sayacı tek bir taş için biriken sekme sayısını gösterir; tur skoru ise beş taşın toplam sekmesidir. Su yüzeyinde rastgele konumlanmış 2-3 nilüfer yaprağı vardır: taşın yörüngesi nilüferin yakınından geçerse +2 bonus ve ekstra yukarı sıçrayış kazanırsın — uzun bir atışı kurtaran ya da çift haneli skorlar açan eleman bu. Tur sonunda toplam skor görünür ve önceki tarayıcı rekorunu geçtiysen kaydedilir. İdeal teknik: orta-yüksek güçte hafif aşağı doğru bir 'kros' sürüklemesi — taşın ilk inişi nilüferin hemen önüne gelirse zincir başlar; çok yumuşak atışlar enerji kaybeder ve erken batar, çok dik atışlar ilk vuruşta zaten batar. R tuşu ya da 'Yeniden başla' düğmesi turu sıfırlar, tur bitince overlay üstüne tıklayarak da hızlıca yeniden başlayabilirsin.",
+  "scoring": {
+    "storageKey": "tas-sektir.best",
+    "label": "Tur skoru",
+    "direction": "higher",
+    "labelEn": "Round score"
+  },
+  "en": {
+    "title": "Skip Stones",
+    "description": "Fling stones from the shore — graze the water at a low angle to skip, hit a lily pad for a bonus, dive in steeply and the stone is gone.",
+    "controls": "Drag + release: aim and power · Tap (after the round): new round · R: restart",
+    "howToPlay": "Skip Stones is a small physics game played in side view over a quiet pond. A stone rests in your hand on the left shore and you get five per round. To throw, press the canvas and drag in the direction you want to throw — the swipe vector is the throw direction, and the drag length is the power. While you drag, a faint arc previews the trajectory and a small power bar fills above the stone; dragging backwards shows a red X and cancels (stones only fly to the right). Release to launch: gravity pulls the stone down, and when it meets the water surface one of two things happens. If the incoming angle is shallow enough and the horizontal speed is high enough, the skip counter ticks up and the stone bounces with reduced energy; if the angle is too steep or the speed has bled away, the stone sinks and that throw ends. The skip counter tracks the current throw; the round score is the sum of all five throws. Two or three lily pads float on the water at random spots: clip one while you're hugging the surface and you bank a +2 bonus plus a strong extra hop — the move that rescues a dying arc or pushes a throw into double digits. The browser saves your highest round score; after the fifth throw the overlay shows your total and lets you tap (or hit R) to start a new round. Ideal technique: a firm, slightly downward swipe so the first touch lands just in front of a lily — chain the bonus and the run keeps going; floaty arcs lose energy and die fast, while steep throws sink on the first hit."
+  }
+}
