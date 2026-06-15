@@ -1,0 +1,45 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="level">1</span></div>
+  <div class="hud__score">Damla<span id="drops">0/0</span></div>
+  <div class="hud__score">Yıldız<span id="stars-hud">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Sıfırla</button>
+</header>
+
+<div class="board-wrap">
+  <section class="misk-panel" aria-label="Koku profili">
+    <div class="misk-axes" id="axes">
+      <!-- axis rows injected by JS -->
+    </div>
+    <div class="misk-bottle" aria-hidden="true">
+      <div class="misk-bottle__neck"></div>
+      <div class="misk-bottle__body">
+        <span id="bottle-liquid" class="misk-bottle__liquid"></span>
+        <span id="bottle-cap" class="misk-bottle__cap">0/0</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="misk-ings" id="ings" aria-label="İçerikler"></section>
+
+  <div class="io-bar">
+    <button id="undo" class="hud__btn" type="button">↶ Geri al</button>
+    <p id="status" class="io-status" aria-live="polite"></p>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <div id="overlay-stars" class="overlay__stars">★★★</div>
+      <h2 id="overlay-title">Misk hazır!</h2>
+      <p id="overlay-msg"></p>
+      <div class="overlay__actions">
+        <button id="next-btn" class="hud__btn hud__btn--primary" type="button">
+          Sonraki bölüm
+        </button>
+        <button id="replay-btn" class="hud__btn" type="button">Tekrar dene</button>
+      </div>
+    </div>
+  </div>
+</div>

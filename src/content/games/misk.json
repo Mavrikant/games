@@ -1,0 +1,21 @@
+{
+  "title": "Misk",
+  "description": "Parfümcünün tezgâhında üç koku ekseni var: çiçek, odun, narenciye. Her içerik damlası farklı ağırlıkla katkı yapar; az damlayla hedefi tam tuttur, üç yıldız topla.",
+  "dateAdded": "2026-06-15",
+  "tags": ["bulmaca", "kimya", "tek-oyunculu"],
+  "controls": "İçeriklere tıkla: damla ekle · 1-6: içerik · U: geri al · R: sıfırla · Enter: sonraki bölüm",
+  "howToPlay": "Parfümcü olarak tezgâhında üç eksenli bir koku profili kurman gerekiyor: çiçek (F), odun (O) ve narenciye (N). HUD'da hedef profil görünür; her eksenin yanında ufak bir tolerans bandı vardır (±). Alttaki içerik kartlarında her yağ damlasının üç eksene ne kadar katkı yapacağı yazılı — örneğin 'Gül F+12 / O+2 / N+0' damlası şişeye eklendiğinde çiçek değerini 12, odunu 2 artırır. Bir içeriğin kartına tıklayınca tek damla şişeye düşer ve mevcut profil çubukları hemen güncellenir. Amacın üç eksenin de hedef bandının içine girmesi. Şişe kapasitesi sınırlı (her bölümde damla sayısı limitli) — kapasiteyi aşarsan bölüm kaybedilir, baştan başlamak gerekir. Bu yüzden hangi damlayı kaç kez ekleyeceğini önceden hesaplamak işe yarar: aynı eksene katkı yapan iki içerikten genelde küçük katsayılıyı 'ince ayar' için bırakırsın. U (veya 'Geri al') düğmesi son damlayı çıkarır — yanlış damla iadesi serbesttir. R (veya 'Sıfırla') bölümü baştan kurar. Her bölümün bir 'en az damla' sayısı vardır; o sayıda ya da altında bitirirsen üç yıldız, biraz fazlasında iki, daha fazlasında bir yıldız alırsın. Yani önce çözüm bul, sonra daha kısasını arayarak tekrar dene. İpucu: tolerans 2-3 olduğunda küçük katsayılı 'kapatma' içerikleri (lavanta gibi) ile son rötuşu yaparsın; büyük katsayılı 'temel' içerikleri (oud, limon) hedefe yakın bir ana yapı oluşturmak için kullan. İlerlemen ve topladığın yıldızlar tarayıcında saklanır.",
+  "thumbnail": "misk.svg",
+  "scoring": {
+    "storageKey": "misk.lb",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Musk",
+    "description": "At the perfumer's bench you have three scent axes: floral, woody, citrus. Each ingredient drop contributes a different weight; nail the target with as few drops as possible to earn three stars.",
+    "controls": "Click an ingredient: add drop · 1-6: ingredient · U: undo · R: reset · Enter: next level",
+    "howToPlay": "As the perfumer at your bench you must build a three-axis scent profile: floral (F), woody (O for odun) and citrus (N for narenciye). The HUD shows the target profile, each axis with a small tolerance band (±). The ingredient cards below show how much each drop will contribute to each axis — e.g. 'Rose F+12 / O+2 / N+0' adds 12 to floral and 2 to woody when added to the bottle. Clicking a card drops a single drop and the current profile bars update immediately. Your goal: get all three axes inside their target bands. The bottle has a limited capacity (a drop count limit per level) — exceed it and the level is lost and must be restarted. So planning which drops to add matters: the smaller-coefficient ingredients are usually saved for fine-tuning. U (or 'Undo') removes the last drop. R (or 'Reset') rebuilds the level. Each level has a 'minimum drop count'; finishing at or below earns three stars, slightly over two, more over one. So find a solution first, then look for a shorter one. Tip: when tolerance is 2-3, use small-coefficient 'closer' ingredients (like lavender) for the final touch; use big-coefficient 'base' ingredients (oud, lemon) to build the main structure near the target. Your progress and stars are saved in your browser."
+  }
+}
