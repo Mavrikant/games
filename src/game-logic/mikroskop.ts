@@ -459,6 +459,7 @@ function clickAt(clientX: number, clientY: number): void {
   }
   if (state === 'gameover') {
     reset();
+    startPlaying();
     return;
   }
   if (missFlash > MISS_FLASH_MS - 200) return;
@@ -526,7 +527,10 @@ function init(): void {
     const k = e.key;
     if (k === ' ' || k === 'Enter') {
       if (state === 'ready') startPlaying();
-      else if (state === 'gameover') reset();
+      else if (state === 'gameover') {
+        reset();
+        startPlaying();
+      }
       e.preventDefault();
       return;
     }
