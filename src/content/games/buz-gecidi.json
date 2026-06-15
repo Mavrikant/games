@@ -1,0 +1,21 @@
+{
+  "title": "Buz Geçidi",
+  "description": "Donmuş nehri buz parçaları üzerinden geç — her adım altındaki buzu çatlatır; dayanıklığı biten buz batar. Hedefe ulaşana kadar kaynakları yönet.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "özgün", "mantık", "tek-oyunculu"],
+  "controls": "Ok tuşları / WASD: komşu buza adım at · Fare/dokunma: hedef hücreye tıkla · R: bölümü baştan al",
+  "thumbnail": "buz-gecidi.svg",
+  "howToPlay": "Buz Geçidi, donmuş bir nehri buzların kırılganlığını yöneterek geçmen gereken sade ama derin bir grid bulmacasıdır. Her bölümde başlangıç hücresinden (mavi kayıkçı işareti) bayrağa kadar yalnızca komşu hücreye adım atarak yürüyebilirsin; çapraz hareket yoktur. Tüm buz hücreleri 1 ile 3 arasında bir 'dayanıklık' (kalan adım hakkı) ile başlar — üstüne bindiğin her adımda dayanıklık bir düşer ve sıfıra inen buz batar; aynı hücreye bir daha basamazsın, ama o sırada üstünde duruyorsan tehlikedesin: bir sonraki hamlende oradan ayrılmazsan oyun sona erer. Buzlar üzerindeki sayı, kalan dayanıklığı gösterir; renk gradyanı (turkuaz → koyu lacivert) görsel olarak desteği bildirir. Klavye okları, WASD veya hedefe tıklama ile yön ver; geri-iz alabilirsin ama her geri dönüş, gittiğin hücreyi de zayıflatır. Her bölüm matematiksel olarak çözülebilir biçimde üretilir; ilk seviye 4×4 ızgaradır ve her bölümde ızgara büyür ya da daha fazla zayıf (1-dayanıklıklı) hücre çıkar. Hedef bayrağa ulaştığında bölüm geçilir; toplam geçtiğin bölüm sayısı skorun olur ve en iyi skor tarayıcında saklanır. Strateji ipucu: önce gözünle bir yol çiz — '3' dayanıklıklı buzları omurga olarak kullan, '1' dayanıklıklı kırılgan buzları yalnızca tek geçişlik kestirme olarak değerlendir. Hedefe doğrudan koşmak yerine, ileride muhtemel kaçış yollarını da hesapla; sıkıştığında geri dönüş için bir 'yedek köprü' bırakmamak en yaygın kaybetme şeklidir.",
+  "scoring": {
+    "storageKey": "buz-gecidi.best",
+    "label": "Bölüm",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Ice Crossing",
+    "description": "Cross the frozen river floe by floe — each step weakens the ice you stand on, and a floe whose strength hits zero sinks. Manage your resources to reach the goal.",
+    "controls": "Arrow keys / WASD: step to neighbour floe · Mouse/touch: tap target cell · R: restart level",
+    "howToPlay": "Ice Crossing is a deceptively simple grid puzzle about crossing a frozen river by managing the fragility of the ice itself. In every level you start on the blue-marked floe and try to reach the flag using only orthogonal steps — no diagonal moves. Every ice cell begins with a 'strength' (remaining steps) between 1 and 3; each time you step onto a cell its strength drops by 1, and once it hits zero the floe sinks and can never be stepped on again. If your current cell sinks on the move you arrive on it, you must leave it next turn — otherwise the run ends. The number on each floe is its remaining strength; the colour gradient (cyan to deep navy) reinforces this visually. Steer with arrow keys, WASD, or by tapping/clicking your destination; you can backtrack, but every backtrack also depletes the cell you return to. Every level is generated to be solvable; level 1 is a 4×4 grid and each subsequent level grows the board or seeds more weak (strength-1) cells. Reach the flag and you advance; the total number of levels cleared is your score, with your best saved locally. Strategy tip: trace a route with your eyes before you move — use strength-3 floes as a backbone and treat strength-1 floes as one-time shortcuts. Don't rush straight at the goal; account for fallback paths in case you get cornered. The most common way to lose is leaving no spare floe to retreat to."
+  }
+}
