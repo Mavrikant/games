@@ -1,0 +1,22 @@
+{
+  "title": "Sırık Atla",
+  "description": "Önce ritimle koş, sonra zirve anında bırak — sırığın enerjisiyle çıtayı geç, her seferinde bir tık daha yükselt.",
+  "dateAdded": "2026-06-15",
+  "tags": ["atletizm", "zamanlama", "ritim", "özgün"],
+  "controls": "Boşluk / tıkla: koşu ritmine vur, sonra zirve anında bırak · R: yeniden başla",
+  "thumbnail": "sirik-atla.svg",
+  "howToPlay": "Sırık Atla, atletizmin sırıkla yüksek atlama disiplinini iki aşamalı bir zamanlama oyununa indirir. Her atlama iki ayrı beceriyi sınar: önce koşu hızı, sonra bırakma açısı. Atlet ekranın solunda kalkış kutusunun (mavi platformun) üzerine doğru koşmaya başlar; HUD'un altında dört vuruşlu bir ritim çubuğu sağa doğru kayan bir göstergeyle çalmaya başlar. Her vuruş anında — gösterge merkez halkadan geçerken — Boşluk'a bas veya ekrana tıkla; dört vuruşu da tam yakalarsan koşu hızı yeşil bölgeye ulaşır, kaçırırsan veya yanlış zamanda basarsan hız azalır. Atlet kalkış kutusuna ulaşır ulaşmaz sırığı yere saplar ve yay çizmeye başlar; bu sırada sağ tarafta dikey bir 'BIRAK' göstergesi yukarı-aşağı süzülür. Sırığın enerjisini dikey yükselişe çevirmek için göstergeyi yeşil zirve bölgesindeyken yine Boşluk veya tıkla ile bırak. Doğru anda bırakırsan sırığın bütün enerjisi yukarı aktarılır ve atlet çıtanın üstüne kavis çizer; erken veya geç bırakırsan vücut yana savrulur ve çıtayı düşürür. Çıta her başarılı atlayışta 0.10 m yükselir (3.00 m'den başlar), her başarısızlık bir hak yakar — üç hak hakkın bitince oyun sona erer. Skorun temizlediğin en yüksek çıta (cm) cinsinden tutulur. İpucu: ritim çubuğunda gösterge halkaları arasındaki mesafe sabittir, kafanda saymak yerine kaymaya odaklan — ve her vuruşta çok az erken basmak geç basmaktan iyidir.",
+  "scoring": {
+    "storageKey": "sirik-atla.best",
+    "label": "Yükseklik",
+    "unit": "cm",
+    "direction": "higher",
+    "labelEn": "Height"
+  },
+  "en": {
+    "title": "Pole Vault",
+    "description": "First run in rhythm, then release at the peak — turn the pole's spring into height and bump the bar a notch each round.",
+    "controls": "Space / tap: hit the run-up beats, then release at the peak · R: restart",
+    "howToPlay": "Pole Vault distils the track-and-field event into a two-stage timing game. Every attempt asks two distinct skills: first the speed of your approach, then the angle of your release. The athlete starts running from the left toward the take-off box (the blue platform); a four-beat rhythm bar at the bottom of the HUD starts ticking with an indicator that slides to the right. On each beat — as the indicator crosses a centre ring — press Space or tap the screen; nailing all four beats sends the run-up gauge into the green, missing or pressing off-beat shaves it down. The moment the athlete hits the take-off box, the pole plants and the body arcs into the air; meanwhile a vertical 'RELEASE' indicator on the right glides up and down. To convert the pole's spring into upward height, release with Space (or tap) while the indicator is inside the green peak zone. Get it right and all the pole's energy becomes lift, sending the athlete cleanly over the bar; release too early or too late and the body sways sideways and knocks the bar down. The bar rises 0.10 m for every clearance (starting at 3.00 m), each failure burns a life, and three lives ends the round. Your score is the highest bar (cm) you've cleared. Tip: the distance between rings on the rhythm bar is fixed — focus on the slide, not on counting — and a tiny bit early is always better than a tiny bit late."
+  }
+}
