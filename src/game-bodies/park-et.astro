@@ -1,0 +1,26 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Süre<span id="time">0.0</span></div>
+  <div class="hud__score">Rekor<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Park alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Park Et</h2>
+      <p id="overlay-msg">Yön tuşları veya WASD ile aracı sür. Yeşil alana park et — başlamak için bir yön tuşuna bas.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn" data-key="up" type="button" aria-label="Gaz">▲</button>
+  <div class="touch__row">
+    <button class="touch__btn" data-key="left" type="button" aria-label="Sola">◀</button>
+    <button class="touch__btn" data-key="down" type="button" aria-label="Geri">▼</button>
+    <button class="touch__btn" data-key="right" type="button" aria-label="Sağa">▶</button>
+  </div>
+</div>

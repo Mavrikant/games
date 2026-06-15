@@ -1,0 +1,21 @@
+{
+  "title": "Park Et",
+  "description": "Aracını dar park yerine engellere değmeden park et. Beş seviye: dosdoğru çekişten paralel parka ve açılı yerlere kadar.",
+  "dateAdded": "2026-06-15",
+  "tags": ["arcade", "simulasyon", "beceri", "özgün", "tek-oyunculu"],
+  "controls": "↑/W: gaz · ↓/S: geri · ←/A, →/D: direksiyon · R: yeniden başla · Enter/Boşluk: sonraki",
+  "thumbnail": "park-et.svg",
+  "howToPlay": "Park Et, üstten görünüm bir 2B park simülasyonudur ve beş elde tasarlanmış seviyeden oluşur: düz çekiş, iki araç arasına yana park, klasik paralel park, dar koridor sonu ve açılı (eğimli) park. Aracı doğrudan değil, gerçek bir direksiyonla yönlendirirsin: ↑ veya W gaz verir (en yüksek hız ~115 piksel/sn), ↓ veya S önce frenler sonra geri vites takar, ← / A ve → / D ön tekerleği eğer — direksiyon zamanla istediğin açıya yaklaşır ve bıraktığında yavaşça merkeze döner. Fizik bir 'bisiklet modeli': aracın dönüş yarıçapı hıza ve direksiyon açısına bağlıdır, dur dururken direksiyonu sağa sola çevirmek aracı çevirmez — önce hareket etmen lazım. Her seviyede ekranda yeşil kesik çizgili 'P' işaretli bir park yeri vardır; arabanın dört köşesi de bu dikdörtgenin içinde olacak ve hız yaklaşık sıfıra düşecek şekilde yaklaşık 0.3 saniye beklersen seviye tamamlanır ve süren rekor olarak kaydedilebilir. Engellere (gri aracın gövdesi, duvarlar, kaldırım) çarptığın ya da park alanının kenarından çıktığın anda 'Çarpıştın' ekranı açılır; R, herhangi bir yön tuşu ya da Yeniden başla düğmesi seviyeyi sıfırdan başlatır. Strateji: paralel parkta önce hedef yerin SOLUNA hizalan, sonra direksiyonu sağa kırarak GERİ git; arka sağ köşe yere girince direksiyonu hızla sola kır ki ön kısım da içeri kıvrılsın. Açılı parkta hedefin açısına önce hizalanmak süreni yarı yarıya kısaltır. Yavaş ve sabırlı; gaza basılı tutmak çarpışmanın hızlı yolu.",
+  "scoring": {
+    "storageKey": "park-et.bestLevel",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Park It",
+    "description": "Squeeze your car into the tight bay without touching the obstacles. Five hand-built levels — straight pull-in, parallel parking, angled bays.",
+    "controls": "↑/W: throttle · ↓/S: reverse · ←/A, →/D: steering · R: restart · Enter/Space: next",
+    "howToPlay": "Park It is a top-down 2D parking sim with five hand-built levels: a straight pull-in, side parking between two cars, the classic parallel park, a narrow corridor with a spot at the end, and an angled bay. You don't move the car directly — you drive it with a real steering wheel. ↑ or W applies throttle (top speed ~115 px/sec), ↓ or S brakes first and then engages reverse, and ← / A and → / D turn the front wheels — steering eases toward your input and self-centres when you release. The physics is a 'bicycle model': turn radius depends on speed and wheel angle, so turning the wheel while stationary does NOT rotate the car — you must move first. Each level has a green dashed bay with a 'P' marker; once all four corners of the car are inside the rectangle and speed drops to near zero for about 0.3 seconds, the level completes and your level reached is saved as your best. Hit any obstacle (a grey parked car, a wall, the kerb) or roll off the lot and the 'Crashed' overlay appears; R, any arrow key, or the Restart button resets the level from scratch. Strategy: for parallel parking, first align to the LEFT of the target spot, then steer right and REVERSE; once the rear-right corner is inside the bay, steer hard left so the nose tucks in too. For an angled bay, lining up to its angle first roughly halves your time. Slow and patient — flooring it is the fastest way to crash."
+  }
+}
