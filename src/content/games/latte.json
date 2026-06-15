@@ -1,0 +1,14 @@
+{
+  "title": "Latte",
+  "description": "Dönen bir fincana süt köpüğünü akıt — desen kahveyle birlikte dönüyor. Hedefe en çok dolguyu, en az taşmayı sığdır.",
+  "dateAdded": "2026-06-15",
+  "tags": ["puzzle", "zamanlama", "özgün", "sanat"],
+  "controls": "Fare: pozisyon · Sol tık basılı: süt akıt · Boşluk/Enter: başla · R: yeniden başla",
+  "howToPlay": "Latte, dönen bir kahve fincanına süt köpüğüyle desen çizdiğin yeni-tip bir hassasiyet oyunudur. Her tur farklı bir hedef desen verilir — halka, kalp, yıldız — ve fincan sürekli (saat yönünde) dönerken sen fareyi tutup süt akıtırsın. Akıttığın her süt damlası fincanın o anki açısına göre yüzeye yapışır ve fincan dönmeye devam ettikçe damlalar fincanla birlikte döner. Bu yüzden saplama bir noktada bekleyip süt dökersen, gerçekte fincanın yüzeyinde bir yay/halka çizmiş olursun; mouse'u dışa doğru çekersen radyal bir çizgi, kasıtlı olarak fincanın dönme yönünde takip edersen sıkı bir spiral elde edersin. Hedef desenin soluk parıltısı fincanın üstünde — fincanla birlikte döner — sen sadece o anki dönmüş konumuna basabilirsin. Her tur 10 saniyedir; süre dolunca puanlama bittiği anda yapılır: hedef alana sığan köpük artı puan, hedef dışındaki taşma ise hafif eksi puan getirir, son skor 0–100 arasıdır. 3 tur (halka → kalp → yıldız) sonunda toplam skor kaydedilir ve rekor güncellenir. İpucu: fincanın üstündeki krem rengi nokta saat 12'yi gösterir — bu noktaya göre hedefin nerede olacağını öngör. Mouse'u dönme yönünün tam tersine çevirirsen yerinde durup nokta nokta dolgu yapabilirsin (en hassas yöntem). Çok hızlı dönme yönünde takip edersen tüm tabloyu süpürür, taşma yaparsın.",
+  "thumbnail": "latte.svg",
+  "scoring": {
+    "storageKey": "latte.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}

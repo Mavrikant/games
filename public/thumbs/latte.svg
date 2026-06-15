@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <radialGradient id="coffee" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#6f4a30"/>
+      <stop offset="55%" stop-color="#3f2615"/>
+      <stop offset="100%" stop-color="#1f110a"/>
+    </radialGradient>
+    <radialGradient id="bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1d1a16"/>
+      <stop offset="100%" stop-color="#0a0807"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <ellipse cx="160" cy="172" rx="92" ry="8" fill="#000" opacity="0.45"/>
+  <circle cx="160" cy="100" r="84" fill="url(#coffee)" stroke="#c89968" stroke-width="3"/>
+  <path d="M160 168
+           C 160 168, 92 138, 92 102
+           C 92 80, 110 64, 130 64
+           C 146 64, 156 76, 160 86
+           C 164 76, 174 64, 190 64
+           C 210 64, 228 80, 228 102
+           C 228 138, 160 168, 160 168 Z"
+        fill="#f4e8cd" opacity="0.94"/>
+  <path d="M160 158
+           C 160 158, 108 134, 108 102
+           C 108 88, 120 80, 132 80
+           C 144 80, 156 88, 160 100
+           C 164 88, 176 80, 188 80
+           C 200 80, 212 88, 212 102
+           C 212 134, 160 158, 160 158 Z"
+        fill="none" stroke="#3f2615" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="160" cy="22" r="4" fill="#e8c89a"/>
+</svg>
