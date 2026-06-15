@@ -1,0 +1,21 @@
+{
+  "title": "Sapan",
+  "description": "Sapanını ger, rüzgârı oku, yükselen balonları vur. 60 saniyede en yüksek skoru kov.",
+  "dateAdded": "2026-06-15",
+  "tags": ["arcade", "fizik", "nişan", "özgün"],
+  "controls": "Sapanı çek + bırak (fare/dokunma) · Space: başla · R: yeniden",
+  "thumbnail": "sapan.svg",
+  "howToPlay": "Ekranın sol-alt köşesinde tahtadan bir sapan duruyor; üstündeki lastik bandı arkaya doğru çekersen taşı fırlatırsın. Mouse ya da parmağını sapanın çatalına bastır, geri-aşağı sürükle: ne kadar çok geri çekersen o kadar güç biriktirirsin, hangi açıyı verirsen taş aynı açıda zıt yöne fırlar. Parmağını bırakırsın — taş yerçekimi (aşağı) ve o anda esen rüzgâr (sağa veya sola) altında parabol çizer ve gökyüzünden yukarı süzülen balonları arar. Beyaz balon +1 puan, altın balon +5 puan, mor balon bir bonus topu daha verir (extra taş atışı). Kırmızı/siyah BOMBALARA vurmak skoru -3 düşürür — bomba zincirinden uzak dur. Rüzgâr göstergesi ekranın üstündedir: ok yönü ve uzunluğu o anki güç. Rüzgâr her 7 saniyede bir değişir, planını ona göre güncelle. Tur 60 saniye sürer; süre dolunca skor kilitlenir ve tarayıcına en iyin olarak kaydedilir. İpucu: rüzgâr arkadan estiğinde daha az çek, önden estiğinde daha çok güç ver; balon dik yükseliyorsa hafif geriden vurman gerekir, çünkü taş varmadan balon yukarı kaçar. R ile her zaman yeniden başlatabilirsin.",
+  "scoring": {
+    "storageKey": "sapan.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Slingshot",
+    "description": "Stretch the slingshot, read the wind, pop the rising balloons. Sixty seconds, chase the high score.",
+    "controls": "Pull and release the slingshot (mouse/touch) · Space: start · R: restart",
+    "howToPlay": "A wooden slingshot sits in the bottom-left corner; press on its fork and drag back-and-down: the further you pull, the more power you store, and the angle of your pull determines the opposite firing angle. Release — the stone follows a parabolic arc under gravity (down) and the current wind (left or right), seeking the balloons drifting up from below. White balloons score +1, gold balloons +5, and purple balloons grant a bonus extra shot. Red/black BOMBS drop your score by -3 — keep your distance. The wind indicator at the top shows direction and magnitude; wind changes every 7 seconds, so re-plan after each shift. A round lasts 60 seconds; when time is up, your score locks and your browser remembers it as your best. Tip: with a tailwind, pull less; with a headwind, pull more. If a balloon is rising fast, lead it slightly so the stone arrives where it will be. Press R any time to restart."
+  }
+}
