@@ -1,0 +1,9 @@
+{
+  "title": "Karınca Yolu",
+  "description": "Izgaraya koku izi çiz; karıncalar yuvadan çıkıp izini takip ederek kenardaki yiyeceği bulsun ve geri getirsin. İzler zamanla soluyor — sürekli yenilemen gerek.",
+  "dateAdded": "2026-06-15",
+  "tags": ["strateji", "puzzle", "karincalar", "refleks"],
+  "controls": "Fare/Dokunma sürükle: koku izi çiz · R: yeniden başla · Boşluk/Enter: başla",
+  "howToPlay": "Ortadaki kahverengi yuvadan karıncalar düzenli aralıklarla çıkıp ızgarada dolaşır. Kenarlarda rastgele yerlerde yeşil yiyecek (yaprak parçaları) belirir. Karıncalar kendi başlarına rastgele yürür ve şanslıysa yiyeceğe rastlar; senin işin onlara yol göstermek. Tahtaya parmağını (veya fareyi) basılı tutup sürükle: dokunduğun her hücre turuncu bir koku izi ile parlar. Karıncalar yürürken çevrelerindeki dört komşu hücreye bakar, en kuvvetli koku izine sahip olana yönelir; böylece çizdiğin hat boyunca akarak yiyeceğe ulaşır. Yiyeceği bulan karınca onu sırtlanır (sırtında küçük yeşil işaret belirir) ve en kısa yoldan doğrudan yuvaya döner — geri dönüşte koku izine ihtiyaç duymaz. Yuvaya bıraktığı her yiyecek skoruna +1 ekler. Koku izleri zamanla soluyor (yaklaşık 4-5 saniyede tamamen kayboluyor), bu yüzden tek seferlik bir hat yetmez; aktif tuttuğun yolları sürekli üzerinden geçerek pekiştirmen gerekir. Aynı anda 5'e kadar yiyecek tahtada olabilir ve farklı kenarlarda doğar; uzun süre tek bir hat üzerine yoğunlaşırsan diğer yiyecekler boşa harcanır. Strateji ipucu: yuvadan yiyeceğe doğru tek bir uzun hat çekmek yerine, aktif yiyeceklere doğru kısa dallar oluştur ve düzenli olarak yenile; karıncalar dağıldığında her biri en yakın izi takip eder. 90 saniyenin sonunda yuvaya getirilen toplam yiyecek skorunu belirler; en yüksek skorun tarayıcında saklanır.",
+  "thumbnail": "karinca-yolu.svg"
+}

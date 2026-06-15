@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2014"/>
+      <stop offset="1" stop-color="#15100a"/>
+    </linearGradient>
+    <radialGradient id="nest" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2a1a0a"/>
+      <stop offset="0.45" stop-color="#a87a4a"/>
+      <stop offset="1" stop-color="#6b4926"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" rx="14" fill="url(#soil)"/>
+  <!-- pheromone trails -->
+  <path d="M160 100 C 100 90, 70 70, 40 55" stroke="#ffbc46" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M160 100 C 220 110, 250 130, 285 150" stroke="#ffbc46" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M160 100 C 200 70, 230 40, 270 30" stroke="#ffbc46" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <!-- leaves (food) -->
+  <g transform="translate(36 50) rotate(-25)">
+    <ellipse rx="14" ry="8" fill="#7be36c"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#2c6a24" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(288 152) rotate(35)">
+    <ellipse rx="14" ry="8" fill="#7be36c"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#2c6a24" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(272 26) rotate(60)">
+    <ellipse rx="12" ry="7" fill="#7be36c"/>
+    <line x1="-10" y1="0" x2="10" y2="0" stroke="#2c6a24" stroke-width="1.5"/>
+  </g>
+  <!-- nest -->
+  <circle cx="160" cy="100" r="28" fill="url(#nest)"/>
+  <circle cx="160" cy="100" r="11" fill="#1a0e06"/>
+  <!-- ants -->
+  <g fill="#0a0a0a">
+    <circle cx="110" cy="92" r="3.5"/>
+    <circle cx="105" cy="89" r="2.2"/>
+  </g>
+  <g fill="#0a0a0a">
+    <circle cx="80" cy="78" r="3.5"/>
+    <circle cx="76" cy="74" r="2.2"/>
+  </g>
+  <g>
+    <circle cx="215" cy="115" r="3.5" fill="#0a0a0a"/>
+    <circle cx="219" cy="118" r="2.2" fill="#0a0a0a"/>
+    <circle cx="215" cy="110" r="2.4" fill="#7be36c"/>
+  </g>
+  <g fill="#0a0a0a">
+    <circle cx="250" cy="135" r="3.5"/>
+    <circle cx="255" cy="139" r="2.2"/>
+  </g>
+  <g>
+    <circle cx="195" cy="80" r="3.5" fill="#0a0a0a"/>
+    <circle cx="199" cy="76" r="2.2" fill="#0a0a0a"/>
+    <circle cx="195" cy="75" r="2.4" fill="#7be36c"/>
+  </g>
+</svg>
