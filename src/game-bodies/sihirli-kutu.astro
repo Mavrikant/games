@@ -1,0 +1,70 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <div class="sk">
+    <div class="sk-box" aria-hidden="true">
+      <div class="sk-box__slot sk-box__slot--in">
+        <span class="sk-box__lbl">Giriş</span>
+        <span id="box-in" class="sk-box__val">—</span>
+      </div>
+      <div class="sk-box__core">
+        <span class="sk-box__sigil">ƒ</span>
+      </div>
+      <div class="sk-box__slot sk-box__slot--out">
+        <span class="sk-box__lbl">Çıkış</span>
+        <span id="box-out" class="sk-box__val">—</span>
+      </div>
+    </div>
+
+    <div class="sk-status">
+      <span id="status-msg" class="sk-status__msg">Bir giriş seç ve <strong>DENE</strong>.</span>
+      <span class="sk-status__pill">Hak: <span id="tests-left">4</span></span>
+    </div>
+
+    <div class="sk-history" id="history" aria-live="polite">
+      <span class="sk-history__title">Denenen:</span>
+      <div id="history-list" class="sk-history__list"></div>
+    </div>
+
+    <div class="sk-entry">
+      <span id="entry-label" class="sk-entry__label">Seçim:</span>
+      <span id="entry-value" class="sk-entry__value">—</span>
+    </div>
+
+    <div class="sk-numpad" role="group" aria-label="Sayı tuş takımı">
+      <button class="sk-numpad__btn" data-key="1" type="button">1</button>
+      <button class="sk-numpad__btn" data-key="2" type="button">2</button>
+      <button class="sk-numpad__btn" data-key="3" type="button">3</button>
+      <button class="sk-numpad__btn" data-key="4" type="button">4</button>
+      <button class="sk-numpad__btn" data-key="5" type="button">5</button>
+      <button class="sk-numpad__btn" data-key="6" type="button">6</button>
+      <button class="sk-numpad__btn" data-key="7" type="button">7</button>
+      <button class="sk-numpad__btn" data-key="8" type="button">8</button>
+      <button class="sk-numpad__btn" data-key="9" type="button">9</button>
+      <button class="sk-numpad__btn sk-numpad__btn--alt" data-key="del" type="button" aria-label="Sil">⌫</button>
+      <button class="sk-numpad__btn" data-key="0" type="button">0</button>
+      <button class="sk-numpad__btn sk-numpad__btn--alt" data-key="enter" type="button" aria-label="Gönder">↵</button>
+    </div>
+
+    <div class="sk-actions">
+      <button id="action-primary" class="hud__btn hud__btn--primary" type="button">DENE</button>
+      <button id="action-secondary" class="hud__btn" type="button">TAHMİNE GEÇ</button>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sihirli Kutu</h2>
+      <p id="overlay-msg">Gizli matematik kuralını keşfet. 4 deneme hakkın var; sonra 2 tahmin doğru olursa seviye atlarsın. Bir tane bile yanlış cevap oyunu bitirir.</p>
+      <button id="overlay-btn" class="hud__btn hud__btn--primary" type="button">BAŞLA</button>
+    </div>
+  </div>
+</div>

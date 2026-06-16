@@ -1,0 +1,20 @@
+{
+  "title": "Sihirli Kutu",
+  "description": "Gizli matematik kuralını keşfet — dene, gör, tahmin et. Tek yanlış cevap oyunu bitirir.",
+  "dateAdded": "2026-06-16",
+  "tags": ["mantık", "matematik", "özgün", "tek-oyunculu"],
+  "controls": "0-9 rakam tuşları · Enter: gönder · ⌫: sil · R: yeniden başla",
+  "howToPlay": "Sihirli Kutu, her seviyede ekrana gizlenmiş bir matematik fonksiyonunu — ƒ(x) — sezgi ve denemeyle çıkardığın bir bulmacadır. Ekranda kutuya bir giriş verir, çıktısını gözlersin: örneğin 3 yazdın, kutu 7 verdi. Bir sonraki denemede 5 yazdın, 11 geldi — desen iki katı artı bir, yani ƒ(x) = 2x + 1 olabilir. Bunu sınamak için 4 denemen var: 0–9 arasında daha önce denemediğin bir giriş seç, DENE'ye bas, çıktı geçmiş listesine eklensin. Yeterli ipucu topladığını düşündüğünde TAHMİNE GEÇ butonuna bas; kutu sana denemediğin rastgele bir x verir ve sen ƒ(x) değerini girersin. Üst üste 2 doğru tahmin yaparsan seviye atlarsın; tek bir yanlış cevap oyunu bitirir ve o ana kadar geçtiğin seviye sayısı skor olarak tarayıcına kaydedilir. Seviye yükseldikçe fonksiyon ailesi zorlaşır: önce basit toplama/çıkarma (x + 3, 9 − x), sonra çarpan ve sabit (2x + 1, 3x − 2), sonra kareli ve mutlak değer (x², |x − 5|), en sonunda mod ve birleşik kurallar (x² mod 7, x(x − 2)). Strateji: ilk denemede 0 ya da 1 yaz — sabit terimi ortaya çıkarır; ikinci denemede 5 gibi orta bir değer ver — eğim ve doğrusallık görünür; üçüncüde 9 gibi yüksek bir değer ver — kareli/mod gibi nonlineer davranış varsa orada açığa çıkar. Tahmin aşamasında verilen x denemediğin bir değer olur, bu yüzden komşu girişlerden ekstrapolasyon yapman gerekebilir; rakam tuşlarıyla 2 haneye kadar yazabilirsin (mesela 5² = 25). Yanlış girdiysen ⌫ ile silip yeniden yazabilirsin. Kafa karıştığında: iki ardışık girişe verilen iki çıktının farkı eğimi söyler, ardışık farkların farkı kareli terimi yakalar. R tuşu her zaman sıfırlar, Enter onaylar.",
+  "scoring": {
+    "storageKey": "sihirli-kutu.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Magic Box",
+    "description": "Discover the hidden math rule — probe, observe, predict. A single wrong answer ends the run.",
+    "controls": "Number keys 0-9 · Enter: submit · ⌫: delete · R: restart",
+    "howToPlay": "Magic Box is a logic-and-inference puzzle in which every level hides a mathematical function ƒ(x) on screen, and you must deduce it by probing. You feed the box an input and watch the output: you type 3 and the box answers 7; you try 5 and it answers 11 — the pattern looks like double-plus-one, so ƒ(x) = 2x + 1. To test that, you have 4 probes per level: pick an input between 0 and 9 you have not tried yet, press PROBE, and the result lands in the history. When you think you have enough evidence, press SWITCH TO PREDICT; the box now hands you a fresh random x you did not probe, and you must enter ƒ(x). Two correct predictions in a row clear the level; a single wrong answer ends the game and your highest cleared level is stored as your best in the browser. As you climb, the function family gets harder: first simple add/subtract (x + 3, 9 − x), then multiplier-and-constant (2x + 1, 3x − 2), then squares and absolute value (x², |x − 5|), finally modulo and combined rules (x² mod 7, x(x − 2)). Strategy: probe 0 or 1 first — it reveals the constant term; probe a mid value like 5 — slope and linearity show; probe 9 — any nonlinear behaviour (squared, modulo) becomes obvious here. Predictions are over inputs you never probed, so you may need to extrapolate from the neighbours; you can enter up to two digits (e.g. 5² = 25). Wrong key? Backspace clears, ⌫ deletes the last digit. When stuck: the difference between two adjacent outputs gives the slope, the second difference exposes the squared term. Press R to reset at any time, Enter to confirm."
+  }
+}
