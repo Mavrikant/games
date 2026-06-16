@@ -1,0 +1,21 @@
+{
+  "title": "Heykel",
+  "description": "Gözcü kapalıyken ilerle, açıldığında heykel gibi don — yakalanmadan bitiş çizgisine ulaş, sonraki tur daha hızlı gelir.",
+  "dateAdded": "2026-06-16",
+  "tags": ["refleks", "özgün", "zamanlama", "strateji"],
+  "controls": "Boşluk / W / ↑ veya dokun ve basılı tut: koş · Bırak: heykel ol · R: yeniden başla",
+  "thumbnail": "heykel.svg",
+  "scoring": {
+    "storageKey": "heykel.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Rounds"
+  },
+  "howToPlay": "Heykel, Türk çocuk oyunu \"İstop / Heykel\"den esinlenmiş özgün bir refleks-zamanlama oyunudur. Tepedeki Gözcü senin aşağıda, başlangıç çizgisindeki figürünü kollar; hedefin onun tam altındaki yeşil bitiş çizgisine ulaşmak. Boşluk, W, ↑ ya da tahtaya dokunup basılı tutarak ileri koşarsın; bıraktığında anında durur ve heykel gibi sabit kalırsın. Gözcünün gözü üç durumdan birindedir: KAPALI (yeşil halka) — güvenle ilerleyebilirsin; UYANIYOR (sarı halka) — kısa bir uyarı süresi, hemen frene basmalısın; AÇIK (kırmızı halka) — bu sırada kıpırdarsan seni görür ve yakalar. Yakalanırsan başlangıç çizgisine geri dönersin ve bir can kaybedersin; üç canın da bittiğinde oyun biter. Bitiş çizgisini geçtiğin her tur skoru bir artırır ve sonraki tur daha gergin gelir: kapalı süresi kısalır, açık süresi uzar, uyanma uyarısı da daralır. İpucu: Gözcünün etrafındaki renk halkasını (yeşil → sarı → kırmızı) periferiyle takip et, gözbebeğine kilitlenme; sarı belirir belirmez dur — kırmızıya \"son saniyede\" yetişmek, ileri seviyelerde her zaman geç kalmaktır.",
+  "en": {
+    "title": "Statue",
+    "description": "Move while the watcher's eye is closed, freeze the instant it opens — reach the finish line, stack rounds, and watch it speed up.",
+    "controls": "Space / W / ↑ or touch and hold: run · Release: freeze · R: restart",
+    "howToPlay": "Statue is an original reflex-and-timing game inspired by the Turkish playground classic \"İstop / Heykel\" (a close cousin of Red Light, Green Light). At the top of the board sits a Watcher; you start at the bottom on the start line and have to reach the green finish line right beneath its face. Press and hold Space, W, ↑ or touch the board to run forward; let go and you stop dead like a statue. The Watcher's eye cycles between three states: CLOSED (green ring) — safe to advance; WAKING (yellow ring) — a short warning to come to a stop; OPEN (red ring) — if you so much as move, the Watcher sees you and catches you. A capture sends you back to the start line and costs one of your three lives. Every time you cross the finish line your round counter ticks up and the next round runs tighter — the closed window shortens, the open window grows and the yellow warning narrows. Tip: watch the coloured ring around the Watcher with your peripheral vision instead of staring at the pupil — stopping the instant yellow appears is almost always safer than trying to beat the red transition; as rounds escalate, brake earlier than you think you should."
+  }
+}
