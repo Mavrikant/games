@@ -1,0 +1,21 @@
+{
+  "title": "Kaval",
+  "description": "Kavalı üfle, sepetten yükselen kobranın başını sarı bandın içinde tut. Ezgin değişir; yılan momentumla seni geriden takip eder.",
+  "dateAdded": "2026-06-16",
+  "tags": ["arcade", "refleks", "özgün", "zaman"],
+  "controls": "Fare/dokun: yukarı-aşağı kaydır — ezgi yüksekliği · ↑/↓ veya W/S: klavyeyle ince ayar · Boşluk: başla · R: yeniden başla",
+  "howToPlay": "Kaval, sürekli bir pitch-takip oyunudur: bir sepetten yükselen kobranın başını ekrandaki sarı 'hipnoz bandı'nın içinde tutmaya çalışırsın. Üflediğin ezginin yüksekliğini fare veya dokunma ile (yukarı kaydır = tiz, aşağı kaydır = pes) ya da klavyede ↑/↓ (veya W/S) tuşlarını basılı tutarak ayarlarsın. Ama yılan ezgine anında uymaz: yay-sönüm modeli ile peşinden gelir, bu yüzden sert değişimlerde aşar, küçük titreşimleri yumuşatır. Sarı bant ise sahnede yavaşça aşağı-yukarı dalgalanır; bandın içindeyken her karede skorun artar ve sol kenardaki 'Ürkme' çubuğu yavaşça azalır. Yılan banttan dışarı kayarsa Ürkme çubuğu dolmaya başlar; bant ne kadar uzağındaysa o kadar hızlı dolar. Çubuk tamamen dolduğunda yılan ürküp sepete kaçar ve oyun biter. Süre geçtikçe zorluk artar: sarı bant incelir, salınımı hızlanır ve genliği büyür — yani daha hassas, daha çevik tepki gerekir. Klavye girişi yumuşak ve sürekli ayarlanır; fare girişi ise anlık konuma snap ettiği için daha hızlı ama sert hamleleri daha çok aşar. Strateji: ezgini bandın anlık merkezine kilitle, salınımın tepe noktalarında erken yavaşla — yılanın eylemsizliğini öngör, bant inerken sen de inişe geç ki yılan tam zamanında girsin. Tıkla / dokun / Boşluk ile başlat; R veya Yeniden Başla yeni bir tur açar. Rekorun tarayıcında saklanır.",
+  "thumbnail": "kaval.svg",
+  "scoring": {
+    "storageKey": "kaval.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Snake Charmer",
+    "description": "Play the flute and keep the cobra's head inside the yellow trance band. Your pitch changes; the snake follows with inertia.",
+    "controls": "Mouse/touch: drag up-down — pitch height · ↑/↓ or W/S: keyboard fine-tune · Space: start · R: restart",
+    "howToPlay": "Snake Charmer is a continuous pitch-tracking game: a cobra rises from a basket and you have to keep its head inside the yellow 'trance band' that drifts up and down the stage. You control the pitch of your flute with the mouse or touch (drag up = higher, down = lower), or by holding ↑/↓ (W/S) on the keyboard. But the snake doesn't snap to your pitch — it follows with a spring-damper, so it overshoots after sharp moves and smooths out little jitters. The yellow band oscillates slowly up and down; while the head is inside it, your score ticks up and the 'Spook' bar on the left edge slowly drains. Whenever the head leaves the band the Spook bar starts filling — the farther outside, the faster. Fill it completely and the snake bolts back into the basket; the run ends. Difficulty ramps with time: the band gets thinner, swings faster, and its amplitude grows — you need finer, quicker reactions. Keyboard input is smooth and gradual; mouse input snaps to position and is faster but tends to overshoot more. Strategy: lock onto the band's current centre, decelerate early near the turn-arounds, and anticipate the snake's inertia by starting your descent slightly before the band does, so the head arrives just in time. Click, tap, or press Space to start; R or the Restart button begins a new round. Your best score is saved in the browser."
+  }
+}
