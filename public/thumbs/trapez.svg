@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Trapez">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2236" />
+      <stop offset="60%" stop-color="#2a3553" />
+      <stop offset="100%" stop-color="#3a2a3e" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sky)" />
+  <rect x="0" y="22" width="320" height="8" fill="#11151c" />
+  <rect x="0" y="32" width="320" height="2" fill="#1c2330" />
+  <g stroke="#b08653" stroke-width="2" fill="none">
+    <line x1="90" y1="32" x2="62" y2="120" />
+    <line x1="90" y1="32" x2="118" y2="108" />
+    <line x1="230" y1="32" x2="208" y2="118" />
+    <line x1="230" y1="32" x2="252" y2="108" />
+  </g>
+  <g transform="translate(90 114) rotate(-18)">
+    <rect x="-30" y="-4" width="60" height="8" rx="2" fill="#d8b06a" />
+    <rect x="-30" y="-4" width="60" height="3" rx="1.5" fill="#fff0c6" />
+  </g>
+  <g transform="translate(230 113) rotate(14)">
+    <rect x="-30" y="-4" width="60" height="8" rx="2" fill="#d8b06a" />
+    <rect x="-30" y="-4" width="60" height="3" rx="1.5" fill="#fff0c6" />
+  </g>
+  <g transform="translate(160 96)">
+    <circle r="9" fill="#f3d28e" />
+    <rect x="-4" y="9" width="8" height="22" rx="3" fill="#e0436a" />
+    <circle cx="0" cy="36" r="5" fill="#e0436a" />
+  </g>
+  <circle cx="230" cy="113" r="20" fill="none" stroke="#78dca0" stroke-width="2" stroke-opacity="0.65" />
+  <rect x="0" y="174" width="320" height="26" fill="#1a1110" />
+  <g stroke="rgba(220,90,90,0.45)" stroke-width="1">
+    <line x1="0" y1="174" x2="26" y2="200" />
+    <line x1="26" y1="174" x2="52" y2="200" />
+    <line x1="52" y1="174" x2="78" y2="200" />
+    <line x1="78" y1="174" x2="104" y2="200" />
+    <line x1="104" y1="174" x2="130" y2="200" />
+    <line x1="130" y1="174" x2="156" y2="200" />
+    <line x1="156" y1="174" x2="182" y2="200" />
+    <line x1="182" y1="174" x2="208" y2="200" />
+    <line x1="208" y1="174" x2="234" y2="200" />
+    <line x1="234" y1="174" x2="260" y2="200" />
+    <line x1="260" y1="174" x2="286" y2="200" />
+    <line x1="286" y1="174" x2="312" y2="200" />
+    <line x1="26" y1="174" x2="0" y2="200" />
+    <line x1="52" y1="174" x2="26" y2="200" />
+    <line x1="78" y1="174" x2="52" y2="200" />
+    <line x1="104" y1="174" x2="78" y2="200" />
+    <line x1="130" y1="174" x2="104" y2="200" />
+    <line x1="156" y1="174" x2="130" y2="200" />
+    <line x1="182" y1="174" x2="156" y2="200" />
+    <line x1="208" y1="174" x2="182" y2="200" />
+    <line x1="234" y1="174" x2="208" y2="200" />
+    <line x1="260" y1="174" x2="234" y2="200" />
+    <line x1="286" y1="174" x2="260" y2="200" />
+    <line x1="312" y1="174" x2="286" y2="200" />
+  </g>
+  <text x="16" y="58" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e7eaef">Trapez</text>
+</svg>
