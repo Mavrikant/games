@@ -1,0 +1,21 @@
+{
+  "title": "Sismograf",
+  "description": "Sismik sinyal sınıflandırma — gelen dalgayı incele ve deprem, patlama, kamyon, balina veya rüzgar olarak ayırt et.",
+  "dateAdded": "2026-06-16",
+  "tags": ["puzzle", "özgün", "gözlem", "reflex"],
+  "controls": "1-5 tuşları veya butonlar: sınıflandır · Enter/Boşluk: başla · R: yeniden başla",
+  "thumbnail": "sismograf.svg",
+  "scoring": {
+    "storageKey": "sismograf.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Sismograf seni bir gözlem istasyonunun başına oturtur: ekranda bir dalga belirir ve sen onu beş kategoriden birine atamak zorundasın — Deprem, Patlama, Kamyon, Balina, Rüzgar. Her olay üç fazdan oluşur. Önce çizim fazı: dalga soldan sağa, kâğıda çizilir gibi yavaşça yazılır; bu sırada özgün biçimini gözlemle. Sonra cevap fazı: çizim biter, alt kenarda hızla erien bir zaman çubuğu belirir ve seçim için sınırlı bir pencere kalır — 1-5 tuşlarına basarak ya da alttaki butonlara dokunarak kararını ver. Son olarak açıklama fazı: doğru cevap dalganın üstünde rozet olarak gösterilir, doğru kategori yeşil, yanlış seçimin kırmızı yanıp söner. Doğru cevap 10 baz puan + seri bonusu kazandırır (her ardışık doğru +2 ekstra, üst sınır +15); yanlış cevap ya da hiç cevap vermemek bir can götürür ve seriyi sıfırlar. Üç canını da kaybedersen oyun biter, skorun sayfana kaydedilir. Her beş olayda bir tur ilerler: dalganın yazılma süresi kısalır, karar penceresi daralır — refleksin de keskinleşmek zorunda kalır. İpucu: depremin küçük bir öncü titreşim (P-dalgası) sonrasında daha uzun süren ana sarsıntıyı (S-dalgası) taşır; patlama tek bir keskin sivri tepe + ani sessizliktir; kamyon yumuşak ama sürekli düşük-frekans gümbürtüsüdür; balina temiz, yavaş, sinüs şeklinde bir melodidir; rüzgar yapısı olmayan kaotik gürültüdür. R tuşu her an oyunu sıfırlar; en yüksek skorun tarayıcına kaydedilir.",
+  "en": {
+    "title": "Seismograph",
+    "description": "Seismic signal classification — inspect the incoming waveform and tell apart an earthquake, blast, truck, whale or wind.",
+    "controls": "Keys 1-5 or buttons: classify · Enter/Space: start · R: restart",
+    "howToPlay": "Seismograph puts you at an observation station: a waveform is drawn on the screen and you have to assign it to one of five categories — Earthquake, Blast, Truck, Whale, Wind. Every event has three phases. First the trace phase: the wave is written left-to-right as if on paper; watch its shape carefully. Then the answer phase: the drawing stops, a countdown bar drains along the bottom and you have a short window to call it — press 1-5 or tap a button. Finally the reveal phase: the correct label appears as a badge over the wave, the right button flashes green and your wrong pick (if any) flashes red. A correct answer scores 10 base points plus a streak bonus (+2 per consecutive correct, capped at +15); a wrong answer or a timeout costs you one life and resets the streak. Lose all three lives and the run ends with your score stored locally. Every five events you advance a round: the wave is drawn faster and the answer window shrinks — your reflexes get squeezed. Tip: an earthquake carries a small foreshock (P-wave) followed by a longer main shock (S-wave); a blast is a single sharp spike then near-silence; a truck is a soft but sustained low-frequency rumble; a whale is a clean slow sine song; wind is structureless chaotic noise. Press R at any time to restart; your best score is saved in the browser."
+  }
+}

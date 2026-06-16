@@ -1,0 +1,47 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="220" aria-label="Sismograf dalga ekranı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sismograf</h2>
+      <p id="overlay-msg">Beş tür sismik sinyali ayırt et: deprem, patlama, kamyon, balina, rüzgar. Dalgaya bak, doğru kategoriyi seç.</p>
+      <button id="start-btn" class="overlay-btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+
+<div class="status">
+  <span id="status-line">Bir kategori seç ya da 1-5 tuşları</span>
+</div>
+
+<div class="choices" role="group" aria-label="Sinyal kategorileri">
+  <button class="choice-btn" data-cat="deprem" type="button">
+    <span class="choice-key">1</span>
+    <span class="choice-name">Deprem</span>
+  </button>
+  <button class="choice-btn" data-cat="patlama" type="button">
+    <span class="choice-key">2</span>
+    <span class="choice-name">Patlama</span>
+  </button>
+  <button class="choice-btn" data-cat="kamyon" type="button">
+    <span class="choice-key">3</span>
+    <span class="choice-name">Kamyon</span>
+  </button>
+  <button class="choice-btn" data-cat="balina" type="button">
+    <span class="choice-key">4</span>
+    <span class="choice-name">Balina</span>
+  </button>
+  <button class="choice-btn" data-cat="ruzgar" type="button">
+    <span class="choice-key">5</span>
+    <span class="choice-name">Rüzgar</span>
+  </button>
+</div>
