@@ -1,0 +1,21 @@
+{
+  "title": "Damga",
+  "description": "Ahşap blokta düz darbelerle hedef deseni oy — koruma hücrelerine değmeden, en az hamlede çıkar.",
+  "dateAdded": "2026-06-16",
+  "tags": ["puzzle", "mantık", "özgün", "tek-oyunculu"],
+  "controls": "Sürükle: darbe çiz · R: sıfırla · N: sonraki seviye",
+  "thumbnail": "damga.svg",
+  "howToPlay": "Damga bir ahşap blok oyma bulmacasıdır: önünde tahta bir kalıp ve üstüne çıkarman gereken bir desen vardır. Tahta iki tür hücreden oluşur. Koyu, oyulmayacak hücreler 'koruma' bölgesidir — bunlara dokunduğun an darbe reddedilir. Üzerinde ince çapraz tarama olan açık tonlu hücreler ise hedef hücrelerdir; senin oyup boşaltman gereken yerler. Bir darbe, başlangıç hücresinden sürüklediğin hücreye uzanan **düz** bir satır ya da sütundur; başlangıç ile bitişin arasındaki tüm hücreleri tek bir hareketle oyar. Sürükleme yön olarak baskın eksene (yatay veya dikey) yakalanır, bu yüzden küçük el titremelerinde bile düz çizgi alırsın. Eğer darbenin geçtiği hücrelerden biri koruma bölgesindeyse darbe geçersiz olur, çerçeve kırmızı yanıp söner ve hiçbir şey değişmez — yeniden dene. Geçerli bir darbe atınca o satır/sütun boyunca tüm hedef hücreler kararıp 'oyulmuş' olarak işaretlenir; daha önce oyulmuş hücreleri tekrar geçmek serbesttir ama yeni hücre oymayan bir darbe (tamamen oyulmuş alana atılan) sessizce yok sayılır, sayaca yazılmaz. Üst HUD'da seviye numarası, rekorun, kullandığın darbe sayısı ve 'par' (önerilen minimum darbe sayısı) yazar. Tüm hedef hücreleri oyduğunda seviye biter; par'da ya da altında bitirirsen başarı mesajı kısa olur, üstündeyse fazla darbe sayını görürsün. Rekor en yüksek tamamladığın seviyedir ve tarayıcına saklanır. R tuşu seviyeyi baştan başlatır, N tuşu bir sonraki seviyeye atlar. İpucu: her seviyede önce desenin uzun kollarını bul ve onları tek darbede al; köşeler genellikle birden çok darbe gerektirir. Koruma hücreleri darbenin önüne barikat kurar, bu yüzden bir kolu iki ayrı darbeye bölmek gerekebilir. Daha karmaşık seviyelerde gözünle 'bu hücre hangi düz çizginin parçası olabilir?' diye tara — bazı hücreler aynı anda hem yatay hem dikey bir darbeye dahil olabilir, sıralamayı buna göre planla.",
+  "scoring": {
+    "storageKey": "damga.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Stamp",
+    "description": "Engrave a wooden block with straight strokes — uncover the target pattern in as few cuts as possible, without nicking the keep zones.",
+    "controls": "Drag: cut a stroke · R: reset · N: next level",
+    "howToPlay": "Damga is a wood-block engraving puzzle: in front of you is a block of timber with a pattern outlined on it. There are two kinds of cells. Dark cells with a wood-grain look are 'keep' zones — your chisel must not touch them. The lighter cells with thin diagonal hatching are target cells; those are the ones you have to chip out. A stroke is a straight horizontal or vertical run of cells from where you started dragging to where you released; it chisels every cell along that line in a single motion. The drag snaps to the dominant axis (horizontal or vertical), so a slightly wobbly drag still produces a clean line. If a stroke would cross a keep cell it is rejected — the frame briefly flashes red and nothing changes. A valid stroke darkens all target cells along its line; passing back over already-chiselled cells is fine, but a stroke that doesn't carve any new cell is silently ignored and not counted. The top HUD shows the level number, your best, the strokes you've used, and the 'par' (suggested minimum stroke count). When every target cell is carved the level ends; if you finished at or under par you get a short success message, otherwise you see how many strokes you went over. Your best score is the highest level you've completed and is saved in your browser. Press R to restart the current level, N to skip to the next. Tip: spot the longest straight runs of the pattern and take them in single strokes; corners typically need more than one cut. Keep cells barricade your strokes — sometimes you have to split a single visual arm into two strokes. On harder levels, ask yourself for each cell, 'which straight line could include this?' — some cells belong to both a horizontal and a vertical option, and your stroke ordering matters."
+  }
+}
