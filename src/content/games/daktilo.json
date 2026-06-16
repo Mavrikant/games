@@ -1,0 +1,21 @@
+{
+  "title": "Daktilo",
+  "description": "Eski daktiloyla yaz — ama tuşlara fazla hızlı basarsan sıkışır.",
+  "dateAdded": "2026-06-16",
+  "tags": ["arcade", "zamanlama", "tek-oyunculu", "özgün"],
+  "controls": "Klavye: harfleri yaz · Boşluk: sıkışmayı aç · R: yeniden başla",
+  "howToPlay": "Ekrandaki kâğıt parçasında yazman gereken küçük bir kelime gösterilir. Klavyenden harfleri sırayla yaz; her doğru harf bir puan kazandırır ve daktilonun ortasındaki çekiç (mallet) kâğıda doğru fırlar. Kelimeyi bitirdiğinde yeni bir kelime gelir, böylece 60 saniye boyunca yazmaya devam edersin.\n\nİşin tuhaf yanı: çoğu yazma oyununun aksine HIZLI yazmana izin yok. Daktilonun fiziği gerçekçidir — iki tuş arasında 100 milisaniyeden az boşluk bırakırsan çekiçler birbirine takılır ve daktilo SIKIŞIR. Sıkışmayı açmak için Boşluk tuşuna basman gerekir ve bu sana 1 saniyelik süre cezası olarak yansır. Yanlış harf basarsan 0,5 saniye gider; ilerleme olmaz, ama yanlış tuş da gap zamanlayıcısını sıfırlar, dolayısıyla 'önce yanlış sonra doğru' hızlı basma stratejisi de sıkışmaya yol açar.\n\nGövdedeki ince çubuk son tuş basışından beri geçen süreyi gösterir — turuncuyken bekle, yeşile dönünce bir sonraki harfi bas. Sürekli istikrarlı bir tempo bul (ortalama dakikada ~150 harfin biraz altı): çok yavaş kalırsan 60 saniyelik süre yetmez, çok hızlı basarsan sıkışırsın. Ritmi tutturduğun an, kelimeyi doğru okurken parmaklarını da senkronize tutmak gerçek bir konsantrasyon meselesidir. Skorun, süre dolduğunda yazdığın toplam doğru harf sayısıdır; en iyi skorun tarayıcında saklanır.\n\nİpuçları: önce gözünle kelimeyi oku, sonra yazmaya başla — kelimeyi okurken duraklayıp gap'in sıfırlanmasına izin verme. R tuşu her zaman turu sıfırlar; süre dolduğunda Enter veya R yeniden başlatır.",
+  "thumbnail": "daktilo.svg",
+  "scoring": {
+    "storageKey": "daktilo.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Typewriter",
+    "description": "Type on an old typewriter — but if you press keys too fast, it jams.",
+    "controls": "Keyboard: type the letters · Space: clear jam · R: restart",
+    "howToPlay": "A short word appears on the sheet of paper. Type each letter in order on your keyboard; every correct letter scores one point and the typewriter's mallet flicks up toward the paper. When you finish a word, a new one slides in, so you keep typing for the full 60-second round.\n\nThe twist is that, unlike most typing games, you are not allowed to type fast. The typewriter's physics are realistic — if two keystrokes are less than 100 milliseconds apart, the mallets collide and the machine JAMS. To clear a jam you press Space, costing you 1 second of game time. Pressing the wrong letter costs 0.5 seconds and produces no progress, but it still resets the gap timer, so a fast 'wrong-then-right' attempt will still jam the machine.\n\nA thin bar inside the typewriter shows how long it has been since your last keystroke — wait while it's orange, press as soon as it turns green. Find a steady cadence (a bit under ~150 letters per minute): too slow and the timer runs out, too fast and you jam. Once you find the rhythm, keeping your eyes on the next letter while syncing your fingers is the real challenge. Your score is the total correct letters typed when time expires; the browser remembers your best run.\n\nTips: read the word with your eyes first, but don't pause so long that the gap timer drains your round. R always restarts; after the round ends, Enter or R starts a fresh attempt."
+  }
+}

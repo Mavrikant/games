@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">60.0</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="640" height="400" aria-label="Daktilo oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Daktilo</h2>
+      <p id="overlay-msg">Aşağıdaki harfleri sırayla yaz — ama iki tuş arasında 100 ms'den az boşluk bırakırsan daktilo SIKIŞIR. Sıkışmayı açmak için Boşluk'a bas.
+
+Başlamak için harfe bas.</p>
+    </div>
+  </div>
+</div>
