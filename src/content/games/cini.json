@@ -1,0 +1,22 @@
+{
+  "title": "Çini",
+  "description": "İznik çinisi gibi simetrik bir desen boya — her dokunuş 4 kareyi birden boyar. Hedef motifi en az hamleyle eşle, 5 bölüm.",
+  "dateAdded": "2026-06-16",
+  "tags": ["puzzle", "özgün", "sanat", "renk", "tek-oyunculu"],
+  "controls": "Tıkla: seçili renkle hücreyi (ve 3 simetrik eşini) boya · 1-4: renk/silgi seç · Z: geri al · R: bölümü sıfırla · Enter/Boşluk: sonraki bölüm",
+  "thumbnail": "cini.svg",
+  "howToPlay": "Çini, geleneksel İznik çinisi mantığını minik bir bulmacaya çevirir: ekranda dört kat aynalı simetrik bir hedef motif görürsün, altında ise boş bir karo. Görevin, paletten bir renk seçip karoya tıklayarak motifi birebir oluşturmak. Tuhaflık şu — fırçan tek bir hücreyi değil, dört simetrik eşini birden boyar: dokunduğun hücre yatay aksta, dikey aksta ve merkezde aynalanıp dört noktaya birden basılır. Yani sol-üstteki bir kareye tıkladığında sağ-üst, sol-alt ve sağ-alt kareler de aynı rengi alır. Renk paletinden 1-4 tuşlarıyla ya da fareyle seçim yap (1: silgi, 2-4: renkler); silgi modunda tıkladığın dörtlü temizlenir. Yanlış hamleyi Z ile geri alabilir, bölümü R ile baştan başlatabilirsin. Hedef ile karo bire bir aynı olduğunda bölüm tamamlanır ve sıradakine geçersin. Toplam 5 bölüm var: ilkler 4×4 tek renk, sonra 6×6 iki renk, en zoru 8×8 üç renk. Her bölümde teorik minimum hamle var; o sayıya ne kadar yaklaşırsan toplam skorun o kadar düşük olur (düşük iyi). İpucu: hedefin yalnız bir çeyreğini düşün; o çeyrekteki dolu hücreleri renklerine göre grupla ve her renk için bir kez fırça seç. Aynı dörtlüye iki kez tıklamak gereksiz hamledir; önce yanlış renkle bastıysan o dörtlüyü silgi ile temizleyip yenisini koymak iki hamle yer.",
+  "scoring": {
+    "storageKey": "cini.best",
+    "label": "Toplam hamle",
+    "direction": "lower",
+    "unit": "hamle",
+    "labelEn": "Total strokes"
+  },
+  "en": {
+    "title": "Iznik Tile",
+    "description": "Paint a symmetric pattern in the spirit of Iznik ceramics — every brush stroke paints four mirrored cells at once. Match the target in as few strokes as possible across 5 levels.",
+    "controls": "Click: paint a cell (and its 3 mirrored twins) with the selected color · 1-4: pick color / eraser · Z: undo · R: reset level · Enter/Space: next level",
+    "howToPlay": "Iznik Tile turns the logic of traditional Turkish ceramic tiles into a small puzzle: you see a target pattern with four-fold mirror symmetry, with an empty tile beneath it. Your job is to pick a colour from the palette and click on the canvas to reproduce the pattern exactly. The twist is that your brush does not paint a single cell, it paints four mirror twins at once: the cell you touch is reflected across the horizontal axis, the vertical axis, and the centre, so all four cells take the same colour at the same time. Picking a cell in the top-left corner therefore paints the top-right, bottom-left, and bottom-right cells too. Pick colours from the palette with the 1-4 keys or the mouse (1: eraser, 2-4: colours); in eraser mode the four selected cells are cleared. Undo a wrong stroke with Z, or restart the level with R. Once the canvas matches the target cell by cell the level is complete and you advance. There are five levels in total: the first ones are 4×4 single-colour, then 6×6 two-colour, the toughest is 8×8 three-colour. Each level has a theoretical minimum stroke count; the closer you get to it, the lower your total record becomes (lower is better). Tip: focus on a single quadrant of the target; group the filled cells in that quadrant by colour and pick each colour just once. Clicking the same quartet twice is a wasted move; if you picked the wrong colour, the cheapest fix is to erase that quartet and repaint it, which costs two strokes."
+  }
+}

@@ -1,0 +1,204 @@
+/*
+ * Çini — Iznik tile painting puzzle. The board is canvas-rendered so most
+ * visuals are in the logic file; this stylesheet covers the HUD strip, the
+ * target preview panel, the overlay (required by @shared/overlay's helpers —
+ * pitfall: missing-overlay-css), the action row and the color palette.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#cini-board {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  touch-action: manipulation;
+  background: var(--surface, #1e2230);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 14px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.cini-overlay__btn {
+  font-size: 14px;
+  padding: 8px 18px;
+}
+
+.hud__stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  min-width: 64px;
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.cini-actions {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 10px;
+  flex-wrap: wrap;
+}
+
+.cini-actions__btn {
+  font-size: 13px;
+  padding: 6px 14px;
+}
+
+.cini-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 12px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: max-content;
+  max-width: 100%;
+}
+
+.cini-panel__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+#cini-target {
+  display: block;
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  background: #f4ecd8;
+}
+
+.cini-palette {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 14px auto 0;
+  flex-wrap: wrap;
+  max-width: 480px;
+}
+
+.cini-palette__btn {
+  background: var(--surface, #1e2230);
+  color: var(--text, #e6e8ef);
+  border: 2px solid var(--border, #2a3040);
+  border-radius: 10px;
+  padding: 6px 8px 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: border-color 0.12s, transform 0.08s;
+  min-width: 54px;
+}
+
+.cini-palette__btn:hover {
+  border-color: var(--accent, #6366f1);
+}
+
+.cini-palette__btn:active {
+  transform: scale(0.96);
+}
+
+.cini-palette__btn.is-active {
+  border-color: var(--accent, #6366f1);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.cini-palette__swatch {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cini-palette__swatch--eraser {
+  background:
+    linear-gradient(45deg, transparent 46%, #c93b3b 46%, #c93b3b 54%, transparent 54%),
+    repeating-conic-gradient(#f4ecd8 0 25%, #d7c9a4 0 50%);
+  background-size: 100% 100%, 12px 12px;
+}
+
+.cini-palette__key {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .hud__stat {
+    font-size: 10px;
+    padding: 8px 10px;
+    min-width: 56px;
+  }
+  .hud__stat span {
+    font-size: 18px;
+  }
+  #cini-target {
+    width: 130px;
+    height: 130px;
+  }
+}

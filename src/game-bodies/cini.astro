@@ -1,0 +1,49 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Bölüm<span id="cini-level">1/5</span></div>
+  <div class="hud__stat">Hamle<span id="cini-strokes">0</span></div>
+  <div class="hud__stat">Min<span id="cini-min">0</span></div>
+  <div class="hud__stat">Rekor<span id="cini-best">—</span></div>
+</header>
+
+<div class="cini-actions" role="group" aria-label="Aksiyonlar">
+  <button id="cini-undo" class="hud__btn cini-actions__btn" type="button" aria-label="Son hamleyi geri al">↶ Geri al</button>
+  <button id="cini-reset" class="hud__btn cini-actions__btn" type="button" aria-label="Bölümü sıfırla">Sıfırla</button>
+</div>
+
+<section class="cini-panel" aria-label="Hedef desen">
+  <div class="cini-panel__label">Hedef</div>
+  <canvas id="cini-target" width="200" height="200" aria-label="Hedef çini deseni"></canvas>
+</section>
+
+<div class="board-wrap">
+  <canvas id="cini-board" width="480" height="480" aria-label="Boyama tahtası"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çini</h2>
+      <p id="overlay-msg">Simetrik fırçayla hedef deseni boya.</p>
+      <button id="overlay-btn" class="hud__btn cini-overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+
+<div class="cini-palette" role="group" aria-label="Renk paleti">
+  <button class="cini-palette__btn" data-color="0" data-key="1" type="button" aria-label="Silgi (1)">
+    <span class="cini-palette__swatch cini-palette__swatch--eraser" aria-hidden="true"></span>
+    <span class="cini-palette__key">1</span>
+  </button>
+  <button class="cini-palette__btn" data-color="1" data-key="2" type="button" aria-label="Kobalt mavi (2)">
+    <span class="cini-palette__swatch" style="background:#1f4ea8" aria-hidden="true"></span>
+    <span class="cini-palette__key">2</span>
+  </button>
+  <button class="cini-palette__btn" data-color="2" data-key="3" type="button" aria-label="Mercan (3)">
+    <span class="cini-palette__swatch" style="background:#c9433a" aria-hidden="true"></span>
+    <span class="cini-palette__key">3</span>
+  </button>
+  <button class="cini-palette__btn" data-color="3" data-key="4" type="button" aria-label="Turkuaz (4)">
+    <span class="cini-palette__swatch" style="background:#2a9d8f" aria-hidden="true"></span>
+    <span class="cini-palette__key">4</span>
+  </button>
+</div>
