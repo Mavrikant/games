@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mantar">
+  <defs>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#15281a" />
+      <stop offset="100%" stop-color="#0a1610" />
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="50%" stop-color="rgba(0,0,0,0)" />
+      <stop offset="100%" stop-color="rgba(0,0,0,0.55)" />
+    </radialGradient>
+    <radialGradient id="peakGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="rgba(253,224,71,0.6)" />
+      <stop offset="100%" stop-color="rgba(253,224,71,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#floor)" />
+
+  <!-- moss patches -->
+  <g fill="rgba(74,124,89,0.10)">
+    <circle cx="42" cy="58" r="22"/>
+    <circle cx="118" cy="38" r="18"/>
+    <circle cx="208" cy="48" r="26"/>
+    <circle cx="278" cy="92" r="20"/>
+    <circle cx="62" cy="152" r="28"/>
+    <circle cx="186" cy="166" r="22"/>
+    <circle cx="252" cy="158" r="18"/>
+  </g>
+
+  <!-- small sprout, left -->
+  <g transform="translate(60,140)">
+    <ellipse cx="0" cy="6" rx="3" ry="6" fill="#f1e5c8"/>
+    <path d="M -7 0 A 7 5 0 0 1 7 0 Z" fill="#8a4030"/>
+  </g>
+
+  <!-- young, mid-left -->
+  <g transform="translate(108,150)">
+    <ellipse cx="0" cy="8" rx="4" ry="9" fill="#f1e5c8"/>
+    <path d="M -11 0 A 11 8 0 0 1 11 0 Z" fill="#c2422a"/>
+    <circle cx="-3" cy="-3" r="1.6" fill="rgba(255,255,255,0.92)"/>
+    <circle cx="4" cy="-2" r="1.6" fill="rgba(255,255,255,0.92)"/>
+  </g>
+
+  <!-- ripe, center-left -->
+  <g transform="translate(155,128)">
+    <ellipse cx="0" cy="10" rx="5" ry="12" fill="#f1e5c8"/>
+    <path d="M -17 0 A 17 13 0 0 1 17 0 Z" fill="#dc2626"/>
+    <path d="M -12 -4 A 11 8 0 0 1 8 -4 Z" fill="#ef4444"/>
+    <circle cx="-9" cy="-3" r="2" fill="rgba(255,255,255,0.92)"/>
+    <circle cx="-2" cy="-6" r="2" fill="rgba(255,255,255,0.92)"/>
+    <circle cx="7" cy="-2" r="2" fill="rgba(255,255,255,0.92)"/>
+    <circle cx="12" cy="-6" r="1.6" fill="rgba(255,255,255,0.92)"/>
+  </g>
+
+  <!-- peak (gold halo), right -->
+  <g transform="translate(220,108)">
+    <circle cx="0" cy="0" r="42" fill="url(#peakGlow)"/>
+    <ellipse cx="0" cy="14" rx="6" ry="14" fill="#f1e5c8"/>
+    <path d="M -22 0 A 22 17 0 0 1 22 0 Z" fill="#f59e0b"/>
+    <path d="M -16 -4 A 14 10 0 0 1 12 -4 Z" fill="#fbbf24"/>
+    <circle cx="-12" cy="-3" r="2.4" fill="rgba(255,255,255,0.95)"/>
+    <circle cx="-4" cy="-7" r="2.4" fill="rgba(255,255,255,0.95)"/>
+    <circle cx="6" cy="-3" r="2.4" fill="rgba(255,255,255,0.95)"/>
+    <circle cx="14" cy="-7" r="2" fill="rgba(255,255,255,0.95)"/>
+    <circle cx="17" cy="-1" r="1.6" fill="rgba(255,255,255,0.95)"/>
+  </g>
+
+  <!-- background hint spores -->
+  <g fill="rgba(180,200,140,0.55)">
+    <circle cx="278" cy="170" r="2"/>
+    <circle cx="285" cy="162" r="1.4"/>
+    <circle cx="270" cy="178" r="1.6"/>
+    <circle cx="42" cy="98" r="1.8"/>
+    <circle cx="36" cy="108" r="1.4"/>
+  </g>
+
+  <rect width="320" height="200" fill="url(#vignette)" />
+
+  <text x="160" y="190" text-anchor="middle"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#f5d76e" opacity="0.92">MANTAR</text>
+</svg>

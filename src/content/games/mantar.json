@@ -1,0 +1,21 @@
+{
+  "title": "Mantar",
+  "description": "Orman zemininde mantarlar olgunlaşır — vaktinde topla, çürürse spor saçıp 2 yeni mantar tetikler. 60 saniyede dengeli hasat.",
+  "dateAdded": "2026-06-16",
+  "tags": ["arcade", "refleks", "özgün", "risk-ödül", "tek-oyunculu"],
+  "controls": "Tıkla/dokun: mantarı topla · Boşluk/Enter: başla · R: yeniden başla",
+  "thumbnail": "mantar.svg",
+  "howToPlay": "Mantar, karanlık bir orman zemininde 60 saniyelik bir hasat oyunudur — ama klasik bir \"hızlı topla\" refleks oyunu değil; her mantarın bir yaşam eğrisi var ve doğru anı seçmek puanı katlıyor. Oyun başladığında zemine küçük filiz mantarlar düşmeye başlar. Her mantar yaklaşık 4 saniye içinde beş evreden geçer: filiz (küçük, gri-bej, +1 puan), olgunlaşmamış (orta boy, soluk renk, +3), olgun (büyük, parlak kırmızı/turuncu/altın cap, +6), tepe (en büyük, etrafında altın halka, +10) ve çürük (sönmüş gri, kırmızı titrek halka uyarısı, 0 puan). Doğal refleks parlak gördüğün anda dokunmak — ama altın halkalı tepe evresi ipucudur; o yarım saniyeyi yakalarsan puan tepedir. Erken dokunursan filizi heba edersin, geç dokunursan mantar çürür. Burada gerçek twist devreye girer: hiç dokunmadan çürüyen bir mantar tam orada patlar ve etrafına iki yeni filiz saçar — yani bir mantarı bilerek çürümeye bırakmak, kısa vadeli puan kaybı ama orta vadeli kalabalık demek. Çok kalabalıkken (ekrandaki canlı mantar sayısı 28'i bulunca) sistem yeni mantar üretmez; spor patlamalarıyla doluluk kendiliğinden patlar. Doğal spawn ise zamanla ~1 saniyeden ~0.55 saniyeye düşer. Skor 60 saniyenin sonunda kilitlenir ve rekorun tarayıcına yazılır. Strateji: ilk 20 saniyeyi tepelerini yakalayıp temizleyerek geçir; ortada 1-2 mantarı bilerek çürümeye bırakıp ekrana 4-6 ekstra mantar getir; son 15 saniyede her şeyi temizle. Klavye yok, sadece tıklama. R tuşu turu sıfırlar. Çürük mantara tıklamak küçük bir tozdan ibarettir — ne puan ne ceza, ama tıklamayla erken patlatamazsın, doğal süresini bekleyeceksin.",
+  "scoring": {
+    "storageKey": "mantar.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Mushroom",
+    "description": "Mushrooms ripen on the forest floor — pick them at their peak, or let them rot to release spores that spawn two new sprouts. A 60-second risk-reward forage.",
+    "controls": "Click/tap: harvest a mushroom · Space/Enter: start · R: restart",
+    "howToPlay": "Mantar (Mushroom) is a 60-second foraging game on a dark forest floor — not a pure twitch arcade, because every mushroom has a life curve and the timing of your tap multiplies the score. When you start, tiny sprouts pop up on the ground. Each one passes through five stages over about four seconds: sprout (small, pale grey-tan, +1 point), young (medium, muted hue, +3), ripe (large, bright red/orange/gold cap, +6), peak (largest, gold halo around it, +10) and rotten (dim grey with a flickering red ring as a final warning, 0 points). The instinct is to tap as soon as something looks bright — but that gold halo on the peak stage is the cue; nail that half-second window and you get the maximum payout. Tap too early and you waste a sprout for one point, tap too late and you watch it rot. The real twist starts there: a mushroom you don't touch eventually bursts where it stands and seeds two new sprouts around it — letting one rot is short-term lost points but mid-term extra spawns. When the floor gets crowded (28 live mushrooms on screen) the system stops natural spawning; the spore bursts then re-seed the field on their own. Natural spawn cadence also ramps from ~1 second to ~0.55 seconds as the round progresses. Your score is locked in at the end of the 60-second timer and your best is saved in your browser. Strategy: spend the first 20 seconds nailing peaks to clear the floor; in the middle, deliberately let a couple rot to flood the screen with extra sprouts; in the last 15 seconds, harvest everything ripe or peaking. No keyboard required — just clicks. Press R to restart the round. Clicking a rotten cap is a tiny puff with neither score nor penalty, and it does not pop the spore burst — that only happens when the cap times out naturally."
+  }
+}
