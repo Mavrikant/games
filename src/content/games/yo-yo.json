@@ -1,0 +1,21 @@
+{
+  "title": "Yo-Yo",
+  "description": "Yo-yo'yu doğru anda sal, dipte uyusun ve sicim dolanmadan eline geri çek. Her tur biraz daha derin, spin biraz daha hızlı tükenir.",
+  "dateAdded": "2026-06-16",
+  "tags": ["arcade", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk veya fare basılı tut: yo-yo'yu sal · Bırak: geri çek · R: yeniden başla",
+  "howToPlay": "Yo-Yo, tek bir bas-bırak ekseninde dönen bir zamanlama oyunudur. Ekranın üstündeki el, sicimin ucundaki yo-yo'yu tutar; aşağı uzayan çizgi sicimdir, sicimin ucundaki disk de spin halindeki yo-yo'dur. Boşluk tuşunu (veya farenin sol tuşunu) basılı tuttuğun sürece sicim uzar ve yo-yo aşağı iner; bıraktığında sicim sarılır ve yo-yo geri yukarı tırmanır. Yo-yo'nun bir spin (dönüş) enerjisi vardır ve bu enerji disk etrafındaki halkada gösterilir: yeşilden sarıya, sarıdan kırmızıya akarak biter. Spin, derindeyken hızla, sığdayken yavaşça tükenir; sicim sarılırken hafifçe yenilenir ama tamamen dolmaz. Görevin yo-yo'yu mümkün olduğunca derine bırakmak ve spin sıfırlanmadan eline geri çekmektir; her başarılı yakalama bir 'tur' tamamlar, derinliğe göre puan kazandırır ve yeni bir spin verir. Dipte bir an beklemek (sleeper) yakalama puanını çarpar — risk büyür ama ödül büyür. Spin sicim üstte bitmediği sürece — yani yo-yo el'e dönmeden tükenirse — sicim dolanır ve oyun biter. Her tur spin biraz daha hızlı azalır, bu yüzden kovalanan derinlik aynı kalsa bile her cycle daha agresif zamanlama gerektirir. Skor tarayıcında saklanır. İpucu: ilk turlarda fazla uzatma — kısa, ritmik bas-bırak'lar ile combo say'ı topla. Üst seviyelerde dipte 0.3–0.5 saniyelik kısa bir sleeper bonus için zamanı kayda al ama spin halkasında kırmızı belirir belirmez bırak; geri çekiş çizgisinin 'glide' bölgesi bu uyarı an'ıdır.",
+  "thumbnail": "yo-yo.svg",
+  "scoring": {
+    "storageKey": "yo-yo.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Yo-Yo",
+    "description": "Throw the yo-yo down at the right moment, let it sleep at the bottom and recall it before the string tangles. Each cycle gets a touch deeper and the spin runs out a touch faster.",
+    "controls": "Hold Space or mouse: let the yo-yo drop · Release: recall · R: restart",
+    "howToPlay": "Yo-Yo is a timing game that revolves around a single hold-and-release axis. The hand at the top of the screen holds the yo-yo by a string; the line below is the string, and the disc at its end is the spinning yo-yo. While you hold Space (or the left mouse button) the string pays out and the yo-yo descends; when you release it the string winds back and the yo-yo climbs up to the hand. The yo-yo has a spin energy shown as the ring around the disc, fading from green through yellow to red as it runs down. Spin drains quickly when the yo-yo is deep, slowly when it is high, and recovers a touch (but never fully) while the string is winding in. Your job is to drop the yo-yo as deep as you can and recall it before the spin reaches zero; every successful catch is a cycle, scores points based on depth, and grants a fresh spin. Pausing at the bottom (a sleeper) multiplies the catch payout — the risk grows, and so does the reward. If the spin ever runs out while the yo-yo isn't already in your hand, the string tangles and the run ends. Each cycle the drain accelerates, so even a constant depth requires tighter timing as you go. Your best score is stored in your browser. Tip: in the opening cycles, don't reach too deep — short, rhythmic press-and-release combos build a multiplier. Higher up, a 0.3–0.5 second sleeper at the bottom unlocks a juicy bonus, but pull the moment the spin ring flashes red; the 'glide' band on the way up is its early warning."
+  }
+}

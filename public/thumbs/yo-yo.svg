@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Yo-Yo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101620" />
+      <stop offset="55%" stop-color="#0c1018" />
+      <stop offset="100%" stop-color="#070910" />
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#5eead4" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#5eead4" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- Forearm / wrist at the top -->
+  <rect x="142" y="0" width="36" height="32" fill="#1f2937" />
+  <rect x="142" y="30" width="36" height="4" fill="#64748b" />
+  <circle cx="160" cy="38" r="10" fill="#e2c39a" />
+
+  <!-- String -->
+  <line x1="160" y1="46" x2="160" y2="128" stroke="#e5e7eb" stroke-opacity="0.85" stroke-width="1.4" />
+
+  <!-- Yo-yo halo + spin ring (green portion = 70%, red gap = 30%) -->
+  <circle cx="160" cy="142" r="32" fill="url(#halo)" />
+  <circle cx="160" cy="142" r="24" fill="none" stroke="#34d399" stroke-width="3"
+    stroke-dasharray="105 45" stroke-dashoffset="38" transform="rotate(-90 160 142)" />
+
+  <!-- Yo-yo body -->
+  <circle cx="160" cy="142" r="20" fill="#7c3aed" />
+  <circle cx="160" cy="142" r="12" fill="#a78bfa" />
+  <g stroke="#0f172a" stroke-width="2" stroke-linecap="round">
+    <line x1="160" y1="138" x2="160" y2="130" />
+    <line x1="164" y1="143" x2="171" y2="146" />
+    <line x1="155" y1="146" x2="148" y2="149" />
+  </g>
+  <circle cx="160" cy="142" r="2.5" fill="#fef3c7" />
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e4e4ed">Yo-Yo</text>
+</svg>
