@@ -1,0 +1,88 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">El<span id="hand">1/8</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <div class="nu">
+    <div class="nu-stage" aria-label="Renk eşleme alanı">
+      <div class="nu-swatch nu-swatch--target" id="target-swatch" aria-label="Hedef renk">
+        <div class="nu-swatch__cover" id="target-cover" aria-hidden="true"></div>
+        <span class="nu-swatch__label">Hedef</span>
+      </div>
+      <div class="nu-swatch nu-swatch--guess" id="guess-swatch" aria-label="Senin tahmin rengin">
+        <span class="nu-swatch__label">Senin</span>
+      </div>
+    </div>
+
+    <div class="nu-status" aria-live="polite">
+      <span id="status-msg" class="nu-status__msg">Başlamak için Başla'ya bas.</span>
+      <span class="nu-status__pill">Bu el: <span id="hand-score">—</span></span>
+    </div>
+
+    <div class="nu-sliders" role="group" aria-label="Renk sürgüleri">
+      <div class="nu-slider" data-channel="r">
+        <label class="nu-slider__label" for="slider-r">Kırmızı</label>
+        <div class="nu-slider__row">
+          <input
+            id="slider-r"
+            class="nu-slider__input"
+            type="range"
+            min="0"
+            max="255"
+            value="128"
+            aria-label="Kırmızı kanalı"
+          />
+          <span class="nu-slider__value" id="value-r">128</span>
+        </div>
+      </div>
+      <div class="nu-slider" data-channel="g">
+        <label class="nu-slider__label" for="slider-g">Yeşil</label>
+        <div class="nu-slider__row">
+          <input
+            id="slider-g"
+            class="nu-slider__input"
+            type="range"
+            min="0"
+            max="255"
+            value="128"
+            aria-label="Yeşil kanalı"
+          />
+          <span class="nu-slider__value" id="value-g">128</span>
+        </div>
+      </div>
+      <div class="nu-slider" data-channel="b">
+        <label class="nu-slider__label" for="slider-b">Mavi</label>
+        <div class="nu-slider__row">
+          <input
+            id="slider-b"
+            class="nu-slider__input"
+            type="range"
+            min="0"
+            max="255"
+            value="128"
+            aria-label="Mavi kanalı"
+          />
+          <span class="nu-slider__value" id="value-b">128</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nu-actions">
+      <button id="lock-btn" class="hud__btn hud__btn--primary" type="button">KİLİTLE</button>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Nüans</h2>
+      <p id="overlay-msg">8 elde hedef renkleri kısa süre gör, sonra R/G/B sürgüleriyle ezberden yeniden üret. Sapman ne kadar azsa puan o kadar yüksek.</p>
+      <button id="start-btn" class="hud__btn hud__btn--primary" type="button">BAŞLA</button>
+    </div>
+  </div>
+</div>
