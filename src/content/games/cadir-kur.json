@@ -1,0 +1,21 @@
+{
+  "title": "Çadır Kur",
+  "description": "Mantık bulmacası — her ağacın yanına tam bir çadır kur, çadırlar birbirine değmesin, satır/sütun sayıları tutsun.",
+  "dateAdded": "2026-06-16",
+  "tags": ["puzzle", "mantık", "özgün"],
+  "controls": "Sol tık: çadır · Sağ tık / Shift+tık: çim işareti · R: bölümü sıfırla · N: yeni bölüm · H: ipucu",
+  "howToPlay": "Çadır Kur, ağaçların yanına çadır yerleştirmeye dayalı klasik bir Nikoli-tarzı mantık bulmacasıdır. Her bölümde önüne bir N×N ızgara çıkar; bazı hücrelerde ağaçlar bulunur, satır ve sütunların başında o satıra/sütuna kaç çadır gireceğini gösteren sayılar yazar. Üç kural vardır: (1) her ağacın yatay veya dikey olarak ona komşu tam bir hücrede çadırı vardır — birebir eşleşme, (2) hiçbir iki çadır birbirine değmez, köşegen komşuluk dahil, (3) her satırdaki ve her sütundaki çadır sayısı kenarlardaki ipucu sayılarına eşit olur. Boş bir hücreye sol tıklarsan oraya bir çadır kurarsın; ikinci tık çadırı kaldırır. Sağ tık veya Shift+tık ise hücreyi 'çim' (çadır kesinlikle olmayacak) olarak işaretler, deduksiyon notu olarak kullanırsın. Üst HUD ipuçlarına dikkat: kalan ipucu satır/sütun ihlal durumunda kırmızı yanar, doğru tamamlandığında yeşile döner. Tüm ağaçlar tek bir çadırla eşleştiğinde, çadır sayıları tutturulduğunda ve çadır-çadır komşuluk yoksa bölüm tamamlanır; süren ve hamle sayın kaydedilir. H ile ipucu alabilirsin (her bölümde 3 hak): rastgele bir mantıksal hamleyi senin yerine işaretler. R bölümü sıfırlar, N yeni bir bulmaca üretir. Strateji: önce 0 ipuçlu satır/sütunları işaretle (tamamı çim), sonra dolu ipuçlu satır/sütunlardaki bariz tek-yer hücreleri çadıra çevir; her ağacın yalnız bir komşusu çim değilse o komşu mecburen çadırdır.",
+  "thumbnail": "cadir-kur.svg",
+  "scoring": {
+    "storageKey": "cadir-kur.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Pitch the Tent",
+    "description": "Logic puzzle — place one tent next to every tree, no two tents may touch, and column/row counts must match.",
+    "controls": "Left click: tent · Right click / Shift+click: grass mark · R: reset level · N: new level · H: hint",
+    "howToPlay": "Pitch the Tent is a classic Nikoli-style logic puzzle. Each level shows you an N×N grid with trees scattered in some cells and a row/column count along the edges saying how many tents the row/column must contain. Three rules: (1) every tree is matched with exactly one tent placed in a horizontally or vertically adjacent cell, one-to-one, (2) no two tents may touch — diagonal contact counts as touching, (3) the number of tents in each row and column must equal the edge clues. Left-click an empty cell to place a tent; clicking the same cell again removes it. Right-click (or Shift+click) marks the cell as 'grass' (definitely no tent here) — useful as a deduction aid. Edge counts turn green when satisfied and red when violated. The puzzle is complete when every tree is paired with one tent, the counts match, and no two tents touch. Your time and move count are saved. Press H for a hint (3 per level): it marks one logically forced cell for you. R resets the level, N deals a new puzzle. Strategy: first mark every cell in a row/column whose clue is 0 as grass; then look for trees whose only un-grass neighbour must be a tent; finally use parity arguments on tightly constrained rows."
+  }
+}

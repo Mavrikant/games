@@ -1,0 +1,187 @@
+/*
+ * Çadır Kur — Tents-and-Trees logic puzzle.
+ * Keep the standard board-wrap + overlay positioning (the @shared/overlay
+ * helper only toggles the .overlay--hidden class; the visual effect has
+ * to come from this stylesheet — pitfall: missing-overlay-css).
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.ck-board {
+  display: grid;
+  grid-template-columns: auto repeat(var(--ck-n, 5), 1fr);
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  touch-action: manipulation;
+}
+
+.ck-clue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  min-height: 28px;
+  min-width: 28px;
+  user-select: none;
+}
+
+.ck-clue--corner {
+  /* empty spacer in the top-left */
+}
+
+.ck-clue--ok {
+  color: #16a34a;
+}
+
+.ck-clue--over {
+  color: #ef4444;
+}
+
+.ck-cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: clamp(14px, 4.5vw, 28px);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  color: var(--text);
+  font-family: inherit;
+  transition: background 0.08s ease-out, border-color 0.08s ease-out;
+}
+
+.ck-cell:hover:not(.ck-cell--tree) {
+  background: var(--surface);
+  border-color: var(--accent, #f59e0b);
+}
+
+.ck-cell--tree {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
+  cursor: default;
+}
+
+.ck-cell--tent {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.6);
+}
+
+.ck-cell--grass {
+  color: var(--text-dim);
+  font-size: clamp(18px, 5.5vw, 32px);
+  line-height: 0.5;
+  background: var(--bg);
+  opacity: 0.55;
+}
+
+.ck-cell--bad {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  animation: ck-shake 0.18s linear;
+}
+
+@keyframes ck-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+.ck-rules {
+  max-width: 560px;
+  margin: 16px auto 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.ck-rules strong {
+  color: var(--text);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hud__score {
+  flex: 1 1 80px;
+  min-width: 80px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

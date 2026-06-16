@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <div class="hud__score">Süre<span id="time">0:00</span></div>
+  <div class="hud__score">İpucu<span id="hints">3</span></div>
+  <button id="hint-btn" class="hud__btn" type="button">İpucu</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+  <button id="next-btn" class="hud__btn" type="button">Sonraki</button>
+</header>
+
+<div class="board-wrap">
+  <div id="board" class="ck-board" role="grid" aria-label="Çadır Kur tahtası"></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Bölüm tamam!</h2>
+      <p id="overlay-msg">Tüm çadırlar yerinde.</p>
+      <button id="overlay-next" class="hud__btn" type="button">Sonraki bölüm</button>
+    </div>
+  </div>
+</div>
+
+<p class="ck-rules">
+  Kural: her ağacın yanında <strong>tam bir çadır</strong>, çadırlar
+  birbirine değmesin (köşegen dahil), satır/sütun sayıları uysun.
+  Sol tık = çadır · Sağ tık veya Shift+tık = çim.
+</p>

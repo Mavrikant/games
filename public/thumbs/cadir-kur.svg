@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çadır Kur">
+  <defs>
+    <linearGradient id="ck-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2238" />
+      <stop offset="100%" stop-color="#0a0b14" />
+    </linearGradient>
+    <linearGradient id="ck-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3856" />
+      <stop offset="100%" stop-color="#101526" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ck-bg)" />
+
+  <!-- subtle starfield -->
+  <g fill="#f5f6f8" opacity="0.35">
+    <circle cx="40" cy="22" r="0.9" />
+    <circle cx="78" cy="48" r="0.7" />
+    <circle cx="265" cy="18" r="1.0" />
+    <circle cx="298" cy="44" r="0.7" />
+    <circle cx="14" cy="60" r="0.6" />
+  </g>
+
+  <!-- crescent moon -->
+  <g transform="translate(282,28)">
+    <circle r="9" fill="#f9e7a8" />
+    <circle r="9" cx="-3.2" cy="-1.4" fill="#0a0b14" />
+  </g>
+
+  <!-- 6x6 grid on the left, cell=22, board=132 -->
+  <g transform="translate(28,40)">
+    <rect x="-6" y="-6" width="144" height="144" rx="8" fill="rgba(255,255,255,0.04)" stroke="#5b6890" stroke-width="1.2" />
+    <g stroke="#3a4564" stroke-width="0.7" fill="none">
+      <path d="M0 22 H132 M0 44 H132 M0 66 H132 M0 88 H132 M0 110 H132" />
+      <path d="M22 0 V132 M44 0 V132 M66 0 V132 M88 0 V132 M110 0 V132" />
+    </g>
+    <!-- trees and tents pattern -->
+    <g font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle" dominant-baseline="central">
+      <text x="11" y="11">🌲</text>
+      <text x="33" y="11">⛺</text>
+      <text x="99" y="11">🌲</text>
+      <text x="121" y="11">⛺</text>
+
+      <text x="55" y="33">⛺</text>
+      <text x="77" y="33">🌲</text>
+
+      <text x="11" y="55">⛺</text>
+      <text x="33" y="55">🌲</text>
+      <text x="121" y="55">🌲</text>
+
+      <text x="55" y="77">🌲</text>
+      <text x="77" y="77">⛺</text>
+      <text x="121" y="77">⛺</text>
+
+      <text x="11" y="99">🌲</text>
+      <text x="33" y="99">⛺</text>
+      <text x="99" y="99">⛺</text>
+
+      <text x="55" y="121">⛺</text>
+      <text x="77" y="121">🌲</text>
+      <text x="121" y="121">🌲</text>
+    </g>
+  </g>
+
+  <!-- side panel: title + clue strip -->
+  <g transform="translate(190,55)">
+    <text x="0" y="0" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#f5f6f8">Çadır Kur</text>
+    <text x="0" y="22" font-family="ui-sans-serif, system-ui" font-size="11" fill="#9aa6c2">Her ağaca bir çadır.</text>
+    <text x="0" y="38" font-family="ui-sans-serif, system-ui" font-size="11" fill="#9aa6c2">Çadırlar değmesin.</text>
+
+    <!-- mock clue badges -->
+    <g transform="translate(0,58)">
+      <g font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">
+        <rect x="0" y="0" width="22" height="22" rx="5" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.5)" />
+        <text x="11" y="15" text-anchor="middle" fill="#86efac">2</text>
+        <rect x="28" y="0" width="22" height="22" rx="5" fill="rgba(245,158,11,0.18)" stroke="rgba(245,158,11,0.55)" />
+        <text x="39" y="15" text-anchor="middle" fill="#fcd34d">3</text>
+        <rect x="56" y="0" width="22" height="22" rx="5" fill="rgba(239,68,68,0.22)" stroke="rgba(239,68,68,0.55)" />
+        <text x="67" y="15" text-anchor="middle" fill="#fca5a5">1</text>
+        <rect x="84" y="0" width="22" height="22" rx="5" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.5)" />
+        <text x="95" y="15" text-anchor="middle" fill="#86efac">2</text>
+      </g>
+    </g>
+
+    <text x="0" y="100" font-family="ui-sans-serif, system-ui" font-size="10" fill="#6e7a99">Klasik mantık bulmacası</text>
+  </g>
+</svg>
