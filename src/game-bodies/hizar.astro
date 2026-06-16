@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Bıçak<span id="blade-hud">100</span></div>
+  <div class="hud__score">Kütük<span id="log-num">1/12</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Hızar — bıçağı ahşap damarına hizala"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Hızar</h2>
+      <p id="overlay-msg">Bıçağı kütüğün damar yönüne çevir, kesmek için boşluğa bas veya tıkla. Budakları es geç — yoksa bıçak kırılır.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

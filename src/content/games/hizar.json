@@ -1,0 +1,14 @@
+{
+  "title": "Hızar",
+  "description": "Bıçağı ahşap damarına paralel hizala, kütüğü temiz kes — budağa çarpan bıçak körelir, kırılınca vardiya biter.",
+  "dateAdded": "2026-06-16",
+  "tags": ["zanaat", "refleks", "hassasiyet", "özgün", "tek-oyunculu"],
+  "controls": "Fare veya ← / →: bıçak açısı · Boşluk / Tıkla: kes · R: yeniden başla",
+  "howToPlay": "Hızar bir bıçkıhane atölyesi simülasyonu. Her vardiyada önüne 12 kütük gelir; her kütüğün üzerinde rastgele bir açıyla ahşap damarı (paralel renkli çizgiler) ve 0-3 arası koyu budak halkası vardır. Görevin damar yönüne tam paralel bir bıçak çekip kütüğü temiz kesmek. Bıçak, kütüğün merkezinden geçen pivottan döner: fareyi kütüğün üzerinde sağa-sola hareket ettirdiğinde bıçak fareyi takip eder; klavyede ← / → tuşları açıyı 1.5° ince ayarlar. Açıyı damarla aynı yöne getirip Boşluk'a bas (veya kütüğe tıkla) — bıçak iner ve kesim tamamlanır. Açı farkı ±2°'nin içindeyse KUSURSUZ (+100), ±8°'nin içindeyse TEMİZ (skor azalır), daha fazlaysa EĞRİ (puan düşer). Bıçak yolun üstünde bir budak varsa BUDAK uyarısı çıkar: −25 puan ve −22 bıçak ömrü; budak vurmadığın her temiz kesim üst üste birikerek combo bonusu (×5 puan) verir. Her kesim normalde 3 ömür götürür; bıçak göstergesi sıfırlanırsa bıçak kırılır, vardiya kapanır. 12 kütüğü de keseceğin gibi vardiyayı erken de bitirebilirsin. İpucu: damar şeritlerini gözle takip et ve bıçak çizgisini en kalın koyu şeride paralel hizala; budakları es geçemiyorsan, en küçüğüne nişan al. Rekorun tarayıcına kaydedilir.",
+  "thumbnail": "hizar.svg",
+  "scoring": {
+    "storageKey": "hizar.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}
