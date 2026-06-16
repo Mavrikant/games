@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Parça<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Isı<span id="heat">100</span></div>
+  <div class="hud__score">Süre<span id="time">25.0</span></div>
+  <button id="forge" class="hud__btn" type="button">Ocak</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="720" height="420" aria-label="Demirci sahnesi"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Demirci</h2>
+      <p id="overlay-msg">Sıcak demiri hedef silüete döv. Hücreye tıkla, soğursa ocağı kullan.</p>
+      <button id="start" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

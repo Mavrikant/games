@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Demirci">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1d22" />
+      <stop offset="100%" stop-color="#08090c" />
+    </linearGradient>
+    <radialGradient id="forgeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe2a8" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ff7a1a" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#3a1a05" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="ironHot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff1c2" />
+      <stop offset="100%" stop-color="#ff7a1a" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <ellipse cx="60" cy="140" rx="60" ry="28" fill="url(#forgeGlow)" />
+  <rect x="20" y="120" width="80" height="36" fill="#2b1d18" />
+  <g fill="#ff8533">
+    <ellipse cx="40" cy="118" rx="6" ry="14" />
+    <ellipse cx="55" cy="112" rx="7" ry="18" />
+    <ellipse cx="72" cy="118" rx="6" ry="14" />
+    <ellipse cx="85" cy="120" rx="5" ry="12" />
+  </g>
+  <g>
+    <rect x="120" y="140" width="180" height="6" fill="#2a2d36" />
+    <polygon points="125,146 295,146 280,162 140,162" fill="#1f2128" />
+    <rect x="150" y="162" width="120" height="14" fill="#15171c" />
+  </g>
+  <g>
+    <rect x="130" y="100" width="22" height="40" fill="url(#ironHot)" />
+    <rect x="156" y="110" width="22" height="30" fill="url(#ironHot)" />
+    <rect x="182" y="118" width="22" height="22" fill="url(#ironHot)" />
+    <rect x="208" y="118" width="22" height="22" fill="url(#ironHot)" />
+    <rect x="234" y="110" width="22" height="30" fill="url(#ironHot)" />
+    <rect x="260" y="100" width="22" height="40" fill="url(#ironHot)" />
+  </g>
+  <g stroke="rgba(180,200,230,0.55)" stroke-width="1.4" stroke-dasharray="3 3" fill="none">
+    <rect x="130" y="92" width="22" height="48" />
+    <rect x="156" y="104" width="22" height="36" />
+    <rect x="182" y="120" width="22" height="20" />
+    <rect x="208" y="120" width="22" height="20" />
+    <rect x="234" y="104" width="22" height="36" />
+    <rect x="260" y="92" width="22" height="48" />
+  </g>
+  <g transform="translate(210,60) rotate(20)">
+    <rect x="-4" y="0" width="8" height="40" fill="#5b3a20" />
+    <rect x="-22" y="-12" width="44" height="20" rx="3" fill="#9aa3b2" />
+    <rect x="-22" y="-12" width="44" height="6" fill="#cfd5e0" />
+  </g>
+  <g fill="#ffd58a">
+    <circle cx="195" cy="78" r="1.6" />
+    <circle cx="186" cy="84" r="1.4" />
+    <circle cx="204" cy="82" r="1.2" />
+    <circle cx="180" cy="92" r="1.2" />
+  </g>
+  <text x="20" y="40" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#f0d8a8">Demirci</text>
+</svg>

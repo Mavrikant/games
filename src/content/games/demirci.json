@@ -1,0 +1,21 @@
+{
+  "title": "Demirci",
+  "description": "Kızgın demiri örs üzerinde döv, hedef silüete götür — soğursa darbe ezer, ocakta tekrar ısıt.",
+  "dateAdded": "2026-06-16",
+  "tags": ["zanaat", "özgün", "strateji", "refleks"],
+  "controls": "Tıkla/dokun: hücreyi çekiçle döv · 1-8: hücreyi numarayla döv · F/Boşluk: ocakta ısıt · Boşluk/Enter (başlangıçta): başla · R: yeniden başla",
+  "howToPlay": "Demirci, kızgın bir demir çubuğu örs üzerinde döverek hedef silüete sokmaya çalıştığın bir zanaat-strateji oyunudur. Sahnede 8 hücreden oluşan bir demir çubuk vardır; her hücre 8 birim yüksekliğinde başlar ve üstte gösterilen kesik çizgili silüet o parçanın hedef profilini gösterir (örneğin balta, nal, çekiç ucu). Bir hücreye tıkla, dokun veya 1-8 tuşlarından birine bas: çekiç o hücreye iner ve yüksekliği düşer. Ne kadar düşeceği demirin ısısına bağlıdır — ısı 66+ iken her darbe 2 birim, daha düşükken 1 birim ezer; ısı 0'a düştüğünde çekiç demiri zar zor öper ve hiçbir şey olmaz. Her darbe ısıyı 8 birim tüketir, ayrıca havada saniyede 4 birim doğal soğuma vardır. Bir hücrenin yüksekliği hedefin altına düşerse demir ezilir ve oyun biter — bu yüzden son birkaç vuruşu sıcak iken yapmak (=2 birim ezme) yerine ısının düşmesini bekleyip 1'er birim hassas vurmak gerekir. Ocak butonuna basarsan (veya F tuşu) 1.4 saniyelik körüklemeyle ısı 100'e yükselir; bu süre içinde dövemezsin ve süre saati durmaz, dolayısıyla her ısıtma sana zaman kaybettirir. Tüm 8 hücre hedef yüksekliğe eşitlendiğinde parça dövülmüş sayılır: skor +1, yeni bir hedef silüet gelir, çubuk tam yükseklikten yeniden başlar ve ısı korunur. Her parça için süren vardır; oyun ilerledikçe süre 25 saniyeden 12 saniyeye iner. Strateji: ilk birkaç darbeyi sıcakken (×2) yap, hedeften 1 birim kalınca ısı düşene kadar bekle veya başka hücreye geç, tüm hücreler son birime yaklaştığında ocağa fazla vakit ayırma. F ile ısıt, R ile sıfırla.",
+  "thumbnail": "demirci.svg",
+  "scoring": {
+    "storageKey": "demirci.best",
+    "label": "Parça",
+    "direction": "higher",
+    "labelEn": "Pieces"
+  },
+  "en": {
+    "title": "Blacksmith",
+    "description": "Hammer red-hot iron on the anvil into the target silhouette — strike too cold and it cracks, reheat in the forge.",
+    "controls": "Click/tap: strike a cell with the hammer · 1-8: strike a cell by number · F/Space: heat in the forge · Space/Enter (on start): begin · R: restart",
+    "howToPlay": "Blacksmith is a craft/strategy game where you hammer a glowing iron bar on the anvil into a target silhouette. The stage shows an 8-cell iron bar; each cell starts 8 units tall and a dashed outline above shows the target profile of the next piece (axe head, horseshoe, chisel, and so on). Click, tap or press 1-8 to bring the hammer down on a cell: its height drops. How far it drops depends on heat — at heat 66+ each strike shaves 2 units, below that 1 unit, and at heat 0 the hammer kisses the cold iron and nothing happens. Every strike spends 8 heat, and the iron also loses 4 heat per second to the air. If any cell drops below its target the iron is crushed and the game ends — so the last hits must usually be done at lower heat (1 unit each) rather than hot (where 2 units would overshoot). Press the Forge button (or F) to bellow the fire for 1.4 seconds — heat ramps back to 100, but you can't strike during the heat-up and the piece timer keeps running. When all 8 cells match the target the piece is forged: score +1, a new target appears, the bar resets to full height and the heat carries over. Each piece has a time budget that drops from 25 s to 12 s as you progress. Strategy: open hot for ×2 shaping, switch to other cells or wait while heat drains as you close in on the target, and don't over-forge — every second in the bellows is one less for hammering."
+  }
+}
