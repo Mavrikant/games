@@ -1,0 +1,21 @@
+{
+  "title": "Süpür",
+  "description": "Buz pistinde kayan taşın önünü süpür — sürtünme azalır, yan sürüklenme yatışır; tam ortadaki hedefe koy.",
+  "dateAdded": "2026-06-16",
+  "tags": ["refleks", "zamanlama", "özgün", "spor"],
+  "controls": "Boşluk veya tıkla&tut: süpür (atış sırasında) · Boşluk: bekleyen atışı fırlat · R: yeniden başla",
+  "howToPlay": "Süpür, curling sporundan esinlenmiş özgün bir tek-kişilik nişan oyunudur. Pistin sol ucundan otomatik olarak kayan taşı, sağ uçtaki dört halkalı 'ev' (sarı merkez 5 puan, mavi 3, beyaz 2, kırmızı 1) içine olabildiğince yakın yerleştirmen gerekiyor. Her atışta taş rastgele bir başlangıç hızı ve hafif bir yan sürüklenme ile fırlar; doğal sürtünme onu yavaşlatır. Taş kayarken Boşluk tuşunu basılı tut veya pistin üzerine tıkla&tut: önünde belirir bir süpürge buzu cilalar — sürtünme yaklaşık üçte birine iner ve aynı sürede yan sürüklenmeyi her karede biraz daha bastırır, yani taş hem daha uzağa gider hem yatay açıdan toparlanır. Bıraktığında doğal sürtünme yeniden devreye girer; süpürmeyi açıp kapatmanın doğru anını seçmek oyunun özüdür. Az süpürürsen taş evden önce durur (puan yok), fazla süpürürsen tam ortayı geçer ve dışarı kaçar — yine puan yok. Üst ve alt kenarlardan zayıf sektirme vardır ama hizalanmaya güvenme. Bir tur 6 atıştan oluşur, biten her atışın puanı toplam skora eklenir ve evdeki yerine kalır (sonraki atışlarda görsel olarak orada durur ama yeni taşı engellemez). 6 atış sonunda toplam puanın yerel rekorla karşılaştırılır ve daha yüksekse tarayıcına kaydedilir. İpucu: ilk birkaç atışta ne kadar 'temiz' süpürmenin taşı kaç piksel öteye götürdüğünü ölç — taşın kayışına bir 'iç ses' duygusu kur. Yan sürüklenmesi belirgin olan taşlarda süpürmeyi orta-erken dönemde yap, çünkü sürüklenmeyi sönümleyen kısım orada en etkili; sürtünme yarışına son saniyede girmek genelde geç kalır. Hedef merkez tek başına 5 puan getirir, ama düzenli 2-3 puan yığmak da 6 atış üzerinden sağlam bir toplam yapar.",
+  "thumbnail": "supur.svg",
+  "scoring": {
+    "storageKey": "supur.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Sweep",
+    "description": "Sweep the ice in front of a sliding stone — friction drops, drift settles; nestle it in the bullseye.",
+    "controls": "Space or click&hold: sweep (while sliding) · Space: launch the next stone · R: restart",
+    "howToPlay": "Sweep is an original solo aiming game inspired by curling. A stone launches automatically from the left of the rink and you need to nestle it as close as possible to the centre of the four-ring 'house' on the right (yellow centre = 5 pts, blue = 3, white = 2, red = 1). Each shot's initial velocity and lateral drift are randomised; natural friction slows the stone down. While the stone is sliding, hold Space or click & hold on the rink: a brush appears in front of the stone, polishing the ice. Friction drops to roughly a third and lateral drift is damped slightly each frame — so the stone glides farther AND straightens up at the same time. Letting go restores normal friction; the heart of the game is choosing exactly when to start and stop sweeping. Sweep too little and the stone stops short of the house (0 pts). Sweep too long and it slides past the centre and off the back (0 pts). The top and bottom edges nudge the stone back gently, but don't rely on bouncing for alignment. A round is 6 shots; each shot's points are added to your total and the stone stays visible in the house (it doesn't block later shots). After the 6th shot your total is compared to your local best and saved in the browser if it's higher. Tip: in the first couple of shots, measure how far a 'clean' sweep carries the stone — build an internal feel for the slide. For stones with strong lateral drift, sweep mid-early rather than at the last moment, because that's when the drift-damping does the most work; chasing only the friction loss in the final second usually arrives too late. The bullseye alone is 5 pts, but stacking 2-3 pts reliably across 6 shots also makes for a strong total."
+  }
+}

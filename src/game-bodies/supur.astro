@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Atış<span id="shot">1/6</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="640" height="280" aria-label="Süpür buz pisti"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Süpür</h2>
+      <p id="overlay-msg">Taşı süpürerek hedefe yerleştir. Başlamak için BOŞLUK veya dokun.</p>
+    </div>
+  </div>
+</div>
+<p class="supur-hint">
+  Atış otomatik fırlar — taş kayarken <kbd>Boşluk</kbd> veya kanvasa <kbd>tıkla &amp; tut</kbd> ile önünü süpür: sürtünme azalır, yan sürüklenme yatışır.
+</p>

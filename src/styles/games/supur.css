@@ -1,0 +1,113 @@
+:root {
+  --supur-ice: #cfe5f3;
+  --supur-edge: #6f8294;
+  --supur-line: #5c6f80;
+  --supur-ring-1: #f0b5b5;
+  --supur-ring-2: #ffffff;
+  --supur-ring-3: #b9cef2;
+  --supur-ring-4: #f6e060;
+  --supur-stone: #2a2f38;
+  --supur-stone-rim: #0f1116;
+  --supur-handle: #c1462a;
+  --supur-handle-active: #f97f3f;
+  --supur-broom: #f8eccf;
+  --supur-broom-rim: #b58a48;
+  --supur-shaving: #ffffff;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  aspect-ratio: 640 / 280;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--supur-ice);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.supur-hint {
+  margin: 14px auto 0;
+  max-width: 640px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.supur-hint kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+}

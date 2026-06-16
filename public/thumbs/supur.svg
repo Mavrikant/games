@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Süpür">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a14" />
+      <stop offset="100%" stop-color="#0e1928" />
+    </linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfe5f3" />
+      <stop offset="100%" stop-color="#a7c5d8" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <rect x="16" y="56" width="288" height="116" rx="14" fill="url(#ice)" />
+  <line x1="16" y1="114" x2="304" y2="114" stroke="#5c6f80" stroke-width="1" stroke-dasharray="6 6" />
+
+  <!-- house (concentric rings) -->
+  <circle cx="234" cy="114" r="44" fill="#f0b5b5" />
+  <circle cx="234" cy="114" r="30" fill="#ffffff" />
+  <circle cx="234" cy="114" r="18" fill="#b9cef2" />
+  <circle cx="234" cy="114" r="8" fill="#f6e060" />
+  <line x1="226" y1="114" x2="242" y2="114" stroke="#5c6f80" stroke-width="1.4" />
+  <line x1="234" y1="106" x2="234" y2="122" stroke="#5c6f80" stroke-width="1.4" />
+
+  <!-- sliding stone -->
+  <circle cx="138" cy="114" r="14" fill="#2a2f38" stroke="#0f1116" stroke-width="2" />
+  <rect x="133" y="96" width="10" height="6" fill="#f97f3f" />
+  <circle cx="138" cy="100" r="4" fill="#f97f3f" />
+
+  <!-- broom in front of stone -->
+  <ellipse cx="166" cy="114" rx="12" ry="8" fill="#f8eccf" stroke="#b58a48" stroke-width="1.6" />
+  <line x1="178" y1="114" x2="208" y2="100" stroke="#b58a48" stroke-width="2" stroke-linecap="round" />
+
+  <!-- shavings -->
+  <circle cx="172" cy="108" r="1.6" fill="#ffffff" />
+  <circle cx="176" cy="120" r="1.4" fill="#ffffff" />
+  <circle cx="162" cy="124" r="1.4" fill="#ffffff" />
+  <circle cx="158" cy="106" r="1.4" fill="#ffffff" />
+
+  <text x="20" y="38" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Süpür</text>
+</svg>
