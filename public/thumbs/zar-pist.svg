@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Zar Pist">
+  <defs>
+    <linearGradient id="zpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="zpDie" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#zpBg)" />
+  <g fill="#262b39" stroke="#1a1f2c" stroke-width="1">
+    <rect x="48"  y="60" width="36" height="36" rx="5" />
+    <rect x="86"  y="60" width="36" height="36" rx="5" />
+    <rect x="124" y="60" width="36" height="36" rx="5" />
+    <rect x="48"  y="98" width="36" height="36" rx="5" />
+    <rect x="86"  y="98" width="36" height="36" rx="5" />
+    <rect x="124" y="98" width="36" height="36" rx="5" />
+    <rect x="48"  y="136" width="36" height="36" rx="5" />
+    <rect x="86"  y="136" width="36" height="36" rx="5" />
+    <rect x="124" y="136" width="36" height="36" rx="5" />
+  </g>
+  <g fill="none" stroke="#6366f1" stroke-width="3">
+    <rect x="128" y="140" width="28" height="28" rx="5" />
+  </g>
+  <text x="142" y="160" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e6e8ef" text-anchor="middle">5</text>
+  <g transform="translate(72 116)">
+    <rect x="-15" y="-15" width="30" height="30" rx="6" fill="rgba(0,0,0,0.35)" transform="translate(2 3)" />
+    <rect x="-15" y="-15" width="30" height="30" rx="6" fill="url(#zpDie)" stroke="#94a3b8" stroke-width="1.5" />
+    <g fill="#0f172a">
+      <circle cx="-7" cy="-7" r="2.4" />
+      <circle cx="7"  cy="-7" r="2.4" />
+      <circle cx="0"  cy="0"  r="2.4" />
+      <circle cx="-7" cy="7"  r="2.4" />
+      <circle cx="7"  cy="7"  r="2.4" />
+    </g>
+  </g>
+  <g stroke="#6366f1" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4 4">
+    <path d="M 92 116 L 142 154" />
+  </g>
+  <polygon points="142,154 138,148 146,148" fill="#6366f1" />
+  <text x="200" y="44" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e4e4ed">Zar Pist</text>
+  <text x="200" y="66" font-family="ui-sans-serif, system-ui" font-size="11" fill="#94a3b8">tumble &amp; match</text>
+  <g transform="translate(220 110)">
+    <rect x="0" y="0" width="34" height="34" rx="6" fill="url(#zpDie)" stroke="#94a3b8" stroke-width="1.5" />
+    <g fill="#0f172a">
+      <circle cx="9"  cy="9"  r="2.4" />
+      <circle cx="17" cy="17" r="2.4" />
+      <circle cx="25" cy="25" r="2.4" />
+    </g>
+  </g>
+  <g transform="translate(264 138)">
+    <rect x="0" y="0" width="34" height="34" rx="6" fill="url(#zpDie)" stroke="#94a3b8" stroke-width="1.5" />
+    <g fill="#0f172a">
+      <circle cx="9"  cy="9"  r="2.4" />
+      <circle cx="25" cy="9"  r="2.4" />
+      <circle cx="9"  cy="25" r="2.4" />
+      <circle cx="25" cy="25" r="2.4" />
+    </g>
+  </g>
+</svg>

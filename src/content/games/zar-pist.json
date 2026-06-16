@@ -1,0 +1,22 @@
+{
+  "title": "Zar Pist",
+  "description": "6 yüzlü zarı kareli pistte yuvarla; her hücreye doğru sayı üstte gelecek şekilde ulaş — 8 bölümlük yumuşak zorlaşan bulmaca.",
+  "dateAdded": "2026-06-16",
+  "tags": ["puzzle", "özgün", "mantık", "tek-oyunculu"],
+  "controls": "Ok tuşları / WASD: zarı yuvarla · Z: geri al · R: bölümü sıfırla · Enter/Boşluk: sonraki bölüm",
+  "howToPlay": "Zar Pist seni standart bir 6 yüzlü zarın başına oturtur ve onu kareli bir pist üzerinde yuvarlayarak işaretli hedef hücrelere doğru üst yüzle ulaşmaya çağırır. Her yön tuşuna basışında zar tam bir kare ilerler ve takla atar: doğuya yuvarladığında batı yüzü üste gelir, kuzeye yuvarladığında güney yüzü üste döner; karşı yüzler her zaman 7'ye tamamlanır (1-6, 2-5, 3-4). Hedef hücrelerin üzerine yazılı sayı, o hücreden geçerken zarın üstünde olması gereken yüzü gösterir; eşleşirse hedef yeşille işaretlenir, eşleşmezse hiçbir şey olmaz ve farklı bir rotadan geri gelebilirsin. Pist üzerinde gri-çapraz çizgili duvar hücreleri de var, onların üstüne yuvarlanamazsın — yolu duvarların etrafından planlamak zorundasın. Tüm hedefleri yakaladığında bölüm tamamlanır ve sıradakine geçersin; toplam 8 bölüm var, hepsi tamamlanınca toplam hamle sayın rekorun olarak kaydedilir (daha az hamle daha iyi). Yanlış yuvarladığında Z tuşu son hamleni geri alır, R tuşu mevcut bölümü sıfırlar. Bölüm bittiğinde Enter veya Boşluk ile sonrakine geç, tüm pisti bitirdiğinde aynı tuşlarla baştan başla. İpucu: zarın üst-kuzey-doğu üçlüsünü kafanda taşı; tek bir takla üst yüzü değiştirirken kuzey ve doğunun yalnız biri sabit kalır. İki ardışık yuvarlamadan oluşan kısa rotalarda (örn. sağ+aşağı vs. aşağı+sağ) üst yüz farklı sonuçlanır — sıralama hedefin değerini bulmanın anahtarıdır. Çıkmazda kaldığını düşündüğünde aynı kareye iki farklı yoldan gelmeyi dene; üst yüz değişir ve çoğu hedef ikinci ya da üçüncü geçişte eşlenebilir.",
+  "thumbnail": "zar-pist.svg",
+  "scoring": {
+    "storageKey": "zar-pist.best",
+    "label": "Toplam hamle",
+    "direction": "lower",
+    "unit": "hamle",
+    "labelEn": "Total moves"
+  },
+  "en": {
+    "title": "Dice Track",
+    "description": "Roll a 6-sided die across a grid; reach each marked cell with the correct face on top — an 8-level puzzle that ramps up gently.",
+    "controls": "Arrows / WASD: tumble the die · Z: undo · R: reset level · Enter/Space: next level",
+    "howToPlay": "Dice Track puts you in charge of a standard six-sided die and asks you to roll it across a grid so that the right face is on top whenever it lands on a marked target cell. Every arrow press makes the die tumble exactly one cell: rolling east brings the west face up, rolling north brings the south face up; opposite faces always sum to seven (1-6, 2-5, 3-4). The number printed inside a target cell is the value the top face must show when the die enters it — match it and the target turns green, miss and nothing happens, so you can come back from another route. The grid also has hatched wall cells you cannot enter, forcing you to plan a path around them. Once every target is matched the level is complete and you advance; there are eight levels in total, and clearing them all banks your total move count as a record (fewer moves is better). Z undoes a tumble, R resets the current level. After winning a level press Enter or Space to continue; after clearing every level the same keys start a fresh run. Tip: keep the top-north-east triplet in your head; one tumble swaps the top face but only one of north or east changes. On short two-tumble paths (e.g. right+down vs. down+right) the final top is different — order is the secret to hitting a target value. If a path looks impossible, try approaching the same cell from a different direction; the top face flips and most targets fall on the second or third try."
+  }
+}

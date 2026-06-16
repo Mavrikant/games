@@ -1,0 +1,33 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Bölüm<span id="zp-level">1</span></div>
+  <div class="hud__stat">Hamle<span id="zp-moves">0</span></div>
+  <div class="hud__stat">Toplam<span id="zp-total">0</span></div>
+  <div class="hud__stat">En iyi<span id="zp-best">—</span></div>
+</header>
+<div class="zp-actions" role="group" aria-label="Aksiyonlar">
+  <button id="zp-undo" class="hud__btn zp-actions__btn" type="button" aria-label="Son hamleyi geri al">
+    <span aria-hidden="true">↶</span> Geri al
+  </button>
+  <button id="zp-restart" class="hud__btn zp-actions__btn" type="button" aria-label="Bölümü sıfırla">
+    Sıfırla
+  </button>
+</div>
+<div class="board-wrap">
+  <canvas id="zp-board" width="480" height="480" aria-label="Zar Pist oyun alanı"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Zar Pist</h2>
+      <p id="overlay-msg">Yön tuşlarıyla zarı yuvarla.</p>
+      <button id="overlay-btn" class="hud__btn zp-overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="zp-touch" role="group" aria-label="Yön tuşları">
+  <button class="zp-touch__btn zp-touch__btn--up" data-dir="up" aria-label="Yukarı" type="button">↑</button>
+  <button class="zp-touch__btn zp-touch__btn--left" data-dir="left" aria-label="Sol" type="button">←</button>
+  <button class="zp-touch__btn zp-touch__btn--down" data-dir="down" aria-label="Aşağı" type="button">↓</button>
+  <button class="zp-touch__btn zp-touch__btn--right" data-dir="right" aria-label="Sağ" type="button">→</button>
+</div>
