@@ -1,0 +1,31 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Atış<span id="attempt">1/3</span></div>
+  <div class="hud__score">Son atış<span id="last">0</span></div>
+  <div class="hud__score">Toplam<span id="score">0</span></div>
+  <div class="hud__score">En iyi<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas
+    id="stage"
+    width="640"
+    height="360"
+    aria-label="Çelik Çomak sahası — soldaki oyuncu çomakla yerdeki çeliği önce havalandırır, sonra havadayken vurur."
+  ></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çelik Çomak</h2>
+      <p id="overlay-msg">
+        İki fazlı zamanlama: önce çubuğu zıplat, sonra havada vur.
+        Boşluk veya tıkla ile başla.
+      </p>
+      <button id="overlay-action" class="overlay__btn" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>
