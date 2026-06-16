@@ -1,0 +1,99 @@
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: #0a0608;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 6, 8, 0.84);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fde68a;
+  letter-spacing: 0.02em;
+}
+
+.overlay__inner p {
+  margin: 0 0 18px;
+  color: var(--text-muted, #cbd5e1);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.overlay__btn {
+  background: linear-gradient(180deg, #f97316, #c2410c);
+  color: #fff;
+  border: 1px solid #ea580c;
+  padding: 10px 26px;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.32);
+}
+
+.overlay__btn:hover {
+  background: linear-gradient(180deg, #fb923c, #ea580c);
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__score {
+  flex: 1;
+  min-width: 90px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

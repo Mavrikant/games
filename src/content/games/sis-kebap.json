@@ -1,0 +1,21 @@
+{
+  "title": "Şiş Kebap",
+  "description": "Kor ateş üzerindeki 4 şişi doğru anda çevir; etin iki yüzünü de pişir, yakma.",
+  "dateAdded": "2026-06-16",
+  "tags": ["beceri", "zaman", "özgün", "timing", "yemek"],
+  "controls": "1-4: ilgili şişi çevir · Tıkla/dokun: şişi seç · Boşluk: başla · R: yeniden",
+  "thumbnail": "sis-kebap.svg",
+  "howToPlay": "Şiş Kebap bir zamanlama oyunudur: alttaki kor ateş üzerinde dört yatay şiş, her birinde dört et küpü vardır. Şişin ateşe bakan yüzü (Alt) hızlı pişer; üst yüz radyant ısıyla çok yavaş ilerler. Bir şişi çevirmek için 1, 2, 3 veya 4 tuşuna bas — ya da şişe doğrudan tıkla; bu, alt ile üst yüzü anında değiştirir. Et küplerinin renk skalası şöyle: pembe (çiğ) → kızıl-kahve (kıvrımlı) → altın sarısı kahve (PİŞTİ aralığı) → koyu kahve → kömür siyahı (YANIK). Bir küpün herhangi bir yüzü pişti eşiğini geçtiğinde o yüz 'pişti' kabul edilir ve geriye sayılmaz — yani önce alt yüzü pişir, sonra çevir, üst (eski alt) yüzüyle ilgilenirken alt (yeni) yüzü de pişsin. Şiş üzerindeki dört et küpünün her ikisi de pişti aralığını gördüğünde şiş otomatik servis edilir: +10 puan ve yerine taze bir şiş gelir. Eğer herhangi bir yüz yanma eşiğine ulaşırsa şiş tamamen ziyan olur: -5 puan, yerine yine taze gelir. Şişler birbirinden farklı et kalınlıklarında doğar — bazıları hızlı pişer, bazıları yavaş; bu nedenle aynı anda dört şişin zamanlamasını yönetmek zorundasın. Ateş 60 saniye boyunca giderek hararetlenir (sağ alttaki ATEŞ göstergesi); ortadan sonra pişme ve yanma daha hızlı olur, böylece son saniyelerde dikkatli olmazsan iyi giden şişleri de kaybedebilirsin. Strateji: alt yüzün koyu altın kahveye yakın olduğunu görür görmez çevir — çok beklersen tek bir küp yanar ve tüm şiş gider; çok erken çevirirsen üst yüzü ve yeni alt yüzü ikisi de tam pişmez. Her şişin altında 'A alta' / 'B alta' yazısı şu an hangi yüzün ateşe baktığını söyler; pembe küpler çiğ, etrafı yeşil çerçeveli küpler hazır demektir, turuncu çerçeve ise 'dikkat — yanmak üzere' uyarısıdır.",
+  "scoring": {
+    "storageKey": "sis-kebap.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Skewer Grill",
+    "description": "Flip the four skewers over the coals at the right moment — cook both sides of each cube without burning a single one.",
+    "controls": "1-4: flip the matching skewer · Click/tap: pick a skewer · Space: start · R: restart",
+    "howToPlay": "Skewer Grill is a timing game: four horizontal skewers sit over a glowing coal bed, each holding four meat cubes. The side facing the coals (bottom) cooks fast; the up side cooks very slowly from radiant heat. Press 1, 2, 3 or 4 — or click the skewer directly — to flip a skewer, swapping its bottom and top sides instantly. The colour scale on each cube goes pink (raw) → red-brown (searing) → golden brown (the DONE zone) → dark brown → charcoal black (BURNT). Once a cube's side passes the done threshold it counts as 'cooked' permanently — so cook the bottom side first, then flip and let the new bottom catch up. A skewer auto-serves the moment all four cubes have hit the done zone on both sides: +10 points, replaced with a fresh raw skewer. If any side reaches the burn threshold the entire skewer is ruined: -5 points. Skewers spawn at different meat-thickness multipliers, so some cook fast and some slow — you must juggle four independent timings. The fire intensifies for 60 seconds (the FIRE bar at the bottom-right); past the halfway mark cooking and burning both accelerate, so the closing seconds will eat skewers that were doing fine moments ago. Strategy: flip the moment the bottom side enters the dark-golden range — wait too long and a single cube burns the whole skewer, flip too early and neither side reaches done. The 'A side down' / 'B side down' label under each row tells you which side faces the coals; green-ringed cubes are ready, orange-ringed cubes are about to burn."
+  }
+}

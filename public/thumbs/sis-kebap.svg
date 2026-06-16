@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Şiş Kebap">
+  <defs>
+    <linearGradient id="sk-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a0f0a" />
+      <stop offset="55%" stop-color="#0e0807" />
+      <stop offset="100%" stop-color="#2a0f04" />
+    </linearGradient>
+    <radialGradient id="sk-ember" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffcc66" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#ff7a18" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ff7a18" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sk-bg)" />
+  <!-- Glowing coal bed -->
+  <rect x="0" y="148" width="320" height="52" fill="#2a0f04" />
+  <ellipse cx="60" cy="170" rx="34" ry="14" fill="url(#sk-ember)" />
+  <ellipse cx="160" cy="174" rx="42" ry="16" fill="url(#sk-ember)" />
+  <ellipse cx="260" cy="170" rx="34" ry="14" fill="url(#sk-ember)" />
+  <!-- Skewer 1 (upper) -->
+  <line x1="38" y1="78" x2="282" y2="78" stroke="#9ca3af" stroke-width="2.5" />
+  <polygon points="32,78 38,75 38,81" fill="#9ca3af" />
+  <rect x="282" y="73" width="14" height="10" fill="#6b3a1a" />
+  <rect x="74"  y="62" width="28" height="32" fill="#ff8da1" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="74"  y="78" width="28" height="16" fill="#c97058" />
+  <rect x="74"  y="77" width="28" height="2"  fill="#000" />
+  <rect x="114" y="62" width="28" height="32" fill="#d9774e" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="114" y="78" width="28" height="16" fill="#8b5a2b" />
+  <rect x="114" y="77" width="28" height="2"  fill="#000" />
+  <rect x="154" y="62" width="28" height="32" fill="#a86c3f" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="154" y="78" width="28" height="16" fill="#5c3617" />
+  <rect x="154" y="77" width="28" height="2"  fill="#000" />
+  <rect x="194" y="62" width="28" height="32" fill="#8b5a2b" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="194" y="78" width="28" height="16" fill="#5c3617" />
+  <rect x="194" y="77" width="28" height="2"  fill="#000" />
+  <!-- Skewer 2 (lower) -->
+  <line x1="38" y1="128" x2="282" y2="128" stroke="#9ca3af" stroke-width="2.5" />
+  <polygon points="32,128 38,125 38,131" fill="#9ca3af" />
+  <rect x="282" y="123" width="14" height="10" fill="#6b3a1a" />
+  <rect x="74"  y="112" width="28" height="32" fill="#8b5a2b" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="74"  y="128" width="28" height="16" fill="#5c3617" />
+  <rect x="74"  y="127" width="28" height="2"  fill="#000" />
+  <rect x="74"  y="112" width="28" height="32" fill="none" stroke="#4ade80" stroke-width="2" />
+  <rect x="114" y="112" width="28" height="32" fill="#a86c3f" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="114" y="128" width="28" height="16" fill="#5c3617" />
+  <rect x="114" y="127" width="28" height="2"  fill="#000" />
+  <rect x="154" y="112" width="28" height="32" fill="#5c3617" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="154" y="128" width="28" height="16" fill="#28140c" />
+  <rect x="154" y="127" width="28" height="2"  fill="#000" />
+  <rect x="154" y="112" width="28" height="32" fill="none" stroke="#f97316" stroke-width="2" />
+  <rect x="194" y="112" width="28" height="32" fill="#c97058" stroke="#0a0608" stroke-width="1.5" />
+  <rect x="194" y="128" width="28" height="16" fill="#8b5a2b" />
+  <rect x="194" y="127" width="28" height="2"  fill="#000" />
+  <!-- Title -->
+  <text x="16" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#fde68a">Şiş Kebap</text>
+</svg>
