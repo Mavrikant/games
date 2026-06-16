@@ -1,0 +1,21 @@
+{
+  "title": "Salgın",
+  "description": "Birkaç hücrede başlayan enfeksiyon her tıklamada komşulara sıçrar — karantina duvarları ör, enfekteleri iyileştir, kaç hücreyi kurtarabildiğini gör.",
+  "dateAdded": "2026-06-16",
+  "tags": ["bulmaca", "strateji", "özgün", "tek-tıklama"],
+  "controls": "Fare / dokun: sağlıklı hücreye tıkla → karantina (yayılmayı engeller) · enfekte hücreye tıkla → iyileştir (immün olur) · R: yeniden başla · Boşluk / Enter: tur sonunda yeniden başla",
+  "howToPlay": "Karşında 7×7'lik bir mahalle var ve birkaç hücrede salgın başladı. Sıradaki her tıklaman bir gün geçirir: sağlıklı bir hücreye tıklarsan onu karantinaya alırsın — enfeksiyon o duvarı geçemez ama hücre bir daha asla aktif olmaz; enfekte bir hücreye tıklarsan onu iyileştirirsin — artık immündür ve enfeksiyon onun üzerinden bulaşmaz. Karantina ve cured cured hücreler artık enfekte olamaz, ama enfeksiyonu durduran ne tıkladıklarındır. Her tıklamadan sonra hastalık bir tur ilerler: kalan her enfekte hücre, dört yönlü her sağlıklı komşusuna belirli olasılıkla bulaşır. Hedef: ekranda enfekte hücre kalmamasını sağla. Bunu yapamazsan ve enfekte sayısı eşik değeri aşarsa salgın kontrolden çıkar. Skorun, salgını durdurduğunda hâlâ aktif kalan (sağlıklı + karantina + iyileşmiş) hücre sayısıdır — ne kadar erken kapatırsan o kadar yüksek. İpucu: ilk hamlende koşma — enfekte hücreyi tedavi etmektense önce yayılma yönüne karantina duvarı dik. Köşelerdeki enfekteler küçük tehdit (sadece 2 komşu), ortadakiler büyük (4 komşu). Karantinaya aldığın hücreyi geri açamazsın; her hamle kalıcıdır.",
+  "thumbnail": "salgin.svg",
+  "scoring": {
+    "storageKey": "salgin.best",
+    "label": "Kurtarılan",
+    "direction": "higher",
+    "labelEn": "Saved"
+  },
+  "en": {
+    "title": "Outbreak",
+    "description": "An infection starts in a few cells and spreads to neighbors after every click — wall it off with quarantines, cure the infected, save the rest of the neighborhood.",
+    "controls": "Mouse / touch: click a healthy cell → quarantine (blocks the spread) · click an infected cell → cure (becomes immune) · R: restart · Space / Enter: restart after the round ends",
+    "howToPlay": "You're looking at a 7×7 neighborhood and a small outbreak has just started. Each click costs you a day: clicking a healthy cell turns it into a quarantine wall — the disease can't cross it, but the cell will never be active again either; clicking an infected cell cures it — it becomes immune and the disease can't spread through it anymore. Quarantined and cured cells cannot be infected, but they only block the spread by being clicked. After every click the disease takes one step forward: each remaining infected cell tries to infect each of its four orthogonal healthy neighbors with a fixed probability. Goal: leave zero infected cells on the board. If the infection count crosses the threshold first, the outbreak runs out of control. Your score is the number of cells still alive — healthy + quarantined + cured — when the round ends; the faster you stop it, the higher you score. Tip: don't rush to cure — often a quarantine wall in the spread direction saves more cells than curing the source. Corner infections are weaker (2 neighbors), center ones are dangerous (4 neighbors). Quarantines are permanent; every move counts."
+  }
+}

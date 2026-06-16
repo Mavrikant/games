@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Salgın">
+  <defs>
+    <linearGradient id="sg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f1216" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <radialGradient id="sg-inf" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </radialGradient>
+    <pattern id="sg-quar" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#0284c7" />
+      <rect width="3" height="6" fill="#38bdf8" />
+    </pattern>
+    <radialGradient id="sg-cure" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#047857" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sg-bg)" />
+
+  <!-- 7x7 grid of cells: 20px each + 4px gaps, centered -->
+  <g transform="translate(82,28)">
+    <!-- row 0 -->
+    <rect x="0"   y="0"   width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="0"   width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="48"  y="0"   width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="72"  y="0"   width="20" height="20" rx="4" fill="url(#sg-inf)" stroke="#ef4444" />
+    <rect x="96"  y="0"   width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="120" y="0"   width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="0"   width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 1 -->
+    <rect x="0"   y="24"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="24"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="48"  y="24"  width="20" height="20" rx="4" fill="url(#sg-inf)" stroke="#ef4444" />
+    <rect x="72"  y="24"  width="20" height="20" rx="4" fill="url(#sg-inf)" stroke="#ef4444" />
+    <rect x="96"  y="24"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="120" y="24"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="24"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 2 -->
+    <rect x="0"   y="48"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="48"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="48"  y="48"  width="20" height="20" rx="4" fill="url(#sg-inf)" stroke="#ef4444" />
+    <rect x="72"  y="48"  width="20" height="20" rx="4" fill="url(#sg-cure)" stroke="#34d399" />
+    <rect x="96"  y="48"  width="20" height="20" rx="4" fill="url(#sg-inf)" stroke="#ef4444" />
+    <rect x="120" y="48"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="144" y="48"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 3 -->
+    <rect x="0"   y="72"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="72"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="48"  y="72"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="72"  y="72"  width="20" height="20" rx="4" fill="url(#sg-cure)" stroke="#34d399" />
+    <rect x="96"  y="72"  width="20" height="20" rx="4" fill="url(#sg-quar)" stroke="#38bdf8" />
+    <rect x="120" y="72"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="72"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 4 -->
+    <rect x="0"   y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="48"  y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="72"  y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="96"  y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="120" y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="96"  width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 5 -->
+    <rect x="0"   y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="48"  y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="72"  y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="96"  y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="120" y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="120" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <!-- row 6 -->
+    <rect x="0"   y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="24"  y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="48"  y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="72"  y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="96"  y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="120" y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+    <rect x="144" y="144" width="20" height="20" rx="4" fill="#1f2530" stroke="#2c3340" />
+  </g>
+
+  <text x="16" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Salgın</text>
+</svg>

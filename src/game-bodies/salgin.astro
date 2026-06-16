@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Tur<span id="turns">0</span></div>
+  <div class="hud__stat">Enfekte<span id="infected">0</span></div>
+  <div class="hud__stat">Kurtarılan<span id="saved">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div id="board" class="board" role="grid" aria-label="Salgın 7×7 ızgara"></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Salgın</h2>
+      <p id="overlay-msg">Sağlıklı hücreye tıkla → karantina. Enfekteye tıkla → tedavi. Başlamak için herhangi bir hücreye dokun.</p>
+      <button id="overlay-restart" class="hud__btn hud__btn--accent" type="button">Yeni oyun</button>
+    </div>
+  </div>
+</div>
