@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Salyangoz İzi">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2230" />
+      <stop offset="100%" stop-color="#0a0d14" />
+    </linearGradient>
+    <radialGradient id="shell" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f9d27a" />
+      <stop offset="100%" stop-color="#a06b2a" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- Slime trail loop -->
+  <g fill="none" stroke="#9fd6ff" stroke-width="14" stroke-linecap="round" opacity="0.55">
+    <path d="M 50 140 C 80 140, 100 100, 140 100 S 200 140, 240 110" />
+  </g>
+  <g fill="none" stroke="#cbeaff" stroke-width="6" stroke-linecap="round" opacity="0.7">
+    <path d="M 50 140 C 80 140, 100 100, 140 100 S 200 140, 240 110" />
+  </g>
+
+  <!-- Leaves -->
+  <g fill="#7fe57c">
+    <ellipse cx="80" cy="60" rx="14" ry="8" transform="rotate(-30 80 60)" />
+    <ellipse cx="220" cy="60" rx="14" ry="8" transform="rotate(20 220 60)" />
+    <ellipse cx="280" cy="160" rx="14" ry="8" transform="rotate(-15 280 160)" />
+  </g>
+
+  <!-- Snail -->
+  <g transform="translate(240 110)">
+    <circle r="22" fill="url(#shell)" />
+    <path d="M 0 0 m -14 0 a 14 14 0 1 1 28 0 a 10 10 0 1 1 -20 0 a 6 6 0 1 1 12 0" fill="none" stroke="#3b2a14" stroke-width="2" />
+    <line x1="10" y1="-4" x2="20" y2="-14" stroke="#f9d27a" stroke-width="2" />
+    <line x1="10" y1="4" x2="22" y2="2" stroke="#f9d27a" stroke-width="2" />
+    <circle cx="22" cy="-14" r="2" fill="#f9d27a" />
+    <circle cx="24" cy="2" r="2" fill="#f9d27a" />
+  </g>
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Salyangoz İzi</text>
+</svg>

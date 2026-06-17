@@ -1,0 +1,21 @@
+{
+  "title": "Salyangoz İzi",
+  "description": "Salyangozu yönet; bıraktığın taze izlerin üzerinden geçtiğinde hızlanırsın. Süre bitmeden tüm yaprakları topla.",
+  "dateAdded": "2026-06-17",
+  "tags": ["puzzle", "arcade", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD: yön · Boşluk: duraklat · R: yeniden başla",
+  "howToPlay": "Bir bahçe ızgarasında küçük bir salyangozu yönetiyorsun ve geride bıraktığın gümüşi salyangoz izi yaklaşık beş saniye boyunca taze kalıyor. Taze bir izin üzerinden geçtiğinde salyangoz iki kat hızlanır; bu yüzden klasik yılan oyununun aksine kendi izine değmek bir hata değil, planlı bir hızlanma fırsatıdır. Tahtanın kenarı duvarsızdır: bir kenardan çıkıp karşı kenardan girersin, böylece izlerini halkaya çevirip turlayarak hız kazanabilirsin. Tahtaya rastgele yaprak yumuşacık tomurcuklar olarak doğar; her topladığında skorun bir artar ve oyun saatine birkaç saniye eklenir. Süre tükendiğinde oyun biter ve en iyi skorun tarayıcında saklanır. Ok tuşları veya WASD ile yön ver, Boşluk ile duraklat, R ile baştan başla. İpucu: çok keskin dönüşler yerine yumuşak halkalar çizip izini örmek hız avantajını maksimuma çıkarır; izlerini iki yaprağın arasına döşeyerek dakikalar süren bir koleksiyon turu oluşturabilirsin.",
+  "scoring": {
+    "storageKey": "salyangoz-izi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "thumbnail": "salyangoz-izi.svg",
+  "en": {
+    "title": "Snail Trail",
+    "description": "Guide the snail and gain speed whenever you cross your own fresh slime trail. Collect every leaf before the timer runs out.",
+    "controls": "Arrow keys or WASD: direction · Space: pause · R: restart",
+    "howToPlay": "You steer a small snail across a garden grid, and the silver slime you leave behind stays fresh for about five seconds. Crossing your own fresh trail makes the snail move twice as fast, so unlike the classic snake game, touching your trail is not a mistake — it's a planned speed boost. The board has no walls: leaving one edge brings you in on the opposite side, so you can weave loops out of your own slime and tour them for sustained speed. Leaves sprout at random spots on the board; collecting one bumps your score by a point and adds a few seconds to the clock. When the timer hits zero the round ends and your best score is kept in the browser. Use the arrow keys or WASD to steer, Space to pause, and R to restart. Tip: prefer smooth loops over sharp turns when weaving your trail to keep the boost flowing, and lay slime between two leaves to build a multi-leaf collection lap."
+  }
+}

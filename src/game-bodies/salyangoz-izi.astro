@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Süre<span id="time">25</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="504" height="360" aria-label="Salyangoz İzi tahtası"></canvas>
+  <div id="overlay" class="overlay" role="status" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Salyangoz İzi</h2>
+      <p id="overlay-text">
+        Ok tuşları veya WASD ile yön ver.
+        Taze izlerine değince hızlanırsın.
+        Başlamak için bir yön tuşuna bas.
+      </p>
+    </div>
+  </div>
+</div>
