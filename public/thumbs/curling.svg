@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Curling">
+  <defs>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfe7f4" />
+      <stop offset="100%" stop-color="#a5c5d6" />
+    </linearGradient>
+    <radialGradient id="redStone" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="#fca5a5" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </radialGradient>
+    <radialGradient id="grayStone" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="#d1d5db" />
+      <stop offset="100%" stop-color="#4b5563" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ice)" />
+  <rect x="0" y="0" width="20" height="200" fill="#0a3b54" />
+  <rect x="300" y="0" width="20" height="200" fill="#0a3b54" />
+  <g transform="translate(160 100)">
+    <circle r="62" fill="#e63946" />
+    <circle r="44" fill="#ffffff" />
+    <circle r="28" fill="#1d4ed8" />
+    <circle r="12" fill="#ffffff" />
+  </g>
+  <g>
+    <circle cx="140" cy="90" r="13" fill="url(#redStone)" />
+    <circle cx="140" cy="90" r="5" fill="#7f1d1d" />
+    <circle cx="178" cy="112" r="13" fill="url(#grayStone)" />
+    <circle cx="178" cy="112" r="5" fill="#1f2937" />
+    <circle cx="190" cy="80" r="13" fill="url(#grayStone)" />
+    <circle cx="190" cy="80" r="5" fill="#1f2937" />
+    <circle cx="120" cy="160" r="13" fill="url(#redStone)" />
+    <circle cx="120" cy="160" r="5" fill="#7f1d1d" />
+  </g>
+  <text x="18" y="34" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#0a3b54">Curling</text>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "title": "Curling",
+  "description": "Buz pisti üstünde 4 kırmızı taşı kaydır — gri rakip taşlarından daha merkeze yerleştir; çarpışmaları kullan.",
+  "dateAdded": "2026-06-17",
+  "tags": ["spor", "fizik", "strateji", "özgün"],
+  "controls": "Sürükle + bırak: yön & güç · Sağ/sol ok ile sürükleme yönü ince ayarı · R: yeniden başla",
+  "howToPlay": "Curling, yukarıdan bakışlı buz pisti üstünde dört kırmızı taşını gri rakip taşlarından daha merkeze (button) yerleştirmeye çalıştığın strateji-fizik oyunudur. Her tur ekranın üst tarafındaki dört iç içe halkadan oluşan ev (house) önünde ve içinde önceden konuşlanmış 2-5 gri taş bulursun; bunlar rakibin guard'larıdır. Senin görevin tek tek dört kırmızı taşı alttaki release zonundan fırlatmak. Taşın üzerine basıp aşağı-geriye doğru sürükle: çekiş yönünün tersine fırlar, çekiş uzunluğu fırlatma gücünü belirler. Sürüklerken pist üstünde kesik bir çizgi öngörünüz, taşın altında ise güç barı gösterilir. Bıraktığında taş buz üstünde sürtünme ile yavaşlayarak kayar, yolda diğer taşlarla esnek çarpışır — kendi taşınla bir gri taşı eve uzaklaştırabilir, aynı şekilde bir gri taş senin taşını dışarı atabilir. Yeterince güçlü atmayan taş yarı yolda durur ve oyuna katılmaz, çok güçlü atan taş arka duvara çarpıp eve giremez. Dört kırmızı taşı da attıktan sonra tur sonu skor sayımı yapılır: gerçek curling kuralı uygulanır — gri taşların eve en yakın olanından daha merkeze gelen her kırmızı taşın 1 puan kazandırır; eğer gri taş senden daha merkezdeyse o tur 0 puandır. Tam button'ın içine (en küçük halka) düşen her kırmızı taş için +1 ek bonus alırsın. Tur biter bitmez bir sonraki tura geçersin; her tur bir gri taş daha eklenir ve guard'lar eve daha yakın yerleşir, böylece zorluk kademeli artar. Toplam skor oturum boyunca birikir, en iyi tek-tur skoru tarayıcına kaydedilir. Strateji: ilk taşı genelde takeout (vurup çıkarma) için sertçe kullan, sonraki taşları nazikçe yerleştirerek korumalı pozisyon bul. Merkeze doğrudan giden yol kapalıysa kenardan kavisli atmak yerine bir gri taşı domino gibi diğerine çarptırarak çift temizlik yapmayı dene.",
+  "thumbnail": "curling.svg",
+  "scoring": {
+    "storageKey": "curling.best",
+    "label": "En iyi tur",
+    "direction": "higher",
+    "labelEn": "Best end"
+  },
+  "en": {
+    "title": "Curling",
+    "description": "Slide four red stones down the ice — place them closer to the button than the gray opponent stones, use collisions.",
+    "controls": "Drag + release: aim & power · R: restart",
+    "howToPlay": "Curling is a top-down strategy-physics game where you slide four red stones down an ice sheet and try to land them closer to the centre (the button) than the gray opponent stones. Each end starts with 2-5 gray stones pre-placed inside or in front of the house (the four concentric rings at the top) — those are your opponent's guards. Your job is to throw all four red stones from the release zone at the bottom. Press on the stone and drag back-and-down: it fires in the opposite direction of your pull, and the pull length sets the power. While you drag, a dashed preview line on the ice and a small power bar under the stone show what you're about to do. On release the stone glides up the sheet, losing speed to ice friction and bouncing elastically off any other stone it touches — you can knock a gray stone out of the house with your own throw, but a gray stone can just as easily kick your stone away. Throw too soft and the stone stops short; too hard and it slams into the back boards and is removed. Once all four red stones are thrown, end scoring applies the real curling rule: every red stone closer to the centre than the closest gray stone scores 1 point; if a gray stone is closest, you score 0 for that end. A red stone sitting fully inside the button (the innermost ring) earns a +1 bonus. A new end starts immediately afterwards; each end adds one more gray stone and pushes the guards closer to the house, so difficulty ramps. Total score accumulates over the session and your best single end is saved in your browser. Strategy tip: use your first stone for a hard takeout (smash a guard out), then place the remaining ones gently behind cover. If the direct line to the centre is blocked, plant your stone so it knocks one gray onto another and clears two at once — like dominos on ice."
+  }
+}
