@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mum Söndür">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1530" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffb04a" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffb04a" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b4423" />
+      <stop offset="100%" stop-color="#2f1b0c" />
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd86b" />
+      <stop offset="100%" stop-color="#ff8a2a" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <ellipse cx="160" cy="140" rx="170" ry="44" fill="url(#glow)" />
+  <rect x="30" y="138" width="260" height="46" rx="8" fill="url(#cake)" />
+  <rect x="30" y="138" width="260" height="6" fill="#f9d2a8" />
+  <g fill="#f9d2a8">
+    <path d="M58 144 q4 9 8 0 z" />
+    <path d="M92 144 q4 11 8 0 z" />
+    <path d="M126 144 q4 9 8 0 z" />
+    <path d="M160 144 q4 12 8 0 z" />
+    <path d="M194 144 q4 9 8 0 z" />
+    <path d="M228 144 q4 11 8 0 z" />
+    <path d="M262 144 q4 9 8 0 z" />
+  </g>
+  <g>
+    <rect x="65" y="100" width="10" height="42" fill="#f5e5c2" />
+    <ellipse cx="70" cy="100" rx="5" ry="2" fill="#ecd9b2" />
+    <line x1="70" y1="98" x2="70" y2="90" stroke="#322217" stroke-width="1.6" />
+    <ellipse cx="70" cy="78" rx="6" ry="11" fill="url(#flame)" />
+    <ellipse cx="70" cy="80" rx="3" ry="6" fill="#fff2b0" />
+  </g>
+  <g>
+    <rect x="105" y="100" width="10" height="42" fill="#f5e5c2" />
+    <ellipse cx="110" cy="100" rx="5" ry="2" fill="#ecd9b2" />
+    <line x1="110" y1="98" x2="110" y2="90" stroke="#322217" stroke-width="1.6" />
+    <ellipse cx="110" cy="78" rx="6" ry="11" fill="url(#flame)" />
+    <ellipse cx="110" cy="80" rx="3" ry="6" fill="#fff2b0" />
+  </g>
+  <g>
+    <rect x="145" y="90" width="12" height="52" fill="#ffc9a3" />
+    <ellipse cx="151" cy="90" rx="6" ry="2" fill="#e3a374" />
+    <line x1="151" y1="88" x2="151" y2="80" stroke="#322217" stroke-width="1.6" />
+    <ellipse cx="151" cy="68" rx="7" ry="13" fill="url(#flame)" />
+    <ellipse cx="151" cy="70" rx="3" ry="7" fill="#fff2b0" />
+  </g>
+  <g>
+    <rect x="185" y="100" width="10" height="42" fill="#f5e5c2" />
+    <ellipse cx="190" cy="100" rx="5" ry="2" fill="#ecd9b2" />
+    <line x1="190" y1="98" x2="190" y2="90" stroke="#322217" stroke-width="1.6" />
+    <g opacity="0.6">
+      <ellipse cx="190" cy="78" rx="4" ry="7" fill="url(#flame)" />
+    </g>
+  </g>
+  <g>
+    <rect x="225" y="100" width="10" height="42" fill="#f5e5c2" />
+    <ellipse cx="230" cy="100" rx="5" ry="2" fill="#ecd9b2" />
+    <line x1="230" y1="98" x2="230" y2="90" stroke="#322217" stroke-width="1.6" />
+  </g>
+  <g opacity="0.65">
+    <path d="M225 90 q5 -6 10 -12" stroke="#a8b8c8" stroke-width="2" fill="none" stroke-linecap="round" />
+    <path d="M230 86 q6 -5 11 -10" stroke="#a8b8c8" stroke-width="1.5" fill="none" stroke-linecap="round" />
+  </g>
+  <g opacity="0.5">
+    <circle cx="235" cy="78" r="2" fill="#a0a0b0" />
+    <circle cx="240" cy="72" r="2.5" fill="#a0a0b0" />
+    <circle cx="246" cy="64" r="3" fill="#a0a0b0" />
+  </g>
+  <g>
+    <path d="M268 30 L256 50 L268 50 Z M280 30 L280 56 L268 56" stroke="#cce4ff" stroke-width="2" fill="rgba(120,200,255,0.18)" stroke-linejoin="round" />
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#ffd86b">Mum Söndür</text>
+</svg>
