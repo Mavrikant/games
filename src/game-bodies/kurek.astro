@@ -1,0 +1,28 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__chip hud__chip--dist">Mesafe<span id="distance">0</span></div>
+  <div class="hud__chip hud__chip--stamina">Stamina<span id="stamina">100</span></div>
+  <div class="hud__chip hud__chip--best">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="360"
+    height="600"
+    aria-label="Kürek nehir alanı"
+    tabindex="0"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Kürek</h2>
+      <p id="overlay-msg">İskeleye varmak için sıra ile kürek çek. Sol ok / A → sol kürek, Sağ ok / D → sağ kürek. Aynı tarafı üst üste çekersen kayık döner.</p>
+      <button id="overlay-action" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn touch__btn--left" data-side="left" type="button" aria-label="Sol kürek">◀ Sol</button>
+  <button class="touch__btn touch__btn--right" data-side="right" type="button" aria-label="Sağ kürek">Sağ ▶</button>
+</div>

@@ -1,0 +1,14 @@
+{
+  "title": "Kürek",
+  "description": "Sıra ile sol-sağ kürek çek; akıntıya karşı dengeli kal, kütüklerden kaç, iskeleye ulaş.",
+  "dateAdded": "2026-06-17",
+  "tags": ["ritim", "arcade", "precision"],
+  "controls": "Sol/Sağ ok veya A/D · R yeniden başla",
+  "howToPlay": "Sol ok (veya A) sol küreği, sağ ok (veya D) sağ küreği çeker. Alternasyonu koru → kayık düz gider. Aynı tarafı üst üste çekmek kayığı döndürür. Akıntı kayığı bir yöne iter; küreklerle dengele. Kütüklere çarpmak stamina düşürür. Hedef: 1500 mesafe ile iskeleye ulaş.",
+  "thumbnail": "kurek.svg",
+  "scoring": {
+    "storageKey": "kurek.best",
+    "label": "Mesafe",
+    "direction": "higher"
+  }
+}

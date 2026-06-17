@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kürek">
+  <defs>
+    <linearGradient id="river" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e2238" />
+      <stop offset="100%" stop-color="#1a3358" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#river)" />
+  <!-- river ripples -->
+  <g stroke="rgba(140,200,255,0.18)" stroke-width="1.2" fill="none">
+    <path d="M0 50 Q40 44 80 50 T160 50 T240 50 T320 50" />
+    <path d="M0 90 Q40 84 80 90 T160 90 T240 90 T320 90" />
+    <path d="M0 140 Q40 134 80 140 T160 140 T240 140 T320 140" />
+    <path d="M0 180 Q40 174 80 180 T160 180 T240 180 T320 180" />
+  </g>
+  <!-- banks -->
+  <rect x="0" y="0" width="8" height="200" fill="rgba(58,90,60,0.7)" />
+  <rect x="312" y="0" width="8" height="200" fill="rgba(58,90,60,0.7)" />
+  <!-- log obstacle -->
+  <g transform="translate(36,30)">
+    <rect width="92" height="18" fill="#7c5a3a" rx="2" />
+    <rect width="8" height="18" fill="#5a3f25" />
+    <rect x="84" width="8" height="18" fill="#5a3f25" />
+    <line x1="14" y1="3" x2="14" y2="15" stroke="rgba(0,0,0,0.35)" />
+    <line x1="78" y1="3" x2="78" y2="15" stroke="rgba(0,0,0,0.35)" />
+  </g>
+  <!-- boat with oars (centered, slight tilt right) -->
+  <g transform="translate(180,120) rotate(-6)">
+    <!-- wake -->
+    <path d="M0 22 L-7 44 L7 44 Z" fill="rgba(255,255,255,0.12)" />
+    <!-- hull -->
+    <path d="M0 -22 L11 22 L-11 22 Z" fill="#fde68a" stroke="#92580f" stroke-width="1.5" />
+    <!-- seat -->
+    <rect x="-7" y="-4" width="14" height="8" fill="rgba(0,0,0,0.22)" />
+    <!-- left oar (drawn) -->
+    <line x1="-9" y1="0" x2="-26" y2="9" stroke="#d6dbf5" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="-27" cy="11" rx="5.5" ry="3" transform="rotate(-17 -27 11)" fill="#c4b5fd" />
+    <!-- right oar (recovery) -->
+    <line x1="9" y1="0" x2="20" y2="4" stroke="#d6dbf5" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="21" cy="5" rx="4.5" ry="2.5" transform="rotate(17 21 5)" fill="#7d8db3" />
+  </g>
+  <!-- title -->
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Kürek</text>
+</svg>
