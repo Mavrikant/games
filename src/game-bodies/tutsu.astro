@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Puan<span id="score">0</span></div>
+  <div class="hud__score">Tur<span id="level">1</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="560" height="400" aria-label="Tütsü sahnesi"></canvas>
+  <div id="overlay" class="overlay" role="status" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tütsü</h2>
+      <p id="overlay-text">
+        Çubukları öyle bir sırada tutuştur ki hepsi aynı anda son nefesini versin.
+        Etiketteki saniyeler her çubuğun yanma süresidir.
+        Başlamak için herhangi bir çubuğa dokun.
+      </p>
+    </div>
+  </div>
+</div>

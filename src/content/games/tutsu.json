@@ -1,0 +1,21 @@
+{
+  "title": "Tütsü",
+  "description": "Farklı uzunluk ve yanma hızındaki tütsü çubuklarını öyle bir sırayla tutuştur ki hepsi aynı anda son nefesini versin.",
+  "dateAdded": "2026-06-17",
+  "tags": ["puzzle", "zamanlama", "özgün", "tek-oyunculu", "mobil"],
+  "controls": "Fare/dokunma: bir çubuğa dokunarak tutuştur · 1-6: numarayla tutuştur · R: yeniden başla",
+  "howToPlay": "Tütsü; pürist bir zamanlama bulmacasıdır. Her tur sana farklı uzunlukta ve farklı yanma hızında birkaç tütsü çubuğu verilir; sahnenin altındaki etiketler her çubuğun yanmak için kaç saniye süreceğini saniye cinsinden gösterir. Ne kadar uzunsa o kadar uzun yanar, ne kadar koyu turuncuysa o kadar yavaş tüketir. Görevin hepsini öyle bir sırada tutuşturmak ki son alev hepsinde aynı anda sönsün. Bir çubuğa dokunduğun an o çubuk yanmaya başlar — geri alamazsın. Bu yüzden en uzun yanacak olanı en başta yak, kısa süren olanları çıkacak gecikme kadar bekledikten sonra yak. Tüm çubuklar sönünce sahne yayılım süreni (en erken biten ile en geç biten arasındaki saniye farkı) ölçer ve 100 üzerinden tur puanı verir: yayılım küçükse puan yüksek olur. Eşik (60 puan) altındaysan oyun biter; üstündeysen bir sonraki seviyeye geçersin: bir çubuk daha eklenir ve tolerans pencereniz daralır. Klavyede 1–6 tuşları sırasıyla soldan sağa çubukları yakar, R her zaman ilk seviyeden sıfırlar. İpucu: önce her çubuğun yanma süresini gözle (etiketteki sn), aralarındaki farkı bul; bu fark, kısa olanı geç başlatmak için beklemen gereken süredir. Renk ipucu önemli — koyu turuncu yavaş, açık sarı hızlıdır; aynı uzunluktaki iki çubuk farklı renkteyse farklı sürede yanar. Yerel rekor olarak en yüksek toplam puanın saklanır.",
+  "scoring": {
+    "storageKey": "tutsu.best",
+    "label": "Puan",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "thumbnail": "tutsu.svg",
+  "en": {
+    "title": "Incense",
+    "description": "Light incense sticks of differing lengths and burn rates in the right order so they all finish burning at the exact same moment.",
+    "controls": "Mouse/touch: tap a stick to light it · 1-6: light by number · R: restart",
+    "howToPlay": "Incense is a pure timing puzzle. Each round gives you a handful of sticks with different lengths and burn rates; the label under every stick shows how many seconds it will take to fully burn down. Longer means longer-burning, darker orange means slower. Your job is to light them in an order such that every flame goes out at the same instant. Once you tap a stick it ignites immediately — there is no taking it back. So light the longest-burning one first and then, after the difference in burn times, light each shorter one. When all sticks have burned out the round measures your spread (gap between the earliest and the latest finish) and awards a score out of 100; tighter spread, higher score. Below the 60-point threshold the run ends; above it you advance — one more stick is added and your tolerance window tightens. Keys 1–6 light sticks left-to-right, R restarts from level 1. Tip: read each stick's burn-time label first, find the gaps between them; those gaps are exactly how long you must wait before lighting the shorter ones. Colour matters too — dark orange is slow, pale yellow is fast; two equally tall sticks of different colours burn for very different times. Your best total across a run is kept locally."
+  }
+}

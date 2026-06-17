@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tütsü">
+  <defs>
+    <linearGradient id="tutsu-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1610" />
+      <stop offset="100%" stop-color="#0a0805" />
+    </linearGradient>
+    <radialGradient id="tutsu-flame" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe6a8" />
+      <stop offset="50%" stop-color="#ff9c4a" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#ff5a00" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#tutsu-bg)" />
+
+  <!-- holder bar -->
+  <rect x="40" y="160" width="240" height="10" fill="#2a1b14" />
+  <rect x="40" y="160" width="240" height="2" fill="rgba(255,255,255,0.07)" />
+
+  <!-- sticks: x, top, color, label -->
+  <!-- Stick 1: medium tall, slow -->
+  <g>
+    <rect x="58" y="60" width="20" height="100" fill="#c1502d" />
+    <rect x="58" y="60" width="3" height="100" fill="rgba(255,255,255,0.12)" />
+    <rect x="75" y="60" width="3" height="100" fill="rgba(0,0,0,0.18)" />
+  </g>
+  <circle cx="68" cy="60" r="18" fill="url(#tutsu-flame)" />
+  <ellipse cx="68" cy="56" rx="3" ry="6" fill="#ffd278" />
+
+  <!-- Stick 2: short, fast -->
+  <g>
+    <rect x="108" y="100" width="20" height="60" fill="#f6cf63" />
+    <rect x="108" y="100" width="3" height="60" fill="rgba(255,255,255,0.18)" />
+    <rect x="125" y="100" width="3" height="60" fill="rgba(0,0,0,0.18)" />
+  </g>
+  <circle cx="118" cy="100" r="16" fill="url(#tutsu-flame)" />
+  <ellipse cx="118" cy="96" rx="3" ry="5" fill="#ffe9a0" />
+
+  <!-- Stick 3: tall, medium-fast -->
+  <g>
+    <rect x="158" y="45" width="20" height="115" fill="#f0a44a" />
+    <rect x="158" y="45" width="3" height="115" fill="rgba(255,255,255,0.15)" />
+    <rect x="175" y="45" width="3" height="115" fill="rgba(0,0,0,0.18)" />
+  </g>
+  <circle cx="168" cy="45" r="20" fill="url(#tutsu-flame)" />
+  <ellipse cx="168" cy="40" rx="3" ry="7" fill="#ffd278" />
+
+  <!-- Stick 4: medium, medium -->
+  <g>
+    <rect x="208" y="80" width="20" height="80" fill="#e07a3a" />
+    <rect x="208" y="80" width="3" height="80" fill="rgba(255,255,255,0.15)" />
+    <rect x="225" y="80" width="3" height="80" fill="rgba(0,0,0,0.18)" />
+  </g>
+  <circle cx="218" cy="80" r="17" fill="url(#tutsu-flame)" />
+  <ellipse cx="218" cy="76" rx="3" ry="6" fill="#ffe0a0" />
+
+  <!-- Smoke wisps -->
+  <g stroke="rgba(230,230,230,0.18)" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M68 48 C 73 36, 63 24, 70 12" />
+    <path d="M118 88 C 122 76, 113 64, 119 52" />
+    <path d="M168 30 C 174 18, 162 6, 170 -2" />
+    <path d="M218 68 C 223 56, 213 44, 220 32" />
+  </g>
+</svg>
