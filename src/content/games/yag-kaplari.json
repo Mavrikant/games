@@ -1,0 +1,21 @@
+{
+  "title": "Yağ Kapları",
+  "description": "Üç kabı doldur, boşalt ve aktararak hedef litreyi tam ölç. Klasik su sürahisi bulmacası — her seviyede farklı kapasiteler.",
+  "dateAdded": "2026-06-17",
+  "tags": ["puzzle", "matematik", "klasik", "tek-oyunculu"],
+  "controls": "Tıklama · Doldur/Boşalt düğmeleri · Kap üstüne tıkla → başka kaba aktar · R: seviyeyi sıfırla",
+  "howToPlay": "Önünde 2–3 farklı hacimde yağ kabı var; sınırsız bir kaynaktan dolduruyor, lavaboya boşaltıyorsun. Hedef: kapların **herhangi birinde** ekranda yazan tam litre miktarı kalsın. Bir kabın altındaki ‘Doldur’ düğmesi onu ağzına kadar doldurur, ‘Boşalt’ tamamen boşaltır. Bir kabın üzerine tıkladığında o kap seçilir; ardından başka bir kaba tıklarsan seçili kaptan diğerine — alıcı kap dolana veya kaynak kap boşalana kadar — yağ akar. Her seviyeyi en az hamleyle çöz; toplam hamle sayın sayılır. Sekiz seviyenin tümünü tamamladığında toplamın **en iyi puanın** olur ve daha az hamleyle tekrar denemen için sıfırlanır. Strateji: bir kaba GCD’si hedefin böleni olan iki kapasiteyi ardı ardına aktararak istediğin ölçüyü tam olarak ortaya çıkarabilirsin; aktarımdan sonra alıcı dolduysa onu boşalt, kaynak boşaldıysa yeniden doldur ve aktarmaya devam et.",
+  "scoring": {
+    "storageKey": "yag-kaplari.best",
+    "label": "Toplam Hamle",
+    "unit": "hamle",
+    "direction": "lower",
+    "labelEn": "Total Moves"
+  },
+  "en": {
+    "title": "Oil Jugs",
+    "description": "Fill, empty, and pour between three jugs to measure exactly the target. Classic water-jug puzzle — capacities change each level.",
+    "controls": "Click · Fill/Empty buttons · Click a jug → click another to pour · R: reset level",
+    "howToPlay": "You have 2–3 jugs of fixed capacities, an unlimited source, and a sink. Goal: leave **exactly** the target liters in any one jug. The Fill button fills a jug to the brim; Empty drains it. Click a jug to select it, then click a different jug to pour — liquid flows until the source is empty or the destination is full. Solve each level in as few moves as possible; your moves accumulate across all eight levels. Finishing all eight saves your **best total** and resets the run so you can try for fewer moves. Strategy: pour back and forth between two capacities whose GCD divides the target — when the destination fills, empty it; when the source empties, refill it, and keep pouring."
+  }
+}

@@ -1,0 +1,246 @@
+:root {
+  --yk-oil: #f3a847;
+  --yk-oil-dark: #c97a1f;
+  --yk-jug: #1c2129;
+  --yk-jug-border: #3a4250;
+  --yk-target: #34d399;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.yk {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  min-height: 380px;
+}
+
+.yk__goal {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted, #aab);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
+
+.yk__goal strong {
+  color: var(--yk-target);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.yk__jugs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
+  min-height: 260px;
+  padding: 8px 4px;
+}
+
+.yk-jug {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.yk-jug__body {
+  position: relative;
+  width: 88px;
+  height: 220px;
+  background: var(--yk-jug);
+  border: 2px solid var(--yk-jug-border);
+  border-radius: 6px 6px 14px 14px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  transition: border-color 0.15s, transform 0.08s;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+}
+
+.yk-jug__body:hover {
+  border-color: var(--accent, #6ee7b7);
+}
+
+.yk-jug__body:active {
+  transform: translateY(1px);
+}
+
+.yk-jug__body--selected {
+  border-color: var(--yk-oil);
+  box-shadow: 0 0 0 3px rgba(243, 168, 71, 0.25);
+}
+
+.yk-jug__body--target {
+  border-color: var(--yk-target);
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.32);
+}
+
+.yk-jug__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--yk-oil) 0%, var(--yk-oil-dark) 100%);
+  border-radius: 0 0 11px 11px;
+  transition: height 0.22s cubic-bezier(0.4, 0.0, 0.2, 1);
+  pointer-events: none;
+}
+
+.yk-jug__cap {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.yk-jug__amount {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0a0b0e;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+.yk-jug__btns {
+  display: flex;
+  gap: 6px;
+}
+
+.yk-jug__btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--text);
+  cursor: pointer;
+  touch-action: manipulation;
+  font: inherit;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.yk-jug__btn:hover {
+  background: var(--surface-2, var(--surface));
+  border-color: var(--accent, #6ee7b7);
+}
+
+.yk-jug__btn:active {
+  transform: translateY(1px);
+}
+
+.yk__hint {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted, #aab);
+  margin: 16px 0 0;
+  min-height: 1.4em;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  min-width: 0;
+}
+
+.hud__score span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.overlay__btn {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  .yk-jug__body {
+    width: 72px;
+    height: 180px;
+  }
+  .yk-jug__amount {
+    font-size: 22px;
+  }
+  .yk__jugs {
+    gap: 12px;
+  }
+}

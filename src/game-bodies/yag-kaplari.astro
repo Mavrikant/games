@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Seviye<span id="level">1 / 8</span></div>
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <div class="hud__score">Toplam<span id="total">0</span></div>
+  <div class="hud__score">En iyi<span id="best">—</span></div>
+  <button id="reset-level" class="hud__btn" type="button">Sıfırla</button>
+  <button id="restart" class="hud__btn" type="button">Baştan</button>
+</header>
+
+<div class="board-wrap">
+  <div class="yk">
+    <div class="yk__goal">
+      Hedef: herhangi bir kapta <strong><span id="goal">0</span> L</strong>
+    </div>
+    <div id="jugs" class="yk__jugs"></div>
+    <p class="yk__hint" id="hint">Bir kabı seç, sonra başka bir kaba tıklayarak aktar.</p>
+  </div>
+
+  <div id="overlay" class="overlay overlay--hidden">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Yağ Kapları</h2>
+      <p id="overlay-msg">Yükleniyor…</p>
+      <button id="overlay-btn" class="hud__btn overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
