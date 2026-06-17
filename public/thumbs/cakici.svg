@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çakıcı">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16181c"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+    <linearGradient id="plank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a4c28"/>
+      <stop offset="0.5" stop-color="#6b3f1f"/>
+      <stop offset="1" stop-color="#5a3318"/>
+    </linearGradient>
+    <linearGradient id="head" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a6d76"/>
+      <stop offset="0.5" stop-color="#444851"/>
+      <stop offset="1" stop-color="#2a2c32"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b08260"/>
+      <stop offset="1" stop-color="#7a4828"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#bg)"/>
+
+  <!-- Vertical wall planks -->
+  <g opacity="0.45">
+    <rect x="0" y="0" width="53" height="138" fill="#101319"/>
+    <rect x="53" y="0" width="53" height="138" fill="#0c0f14"/>
+    <rect x="106" y="0" width="54" height="138" fill="#101319"/>
+    <rect x="160" y="0" width="53" height="138" fill="#0c0f14"/>
+    <rect x="213" y="0" width="53" height="138" fill="#101319"/>
+    <rect x="266" y="0" width="54" height="138" fill="#0c0f14"/>
+  </g>
+
+  <!-- Plank along the bottom -->
+  <g>
+    <rect x="30" y="140" width="260" height="36" fill="url(#plank)" stroke="#1a1b20" stroke-width="2"/>
+    <g stroke="rgba(0,0,0,0.28)" stroke-width="1">
+      <line x1="40" y1="150" x2="280" y2="151"/>
+      <line x1="40" y1="158" x2="280" y2="159"/>
+      <line x1="40" y1="167" x2="280" y2="167"/>
+    </g>
+  </g>
+
+  <!-- Nails -->
+  <g>
+    <!-- nail 1: flush -->
+    <rect x="71" y="139" width="3" height="22" fill="#8d909a"/>
+    <ellipse cx="72.5" cy="139" rx="10" ry="5" fill="#b8bcc6" stroke="#1c1e23" stroke-width="1.2"/>
+    <ellipse cx="69" cy="138" rx="5" ry="2" fill="rgba(255,255,255,0.35)"/>
+    <!-- nail 2: half-driven with green flash -->
+    <g>
+      <rect x="132" y="128" width="3" height="30" fill="#8d909a"/>
+      <ellipse cx="133.5" cy="128" rx="10" ry="5" fill="#b8bcc6" stroke="#1c1e23" stroke-width="1.2"/>
+      <ellipse cx="133.5" cy="128" rx="13" ry="7" fill="none" stroke="#7be08a" stroke-width="2" opacity="0.85"/>
+    </g>
+    <!-- nail 3: tall, bent slightly -->
+    <g transform="rotate(8 195 125)">
+      <rect x="193.5" y="125" width="3" height="32" fill="#8d909a"/>
+      <ellipse cx="195" cy="125" rx="10" ry="5" fill="#b8bcc6" stroke="#1c1e23" stroke-width="1.2"/>
+    </g>
+    <!-- nail 4: tall, untouched + sweet arrow -->
+    <g>
+      <rect x="254" y="123" width="3" height="34" fill="#8d909a"/>
+      <ellipse cx="255.5" cy="123" rx="10" ry="5" fill="#b8bcc6" stroke="#1c1e23" stroke-width="1.2"/>
+      <polygon points="255.5,107 250,98 261,98" fill="#7be08a"/>
+    </g>
+  </g>
+
+  <!-- Sweet arrows above untouched -->
+  <polygon points="72.5,127 67,118 78,118" fill="#7be08a" opacity="0.0"/>
+  <polygon points="133.5,116 128,107 139,107" fill="#7be08a" opacity="0.85"/>
+
+  <!-- Pendulum cable from top -->
+  <line x1="160" y1="14" x2="200" y2="90" stroke="#2b2d33" stroke-width="3"/>
+  <circle cx="160" cy="14" r="5" fill="#1d1f25" stroke="#3a3c44" stroke-width="1.2"/>
+
+  <!-- Hammer head at end of cable, mid-swing right -->
+  <g transform="translate(200 90) rotate(28)">
+    <rect x="-5" y="-30" width="10" height="24" fill="url(#handle)" stroke="#3a230f" stroke-width="1.2"/>
+    <rect x="-20" y="-8" width="40" height="22" fill="url(#head)" stroke="#1c1e23" stroke-width="1.6"/>
+    <rect x="-20" y="-8" width="40" height="4" fill="rgba(255,255,255,0.18)"/>
+    <rect x="-20" y="12" width="40" height="3" fill="#2a2c32"/>
+  </g>
+</svg>

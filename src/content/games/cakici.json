@@ -1,0 +1,21 @@
+{
+  "title": "Çakıcı",
+  "description": "Salınan çekici doğru anda bırak — her çivinin kendi açısı var; iyi nişancılığın yoksa eğilirler.",
+  "dateAdded": "2026-06-17",
+  "tags": ["özgün", "refleks", "zamanlama", "tek-oyunculu"],
+  "controls": "Boşluk/Sol tık: çekici düşür · R: yeniden başla",
+  "howToPlay": "Tezgâhın üstünden sallanan ağır bir çekiç var; aşağıdaki kalasa dik duran 4 çivi de ekranın altında seni bekliyor. Çekiç sürekli sağa-sola salınıyor — durduramazsın. Her çivinin tam başının üzerine denk gelen kendine ait bir 'şah noktası' (yeşil ok) var: salınımın hangi anında çekiç tam o çivinin üstüne bakıyorsa, o an o çiviyi vurabilirsin. Boşluk veya sol tıklamayla çekici aşağı düşürürsün — bıraktığın andaki açı, hangi çiviye gideceğini ve ne kadar iyi vuracağını belirler.\n\nSkorlama tek bir prensibe dayanır: hassasiyet. Şah noktasına ne kadar yakınsan vuruş o kadar 'tam' olur. Üç tam vuruş çiviyi başının altına çakar (yeşil yanar, +10 puan). Tam noktadan az saparsan çivi başı yana doğru eğrilir (sarı → kızıl); aynı çiviyi üst üste eğri vurmaya devam edersen 3'üncü eğri vuruşta çivi kırılır, kalas atık olur (−4 puan). Tamamen ıskaladığında (yakın hiçbir çivi yok) çekiç boş havada ses çıkarır, ne ilerleme ne ceza, sadece kalan 60 saniyenden bir parça yer.\n\nKalas dolduğunda yeni bir kalas iner — her seferinde çivi sayısı veya salınım hızı artar; ilk kalas yavaş ve 3 çivi, ikinciden itibaren ya bir çivi daha eklenir ya çekiç hızlanır, yedinciden sonra ikisi birden. Best skorun tarayıcında saklanır.\n\nİpucu: Çekiç gerçek bir sarkaç gibi yavaşlayıp hızlanır — uçlarda neredeyse durur, ortadayken hızlıdır. Uçlara yakın bir çivi varsa çekiç o tarafta yavaşken hassas vurmak kolay; ortadaki çiviler hızlı geçildiği için zamanlama daha sıkıdır. Yeşil oklar gerçek hedef pozisyonun göstergesidir, kafanda hayal etme; oka göre salınımın yönünü ve hızını okuyarak küçük öncülemeler yap. Yanlış çiviye gitmemek için aynı anda iki çivinin oka yakın olduğu anlardan kaçın.",
+  "thumbnail": "cakici.svg",
+  "scoring": {
+    "storageKey": "cakici.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Striker",
+    "description": "Drop the swinging hammer at the right moment — each nail has its own sweet angle, miss it and they bend.",
+    "controls": "Space/Left click: drop the hammer · R: restart",
+    "howToPlay": "A heavy hammer swings constantly above the workbench, and 4 nails stand upright in the plank below. You can't stop the hammer — only release it. Each nail has its own 'sweet angle' (green arrow above the nail head): when the swinging hammer is exactly above a nail, that's the moment to strike. Press Space (or click) to drop the hammer; the angle at the release moment decides which nail you hit and how cleanly.\n\nScoring is all about precision. The closer you release to a nail's sweet angle, the cleaner the hit. Three clean hits drive the nail flush (green flash, +10 score). Off-centre strikes bend the nail head sideways (yellow → red); the third bent strike on the same nail snaps it off, that nail becomes waste (−4 score). A total miss (no nail within range) is just a thud — no progress, no penalty, only seconds lost.\n\nWhen a plank is fully done, a fresh plank descends — either with more nails or a faster hammer; after seven planks both ramp at once. Your best score is stored locally.\n\nTips: the hammer is a real pendulum — almost stationary at the extremes, fastest in the middle. Nails near the edges are easier to hit precisely (more dwell time); centre nails punish bad timing. Don't trust your mental model — use the green arrows as the true reference. Avoid releasing when two nails are both close to the swing line, you might hit the wrong one."
+  }
+}

@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">60.0</span></div>
+  <div class="hud__score">Kalas<span id="plank">1</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="560" height="520" aria-label="Çakıcı oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çakıcı</h2>
+      <p id="overlay-msg">Üstteki çekiç sallanır; her çivinin başının üzerinde küçük yeşil bir ok var — çekiç o oka denk geldiğinde Boşluk veya sol tıkla bırak. Tam üstünde isen çivi temiz çakılır, yamuk vurursan eğrilir. Çiviyi kırma; bütün çivileri çaktıkça yeni bir kalas iner.
+
+Başlamak için tıkla veya Boşluk'a bas.</p>
+    </div>
+  </div>
+</div>
