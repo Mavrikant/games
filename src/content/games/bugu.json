@@ -1,0 +1,9 @@
+{
+  "title": "Buğu",
+  "description": "Buharlı aynayı parmağınla sil; saklı sembolü buğu geri çökmeden tanı.",
+  "dateAdded": "2026-06-17",
+  "tags": ["tahmin", "reaksiyon", "orijinal"],
+  "controls": "Fare/dokunma: silmek için sürükle · 1-4: cevap seç · R: yeniden başla",
+  "thumbnail": "bugu.svg",
+  "howToPlay": "Önünde buhar tutmuş bir banyo aynası var; arkasında her tur farklı bir sembol (kalp, yıldız, ay, baklava, daire, kare, üçgen ya da artı) gizli. Fareyi basılı tutarak ya da dokunmatik ekranda parmağını sürükleyerek aynayı sil; bıraktığın berrak iz seni sembole biraz daha yaklaştırır ama duraklarsan buhar yavaşça geri çöker ve gördüklerin tekrar bulanıklaşır. Aynanın altındaki dört seçenekten doğru sembolü 1-4 tuşlarıyla ya da tıklayarak işaretle: her doğru cevap +1 puan ve hemen yeni bir tur, her yanlış cevap saniyelerinden 4 saniye kopararak buharı yoğunlaştırır. Toplam süren 60 saniye; bittiğinde rekor tarayıcına yazılır. İpucu: tek bir geniş daire çizmek yerine sembolün muhtemel olduğu bölgeye odaklan; eli durdurma anına dikkat — buhar saniyede %1 dolayında geri toplandığı için, küçük tereddüt bile karar verme penceresini kapatır."
+}

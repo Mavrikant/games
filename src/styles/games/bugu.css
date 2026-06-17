@@ -1,0 +1,169 @@
+:root {
+  --bugu-frame: #1a2533;
+  --bugu-frame-edge: #34465c;
+  --bugu-drop: #6ec0ff;
+  --bugu-correct: #34d399;
+  --bugu-wrong: #fb7185;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 14px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #25334a 0%, #141a26 60%, #0d1118 100%);
+  border: 1px solid var(--bugu-frame-edge);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+#mirror {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #bfcad5;
+  border-radius: 10px;
+  border: 1px solid var(--bugu-frame);
+  touch-action: none;
+  cursor: crosshair;
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.overlay {
+  position: absolute;
+  inset: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 10px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  /* PITFALLS#unreachable-start-state: overlay never swallows pointerdown;
+     the mirror canvas underneath always gets the event and decides what
+     ready/playing/gameover means. */
+  pointer-events: none;
+}
+
+.overlay--hidden {
+  opacity: 0;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.choice {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition:
+    transform 0.08s ease-out,
+    border-color 0.15s,
+    background 0.15s;
+  touch-action: manipulation;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: var(--bugu-drop);
+  transform: translateY(-1px);
+}
+
+.choice:active:not(:disabled) {
+  transform: translateY(0);
+  background: rgba(110, 192, 255, 0.12);
+}
+
+.choice:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.choice__num {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.choice__icon {
+  width: 70%;
+  height: 70%;
+  color: var(--text);
+}
+
+@media (max-width: 420px) {
+  .board-wrap {
+    padding: 10px;
+  }
+  .overlay {
+    inset: 10px;
+  }
+  .choices {
+    gap: 6px;
+  }
+}
