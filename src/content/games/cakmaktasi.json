@@ -1,0 +1,21 @@
+{
+  "title": "Çakmaktaşı",
+  "description": "Çelik bıçağı çakmak taşına doğru hızda sürt — kıvılcımları kava düşür, ateşi en hızlı sen tutuştur.",
+  "dateAdded": "2026-06-17",
+  "tags": ["özgün", "refleks", "tek-oyunculu"],
+  "controls": "Fare ile çeliği tut, taşın üzerinde aşağı sürükle · R: yeniden başla",
+  "howToPlay": "Ortada bir çakmaktaşı (gri), üzerinde bir parça çelik (gümüş), altında kuru kav (kahverengi) duruyor. Çelik, fareyi takip eder. Çakmaktaşının çizgili yüzeyinin üzerinde fareyi BASILI tutup AŞAĞI sürükle: her sürtüş anında çelikten kıvılcımlar fırlar. Ekranın sağındaki 'Hız' göstergesi sürükleme hızını yeşil aralığa sokmana yardım eder; çok yavaş gidersen kıvılcım çıkmaz, çok hızlı gidersen çeliğin ucu taşa değmez.\n\nKıvılcımlar yerçekimiyle aşağı süzülür ve kava düşerse kavın ısısı artar. Her başarılı sürtüş kavı biraz daha kızdırır; yanlış hız sürtüşü kavı soğutmaz ama zaman kaybedersin. Kav göstergesi %100'e ulaşınca tutuşur — ateşin yanına 'Yandı!' yazar ve turun biter. Skor = yandığında geriye kalan süre × 10 (yandıramazsan kavın ulaştığı ısı %). Süre 30 saniye, rekorun localStorage'da saklanır.\n\nPüf: çeliği taşın yan kenarından çıkarıp tekrar girmek için kısa, çabuk darbeler hızı korur — uzun sürekli sürüklemede ivme yavaşlar. Kıvılcımlar yatay yön hızını da taşır; çeliği kavın tam üzerine getirip oradan sürtersen kıvılcımların büyük çoğunluğu kava düşer.",
+  "thumbnail": "cakmaktasi.svg",
+  "scoring": {
+    "storageKey": "cakmaktasi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Flint & Steel",
+    "description": "Strike the steel down the flint at the right speed — let sparks fall on the tinder and ignite the fastest fire.",
+    "controls": "Mouse: hold the steel, drag it downward across the flint · R: restart",
+    "howToPlay": "A flint (grey) sits at centre, a steel striker (silver) follows your mouse, and dry tinder (brown) waits below. Hold the mouse button and drag DOWNWARD across the ridged flint face: each stroke throws sparks. The 'Speed' meter on the right helps you keep your drag inside the green window; too slow and no sparks fly, too fast and the steel skips off.\n\nSparks arc down under gravity and heat the tinder when they land on it. Each good stroke nudges the tinder closer to ignition; bad strokes just cost you time. When the tinder bar hits 100% the round ends — you see 'Yandı!' and your score is the remaining seconds × 10 (or, if you fail to ignite within 30 seconds, the heat % you reached). Best score is saved locally.\n\nTip: short, repeated downstrokes keep momentum better than one long drag (acceleration drops mid-drag). Sparks inherit horizontal velocity from your motion, so position the steel directly over the tinder before each stroke to land most sparks on it."
+  }
+}

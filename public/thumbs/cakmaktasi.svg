@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çakmaktaşı">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16181c"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+    <linearGradient id="flint" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a7d87"/>
+      <stop offset="0.55" stop-color="#4d4e56"/>
+      <stop offset="1" stop-color="#33343b"/>
+    </linearGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e7eaef"/>
+      <stop offset="0.5" stop-color="#9aa0aa"/>
+      <stop offset="1" stop-color="#5d626c"/>
+    </linearGradient>
+    <radialGradient id="spark" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff2a8"/>
+      <stop offset="0.6" stop-color="#ff9a2b"/>
+      <stop offset="1" stop-color="rgba(255,154,43,0)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#bg)"/>
+
+  <!-- Flint slab with diagonal ridges -->
+  <g>
+    <rect x="46" y="46" width="178" height="78" rx="2" fill="url(#flint)" stroke="#1a1b20" stroke-width="2"/>
+    <rect x="46" y="46" width="178" height="6" fill="#8a8b95"/>
+    <g stroke="rgba(20,20,26,0.55)" stroke-width="1">
+      <line x1="46" y1="118" x2="124" y2="40"/>
+      <line x1="58" y1="124" x2="136" y2="46"/>
+      <line x1="78" y1="124" x2="156" y2="46"/>
+      <line x1="98" y1="124" x2="176" y2="46"/>
+      <line x1="118" y1="124" x2="196" y2="46"/>
+      <line x1="138" y1="124" x2="216" y2="46"/>
+      <line x1="158" y1="124" x2="224" y2="58"/>
+      <line x1="178" y1="124" x2="224" y2="80"/>
+      <line x1="198" y1="124" x2="224" y2="102"/>
+    </g>
+  </g>
+
+  <!-- Steel striker (knife) mid-stroke, tilted -->
+  <g transform="translate(190 60) rotate(28)">
+    <rect x="-9" y="-34" width="18" height="18" fill="#6b3f1f" stroke="#3a2310" stroke-width="1.5"/>
+    <polygon points="-9,-16 9,-16 7,16 -7,16" fill="url(#blade)" stroke="#1e2025" stroke-width="1.5"/>
+    <line x1="-6" y1="-14" x2="6" y2="-14" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Sparks arcing down toward tinder -->
+  <g>
+    <circle cx="186" cy="108" r="6" fill="url(#spark)"/>
+    <circle cx="200" cy="124" r="5" fill="url(#spark)"/>
+    <circle cx="172" cy="120" r="4" fill="url(#spark)"/>
+    <circle cx="160" cy="138" r="5" fill="url(#spark)"/>
+    <circle cx="148" cy="150" r="3" fill="url(#spark)"/>
+    <circle cx="214" cy="146" r="3" fill="url(#spark)"/>
+  </g>
+
+  <!-- Tinder pile -->
+  <g>
+    <polygon
+      points="60,178 74,144 100,134 220,134 246,148 260,178"
+      fill="#3a2618" stroke="#1a0e07" stroke-width="2"/>
+    <polygon
+      points="60,178 74,144 100,134 220,134 246,148 260,178"
+      fill="rgba(255,110,30,0.35)"/>
+    <g stroke="#6e4a2d" stroke-width="1.5" fill="none">
+      <line x1="86" y1="160" x2="100" y2="148"/>
+      <line x1="110" y1="156" x2="122" y2="144"/>
+      <line x1="134" y1="160" x2="146" y2="146"/>
+      <line x1="160" y1="156" x2="172" y2="144"/>
+      <line x1="186" y1="160" x2="200" y2="146"/>
+      <line x1="208" y1="160" x2="220" y2="148"/>
+    </g>
+  </g>
+
+  <!-- Tiny glow at base of pile -->
+  <ellipse cx="160" cy="172" rx="60" ry="6" fill="rgba(255,150,40,0.35)"/>
+</svg>
