@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çıkrık">
+  <defs>
+    <linearGradient id="cikrikBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2230" />
+      <stop offset="100%" stop-color="#0a0d12" />
+    </linearGradient>
+    <linearGradient id="cikrikWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d7aa6" />
+      <stop offset="100%" stop-color="#0d4664" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cikrikBg)" />
+  <rect x="92" y="78" width="120" height="116" fill="#070a0e" stroke="#1f2530" stroke-width="2" />
+  <rect x="92" y="160" width="120" height="34" fill="url(#cikrikWater)" />
+  <rect x="92" y="160" width="120" height="3" fill="#7dd3fc" opacity="0.7" />
+  <rect x="86" y="68" width="132" height="14" fill="#3a3a44" stroke="#2a2a32" stroke-width="1.5" />
+  <rect x="88" y="42" width="10" height="36" fill="#5b3a1c" stroke="#2b1a08" stroke-width="1.5" />
+  <rect x="206" y="42" width="10" height="36" fill="#5b3a1c" stroke="#2b1a08" stroke-width="1.5" />
+  <rect x="96" y="46" width="116" height="14" fill="#7a5631" stroke="#2b1a08" stroke-width="1.5" />
+  <line x1="152" y1="60" x2="152" y2="118" stroke="#c9a86b" stroke-width="2.5" />
+  <g transform="translate(152, 118)">
+    <path d="M -22 0 L 22 0 L 17 26 L -17 26 Z" fill="#8a5a2e" stroke="#3a2510" stroke-width="2" />
+    <path d="M -18 0 Q 0 -12 18 0" fill="none" stroke="#c9a86b" stroke-width="2" />
+    <line x1="-22" y1="6" x2="22" y2="6" stroke="#cbd5e1" stroke-width="2" />
+    <line x1="-17" y1="20" x2="17" y2="20" stroke="#cbd5e1" stroke-width="2" />
+  </g>
+  <g transform="translate(258, 53)">
+    <circle r="32" fill="#3a2510" />
+    <circle r="27" fill="#8a5a2e" />
+    <circle r="8" fill="#3a2510" />
+    <line x1="-25" y1="0" x2="25" y2="0" stroke="#3a2510" stroke-width="4" />
+    <line x1="0" y1="-25" x2="0" y2="25" stroke="#3a2510" stroke-width="4" />
+    <circle cx="20" cy="0" r="6" fill="#facc15" stroke="#7a3e02" stroke-width="1.5" />
+  </g>
+  <g fill="#7dd3fc">
+    <circle cx="118" cy="118" r="7" opacity="0.85" />
+    <path d="M 118 105 L 111 117 L 125 117 Z" opacity="0.85" />
+  </g>
+  <g transform="translate(186, 140)">
+    <circle r="9" fill="#fbbf24" stroke="#a07000" stroke-width="1.5" />
+    <text y="3" font-family="serif" font-size="11" font-weight="700" text-anchor="middle" fill="#a07000">₺</text>
+  </g>
+  <g transform="translate(126, 154)" fill="#f43f5e" stroke="#7f1d1d" stroke-width="1.2">
+    <path d="M 0 -9 L 8 0 L 0 9 L -8 0 Z" />
+  </g>
+  <text x="18" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Çıkrık</text>
+</svg>

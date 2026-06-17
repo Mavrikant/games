@@ -1,0 +1,21 @@
+{
+  "title": "Çıkrık",
+  "description": "Çıkrığı daireler çizerek çevir — kovayı kuyuya indir, akan değerleri yakala; taş ve çizmeden uzak dur.",
+  "dateAdded": "2026-06-17",
+  "tags": ["özgün", "jest", "refleks", "tek-oyunculu", "mobil"],
+  "controls": "Fare/parmak: çıkrığın etrafında daire çiz (saat yönü = aşağı, ters yön = yukarı) · ↑/↓ veya W/S: kovayı doğrudan oynat · Boşluk/Enter: başla · R: yeniden",
+  "howToPlay": "Çıkrık eski tarz bir kuyu çıkrığını gerçek bir el hareketiyle çevirmen üzerine kurulu, döndürme-jesti bazlı özgün bir tarayıcı oyunudur. Sağ üstte koca bir çıkrık çarkı, altında kuyu boşluğu ve ucundaki tahta kova var. Kuyunun derinliklerinde rastgele Y koordinatlarında geçici 'şeyler' belirir: mavi su damlaları (+1), altın akçeler (+3), kızıl yakutlar (+6); aralarında gri taşlar (−2) ve eski çizmeler (−1) gizlenir. Her şey yaklaşık 2.2 saniye görünüp solar. Görevin: o pencere içinde kovayı tam o derinliğe getirip değerli olanı yakalamak, değersizi es geçmek. Kontrol şu: tahtaya bas-tut, sonra çıkrığın merkezi etrafında parmağını veya fareyi daireler çizerek hareket ettir. Saat yönünde çevirirsen kova iner, ters yönde çevirirsen yükselir; tıpkı gerçek bir çıkrıkta olduğu gibi yaklaşık altı tam tur kuyunun en üstünden suya kadar iner. Klavye kullananlar ↑/↓ veya W/S ile kovayı doğrudan oynatabilir; dokunmatikte alttaki ▲/▼ butonları da çalışır. Skor her doğru yakalamada artar, taş veya çizme için cezayla iner (sıfırın altına düşmez); 60 saniye dolduğunda toplam skor kişisel rekorla karşılaştırılır. İpucu: çıkrık dönüşü 'kümülatif'tir — kuyu derininde bir yakut belirdiğinde paniklemeden parmağını çıkrığın etrafında hızlı ama tutarlı bir kavisle çevir; kısa, sarsıntılı hareketler yerine geniş bir yay kovayı tek seferde hedef derinliğe oturtur. Üst üste taş gelen bir koşuda kovayı suyun hemen üstüne demirle, sadece değerli olanlar geldiğinde alçal: bekleyebileceğin yer kuyunun ağzıdır, sürekli iniş yapan kazanır görünür ama cezalı bitirir.",
+  "thumbnail": "cikrik.svg",
+  "scoring": {
+    "storageKey": "cikrik.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Crank Well",
+    "description": "Spin the windlass with circular drags — lower the bucket, scoop up the good stuff, dodge stones and old boots.",
+    "controls": "Mouse/finger: drag in a circle around the wheel (clockwise = down, counter = up) · ↑/↓ or W/S: move the bucket directly · Space/Enter: start · R: restart",
+    "howToPlay": "Crank Well is an original, gesture-based browser game built around the real motion of cranking an old-fashioned well windlass. A large hand wheel sits at the top right, with the well shaft running below it and a wooden bucket on the rope. At random depths inside the shaft, brief 'items' appear: blue water drops (+1), golden coins (+3) and red rubies (+6); mixed in with grey stones (−2) and old boots (−1). Each item fades in and out over about 2.2 seconds. Your job: drive the bucket to exactly that depth while the item is still on screen, scoop up the valuables, and let the junk pass. Controls: press and hold anywhere on the canvas, then move your finger or mouse in circles around the wheel's centre. Clockwise lowers the bucket, counter-clockwise raises it — like a real crank, about six full revolutions takes the bucket from the rim to the water. Keyboard players can use ↑/↓ or W/S to nudge the bucket directly; on touch the ▲/▼ buttons below also work. Score climbs on each good catch and dips on stones or boots (never below zero); when the 60-second timer runs out your total is compared against your local best. Tip: rotation is cumulative — when a ruby flashes deep in the shaft, don't panic-jab. A single broad, steady arc around the wheel lands the bucket on the target depth in one move; short jittery jerks just bleed time. If junk keeps flowing, park the bucket just above the waterline and only descend on a confirmed valuable — the well rewards patience, not constant motion."
+  }
+}
