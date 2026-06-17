@@ -1,0 +1,21 @@
+{
+  "title": "Okçu",
+  "description": "Yardımcının kafasındaki elmayı vur — ama başına değil. Rüzgâr, yerçekimi ve hareket eden hedef.",
+  "dateAdded": "2026-06-17",
+  "tags": ["arcade", "refleks", "hassas", "özgün"],
+  "controls": "Boşluk: çek (basılı tut) → bırak: at · ↑ / ↓: nişan · Fare: nişan ve çek/bırak · R: yeniden başla",
+  "thumbnail": "okcu.svg",
+  "howToPlay": "Okçu, William Tell efsanesinin küçük bir refleks oyunudur: sol altta sen yayını germiş duruyorsun, sağda yardımcın yatayda salınan bir hedef gibi geziniyor ve kafasının üstüne dikkatsizce bir elma koymuş. Her atışta sadece elmayı vurman gerekiyor — başını sıyırırsan oyun anında biter. Nişan almak için yukarı/aşağı ok tuşlarıyla yayın açısını ayarla (ya da fareyi ekranda gezdir); açı, okçunun kolundan çıkan yön olarak gösterilir. Atış gücünü dolduracak şarj çubuğu okçunun başının üstündedir; Boşluk tuşunu basılı tut, çubuk dolar, bırakınca ok hedef tarafa fırlar. Aynısını fare ile de yapabilirsin: canvas üzerinde butonu basılı tutarken konumun nişanı verir, bırakınca atış başlar. Ok serbest düşüş gibi yerçekimine tabidir; üstte gösterilen turuncu rüzgar oku yatay olarak okunu sürükler — rüzgar sağa doğruysa hedef yukarı/sol kalır, yani açıyı biraz daha yukarı veya gücü daha yüksek tutman gerekir. Her atış 5 hakkından birini tüketir; başarılı bir elma vuruşu skoru bir artırır ve rekoru yeniler. Skor yükseldikçe hem rüzgar şiddeti hem yardımcının salınım hızı artar, böylece son atışlar gerçek bir test olur. R tuşu ya da Yeniden başla butonu turu sıfırlar; en iyi skorun tarayıcında saklanır. Strateji: önce nişanı hedefe sabitle ve gücün düşük başladığını unutma — şarjı tam doldurman çoğu zaman gerekmez, orta güçle düşük açı genellikle elmaya daha kolay isabet eder. Yardımcı geriye doğru hareket ederken atış yapma, çünkü ok hedefe vardığında kafa elmanın yerinde olabilir; salınımın u-dönüşü anında bırak.",
+  "scoring": {
+    "storageKey": "okcu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Archer",
+    "description": "Hit the apple on your helper's head — and only the apple. Wind, gravity, and a moving target.",
+    "controls": "Space: hold to draw, release to shoot · ↑ / ↓: aim · Mouse: aim and draw/release · R: restart",
+    "howToPlay": "Archer is a small reflex game inspired by the William Tell tale: you stand on the lower left with a drawn bow, and your helper paces back and forth on the right with an apple foolishly perched on their head. Each shot has to hit the apple — clipping their head ends the round immediately. Aim with the Up/Down arrow keys (or move the mouse on the canvas) — the angle is shown by the arrow nocked on the bow. The charge bar sits above the archer's head: hold Space to fill it, release to loose the arrow. You can do the same with the mouse: holding the canvas pointer aims with its position and charges power; releasing fires. The arrow falls under gravity; the orange wind arrow at the top pushes it horizontally — a right-blowing wind drifts your shot right, so you must aim a bit higher or pull harder against it. Each shot uses one of five attempts. Every clean apple hit raises your score and your best is saved locally. As your score climbs both the wind range and the helper's pacing speed grow, so the last shots become a real test. Press R or the restart button any time. Tip: don't max out the charge — a moderate pull at a low angle usually lands cleaner than a high arching shot. Avoid loosing while the helper is moving toward your target zone; wait for the apex of the swing when the head briefly stops."
+  }
+}
