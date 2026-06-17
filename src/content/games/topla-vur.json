@@ -1,0 +1,21 @@
+{
+  "title": "Topla Vur",
+  "description": "Düşen sayılardan hedef toplamı kovala — sayılara tıkla, kovayı tam hedefte patlat. Aştın mı baştan; her el yeni hedef.",
+  "dateAdded": "2026-06-17",
+  "tags": ["matematik", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "Fare/dokunma: sayıya tıkla · Boşluk: kovayı sıfırla / başla · Enter: başla · R: yeniden",
+  "howToPlay": "Topla Vur, refleksinle aritmetiği aynı anda çalıştıran bir hedef-toplam oyunudur. Ekranın üstünden 6 sütundan rastgele 1-9 arası sayılar düşer; sen onlara tıklayarak alt HUD'daki 'kovaya' eklersin. HUD'un solunda her el için yeni bir HEDEF rakamı görünür (9-22 arası). Görevin: kovayı tam o hedefe ulaştırmak. Kova hedefe eşit olunca patlar, +1 puan alırsın ve yeni bir hedef üretilir. Kovayı taşırırsan (toplam hedefi aşarsa) kova sıfırlanır, serin biter ve 1 puan ceza yersin (skor 0'ın altına düşmez). Üst üste 3 doğru patlatma yaparsan 'seri' bonusu devreye girer ve her doğru +2 puan getirir — taşırırsan veya boşluk tuşuyla kovayı manuel sıfırlarsan seri kırılır. Sayılar 60 saniye boyunca akar; yakalayamadıkların ekranın altından düşüp kaybolur (ceza yok, sadece fırsat kaybı). Skor yükseldikçe hem düşme hızı hem spawn yoğunluğu artar; geç oyunda hangi sayıyı kovaya katacağını saniyenin altında karar vermen gerekir. Boşluk tuşu iki iş yapar: oyun başlamamışsa veya bittiyse yeni eli başlatır, oyun devam ediyorsa kovayı manuel sıfırlar — kovaya yanlış sayıyı eklediğini fark ettiğinde taşırmayı beklemeden temizle. R tuşu veya 'Yeniden başla' düğmesi her an sıfırdan başlatır. Strateji ipucu: hedefe ulaşmak için her zaman büyük sayıyı önce katmak yerine, ekrandaki sayılara önceden bak ve kovayı bir 'kombo'ya hazırla — örneğin hedef 14 ise iki tane 7 hizalanıyorsa onları seç, tek bir 9'un peşine düşüp 5 bekleme. Taşıma riski yüksek olduğunda küçük bir sayıyla bitirmeyi planla, aşmamak için sabır göster. En yüksek skorun tarayıcına otomatik kaydedilir.",
+  "thumbnail": "topla-vur.svg",
+  "scoring": {
+    "storageKey": "topla-vur.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Sum Strike",
+    "description": "Chase the target sum from falling numbers — tap to fill the bucket, hit the target exactly. Overshoot and it resets.",
+    "controls": "Mouse/touch: tap a number · Space: clear bucket / start · Enter: start · R: restart",
+    "howToPlay": "Sum Strike puts your reflexes and arithmetic on the same beat. Numbers from 1 to 9 fall from the top across 6 columns; you tap them to add them to the 'bucket' shown in the HUD. On the left of the HUD a fresh TARGET (9-22) appears each round. Your job: land the bucket on the target exactly. When bucket equals target it pops, you score +1, and a new target spawns. Overshoot the target and the bucket clears, your streak ends, and you pay 1 point (the score never goes below 0). Three pops in a row light up a STREAK bonus: each correct pop while the streak holds is worth +2 — overshoot or manually clear the bucket and the streak breaks. The round runs 60 seconds; numbers you miss fall off the bottom without penalty, just lost opportunity. As your score climbs, fall speed and spawn density both ramp up; in late game you have well under a second to commit to each tap. The Space key does double duty: it starts a new run when the round is over, and clears the bucket mid-game when you realise you've added the wrong number — don't wait to overshoot, scrub and replan. R restarts at any time. Strategy tip: don't reflex-grab the biggest number — look across the board and prep a 'combo' for the bucket. For target 14, if two 7s are already lined up, prefer them over chasing a single 9 + 5. When overshoot risk is high, plan to finish with a small number and resist taking the larger tile that's about to slip off."
+  }
+}

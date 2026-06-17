@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Hedef<span id="target">–</span></div>
+  <div class="hud__score">Kova<span id="bucket">0</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <div class="hud__score">Seri<span id="streak">–</span></div>
+  <button id="clear" class="hud__btn" type="button" aria-label="Kovayı sıfırla">Kova sıfırla</button>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="560"
+    aria-label="Topla Vur oyun alanı"
+  ></canvas>
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Topla Vur</h2>
+      <p id="overlay-msg">
+        Düşen sayılara tıklayarak kovayı hedefe ulaştır.
+        Aşarsan kova sıfırlanır.
+        Hazırsan Boşluk veya Başla'ya bas.
+      </p>
+      <button id="overlay-btn" type="button" class="hud__btn">Başla</button>
+    </div>
+  </div>
+</div>
