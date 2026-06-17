@@ -1,0 +1,48 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <section class="pu-customer" aria-label="Müşteri kartı">
+    <div class="pu-customer__head">
+      <div class="pu-customer__avatar" id="pu-avatar" aria-hidden="true">🙂</div>
+      <div class="pu-customer__items" id="pu-items">—</div>
+    </div>
+    <div class="pu-customer__rows">
+      <div class="pu-row"><span>Toplam</span><span id="pu-total" class="pu-num">0,00 ₺</span></div>
+      <div class="pu-row"><span>Verilen</span><span id="pu-paid" class="pu-num">0 ₺</span></div>
+      <div class="pu-row pu-row--big"><span>Para üstü</span><span id="pu-change" class="pu-num pu-num--accent">0,00 ₺</span></div>
+    </div>
+    <div class="pu-patience" aria-label="Müşteri sabrı">
+      <div class="pu-patience__fill" id="pu-patience"></div>
+    </div>
+  </section>
+
+  <section class="pu-tray" aria-label="Para çekmecesi">
+    <div class="pu-tray__head">
+      <span class="pu-tray__label">Çekmece</span>
+      <span class="pu-tray__total" id="pu-tray-total">0,00 ₺</span>
+    </div>
+    <div class="pu-tray__items" id="pu-tray"></div>
+  </section>
+
+  <div class="pu-denoms" id="pu-denoms" role="group" aria-label="Kupürler"></div>
+
+  <div class="pu-actions">
+    <button id="pu-clear" class="pu-btn pu-btn--ghost" type="button">Temizle</button>
+    <button id="pu-submit" class="pu-btn pu-btn--primary" type="button">Üstünü ver</button>
+  </div>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Para Üstü</h2>
+      <p id="overlay-msg">Kasiyer ol — müşteriye doğru para üstünü en az kupürle ver. Üç canın var.</p>
+      <button id="overlay-action" class="pu-btn pu-btn--primary" type="button">Başla</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,353 @@
+/*
+ * Para Üstü — cashier's-change game styles. board-wrap stays a positioning
+ * container so the standard @shared/overlay modal sits on top.
+ * pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: var(--radius, 14px);
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* ---------- Customer card ---------- */
+
+.pu-customer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 12px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pu-customer__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pu-customer__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.pu-customer__items {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.4;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.pu-item {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.pu-item strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.pu-customer__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 4px 0;
+}
+
+.pu-row--big {
+  font-size: 16px;
+  color: var(--text);
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.pu-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pu-num--accent {
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.pu-patience {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pu-patience__fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--success, #3ee686),
+    var(--c-yellow, #ffd166) 70%,
+    var(--c-red, #ff6b81)
+  );
+  transform-origin: left center;
+  transition: transform 80ms linear;
+  border-radius: 4px;
+}
+
+/* ---------- Tray ---------- */
+
+.pu-tray {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 12px);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 70px;
+}
+
+.pu-tray__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.pu-tray__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.pu-tray__total {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.pu-tray__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 36px;
+  align-items: center;
+}
+
+.pu-chip {
+  background: var(--surface-3);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pu-chip:hover {
+  background: var(--surface-2);
+}
+
+.pu-chip--empty {
+  color: var(--text-dim);
+  font-style: italic;
+  background: transparent;
+  border: 1px dashed var(--border);
+  cursor: default;
+}
+
+.pu-chip--empty:hover {
+  background: transparent;
+}
+
+/* ---------- Denomination grid ---------- */
+
+.pu-denoms {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.pu-denom {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  border-radius: var(--radius-xs, 8px);
+  padding: 12px 4px;
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: transform 0.08s ease-out;
+}
+
+.pu-denom:hover {
+  background: var(--surface-3);
+}
+
+.pu-denom:active {
+  transform: scale(0.96);
+}
+
+.pu-denom__kind {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* ---------- Actions ---------- */
+
+.pu-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pu-btn {
+  flex: 1;
+  border-radius: var(--radius-xs, 8px);
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.pu-btn--primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.pu-btn--primary:hover {
+  background: var(--accent-strong, var(--accent));
+}
+
+.pu-btn--ghost {
+  background: transparent;
+}
+
+/* Visual feedback flashes */
+
+.pu-customer--good {
+  animation: pu-flash-good 0.4s ease-out;
+}
+
+.pu-customer--bad {
+  animation: pu-flash-bad 0.4s ease-out;
+}
+
+@keyframes pu-flash-good {
+  0% { box-shadow: 0 0 0 3px var(--success, #3ee686); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@keyframes pu-flash-bad {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@media (max-width: 380px) {
+  .pu-denoms {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pu-num--accent {
+    font-size: 18px;
+  }
+}

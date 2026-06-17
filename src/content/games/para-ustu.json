@@ -1,0 +1,21 @@
+{
+  "title": "Para Üstü",
+  "description": "Kasiyer ol — müşterinin uzattığı banknotla aldıkları arasındaki para üstünü en az kupürle çekmeceden tamamla. Sabırları tükenmeden onayla.",
+  "dateAdded": "2026-06-17",
+  "tags": ["matematik", "hız", "özgün", "tek-oyunculu"],
+  "controls": "Tıkla: kupürü çekmeceye ekle / çekmeceden kaldır · 1-8: kupür kısayolları · Backspace: son kupürü al · Enter: üstünü ver · Esc: çekmeceyi boşalt · R: yeniden başla",
+  "thumbnail": "para-ustu.svg",
+  "scoring": {
+    "storageKey": "para-ustu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Para Üstü, küçük bir bakkalın kasasında durup hızlı zihinden çıkarma yapma oyunudur. Her müşteri 1–3 ürünle gelir; ekranda ürünlerin tek tek fiyatları, alttaki TOPLAM, VERİLEN banknot ve sağda hesaplanmış PARA ÜSTÜ rakamı yazılıdır. Görevin aynı para üstünü, alttaki kupür ızgarasından (25 kr, 50 kr, 1 ₺, 5 ₺, 10 ₺, 20 ₺, 50 ₺, 100 ₺) tek tek tıklayarak çekmecenin içinde tamamlayıp 'Üstünü ver' butonuna basmaktır. Çekmece üstündeki toplam canlı işler — istediğin kupüre tıklayarak onu geri alabilir, 'Temizle' ile her şeyi sıfırlayabilirsin. Doğru tutturursan skorun +1 olur; en az kupürle (yani matematikteki açgözlü çözümle) tamam edersen +2 bonus alırsın. Yanlış miktar onaylarsan veya müşteri sabrı (üstte renkli çubuk) biterse bir can kaybedersin; üç can biterse oyun sona erer. Müşteri sırası ilerledikçe daha karışık fiyatlar gelir ve sabır çubuğu hızlanır, bu yüzden hem doğru hem hızlı olman gerekir. Klavye kullanıcıları için 1–8 tuşları soldan sağa kupürleri ekler, Backspace son kupürü geri alır, Enter onaylar, Esc çekmeceyi boşaltır, R sıfırlar. Strateji ipucu: para üstünü hesaplarken bütüne yuvarla — örneğin 17,75 ₺ için önce 25 kr (18,00'a tamamla), sonra 2 ₺ (20'ye), sonra istediğin büyük banknotla zirveye çık; bu sıra hem en az kupürü verir hem de zihninde aritmetiği basitleştirir.",
+  "en": {
+    "title": "Make Change",
+    "description": "Play cashier — work out the change between what the customer paid and what they bought, then assemble it with the fewest possible coins and bills before their patience runs out.",
+    "controls": "Click: add a denomination to the drawer / remove one · 1-8: denomination shortcuts · Backspace: take the last one back · Enter: give change · Esc: clear the drawer · R: restart",
+    "howToPlay": "Make Change is a quick mental-arithmetic game where you stand behind the counter of a small grocery and work out cashier-style subtractions in real time. Each customer arrives with one to three items; the screen lists the unit prices, then the TOTAL, the bill they handed over (PAID), and the CHANGE you owe them on the right. Your task is to assemble exactly that change from the denomination grid at the bottom (25 kr, 50 kr, 1 ₺, 5 ₺, 10 ₺, 20 ₺, 50 ₺, 100 ₺) by clicking each note or coin to drop it into the drawer, then pressing 'Give change'. The drawer tally updates live — click any chip to take it back, or hit 'Clear' to start the count over. Hitting the exact amount scores +1; doing it with the minimum number of pieces (i.e. the greedy textbook change) scores +2 as a perfect bonus. A wrong amount or letting the customer's patience meter (the coloured bar above) drain costs a life; three lost lives end the run. Prices get spikier and patience tightens as your queue grows, so the game rewards both accuracy and speed. Keyboard players can use 1-8 to add denominations left-to-right, Backspace to take the last one back, Enter to confirm, Esc to clear, and R to restart. Tip: round to the next clean number first — for change of 17.75 ₺, drop a 25 kr to reach 18, then a 2 ₺ to reach 20, then a larger note to cap it — that order both minimises the pieces and keeps the arithmetic simple in your head."
+  }
+}
