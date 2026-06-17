@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Marangoz">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16181c"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d2a878"/>
+      <stop offset="1" stop-color="#a4774a"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <!-- Workbench band -->
+  <rect x="0" y="118" width="320" height="62" fill="#1c1f25"/>
+  <!-- Needs row (target pieces) -->
+  <g>
+    <rect x="40" y="32" width="62" height="36" rx="6" fill="#c19a6b"/>
+    <rect x="46" y="36" width="50" height="3" fill="rgba(255,255,255,0.22)"/>
+    <text x="71" y="58" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#1a1a1a">22</text>
+    <rect x="116" y="32" width="36" height="36" rx="6" fill="#5fb96b"/>
+    <rect x="121" y="36" width="26" height="3" fill="rgba(255,255,255,0.22)"/>
+    <text x="134" y="58" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#0a2a0e">9</text>
+    <rect x="166" y="32" width="48" height="36" rx="6" fill="#c19a6b"/>
+    <rect x="172" y="36" width="36" height="3" fill="rgba(255,255,255,0.22)"/>
+    <text x="190" y="58" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#1a1a1a">14</text>
+    <rect x="228" y="32" width="52" height="36" rx="6" fill="#c19a6b"/>
+    <rect x="234" y="36" width="40" height="3" fill="rgba(255,255,255,0.22)"/>
+    <text x="254" y="58" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#1a1a1a">17</text>
+  </g>
+  <!-- Plank -->
+  <rect x="30" y="138" width="260" height="36" rx="4" fill="url(#wood)" stroke="#3a2a1a" stroke-width="2"/>
+  <line x1="36" y1="148" x2="284" y2="148" stroke="rgba(80,50,20,0.3)"/>
+  <line x1="36" y1="158" x2="284" y2="158" stroke="rgba(80,50,20,0.3)"/>
+  <line x1="36" y1="168" x2="284" y2="168" stroke="rgba(80,50,20,0.3)"/>
+  <!-- Saw cut kerf -->
+  <rect x="124" y="138" width="3" height="36" fill="#15171b"/>
+  <!-- Saw blade triangle above kerf -->
+  <polygon points="120,124 130,124 125,138" fill="#cfd6dc"/>
+  <!-- Sawdust ridge -->
+  <rect x="120" y="174" width="11" height="3" fill="#a47b4a"/>
+  <!-- Ruler marks above plank -->
+  <g stroke="#8a8f9c" stroke-width="1">
+    <line x1="42" y1="128" x2="42" y2="135"/>
+    <line x1="72" y1="130" x2="72" y2="135"/>
+    <line x1="102" y1="128" x2="102" y2="135"/>
+    <line x1="132" y1="130" x2="132" y2="135"/>
+    <line x1="162" y1="128" x2="162" y2="135"/>
+    <line x1="192" y1="130" x2="192" y2="135"/>
+    <line x1="222" y1="128" x2="222" y2="135"/>
+    <line x1="252" y1="130" x2="252" y2="135"/>
+    <line x1="282" y1="128" x2="282" y2="135"/>
+  </g>
+  <!-- Title-ish faint label bottom -->
+  <text x="160" y="192" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#8a8f9c" letter-spacing="2">MARANGOZ</text>
+</svg>

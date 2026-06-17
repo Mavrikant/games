@@ -1,0 +1,21 @@
+{
+  "title": "Marangoz",
+  "description": "Tahtayı doğru noktalardan kes — istenen parçaları çıkar, atık en az olsun.",
+  "dateAdded": "2026-06-17",
+  "tags": ["puzzle", "strateji", "özgün", "tek-oyunculu"],
+  "controls": "Fare/dokunma: tahtaya tıkla → kesim ekle · kesim üzerine tıkla → sil · Boşluk/Enter: kes ve gönder · R: yeniden başla",
+  "howToPlay": "Tezgâhtaki tahta belirli bir uzunluğa sahip. Üstte 'İstenen parçalar' listesi var (örneğin 22 cm + 9 cm + 14 cm). Tahta üzerinde tıkladığın her yere bir testere izi düşer; kesim cetvelin santimetrelerine oturur, böylece istediğin uzunlukta parçaları çıkarabilirsin. Yanlış yere kesim koyduysan kesim çizgisinin üzerine tıklayıp silebilirsin.\n\nBoşluk veya Enter'a basınca (ya da 'Kes' butonuyla) testereyi çalıştırırsın: tahta parçalara ayrılır ve oyun istenen listedeki her parça için tam uzunlukta bir segment arar. Eşleşen parçalar yeşil, fazlalık (atık) kahverengi, eksik kalan ihtiyaçlar kırmızı yanar. Skor: eşleşen parça başına +10 puan, eksik bırakılan ihtiyaç başına −4 puan, geriye kalan her 1 cm atık için −1 puan. Onayladığın anda yeni bir tahta gelir — 75 saniyede toplam ne kadar puan toplayabildiğin önemli.\n\nTuhaflık: testerenin kendisi 1 cm yer kaplar. Yani bir kesim yaparken o noktadan 1 cm tahta talaşa gider. Üç parça çıkarmak istiyorsan iki kesime ihtiyacın var (ve 2 cm kerf kaybı). İstenen parçalar toplamı, tahtanın uzunluğundan kerf payı kadar küçük olur — yine de talaş kaçırırsan kayıp yaşarsın. İyi bir marangoz, ihtiyaçları aklında kümülatif toplayıp testereyi tam o noktalara koyar (örneğin '0 + 22 → 22'de kes, sonra 22 + 1 (kerf) + 9 = 32'de kes' gibi).\n\nİpuçları: Cetvelin santimetre işaretleri 5 cm'de bir kalın çizgilidir, hizalama için kullan. Kesim çubuklarının yanında oluşan parça uzunluğu yazar — listedeki rakamla karşılaştır. Hatalı bir kesim varsa Onayla'ya basmadan önce mutlaka düzelt; onayladıktan sonra o tahta gider. R her zaman süreyi sıfırlar, rekorun localStorage'da saklanır.",
+  "thumbnail": "marangoz.svg",
+  "scoring": {
+    "storageKey": "marangoz.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Carpenter",
+    "description": "Slice the plank at the right marks — produce the required pieces with as little waste as possible.",
+    "controls": "Mouse/touch: tap plank → add cut · tap a cut → remove · Space/Enter: saw and submit · R: restart",
+    "howToPlay": "There's a wooden plank of a fixed length on the bench. At the top you see a list of 'Required pieces' (for example 22 cm + 9 cm + 14 cm). Each tap on the plank drops a saw mark; cuts snap to the centimetre ruler so you can produce pieces of exact lengths. Misplaced a cut? Tap the cut line to remove it.\n\nPress Space/Enter (or the 'Saw' button) to run the saw: the plank splits and each required piece is matched against a segment of the exact length. Matched pieces light up green, extras (waste) brown, unmet needs red. Score: +10 per matched piece, −4 per unmet need, −1 per cm of leftover waste. The moment you submit, a new plank arrives — your total score over 75 seconds is what counts.\n\nThe twist: the saw itself is 1 cm thick. Each cut destroys 1 cm of wood as sawdust. To produce three pieces you need two cuts (so 2 cm kerf loss). The required pieces' total is always smaller than the plank by the kerf budget — still, sloppy cuts cost you. A good carpenter mentally adds up the needs cumulatively and drops the saw exactly there (e.g. '22, then 22 + 1 kerf + 9 = 32', etc.).\n\nTips: ruler marks thicken every 5 cm — use them to align. The number above each segment shows its produced length — compare to the list. Always fix mistakes before pressing Saw; the plank is gone once committed. R restarts the round at any time; your high score is saved locally."
+  }
+}

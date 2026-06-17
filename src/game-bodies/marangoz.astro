@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">75.0</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="720" height="440" aria-label="Marangoz oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Marangoz</h2>
+      <p id="overlay-msg">Tahtayı, üst kısımda istenen parçaları üretecek şekilde böl. Tahtaya tıkla → kesim ekle. Yanlış kesimi tekrar tıklayarak sil. Bittiğinde Kes butonuna ya da Boşluk'a bas.
+
+Testere 1 cm yer kaplar — her kesim 1 cm talaş bırakır.
+
+Başlamak için tahtaya tıkla.</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="submit" class="action-btn action-btn--primary" type="button">Kes ve Onayla</button>
+    <button id="clear" class="action-btn" type="button">Kesimleri temizle</button>
+  </div>
+</div>
