@@ -1,0 +1,21 @@
+{
+  "title": "Nonogram",
+  "description": "Satır ve sütun ipuçlarına göre kareleri doldur; gizlenen resmi mantıkla ortaya çıkar.",
+  "dateAdded": "2026-06-17",
+  "tags": ["puzzle", "mantık", "klasik"],
+  "controls": "Sol tık: doldur · Sağ tık / uzun bas: işaretle · R: yeniden başla · N: sonraki",
+  "howToPlay": "Tahtanın üstündeki ve solundaki sayılar, o sütun veya satırda bulunan ardışık dolu hücre dizilerinin uzunluklarını söyler. Örneğin '2 1' ipucu, önce 2 ardışık dolu hücrenin, sonra en az bir boşluğun, ardından 1 dolu hücrenin geleceği anlamına gelir. Sol tıklama ile bir hücreyi doldurmaya çalışırsın; eğer çözümde o hücre dolu ise yeşil kalır, değilse anlık olarak kırmızı yanıp 'X' işareti alır ve bir can kaybedersin. Doldurulmamış hücreleri eleme için sağ tıkla (veya mobilde uzun bas) — bu işaret sadece notundur, canına etkisi yoktur. Çözüm: gizli resimdeki tüm dolu kareleri bulduğunda bulmaca tamamlanır. 3 hatadan sonra oyun biter; o ana kadar çözdüğün bulmaca sayısı skorunu belirler. R ile bulmacayı sıfırla, N ile aynı bulmacada vazgeçip yenisine geç (vazgeçen tur skora sayılmaz). Strateji: önce ipucu toplamı satır/sütun uzunluğuna eşit veya çok yakın olan satırları çöz — onlarda zorunlu dolu hücreler vardır; sonra elenmiş hücreleri çapraz olarak diğer satırlara taşı.",
+  "thumbnail": "nonogram.svg",
+  "scoring": {
+    "storageKey": "nonogram.best",
+    "label": "Bulmaca",
+    "direction": "higher",
+    "labelEn": "Puzzles"
+  },
+  "en": {
+    "title": "Nonogram",
+    "description": "Fill cells by row and column clues to reveal a hidden pixel picture.",
+    "controls": "Left click: fill · Right click / long press: mark · R: restart · N: next",
+    "howToPlay": "The numbers above each column and beside each row tell you the lengths of consecutive runs of filled cells in that line. '2 1' means a run of 2 filled cells, then at least one gap, then a run of 1 filled cell. Left-click a cell to try to fill it: if the solution wants that cell filled it stays green, otherwise it flashes red, becomes an 'X' mark, and you lose one life. Right-click (or long-press on mobile) marks a cell as definitely empty — purely a personal note, no life cost. Win by filling every solution cell. After 3 mistakes the game ends; your score is the number of puzzles solved up to that point. Press R to restart the current puzzle and N to give up and skip to a new one (the skipped puzzle doesn't count). Strategy: solve lines where the clue sum is equal or close to the line length first — those have forced filled cells; then cross-propagate the eliminated cells to other lines."
+  }
+}

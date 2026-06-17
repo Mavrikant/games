@@ -1,0 +1,26 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Bulmaca<span id="solved">0</span></div>
+  <div class="hud__stat">Can<span id="lives">●●●</span></div>
+  <div class="hud__stat">Rekor<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div id="puzzle-name" class="ng-puzzle-name">—</div>
+  <div id="board" class="ng-board" aria-label="Nonogram tahtası">
+    <div id="ng-corner" class="ng-corner"></div>
+    <div id="ng-col-hints" class="ng-col-hints"></div>
+    <div id="ng-row-hints" class="ng-row-hints"></div>
+    <div id="ng-grid" class="ng-grid" role="grid" aria-label="Bulmaca hücreleri"></div>
+  </div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çözüldü!</h2>
+      <p id="overlay-msg">—</p>
+      <button id="overlay-next" class="hud__btn hud__btn--accent" type="button">Sıradaki</button>
+    </div>
+  </div>
+</div>
+<p class="hint">Sol tık doldur · Sağ tık veya uzun bas işaretle · R: yeniden başla · N: sonraki</p>
