@@ -1,0 +1,21 @@
+{
+  "title": "Sema",
+  "description": "Semazen merkezde döner; hızlandıkça kolları dışarı açılır. Açılan kollar farklı uzaklıklardaki notalara denk gelir — devir-yarıçap dengesi oyunu.",
+  "dateAdded": "2026-06-18",
+  "tags": ["fizik", "zaman", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk / yukarı ok: hızlanmak için basılı tut · Bırak: yavaşla · R: yeniden başla · Dokunmatik: \"Hızlandır\" butonunu basılı tut",
+  "thumbnail": "sema.svg",
+  "howToPlay": "Sema, semazenin merkez bir nokta etrafında dönmesi üzerine kurulu bir devir-yarıçap dengesi oyunudur. Boşluk tuşunu (veya yukarı oku, ya da mobilde 'Hızlandır' butonunu) basılı tuttukça semazenin dönüş hızı artar; bıraktığında sürtünme yavaşça hızı düşürür. Hız arttıkça merkezcil kuvvet hissi gibi kolların yatay uzantısı dışarı doğru açılır — yani arm-tip yarıçapı (R) doğrudan açısal hıza bağlıdır. Tahtada üç eş merkezli halka bulunur: en içtekinde mavi (1 puan), ortada altın sarısı (3 puan), en dıştakinde kızıl (5 puan) notalar belirir. Toplama mekaniği şudur: kolun ucu o anki R değerinde dönerken bir notanın bulunduğu yarıçapa yeterince yakın olur ve aynı zamanda notanın açısal konumunu süpürürse nota toplanır. Yani sadece hızlı dönmek değil, doğru hızda dönmek gerekir; iç notalar için yavaşlamak, dış notalar için hızlanmak gerekir. Kol radyusunun değişimi anlık değil, hıza karşı yumuşatılır — bu yüzden hızlanmaya/yavaşlamaya birkaç yüz milisaniye önceden başlamak gerekir. Notalar belirir, birkaç saniye durur, sonra solar; toplayamadığın notalar sessizce kaybolur. Tur 60 saniye sürer; süre dolunca skor kaydedilir ve en yüksek skor tarayıcıda saklanır. İpucu: bir tam tur boyunca aynı halkada kalıp ardışık notaları taramak, sürekli halka değiştirmekten çok daha verimlidir. En yüksek skoru hedefliyorsan büyük çoğunluğu zaten dış halkada (5 puan) topla, sadece kısa pencerelerde içeri çekil.",
+  "scoring": {
+    "storageKey": "sema.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Sema",
+    "description": "A whirling dervish spins at the center; the faster you spin, the wider the arms reach. Match your spin radius to the rings of musical notes — a spin-vs-radius balance game.",
+    "controls": "Space / Up Arrow: hold to accelerate · Release: slow down · R: restart · Touch: hold the \"Accelerate\" button",
+    "howToPlay": "Sema is a spin-versus-radius balance game inspired by the whirling dervish ceremony. Hold Space (or Up Arrow, or the on-screen 'Accelerate' button on mobile) to add angular velocity; releasing lets friction slow you down. As you spin faster, the arms swing outward — the arm-tip radius (R) is bound directly to angular velocity, mimicking centrifugal extension. Three concentric note rings appear on the board: an inner blue ring (1 point), a golden middle ring (3 points), and a red outer ring (5 points). To collect a note, the arm tip must be at roughly the note's radius AND sweep through the note's angular position. So fast spinning alone isn't enough — you must spin at the right speed: slow down for inner notes, speed up for outer ones. The arm radius lerps toward the speed target rather than snapping, so begin accelerating or decelerating a few hundred milliseconds before you need the new radius. Notes appear, hold for a few seconds, then fade and silently vanish if missed. A round lasts 60 seconds; the best score is stored locally. Tip: sweeping consecutive notes on the same ring is much more efficient than constantly switching rings — bag the outer 5-pointers in long stretches and only pull in for the short windows when an inner note matters."
+  }
+}

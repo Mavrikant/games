@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Sema oyun alanı"></canvas>
+  <div class="meter" aria-hidden="true">
+    <div class="meter__label">Devir</div>
+    <div class="meter__bar"><div id="spin-fill" class="meter__fill"></div></div>
+  </div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sema</h2>
+      <p id="overlay-msg">Boşluk tuşunu <b>basılı tut</b> ki semazen hızlansın, kollar açılsın.<br/>Bırakırsan yavaşlar, kollar içe çekilir.<br/>Kolların ucu, notaların bulunduğu yarıçapı süpürdüğünde notayı toplarsın.<br/><br/><b>Başlamak için boşluğa bas.</b></p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button id="touch-spin" class="touch__btn" type="button">Hızlandır (basılı tut)</button>
+</div>
