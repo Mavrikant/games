@@ -174,6 +174,47 @@
   color: #d6e0ee;
 }
 
+/* ---- FPV crosshair ---- */
+.km-crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  display: none;
+  pointer-events: none;
+  z-index: 3;
+}
+.km-crosshair::before,
+.km-crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+}
+.km-crosshair::before {
+  left: 50%;
+  top: 2px;
+  width: 2px;
+  height: 18px;
+  transform: translateX(-50%);
+}
+.km-crosshair::after {
+  top: 50%;
+  left: 2px;
+  height: 2px;
+  width: 18px;
+  transform: translateY(-50%);
+}
+/* While a match is live: show the crosshair and hide the system cursor. */
+.km-root--play .km-crosshair {
+  display: block;
+}
+.km-root--play #gl {
+  cursor: none;
+}
+
 /* ---- overlay ---- */
 .overlay {
   position: absolute;

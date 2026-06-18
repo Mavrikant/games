@@ -1,20 +1,25 @@
-// Local player input: keyboard + mouse + touch. Movement is WASD / arrows or a
-// left-half virtual joystick; aim follows the mouse (or the last tapped point);
-// the action is a single edge (eyedropper for hiders, tongue for seekers) bound
-// to left-click, Space, a right-side tap, or the on-screen button.
+// First-person local input: keyboard + mouse-look (pointer lock, with a
+// drag-look fallback) + touch (left-half joystick to move, right-half drag to
+// look, on-screen button to act). Produces a facing-relative InputState
+// (fwd/strafe/yaw) plus a look pitch for the camera.
 //
-// Keyboard has NO deadzone — a pressed key is a full unit vector (pitfall:
-// deadzone-blocks-keyboard-steering). The keydown handler ignores events while
-// an INPUT/TEXTAREA is focused so typing a name never steers.
+// Keyboard has NO deadzone — a pressed key is a full unit (pitfall:
+// deadzone-blocks-keyboard-steering). Key/typing handlers ignore INPUT/TEXTAREA
+// focus so typing a name never moves the player.
 
+import { DRAG_SENS, LOOK_SENS, PITCH_LIMIT } from './constants';
 import type { InputState } from './types';
 
 export interface LocalInput {
   attach(): void;
-  /** Copy the current state into `into`, consuming the fire edge. */
   read(into: InputState): void;
-  /** True when the last aim came from a real pointer position. */
-  hasAim(): boolean;
+  /** Current look pitch (radians, + = up) for the FPV camera. */
+  lookPitch(): number;
+  lookYaw(): number;
+  /** Seed yaw/pitch (e.g. from the player's spawn facing) at match start. */
+  setLook(yaw: number, pitch?: number): void;
+  /** True while the pointer is locked (used to hide the cursor / show hints). */
+  isLocked(): boolean;
   readonly isCoarse: boolean;
 }
 
@@ -23,28 +28,37 @@ export function createLocalInput(opts: {
   stick: HTMLElement;
   nub: HTMLElement;
   actionBtn: HTMLButtonElement;
-  toWorld: (clientX: number, clientY: number) => { x: number; z: number } | null;
 }): LocalInput {
   const keys = new Set<string>();
-  let aimClient: { x: number; y: number } | null = null;
-  let aimWorld: { x: number; z: number } | null = null;
+  let yaw = 0;
+  let pitch = 0;
   let fireEdge = false;
-  // Touch joystick state.
+  let locked = false;
   let stickId = -1;
   let stickOrigin = { x: 0, y: 0 };
-  let stickVec = { x: 0, y: 0 };
+  let stick = { fwd: 0, strafe: 0 };
+  let dragId = -1;
+  let dragX = 0;
+  let dragY = 0;
+  let dragMoved = false;
+  let dragStart = 0;
 
   const isCoarse =
     typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
 
-  function keyToAxis(): { mx: number; mz: number } {
-    let mx = 0;
-    let mz = 0;
-    if (keys.has('w') || keys.has('arrowup')) mz -= 1;
-    if (keys.has('s') || keys.has('arrowdown')) mz += 1;
-    if (keys.has('a') || keys.has('arrowleft')) mx -= 1;
-    if (keys.has('d') || keys.has('arrowright')) mx += 1;
-    return { mx, mz };
+  function rotate(dx: number, dy: number, sens: number): void {
+    yaw -= dx * sens;
+    pitch = Math.max(-PITCH_LIMIT, Math.min(PITCH_LIMIT, pitch - dy * sens));
+  }
+
+  function keyAxis(): { fwd: number; strafe: number } {
+    let fwd = 0;
+    let strafe = 0;
+    if (keys.has('w') || keys.has('arrowup')) fwd += 1;
+    if (keys.has('s') || keys.has('arrowdown')) fwd -= 1;
+    if (keys.has('d') || keys.has('arrowright')) strafe += 1;
+    if (keys.has('a') || keys.has('arrowleft')) strafe -= 1;
+    return { fwd, strafe };
   }
 
   function placeNub(dx: number, dy: number): void {
@@ -52,7 +66,7 @@ export function createLocalInput(opts: {
   }
 
   function attach(): void {
-    const { canvas, stick, actionBtn } = opts;
+    const { canvas, stick: stickEl, actionBtn } = opts;
 
     window.addEventListener('keydown', (e) => {
       const target = e.target as HTMLElement | null;
@@ -72,30 +86,43 @@ export function createLocalInput(opts: {
         e.preventDefault();
       }
     });
-    window.addEventListener('keyup', (e) => {
-      keys.delete(e.key.toLowerCase());
-    });
+    window.addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
     window.addEventListener('blur', () => keys.clear());
 
-    // Pointer handling on the canvas. The overlay sits above the canvas, so
-    // none of these fire while a menu is visible (pitfall: overlay-input-leak).
+    // Pointer lock (desktop): a click locks; movement events then drive the look.
+    document.addEventListener('pointerlockchange', () => {
+      locked = document.pointerLockElement === canvas;
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (locked) rotate(e.movementX, e.movementY, LOOK_SENS);
+    });
+    canvas.addEventListener('click', () => {
+      if (!locked && !isCoarse) canvas.requestPointerLock?.();
+    });
+
     canvas.addEventListener('pointerdown', (e) => {
+      if (locked) {
+        fireEdge = true; // locked click = act
+        return;
+      }
       const rect = canvas.getBoundingClientRect();
       const leftHalf = e.clientX - rect.left < rect.width * 0.45;
       if (isCoarse && e.pointerType !== 'mouse' && leftHalf && stickId === -1) {
         stickId = e.pointerId;
         stickOrigin = { x: e.clientX, y: e.clientY };
-        stickVec = { x: 0, y: 0 };
-        stick.style.left = `${e.clientX - rect.left - 50}px`;
-        stick.style.top = `${e.clientY - rect.top - 50}px`;
-        stick.classList.add('km-stick--live');
+        stick = { fwd: 0, strafe: 0 };
+        stickEl.style.left = `${e.clientX - rect.left - 50}px`;
+        stickEl.style.top = `${e.clientY - rect.top - 50}px`;
+        stickEl.classList.add('km-stick--live');
         placeNub(0, 0);
       } else {
-        // Aim + fire (mouse anywhere; touch on the right side).
-        aimClient = { x: e.clientX, y: e.clientY };
-        fireEdge = true;
+        dragId = e.pointerId;
+        dragX = e.clientX;
+        dragY = e.clientY;
+        dragMoved = false;
+        dragStart = performance.now();
+        canvas.setPointerCapture?.(e.pointerId);
       }
-      canvas.setPointerCapture?.(e.pointerId);
       e.preventDefault();
     });
     canvas.addEventListener('pointermove', (e) => {
@@ -103,27 +130,35 @@ export function createLocalInput(opts: {
         const dx = e.clientX - stickOrigin.x;
         const dy = e.clientY - stickOrigin.y;
         const len = Math.hypot(dx, dy);
-        const cap = 40;
+        const cap = 42;
         const s = len > cap ? cap / len : 1;
-        stickVec = { x: (dx * s) / cap, y: (dy * s) / cap };
+        stick = { strafe: (dx * s) / cap, fwd: -(dy * s) / cap };
         placeNub(dx * s, dy * s);
-        return;
+      } else if (e.pointerId === dragId) {
+        const dx = e.clientX - dragX;
+        const dy = e.clientY - dragY;
+        dragX = e.clientX;
+        dragY = e.clientY;
+        rotate(dx, dy, DRAG_SENS);
+        if (Math.abs(dx) + Math.abs(dy) > 2) dragMoved = true;
       }
-      aimClient = { x: e.clientX, y: e.clientY };
     });
     const endPointer = (e: PointerEvent): void => {
       if (e.pointerId === stickId) {
         stickId = -1;
-        stickVec = { x: 0, y: 0 };
+        stick = { fwd: 0, strafe: 0 };
         opts.stick.classList.remove('km-stick--live');
         placeNub(0, 0);
+      } else if (e.pointerId === dragId) {
+        dragId = -1;
+        // A quick tap that didn't drag = act (look is done by dragging).
+        if (!dragMoved && performance.now() - dragStart < 250) fireEdge = true;
       }
     };
     canvas.addEventListener('pointerup', endPointer);
     canvas.addEventListener('pointercancel', endPointer);
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    // Dedicated action button (thumb players).
     actionBtn.addEventListener('pointerdown', (e) => {
       fireEdge = true;
       e.preventDefault();
@@ -131,17 +166,11 @@ export function createLocalInput(opts: {
   }
 
   function read(into: InputState): void {
-    const axis = keyToAxis();
-    into.mx = axis.mx !== 0 || axis.mz !== 0 ? axis.mx : stickVec.x;
-    into.mz = axis.mx !== 0 || axis.mz !== 0 ? axis.mz : stickVec.y;
-    if (aimClient) {
-      const w = opts.toWorld(aimClient.x, aimClient.y);
-      if (w) aimWorld = w;
-    }
-    if (aimWorld) {
-      into.aimX = aimWorld.x;
-      into.aimZ = aimWorld.z;
-    }
+    const k = keyAxis();
+    const using = k.fwd !== 0 || k.strafe !== 0;
+    into.fwd = using ? k.fwd : stick.fwd;
+    into.strafe = using ? k.strafe : stick.strafe;
+    into.yaw = yaw;
     if (fireEdge) into.fire = true;
     fireEdge = false;
   }
@@ -149,7 +178,13 @@ export function createLocalInput(opts: {
   return {
     attach,
     read,
-    hasAim: () => aimWorld !== null,
+    lookPitch: () => pitch,
+    lookYaw: () => yaw,
+    setLook: (y, p = 0) => {
+      yaw = y;
+      pitch = p;
+    },
+    isLocked: () => locked,
     isCoarse,
   };
 }
