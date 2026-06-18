@@ -1,0 +1,21 @@
+{
+  "title": "Boya Karıştır",
+  "description": "Hedef rengi yakalamak için kırmızı, sarı ve mavi damlaları doğru oranda karıştır — renk teorisi temelli kısa bir bulmaca.",
+  "dateAdded": "2026-06-18",
+  "tags": ["renk", "puzzle", "özgün", "tek-oyunculu", "mobil"],
+  "controls": "1: kırmızı damla · 2: sarı damla · 3: mavi damla · Enter: onayla · C: boşalt · Boşluk: başlat · R: yeniden başla",
+  "thumbnail": "boya-karistir.svg",
+  "howToPlay": "Boya Karıştır, gözünün renk hissini biraz da kafanın hesabıyla buluşturduğun kısa bir bulmacadır. Sahnenin üst yarısında iki yuvarlak vardır: solda HEDEF (bu turun ulaşman gereken renk), sağda KARIŞIM (şu an karıştırdığın boya). Altta üç boya tüpü durur: Kırmızı (1), Sarı (2), Mavi (3). Her tıklama veya numara tuşuna basma o tüpten karışıma bir damla ekler. Karışım rengi, eklediğin damlaların oranlarına göre anlık olarak güncellenir — yani 1 kırmızı + 1 sarı saf turuncu, 1 kırmızı + 1 mavi saf mor, 1 sarı + 1 mavi saf yeşil verir; 2 sarı + 1 mavi ise daha sarı-yeşil bir tona kayar. Hedef rengi her zaman üç temel renkten türetildiği için ulaşılabilir bir noktada durur; senin görevin doğru oranı sezmek. Hazır olduğunda ONAYLA (Enter) düğmesine bas — karışımın hedefe ne kadar yakınsa o kadar yüksek puan alırsın: tam isabet 100 puan, makul yakınlık 60-80, ciddi sapma 20 altı. Onayla'dan sonra karışım otomatik boşalır ve yeni bir hedef gelir. Yanlış başlattıysan BOŞALT (C) tüm damlaları siler ve baştan denemene izin verir; her tur en fazla 12 damla atabilirsin. Toplam 60 saniyen var; bu sürede çıkardığın puanların toplamı turun skoru olur ve tarayıcında saklanır. Tur ilerledikçe hedefler daha çok damlanın oranıyla üretildiği için ince ayar gerektirir (2 damladan başlayıp 6 damlaya kadar). İpucu: önce hedefin BASKIN tonunu tespit et — sıcak (kırmızı/sarı) ise mavi az olmalı; soğuksa (mavi/yeşil) kırmızı azaltılır. Pastel/gri tonlarda üç renge de düşük oranlarda dokunmaya çalış. Her zaman küçük adımlarla git: 1 damla ekleyip karışım nereye kaydı diye bak, sonra oranı düzelt.",
+  "scoring": {
+    "storageKey": "boya-karistir.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Paint Mix",
+    "description": "Mix red, yellow and blue drops in the right ratio to reach the target color — a short color-theory puzzle.",
+    "controls": "1: red drop · 2: yellow drop · 3: blue drop · Enter: submit · C: clear · Space: start · R: restart",
+    "howToPlay": "Paint Mix is a short puzzle that asks your colour intuition to meet a little arithmetic. The top of the scene has two circles: on the left, the TARGET (the colour you have to hit this round); on the right, the MIX (your current blend). Below them are three paint pots: Red (1), Yellow (2), Blue (3). Each click or number key adds one drop of that pot to the mix. The mix colour updates live as a weighted average of the drops, so 1 red + 1 yellow gives a clean orange, 1 red + 1 blue gives purple, 1 yellow + 1 blue gives green, and 2 yellow + 1 blue leans more yellow-green. Because every target is generated as a valid combination of the three primaries, every round is winnable — your job is to spot the right ratio. When you're ready, press SUBMIT (Enter): the closer your mix is to the target, the higher the score — perfect hit is 100, a near-miss is 60-80, a far miss under 20. The mix clears automatically and the next target appears. CLEAR (C) wipes drops if you started badly; each round caps at 12 drops. You have 60 seconds total, and the sum of all your round scores is your run score (saved locally). Targets use more drops as the round count grows (from 2 up to 6), so the ratios get pickier. Tip: first identify the dominant tone — warm (red/yellow) targets want very little blue, cool ones want less red. For pastels and greys, touch all three pots in small doses. Always step in by single drops and read where the mix has moved before adding more."
+  }
+}

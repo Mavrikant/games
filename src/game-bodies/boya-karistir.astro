@@ -1,0 +1,55 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <div class="palette" aria-label="Renk karıştırma alanı">
+    <div class="swatch">
+      <div class="swatch__label">Hedef</div>
+      <div class="swatch__circle" id="target-circle"></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch__label">Karışım</div>
+      <div class="swatch__circle swatch__circle--mix" id="mix-circle">
+        <span id="mix-empty" class="swatch__hint">boş</span>
+      </div>
+      <div class="counts" id="mix-counts" aria-hidden="true">
+        <span class="counts__pill counts__pill--r">K<b id="count-r">0</b></span>
+        <span class="counts__pill counts__pill--y">S<b id="count-y">0</b></span>
+        <span class="counts__pill counts__pill--b">M<b id="count-b">0</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="pots" role="group" aria-label="Boya tüpleri">
+    <button class="pot pot--r" data-color="r" type="button" aria-label="Kırmızı damla ekle">
+      <span class="pot__color"></span>
+      <span class="pot__name">Kırmızı</span>
+      <span class="pot__key">1</span>
+    </button>
+    <button class="pot pot--y" data-color="y" type="button" aria-label="Sarı damla ekle">
+      <span class="pot__color"></span>
+      <span class="pot__name">Sarı</span>
+      <span class="pot__key">2</span>
+    </button>
+    <button class="pot pot--b" data-color="b" type="button" aria-label="Mavi damla ekle">
+      <span class="pot__color"></span>
+      <span class="pot__name">Mavi</span>
+      <span class="pot__key">3</span>
+    </button>
+  </div>
+  <div class="actions">
+    <button id="clear-btn" class="action action--ghost" type="button">Boşalt (C)</button>
+    <button id="submit-btn" class="action action--primary" type="button">Onayla (Enter)</button>
+  </div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Boya Karıştır</h2>
+      <p id="overlay-msg">Hedef renge ulaşmak için kırmızı, sarı ve mavi damlaları doğru oranda karıştır.<br/>Başlamak için tıkla veya Boşluk'a bas.</p>
+    </div>
+  </div>
+</div>
