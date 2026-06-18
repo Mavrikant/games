@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Ağ Ör">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#1c1f2e" />
+      <stop offset="100%" stop-color="#0a0b14" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" rx="10" />
+  <g transform="translate(160,100)" stroke="#dde2ea" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.9">
+    <!-- 8 radials -->
+    <line x1="0" y1="0" x2="0" y2="-80" />
+    <line x1="0" y1="0" x2="56" y2="-56" />
+    <line x1="0" y1="0" x2="80" y2="0" />
+    <line x1="0" y1="0" x2="56" y2="56" />
+    <line x1="0" y1="0" x2="0" y2="80" />
+    <line x1="0" y1="0" x2="-56" y2="56" />
+    <line x1="0" y1="0" x2="-80" y2="0" />
+    <line x1="0" y1="0" x2="-56" y2="-56" />
+    <!-- 4 concentric octagons -->
+    <polygon points="0,-24 17,-17 24,0 17,17 0,24 -17,17 -24,0 -17,-17" />
+    <polygon points="0,-44 31,-31 44,0 31,31 0,44 -31,31 -44,0 -31,-31" />
+    <polygon points="0,-60 42,-42 60,0 42,42 0,60 -42,42 -60,0 -42,-42" />
+    <polygon points="0,-76 54,-54 76,0 54,54 0,76 -54,54 -76,0 -54,-54" />
+  </g>
+  <!-- Anchors -->
+  <g fill="#cdd6e0">
+    <circle cx="160" cy="20" r="2.5"/>
+    <circle cx="216" cy="44" r="2.5"/>
+    <circle cx="240" cy="100" r="2.5"/>
+    <circle cx="216" cy="156" r="2.5"/>
+    <circle cx="160" cy="180" r="2.5"/>
+    <circle cx="104" cy="156" r="2.5"/>
+    <circle cx="80" cy="100" r="2.5"/>
+    <circle cx="104" cy="44" r="2.5"/>
+  </g>
+  <!-- Prey insects stuck in the web -->
+  <circle cx="184" cy="80" r="3.5" fill="#9be6c5"/>
+  <circle cx="138" cy="123" r="5" fill="#e8d57a"/>
+  <circle cx="200" cy="128" r="3" fill="#9be6c5"/>
+  <circle cx="125" cy="78" r="6" fill="#e07c5a"/>
+  <!-- Spider in center -->
+  <g transform="translate(160,100)" stroke="#1a1622" stroke-width="1.1" stroke-linecap="round">
+    <line x1="0" y1="0" x2="-8" y2="-3"/>
+    <line x1="-8" y1="-3" x2="-13" y2="-7"/>
+    <line x1="0" y1="0" x2="8" y2="-3"/>
+    <line x1="8" y1="-3" x2="13" y2="-7"/>
+    <line x1="0" y1="0" x2="-10" y2="2"/>
+    <line x1="-10" y1="2" x2="-15" y2="4"/>
+    <line x1="0" y1="0" x2="10" y2="2"/>
+    <line x1="10" y1="2" x2="15" y2="4"/>
+    <line x1="0" y1="0" x2="-9" y2="6"/>
+    <line x1="-9" y1="6" x2="-13" y2="11"/>
+    <line x1="0" y1="0" x2="9" y2="6"/>
+    <line x1="9" y1="6" x2="13" y2="11"/>
+  </g>
+  <ellipse cx="160" cy="102" rx="6" ry="8" fill="#2c1f33"/>
+  <circle cx="160" cy="96" r="4" fill="#3a2940"/>
+  <circle cx="158.6" cy="95" r="0.9" fill="#e8b85a"/>
+  <circle cx="161.4" cy="95" r="0.9" fill="#e8b85a"/>
+  <!-- Title -->
+  <text x="20" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#e8ecf2">Ağ Ör</text>
+</svg>
