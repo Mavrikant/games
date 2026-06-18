@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Faz">
+  <defs>
+    <linearGradient id="fazBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0d18" />
+      <stop offset="100%" stop-color="#11142a" />
+    </linearGradient>
+    <radialGradient id="fazHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(155,231,255,0.55)" />
+      <stop offset="100%" stop-color="rgba(155,231,255,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#fazBg)" />
+
+  <!-- mid reference -->
+  <line x1="0" y1="110" x2="320" y2="110" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+
+  <!-- wave A (blue): glow + crisp -->
+  <path d="M0,110 C 30,40 60,180 90,110 S 150,40 180,110 240,180 270,110 320,40 320,110"
+        fill="none" stroke="#7cc8ff" stroke-width="7" stroke-opacity="0.22"
+        stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M0,110 C 30,40 60,180 90,110 S 150,40 180,110 240,180 270,110 320,40 320,110"
+        fill="none" stroke="#7cc8ff" stroke-width="2.6"
+        stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- wave B (orange): glow + crisp -->
+  <path d="M0,110 C 24,170 48,52 80,110 110,160 138,62 172,110 200,158 232,58 264,110 290,156 310,72 320,110"
+        fill="none" stroke="#ffae6c" stroke-width="7" stroke-opacity="0.22"
+        stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M0,110 C 24,170 48,52 80,110 110,160 138,62 172,110 200,158 232,58 264,110 290,156 310,72 320,110"
+        fill="none" stroke="#ffae6c" stroke-width="2.6"
+        stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- capture line + halo (the two waves nearly align here at x=160) -->
+  <line x1="160" y1="26" x2="160" y2="184"
+        stroke="rgba(255,255,255,0.32)" stroke-width="1.4" stroke-dasharray="5 5" />
+  <circle cx="160" cy="110" r="34" fill="url(#fazHalo)" />
+
+  <!-- dots on the capture line -->
+  <circle cx="160" cy="105" r="6.5" fill="#7cc8ff" />
+  <circle cx="160" cy="116" r="6.5" fill="#ffae6c" />
+  <line x1="160" y1="105" x2="160" y2="116" stroke="rgba(255,255,255,0.85)" stroke-width="3" stroke-linecap="round" />
+
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Faz</text>
+  <text x="20" y="56" font-family="ui-sans-serif, system-ui" font-size="11" fill="#8da0c4">çakışmayı yakala</text>
+</svg>

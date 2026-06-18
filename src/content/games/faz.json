@@ -1,0 +1,21 @@
+{
+  "title": "Faz",
+  "description": "İki sinüs dalgası farklı hızlarda kayar; tam üst üste binme anını yakala. Mesafe ne kadar yakın, puan o kadar yüksek; 3 mükemmel art arda kombo bonusu kazandırır.",
+  "dateAdded": "2026-06-18",
+  "tags": ["arcade", "zamanlama", "özgün", "refleks"],
+  "controls": "Boşluk / Tıkla: yakala · R: yeniden başla",
+  "thumbnail": "faz.svg",
+  "scoring": {
+    "storageKey": "faz.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Faz, iki bağımsız sinüs dalgasının kesiştiği anı yakalamak üzerine kurulu bir gözlem-zamanlama oyunudur. Ekranın ortasında dikey kesikli bir 'yakalama çizgisi' vardır; mavi ve turuncu iki dalga sürekli farklı genlik, periyot ve hızlarda akar. Her dalganın yakalama çizgisindeki anlık y değeri o renkte bir noktayla işaretlenir ve iki nokta arasında ne kadar fark olduğunu görmen için aralarına ince bir çizgi çekilir. Boşluk veya tıklama ile o anı 'yakalarsın': iki nokta birbirine ne kadar yakınsa o kadar puan alırsın. Tam çakışırlarsa (6 pikselden yakın) 100 puanlık mükemmel atışı kazanırsın; çakışma uzaklaştıkça puan karesel olarak düşer ve 90 pikseli geçince hiç puan almazsın. Her yakalamadan sonra dalgalar tamamen yeniden rastgele kurulur — farklı genlik, farklı periyot, farklı hız ve yön. Bu yüzden 'ezberle hareket et' işe yaramaz; her seferinde yeniden ölçmen gerekir. Üst üste 3 mükemmel atış bir kombo bonusu (+25) ekler; tek bir 'kaçtı' kombonu sıfırlar, dolayısıyla aceleyle ateşlemek pahalıya patlar. Süren 45 saniyedir; süre bitince toplam skor kaydedilir ve en yüksek skorun tarayıcında saklanır. Strateji: dalgaların orta hattan geçtiği anı (sıfır çizgisi) tahmin etmeye çalışma; iki noktanın aynı yöne yöneldiği anlarda mesafe sıfıra yaklaşır, asıl ateşlenmesi gereken o pencere o iki nokta birbirine doğru hızlanırken değil yavaşlarken oluşur. Zorluk seviyesi her 3 yakalamada bir artar; üst seviyelerde dalgaların hızı katlanır ve mükemmel pencere göz açıp kapayıncaya kadar uçar — sabırlı olup orta puanlı 'iyi' atışlarla skoru biriktirmek genelde mükemmel kovalamaktan daha çok puan getirir.",
+  "en": {
+    "title": "Phase",
+    "description": "Two sine waves drift at different speeds — capture the instant they cross. Closer alignment scores more; three perfect captures in a row pay a combo bonus.",
+    "controls": "Space / Click: capture · R: restart",
+    "howToPlay": "Phase is an observation-and-timing arcade built around catching the moment two independent sine waves cross. A dashed vertical 'capture line' sits in the middle of the canvas, and blue and orange waves continuously sweep across with different amplitudes, periods and scroll speeds. Each wave's instantaneous Y value at the capture line is marked with a dot in its colour, with a thin connector drawn between them so you can read the gap at a glance. Press Space — or tap the canvas — to capture the moment: the closer the two dots are, the more points you score. Within 6 pixels you get the full 100 points (perfect); the score falls off quadratically with distance and reaches zero beyond a 90 pixel gap. After every capture both waves are completely re-randomised with new amplitudes, periods, speeds and directions, so muscle memory doesn't help — you have to re-read the screen every time. Three perfect captures in a row pay a +25 combo bonus; a single 'miss' resets your streak, so trigger-happy captures are expensive. The round lasts 45 seconds; when time runs out the total is recorded and your best is kept in your browser. Strategy: don't try to predict the centreline crossing — the gap shrinks to zero whenever both dots travel in the same direction, and the firing window is widest just as they decelerate toward each other, not while they accelerate. Difficulty steps up every three captures, with speeds nearly doubling at higher tiers; chasing perfects becomes much harder, and racking up steady 'good' captures usually beats greedy perfect-hunting on overall score."
+  }
+}
