@@ -1,0 +1,88 @@
+---
+---
+
+<div id="km-root" class="km-root">
+  <header class="hud">
+    <div class="hud__score km-role-chip">Rol<span id="role">Saklanan 🦎</span></div>
+    <div class="hud__score">Aşama<span id="phase">Menü</span></div>
+    <div class="hud__score">Süre<span id="time">1:20</span></div>
+    <div class="hud__score">Skor<span id="score">0</span></div>
+    <div class="hud__score">Rekor<span id="best">0</span></div>
+    <button id="fs" class="hud__btn" type="button" aria-label="Tam ekran">⛶</button>
+    <button id="restart" class="hud__btn" type="button">Menü</button>
+  </header>
+
+  <div id="status" class="km-status" aria-live="polite">Çevrimdışı</div>
+
+  <div class="board-wrap">
+    <canvas id="gl" aria-label="Kamuflaj 3B arena"></canvas>
+
+    <!-- Camouflage meter (hiders) -->
+    <div id="blend" class="km-blend" aria-hidden="true">
+      <span class="km-blend__label">Kamuflaj</span>
+      <div class="km-blend__track"><div id="blend-bar" class="km-blend__bar"></div></div>
+    </div>
+
+    <ul id="feed" class="km-feed"></ul>
+
+    <!-- Phase banner -->
+    <div id="banner" class="km-banner km-banner--hidden" aria-live="polite">
+      <div id="banner-title" class="km-banner__title">—</div>
+      <div id="banner-sub" class="km-banner__sub">—</div>
+    </div>
+
+    <!-- Touch controls: shown only on coarse pointers via CSS. -->
+    <div id="stick" class="km-stick"><div id="stick-nub" class="km-stick__nub"></div></div>
+    <button id="action" class="km-action" type="button" aria-label="Damlalık / Dil">Damlalık</button>
+
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Kamuflaj</h2>
+        <p id="overlay-msg">Vücudunu çevreye boya, kıpırdamadan dur ve avcının dilinden kaç.</p>
+
+        <input
+          id="name"
+          class="km-name"
+          type="text"
+          maxlength="14"
+          placeholder="Takma adın"
+          aria-label="Takma ad"
+        />
+
+        <!-- Role preference -->
+        <div id="role-toggle" class="km-role">
+          <span class="km-role__caption">Rolün</span>
+          <div class="km-role__opts">
+            <button id="role-hide" class="km-role__opt km-role__opt--on" type="button">🦎 Saklan</button>
+            <button id="role-seek" class="km-role__opt" type="button">👁 Avla</button>
+          </div>
+        </div>
+
+        <!-- Menu actions -->
+        <div id="menu-actions" class="km-actions">
+          <button id="bots" class="km-btn km-btn--primary" type="button">Botlarla Oyna</button>
+          <button id="create" class="km-btn" type="button">Oda Oluştur</button>
+        </div>
+
+        <!-- Share panel (host, while waiting for guests) -->
+        <div id="share" class="km-share km-share--hidden">
+          <p class="km-share__label">Bu bağlantıyı arkadaşlarına gönder:</p>
+          <div class="km-share__row">
+            <input id="share-link" class="km-share__input" type="text" readonly aria-label="Oda bağlantısı" />
+            <button id="copy" class="km-btn km-btn--small" type="button">Kopyala</button>
+          </div>
+          <button id="solo-start" class="km-btn km-btn--primary" type="button">Beklemeden başla</button>
+        </div>
+
+        <!-- Match-end scoreboard -->
+        <div id="over-panel" class="km-over km-over--hidden">
+          <ol id="board-list" class="km-board"></ol>
+          <div id="over-actions" class="km-actions">
+            <button id="rematch" class="km-btn km-btn--primary" type="button">Yeniden Oyna</button>
+            <button id="to-menu" class="km-btn" type="button">Menü</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
