@@ -170,17 +170,51 @@ function distToWall(x: number, z: number, w: WallSeg): number {
   return Math.hypot(x - cx, z - cz);
 }
 
-const PROP_KINDS: PropKind[] = ['crate', 'barrel', 'plant', 'rock', 'lamp'];
+// Weighted prop table with a footprint (r) and height (h) profile per kind.
+// Tall kinds (column, shelf, statue) block sightlines; wide low kinds (bush,
+// table, rock) give close cover — together they create far more hiding spots.
+interface PropProfile {
+  kind: PropKind;
+  weight: number;
+  rMin: number;
+  rMax: number;
+  hMin: number;
+  hMax: number;
+}
+const PROP_PROFILES: PropProfile[] = [
+  { kind: 'crate', weight: 12, rMin: 0.8, rMax: 1.3, hMin: 1.2, hMax: 2.2 },
+  { kind: 'barrel', weight: 9, rMin: 0.7, rMax: 1.0, hMin: 1.4, hMax: 2.1 },
+  { kind: 'plant', weight: 9, rMin: 0.7, rMax: 1.1, hMin: 1.7, hMax: 2.7 },
+  { kind: 'bush', weight: 11, rMin: 1.2, rMax: 2.0, hMin: 1.1, hMax: 1.8 },
+  { kind: 'rock', weight: 8, rMin: 0.9, rMax: 1.7, hMin: 0.9, hMax: 1.5 },
+  { kind: 'column', weight: 8, rMin: 0.7, rMax: 0.95, hMin: 4.2, hMax: 5.0 },
+  { kind: 'shelf', weight: 9, rMin: 1.0, rMax: 1.4, hMin: 2.8, hMax: 3.7 },
+  { kind: 'table', weight: 8, rMin: 1.1, rMax: 1.6, hMin: 1.0, hMax: 1.4 },
+  { kind: 'urn', weight: 7, rMin: 0.7, rMax: 1.0, hMin: 1.8, hMax: 2.6 },
+  { kind: 'statue', weight: 5, rMin: 0.8, rMax: 1.1, hMin: 2.6, hMax: 3.4 },
+  { kind: 'lamp', weight: 6, rMin: 0.45, rMax: 0.65, hMin: 3.0, hMax: 4.0 },
+];
+const PROFILE_TOTAL = PROP_PROFILES.reduce((s, p) => s + p.weight, 0);
+
+function pickProfile(roll: number): PropProfile {
+  let acc = roll * PROFILE_TOTAL;
+  for (const p of PROP_PROFILES) {
+    acc -= p.weight;
+    if (acc <= 0) return p;
+  }
+  return PROP_PROFILES[0]!;
+}
 
 function makeProps(seed: number, walls: WallSeg[]): PropSpec[] {
   const rand = mulberry32(seed);
   const props: PropSpec[] = [];
   let guard = 0;
-  while (props.length < PROP_COUNT && guard < PROP_COUNT * 60) {
+  while (props.length < PROP_COUNT && guard < PROP_COUNT * 80) {
     guard++;
+    const prof = pickProfile(rand());
+    const r = prof.rMin + rand() * (prof.rMax - prof.rMin);
     const x = -MAP_HW + 2 + rand() * (MAP_HW * 2 - 4);
     const z = -MAP_HD + 2 + rand() * (MAP_HD * 2 - 4);
-    const r = 0.9 + rand() * 1.4;
     let ok = true;
     for (const wl of walls) {
       if (distToWall(x, z, wl) < r + WALL_T + 0.6) {
@@ -190,21 +224,20 @@ function makeProps(seed: number, walls: WallSeg[]): PropSpec[] {
     }
     if (ok) {
       for (const p of props) {
-        if (Math.hypot(p.x - x, p.z - z) < p.r + r + 1.6) {
+        if (Math.hypot(p.x - x, p.z - z) < p.r + r + 1.4) {
           ok = false;
           break;
         }
       }
     }
     if (!ok) continue;
-    const kind = PROP_KINDS[Math.floor(rand() * PROP_KINDS.length)]!;
     props.push({
       x,
       z,
       r,
-      h: 1.4 + rand() * 2.4,
+      h: prof.hMin + rand() * (prof.hMax - prof.hMin),
       hue: PROP_HUES[Math.floor(rand() * PROP_HUES.length)]!,
-      kind,
+      kind: prof.kind,
       seed: Math.floor(rand() * 1e6),
     });
   }

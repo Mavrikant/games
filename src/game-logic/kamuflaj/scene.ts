@@ -24,6 +24,7 @@ import {
   GRID_ROWS,
   MAP_HD,
   MAP_HW,
+  PROP_HUES,
   ROOM,
   SKY,
   WALL_H,
@@ -484,6 +485,95 @@ function makeProp(p: PropSpec): THREE.Object3D {
     );
     bulb.position.y = p.h + p.r * 0.3;
     grp.add(bulb);
+  } else if (p.kind === 'bush') {
+    const leafMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.5, 0.4), roughness: 0.88, flatShading: true });
+    const clumps = 8;
+    for (let i = 0; i < clumps; i++) {
+      const a = (i / clumps) * Math.PI * 2 + rnd();
+      const rad = p.r * (0.25 + rnd() * 0.5);
+      const cl = shadeMesh(new THREE.Mesh(new THREE.IcosahedronGeometry(p.r * (0.4 + rnd() * 0.3), 0), leafMat), true, true);
+      cl.position.set(Math.cos(a) * rad, p.h * (0.35 + rnd() * 0.4), Math.sin(a) * rad);
+      cl.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
+      grp.add(cl);
+    }
+    const crown = shadeMesh(new THREE.Mesh(new THREE.IcosahedronGeometry(p.r * 0.55, 0), leafMat), true, true);
+    crown.position.y = p.h * 0.8;
+    grp.add(crown);
+  } else if (p.kind === 'column') {
+    const stoneMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.16, 0.58), roughness: 0.85, flatShading: false });
+    const shaft = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(p.r * 0.62, p.r * 0.7, p.h, 16), stoneMat), true, true);
+    shaft.position.y = p.h / 2;
+    grp.add(shaft);
+    const base = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(p.r, p.r, 0.45, 16), stoneMat), true, true);
+    base.position.y = 0.22;
+    grp.add(base);
+    const capital = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(p.r * 0.95, p.r * 0.78, 0.5, 16), stoneMat), true, false);
+    capital.position.y = p.h - 0.25;
+    grp.add(capital);
+  } else if (p.kind === 'shelf') {
+    const woodMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.42, 0.36), roughness: 0.72, flatShading: true });
+    const w = p.r * 1.8;
+    const d = p.r * 1.05;
+    const carcass = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(w, p.h, d), woodMat), true, true);
+    carcass.position.set(0, p.h / 2, 0);
+    grp.add(carcass);
+    const slatMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.3, 0.24), roughness: 0.7 });
+    for (let s = 1; s <= 3; s++) {
+      const slat = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(w + 0.08, 0.1, d + 0.08), slatMat), true, false);
+      slat.position.set(0, (p.h * s) / 4, 0);
+      grp.add(slat);
+    }
+    for (let b = 0; b < 4; b++) {
+      const bk = shadeMesh(
+        new THREE.Mesh(
+          new THREE.BoxGeometry(0.16 + rnd() * 0.1, 0.4 + rnd() * 0.25, d * 0.6),
+          new THREE.MeshStandardMaterial({ color: hsl(PROP_HUES[Math.floor(rnd() * PROP_HUES.length)]!, 0.5, 0.5), roughness: 0.6 }),
+        ),
+        true,
+        false,
+      );
+      const shelfY = (p.h * (1 + Math.floor(rnd() * 3))) / 4 + 0.27;
+      bk.position.set(-w / 2 + 0.3 + b * (w / 4.5), shelfY, 0);
+      grp.add(bk);
+    }
+  } else if (p.kind === 'urn') {
+    const clayMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.42, 0.46), roughness: 0.78, metalness: 0.05 });
+    const pts: THREE.Vector2[] = [
+      new THREE.Vector2(0.02, 0),
+      new THREE.Vector2(p.r * 0.5, 0),
+      new THREE.Vector2(p.r * 0.92, p.h * 0.28),
+      new THREE.Vector2(p.r, p.h * 0.46),
+      new THREE.Vector2(p.r * 0.62, p.h * 0.72),
+      new THREE.Vector2(p.r * 0.5, p.h * 0.86),
+      new THREE.Vector2(p.r * 0.72, p.h * 0.96),
+      new THREE.Vector2(p.r * 0.6, p.h),
+    ];
+    const urn = shadeMesh(new THREE.Mesh(new THREE.LatheGeometry(pts, 20), clayMat), true, true);
+    grp.add(urn);
+  } else if (p.kind === 'statue') {
+    const stoneMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.1, 0.6), roughness: 0.92, flatShading: true });
+    const ped = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(p.r * 1.5, p.h * 0.24, p.r * 1.5), stoneMat), true, true);
+    ped.position.y = p.h * 0.12;
+    grp.add(ped);
+    const robe = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(p.r * 0.72, p.h * 0.58, 12), stoneMat), true, true);
+    robe.position.y = p.h * 0.24 + p.h * 0.29;
+    grp.add(robe);
+    const headS = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(p.r * 0.34, 14, 12), stoneMat), true, false);
+    headS.position.y = p.h * 0.24 + p.h * 0.58 + p.r * 0.28;
+    grp.add(headS);
+  } else if (p.kind === 'table') {
+    const woodMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.4, 0.4), roughness: 0.7, flatShading: true });
+    const w = p.r * 1.9;
+    const d = p.r * 1.35;
+    const top = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(w, 0.18, d), woodMat), true, true);
+    top.position.y = p.h;
+    grp.add(top);
+    const legGeo = new THREE.CylinderGeometry(0.1, 0.09, p.h, 8);
+    for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]] as const) {
+      const leg = shadeMesh(new THREE.Mesh(legGeo, woodMat), true, false);
+      leg.position.set(sx * (w / 2 - 0.18), p.h / 2, sz * (d / 2 - 0.18));
+      grp.add(leg);
+    }
   } else {
     const box = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(p.r * 1.7, p.h, p.r * 1.7), mat), true, true);
     box.position.y = p.h / 2;
@@ -517,13 +607,18 @@ function makeWall(group: THREE.Group, w: WallSeg): void {
     bumpMap: wallTex?.bump ?? null,
     bumpScale: 0.04,
   });
-  const body = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX, WALL_H, dimZ), wallMat), true, true);
-  body.position.set(mid.x, WALL_H / 2, mid.z);
+  // Sink the base slightly below the floor (y0 = -0.12) so no wall face is
+  // coplanar with the floor plane (pitfall: z-fighting-at-wall-base).
+  const y0 = -0.12;
+  const bodyH = WALL_H - y0;
+  const body = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX, bodyH, dimZ), wallMat), true, true);
+  body.position.set(mid.x, y0 + bodyH / 2, mid.z);
   group.add(body);
 
   const baseMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.18, 0.26), roughness: 0.85 });
-  const base = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX + 0.16, BASEBOARD_H, dimZ + 0.16), baseMat), true, true);
-  base.position.set(mid.x, BASEBOARD_H / 2, mid.z);
+  const baseH = BASEBOARD_H - y0;
+  const base = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX + 0.16, baseH, dimZ + 0.16), baseMat), true, true);
+  base.position.set(mid.x, y0 + baseH / 2, mid.z);
   group.add(base);
 
   const capMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.16, 0.58), roughness: 0.7 });
@@ -542,8 +637,9 @@ function makePillar(group: THREE.Group, x: number, z: number): void {
     bumpMap: wallTex?.bump ?? null,
     bumpScale: 0.04,
   });
-  const shaft = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(PILLAR_T, WALL_H + 0.3, PILLAR_T), mat), true, true);
-  shaft.position.set(x, (WALL_H + 0.3) / 2, z);
+  const shaftH = WALL_H + 0.3 + 0.12;
+  const shaft = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(PILLAR_T, shaftH, PILLAR_T), mat), true, true);
+  shaft.position.set(x, -0.12 + shaftH / 2, z);
   group.add(shaft);
   const capMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.16, 0.6), roughness: 0.6 });
   const cap = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(PILLAR_T + 0.3, 0.45, PILLAR_T + 0.3), capMat), true, false);
@@ -562,8 +658,12 @@ function makeLintel(group: THREE.Group, x: number, z: number, horizontal: boolea
     bumpMap: wallTex?.bump ?? null,
     bumpScale: 0.04,
   });
-  const dimX = horizontal ? DOOR_W + 0.4 : WALL_T;
-  const dimZ = horizontal ? WALL_T : DOOR_W + 0.4;
+  // The lintel overlaps the flanking wall segments; make it slightly THINNER
+  // than the wall so its side faces nest inside the wall faces instead of
+  // sitting coplanar (pitfall: z-fighting-over-doorway).
+  const thin = WALL_T * 0.82;
+  const dimX = horizontal ? DOOR_W + 0.4 : thin;
+  const dimZ = horizontal ? thin : DOOR_W + 0.4;
   const lintel = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX, h, dimZ), mat), true, true);
   lintel.position.set(x, DOOR_H + h / 2, z);
   group.add(lintel);
@@ -587,6 +687,9 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
     metalness: 0.04,
     transparent: true,
     opacity: 1,
+    // depthWrite keeps a faded hider a coherent ghost instead of letting its own
+    // inner faces blend through (pitfall: transparent-self-overlap).
+    depthWrite: true,
     bumpMap: bump ?? null,
     bumpScale: 0.015,
   });
@@ -602,12 +705,16 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
   belly.position.y = 0.4;
   group.add(belly);
 
-  // Dorsal crest — overlapping fins along the spine.
+  // Dorsal crest — a serrated ridge of thin overlapping fins hugging the spine.
   const crestMat = isSeeker ? new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5, flatShading: true }) : skin;
-  for (let i = 0; i < 9; i++) {
-    const t = i / 8;
-    const fin = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.1 - t * 0.03, 0.26 - t * 0.12, 4), crestMat), false, false);
-    fin.position.set(0, 0.92 - t * 0.18, 0.5 - t * 1.0);
+  const FINS = 14;
+  for (let i = 0; i < FINS; i++) {
+    const t = i / (FINS - 1);
+    const z = 0.55 - t * 1.32;
+    const bodyTop = 0.9 - Math.abs(t - 0.25) * 0.28; // follow the body's arc
+    const fin = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.11 - t * 0.05, 0.2 - t * 0.1, 4), crestMat), false, false);
+    fin.scale.x = 0.32; // flatten into a fin
+    fin.position.set(0, bodyTop, z);
     group.add(fin);
   }
 
@@ -648,31 +755,36 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
     eyes.push(eg);
   }
 
-  // Curled prehensile tail (overlapping spheres).
+  // Curled prehensile tail — one smooth tube along a spiral curve (no beads),
+  // pivoting at its base so it can sway.
   const tail = new THREE.Group();
-  tail.position.set(0, 0.48, -0.8);
-  for (let i = 0; i < 10; i++) {
-    const seg = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.18 - i * 0.015, 10, 8), skin), false, false);
-    const a = i * 0.62;
-    const rad = 0.55 - i * 0.04;
-    seg.position.set(Math.sin(a) * rad * 0.35, Math.sin(a * 0.6) * 0.12, -i * 0.13 + (1 - Math.cos(a)) * rad * 0.5);
-    tail.add(seg);
-  }
+  tail.position.set(0, 0.5, -0.72);
+  const tailCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0, 0, 0.06),
+    new THREE.Vector3(0, -0.04, -0.34),
+    new THREE.Vector3(0.07, -0.04, -0.62),
+    new THREE.Vector3(0.2, 0.06, -0.74),
+    new THREE.Vector3(0.27, 0.24, -0.64),
+    new THREE.Vector3(0.17, 0.36, -0.46),
+    new THREE.Vector3(0.03, 0.36, -0.34),
+  ]);
+  const tube = shadeMesh(new THREE.Mesh(new THREE.TubeGeometry(tailCurve, 44, 0.12, 9, false), skin), false, true);
+  tail.add(tube);
   group.add(tail);
 
-  // Legs: thigh + shin + gripping foot, meeting the body.
-  for (const [lx, lz, sgn] of [[-0.36, 0.5, -1], [0.36, 0.5, 1], [-0.36, -0.34, -1], [0.36, -0.34, 1]] as const) {
-    const thigh = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.08, 0.42, 8), skin), false, false);
-    thigh.position.set(lx, 0.34, lz);
-    thigh.rotation.z = sgn * 0.5;
+  // Legs: thigh + shin + gripping foot, tucked under the body (no gaps).
+  for (const [lx, lz, sgn] of [[-0.34, 0.46, -1], [0.34, 0.46, 1], [-0.34, -0.32, -1], [0.34, -0.32, 1]] as const) {
+    const thigh = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.075, 0.4, 8), skin), false, true);
+    thigh.position.set(lx, 0.36, lz);
+    thigh.rotation.z = sgn * 0.42;
     group.add(thigh);
-    const shin = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.34, 8), skin), false, false);
-    shin.position.set(lx + sgn * 0.18, 0.12, lz);
-    shin.rotation.z = sgn * -0.3;
+    const shin = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.32, 8), skin), false, true);
+    shin.position.set(lx + sgn * 0.15, 0.13, lz);
+    shin.rotation.z = sgn * -0.34;
     group.add(shin);
-    const foot = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), skin), false, false);
-    foot.scale.set(1.4, 0.6, 1.2);
-    foot.position.set(lx + sgn * 0.26, 0.04, lz);
+    const foot = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), skin), false, true);
+    foot.scale.set(1.5, 0.55, 1.25);
+    foot.position.set(lx + sgn * 0.22, 0.045, lz);
     group.add(foot);
   }
 

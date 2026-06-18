@@ -32,7 +32,7 @@ export const MAP_HW = (GRID_COLS * ROOM) / 2; // half-width  (x ∈ [-HW, HW])
 export const MAP_HD = (GRID_ROWS * ROOM) / 2; // half-depth  (z ∈ [-HD, HD])
 
 export const PLAYER_R = 0.7; // body collision radius
-export const PROP_COUNT = 40; // scattered cover objects across all rooms
+export const PROP_COUNT = 54; // scattered, varied cover objects across all rooms
 export const FLOOR_HUE = 28; // warm wood floor (HSL hue)
 export const WALL_HUE = 210; // cool wall
 
