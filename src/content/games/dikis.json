@@ -1,0 +1,14 @@
+{
+  "title": "Dikiş",
+  "description": "Otomatik vuran iğnenin altında imleci hedef desenin sıradaki noktasına götür — kumaşta düzgün izi çıkar.",
+  "dateAdded": "2026-06-18",
+  "tags": ["hassas", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "Fare/dokunma: imleci sıradaki noktaya getir · Boşluk / Enter veya tıkla: başla · R: yeniden",
+  "howToPlay": "Dikiş, ritimli bir dikiş makinesini simüle eder: iğne sabit aralıklarla aşağı iner ve imlecinin bulunduğu yere bir ilmek atar. Senin görevin, kumaşa çizilen kesik çizginin üzerindeki sıradaki vurgulu noktayı her vuruşa hazırlayıp imleci tam zamanında oraya getirmek. İmleci sırayla bir sonraki vurgulanan halkanın içine sok; iğne indiğinde mesafe ne kadar küçükse o kadar puan: tam ortada Mükemmel (+15), halkanın iç bölgesinde İyi (+8), halkanın kenarında Tam (+3). Halka dışında kaldıysan ilmek 'Iska' sayılır, puan eklemez ve halka aynı yerde kalır — ama dört ıska biriktirirsen oyun biter. Her bölümün altındaki ince çubuk, bir sonraki vuruşa kalan süreyi gösterir; bölüm ilerledikçe iğne hızlanır, halka daralır, desen zorlaşır. Beş bölümü tamamla — düz, dalga, zikzak, spiral ve kalp — toplam puanı en yükseğe çıkar. Strateji: imleci bir sonraki halkaya getirip orada sabit durdurmak en güvenli yol; üç-dört noktayı önden okuyup imleci tam vuruş anında orta noktada tutmaya çalış. Boşluk/Enter veya tıklama her bölümü başlatır, R her an yeniden başlatır.",
+  "thumbnail": "dikis.svg",
+  "scoring": {
+    "storageKey": "dikis.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}
