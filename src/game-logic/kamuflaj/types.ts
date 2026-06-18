@@ -34,7 +34,18 @@ export interface WallSeg {
   bz: number;
 }
 
-export type PropKind = 'crate' | 'barrel' | 'plant' | 'rock' | 'lamp';
+export type PropKind =
+  | 'crate'
+  | 'barrel'
+  | 'plant'
+  | 'rock'
+  | 'lamp'
+  | 'bush'
+  | 'column'
+  | 'shelf'
+  | 'urn'
+  | 'statue'
+  | 'table';
 
 // Static cover object. Position + footprint + hue. Generated on the host and
 // sent verbatim to guests in the 'start' message so both peers share geometry.
