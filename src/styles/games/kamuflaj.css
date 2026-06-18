@@ -1,0 +1,515 @@
+/*
+ * Kamuflaj — 3D chameleon hide-and-seek.
+ * Overlay positioning + .overlay--hidden are required by @shared/overlay
+ * (pitfall: missing-overlay-css). Do not delete them.
+ */
+
+.km-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.km-status {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  min-height: 1.2em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 720px) {
+  .board-wrap {
+    max-width: 820px;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+#gl {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #10141c;
+  border: 1px solid var(--border);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ---- HUD chips ---- */
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__score {
+  flex: 1;
+  min-width: 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.km-role-chip span {
+  font-size: 15px;
+}
+
+/* ---- camouflage meter ---- */
+.km-blend {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(8, 10, 14, 0.6);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.km-blend__label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+}
+
+.km-blend__track {
+  width: 120px;
+  height: 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.km-blend__bar {
+  width: 0%;
+  height: 100%;
+  border-radius: 6px;
+  background: #f87171;
+  transition: width 0.12s linear, background 0.2s;
+}
+
+/* ---- event feed ---- */
+.km-feed {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.km-feed li {
+  font-size: 12px;
+  color: #e2e8f0;
+  background: rgba(8, 10, 14, 0.55);
+  border-radius: 8px;
+  padding: 4px 9px;
+  max-width: 70vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- phase banner ---- */
+.km-banner {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  text-align: center;
+  pointer-events: none;
+  background: rgba(8, 10, 14, 0.45);
+  padding: 12px 22px;
+  border-radius: 14px;
+  transition: opacity 0.2s;
+}
+
+.km-banner--hidden {
+  opacity: 0;
+}
+
+.km-banner__title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.km-banner__sub {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: #d6e0ee;
+}
+
+/* ---- overlay ---- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 10, 14, 0.74);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 92%;
+  width: 350px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.km-name {
+  display: block;
+  width: 100%;
+  max-width: 230px;
+  margin: 0 auto 12px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  text-align: center;
+}
+
+.km-name:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- role toggle ---- */
+.km-role {
+  margin: 0 auto 14px;
+  max-width: 250px;
+}
+
+.km-role--hidden {
+  display: none;
+}
+
+.km-role__caption {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.km-role__opts {
+  display: flex;
+  gap: 8px;
+}
+
+.km-role__opt {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.km-role__opt--on {
+  background: var(--accent-strong);
+  border-color: transparent;
+  color: #fff;
+}
+
+.km-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.km-actions--hidden,
+.km-share--hidden,
+.km-over--hidden {
+  display: none;
+}
+
+.km-btn {
+  width: 100%;
+  max-width: 250px;
+  padding: 12px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.km-btn:hover {
+  background: var(--surface);
+  filter: brightness(1.1);
+}
+
+.km-btn--primary {
+  background: var(--accent-strong);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.km-btn--small {
+  width: auto;
+  max-width: none;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+/* ---- share panel ---- */
+.km-share {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.km-share--hidden {
+  display: none;
+}
+
+.km-hidden {
+  display: none;
+}
+
+.km-lobby {
+  margin: 2px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.km-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.km-share__label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.km-share__row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.km-share__input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.km-share__input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- match-end scoreboard ---- */
+.km-over {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+/* Must come AFTER .km-over: equal specificity, last rule wins. */
+.km-over--hidden {
+  display: none;
+}
+
+.km-board {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-height: 40vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.km-board__me {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ---- touch controls (coarse pointers only) ---- */
+.km-stick {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(134, 239, 172, 0.45);
+  background: rgba(8, 10, 14, 0.25);
+  z-index: 4;
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.km-stick--live {
+  opacity: 1;
+}
+
+.km-stick__nub {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(134, 239, 172, 0.55);
+}
+
+.km-action {
+  position: absolute;
+  right: max(12px, env(safe-area-inset-right, 0px));
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  display: none;
+  min-width: 84px;
+  min-height: 60px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(134, 239, 172, 0.6);
+  background: rgba(8, 10, 14, 0.55);
+  color: #bbf7d0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.km-action:active {
+  background: rgba(134, 239, 172, 0.35);
+  color: #fff;
+}
+
+@media (pointer: coarse) {
+  .km-stick {
+    display: block;
+  }
+  .km-action {
+    display: block;
+  }
+  .km-root .hud__btn {
+    min-height: 48px;
+  }
+}
+
+/* ---- fullscreen (erime-arena pattern: native + .km-root--max iOS fallback) ---- */
+.km-root:fullscreen,
+.km-root:-webkit-full-screen,
+.km-root--max {
+  box-sizing: border-box;
+  padding: 10px;
+  gap: 8px;
+  background: var(--bg);
+}
+
+.km-root:fullscreen,
+.km-root:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+}
+
+.km-root--max {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh; /* fallback */
+  height: 100dvh; /* track the mobile address bar */
+}
+
+.km-root:fullscreen .board-wrap,
+.km-root:-webkit-full-screen .board-wrap,
+.km-root--max .board-wrap {
+  max-width: none;
+  width: 100%;
+  aspect-ratio: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}

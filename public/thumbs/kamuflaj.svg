@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Kamuflaj">
+  <defs>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a2230"/>
+      <stop offset="1" stop-color="#10141c"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#floor)"/>
+  <!-- floor ellipse -->
+  <ellipse cx="160" cy="150" rx="150" ry="46" fill="#2a2018" opacity="0.55"/>
+
+  <!-- props (camouflage palette) -->
+  <rect x="36" y="96" width="40" height="46" rx="4" fill="#3f7d4a"/>
+  <rect x="248" y="104" width="40" height="40" rx="4" fill="#7b4fb0"/>
+  <ellipse cx="110" cy="138" rx="20" ry="22" fill="#c98a2e"/>
+  <rect x="198" y="86" width="26" height="60" rx="6" fill="#b03a3a"/>
+  <circle cx="224" cy="80" r="11" fill="#facc15"/>
+
+  <!-- hidden chameleon, blended green near the crate -->
+  <g transform="translate(70,120)" opacity="0.92">
+    <ellipse cx="0" cy="0" rx="26" ry="16" fill="#3f7d4a"/>
+    <circle cx="20" cy="-4" r="11" fill="#3f7d4a"/>
+    <circle cx="25" cy="-7" r="4.5" fill="#1b1f29"/>
+    <circle cx="26.5" cy="-7.5" r="1.7" fill="#fde68a"/>
+    <path d="M-22 2 q-14 -2 -18 8" stroke="#3f7d4a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- seeker chameleon with tongue out -->
+  <g transform="translate(196,128)">
+    <ellipse cx="0" cy="0" rx="24" ry="15" fill="#c0463f"/>
+    <circle cx="-20" cy="-4" r="11" fill="#c0463f"/>
+    <polygon points="-2,-15 4,-15 1,-26" fill="#ef4444"/>
+    <circle cx="-25" cy="-6" r="4.5" fill="#1b1f29"/>
+    <circle cx="-26.5" cy="-6.5" r="1.7" fill="#fca5a5"/>
+    <!-- tongue toward the hidden one -->
+    <path d="M-30 -2 q-40 6 -86 -2" stroke="#f43f5e" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="-116" cy="-4" r="4" fill="#f43f5e"/>
+  </g>
+
+  <text x="160" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#e8f0fb">Kamuflaj</text>
+  <text x="160" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9fb0c4">3B · çok oyunculu saklambaç</text>
+</svg>
