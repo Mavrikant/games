@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Şifre Çöz">
+  <defs>
+    <linearGradient id="sc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101728" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="sc-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6fb1ff" />
+      <stop offset="100%" stop-color="#9a6bff" />
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#sc-bg)" />
+
+  <!-- decorative grid dots -->
+  <g fill="#1d2742" opacity="0.55">
+    <circle cx="20" cy="20" r="1.4" />
+    <circle cx="56" cy="20" r="1.4" />
+    <circle cx="92" cy="20" r="1.4" />
+    <circle cx="128" cy="20" r="1.4" />
+    <circle cx="164" cy="20" r="1.4" />
+    <circle cx="200" cy="20" r="1.4" />
+    <circle cx="236" cy="20" r="1.4" />
+    <circle cx="272" cy="20" r="1.4" />
+    <circle cx="308" cy="20" r="1.4" />
+    <circle cx="20" cy="180" r="1.4" />
+    <circle cx="56" cy="180" r="1.4" />
+    <circle cx="92" cy="180" r="1.4" />
+    <circle cx="128" cy="180" r="1.4" />
+    <circle cx="164" cy="180" r="1.4" />
+    <circle cx="200" cy="180" r="1.4" />
+    <circle cx="236" cy="180" r="1.4" />
+    <circle cx="272" cy="180" r="1.4" />
+    <circle cx="308" cy="180" r="1.4" />
+  </g>
+
+  <!-- Cipher row: scrambled characters -->
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="34" font-weight="700" letter-spacing="2">
+    <text x="36"  y="92" fill="#5b6885">K</text>
+    <text x="76"  y="92" fill="#5b6885">M</text>
+    <text x="116" y="92" fill="#5b6885">Ş</text>
+    <text x="156" y="92" fill="#5b6885">.</text>
+    <text x="196" y="92" fill="#5b6885">Z</text>
+    <text x="236" y="92" fill="#5b6885">X</text>
+    <text x="276" y="92" fill="#5b6885">P</text>
+  </g>
+
+  <!-- Arrows pointing down -->
+  <g stroke="url(#sc-accent)" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M48 102 L48 122" />
+    <path d="M88 102 L88 122" />
+    <path d="M128 102 L128 122" />
+    <path d="M208 102 L208 122" />
+    <path d="M248 102 L248 122" />
+    <path d="M288 102 L288 122" />
+    <!-- arrowheads -->
+    <path d="M44 116 L48 122 L52 116" />
+    <path d="M84 116 L88 122 L92 116" />
+    <path d="M124 116 L128 122 L132 116" />
+    <path d="M204 116 L208 122 L212 116" />
+    <path d="M244 116 L248 122 L252 116" />
+    <path d="M284 116 L288 122 L292 116" />
+  </g>
+
+  <!-- Decoded row: revealed plaintext (Turkish word: KEDİ VAR) -->
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="34" font-weight="800" letter-spacing="2">
+    <text x="36"  y="160" fill="#6fb1ff">K</text>
+    <text x="76"  y="160" fill="#9a6bff">E</text>
+    <text x="116" y="160" fill="#6fb1ff">D</text>
+    <text x="156" y="160" fill="#5b6885">.</text>
+    <text x="196" y="160" fill="#9a6bff">V</text>
+    <text x="236" y="160" fill="#6fb1ff">A</text>
+    <text x="276" y="160" fill="#9a6bff">R</text>
+  </g>
+
+  <!-- Title -->
+  <text x="160" y="44" text-anchor="middle"
+        font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="18" font-weight="700" fill="#e7ecf8" letter-spacing="3">
+    ŞİFRE ÇÖZ
+  </text>
+</svg>

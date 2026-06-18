@@ -1,0 +1,22 @@
+{
+  "title": "Şifre Çöz",
+  "description": "Türkçe bir atasözü monoalfabetik şifre ile gizlendi. Harfleri eşleştir, metni çöz.",
+  "dateAdded": "2026-06-18",
+  "tags": ["bulmaca", "kelime", "mantik"],
+  "controls": "Şifreli harfe tıkla · alttaki Türkçe alfabe pad'inden tahmini seç · I: ipucu · R: yeniden başla · Esc: seçimi temizle",
+  "howToPlay": "Her el yeni bir Türkçe atasözü 29 harflik Türkçe alfabe üzerinde rastgele bir monoalfabetik substitusyon (her harf başka tek bir harfle yer değiştirir) ile şifrelenir; senin görevin orijinal metni çözmek. Üstteki şifreli metinde her harf bir kutucuk olarak görünür: kutunun altında şifreli harf (örn. M), üstte ise senin tahminin (boşken nokta) yer alır. Önce çözmek istediğin şifreli harfe tıkla — aynı harfin tüm tekrarları seçili hale gelir. Sonra alttaki Türkçe alfabe pad'inden hangi harf olduğunu düşünüyorsan ona tıkla; o tahmin bütün tekrarlarına uygulanır. Aynı pad harfini başka bir şifreli harfe atarsan eski eşleşme otomatik temizlenir, yani çift atama olmaz. Yanlış sandığın bir tahmini kaldırmak için kutuyu tekrar seçip Backspace'e basabilir veya pad'de aynı harfe ikinci kez tıklayabilirsin. 'Seçimi temizle' düğmesi şu an seçili olan şifreli harfin tahminini siler. İpucu butonu hâlâ yanlış veya boş olan rastgele bir şifreli harfin doğru karşılığını açar; her ipucu skoruna +10 saniye ceza ekler. Tüm metni doğru çözünce el biter, süre + ipucu cezasının toplamı 'skor'un olur ve en düşük skor 'en iyi' olarak kaydedilir. Stratejiniz: en kısa kelimelerle başla (Türkçe'de 'BİR', 'VAR', 'BU' gibi); şifreli metnin sonuna sık gelen Türkçe ekleri (-DIR, -DİR, -NIN) ara; sesli harfleri (A, E, İ, O, U) sıklık olarak en çok geçen şifreli sembollerde dene; iki harfli kelimelerin önceki harfleri zaten ipucu verir. Kelime sınırları korunduğu için bulmacalar 1-3 dakikalık keyifli bir mantık egzersizidir.",
+  "thumbnail": "sifre-coz.svg",
+  "scoring": {
+    "storageKey": "sifre-coz.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "lower",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Decipher",
+    "description": "A Turkish proverb is hidden behind a monoalphabetic substitution cipher. Map the letters, crack the message.",
+    "controls": "Click a cipher letter · pick the guess from the Turkish alphabet pad · I: hint · R: new puzzle · Esc: clear selection",
+    "howToPlay": "Each round picks a fresh Turkish proverb and scrambles it with a random monoalphabetic substitution over the 29-letter Turkish alphabet (every plaintext letter maps to one fixed cipher letter); your job is to recover the original text. Each plaintext position is shown as a small cell with the cipher letter (e.g. M) at the bottom and your current guess (a dot when empty) on top. First click the cipher letter you want to attack — all of its occurrences are highlighted at once. Then pick the candidate letter from the Turkish alphabet pad at the bottom, and your guess is applied to every occurrence of that cipher letter. Assigning the same pad letter to a different cipher letter automatically clears the old mapping so you never have two cipher letters guessing the same plaintext. To erase a wrong guess, select the cell again and press Backspace, or tap the same pad letter twice. The 'Clear selection' button drops the current selected cell's guess. The Hint button reveals the correct mapping for a random cipher letter that is still wrong or empty, but each hint adds a 10-second penalty to your score. The round ends when the whole text matches the original; your final score is elapsed time plus hint penalties, and the lowest score is saved as your best. Strategy: start with the shortest words ('BİR', 'VAR' etc.), look for common Turkish suffixes (-DIR, -DİR, -NIN) at the end of words, try vowels (A, E, İ, O, U) on the most frequent cipher symbols, and use the word boundaries — they are not encrypted — to anchor short words first. Each puzzle is a 1-3 minute brain teaser."
+  }
+}

@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">0:00</span></div>
+  <div class="hud__score">İpucu<span id="hints">0</span></div>
+  <div class="hud__score">En iyi<span id="best">—</span></div>
+  <button id="hint" class="hud__btn" type="button">İpucu</button>
+  <button id="restart" class="hud__btn" type="button">Yeni şifre</button>
+</header>
+<div class="board-wrap">
+  <div class="puzzle">
+    <div id="cipher" class="cipher" aria-live="polite" aria-label="Şifreli metin"></div>
+    <div class="pad-wrap">
+      <div class="pad-hint">Şifreli bir harfe tıkla, sonra altta tahminini seç.</div>
+      <div id="pad" class="pad" role="group" aria-label="Türkçe alfabe"></div>
+      <button id="clear" class="pad-clear" type="button">Seçimi temizle</button>
+    </div>
+  </div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Şifre çözüldü!</h2>
+      <p id="overlay-text"></p>
+      <button id="overlay-btn" class="hud__btn" type="button">Yeni şifre</button>
+    </div>
+  </div>
+</div>
