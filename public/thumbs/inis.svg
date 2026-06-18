@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="İniş">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#050818" />
+      <stop offset="60%" stop-color="#0a1228" />
+      <stop offset="100%" stop-color="#131a3a" />
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe46a" />
+      <stop offset="100%" stop-color="#ff8a3c" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sky)" />
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="40" cy="30" r="1.2" />
+    <circle cx="90" cy="55" r="0.8" />
+    <circle cx="160" cy="20" r="1" />
+    <circle cx="220" cy="45" r="1.4" />
+    <circle cx="280" cy="60" r="0.9" />
+    <circle cx="60" cy="80" r="0.7" />
+    <circle cx="250" cy="100" r="0.6" />
+  </g>
+  <!-- terrain silhouette -->
+  <path d="M0,170 L30,150 L55,160 L80,140 L105,155 L130,148
+           L150,158 L155,158 L210,158 L215,158 L240,140 L270,155 L300,148 L320,160 L320,200 L0,200 Z"
+        fill="#1c2236" stroke="#43507a" stroke-width="1.5" />
+  <!-- landing pad -->
+  <line x1="155" y1="158" x2="210" y2="158" stroke="#1bd97a" stroke-width="3" />
+  <rect x="153" y="150" width="2" height="8" fill="#1bd97a" />
+  <rect x="210" y="150" width="2" height="8" fill="#1bd97a" />
+  <!-- lander -->
+  <g transform="translate(120,80)">
+    <!-- flame -->
+    <polygon points="-6,18 0,32 6,18" fill="url(#flame)" />
+    <polygon points="-3,18 0,26 3,18" fill="#fff5b8" />
+    <!-- body -->
+    <rect x="-7" y="-9" width="14" height="18" fill="#e7eaf6" />
+    <polygon points="-7,-9 0,-15 7,-9" fill="#c1c8de" />
+    <rect x="-3" y="-6" width="6" height="4" fill="#5cd2ff" />
+    <!-- legs -->
+    <line x1="-7" y1="9" x2="-10" y2="13" stroke="#9aa4c2" stroke-width="1.5" />
+    <line x1="7" y1="9" x2="10" y2="13" stroke="#9aa4c2" stroke-width="1.5" />
+  </g>
+  <!-- wind arrow -->
+  <g stroke="rgba(255,255,255,0.55)" fill="rgba(255,255,255,0.55)" stroke-width="1.5">
+    <line x1="240" y1="22" x2="290" y2="22" />
+    <polygon points="290,22 284,19 284,25" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e4e4ed">İniş</text>
+</svg>

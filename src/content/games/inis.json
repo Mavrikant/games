@@ -1,0 +1,21 @@
+{
+  "title": "İniş",
+  "description": "Tek tuş, tek motor — yerçekimi seni aşağı çekerken yan rüzgâra karşı yumuşak in; ne kadar iniş üst üste yapabilirsin?",
+  "dateAdded": "2026-06-18",
+  "tags": ["arcade", "fizik", "özgün", "tek-oyunculu", "refleks"],
+  "controls": "Boşluk veya tıkla&tut: ana motor (yakıt harcar) · R: yeniden başla · Mobil: canvas'a basılı tut",
+  "thumbnail": "inis.svg",
+  "howToPlay": "İniş, klasik ay-iniş simülasyonundan ilham alır ama klavyene yalnızca tek bir tuş bırakır — Boşluk. Üstte küçük bir uzay aracı, altta dağlık bir yüzey üzerinde dar bir iniş pisti vardır. Yer çekimi seni sürekli aşağı çeker, bir de turun başında rastgele bir yan rüzgâr seçilir (HUD'daki ok yönü ve uzunluğuyla gösterir): rüzgâr aracını yana sürükler. Boşluğa bastığında (basılı tuttuğunda) ana motor yanar — dikey hızını yumuşatır ve aynı anda rüzgârın yan sürüklemesini yarıya düşürür: yani motor hem fren hem dümen olarak çalışır. Ama yakıt sınırlıdır; motor açıkken yakıt çubuğun hızla erir ve sıfırlanırsa motor bir daha çalışmaz, yalnız yer çekimine kalırsın. Başarılı bir iniş için aracın PİSTİN ÜZERİNDE (yeşil bant) durması, dikey hızının (Vy) yumuşak — yaklaşık |Vy|<1.6 px/kare — ve yatay hızının da çok küçük olması gerekir; HUD üstünde her ikisi de canlı gösterilir, kırmızı renge dönerse 'sert iniş' tehdidi var demektir. Pist dışı bir tepeye değmek, çok hızlı çarpmak ya da canvas'ın kenarından çıkmak crash sayılır ve tur biter. Her başarılı iniş skoru +1 yapar, yeni bir tur başlar (yeni pist konumu, yeni rüzgâr, dolu yakıt) ve oyun crash olana kadar zincirlemeye devam eder. Skor üst üste yapabildiğin başarılı iniş sayısıdır; yerel rekorun otomatik saklanır. R tuşu ya da 'Yeniden başla' düğmesi tutoyu sıfırlar. İpucu: motoru sürekli açık tutma — yakıt biter; küçük 'puff'larla (kısa basışlar) dikey hızını sıfıra yakın tut, rüzgâr seni pistten kaçırırken birkaç saniye basılı tut, sonra bırak. Vy düşükken motor zaten yetmiyorsa son saniyede ekstra puff güvenli bir 'cushion' sağlar.",
+  "scoring": {
+    "storageKey": "inis.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Touchdown",
+    "description": "One key, one engine — fight gravity and crosswinds, set down softly; how many landings can you chain?",
+    "controls": "Space or click&hold: main engine (burns fuel) · R: restart · Mobile: press and hold the canvas",
+    "howToPlay": "Touchdown is a classic lunar-landing sim distilled to a single key: Space. A tiny lander starts at the top, with a mountainous surface and a narrow landing pad below. Gravity pulls you down constantly, and each run picks a random crosswind (shown by the HUD arrow's direction and length): the wind drifts you sideways. Holding Space fires the main engine — it softens vertical speed AND halves the wind's lateral pull, so the engine doubles as both brake and rudder. Fuel is finite though; the bar drains fast while the engine burns and once empty the engine is gone, leaving you to gravity alone. A clean landing requires the lander to be ON the pad (the green band), with vertical speed gentle — roughly |Vy|<1.6 px/frame — and horizontal speed near zero; both readouts at the top turn red when you're about to slam. Touching any non-pad terrain, hitting too fast, or sailing off the canvas edge counts as a crash and ends the run. Each successful landing scores +1 and starts a fresh round (new pad position, new wind, full fuel), chaining until you crash. Score is the number of consecutive successful landings; your local best is saved automatically. R or the restart button resets the run. Tip: don't hold the engine continuously — fuel runs out; tap in short puffs to keep Vy near zero, hold a couple of seconds when the wind is dragging you off the pad, then release. Save one final puff as a cushion just before touchdown."
+  }
+}
