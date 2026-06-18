@@ -1,0 +1,21 @@
+{
+  "title": "Beş Taş",
+  "description": "Geleneksel Türk çocuk oyunu — havadaki taşı düşmeden, yerdeki taşlardan tam istenen sayıda kap.",
+  "dateAdded": "2026-06-18",
+  "tags": ["refleks", "geleneksel", "tek-oyunculu", "özgün", "mobil"],
+  "controls": "Boşluk veya tıkla: at · Fare/dokunma: yerden taş kap · R: yeniden başla",
+  "thumbnail": "bes-tas.svg",
+  "howToPlay": "Beş Taş, sokakta beş çakıl taşıyla oynanan klasik Türk çocuk oyununun dijital versiyonudur. Beş tane taş yerde durur; sen havaya bir taş atarsın ve **havada kalan o taş yere düşmeden** önce yerdeki taşlardan o turun gerektirdiği sayıda taşı kaparsın. Birinci turda her atışta bir taş, ikinci turda iki taş, üçüncüde üç, dördüncüde dört, son turda ise beş taşın hepsi tek atışta kapılmalıdır. Yerdeki taşları azaltacak şekilde tek tek seçtiğin için her atışta hedef sayı kalan taşlarla sınırlıdır — örneğin üçüncü turda önce 3, sonra 2 taş kaparsın. Atış için Boşluk'a bas veya zemine tıkla; havada parabol çizen taş düşene kadar yerden gereken sayıda taşa tıkla. Doğru sayıda kapıp havadaki taşı yakalarsan tur ilerler; yanlış sayıda kapma, fazla kapma veya hiç kapamama anında oyunu bitirir. Tur ne kadar yüksekse atış o kadar kısa kalır, bu yüzden düşünme ile refleksin sınırı turla birlikte daralır. Skorun ulaştığın en yüksek tur, en iyi sonucun tarayıcında saklanır. İpucu: havadaki taşın gölgesi yere yaklaşırken parlar — bu son uyarıdır; geç kalmadan tıkla. Kapacağın taşları gözlerinle önceden seç, fareyi hazır tut, atışla beraber tek hamlede vur.",
+  "scoring": {
+    "storageKey": "bes-tas.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Round"
+  },
+  "en": {
+    "title": "Five Stones",
+    "description": "Traditional Turkish children's game — grab exactly the required number of stones from the ground before the tossed stone falls.",
+    "controls": "Space or click: toss · Mouse/tap: pick a stone · R: restart",
+    "howToPlay": "Five Stones (Beş Taş) is the digital version of the classic Turkish street game played with five pebbles. Five stones rest on the ground; you toss one stone into the air, and **before that airborne stone lands** you must grab exactly the number of stones the current round demands. Round one asks for one stone per toss, round two for two, three, four, and finally five — all five at once in the last round. Because each toss reduces the floor pool, the target per toss is capped by what's left — in round three for example you grab 3 first, then the remaining 2. Press Space or click the ground to toss; while the airborne stone arcs, tap the floor stones you want to grab. Picking the correct count and catching the tossed stone advances you; grabbing the wrong number, grabbing extra, or grabbing none ends the game instantly. Higher rounds give you a shorter air window, so the margin between thinking and reflex shrinks as you climb. Your score is the highest round you reached; your best is saved in the browser. Tip: the airborne stone's shadow flashes as it nears the floor — that's your last warning, tap before it lands. Pre-select the stones you'll grab with your eyes, keep the cursor ready, and commit in one fluid motion."
+  }
+}

@@ -1,0 +1,108 @@
+/*
+ * Beş Taş — per-game styles.
+ * Standard board-wrap + overlay positioning required by @shared/overlay
+ * helpers (pitfall: missing-overlay-css).
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  background: linear-gradient(180deg, #1a2a17 0%, #25391e 55%, #3a5028 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 14, 8, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.overlay__inner p {
+  margin: 0 0 14px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.overlay__inner strong {
+  color: #f5d76e;
+}
+
+.overlay__btn {
+  background: #f5d76e;
+  color: #1a1d10;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.overlay__btn:hover {
+  background: #ffe787;
+  transform: translateY(-1px);
+}
+
+.overlay__btn:active {
+  transform: translateY(1px);
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

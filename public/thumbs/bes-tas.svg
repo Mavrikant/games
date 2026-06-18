@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Beş Taş">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2a17" />
+      <stop offset="55%" stop-color="#25391e" />
+      <stop offset="100%" stop-color="#3a5028" />
+    </linearGradient>
+    <radialGradient id="stone" cx="0.35" cy="0.32" r="0.7">
+      <stop offset="0%" stop-color="#fff7e2" />
+      <stop offset="45%" stop-color="#d8c5a3" />
+      <stop offset="100%" stop-color="#5a4a30" />
+    </radialGradient>
+    <radialGradient id="airStone" cx="0.35" cy="0.32" r="0.75">
+      <stop offset="0%" stop-color="#fff8e2" />
+      <stop offset="50%" stop-color="#e8c97a" />
+      <stop offset="100%" stop-color="#7a5b1c" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+
+  <!-- arc trajectory -->
+  <path d="M160 145 Q160 35 200 50" stroke="#f5d76e" stroke-width="1.5" stroke-dasharray="3 4" fill="none" opacity="0.55" />
+
+  <!-- air stone (mid-arc) -->
+  <ellipse cx="195" cy="62" rx="14" ry="11" fill="url(#airStone)" transform="rotate(15 195 62)" />
+
+  <!-- shadow on ground -->
+  <ellipse cx="160" cy="160" rx="12" ry="4" fill="rgba(0,0,0,0.35)" />
+
+  <!-- five stones on the ground -->
+  <ellipse cx="60" cy="155" rx="16" ry="13" fill="url(#stone)" />
+  <ellipse cx="100" cy="162" rx="16" ry="13" fill="url(#stone)" />
+  <ellipse cx="148" cy="158" rx="16" ry="13" fill="url(#stone)" />
+  <ellipse cx="200" cy="164" rx="16" ry="13" fill="url(#stone)" />
+  <ellipse cx="252" cy="156" rx="16" ry="13" fill="url(#stone)" />
+
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#f5d76e">Beş Taş</text>
+</svg>
