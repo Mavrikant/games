@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Tur<span id="round">1</span></div>
+  <div class="hud__score">Mektup<span id="letter">1/6</span></div>
+  <div class="hud__score">Rekor<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="640"
+    aria-label="Mühür — balmumu damlat ve damgayı vur"></canvas>
+  <button id="stamp" class="stamp-btn" type="button" aria-label="Damgala">
+    Damgala
+  </button>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mühür</h2>
+      <p id="overlay-msg"></p>
+      <button id="overlay-action" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
