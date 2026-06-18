@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Med Cezir">
+  <defs>
+    <linearGradient id="mcSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1a2a" />
+      <stop offset="100%" stop-color="#13283d" />
+    </linearGradient>
+    <linearGradient id="mcWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a7aa8" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0e3a60" stop-opacity="0.95" />
+    </linearGradient>
+    <radialGradient id="mcGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffd34a" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ffd34a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#mcSky)" />
+  <rect x="0" y="120" width="320" height="80" fill="#c9a36a" />
+  <path d="M0,118 Q40,112 80,118 T160,118 T240,118 T320,118 L320,200 L0,200 Z" fill="url(#mcWater)" />
+  <path d="M0,118 Q40,112 80,118 T160,118 T240,118 T320,118" stroke="#e8f4ff" stroke-width="2" fill="none" />
+  <circle cx="100" cy="118" r="22" fill="url(#mcGlow)" />
+  <circle cx="100" cy="118" r="9" fill="#ffd34a" stroke="#fff7d0" stroke-width="1.6" />
+  <circle cx="60" cy="92" r="7" fill="#ede0b8" stroke="rgba(80,60,30,0.55)" stroke-width="1" />
+  <circle cx="200" cy="138" r="7" fill="rgba(245,235,200,0.35)" />
+  <circle cx="250" cy="84" r="7" fill="#ede0b8" stroke="rgba(80,60,30,0.55)" stroke-width="1" />
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#e4e4ed">Med Cezir</text>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "title": "Med Cezir",
+  "description": "Gel-gitin ritmini izle, dalga yüzeyine değen kabukları tam zamanında topla.",
+  "dateAdded": "2026-06-18",
+  "tags": ["timing", "tek-tıklama", "ritim"],
+  "controls": "Parlayan kabuğa tıkla • Boşluk başlat • R yeniden başla",
+  "howToPlay": "Su seviyesi sinüs gibi yükselir ve alçalır. Bir kabuk yalnızca dalga onun yüksekliğinden geçerken parlar — o kısa pencerede tıkla. Su altında veya kumda bekleyen kabuklar etkisizdir. 60 saniyede 14 kabuğun hepsini topla.",
+  "thumbnail": "med-cezir.svg"
+}
