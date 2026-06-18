@@ -1,0 +1,21 @@
+{
+  "title": "Su Halkası",
+  "description": "Bir göletin yüzeyine tek bir taş bırak — yayılan halka yapraklara değdikçe onlar da kendi halkalarını yayar. Tek tıkla zincir reaksiyonu kur ve hedefe ulaş.",
+  "dateAdded": "2026-06-18",
+  "tags": ["puzzle", "fizik", "özgün", "zincir-reaksiyon"],
+  "controls": "Tıkla/dokun: taşı bırak · Boşluk/Enter: başla · R: yeniden başla · N: sonraki seviye",
+  "thumbnail": "su-halkasi.svg",
+  "howToPlay": "Su Halkası, bir göletin yüzeyinde sessizce süzülen nilüfer yapraklarını tek bir taşla harekete geçirdiğin bir zincir-reaksiyon bulmacasıdır. Her seviyede gölete belirli sayıda yaprak doğar; hepsi rastgele yönlere yavaşça kayar ve kenarlardan yumuşakça seker. Senin tek silahın bir taş: göletin herhangi bir noktasına tıklayıp dokunduğunda taş suya düşer ve oradan dışa doğru genişleyen bir halka yayılır. Halka önce büyür, sonra bir an en geniş hâlinde durur ve nihayet sönerek kaybolur — yaşam süresi yaklaşık bir buçuk saniyedir. Bu süre içinde herhangi bir yaprak halkaya değerse o yaprak 'uyanır' ve kendi halkasını yaymaya başlar. Uyanmış yaprağın halkası diğer uyumakta olan yaprakları da tetikleyebilir; bu, yumuşak fakat keskin bir zincir reaksiyona dönüşür. Tüm halkalar söndüğünde reaksiyon biter ve kaç yaprağa ulaştığın sayılır. Seviyeyi geçmek için belirli bir hedef yaprak sayısına ulaşman gerekir (üstte 'Hedef'); hedefi yakaladıysan bir sonraki seviyeye geçersin — yaprak sayısı ve hedef artar. Tutturamadıysan oyun biter ve ulaştığın en yüksek seviye rekor olarak tarayıcına kaydedilir. Strateji: göleti yüzeysel tarama; yaprakları aklında üç-dört'lü kümeler hâlinde grupla. Kümelerin tam ortasına nişan al ki ilk halka birden fazla yaprağı aynı anda tetiklesin — zincirin başlangıcı ne kadar genişse uzaması da o kadar olasıdır. Yapraklar yavaş hareket eder, sabırlı ol: doğal bir kümelenme için bir-iki saniye bekle, sonra taşı bırak. Çok kenarda bir yaprağa nişan almak risklidir, çünkü halkanın yarısı duvarın dışına gider ve etkin alanın yarıya iner.",
+  "scoring": {
+    "storageKey": "su-halkasi.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Water Ring",
+    "description": "Drop a single stone into the pond — the ripple ignites lily pads it touches, and each ignited pad spreads its own ring. Chain them all with one tap to clear each level.",
+    "controls": "Click/tap: drop the stone · Space/Enter: start · R: restart · N: next level",
+    "howToPlay": "Water Ring is a chain-reaction puzzle played on the calm surface of a pond. Each level seeds the pond with a number of slowly drifting lily pads that bounce gently off the edges. Your only move is one stone: tap anywhere on the pond and a circular ripple expands from the impact point. The ripple grows for a moment, holds its maximum radius, then fades — about a second and a half of life. Any lily pad the ripple touches during that window 'wakes up' and starts spreading its own ripple, which can in turn wake more pads. The cascade ripples outward until every ring has faded. When the pond settles, you count how many pads you managed to wake. To pass the level you need to meet the target shown in the HUD; pass and you advance to a tougher level with more pads and a higher target, fall short and the run ends. Your best level reached is saved in your browser. Strategy: scan the pond loosely and look for clusters of three or four pads close together — drop the stone in the middle of the cluster so the first ripple ignites several pads at once. A wide opening burst makes a long chain far more likely. The pads drift slowly, so you can be patient and wait one or two seconds for a natural cluster to form. Avoid aiming at pads near the wall: half of the ripple sails off the canvas and you only get half the reach."
+  }
+}
