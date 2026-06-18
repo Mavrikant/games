@@ -1,0 +1,26 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score hud__strikes">Hata<span id="strikes">0/3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Çöp Çatan oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çöp Çatan</h2>
+      <p id="overlay-msg">Birbirine geçmiş çubuk yığını. Yalnızca en üstteki çubuğu — altında başka çubuk olmayanı — tıklayıp toplayabilirsin. Altta kalan bir çubuğa dokunursan yığını kıpırdatırsın, hata sayılır. 3 hatada tur biter.</p>
+      <button id="start" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<p class="legend" aria-label="Çubuk değerleri">
+  <span class="legend__chip" style="--c:#f5f5f5">Sultan 10</span>
+  <span class="legend__chip" style="--c:#ef4444">5</span>
+  <span class="legend__chip" style="--c:#60a5fa">3</span>
+  <span class="legend__chip" style="--c:#34d399">2</span>
+  <span class="legend__chip" style="--c:#fbbf24">1</span>
+</p>

@@ -1,0 +1,14 @@
+{
+  "title": "Çöp Çatan",
+  "description": "Birbirine geçmiş renkli çubukların oluşturduğu yığını üstten başlayarak söküp puan topla; altta kalan çubuğa dokunursan yığın kıpırdar ve hata sayılır.",
+  "dateAdded": "2026-06-18",
+  "tags": ["puzzle", "refleks", "klasik"],
+  "thumbnail": "cop-catan.svg",
+  "controls": "Tıklama veya dokunma: çubuğu al · R: yeniden başla · Boşluk/Enter: başla",
+  "howToPlay": "Tahtaya beyaz Sultan dahil 18 renkli çubuk dağınık biçimde atılır; çubuklar üst üste binerek karmaşık bir yığın oluşturur. Amacın yalnız en üstteki çubukları — yani altında başka çubuk olmayanları — seçip topla. Her renk farklı puan verir: Sultan 10, kırmızı 5, mavi 3, yeşil 2, sarı 1. Üzerine geldiğin çubuk yeşil halka ile vurgulanırsa serbest; kırmızı halka ile çevriliyse altında en az bir çubuk var ve oynamak yığını kıpırdatır — bu hata olarak işlenir. 3 hatada tur kapanır. Tüm çubukları temizleyebilirsen tam puana ulaşırsın. Strateji ipucu: çubukların görünür sırasına bak; en son çizilen çubuk en üsttedir. Üç çubuk birbirine değiyorsa, hangisinin sonuncu eklendiğini renklerin gölgesi ve örtüşme yönü gösterir. En yüksek skor tarayıcında saklanır.",
+  "scoring": {
+    "storageKey": "cop-catan.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}
