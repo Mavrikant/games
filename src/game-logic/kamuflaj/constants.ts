@@ -12,8 +12,8 @@ export const MAX_SUBSTEPS = 3; // per rendered frame (tab-return safety)
 export const FRAME_DT_CLAMP = 0.05; // clamp rAF delta (tab switch / jank)
 
 // ---- roster -----------------------------------------------------------------
-export const TOTAL_PLAYERS = 6; // humans + bots, always this many
-export const MAX_HUMANS = 6;
+export const MAX_HUMANS = 6; // room capacity
+export const MIN_PLAYERS = 2; // can't start a hide-and-seek with one person
 export const MIN_SEEKERS = 1;
 export const MIN_HIDERS = 1;
 // Seekers scale with the roster: ~1 seeker per 3 players.
@@ -75,14 +75,3 @@ export const PROP_HUES = [4, 28, 48, 92, 140, 170, 200, 270, 320];
 export const SNAP_MS = 100; // host snapshot cadence (10/s)
 export const INPUT_MS = 100; // guest input throttle
 export const FEED_MAX = 3;
-
-export const BOT_NAMES = [
-  'Yaprakdili',
-  'Gölgeavcı',
-  'Renkçi',
-  'Sinsi',
-  'Dalgöz',
-  'Bukalemis',
-  'Pusu',
-  'Tozrengi',
-];

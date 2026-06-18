@@ -62,18 +62,11 @@ export function freshWorld(): World {
   };
 }
 
-export function makePlayer(
-  id: string,
-  name: string,
-  role: Role,
-  hue: number,
-  bot: boolean,
-): Player {
+export function makePlayer(id: string, name: string, role: Role, hue: number): Player {
   return {
     id,
     name,
     role,
-    bot,
     x: 0,
     z: 0,
     yaw: 0,
@@ -147,11 +140,11 @@ function makeProps(seed: number): PropSpec[] {
  *  guests overwrite props from the host's 'start' message. */
 export function setupMatch(
   world: World,
-  roster: { id: string; name: string; role: Role; hue: number; bot: boolean }[],
+  roster: { id: string; name: string; role: Role; hue: number }[],
   seed = Math.floor(Math.random() * 1e6),
 ): void {
   world.props = makeProps(seed);
-  world.players = roster.map((r) => makePlayer(r.id, r.name, r.role, r.hue, r.bot));
+  world.players = roster.map((r) => makePlayer(r.id, r.name, r.role, r.hue));
   world.status = 'countdown';
   world.t = 0;
   world.phaseLeft = COUNTDOWN_S;

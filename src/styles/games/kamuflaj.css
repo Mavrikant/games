@@ -336,6 +336,23 @@
   display: none;
 }
 
+.km-hidden {
+  display: none;
+}
+
+.km-lobby {
+  margin: 2px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.km-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+
 .km-share__label {
   margin: 0;
   font-size: 13px;

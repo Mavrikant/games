@@ -60,18 +60,21 @@
 
         <!-- Menu actions -->
         <div id="menu-actions" class="km-actions">
-          <button id="bots" class="km-btn km-btn--primary" type="button">Botlarla Oyna</button>
-          <button id="create" class="km-btn" type="button">Oda Oluştur</button>
+          <button id="create" class="km-btn km-btn--primary" type="button">Oda Oluştur</button>
         </div>
 
-        <!-- Share panel (host, while waiting for guests) -->
+        <!-- Lobby panel (host shares + starts; guest waits) -->
         <div id="share" class="km-share km-share--hidden">
-          <p class="km-share__label">Bu bağlantıyı arkadaşlarına gönder:</p>
-          <div class="km-share__row">
-            <input id="share-link" class="km-share__input" type="text" readonly aria-label="Oda bağlantısı" />
-            <button id="copy" class="km-btn km-btn--small" type="button">Kopyala</button>
+          <div id="share-row-wrap">
+            <p class="km-share__label">Bu bağlantıyı arkadaşlarına gönder:</p>
+            <div class="km-share__row">
+              <input id="share-link" class="km-share__input" type="text" readonly aria-label="Oda bağlantısı" />
+              <button id="copy" class="km-btn km-btn--small" type="button">Kopyala</button>
+            </div>
           </div>
-          <button id="solo-start" class="km-btn km-btn--primary" type="button">Beklemeden başla</button>
+          <p class="km-lobby">Oyuncular: <span id="lobby-count">1/6</span></p>
+          <p id="lobby-note" class="km-share__label">—</p>
+          <button id="lobby-start" class="km-btn km-btn--primary" type="button">Başlat</button>
         </div>
 
         <!-- Match-end scoreboard -->

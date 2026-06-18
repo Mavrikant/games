@@ -8,19 +8,17 @@ import { joinChannel, channelEnabled } from '@shared/realtime-channel';
 import type { ChannelHandle } from '@shared/realtime-channel';
 
 import {
-  BOT_NAMES,
   FRAME_DT_CLAMP,
   HUNT_S,
   INPUT_MS,
   MAX_HUMANS,
   MAX_SUBSTEPS,
+  MIN_PLAYERS,
   SIM_DT,
   SNAP_MS,
-  TOTAL_PLAYERS,
   seekerCountFor,
 } from './kamuflaj/constants';
 import { freshInput, freshWorld, makePlayer, seatPlayers, setupMatch, step } from './kamuflaj/world';
-import { driveBots, resetBotMinds } from './kamuflaj/bots';
 import {
   decodeHello,
   decodeInput,
@@ -45,8 +43,8 @@ import type { Player, Role, Snapshot, Status, World } from './kamuflaj/types';
 
 // 3D multiplayer chameleon hide-and-seek. Hiders paint their skin to the colour
 // of nearby props and freeze to vanish; seekers hunt them with a sticky tongue.
-// Host-authoritative online rooms (aero-kanca pattern) with AI bots filling
-// every empty slot; fully playable offline. PITFALLS honoured throughout.
+// Online-only: host-authoritative rooms over @shared/realtime-channel, real
+// players gathered in a lobby (no AI). Needs the realtime backend configured.
 
 const STORAGE_BEST = 'kamuflaj.best';
 const STORAGE_NAME = 'kamuflaj.name';
@@ -57,16 +55,15 @@ const SCORE_DESC: ScoreDescriptor = {
   direction: 'higher',
 };
 
-// Distinct identity hues per slot (slot 0 = the local player).
+// Distinct identity hues per slot (slot 0 = the room host).
 const PALETTE = [120, 22, 200, 285, 52, 330];
 
-type Mode = 'idle' | 'bots' | 'online-host' | 'online-guest';
+type Mode = 'idle' | 'online-host' | 'online-guest';
 interface Seat {
   id: string;
   name: string;
   role: Role;
   hue: number;
-  bot: boolean;
 }
 
 const gen = createGenToken();
@@ -80,6 +77,7 @@ let myName = 'Sen';
 let chosenRole: Role = 'hider';
 let best = 0;
 let halted = false;
+let lobbyCount = 1;
 
 const guestNames = new Map<string, string>();
 let gotStart = false; // guest: ignore snapshots until the host's 'start'
@@ -118,12 +116,14 @@ let roleToggle!: HTMLElement;
 let roleHideBtn!: HTMLButtonElement;
 let roleSeekBtn!: HTMLButtonElement;
 let menuActions!: HTMLElement;
-let botsBtn!: HTMLButtonElement;
 let createBtn!: HTMLButtonElement;
 let shareBox!: HTMLElement;
+let shareRowWrap!: HTMLElement;
 let shareLinkInput!: HTMLInputElement;
 let copyBtn!: HTMLButtonElement;
-let soloStartBtn!: HTMLButtonElement;
+let lobbyCountEl!: HTMLElement;
+let lobbyNote!: HTMLElement;
+let lobbyStartBtn!: HTMLButtonElement;
 let overPanel!: HTMLElement;
 let boardList!: HTMLOListElement;
 let rematchBtn!: HTMLButtonElement;
@@ -161,76 +161,62 @@ function saveName(): void {
   }
 }
 
-/** Balance a roster: humans (with preferred roles) + bots, exactly
- *  seekerCountFor(TOTAL) seekers, the rest hiders. */
+/** Assign roles among the real players present, exactly seekerCountFor(n)
+ *  seekers (honouring each player's preference first), the rest hiders. */
 function assignRoster(humans: { id: string; name: string; prefer: Role }[]): Seat[] {
-  const total = TOTAL_PLAYERS;
-  const need = seekerCountFor(total);
-  const seats: {
-    id: string;
-    name: string;
-    bot: boolean;
-    prefer: Role | null;
-    role: Role | null;
-  }[] = humans.map((h) => ({ id: h.id, name: h.name, bot: false, prefer: h.prefer, role: null }));
-  let bi = 0;
-  while (seats.length < total) {
-    seats.push({
-      id: `bot${seats.length}`,
-      name: BOT_NAMES[bi % BOT_NAMES.length]!,
-      bot: true,
-      prefer: null,
-      role: null,
-    });
-    bi++;
-  }
+  const n = humans.length;
+  const need = seekerCountFor(n);
+  const roles: (Role | null)[] = humans.map(() => null);
   let s = 0;
-  for (const seat of seats) {
-    if (s >= need) break;
-    if (!seat.bot && seat.prefer === 'seeker') {
-      seat.role = 'seeker';
+  for (let i = 0; i < n && s < need; i++) {
+    if (humans[i]!.prefer === 'seeker') {
+      roles[i] = 'seeker';
       s++;
     }
   }
-  for (const seat of seats) {
-    if (s >= need) break;
-    if (seat.bot) {
-      seat.role = 'seeker';
+  for (let i = 0; i < n && s < need; i++) {
+    if (roles[i] === null) {
+      roles[i] = 'seeker';
       s++;
     }
   }
-  for (const seat of seats) {
-    if (s >= need) break;
-    if (seat.role === null) {
-      seat.role = 'seeker';
-      s++;
-    }
-  }
-  return seats.map((seat, i) => ({
-    id: seat.id,
-    name: seat.name,
-    role: seat.role ?? 'hider',
+  return humans.map((h, i) => ({
+    id: h.id,
+    name: h.name,
+    role: roles[i] ?? 'hider',
     hue: PALETTE[i % PALETTE.length]!,
-    bot: seat.bot,
   }));
+}
+
+/** Host: build a roster from everyone currently in the room (self first). */
+function rosterFromMembers(): Seat[] {
+  if (!room) return assignRoster([{ id: myId, name: myName, prefer: chosenRole }]);
+  const ids = room.members();
+  const humans: { id: string; name: string; prefer: Role }[] = [
+    { id: myId, name: myName, prefer: chosenRole },
+  ];
+  for (const id of ids) {
+    if (id === myId) continue;
+    humans.push({ id, name: guestNames.get(id) ?? 'Misafir', prefer: 'hider' });
+  }
+  return assignRoster(humans.slice(0, MAX_HUMANS));
 }
 
 // ---- match flow -------------------------------------------------------------
 
-/** Menu backdrop: bots mill about and paint behind the overlay so the page
- *  shows live motion immediately (pitfall: invisible-boot). */
+/** Menu backdrop: an empty, softly-lit room (no AI players) slowly orbited by
+ *  the camera so the page shows the arena immediately (pitfall: invisible-boot). */
 function startAttract(): void {
   world = freshWorld();
   world.mode = 'idle';
-  resetBotMinds();
-  setupMatch(world, assignRoster([]));
+  setupMatch(world, []);
+  world.players = [];
   world.status = 'menu';
   buildArena(world);
   resetCamera();
 }
 
 function beginMatch(roster: Seat[]): void {
-  resetBotMinds();
   setupMatch(world, roster);
   world.mode = mode;
   reportedOver = false;
@@ -240,15 +226,6 @@ function beginMatch(roster: Seat[]): void {
   if (mode === 'online-host' && room) room.send('start', encodeStart(world));
 }
 
-function startBots(): void {
-  saveName();
-  teardownRoom();
-  mode = 'bots';
-  myId = 'me';
-  setStatus(`⚪ Botlara karşı · rolün: ${roleLabel(chosenRole)}`);
-  beginMatch(assignRoster([{ id: myId, name: myName, prefer: chosenRole }]));
-}
-
 function teardownRoom(): void {
   if (room) {
     room.leave();
@@ -256,6 +233,7 @@ function teardownRoom(): void {
   }
   guestNames.clear();
   started = false;
+  lobbyCount = 1;
 }
 
 function getRoomFromUrl(): string {
@@ -270,61 +248,12 @@ function randomCode(): string {
   return Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
-// ---- host networking --------------------------------------------------------
-
-function humanCount(): number {
-  let n = 0;
-  for (const c of world.players) if (!c.bot) n++;
-  return n;
-}
-
-function addJoinFeed(line: string): void {
+function addFeed(line: string): void {
   world.feed.unshift(line);
   if (world.feed.length > 3) world.feed.length = 3;
 }
 
-/** Host: hand a bot slot to a newly arrived guest (keeps that slot's role). */
-function adoptGuest(id: string): void {
-  if (world.players.some((c) => c.id === id)) return;
-  if (humanCount() >= MAX_HUMANS) {
-    room?.send('full', { id });
-    return;
-  }
-  for (const c of world.players) {
-    if (c.bot) {
-      c.bot = false;
-      c.id = id;
-      c.name = guestNames.get(id) ?? 'Misafir';
-      c.input = freshInput();
-      addJoinFeed(`${c.name} katıldı (${roleLabel(c.role)})`);
-      buildArena(world);
-      if (room) room.send('start', encodeStart(world));
-      return;
-    }
-  }
-  room?.send('full', { id });
-}
-
-/** Host: a guest left — its slot reverts to a bot. */
-function dropGuest(id: string): void {
-  for (let i = 0; i < world.players.length; i++) {
-    const c = world.players[i]!;
-    if (c.id === id && !c.bot) {
-      addJoinFeed(`${c.name} ayrıldı`);
-      c.bot = true;
-      c.id = `bot${i}`;
-      c.name = BOT_NAMES[i % BOT_NAMES.length]!;
-      c.input = freshInput();
-      buildArena(world);
-      if (room) room.send('start', encodeStart(world));
-      return;
-    }
-  }
-}
-
-/** Drop back to the menu with an explanatory message (network-failure paths).
- *  Unlike backToMenu() it neither bumps the gen token nor overwrites the
- *  custom title/message. */
+/** Drop back to the menu with an explanatory message (network-failure paths). */
 function menuWithMessage(title: string, msg: string, status: string): void {
   teardownRoom();
   mode = 'idle';
@@ -337,10 +266,30 @@ function menuWithMessage(title: string, msg: string, status: string): void {
   setStatus(status);
 }
 
+// ---- host: room + lobby -----------------------------------------------------
+
+/** Host: a guest left. In the lobby just drop the count; mid-match remove the
+ *  player so the match can still resolve. */
+function dropMember(id: string): void {
+  guestNames.delete(id);
+  if (started) {
+    const i = world.players.findIndex((p) => p.id === id);
+    if (i >= 0) {
+      addFeed(`${world.players[i]!.name} ayrıldı`);
+      world.players.splice(i, 1);
+      buildArena(world);
+    }
+  }
+}
+
 async function createRoom(): Promise<void> {
   saveName();
   if (!channelEnabled()) {
-    startBots();
+    menuWithMessage(
+      'Sunucu gerekli',
+      'Kamuflaj yalnızca çok oyunculudur ve çevrimiçi bir sunucu gerektirir. Bu sürümde sunucu yapılandırılmamış.',
+      '⚠️ Çok oyunculu sunucu yapılandırılmamış',
+    );
     return;
   }
   teardownRoom();
@@ -348,6 +297,7 @@ async function createRoom(): Promise<void> {
   roomCode = randomCode();
   shareLinkInput.value = `${window.location.origin}${window.location.pathname}?room=${roomCode}`;
   world.status = 'waiting';
+  lobbyCount = 1;
   syncOverlay(true);
   setStatus('🟡 Odaya bağlanılıyor…');
   const myGen = gen.current();
@@ -363,11 +313,12 @@ async function createRoom(): Promise<void> {
             guestNames.set(from, n);
             const c = world.players.find((cr) => cr.id === from);
             if (c) c.name = n;
+            if (world.status === 'waiting') syncLobby();
           }
         } else if (event === 'input' && started) {
           const msg = decodeInput(data);
           const c = world.players.find((cr) => cr.id === from);
-          if (msg && c && !c.bot) {
+          if (msg && c) {
             c.input.mx = msg.mx;
             c.input.mz = msg.mz;
             c.input.aimX = msg.ax;
@@ -378,18 +329,11 @@ async function createRoom(): Promise<void> {
       },
       onPresence: (ids) => {
         if (mode !== 'online-host' || !room) return;
-        const guests = ids.filter((id) => id !== room!.id);
-        if (!started && guests.length > 0) {
-          started = true;
-          myId = room!.id;
-          beginMatch(assignRoster([{ id: myId, name: myName, prefer: chosenRole }]));
-          for (const g of guests) adoptGuest(g);
-        } else if (started) {
-          for (const g of guests) adoptGuest(g);
-        }
+        lobbyCount = Math.min(MAX_HUMANS, ids.length);
+        if (world.status === 'waiting') syncLobby();
       },
       onLeave: (id) => {
-        if (mode === 'online-host' && started) dropGuest(id);
+        if (mode === 'online-host') dropMember(id);
       },
     },
   );
@@ -400,19 +344,23 @@ async function createRoom(): Promise<void> {
   if (!handle) {
     menuWithMessage(
       'Bağlanılamadı',
-      'Çevrimiçi sunucuya ulaşılamadı. Botlara karşı oynayabilirsin.',
-      '⚠️ Bağlanılamadı · botlarla oyna',
+      'Çevrimiçi sunucuya ulaşılamadı. Lütfen daha sonra tekrar dene.',
+      '⚠️ Bağlanılamadı',
     );
     return;
   }
   room = handle;
   myId = handle.id;
-  setStatus('🟢 Oda hazır · arkadaşlarını bekle');
-  if (handle.peerCount() > 0) {
-    started = true;
-    beginMatch(assignRoster([{ id: myId, name: myName, prefer: chosenRole }]));
-    for (const id of handle.members()) if (id !== handle.id) adoptGuest(id);
-  }
+  lobbyCount = Math.max(1, room.members().length);
+  setStatus('🟢 Oda hazır · arkadaşlarını çağır');
+  syncLobby();
+}
+
+function hostStart(): void {
+  if (mode !== 'online-host' || !room) return;
+  if (lobbyCount < MIN_PLAYERS) return;
+  started = true;
+  beginMatch(rosterFromMembers());
 }
 
 // ---- guest networking -------------------------------------------------------
@@ -425,7 +373,7 @@ function applyStart(data: unknown): void {
   world = freshWorld();
   world.mode = 'online-guest';
   world.props = start.props;
-  world.players = start.roster.map((r) => makePlayer(r.id, r.name, r.role, r.hue, r.bot));
+  world.players = start.roster.map((r) => makePlayer(r.id, r.name, r.role, r.hue));
   seatPlayers(world);
   world.status = 'countdown';
   gotStart = true;
@@ -441,12 +389,22 @@ function applySnapshot(snap: Snapshot): void {
   world.phaseLeft = snap.pl;
   world.feed = snap.fd.slice(0, 3);
   world.winner = snap.wn;
+  const ids = new Set(snap.pr.map((p) => p.id));
+  let structural = false;
+  // Prune players who left the host's world.
+  for (let i = world.players.length - 1; i >= 0; i--) {
+    if (!ids.has(world.players[i]!.id)) {
+      netTargets.delete(world.players[i]!.id);
+      world.players.splice(i, 1);
+      structural = true;
+    }
+  }
   for (const np of snap.pr) {
     let c = world.players.find((p) => p.id === np.id);
     if (!c) {
-      c = makePlayer(np.id, np.nm, np.ro === 1 ? 'seeker' : 'hider', np.bh, false);
+      c = makePlayer(np.id, np.nm, np.ro === 1 ? 'seeker' : 'hider', np.bh);
       world.players.push(c);
-      buildArena(world);
+      structural = true;
     }
     c.name = np.nm;
     c.role = np.ro === 1 ? 'seeker' : 'hider';
@@ -456,18 +414,12 @@ function applySnapshot(snap: Snapshot): void {
     c.score = np.sc;
     netTargets.set(np.id, { x: np.x, z: np.z, yaw: np.yw });
     if (typeof np.tx === 'number' && typeof np.tz === 'number' && typeof np.tl === 'number') {
-      c.tongue = {
-        dx: np.tx,
-        dz: np.tz,
-        len: np.tl,
-        max: np.tl,
-        retract: false,
-        hitId: np.tv ?? null,
-      };
+      c.tongue = { dx: np.tx, dz: np.tz, len: np.tl, max: np.tl, retract: false, hitId: np.tv ?? null };
     } else {
       c.tongue = null;
     }
   }
+  if (structural) buildArena(world);
 }
 
 /** Guest render integration: ease each player onto its last snapshot pose. */
@@ -505,23 +457,18 @@ async function joinRoomAsGuest(code: string): Promise<void> {
           if (!gotStart) return;
           const snap = decodeSnapshot(data);
           if (snap) applySnapshot(snap);
-        } else if (event === 'full') {
-          const d = data as { id?: unknown } | null;
-          if (d && typeof d === 'object' && d.id === room?.id) {
-            menuWithMessage(
-              'Oda dolu',
-              'Bu odada boş yer kalmamış. Botlara karşı oynayabilirsin.',
-              '⚠️ Oda dolu · botlarla oyna',
-            );
-          }
         }
       },
-      onPresence: () => {},
+      onPresence: (ids) => {
+        if (mode !== 'online-guest') return;
+        lobbyCount = Math.min(MAX_HUMANS, ids.length);
+        if (world.status === 'waiting' || world.status === 'connecting') syncLobby();
+      },
       onLeave: () => {
         if (mode === 'online-guest' && room && room.peerCount() === 0) {
           menuWithMessage(
             'Bağlantı koptu',
-            'Oda kurucusu ayrıldı. Yeni bir oda kurabilir veya botlarla oynayabilirsin.',
+            'Oda kurucusu ayrıldı. Yeni bir oda kurabilirsin.',
             '🔴 Kurucu ayrıldı',
           );
         }
@@ -535,18 +482,21 @@ async function joinRoomAsGuest(code: string): Promise<void> {
   if (!handle) {
     menuWithMessage(
       'Bağlanılamadı',
-      'Çevrimiçi sunucuya ulaşılamadı. Botlara karşı oynayabilirsin.',
-      '⚠️ Bağlanılamadı · botlarla oyna',
+      'Çevrimiçi sunucuya ulaşılamadı. Lütfen daha sonra tekrar dene.',
+      '⚠️ Bağlanılamadı',
     );
     return;
   }
   room = handle;
   myId = handle.id;
+  lobbyCount = Math.max(1, room.members().length);
   room.send('hello', { name: myName });
-  setStatus('🟢 Bağlandı · maç başlıyor');
+  world.status = 'waiting';
+  setStatus('🟢 Lobiye katıldın · kurucuyu bekle');
+  syncOverlay(true);
 }
 
-// ---- overlay / banner -------------------------------------------------------
+// ---- overlay / lobby / banner ----------------------------------------------
 
 function show(el: HTMLElement, cls: string): void {
   el.classList.remove(cls);
@@ -561,13 +511,38 @@ function syncRoleToggle(): void {
 }
 
 function showMenuPanels(): void {
-  show(menuActions, 'km-actions--hidden');
-  show(roleToggle, 'km-role--hidden');
   hide(shareBox, 'km-share--hidden');
   hide(overPanel, 'km-over--hidden');
-  nameInput.style.display = '';
-  createBtn.style.display = channelEnabled() ? '' : 'none';
+  if (channelEnabled()) {
+    show(menuActions, 'km-actions--hidden');
+    show(roleToggle, 'km-role--hidden');
+    nameInput.style.display = '';
+  } else {
+    // No realtime backend → multiplayer can't run here.
+    hide(menuActions, 'km-actions--hidden');
+    hide(roleToggle, 'km-role--hidden');
+    nameInput.style.display = 'none';
+  }
   syncRoleToggle();
+}
+
+/** Refresh the live lobby panel (player count + host's start button). */
+function syncLobby(): void {
+  lobbyCountEl.textContent = `${lobbyCount}/${MAX_HUMANS}`;
+  if (mode === 'online-host') {
+    show(shareRowWrap, 'km-hidden');
+    lobbyStartBtn.style.display = '';
+    const ready = lobbyCount >= MIN_PLAYERS;
+    lobbyStartBtn.disabled = !ready;
+    lobbyStartBtn.textContent = ready ? `Başlat (${lobbyCount} oyuncu)` : 'En az 2 oyuncu gerekli';
+    lobbyNote.textContent = ready
+      ? 'Hazır olduğunda başlat. Sonradan katılanlar bir sonraki tura girer.'
+      : 'Bağlantıyı paylaş; en az bir kişi daha katılınca başlatabilirsin.';
+  } else {
+    hide(shareRowWrap, 'km-hidden');
+    lobbyStartBtn.style.display = 'none';
+    lobbyNote.textContent = 'Kurucu maçı başlatınca otomatik gireceksin.';
+  }
 }
 
 function syncOverlay(force = false): void {
@@ -579,18 +554,21 @@ function syncOverlay(force = false): void {
     showMenuPanels();
     showOverlay(overlay);
   } else if (st === 'waiting') {
-    overlayTitle.textContent = 'Oda kuruldu';
+    overlayTitle.textContent = mode === 'online-host' ? 'Oda kuruldu' : 'Lobiye katıldın';
     overlayMsg.textContent =
-      'Bağlantıyı arkadaşlarına gönder; ilk oyuncu katılınca maç başlar. Boş yerleri botlar doldurur.';
+      mode === 'online-host'
+        ? 'Bağlantıyı arkadaşlarına gönder ve hazır olunca başlat.'
+        : 'Oda kurucusunun maçı başlatması bekleniyor.';
     hide(menuActions, 'km-actions--hidden');
     hide(roleToggle, 'km-role--hidden');
     hide(overPanel, 'km-over--hidden');
     show(shareBox, 'km-share--hidden');
     nameInput.style.display = 'none';
+    syncLobby();
     showOverlay(overlay);
   } else if (st === 'connecting') {
     overlayTitle.textContent = 'Bağlanılıyor…';
-    overlayMsg.textContent = 'Oda kurucusuna bağlanılıyor, maç birazdan başlayacak.';
+    overlayMsg.textContent = 'Odaya bağlanılıyor, birazdan lobiye gireceksin.';
     hide(menuActions, 'km-actions--hidden');
     hide(roleToggle, 'km-role--hidden');
     hide(shareBox, 'km-share--hidden');
@@ -634,7 +612,7 @@ function showOverPanel(): void {
   hide(shareBox, 'km-share--hidden');
   show(overPanel, 'km-over--hidden');
   nameInput.style.display = 'none';
-  rematchBtn.style.display = mode === 'online-guest' ? 'none' : '';
+  rematchBtn.style.display = mode === 'online-host' ? '' : 'none';
   if (mode === 'online-guest') overlayMsg.textContent += ' · kurucunun yeniden başlatması bekleniyor';
   showOverlay(overlay);
 
@@ -657,7 +635,7 @@ function syncBanner(): void {
     title = `Rolün: ${roleLabel(me?.role ?? chosenRole)}`;
     sub =
       (me?.role ?? chosenRole) === 'seeker'
-        ? 'Uyuyorsun… avın birazdan saklanacak'
+        ? 'Uyuyorsun… av birazdan saklanacak'
         : 'Bir saklanak bul ve boyanmaya hazırlan';
   } else if (st === 'prep') {
     if (me?.role === 'seeker') {
@@ -699,14 +677,13 @@ function syncHud(): void {
   phaseEl.textContent = PHASE_LABEL[world.status] ?? '';
   if (world.status === 'prep' || world.status === 'hunt' || world.status === 'countdown') {
     timeEl.textContent = fmtTime(world.phaseLeft);
-  } else if (world.status === 'menu') {
+  } else if (world.status === 'menu' || world.status === 'waiting') {
     timeEl.textContent = fmtTime(HUNT_S);
   } else {
     timeEl.textContent = '—';
   }
   scoreEl.textContent = String(me ? Math.round(me.score) : 0);
 
-  // Blend meter for a hiding local player.
   const isHider = !!me && me.role === 'hider' && !me.caught;
   const inMatch = world.status === 'prep' || world.status === 'hunt';
   if (isHider && inMatch) {
@@ -718,7 +695,6 @@ function syncHud(): void {
     blendWrap.style.display = 'none';
   }
 
-  // Feed.
   const key = world.feed.join('|');
   if (key !== feedKey) {
     feedKey = key;
@@ -786,8 +762,9 @@ function tick(dt: number): void {
     }
     easeGuestPlayers(dt);
   } else {
+    // Host (or idle attract): run the authoritative simulation.
     const me = myPlayer();
-    if (playing && me && !me.bot) {
+    if (playing && me) {
       input.read(me.input);
       if (!input.hasAim()) {
         me.input.aimX = me.x + Math.sin(me.yaw) * 8;
@@ -797,7 +774,6 @@ function tick(dt: number): void {
       input.read(discardInput);
       discardInput.fire = false;
     }
-    driveBots(world, dt);
     simAcc += dt;
     let steps = 0;
     while (simAcc >= SIM_DT && steps < MAX_SUBSTEPS) {
@@ -861,16 +837,16 @@ function backToMenu(): void {
   startAttract();
   overlayTitle.textContent = 'Kamuflaj';
   overlayMsg.textContent = channelEnabled()
-    ? 'Vücudunu çevreye boya, kıpırdamadan dur ve avcının dilinden kaç. Oda kur ya da botlarla oyna.'
-    : 'Vücudunu çevreye boya, kıpırdamadan dur ve avcının dilinden kaç. Botlara karşı oyna.';
+    ? 'Vücudunu çevreye boya, kıpırdamadan dur ve avcının dilinden kaç. Bir oda kur ve arkadaşlarını çağır.'
+    : 'Kamuflaj çok oyunculu bir saklambaçtır ve çevrimiçi bir sunucu gerektirir.';
   bannerKey = '';
   banner.classList.add('km-banner--hidden');
   lastShownStatus = null;
   syncOverlay(true);
   // This status rewrite is also the smoke test's boot signal (contains '·').
-  if (!isWebglOk()) setStatus('⚠️ 3B desteklenmiyor · oyun yine de oynanır');
-  else if (channelEnabled()) setStatus('⚪ Hazır · oda kur veya botlarla oyna');
-  else setStatus('⚪ Çevrimdışı · botlarla oyna');
+  if (!isWebglOk()) setStatus('⚠️ 3B desteklenmiyor · oyun yine de çalışır');
+  else if (channelEnabled()) setStatus('⚪ Hazır · oda kur ve arkadaşlarını çağır');
+  else setStatus('⚠️ Çok oyunculu · sunucu yapılandırılmamış');
   startLoop();
 }
 
@@ -907,12 +883,14 @@ function init(): void {
   roleHideBtn = document.querySelector<HTMLButtonElement>('#role-hide')!;
   roleSeekBtn = document.querySelector<HTMLButtonElement>('#role-seek')!;
   menuActions = document.querySelector<HTMLElement>('#menu-actions')!;
-  botsBtn = document.querySelector<HTMLButtonElement>('#bots')!;
   createBtn = document.querySelector<HTMLButtonElement>('#create')!;
   shareBox = document.querySelector<HTMLElement>('#share')!;
+  shareRowWrap = document.querySelector<HTMLElement>('#share-row-wrap')!;
   shareLinkInput = document.querySelector<HTMLInputElement>('#share-link')!;
   copyBtn = document.querySelector<HTMLButtonElement>('#copy')!;
-  soloStartBtn = document.querySelector<HTMLButtonElement>('#solo-start')!;
+  lobbyCountEl = document.querySelector<HTMLElement>('#lobby-count')!;
+  lobbyNote = document.querySelector<HTMLElement>('#lobby-note')!;
+  lobbyStartBtn = document.querySelector<HTMLButtonElement>('#lobby-start')!;
   overPanel = document.querySelector<HTMLElement>('#over-panel')!;
   boardList = document.querySelector<HTMLOListElement>('#board-list')!;
   rematchBtn = document.querySelector<HTMLButtonElement>('#rematch')!;
@@ -938,32 +916,15 @@ function init(): void {
   initScene(canvas, input.isCoarse);
   if (!isWebglOk()) setStatus('⚠️ 3B görüntü desteklenmiyor · oyun yine de çalışır');
 
-  // Buttons.
   roleHideBtn.addEventListener('click', () => setRole('hider'));
   roleSeekBtn.addEventListener('click', () => setRole('seeker'));
-  botsBtn.addEventListener('click', () => {
-    startBots();
-    if (input.isCoarse && !fsActive()) enterFullscreen();
+  createBtn.addEventListener('click', () => {
+    void createRoom();
+    if (input.isCoarse && !fsActive() && channelEnabled()) enterFullscreen();
   });
-  createBtn.addEventListener('click', () => void createRoom());
-  soloStartBtn.addEventListener('click', () => {
-    if (mode === 'online-host' && !started && room) {
-      started = true;
-      beginMatch(assignRoster([{ id: myId, name: myName, prefer: chosenRole }]));
-    }
-  });
+  lobbyStartBtn.addEventListener('click', hostStart);
   rematchBtn.addEventListener('click', () => {
-    if (mode === 'bots') startBots();
-    else if (mode === 'online-host') {
-      const roster: Seat[] = world.players.map((c) => ({
-        id: c.id,
-        name: c.name,
-        role: c.role,
-        hue: c.bodyHue,
-        bot: c.bot,
-      }));
-      beginMatch(roster);
-    }
+    if (mode === 'online-host') beginMatch(rosterFromMembers());
   });
   toMenuBtn.addEventListener('click', backToMenu);
   restartBtn.addEventListener('click', backToMenu);
@@ -985,14 +946,15 @@ function init(): void {
   });
   document.addEventListener('fullscreenchange', syncFs);
 
-  // Keyboard fallback for the menu (pitfall: unreachable-start-state).
+  // Keyboard fallback for the menu (pitfall: unreachable-start-state): Enter or
+  // Space opens a room when the backend is available.
   window.addEventListener('keydown', (e) => {
-    if (world.status !== 'menu') return;
+    if (world.status !== 'menu' || !channelEnabled()) return;
     const target = e.target as HTMLElement | null;
     const typing = !!target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA');
     if (e.key === 'Enter' || (!typing && e.key === ' ')) {
       e.preventDefault();
-      startBots();
+      void createRoom();
     }
   });
 
@@ -1009,7 +971,7 @@ function init(): void {
   } else if (code && !channelEnabled()) {
     backToMenu();
     overlayMsg.textContent =
-      'Bu bağlantı çevrimiçi bir oda içindi ama sunucu yapılandırılmamış. Botlara karşı oynayabilirsin.';
+      'Bu bağlantı çevrimiçi bir oda içindi ama sunucu yapılandırılmamış.';
   } else {
     backToMenu();
   }

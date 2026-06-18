@@ -51,10 +51,9 @@ export interface Tongue {
 }
 
 export interface Player {
-  id: string; // channel id for humans, 'bot1'.. for bots
+  id: string; // realtime-channel id
   name: string;
   role: Role;
-  bot: boolean;
   x: number;
   z: number;
   yaw: number; // facing (render + reveal cone)
@@ -113,7 +112,7 @@ export interface Snapshot {
 
 export interface StartMsg {
   props: PropSpec[];
-  roster: { id: string; name: string; role: Role; hue: number; bot: boolean }[];
+  roster: { id: string; name: string; role: Role; hue: number }[];
 }
 
 export interface InputMsg {

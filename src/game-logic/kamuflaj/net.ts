@@ -80,7 +80,6 @@ export function encodeStart(world: World): StartMsg {
       name: p.name,
       role: p.role,
       hue: p.bodyHue,
-      bot: p.bot,
     })),
   };
 }
@@ -103,7 +102,7 @@ export function decodeStart(data: unknown): StartMsg | null {
     const r = raw as Partial<StartMsg['roster'][number]>;
     if (!str(r.id) || !str(r.name) || !num(r.hue)) return null;
     const role: Role = r.role === 'seeker' ? 'seeker' : 'hider';
-    roster.push({ id: r.id, name: r.name, role, hue: r.hue, bot: r.bot === true });
+    roster.push({ id: r.id, name: r.name, role, hue: r.hue });
   }
   return { props, roster };
 }
