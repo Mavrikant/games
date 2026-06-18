@@ -1,0 +1,22 @@
+{
+  "title": "Köz",
+  "description": "Sönmeye yüz tutmuş korları çevreden üfleyerek canlı tut; birini canlandırırken komşuların oksijenini çalarsın.",
+  "dateAdded": "2026-06-18",
+  "tags": ["ozgun", "zamana-karsi", "strateji"],
+  "controls": "Fareyle korı tıkla veya 1-7 tuşları · R: yeniden başla",
+  "howToPlay": "Ateşin küllerinde yedi tane közün dağılmış halde duruyor. Hepsi yavaş yavaş söner; senin işin elindeki tek üfleme aletiyle sırayla onları canlandırmak. Bir korı tıkladığında yandığı yoğunluk 100'e fırlar ama o üfleyiş, çemberin iki yanındaki komşu korlardan oksijen çalar; o iki komşu anında belirgin biçimde sönükleşir. Bu yüzden hangi korı ne zaman üfleyeceğin sırf 'en sönüğü' bulmak değil, hangi komşusunun ölmesini göze alabileceğin bir hesap meselesine dönüşür. Düşmana bonus olarak rastgele rüzgâr esintileri bir kenardan gelir; o tarafa bakan üç-dört kor aynı anda ciddi yoğunluk kaybeder, ekranın kenarında küçük bir ok rüzgârın yönünü bir saniye önceden gösterir. Zaman ilerledikçe doğal sönme hızı artar, rüzgârlar sıklaşır — ısrarcı bir baskı altında olduğunu hissedersin. Tek başına bir kor ya da hiç korun kalmadığında oyun biter; başarı ölçütün ateşi ne kadar canlı tuttuğunsa, ekrandaki sayaç o saniyeyi sayar ve en iyi süren tarayıcında saklanır. Strateji ipucu: yakın komşusu zaten ölmüş bir korı üflemek 'bedavadır' (kimse oksijen kaybetmez), bu yüzden tek bir koru kasten feda edip arkasındaki iki korı serbestçe üfleyebileceğin bir 'köprü' kurmak ileri seviyede yüksek skorun anahtarıdır. Acele etme, en sönükten başlama refleksini bırak ve önce komşuluk haritasına bak.",
+  "thumbnail": "koz.svg",
+  "scoring": {
+    "storageKey": "koz.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Ember",
+    "description": "Keep fading embers alive by fanning them — but each fan steals oxygen from the two embers next to it.",
+    "controls": "Click an ember or press 1-7 · R: restart",
+    "howToPlay": "Seven embers sit scattered in the ashes of a fire. They all fade slowly; your one job is to take turns reviving them with your single bellows. When you click an ember, its glow shoots back up to 100 — but the puff steals oxygen from the two embers next to it in the ring, and those two visibly dim by a fixed amount. So choosing which ember to fan and when is never just about picking the dimmest one; it's a quiet trade about which neighbour you can afford to let die. A bonus enemy is the occasional wind gust from a random edge of the screen; three or four embers facing that side lose a meaningful chunk of intensity at once, and a small arrow on the edge of the canvas warns you about the gust one second in advance. As time passes the natural decay speeds up and the gusts come more often, so the pressure ramps. The game ends as soon as you're left with only one ember alive or zero. Your only score is how long you keep the fire going — a counter on screen ticks the seconds, and your best run is saved locally in your browser. Strategy tip: fanning an ember whose direct neighbour is already dead is essentially 'free' (no live oxygen is stolen), so deliberately sacrificing one ember to build a 'bridge' you can fan past without cost is the secret to long runs. Don't reflexively grab the dimmest first — read the neighbour map before you puff."
+  }
+}

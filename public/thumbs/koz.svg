@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Köz">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="55%" r="65%">
+      <stop offset="0%" stop-color="#2a1410"/>
+      <stop offset="55%" stop-color="#140b10"/>
+      <stop offset="100%" stop-color="#070509"/>
+    </radialGradient>
+    <radialGradient id="glowHot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd089" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ff7a2e" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ff7a2e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowMid" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffa663" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#c45620" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c45620" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowLow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a8470d" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#5e220b" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#5e220b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <circle cx="160" cy="100" r="78" fill="none" stroke="#3a2218" stroke-width="1" opacity="0.5"/>
+
+  <g>
+    <circle cx="160" cy="22" r="38" fill="url(#glowHot)"/>
+    <circle cx="160" cy="22" r="9" fill="#fff0c6"/>
+  </g>
+
+  <g>
+    <circle cx="231" cy="60" r="32" fill="url(#glowMid)"/>
+    <circle cx="231" cy="60" r="8" fill="#ffac6a"/>
+  </g>
+
+  <g>
+    <circle cx="245" cy="140" r="22" fill="url(#glowLow)"/>
+    <circle cx="245" cy="140" r="6.5" fill="#7a3818"/>
+  </g>
+
+  <g>
+    <circle cx="185" cy="172" r="14" fill="url(#glowLow)" opacity="0.5"/>
+    <circle cx="185" cy="172" r="5" fill="#3c1d12"/>
+  </g>
+
+  <g>
+    <circle cx="135" cy="172" r="32" fill="url(#glowMid)"/>
+    <circle cx="135" cy="172" r="8" fill="#ffac6a"/>
+  </g>
+
+  <g>
+    <circle cx="75" cy="140" r="20" fill="url(#glowLow)"/>
+    <circle cx="75" cy="140" r="6.5" fill="#83391a"/>
+  </g>
+
+  <g>
+    <circle cx="89" cy="60" r="36" fill="url(#glowHot)"/>
+    <circle cx="89" cy="60" r="9" fill="#fff0c6"/>
+  </g>
+
+  <g opacity="0.6">
+    <ellipse cx="160" cy="100" rx="20" ry="3" fill="#1a0e0a"/>
+    <ellipse cx="120" cy="105" rx="8" ry="2" fill="#1a0e0a"/>
+    <ellipse cx="195" cy="108" rx="10" ry="2.2" fill="#1a0e0a"/>
+  </g>
+</svg>
