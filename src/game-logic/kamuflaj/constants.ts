@@ -27,6 +27,7 @@ export const ROOM = 26; // room edge length (x and z)
 export const WALL_T = 0.7; // wall thickness
 export const WALL_H = 5.5;
 export const DOOR_W = 6.5; // doorway gap width
+export const DOOR_H = 3.6; // doorway head height (wall continues above as a lintel)
 export const MAP_HW = (GRID_COLS * ROOM) / 2; // half-width  (x ∈ [-HW, HW])
 export const MAP_HD = (GRID_ROWS * ROOM) / 2; // half-depth  (z ∈ [-HD, HD])
 
