@@ -1,0 +1,21 @@
+{
+  "title": "Ahenk",
+  "description": "Üç sarkacı aynı anda hizala — üçü de aynı anda dikeyden geçtiğinde Boşluk'a bas. 5 ıska ile elenirsin.",
+  "dateAdded": "2026-06-18",
+  "tags": ["fizik", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk: kilitle · R: yeniden başla",
+  "thumbnail": "ahenk.svg",
+  "howToPlay": "Ahenk üç farklı frekansta sallanan sarkacın eşgüdümünü yakalama oyunudur: ekranın üst kenarına asılı üç ip ucunda renkli birer top sallanır; her topun frekansı farklı olduğu için pencerede çoğu an üçü de farklı yerlerdedir. Dikey çıtanın (her ipin sabitlendiği noktadan inen şeffaf mavi şerit) içinden geçtikleri an, o sarkaç o şeride 'kilitlenmeye' aday demektir; ama puan ancak üç sarkaç **aynı anda** kendi şeritlerinin içindeyken kazanılır. Bu anı yakaladığını düşündüğün anda Boşluk tuşuna basarsın; üçü de gerçekten içerideyse skor +1, küçük bir yeşil parıltı ve kısa bir dondurma ile yeni frekanslar başlar. Üçünden biri bile şeridin dışındaysa ıska +1 olur ve kırmızı parıltı verilir. Beş ıska birikince oyun biter; o seansın skoru ve cihazda saklanan rekorun overlay'de gösterilir. Her 3 başarılı kilitte seviye artar: frekanslar birbirinden daha çok uzaklaşır, üçünün aynı anda dikeyden geçtiği anlar seyrekleşir ve oyun zorlaşır. İpuçları: (1) Sallanma için tek bir referans seç — en yavaş sarkacı, çünkü dikey eksene yakın olduğu pencereler daha sık. (2) En hızlı iki sarkaç çıtanın içindeyken yavaş olanı bekle; üçü aynı pencerede çakışınca bas. (3) Yanlış zamanda basmak ıska sayar — emin değilsen bir periyot atla, çünkü 5 ıska sınırı acımasız. Skor doğrudan kayıtlı rekorla karşılaştırılır; rekoru kırdığında sonraki ziyaretinde de hatırlanır.",
+  "scoring": {
+    "storageKey": "ahenk.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Harmony",
+    "description": "Sync three pendulums — hit Space at the instant all three pass through vertical. Five misses and you're out.",
+    "controls": "Space: lock · R: restart",
+    "howToPlay": "Harmony is a precision-timing game built around three pendulums swinging at slightly different frequencies. Each pendulum hangs from a pivot at the top of the canvas and oscillates on its own track. A faint vertical band runs down from each pivot — that is the 'lock zone' for that pendulum, sized to match the judge's actual tolerance. When you think all three bobs are inside their own bands at the same instant, you press Space (or tap the on-screen button on mobile). If all three really are inside, you score +1, get a green flash and a brief freeze, then the game re-rolls the frequencies and starts a new round. If even one bob is outside its band, you take a miss and the bands flash red. Five misses end the run. Every three successful locks the level steps up: the frequencies spread further apart, so the simultaneous zero-crossing windows get rarer. Tips: (1) Lock onto the slowest pendulum as your reference — it stays near vertical the longest. (2) When the two faster bobs are clearly inside, wait for the slow one. (3) Spamming Space is punished; better to skip a window than burn an early miss. Your best score is saved locally."
+  }
+}

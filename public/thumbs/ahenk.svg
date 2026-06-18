@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Ahenk">
+  <defs>
+    <linearGradient id="ah-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1422" />
+      <stop offset="100%" stop-color="#080910" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ah-bg)" />
+  <!-- Suspension rail -->
+  <rect x="40" y="32" width="240" height="3" fill="#3b4252" />
+  <!-- Lock bands -->
+  <rect x="80" y="36" width="14" height="160" fill="#6366f1" fill-opacity="0.12" stroke="#6366f1" stroke-opacity="0.45" stroke-width="0.8" />
+  <rect x="153" y="36" width="14" height="160" fill="#6366f1" fill-opacity="0.12" stroke="#6366f1" stroke-opacity="0.45" stroke-width="0.8" />
+  <rect x="226" y="36" width="14" height="160" fill="#6366f1" fill-opacity="0.12" stroke="#6366f1" stroke-opacity="0.45" stroke-width="0.8" />
+  <!-- Pendulum 1 (left, off-band) -->
+  <line x1="87" y1="35" x2="65" y2="148" stroke="#6b7280" stroke-width="1.4" />
+  <circle cx="87" cy="35" r="3" fill="#e5e7eb" />
+  <circle cx="65" cy="148" r="13" fill="#60a5fa" />
+  <!-- Pendulum 2 (center, in-band) -->
+  <line x1="160" y1="35" x2="160" y2="160" stroke="#6b7280" stroke-width="1.4" />
+  <circle cx="160" cy="35" r="3" fill="#e5e7eb" />
+  <circle cx="160" cy="160" r="13" fill="#fbbf24" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1.6" />
+  <!-- Pendulum 3 (right, slightly off-band) -->
+  <line x1="233" y1="35" x2="255" y2="146" stroke="#6b7280" stroke-width="1.4" />
+  <circle cx="233" cy="35" r="3" fill="#e5e7eb" />
+  <circle cx="255" cy="146" r="13" fill="#34d399" />
+  <text x="20" y="28" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Ahenk</text>
+</svg>

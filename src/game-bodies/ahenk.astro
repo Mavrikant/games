@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Iska<span id="miss">0/5</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Ahenk sarkaç sahnesi"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Ahenk</h2>
+      <p id="overlay-msg">Üç sarkaç aynı anda dikeyden geçtiğinde Boşluk'a bas. 5 ıska ile elenirsin.</p>
+      <button id="overlay-btn" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button id="touch-lock" class="touch__btn" type="button">Kilitle</button>
+</div>
