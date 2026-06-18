@@ -23,11 +23,15 @@ export default async function (page) {
   }
 
   // Start a bot match; the 3 s countdown must end with the overlay hidden.
+  // Under CI load headless Chromium throttles rAF, and the entry's
+  // FRAME_DT_CLAMP makes the countdown advance in (sim) slow motion when
+  // frames are starved — so the wall-clock wait must be generous (the 8 s
+  // budget reliably timed out on the mobile viewport).
   await page.click('#bots');
   const hidden = await waitForBoot(
     page,
     () => document.querySelector('#overlay')?.classList.contains('overlay--hidden') ?? false,
-    8000,
+    16000,
   );
   if (!hidden) throw new Error('overlay should hide after the countdown');
 
@@ -42,7 +46,7 @@ export default async function (page) {
       const t = document.querySelector('#time')?.textContent ?? '';
       return t !== '' && t !== '2:00';
     },
-    8000,
+    16000,
   );
   if (!ticked) {
     const time = await page.evaluate(() => document.querySelector('#time')?.textContent ?? '');
