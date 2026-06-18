@@ -7,20 +7,30 @@
 // First-person: when a match is live the camera sits at the local player's eye
 // and looks along (yaw, pitch); the local body is hidden. Otherwise an elevated
 // orbit shows the whole multi-room map behind the menu/lobby.
+//
+// Look & feel: real-time shadow mapping, procedurally textured walls/floor with
+// baseboards, cornices, corner pillars and door lintels (so no seams gap to the
+// sky), lamp glow, drifting dust, a starlit dusk sky and atmospheric fog.
 
 import * as THREE from 'three';
 import {
+  DOOR_H,
+  DOOR_W,
   EYE_H,
   FLOOR_HUE,
   FOG_FAR,
   FOG_NEAR,
+  GRID_COLS,
+  GRID_ROWS,
   MAP_HD,
   MAP_HW,
+  ROOM,
   SKY,
   WALL_H,
   WALL_HUE,
   WALL_T,
 } from './constants';
+import { buildDoorways } from './world';
 import type { Player, PropSpec, WallSeg, World } from './types';
 
 let webglOk = false;
@@ -31,6 +41,7 @@ let camera: THREE.PerspectiveCamera | null = null;
 
 let arenaGroup: THREE.Group | null = null;
 let actorsGroup: THREE.Group | null = null;
+let keyLight: THREE.DirectionalLight | null = null;
 let lampLights: THREE.PointLight[] = [];
 let motes: THREE.Points | null = null;
 
@@ -53,7 +64,10 @@ const scratchEye = new THREE.Vector3();
 const scratchLook = new THREE.Vector3();
 const scratchCam = new THREE.Vector3();
 
-const MAX_LAMP_LIGHTS = 5;
+const MAX_LAMP_LIGHTS = 6;
+const BASEBOARD_H = 0.55;
+const CORNICE_H = 0.4;
+const PILLAR_T = WALL_T * 1.9;
 
 export function isWebglOk(): boolean {
   return webglOk;
@@ -68,59 +82,179 @@ function hslCss(hue: number, s: number, l: number): string {
   return `hsl(${(((hue % 360) + 360) % 360).toFixed(0)} ${(s * 100).toFixed(0)}% ${(l * 100).toFixed(0)}%)`;
 }
 
-function makeGradientTexture(top: string, bottom: string): THREE.Texture | null {
+function newCanvas(size: number): [HTMLCanvasElement, CanvasRenderingContext2D] | null {
   if (typeof document === 'undefined') return null;
   const c = document.createElement('canvas');
-  c.width = 4;
-  c.height = 256;
+  c.width = c.height = size;
   const ctx = c.getContext('2d');
   if (!ctx) return null;
-  const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0, top);
-  g.addColorStop(1, bottom);
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, 4, 256);
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
+  return [c, ctx];
 }
 
-function makeFloorTexture(): THREE.Texture | null {
-  if (typeof document === 'undefined') return null;
-  const c = document.createElement('canvas');
-  c.width = c.height = 256;
-  const ctx = c.getContext('2d');
-  if (!ctx) return null;
-  ctx.fillStyle = hslCss(FLOOR_HUE, 0.32, 0.38);
+function tx(c: HTMLCanvasElement, repeat: number, srgb: boolean): THREE.Texture {
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(repeat, repeat);
+  t.anisotropy = 4;
+  return t;
+}
+
+function makeGradientTexture(top: string, mid: string, bottom: string): THREE.Texture | null {
+  const made = newCanvas(8);
+  if (!made) return null;
+  const [c, ctx] = made;
+  const g = ctx.createLinearGradient(0, 0, 0, 8);
+  g.addColorStop(0, top);
+  g.addColorStop(0.55, mid);
+  g.addColorStop(1, bottom);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 8, 8);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+// Warm wooden floor: planks + grout + worn speckle, with a matching bump map.
+function makeFloorTextures(): { map: THREE.Texture; bump: THREE.Texture } | null {
+  const made = newCanvas(512);
+  if (!made) return null;
+  const [c, ctx] = made;
+  ctx.fillStyle = hslCss(FLOOR_HUE, 0.34, 0.36);
+  ctx.fillRect(0, 0, 512, 512);
+  const planks = 8;
+  const ph = 512 / planks;
+  for (let i = 0; i < planks; i++) {
+    const shade = 0.3 + ((i * 37) % 9) / 100;
+    ctx.fillStyle = hslCss(FLOOR_HUE + ((i * 13) % 7) - 3, 0.34, shade);
+    ctx.fillRect(0, i * ph, 512, ph - 1);
+    // grain streaks
+    for (let g = 0; g < 26; g++) {
+      ctx.strokeStyle = `rgba(0,0,0,${0.04 + Math.random() * 0.05})`;
+      ctx.lineWidth = 1;
+      const y = i * ph + Math.random() * ph;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.bezierCurveTo(160, y + (Math.random() * 6 - 3), 360, y + (Math.random() * 6 - 3), 512, y);
+      ctx.stroke();
+    }
+  }
+  // grout lines between planks
+  ctx.fillStyle = 'rgba(0,0,0,0.45)';
+  for (let i = 1; i < planks; i++) ctx.fillRect(0, i * ph - 1.5, 512, 2.5);
+  // stagger short vertical seams
+  for (let i = 0; i < planks; i++) {
+    const x = ((i * 191) % 512);
+    ctx.fillRect(x, i * ph, 2.5, ph);
+  }
+  // worn highlights
+  for (let i = 0; i < 1400; i++) {
+    ctx.fillStyle = `rgba(255,240,210,${Math.random() * 0.05})`;
+    ctx.fillRect(Math.random() * 512, Math.random() * 512, 1.5, 1.5);
+  }
+
+  const bumpMade = newCanvas(512);
+  let bump: THREE.Texture;
+  if (bumpMade) {
+    const [bc, bctx] = bumpMade;
+    bctx.fillStyle = '#808080';
+    bctx.fillRect(0, 0, 512, 512);
+    bctx.fillStyle = '#202020';
+    for (let i = 1; i < planks; i++) bctx.fillRect(0, i * ph - 1.5, 512, 2.5);
+    for (let i = 0; i < planks; i++) bctx.fillRect((i * 191) % 512, i * ph, 2.5, ph);
+    bump = tx(bc, 6, false);
+  } else {
+    bump = tx(c, 6, false);
+  }
+  return { map: tx(c, 6, true), bump };
+}
+
+// Plaster wall with faint panel lines + a bump map for relief.
+function makeWallTextures(): { map: THREE.Texture; bump: THREE.Texture } | null {
+  const made = newCanvas(256);
+  if (!made) return null;
+  const [c, ctx] = made;
+  ctx.fillStyle = hslCss(WALL_HUE, 0.16, 0.42);
   ctx.fillRect(0, 0, 256, 256);
-  ctx.strokeStyle = 'rgba(0,0,0,0.16)';
-  ctx.lineWidth = 2;
-  for (let i = 1; i < 6; i++) {
-    const y = (256 / 6) * i;
+  // mottled plaster
+  for (let i = 0; i < 2600; i++) {
+    const v = Math.random();
+    ctx.fillStyle = `rgba(${v > 0.5 ? '255,255,255' : '0,0,0'},${Math.random() * 0.05})`;
+    ctx.fillRect(Math.random() * 256, Math.random() * 256, 2, 2);
+  }
+  // subtle vertical panel seams
+  ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+  ctx.lineWidth = 1.5;
+  for (const x of [64, 128, 192]) {
     ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(256, y);
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 256);
     ctx.stroke();
   }
-  ctx.fillStyle = 'rgba(255,240,210,0.05)';
-  for (let i = 0; i < 400; i++) ctx.fillRect(Math.random() * 256, Math.random() * 256, 1.5, 1.5);
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  tex.repeat.set(6, 4);
-  return tex;
+  const bumpMade = newCanvas(256);
+  let bump: THREE.Texture;
+  if (bumpMade) {
+    const [bc, bctx] = bumpMade;
+    bctx.fillStyle = '#7a7a7a';
+    bctx.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 2200; i++) {
+      const v = Math.random() > 0.5 ? 255 : 40;
+      bctx.fillStyle = `rgba(${v},${v},${v},0.06)`;
+      bctx.fillRect(Math.random() * 256, Math.random() * 256, 2, 2);
+    }
+    bctx.strokeStyle = 'rgba(20,20,20,0.6)';
+    for (const x of [64, 128, 192]) {
+      bctx.beginPath();
+      bctx.moveTo(x, 0);
+      bctx.lineTo(x, 256);
+      bctx.stroke();
+    }
+    bump = tx(bc, 1, false);
+    bump.repeat.set(1, 1);
+  } else {
+    bump = tx(c, 1, false);
+  }
+  const map = tx(c, 1, true);
+  map.repeat.set(1, 1);
+  return { map, bump };
+}
+
+let scaleBump: THREE.Texture | null = null;
+function getScaleBump(): THREE.Texture | null {
+  if (scaleBump) return scaleBump;
+  const made = newCanvas(128);
+  if (!made) return null;
+  const [c, ctx] = made;
+  ctx.fillStyle = '#808080';
+  ctx.fillRect(0, 0, 128, 128);
+  // scaly cells
+  for (let y = 0; y < 16; y++) {
+    for (let x = 0; x < 16; x++) {
+      const cx = x * 8 + (y % 2) * 4 + 4;
+      const cy = y * 8 + 4;
+      const g = ctx.createRadialGradient(cx, cy, 1, cx, cy, 4.5);
+      g.addColorStop(0, 'rgba(255,255,255,0.6)');
+      g.addColorStop(1, 'rgba(60,60,60,0.6)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  scaleBump = new THREE.CanvasTexture(c);
+  scaleBump.wrapS = scaleBump.wrapT = THREE.RepeatWrapping;
+  scaleBump.repeat.set(3, 4);
+  return scaleBump;
 }
 
 let blobTexture: THREE.Texture | null = null;
 function getBlobTexture(): THREE.Texture | null {
   if (blobTexture) return blobTexture;
-  if (typeof document === 'undefined') return null;
-  const c = document.createElement('canvas');
-  c.width = c.height = 64;
-  const ctx = c.getContext('2d');
-  if (!ctx) return null;
+  const made = newCanvas(64);
+  if (!made) return null;
+  const [c, ctx] = made;
   const g = ctx.createRadialGradient(32, 32, 2, 32, 32, 30);
-  g.addColorStop(0, 'rgba(0,0,0,0.5)');
+  g.addColorStop(0, 'rgba(0,0,0,0.55)');
   g.addColorStop(1, 'rgba(0,0,0,0)');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 64, 64);
@@ -128,33 +262,52 @@ function getBlobTexture(): THREE.Texture | null {
   return blobTexture;
 }
 
+let floorTex: { map: THREE.Texture; bump: THREE.Texture } | null = null;
+let wallTex: { map: THREE.Texture; bump: THREE.Texture } | null = null;
+
 // ---- init -------------------------------------------------------------------
 
 export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean {
   canvasEl = canvas;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isCoarse ? 1.5 : 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     scene = new THREE.Scene();
-    const bg = makeGradientTexture('#222a3a', '#0c0f16');
+    const bg = makeGradientTexture('#1b2740', '#222a3a', '#0a0d14');
     scene.background = bg ?? new THREE.Color(SKY);
-    scene.fog = new THREE.Fog(SKY, FOG_NEAR, FOG_FAR);
+    scene.fog = new THREE.Fog(0x10141c, FOG_NEAR, FOG_FAR);
 
-    camera = new THREE.PerspectiveCamera(70, 1, 0.05, 260);
+    camera = new THREE.PerspectiveCamera(72, 1, 0.05, 320);
     camera.position.set(0, 30, 30);
     camera.lookAt(0, 0, 0);
 
-    scene.add(new THREE.HemisphereLight(0xcfe0ff, 0x3a2f28, 0.9));
-    const key = new THREE.DirectionalLight(0xfff0d6, 0.9);
-    key.position.set(20, 40, 14);
-    scene.add(key);
-    const rim = new THREE.DirectionalLight(0x6f8cff, 0.35);
-    rim.position.set(-24, 18, -18);
-    scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0xb9c7ff, 0x2a2118, 0.62));
+
+    keyLight = new THREE.DirectionalLight(0xe6edff, 1.55);
+    keyLight.position.set(34, 60, 24);
+    keyLight.castShadow = true;
+    const sm = isCoarse ? 1024 : 2048;
+    keyLight.shadow.mapSize.set(sm, sm);
+    keyLight.shadow.camera.near = 2;
+    keyLight.shadow.camera.far = 160;
+    keyLight.shadow.camera.left = -MAP_HW - 6;
+    keyLight.shadow.camera.right = MAP_HW + 6;
+    keyLight.shadow.camera.top = MAP_HD + 6;
+    keyLight.shadow.camera.bottom = -MAP_HD - 6;
+    keyLight.shadow.bias = -0.0004;
+    keyLight.shadow.normalBias = 0.7;
+    scene.add(keyLight);
+    scene.add(keyLight.target);
+
+    const fill = new THREE.DirectionalLight(0x8fa6ff, 0.3);
+    fill.position.set(-28, 22, -22);
+    scene.add(fill);
 
     arenaGroup = new THREE.Group();
     actorsGroup = new THREE.Group();
@@ -162,13 +315,15 @@ export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean
 
     lampLights = [];
     for (let i = 0; i < MAX_LAMP_LIGHTS; i++) {
-      const pl = new THREE.PointLight(0xffd9a0, 0, 20, 2);
+      const pl = new THREE.PointLight(0xffd9a0, 0, 22, 2);
       pl.visible = false;
       scene.add(pl);
       lampLights.push(pl);
     }
 
-    const moteN = isCoarse ? 90 : 170;
+    addStars(isCoarse ? 320 : 700);
+
+    const moteN = isCoarse ? 90 : 180;
     const mpos = new Float32Array(moteN * 3);
     for (let i = 0; i < moteN; i++) {
       mpos[i * 3] = (Math.random() * 2 - 1) * MAP_HW;
@@ -179,7 +334,7 @@ export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean
     mgeo.setAttribute('position', new THREE.BufferAttribute(mpos, 3));
     motes = new THREE.Points(
       mgeo,
-      new THREE.PointsMaterial({ color: 0xfff3d6, size: 0.1, transparent: true, opacity: 0.45, depthWrite: false }),
+      new THREE.PointsMaterial({ color: 0xfff3d6, size: 0.09, transparent: true, opacity: 0.4, depthWrite: false }),
     );
     scene.add(motes);
 
@@ -190,6 +345,26 @@ export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean
     renderer = null;
   }
   return webglOk;
+}
+
+function addStars(n: number): void {
+  if (!scene) return;
+  const pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const r = 180 + Math.random() * 60;
+    const th = Math.random() * Math.PI * 2;
+    const ph = Math.random() * Math.PI * 0.5; // upper hemisphere
+    pos[i * 3] = Math.cos(th) * Math.sin(ph + 0.1) * r;
+    pos[i * 3 + 1] = Math.cos(ph) * r * 0.7 + 20;
+    pos[i * 3 + 2] = Math.sin(th) * Math.sin(ph + 0.1) * r;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const stars = new THREE.Points(
+    geo,
+    new THREE.PointsMaterial({ color: 0xdfe8ff, size: 1.1, sizeAttenuation: true, transparent: true, opacity: 0.9, depthWrite: false, fog: false }),
+  );
+  scene.add(stars);
 }
 
 export function resize(): void {
@@ -231,27 +406,33 @@ function addBlob(group: THREE.Group, r: number): void {
   if (!tex) return;
   const blob = new THREE.Mesh(
     new THREE.PlaneGeometry(r * 2.6, r * 2.6),
-    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.55 }),
+    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.5 }),
   );
   blob.rotation.x = -Math.PI / 2;
   blob.position.y = 0.03;
   group.add(blob);
 }
 
+function shadeMesh(mesh: THREE.Mesh, cast: boolean, receive: boolean): THREE.Mesh {
+  mesh.castShadow = cast;
+  mesh.receiveShadow = receive;
+  return mesh;
+}
+
 function makeProp(p: PropSpec): THREE.Object3D {
   const color = hsl(p.hue, 0.52, 0.5);
-  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0.05, flatShading: true });
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.82, metalness: 0.05, flatShading: true });
   const grp = new THREE.Group();
   grp.position.set(p.x, 0, p.z);
   const rnd = jitter(p.seed);
 
   if (p.kind === 'barrel') {
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(p.r, p.r * 0.92, p.h, 16), mat);
+    const body = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(p.r, p.r * 0.92, p.h, 18), mat), true, true);
     body.position.y = p.h / 2;
     grp.add(body);
-    const bandMat = new THREE.MeshStandardMaterial({ color: '#3a3128', roughness: 0.6, metalness: 0.4 });
-    for (const fy of [0.25, 0.75]) {
-      const band = new THREE.Mesh(new THREE.TorusGeometry(p.r * 1.01, 0.06, 6, 18), bandMat);
+    const bandMat = new THREE.MeshStandardMaterial({ color: '#3a3128', roughness: 0.5, metalness: 0.5 });
+    for (const fy of [0.22, 0.78]) {
+      const band = shadeMesh(new THREE.Mesh(new THREE.TorusGeometry(p.r * 1.01, 0.06, 6, 20), bandMat), true, false);
       band.rotation.x = Math.PI / 2;
       band.position.y = p.h * fy;
       grp.add(band);
@@ -264,49 +445,53 @@ function makeProp(p: PropSpec): THREE.Object3D {
       pos.setXYZ(i, pos.getX(i) * k, Math.max(0, pos.getY(i)) * k * 0.85, pos.getZ(i) * k);
     }
     geo.computeVertexNormals();
-    const rock = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color, roughness: 0.95, flatShading: true }));
+    const rock = shadeMesh(new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color, roughness: 0.95, flatShading: true })), true, true);
     rock.position.y = p.r * 0.5;
     grp.add(rock);
   } else if (p.kind === 'plant') {
-    const pot = new THREE.Mesh(
-      new THREE.CylinderGeometry(p.r * 0.6, p.r * 0.45, p.h * 0.35, 10),
-      new THREE.MeshStandardMaterial({ color: '#8a5a3a', roughness: 0.85, flatShading: true }),
+    const pot = shadeMesh(
+      new THREE.Mesh(
+        new THREE.CylinderGeometry(p.r * 0.6, p.r * 0.45, p.h * 0.35, 12),
+        new THREE.MeshStandardMaterial({ color: '#8a5a3a', roughness: 0.85, flatShading: true }),
+      ),
+      true,
+      true,
     );
     pot.position.y = p.h * 0.175;
     grp.add(pot);
-    for (let i = 0; i < 5; i++) {
-      const leafMat = new THREE.MeshStandardMaterial({
-        color: hsl(p.hue, 0.5, 0.42 + rnd() * 0.18),
-        roughness: 0.7,
-        flatShading: true,
-      });
-      const leaf = new THREE.Mesh(new THREE.ConeGeometry(p.r * 0.42, p.h * (0.7 + rnd() * 0.5), 5), leafMat);
-      const a = (i / 5) * Math.PI * 2 + rnd();
+    for (let i = 0; i < 6; i++) {
+      const leafMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.5, 0.42 + rnd() * 0.18), roughness: 0.65, flatShading: true });
+      const leaf = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(p.r * 0.42, p.h * (0.7 + rnd() * 0.5), 5), leafMat), true, false);
+      const a = (i / 6) * Math.PI * 2 + rnd();
       leaf.position.set(Math.cos(a) * p.r * 0.3, p.h * 0.55, Math.sin(a) * p.r * 0.3);
       leaf.rotation.set(0.5 - rnd(), a, 0.6 - rnd());
       grp.add(leaf);
     }
   } else if (p.kind === 'lamp') {
-    const post = new THREE.Mesh(
-      new THREE.CylinderGeometry(p.r * 0.16, p.r * 0.24, p.h, 8),
-      new THREE.MeshStandardMaterial({ color: '#2c2f37', roughness: 0.5, metalness: 0.6, flatShading: true }),
+    const post = shadeMesh(
+      new THREE.Mesh(
+        new THREE.CylinderGeometry(p.r * 0.16, p.r * 0.24, p.h, 10),
+        new THREE.MeshStandardMaterial({ color: '#2c2f37', roughness: 0.4, metalness: 0.7, flatShading: true }),
+      ),
+      true,
+      true,
     );
     post.position.y = p.h / 2;
     grp.add(post);
     const bulb = new THREE.Mesh(
-      new THREE.SphereGeometry(p.r * 0.5, 14, 10),
-      new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.4, roughness: 0.3 }),
+      new THREE.SphereGeometry(p.r * 0.5, 16, 12),
+      new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.8, roughness: 0.25 }),
     );
     bulb.position.y = p.h + p.r * 0.3;
     grp.add(bulb);
   } else {
-    const box = new THREE.Mesh(new THREE.BoxGeometry(p.r * 1.7, p.h, p.r * 1.7), mat);
+    const box = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(p.r * 1.7, p.h, p.r * 1.7), mat), true, true);
     box.position.y = p.h / 2;
     grp.add(box);
-    const frameMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.45, 0.34), roughness: 0.8, flatShading: true });
+    const frameMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.45, 0.32), roughness: 0.75, flatShading: true });
     const w = p.r * 1.74;
     for (const fy of [0.08, p.h - 0.08]) {
-      const f = new THREE.Mesh(new THREE.BoxGeometry(w, 0.14, w), frameMat);
+      const f = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(w, 0.14, w), frameMat), true, false);
       f.position.y = fy;
       grp.add(f);
     }
@@ -316,94 +501,185 @@ function makeProp(p: PropSpec): THREE.Object3D {
   return grp;
 }
 
-function makeWall(w: WallSeg): THREE.Mesh {
+// Wall built as a base box + baseboard + cornice cap, all casting/receiving.
+function makeWall(group: THREE.Group, w: WallSeg): void {
   const vertical = w.ax === w.bx;
-  const len = vertical ? Math.abs(w.bz - w.az) : Math.abs(w.bx - w.ax);
-  const geo = vertical
-    ? new THREE.BoxGeometry(WALL_T, WALL_H, len + WALL_T)
-    : new THREE.BoxGeometry(len + WALL_T, WALL_H, WALL_T);
-  const mat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.22, 0.4), roughness: 0.92, flatShading: true });
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.position.set((w.ax + w.bx) / 2, WALL_H / 2, (w.az + w.bz) / 2);
-  return mesh;
+  const len = (vertical ? Math.abs(w.bz - w.az) : Math.abs(w.bx - w.ax)) + WALL_T;
+  const mid = new THREE.Vector3((w.ax + w.bx) / 2, 0, (w.az + w.bz) / 2);
+  const dimX = vertical ? WALL_T : len;
+  const dimZ = vertical ? len : WALL_T;
+
+  const wallMat = new THREE.MeshStandardMaterial({
+    color: hsl(WALL_HUE, 0.2, 0.46),
+    roughness: 0.94,
+    metalness: 0.02,
+    map: wallTex?.map ?? null,
+    bumpMap: wallTex?.bump ?? null,
+    bumpScale: 0.04,
+  });
+  const body = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX, WALL_H, dimZ), wallMat), true, true);
+  body.position.set(mid.x, WALL_H / 2, mid.z);
+  group.add(body);
+
+  const baseMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.18, 0.26), roughness: 0.85 });
+  const base = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX + 0.16, BASEBOARD_H, dimZ + 0.16), baseMat), true, true);
+  base.position.set(mid.x, BASEBOARD_H / 2, mid.z);
+  group.add(base);
+
+  const capMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.16, 0.58), roughness: 0.7 });
+  const cap = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX + 0.2, CORNICE_H, dimZ + 0.2), capMat), true, false);
+  cap.position.set(mid.x, WALL_H - CORNICE_H / 2, mid.z);
+  group.add(cap);
+}
+
+// Square corner pillar at every grid-line intersection — hides wall seams and
+// gives the rooms architectural structure.
+function makePillar(group: THREE.Group, x: number, z: number): void {
+  const mat = new THREE.MeshStandardMaterial({
+    color: hsl(WALL_HUE, 0.22, 0.4),
+    roughness: 0.9,
+    map: wallTex?.map ?? null,
+    bumpMap: wallTex?.bump ?? null,
+    bumpScale: 0.04,
+  });
+  const shaft = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(PILLAR_T, WALL_H + 0.3, PILLAR_T), mat), true, true);
+  shaft.position.set(x, (WALL_H + 0.3) / 2, z);
+  group.add(shaft);
+  const capMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.16, 0.6), roughness: 0.6 });
+  const cap = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(PILLAR_T + 0.3, 0.45, PILLAR_T + 0.3), capMat), true, false);
+  cap.position.set(x, WALL_H + 0.3 + 0.1, z);
+  group.add(cap);
+}
+
+// Lintel above a doorway so the opening reads as a doorway and nothing gaps to
+// the sky over the passage.
+function makeLintel(group: THREE.Group, x: number, z: number, horizontal: boolean): void {
+  const h = WALL_H - DOOR_H;
+  const mat = new THREE.MeshStandardMaterial({
+    color: hsl(WALL_HUE, 0.2, 0.44),
+    roughness: 0.94,
+    map: wallTex?.map ?? null,
+    bumpMap: wallTex?.bump ?? null,
+    bumpScale: 0.04,
+  });
+  const dimX = horizontal ? DOOR_W + 0.4 : WALL_T;
+  const dimZ = horizontal ? WALL_T : DOOR_W + 0.4;
+  const lintel = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(dimX, h, dimZ), mat), true, true);
+  lintel.position.set(x, DOOR_H + h / 2, z);
+  group.add(lintel);
+  // a slim header beam under the lintel for trim
+  const beamMat = new THREE.MeshStandardMaterial({ color: hsl(WALL_HUE, 0.18, 0.3), roughness: 0.7 });
+  const beam = shadeMesh(
+    new THREE.Mesh(new THREE.BoxGeometry(dimX + 0.1, 0.22, dimZ + 0.1), beamMat),
+    true,
+    false,
+  );
+  beam.position.set(x, DOOR_H - 0.05, z);
+  group.add(beam);
 }
 
 function makeChameleon(hue: number, isSeeker: boolean): ActorView {
   const group = new THREE.Group();
+  const bump = getScaleBump();
   const skin = new THREE.MeshStandardMaterial({
     color: hsl(hue, 0.6, 0.52),
-    roughness: 0.55,
-    metalness: 0.05,
-    flatShading: true,
+    roughness: 0.5,
+    metalness: 0.04,
     transparent: true,
     opacity: 1,
+    bumpMap: bump ?? null,
+    bumpScale: 0.015,
   });
 
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.5, 14, 12), skin);
-  body.scale.set(0.95, 0.82, 1.5);
-  body.position.y = 0.5;
+  // Smoothly-shaded tapered body (single mesh — no seams).
+  const body = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.5, 20, 16), skin), false, true);
+  body.scale.set(0.95, 0.82, 1.52);
+  body.position.y = 0.52;
   group.add(body);
+  // belly fill so legs meet the body with no gap
+  const belly = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.42, 16, 12), skin), false, true);
+  belly.scale.set(1, 0.7, 1.3);
+  belly.position.y = 0.4;
+  group.add(belly);
 
-  for (let i = 0; i < 6; i++) {
-    const t = i / 5;
-    const spike = new THREE.Mesh(
-      new THREE.ConeGeometry(0.09, 0.24 - t * 0.1, 4),
-      isSeeker ? new THREE.MeshStandardMaterial({ color: '#ef4444', flatShading: true }) : skin,
-    );
-    spike.position.set(0, 0.9 - t * 0.16, 0.42 - t * 0.82);
-    group.add(spike);
+  // Dorsal crest — overlapping fins along the spine.
+  const crestMat = isSeeker ? new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5, flatShading: true }) : skin;
+  for (let i = 0; i < 9; i++) {
+    const t = i / 8;
+    const fin = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.1 - t * 0.03, 0.26 - t * 0.12, 4), crestMat), false, false);
+    fin.position.set(0, 0.92 - t * 0.18, 0.5 - t * 1.0);
+    group.add(fin);
   }
 
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.36, 14, 12), skin);
-  head.scale.set(1, 0.92, 1.12);
-  head.position.set(0, 0.66, 0.86);
+  // Neck + head, overlapping the body.
+  const neck = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12), skin), false, true);
+  neck.scale.set(0.9, 0.85, 1);
+  neck.position.set(0, 0.6, 0.7);
+  group.add(neck);
+  const head = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.36, 18, 14), skin), false, true);
+  head.scale.set(1, 0.95, 1.16);
+  head.position.set(0, 0.68, 0.92);
   group.add(head);
-  const casque = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.34, 5), skin);
-  casque.position.set(0, 0.92, 0.74);
-  casque.rotation.x = -0.5;
+  const snout = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), skin), false, true);
+  snout.scale.set(0.9, 0.8, 1.2);
+  snout.position.set(0, 0.6, 1.18);
+  group.add(snout);
+  const casque = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.4, 6), skin), false, false);
+  casque.position.set(0, 0.96, 0.78);
+  casque.rotation.x = -0.55;
   group.add(casque);
 
+  // Turret eyes (independently swivel).
   const eyes: THREE.Group[] = [];
-  const eyeMat = new THREE.MeshStandardMaterial({ color: '#15181f', roughness: 0.4, flatShading: true });
+  const eyeMat = new THREE.MeshStandardMaterial({ color: '#15181f', roughness: 0.35 });
   const pupilMat = new THREE.MeshBasicMaterial({ color: isSeeker ? '#fca5a5' : '#fde68a' });
   for (const sx of [-1, 1]) {
     const eg = new THREE.Group();
-    eg.position.set(0.26 * sx, 0.78, 0.84);
-    const turret = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 10), skin);
+    eg.position.set(0.27 * sx, 0.8, 0.86);
+    const turret = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), skin), false, false);
     eg.add(turret);
-    const ball = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 10), eyeMat);
-    ball.position.set(0.1 * sx, 0, 0.02);
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), eyeMat);
+    ball.position.set(0.11 * sx, 0, 0.02);
     eg.add(ball);
-    const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), pupilMat);
-    pupil.position.set(0.16 * sx, 0, 0.03);
+    const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), pupilMat);
+    pupil.position.set(0.17 * sx, 0, 0.03);
     eg.add(pupil);
     group.add(eg);
     eyes.push(eg);
   }
 
+  // Curled prehensile tail (overlapping spheres).
   const tail = new THREE.Group();
-  tail.position.set(0, 0.46, -0.82);
-  for (let i = 0; i < 8; i++) {
-    const seg = new THREE.Mesh(new THREE.SphereGeometry(0.17 - i * 0.019, 8, 7), skin);
-    const a = i * 0.6;
-    const rad = 0.5 - i * 0.045;
-    seg.position.set(Math.sin(a) * rad * 0.4, Math.sin(a * 0.5) * 0.1, -i * 0.14 + (1 - Math.cos(a)) * rad * 0.5);
+  tail.position.set(0, 0.48, -0.8);
+  for (let i = 0; i < 10; i++) {
+    const seg = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.18 - i * 0.015, 10, 8), skin), false, false);
+    const a = i * 0.62;
+    const rad = 0.55 - i * 0.04;
+    seg.position.set(Math.sin(a) * rad * 0.35, Math.sin(a * 0.6) * 0.12, -i * 0.13 + (1 - Math.cos(a)) * rad * 0.5);
     tail.add(seg);
   }
   group.add(tail);
 
-  const legGeo = new THREE.CylinderGeometry(0.09, 0.06, 0.5, 6);
-  for (const [lx, lz] of [[-0.4, 0.46], [0.4, 0.46], [-0.4, -0.36], [0.4, -0.36]] as const) {
-    const leg = new THREE.Mesh(legGeo, skin);
-    leg.position.set(lx, 0.22, lz);
-    leg.rotation.z = lx < 0 ? 0.3 : -0.3;
-    group.add(leg);
+  // Legs: thigh + shin + gripping foot, meeting the body.
+  for (const [lx, lz, sgn] of [[-0.36, 0.5, -1], [0.36, 0.5, 1], [-0.36, -0.34, -1], [0.36, -0.34, 1]] as const) {
+    const thigh = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.08, 0.42, 8), skin), false, false);
+    thigh.position.set(lx, 0.34, lz);
+    thigh.rotation.z = sgn * 0.5;
+    group.add(thigh);
+    const shin = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.34, 8), skin), false, false);
+    shin.position.set(lx + sgn * 0.18, 0.12, lz);
+    shin.rotation.z = sgn * -0.3;
+    group.add(shin);
+    const foot = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), skin), false, false);
+    foot.scale.set(1.4, 0.6, 1.2);
+    foot.position.set(lx + sgn * 0.26, 0.04, lz);
+    group.add(foot);
   }
 
   const blobTex = getBlobTexture();
   const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.8, 1.8),
-    new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.5, depthWrite: false }),
+    new THREE.PlaneGeometry(1.9, 1.9),
+    new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.45, depthWrite: false }),
   );
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.04;
@@ -416,8 +692,8 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
   tongue.visible = false;
   group.add(tongue);
   const tongueTip = new THREE.Mesh(
-    new THREE.SphereGeometry(0.14, 8, 8),
-    new THREE.MeshBasicMaterial({ color: '#fb7185' }),
+    new THREE.SphereGeometry(0.15, 10, 10),
+    new THREE.MeshStandardMaterial({ color: '#fb7185', emissive: '#f43f5e', emissiveIntensity: 0.5 }),
   );
   tongueTip.visible = false;
   group.add(tongueTip);
@@ -427,21 +703,31 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
 
 export function buildArena(world: World): void {
   if (!webglOk || !arenaGroup || !actorsGroup) return;
+  if (!floorTex) floorTex = makeFloorTextures();
+  if (!wallTex) wallTex = makeWallTextures();
 
   disposeGroup(arenaGroup);
-  const floorTex = makeFloorTexture();
-  const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(MAP_HW * 2, MAP_HD * 2),
-    new THREE.MeshStandardMaterial({
-      map: floorTex ?? undefined,
-      color: floorTex ? 0xffffff : hsl(FLOOR_HUE, 0.32, 0.4),
-      roughness: 0.95,
-    }),
-  );
+
+  const floorMat = new THREE.MeshStandardMaterial({
+    map: floorTex?.map ?? null,
+    bumpMap: floorTex?.bump ?? null,
+    bumpScale: 0.03,
+    color: floorTex ? 0xffffff : hsl(FLOOR_HUE, 0.32, 0.4),
+    roughness: 0.92,
+    metalness: 0.02,
+  });
+  const floor = shadeMesh(new THREE.Mesh(new THREE.PlaneGeometry(MAP_HW * 2, MAP_HD * 2), floorMat), false, true);
   floor.rotation.x = -Math.PI / 2;
   arenaGroup.add(floor);
 
-  for (const w of world.walls) arenaGroup.add(makeWall(w));
+  for (const w of world.walls) makeWall(arenaGroup, w);
+  for (let cx = 0; cx <= GRID_COLS; cx++) {
+    for (let cz = 0; cz <= GRID_ROWS; cz++) {
+      makePillar(arenaGroup, -MAP_HW + ROOM * cx, -MAP_HD + ROOM * cz);
+    }
+  }
+  for (const d of buildDoorways()) makeLintel(arenaGroup, d.x, d.z, d.horizontal);
+
   for (const p of world.props) arenaGroup.add(makeProp(p));
 
   const lamps = world.props.filter((p) => p.kind === 'lamp');
@@ -450,8 +736,8 @@ export function buildArena(world: World): void {
     const lp = lamps[i];
     if (lp) {
       pl.visible = true;
-      pl.color.copy(hsl(lp.hue, 0.5, 0.55));
-      pl.intensity = 14;
+      pl.color.copy(hsl(lp.hue, 0.5, 0.6));
+      pl.intensity = 16;
       pl.position.set(lp.x, lp.h + lp.r * 0.3, lp.z);
     } else {
       pl.visible = false;
@@ -485,7 +771,7 @@ export function render(
 ): void {
   if (!webglOk || !renderer || !scene || !camera) return;
   const now = performance.now() / 1000;
-  if (motes) motes.rotation.y += dt * 0.015;
+  if (motes) motes.rotation.y += dt * 0.012;
 
   const fpv = (world.status === 'prep' || world.status === 'hunt') && actorViews.has(myId);
 
@@ -522,8 +808,8 @@ export function render(
     if (p.role === 'hider' && !p.caught) opacity = Math.max(0.12, p.visible);
     view.skin.opacity = opacity;
     view.group.rotation.z = p.caught ? Math.PI * 0.12 : 0;
-    view.body.position.y = p.caught ? 0.35 : 0.5;
-    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.45 * Math.max(0.25, opacity);
+    view.body.position.y = p.caught ? 0.37 : 0.52;
+    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.42 * Math.max(0.25, opacity);
 
     if (view.isSeeker && p.tongue && !p.caught) {
       const len = Math.max(0.01, p.tongue.len);
@@ -554,10 +840,9 @@ export function render(
     camera.lookAt(scratchLook);
     camInit = true;
   } else {
-    // Elevated orbit overview of the whole map (menu / lobby / results).
-    menuAngle += dt * 0.1;
-    const rad = Math.max(MAP_HW, MAP_HD) * 1.3;
-    scratchCam.set(Math.sin(menuAngle) * rad, Math.max(MAP_HW, MAP_HD) * 0.9, Math.cos(menuAngle) * rad);
+    menuAngle += dt * 0.09;
+    const rad = Math.max(MAP_HW, MAP_HD) * 1.35;
+    scratchCam.set(Math.sin(menuAngle) * rad, Math.max(MAP_HW, MAP_HD) * 0.95, Math.cos(menuAngle) * rad);
     camera.position.lerp(scratchCam, camInit ? Math.min(1, dt * 0.8) : 1);
     camera.lookAt(0, 0.5, 0);
     camInit = true;

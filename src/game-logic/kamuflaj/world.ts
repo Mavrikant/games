@@ -135,6 +135,34 @@ export function buildWalls(): WallSeg[] {
   return w;
 }
 
+/** Doorway openings (centres) in the interior walls — used by the renderer to
+ *  build lintels, door frames and corner pillars. Mirrors buildWalls() exactly,
+ *  so geometry can never drift from collision. `horizontal` = the wall runs
+ *  along x (the opening spans x); otherwise the wall runs along z. */
+export interface Doorway {
+  x: number;
+  z: number;
+  horizontal: boolean;
+}
+export function buildDoorways(): Doorway[] {
+  const d: Doorway[] = [];
+  const HW = MAP_HW;
+  const HD = MAP_HD;
+  for (let c = 1; c < GRID_COLS; c++) {
+    const x = -HW + ROOM * c;
+    for (let r = 0; r < GRID_ROWS; r++) {
+      d.push({ x, z: -HD + ROOM * r + ROOM / 2, horizontal: false });
+    }
+  }
+  for (let r = 1; r < GRID_ROWS; r++) {
+    const z = -HD + ROOM * r;
+    for (let c = 0; c < GRID_COLS; c++) {
+      d.push({ x: -HW + ROOM * c + ROOM / 2, z, horizontal: true });
+    }
+  }
+  return d;
+}
+
 /** Closest distance from a point to an axis-aligned wall segment. */
 function distToWall(x: number, z: number, w: WallSeg): number {
   const cx = Math.max(Math.min(w.ax, w.bx), Math.min(Math.max(w.ax, w.bx), x));
@@ -328,10 +356,13 @@ function collideWalls(world: World, p: Player): void {
 
 function moveAndCollide(world: World, p: Player, speed: number, dt: number): void {
   const { fwd, strafe, yaw } = p.input;
+  // Basis matching the FPV camera (three.js lookAt): forward = (sin yaw, cos yaw),
+  // camera-right = (-cos yaw, sin yaw). Using +cos/-sin here inverts strafe, so
+  // the right vector must be negated (pitfall: strafe-mirrored).
   const fx = Math.sin(yaw);
   const fz = Math.cos(yaw);
-  const rx = Math.cos(yaw);
-  const rz = -Math.sin(yaw);
+  const rx = -Math.cos(yaw);
+  const rz = Math.sin(yaw);
   const dx = fx * fwd + rx * strafe;
   const dz = fz * fwd + rz * strafe;
   const m = Math.hypot(dx, dz);
