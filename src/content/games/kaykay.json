@@ -1,0 +1,21 @@
+{
+  "title": "Kaykay",
+  "description": "Rampaya gir, havadayken Boşluk'u basılı tut — tahta dönsün; doğru anda bırak — tekerlek üstüne in. Her tam dönüş +puan; tahtanın yüzü yukarıdayken yere değersen düşersin.",
+  "dateAdded": "2026-06-18",
+  "tags": ["arcade", "özgün", "zamanlama", "refleks"],
+  "controls": "Boşluk veya tıkla: havadayken döndür (basılı tut) · Bırak: dönüşü durdur · R: yeniden başla",
+  "thumbnail": "kaykay.svg",
+  "howToPlay": "Kaykay, kickflip yapan kaykaycının havadaki dönüş anını yöneten bir zamanlama oyunudur. Kaykaycı ekranda soldan sağa sabit hızla kayar; sağdan üzerine bir rampa gelir ve değdiği an havalanır. Havadayken Boşluk'u basılı tutarsan (veya alana parmağını/farenin tuşunu basılı tutarsan) tahta kendi uzun ekseni etrafında dönmeye başlar — her tam 360° bir 'flip' sayılır ve havadaki sayaç onu canlı gösterir. Doğru anda bırakırsan dönüş orada donar; yere indiğin an tahtanın açısı 360°'nin (yani tekerlekler aşağı) ±22° toleransına denk gelmelidir. Temiz iniş çıkardığın flip sayısı kadar puan getirir: 0 flip + temiz = 1 puan (sade ollie), 1 flip = 2, 2 flip = 4, ve böyle ikişer artar. Tahtanın yüzü yukarıdayken yere değdin mi düşersin — bir can gider. Üç canın da bittiğinde oyun biter. Skor arttıkça rampalar daha hızlı gelir ve dönüş hızı yükselir, böylece aynı sürede daha çok flip mümkün ama doğru anı yakalamak daha zor. Hava-süresi her atlayışta sabittir, bu yüzden ilk birkaç rampada bir flip için ne kadar Boşluk tutman gerektiğini ezberle; sonra iki ve üç fliplere terfi et. R tuşu her zaman sıfırlar; Yeniden başla butonu da aynı işi yapar. Strateji: önce sıfırdan başlayıp tek flip ritmini bul, ondan sonra art arda iki flip atmaya geç — geç bıraktığında tahta üst tarafta gelir, erken bıraktığında zaten 180°'yi geçmemişsindir; iki uçtan birinde takıldığında bir ramparda sade bir ollie at, can kazanmazsın ama can kaybetmezsin.",
+  "scoring": {
+    "storageKey": "kaykay.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Kickflip",
+    "description": "Roll into the ramp, hold Space mid-air so the deck spins, release at just the right moment so the wheels land down. Every full flip scores; landing deck-up wipes you out.",
+    "controls": "Space or click (hold): spin the deck while airborne · Release: lock the rotation · R: restart",
+    "howToPlay": "Kickflip is a timing game about controlling the rotation of a skateboard deck during a trick. The skater rolls left to right at a constant speed; a ramp slides in from the right and the moment the skater hits it they launch into the air. While airborne, hold Space (or hold the pointer down on the board) and the deck starts spinning around its long axis — every full 360° counts as one flip, and the live counter above the skater shows the running tally. Releasing locks the rotation in place; when the wheels touch down the deck's angle must be within ±22° of a multiple of 360° (i.e. wheels-down). A clean landing scores points equal to flips: 0 flips clean = 1 (plain ollie), 1 flip = 2, 2 flips = 4, scaling by two. Land deck-up and you bail — you lose a life. Three bails and the run ends. As your score rises the ramps come faster and the spin rate increases, so packing more flips into the same air time becomes both possible and harder to time. Air time is fixed every jump, so spend the first few ramps memorising how long to hold Space for one flip; then push for two and three. R always resets; the Restart button does the same. Strategy: warm up with single-flip rhythm, then climb to doubles only after it's consistent — releasing late means you blow past 360°, releasing early means you never reached it. Whenever you're unsure, fall back to a plain ollie: it costs no progress but keeps your lives."
+  }
+}
