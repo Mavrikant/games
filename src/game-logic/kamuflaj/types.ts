@@ -2,7 +2,7 @@
 // three.js types) so world.ts runs — and the smoke test passes — even when
 // WebGL is unavailable.
 
-export type Mode = 'idle' | 'bots' | 'online-host' | 'online-guest';
+export type Mode = 'idle' | 'online-host' | 'online-guest';
 
 export type Role = 'hider' | 'seeker';
 
@@ -15,14 +15,23 @@ export type Status =
   | 'hunt'
   | 'over';
 
-// One normalized input frame per player. `fire` is an edge (consumed by the
-// sim and cleared); movement is level-triggered.
+// One normalized input frame per player, in first-person terms. `fire` is an
+// edge (consumed by the sim and cleared); movement + facing are level-triggered.
 export interface InputState {
-  mx: number; // move direction x, -1..1
-  mz: number; // move direction z, -1..1
-  aimX: number; // world-space aim point (seeker tongue / facing)
-  aimZ: number;
+  fwd: number; // forward/back relative to facing, -1..1
+  strafe: number; // left/right relative to facing, -1..1
+  yaw: number; // look direction (radians); movement + tongue are relative to it
   fire: boolean; // edge: action pressed this frame
+}
+
+// An axis-aligned wall segment (either vertical x=const or horizontal z=const).
+// Deterministic from the grid constants, so both peers compute the same map and
+// it never needs serialising.
+export interface WallSeg {
+  ax: number;
+  az: number;
+  bx: number;
+  bz: number;
 }
 
 export type PropKind = 'crate' | 'barrel' | 'plant' | 'rock' | 'lamp';
@@ -78,6 +87,7 @@ export interface World {
   t: number; // sim seconds since the current phase began
   phaseLeft: number; // seconds remaining in countdown/prep/hunt
   props: PropSpec[];
+  walls: WallSeg[];
   players: Player[];
   feed: string[]; // newest first, FEED_MAX entries
   winner: '' | 'hider' | 'seeker' | null; // '' = nobody hidden & nobody caught edge
@@ -116,9 +126,8 @@ export interface StartMsg {
 }
 
 export interface InputMsg {
-  mx: number;
-  mz: number;
-  ax: number;
-  az: number;
+  f: number; // fwd
+  s: number; // strafe
+  y: number; // yaw
   fire: boolean;
 }

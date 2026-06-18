@@ -111,10 +111,9 @@ export function decodeStart(data: unknown): StartMsg | null {
 
 export function encodeInput(input: InputState): InputMsg {
   return {
-    mx: round2(input.mx),
-    mz: round2(input.mz),
-    ax: round2(input.aimX),
-    az: round2(input.aimZ),
+    f: round2(input.fwd),
+    s: round2(input.strafe),
+    y: round2(input.yaw),
     fire: input.fire,
   };
 }
@@ -122,12 +121,11 @@ export function encodeInput(input: InputState): InputMsg {
 export function decodeInput(data: unknown): InputMsg | null {
   if (typeof data !== 'object' || data === null) return null;
   const d = data as Partial<InputMsg>;
-  if (!num(d.mx) || !num(d.mz) || !num(d.ax) || !num(d.az)) return null;
+  if (!num(d.f) || !num(d.s) || !num(d.y)) return null;
   return {
-    mx: Math.max(-1, Math.min(1, d.mx)),
-    mz: Math.max(-1, Math.min(1, d.mz)),
-    ax: d.ax,
-    az: d.az,
+    f: Math.max(-1, Math.min(1, d.f)),
+    s: Math.max(-1, Math.min(1, d.s)),
+    y: d.y,
     fire: d.fire === true,
   };
 }

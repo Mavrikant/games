@@ -25,13 +25,17 @@
 
     <ul id="feed" class="km-feed"></ul>
 
+    <!-- FPV crosshair (visible only while playing) -->
+    <div id="crosshair" class="km-crosshair" aria-hidden="true"></div>
+
     <!-- Phase banner -->
     <div id="banner" class="km-banner km-banner--hidden" aria-live="polite">
       <div id="banner-title" class="km-banner__title">—</div>
       <div id="banner-sub" class="km-banner__sub">—</div>
     </div>
 
-    <!-- Touch controls: shown only on coarse pointers via CSS. -->
+    <!-- Touch controls: shown only on coarse pointers via CSS. Left half =
+         move joystick, right half drag = look, button = act. -->
     <div id="stick" class="km-stick"><div id="stick-nub" class="km-stick__nub"></div></div>
     <button id="action" class="km-action" type="button" aria-label="Damlalık / Dil">Damlalık</button>
 
@@ -61,6 +65,7 @@
         <!-- Menu actions -->
         <div id="menu-actions" class="km-actions">
           <button id="create" class="km-btn km-btn--primary" type="button">Oda Oluştur</button>
+          <button id="join" class="km-btn km-btn--primary" type="button" style="display:none">Odaya Katıl</button>
         </div>
 
         <!-- Lobby panel (host shares + starts; guest waits) -->

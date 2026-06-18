@@ -18,7 +18,16 @@ import {
   SNAP_MS,
   seekerCountFor,
 } from './kamuflaj/constants';
-import { freshInput, freshWorld, makePlayer, seatPlayers, setupMatch, step } from './kamuflaj/world';
+import {
+  buildWalls,
+  freshInput,
+  freshWorld,
+  makePlayer,
+  predictLocal,
+  seatPlayers,
+  setupMatch,
+  step,
+} from './kamuflaj/world';
 import {
   decodeHello,
   decodeInput,
@@ -35,16 +44,15 @@ import {
   render as renderScene,
   resetCamera,
   resize as resizeScene,
-  toWorld,
 } from './kamuflaj/scene';
 import { createLocalInput } from './kamuflaj/input';
 import type { LocalInput } from './kamuflaj/input';
 import type { Player, Role, Snapshot, Status, World } from './kamuflaj/types';
 
-// 3D multiplayer chameleon hide-and-seek. Hiders paint their skin to the colour
-// of nearby props and freeze to vanish; seekers hunt them with a sticky tongue.
-// Online-only: host-authoritative rooms over @shared/realtime-channel, real
-// players gathered in a lobby (no AI). Needs the realtime backend configured.
+// First-person 3D multiplayer chameleon hide-and-seek across a grid of rooms.
+// Hiders paint their skin to nearby surfaces and freeze; seekers roam room to
+// room and lash a sticky tongue. Online-only host-authoritative rooms over
+// @shared/realtime-channel (real players, no AI). Needs the realtime backend.
 
 const STORAGE_BEST = 'kamuflaj.best';
 const STORAGE_NAME = 'kamuflaj.name';
@@ -55,7 +63,6 @@ const SCORE_DESC: ScoreDescriptor = {
   direction: 'higher',
 };
 
-// Distinct identity hues per slot (slot 0 = the room host).
 const PALETTE = [120, 22, 200, 285, 52, 330];
 
 type Mode = 'idle' | 'online-host' | 'online-guest';
@@ -71,16 +78,17 @@ let world: World = freshWorld();
 let mode: Mode = 'idle';
 let room: ChannelHandle | null = null;
 let roomCode = '';
-let started = false; // host: has a match begun?
+let started = false;
 let myId = 'me';
 let myName = 'Sen';
 let chosenRole: Role = 'hider';
 let best = 0;
 let halted = false;
 let lobbyCount = 1;
+let pendingJoinCode = ''; // set when arriving via ?room= (guest must name + join)
 
 const guestNames = new Map<string, string>();
-let gotStart = false; // guest: ignore snapshots until the host's 'start'
+let gotStart = false;
 let lastSnapAt = 0;
 let lastInputAt = 0;
 let simAcc = 0;
@@ -117,6 +125,7 @@ let roleHideBtn!: HTMLButtonElement;
 let roleSeekBtn!: HTMLButtonElement;
 let menuActions!: HTMLElement;
 let createBtn!: HTMLButtonElement;
+let joinBtn!: HTMLButtonElement;
 let shareBox!: HTMLElement;
 let shareRowWrap!: HTMLElement;
 let shareLinkInput!: HTMLInputElement;
@@ -161,8 +170,16 @@ function saveName(): void {
   }
 }
 
-/** Assign roles among the real players present, exactly seekerCountFor(n)
- *  seekers (honouring each player's preference first), the rest hiders. */
+function isPlaying(): boolean {
+  return world.status === 'prep' || world.status === 'hunt';
+}
+
+/** Seed the look direction from the local player's spawn facing, once per match. */
+function seedLook(): void {
+  const me = myPlayer();
+  if (me) input.setLook(me.yaw, 0);
+}
+
 function assignRoster(humans: { id: string; name: string; prefer: Role }[]): Seat[] {
   const n = humans.length;
   const need = seekerCountFor(n);
@@ -188,7 +205,6 @@ function assignRoster(humans: { id: string; name: string; prefer: Role }[]): Sea
   }));
 }
 
-/** Host: build a roster from everyone currently in the room (self first). */
 function rosterFromMembers(): Seat[] {
   if (!room) return assignRoster([{ id: myId, name: myName, prefer: chosenRole }]);
   const ids = room.members();
@@ -204,8 +220,6 @@ function rosterFromMembers(): Seat[] {
 
 // ---- match flow -------------------------------------------------------------
 
-/** Menu backdrop: an empty, softly-lit room (no AI players) slowly orbited by
- *  the camera so the page shows the arena immediately (pitfall: invisible-boot). */
 function startAttract(): void {
   world = freshWorld();
   world.mode = 'idle';
@@ -223,6 +237,7 @@ function beginMatch(roster: Seat[]): void {
   lastShownStatus = null;
   buildArena(world);
   resetCamera();
+  seedLook();
   if (mode === 'online-host' && room) room.send('start', encodeStart(world));
 }
 
@@ -253,10 +268,10 @@ function addFeed(line: string): void {
   if (world.feed.length > 3) world.feed.length = 3;
 }
 
-/** Drop back to the menu with an explanatory message (network-failure paths). */
 function menuWithMessage(title: string, msg: string, status: string): void {
   teardownRoom();
   mode = 'idle';
+  pendingJoinCode = '';
   netTargets.clear();
   startAttract();
   overlayTitle.textContent = title;
@@ -268,8 +283,6 @@ function menuWithMessage(title: string, msg: string, status: string): void {
 
 // ---- host: room + lobby -----------------------------------------------------
 
-/** Host: a guest left. In the lobby just drop the count; mid-match remove the
- *  player so the match can still resolve. */
 function dropMember(id: string): void {
   guestNames.delete(id);
   if (started) {
@@ -292,6 +305,7 @@ async function createRoom(): Promise<void> {
     );
     return;
   }
+  if (input.isCoarse && !fsActive()) enterFullscreen();
   teardownRoom();
   mode = 'online-host';
   roomCode = randomCode();
@@ -319,10 +333,9 @@ async function createRoom(): Promise<void> {
           const msg = decodeInput(data);
           const c = world.players.find((cr) => cr.id === from);
           if (msg && c) {
-            c.input.mx = msg.mx;
-            c.input.mz = msg.mz;
-            c.input.aimX = msg.ax;
-            c.input.aimZ = msg.az;
+            c.input.fwd = msg.f;
+            c.input.strafe = msg.s;
+            c.input.yaw = msg.y;
             if (msg.fire) c.input.fire = true;
           }
         }
@@ -359,6 +372,7 @@ async function createRoom(): Promise<void> {
 function hostStart(): void {
   if (mode !== 'online-host' || !room) return;
   if (lobbyCount < MIN_PLAYERS) return;
+  if (!fsActive()) enterFullscreen();
   started = true;
   beginMatch(rosterFromMembers());
 }
@@ -372,6 +386,7 @@ function applyStart(data: unknown): void {
   if (!start) return;
   world = freshWorld();
   world.mode = 'online-guest';
+  world.walls = buildWalls(); // deterministic — identical to the host's map
   world.props = start.props;
   world.players = start.roster.map((r) => makePlayer(r.id, r.name, r.role, r.hue));
   seatPlayers(world);
@@ -380,6 +395,7 @@ function applyStart(data: unknown): void {
   netTargets.clear();
   buildArena(world);
   resetCamera();
+  seedLook();
   reportedOver = false;
   lastShownStatus = null;
 }
@@ -391,7 +407,6 @@ function applySnapshot(snap: Snapshot): void {
   world.winner = snap.wn;
   const ids = new Set(snap.pr.map((p) => p.id));
   let structural = false;
-  // Prune players who left the host's world.
   for (let i = world.players.length - 1; i >= 0; i--) {
     if (!ids.has(world.players[i]!.id)) {
       netTargets.delete(world.players[i]!.id);
@@ -422,10 +437,11 @@ function applySnapshot(snap: Snapshot): void {
   if (structural) buildArena(world);
 }
 
-/** Guest render integration: ease each player onto its last snapshot pose. */
+/** Ease the OTHER players onto their last snapshot pose (self is predicted). */
 function easeGuestPlayers(dt: number): void {
   const k = Math.min(1, dt * 9);
   for (const c of world.players) {
+    if (c.id === myId) continue;
     const t = netTargets.get(c.id);
     if (!t) continue;
     c.x += (t.x - c.x) * k;
@@ -496,6 +512,24 @@ async function joinRoomAsGuest(code: string): Promise<void> {
   syncOverlay(true);
 }
 
+/** Guest entry point from the "Katıl" gesture: name + fullscreen + join. */
+function joinViaPanel(): void {
+  if (!pendingJoinCode) return;
+  saveName();
+  if (!channelEnabled()) {
+    menuWithMessage(
+      'Sunucu gerekli',
+      'Bu bağlantı çevrimiçi bir oda içindi ama sunucu yapılandırılmamış.',
+      '⚠️ Sunucu yapılandırılmamış',
+    );
+    return;
+  }
+  if (!fsActive()) enterFullscreen();
+  const code = pendingJoinCode;
+  pendingJoinCode = '';
+  void joinRoomAsGuest(code);
+}
+
 // ---- overlay / lobby / banner ----------------------------------------------
 
 function show(el: HTMLElement, cls: string): void {
@@ -513,20 +547,22 @@ function syncRoleToggle(): void {
 function showMenuPanels(): void {
   hide(shareBox, 'km-share--hidden');
   hide(overPanel, 'km-over--hidden');
-  if (channelEnabled()) {
-    show(menuActions, 'km-actions--hidden');
-    show(roleToggle, 'km-role--hidden');
-    nameInput.style.display = '';
-  } else {
-    // No realtime backend → multiplayer can't run here.
+  if (!channelEnabled()) {
     hide(menuActions, 'km-actions--hidden');
     hide(roleToggle, 'km-role--hidden');
     nameInput.style.display = 'none';
+    return;
   }
+  show(menuActions, 'km-actions--hidden');
+  nameInput.style.display = '';
+  const joining = pendingJoinCode !== '';
+  // Guests joining a link choose only a name; the host assigns roles.
+  roleToggle.classList.toggle('km-role--hidden', joining);
+  createBtn.style.display = joining ? 'none' : '';
+  joinBtn.style.display = joining ? '' : 'none';
   syncRoleToggle();
 }
 
-/** Refresh the live lobby panel (player count + host's start button). */
 function syncLobby(): void {
   lobbyCountEl.textContent = `${lobbyCount}/${MAX_HUMANS}`;
   if (mode === 'online-host') {
@@ -550,7 +586,11 @@ function syncOverlay(force = false): void {
   if (!force && st === lastShownStatus) return;
 
   if (st === 'menu') {
-    overlayTitle.textContent = overlayTitle.textContent || 'Kamuflaj';
+    overlayTitle.textContent =
+      pendingJoinCode !== '' ? 'Odaya Katıl' : overlayTitle.textContent || 'Kamuflaj';
+    if (pendingJoinCode !== '') {
+      overlayMsg.textContent = 'Adını gir ve odaya katıl. Kurucu maçı başlatınca FPV olarak oynarsın.';
+    }
     showMenuPanels();
     showOverlay(overlay);
   } else if (st === 'waiting') {
@@ -578,7 +618,6 @@ function syncOverlay(force = false): void {
   } else if (st === 'over') {
     showOverPanel();
   } else {
-    // countdown / prep / hunt → gameplay is visible.
     hideOverlay(overlay);
   }
   lastShownStatus = st;
@@ -643,7 +682,7 @@ function syncBanner(): void {
       sub = `Av başlamasına ${Math.ceil(world.phaseLeft)} sn`;
     } else {
       title = 'Saklan & Boyan!';
-      sub = `Damlalık: Boşluk / dokun · ${Math.ceil(world.phaseLeft)} sn`;
+      sub = `Damlalık: Boşluk / tıkla · ${Math.ceil(world.phaseLeft)} sn`;
     }
   }
   const showBanner = st === 'countdown' || st === 'prep';
@@ -748,28 +787,43 @@ function exitFullscreen(): void {
 // ---- main loop --------------------------------------------------------------
 
 function tick(dt: number): void {
-  const playing = world.status === 'prep' || world.status === 'hunt';
+  const playing = isPlaying();
 
   if (mode === 'online-guest') {
     input.read(playing ? guestInput : discardInput);
-    if (playing && room) {
-      const now = performance.now();
-      if (guestInput.fire || now - lastInputAt >= INPUT_MS) {
-        lastInputAt = now;
-        room.send('input', encodeInput(guestInput));
-        guestInput.fire = false;
+    const me = myPlayer();
+    if (playing && me) {
+      me.input.fwd = guestInput.fwd;
+      me.input.strafe = guestInput.strafe;
+      me.input.yaw = guestInput.yaw;
+      const frozen = me.role === 'seeker' && world.status === 'prep';
+      if (!me.caught && !frozen) predictLocal(world, me, dt);
+      // Reconcile toward the host's last known position (drift correction).
+      const t = netTargets.get(me.id);
+      if (t) {
+        if (Math.hypot(t.x - me.x, t.z - me.z) > 5) {
+          me.x = t.x;
+          me.z = t.z;
+        } else {
+          const corr = Math.min(1, dt * 3);
+          me.x += (t.x - me.x) * corr;
+          me.z += (t.z - me.z) * corr;
+        }
+      }
+      if (room) {
+        const now = performance.now();
+        if (guestInput.fire || now - lastInputAt >= INPUT_MS) {
+          lastInputAt = now;
+          room.send('input', encodeInput(guestInput));
+          guestInput.fire = false;
+        }
       }
     }
     easeGuestPlayers(dt);
   } else {
-    // Host (or idle attract): run the authoritative simulation.
     const me = myPlayer();
     if (playing && me) {
       input.read(me.input);
-      if (!input.hasAim()) {
-        me.input.aimX = me.x + Math.sin(me.yaw) * 8;
-        me.input.aimZ = me.z + Math.cos(me.yaw) * 8;
-      }
     } else {
       input.read(discardInput);
       discardInput.fire = false;
@@ -797,13 +851,8 @@ function tick(dt: number): void {
   syncOverlay();
 
   const me = myPlayer();
-  const aim =
-    playing && me
-      ? mode === 'online-guest'
-        ? { x: guestInput.aimX, z: guestInput.aimZ }
-        : { x: me.input.aimX, z: me.input.aimZ }
-      : null;
-  renderScene(world, dt, myId, aim);
+  kmRoot.classList.toggle('km-root--play', playing && !!me);
+  renderScene(world, dt, myId, { yaw: input.lookYaw(), pitch: input.lookPitch() });
 }
 
 function startLoop(): void {
@@ -833,17 +882,17 @@ function backToMenu(): void {
   halted = false;
   teardownRoom();
   mode = 'idle';
+  pendingJoinCode = '';
   netTargets.clear();
   startAttract();
   overlayTitle.textContent = 'Kamuflaj';
   overlayMsg.textContent = channelEnabled()
-    ? 'Vücudunu çevreye boya, kıpırdamadan dur ve avcının dilinden kaç. Bir oda kur ve arkadaşlarını çağır.'
+    ? 'Birinci şahıs bukalemun saklambacı. Odalardan oluşan haritada saklan, boyan ve avcının dilinden kaç. Bir oda kur ve arkadaşlarını çağır.'
     : 'Kamuflaj çok oyunculu bir saklambaçtır ve çevrimiçi bir sunucu gerektirir.';
   bannerKey = '';
   banner.classList.add('km-banner--hidden');
   lastShownStatus = null;
   syncOverlay(true);
-  // This status rewrite is also the smoke test's boot signal (contains '·').
   if (!isWebglOk()) setStatus('⚠️ 3B desteklenmiyor · oyun yine de çalışır');
   else if (channelEnabled()) setStatus('⚪ Hazır · oda kur ve arkadaşlarını çağır');
   else setStatus('⚠️ Çok oyunculu · sunucu yapılandırılmamış');
@@ -884,6 +933,7 @@ function init(): void {
   roleSeekBtn = document.querySelector<HTMLButtonElement>('#role-seek')!;
   menuActions = document.querySelector<HTMLElement>('#menu-actions')!;
   createBtn = document.querySelector<HTMLButtonElement>('#create')!;
+  joinBtn = document.querySelector<HTMLButtonElement>('#join')!;
   shareBox = document.querySelector<HTMLElement>('#share')!;
   shareRowWrap = document.querySelector<HTMLElement>('#share-row-wrap')!;
   shareLinkInput = document.querySelector<HTMLInputElement>('#share-link')!;
@@ -909,7 +959,6 @@ function init(): void {
     stick: document.querySelector<HTMLElement>('#stick')!,
     nub: document.querySelector<HTMLElement>('#stick-nub')!,
     actionBtn: document.querySelector<HTMLButtonElement>('#action')!,
-    toWorld,
   });
   input.attach();
 
@@ -918,10 +967,8 @@ function init(): void {
 
   roleHideBtn.addEventListener('click', () => setRole('hider'));
   roleSeekBtn.addEventListener('click', () => setRole('seeker'));
-  createBtn.addEventListener('click', () => {
-    void createRoom();
-    if (input.isCoarse && !fsActive() && channelEnabled()) enterFullscreen();
-  });
+  createBtn.addEventListener('click', () => void createRoom());
+  joinBtn.addEventListener('click', joinViaPanel);
   lobbyStartBtn.addEventListener('click', hostStart);
   rematchBtn.addEventListener('click', () => {
     if (mode === 'online-host') beginMatch(rosterFromMembers());
@@ -946,15 +993,14 @@ function init(): void {
   });
   document.addEventListener('fullscreenchange', syncFs);
 
-  // Keyboard fallback for the menu (pitfall: unreachable-start-state): Enter or
-  // Space opens a room when the backend is available.
   window.addEventListener('keydown', (e) => {
     if (world.status !== 'menu' || !channelEnabled()) return;
     const target = e.target as HTMLElement | null;
     const typing = !!target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA');
     if (e.key === 'Enter' || (!typing && e.key === ' ')) {
       e.preventDefault();
-      void createRoom();
+      if (pendingJoinCode) joinViaPanel();
+      else void createRoom();
     }
   });
 
@@ -966,8 +1012,11 @@ function init(): void {
   startAttract();
   const code = getRoomFromUrl();
   if (code && channelEnabled()) {
-    startLoop();
-    void joinRoomAsGuest(code);
+    // Arriving via a share link: ask the guest for a name before joining.
+    backToMenu();
+    pendingJoinCode = code;
+    lastShownStatus = null;
+    syncOverlay(true);
   } else if (code && !channelEnabled()) {
     backToMenu();
     overlayMsg.textContent =
