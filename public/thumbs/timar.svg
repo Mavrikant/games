@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tımar">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a14" />
+      <stop offset="100%" stop-color="#14110b" />
+    </linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a17249" />
+      <stop offset="100%" stop-color="#6c4527" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <!-- floor band -->
+  <rect x="0" y="158" width="320" height="42" fill="#1a1408" opacity="0.45" />
+
+  <!-- horse body -->
+  <ellipse cx="148" cy="120" rx="76" ry="30" fill="url(#coat)" />
+  <!-- neck -->
+  <polygon points="208,108 222,86 252,90 234,118" fill="url(#coat)" />
+  <!-- head -->
+  <ellipse cx="252" cy="80" rx="30" ry="18" fill="url(#coat)" />
+  <!-- ear -->
+  <polygon points="245,67 249,55 256,69" fill="#5e3a20" />
+  <!-- mane -->
+  <path d="M214 110 Q228 80 246 78" stroke="#2a1810" stroke-width="3" fill="none" stroke-linecap="round" />
+  <!-- eye -->
+  <circle cx="262" cy="76" r="1.8" fill="#0a0a0a" />
+  <!-- legs -->
+  <rect x="92" y="142" width="10" height="36" fill="#6c4527" />
+  <rect x="118" y="142" width="10" height="36" fill="#6c4527" />
+  <rect x="156" y="142" width="10" height="36" fill="#6c4527" />
+  <rect x="182" y="142" width="10" height="36" fill="#6c4527" />
+  <!-- hooves -->
+  <rect x="91" y="174" width="12" height="5" fill="#1a1008" />
+  <rect x="117" y="174" width="12" height="5" fill="#1a1008" />
+  <rect x="155" y="174" width="12" height="5" fill="#1a1008" />
+  <rect x="181" y="174" width="12" height="5" fill="#1a1008" />
+  <!-- tail -->
+  <path d="M76 110 Q56 122 50 144" stroke="#2a1810" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M78 118 Q60 130 56 152" stroke="#2a1810" stroke-width="3" fill="none" stroke-linecap="round" />
+
+  <!-- grain chevrons (subtle, head→rump direction = right) -->
+  <g stroke="#3a2410" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.55">
+    <path d="M102 110 L114 110 M111 106 L114 110 L111 114" />
+    <path d="M134 122 L146 122 M143 118 L146 122 L143 126" />
+    <path d="M170 112 L182 112 M179 108 L182 112 L179 116" />
+    <path d="M102 130 L114 130 M111 126 L114 130 L111 134" />
+    <path d="M138 134 L150 134 M147 130 L150 134 L147 138" />
+  </g>
+
+  <!-- dirt spots -->
+  <circle cx="120" cy="116" r="7" fill="#241608" opacity="0.85" />
+  <circle cx="158" cy="128" r="6" fill="#241608" opacity="0.8" />
+  <circle cx="186" cy="115" r="5" fill="#241608" opacity="0.8" />
+  <circle cx="100" cy="138" r="6" fill="#241608" opacity="0.75" />
+
+  <!-- big yellow direction arrow (top-right) -->
+  <circle cx="288" cy="32" r="20" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.6)" />
+  <line x1="272" y1="32" x2="302" y2="32" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round" />
+  <line x1="302" y1="32" x2="294" y2="26" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round" />
+  <line x1="302" y1="32" x2="294" y2="38" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round" />
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#f5deb3">Tımar</text>
+</svg>

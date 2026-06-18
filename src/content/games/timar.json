@@ -1,0 +1,21 @@
+{
+  "title": "Tımar",
+  "description": "Atın tüy yönüne uygun fırçala — yöne karşı sürtersen post diken diken olur.",
+  "dateAdded": "2026-06-18",
+  "tags": ["refleks", "özgün", "fırça", "hayvan"],
+  "controls": "Fareyi sürükle veya dokun: fırçala · Boşluk/Enter: başla · R: yeniden başla",
+  "howToPlay": "Tımar, atın postunu tarayan bir tüy-yönü oyunudur. Her atın belirli bir 'tüy yönü' vardır — sağ üstteki sarı ok onu gösterir. Fırçayı (fareyi veya parmağını) atın üzerinde bu yöne uygun sürüklersen tozlar ve gübre lekeleri hızla dökülür. Aynı yere yöne karşı sürtersen post ürperir: turuncu 'kabardı' işareti çıkar ve civardaki toz geri yapışır — yani aslında işini bozmuş olursun. 75 saniyelik tek bir seansın var. Bir at tamamen tımarlandığında yeni bir at gelir, fakat tüy yönü değişir: bir önceki at için doğru olan sürtme yönü yeni atta seni cezalandırır. İlk turlar baş-sağrı, sırt-karın gibi sezgisel yönlerde başlar; ileri turlar çapraz veya rastgele yönlere geçer ve toz sayısı artar. Strateji: aceleyle ileri-geri sürtmek yerine her atta önce oka bak, kısa-kararlı strok'larla yönü doğrula, sonra kapsamı genişlet. Fırça çok yavaşken (yön belirsiz) etki azdır; çok hızlı ama yanlış yönde de bir ruffle ile birkaç saniye geriye dönersin. Kafa, boyun ve karın çevresi de aynı tek yönü paylaşır — gerçek bir tımar gibi tüy fizyolojisi yoktur, oyunu öğrenmesi 30 saniye sürsün diye basitleştirilmiştir. Skor = 75 saniyede temiz biten at sayısı; tarayıcına kaydedilir.",
+  "thumbnail": "timar.svg",
+  "scoring": {
+    "storageKey": "timar.best",
+    "label": "At",
+    "direction": "higher",
+    "labelEn": "Horses"
+  },
+  "en": {
+    "title": "Tımar",
+    "description": "Groom the horse along the coat grain — brush against it and the fur prickles up.",
+    "controls": "Drag the mouse or finger: brush · Space/Enter: start · R: restart",
+    "howToPlay": "Tımar is a direction-aware grooming game. Every horse has a single 'coat grain' direction — the yellow arrow in the top-right shows it. Drag the brush over the horse along that direction and dirt lifts off the coat. Drag against the grain at the same spot and the fur prickles up: an orange 'ruffled' mark appears and the dirt nearby reattaches — you're actually making things worse. You have one 75-second session. When a horse is fully clean a fresh one walks in, but the grain rotates: what worked for the last horse will now hurt you. Early rounds use intuitive head-to-rump or back-to-belly directions; later rounds add diagonals and random angles with more dirt. Strategy: don't scrub back and forth blindly. Glance at the arrow on every new horse, sweep a few short confident strokes to confirm the direction, then widen. Very slow brush motion is treated as ambiguous (low effect); fast strokes in the wrong direction cost you a ruffle plus several seconds of progress. Head, neck and belly share the same grain — there's no per-body-region grain because the game is meant to be learnable in 30 seconds. Score = horses cleaned in 75 seconds; saved locally."
+  }
+}
