@@ -1,0 +1,21 @@
+{
+  "title": "Pus",
+  "description": "Sis çökmeden önce gemlerin yerini ezberle; karanlıkta el feneriyle bul ve doğru yere tıkla. Her tur daha çok gem, daha küçük fener.",
+  "dateAdded": "2026-06-19",
+  "tags": ["hafıza", "beceri", "orijinal", "tek-oyunculu"],
+  "controls": "Fare/dokunma: el fenerini gezdir, gem yerine tıkla · R: yeniden başla · Boşluk: başla",
+  "howToPlay": "Her tur kısa bir ipucu evresiyle başlar: tahtada birkaç parlak gem belirir ve birkaç saniye boyunca tüm konumlar açıkça görünür — bu süre içinde tek işin gem yerlerini ezberlemektir. Süre bitince sis çöker ve tahta neredeyse tamamen kararır; geriye yalnızca farenin (veya parmağının) etrafında dairesel bir el feneri kalır. Karanlıkta el feneriyle gezerken ezberlediğin konumlara tıklayarak gemleri toplarsın: tıkladığın nokta bir gemin yakın çevresine düşerse gem toplanır, skoru bir artırır ve toplanmış gemler hafifçe ışıldayarak konumlarını korur. Bir turun tüm gemlerini topladığında oyun anında bir sonraki tura geçer; her yeni tur bir gem daha ekler, ipucu evresini biraz kısaltır ve el fenerinin yarıçapını biraz daraltır. Toplam süre 60 saniyedir; süre bitene kadar topladığın gem sayısı skorundur. Stratejik fikir: ipucu evresinde tek tek gemleri taramak yerine birkaç gemi bir referans şekliyle (üçgen, çizgi, köşegen) gruplayarak ezberle — sis çökünce konumları noktasal değil ilişkisel hatırlamak çok daha kolaydır. Yanlış tıklama cezası yoktur, ama her boş tıklama saniyeleri yer. Mobilde de dokun-ve-sürükle ile feneri hareket ettirebilir, bir nokta üzerine basıp bırakarak gem toplayabilirsin. R tuşu veya 'Yeniden başla' düğmesi her an oyunu sıfırlar; en yüksek gem sayın tarayıcında saklanır.",
+  "thumbnail": "pus.svg",
+  "scoring": {
+    "storageKey": "pus.best",
+    "label": "Toplanan gem",
+    "direction": "higher",
+    "labelEn": "Gems collected"
+  },
+  "en": {
+    "title": "Mist",
+    "description": "Memorize where the gems are before the mist falls; in the dark, sweep your flashlight and tap the remembered spots. Each round adds more gems and shrinks the light.",
+    "controls": "Mouse/touch: move the flashlight, tap a gem · R: restart · Space: start",
+    "howToPlay": "Each round starts with a short preview: a handful of bright gems appear on the board and all their positions stay visible for a couple of seconds — your only job here is to memorise where they are. When the timer runs out the mist drops and the board turns almost completely dark; only a circular flashlight follows your cursor (or finger). In the dark you click on the spots you memorised: a click that lands close enough to a gem collects it, adds one to the score, and the collected gem keeps a faint glow so you can see your progress. Clear every gem in the round and the next round starts immediately — adding one more gem, shortening the preview slightly, and shrinking the flashlight a little. The whole run lasts 60 seconds; your score is however many gems you collect before time runs out. Tip: during the preview phase, instead of memorising each gem one by one, group them as a reference shape (a triangle, a line, a diagonal) — once the mist falls, remembering positions relationally is far easier than as isolated dots. Misses cost no points, but each empty click eats away seconds. On mobile, drag with your finger to move the flashlight and tap on a remembered spot to collect. R or the 'Restart' button resets at any time; your best run is saved in the browser."
+  }
+}

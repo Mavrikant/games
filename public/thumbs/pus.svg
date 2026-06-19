@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Pus">
+  <defs>
+    <radialGradient id="bg" cx="0.7" cy="0.4" r="0.9">
+      <stop offset="0%" stop-color="#1a2030" />
+      <stop offset="100%" stop-color="#04050a" />
+    </radialGradient>
+    <radialGradient id="flash" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.95" />
+      <stop offset="55%" stop-color="#f8fafc" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="gemglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="60" y1="0" x2="60" y2="200" />
+    <line x1="120" y1="0" x2="120" y2="200" />
+    <line x1="180" y1="0" x2="180" y2="200" />
+    <line x1="240" y1="0" x2="240" y2="200" />
+    <line x1="0" y1="50" x2="320" y2="50" />
+    <line x1="0" y1="100" x2="320" y2="100" />
+    <line x1="0" y1="150" x2="320" y2="150" />
+  </g>
+  <g opacity="0.18">
+    <circle cx="48" cy="148" r="14" fill="url(#gemglow)" />
+    <circle cx="252" cy="42" r="14" fill="url(#gemglow)" />
+    <circle cx="76" cy="56" r="14" fill="url(#gemglow)" />
+  </g>
+  <circle cx="200" cy="120" r="78" fill="url(#flash)" />
+  <g transform="translate(186 124)">
+    <circle r="22" fill="url(#gemglow)" />
+    <polygon points="0,-12 12,0 0,12 -12,0" fill="#fbbf24" />
+    <polygon points="-5,-2 0,-7 1,-2 -2,2" fill="#ffffff" fill-opacity="0.6" />
+  </g>
+  <g transform="translate(228 96)" opacity="0.75">
+    <polygon points="0,-10 10,0 0,10 -10,0" fill="#fbbf24" />
+  </g>
+  <text x="20" y="180" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#e5e7eb" letter-spacing="-0.5">PUS</text>
+</svg>
