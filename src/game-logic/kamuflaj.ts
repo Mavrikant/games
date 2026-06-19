@@ -2,8 +2,6 @@ import { defineGame } from '@shared/game-module';
 import { safeRead, safeWrite } from '@shared/storage';
 import { createGenToken } from '@shared/gen-token';
 import { showOverlay, hideOverlay } from '@shared/overlay';
-import { reportGameOver } from '@shared/leaderboard';
-import type { ScoreDescriptor } from '@shared/leaderboard';
 import { joinChannel, channelEnabled } from '@shared/realtime-channel';
 import type { ChannelHandle } from '@shared/realtime-channel';
 
@@ -53,14 +51,8 @@ import type { Player, Role, Snapshot, Status, World } from './kamuflaj/types';
 // room and lash a sticky tongue. Online-only host-authoritative rooms over
 // @shared/realtime-channel (real players, no AI). Needs the realtime backend.
 
-const STORAGE_BEST = 'kamuflaj.best';
 const STORAGE_NAME = 'kamuflaj.name';
 const STORAGE_ROLE = 'kamuflaj.role';
-const SCORE_DESC: ScoreDescriptor = {
-  gameId: 'kamuflaj',
-  storageKey: STORAGE_BEST,
-  direction: 'higher',
-};
 
 const PALETTE = [120, 22, 200, 285, 52, 330];
 
@@ -81,7 +73,6 @@ let started = false;
 let myId = 'me';
 let myName = 'Sen';
 let chosenRole: Role = 'hider';
-let best = 0;
 let halted = false;
 let lobbyCount = 1;
 let pendingJoinCode = ''; // set when arriving via ?room= (guest must name + join)
@@ -92,7 +83,6 @@ let lastSnapAt = 0;
 let lastInputAt = 0;
 let simAcc = 0;
 let lastShownStatus: Status | null = null;
-let reportedOver = false;
 let feedKey = '';
 let bannerKey = '';
 
@@ -106,8 +96,6 @@ let canvas!: HTMLCanvasElement;
 let roleEl!: HTMLElement;
 let phaseEl!: HTMLElement;
 let timeEl!: HTMLElement;
-let scoreEl!: HTMLElement;
-let bestEl!: HTMLElement;
 let statusEl!: HTMLElement;
 let feedEl!: HTMLElement;
 let blendWrap!: HTMLElement;
@@ -133,7 +121,6 @@ let lobbyCountEl!: HTMLElement;
 let lobbyNote!: HTMLElement;
 let lobbyStartBtn!: HTMLButtonElement;
 let overPanel!: HTMLElement;
-let boardList!: HTMLOListElement;
 let rematchBtn!: HTMLButtonElement;
 let toLobbyBtn!: HTMLButtonElement;
 let toMenuBtn!: HTMLButtonElement;
@@ -227,7 +214,6 @@ function startAttract(): void {
 function beginMatch(roster: Seat[]): void {
   setupMatch(world, roster);
   world.mode = mode;
-  reportedOver = false;
   lastShownStatus = null;
   buildArena(world);
   resetCamera();
@@ -381,7 +367,6 @@ function hostReturnToLobby(): void {
   world.status = 'waiting';
   world.winner = null;
   world.feed = [];
-  reportedOver = false;
   lastShownStatus = null;
   setStatus('🟢 Lobi açık · hazır olunca yeni turu başlat');
   syncOverlay(true);
@@ -406,7 +391,6 @@ function applyStart(data: unknown): void {
   buildArena(world);
   resetCamera();
   seedLook();
-  reportedOver = false;
   lastShownStatus = null;
 }
 
@@ -419,7 +403,6 @@ function enterLobbyGuest(): void {
   world.winner = null;
   world.feed = [];
   netTargets.clear();
-  reportedOver = false;
   lastShownStatus = null;
   setStatus('🟢 Lobiye dönüldü · kurucu yeni turu başlatacak');
   syncOverlay(true);
@@ -652,7 +635,6 @@ function syncOverlay(force = false): void {
 
 function showOverPanel(): void {
   const me = myPlayer();
-  const ranked = [...world.players].sort((a, b) => b.score - a.score);
   const won =
     !!me &&
     ((world.winner === 'hider' && me.role === 'hider') ||
@@ -662,17 +644,11 @@ function showOverPanel(): void {
     : world.winner === 'seeker'
       ? 'Avcılar kazandı'
       : 'Saklananlar kazandı';
-  overlayMsg.textContent = me ? `Skorun: ${me.score}` : 'Maç bitti.';
-  boardList.textContent = '';
-  for (const c of ranked) {
-    const li = document.createElement('li');
-    const tag = c.role === 'seeker' ? '👁' : c.caught ? '💤' : '🦎';
-    li.textContent = `${tag} ${c.name} — ${c.score}${
-      c.role === 'seeker' ? ` · ${c.catches} yakalama` : ''
-    }`;
-    if (c.id === myId) li.className = 'km-board__me';
-    boardList.appendChild(li);
-  }
+  const survivors = world.players.filter((p) => p.role === 'hider' && !p.caught).length;
+  overlayMsg.textContent =
+    world.winner === 'seeker'
+      ? 'Tüm saklananlar yakalandı.'
+      : `${survivors} saklanan kurtuldu.`;
   hide(menuActions, 'km-actions--hidden');
   hide(roleToggle, 'km-role--hidden');
   hide(shareBox, 'km-share--hidden');
@@ -684,15 +660,6 @@ function showOverPanel(): void {
     overlayMsg.textContent += ' · kurucu aynı odada yeni tur başlatabilir';
   }
   showOverlay(overlay);
-
-  if (!reportedOver && me) {
-    reportedOver = true;
-    if (me.score > best) {
-      best = me.score;
-      bestEl.textContent = String(best);
-    }
-    reportGameOver(SCORE_DESC, me.score, { label: 'Skor' });
-  }
 }
 
 function syncBanner(): void {
@@ -751,7 +718,6 @@ function syncHud(): void {
   } else {
     timeEl.textContent = '—';
   }
-  scoreEl.textContent = String(me ? Math.round(me.score) : 0);
 
   const isHider = !!me && me.role === 'hider' && !me.caught;
   const inMatch = world.status === 'prep' || world.status === 'hunt';
@@ -947,8 +913,6 @@ function init(): void {
   roleEl = document.querySelector<HTMLElement>('#role')!;
   phaseEl = document.querySelector<HTMLElement>('#phase')!;
   timeEl = document.querySelector<HTMLElement>('#time')!;
-  scoreEl = document.querySelector<HTMLElement>('#score')!;
-  bestEl = document.querySelector<HTMLElement>('#best')!;
   statusEl = document.querySelector<HTMLElement>('#status')!;
   feedEl = document.querySelector<HTMLElement>('#feed')!;
   blendWrap = document.querySelector<HTMLElement>('#blend')!;
@@ -974,7 +938,6 @@ function init(): void {
   lobbyNote = document.querySelector<HTMLElement>('#lobby-note')!;
   lobbyStartBtn = document.querySelector<HTMLButtonElement>('#lobby-start')!;
   overPanel = document.querySelector<HTMLElement>('#over-panel')!;
-  boardList = document.querySelector<HTMLOListElement>('#board-list')!;
   rematchBtn = document.querySelector<HTMLButtonElement>('#rematch')!;
   toLobbyBtn = document.querySelector<HTMLButtonElement>('#to-lobby')!;
   toMenuBtn = document.querySelector<HTMLButtonElement>('#to-menu')!;
@@ -984,8 +947,6 @@ function init(): void {
   myName = safeRead<string>(STORAGE_NAME, '') || 'Sen';
   if (myName !== 'Sen') nameInput.value = myName;
   chosenRole = safeRead<Role>(STORAGE_ROLE, 'hider') === 'seeker' ? 'seeker' : 'hider';
-  best = safeRead<number>(STORAGE_BEST, 0);
-  bestEl.textContent = String(best);
 
   input = createLocalInput({
     canvas,
