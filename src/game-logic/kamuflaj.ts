@@ -135,6 +135,7 @@ let lobbyStartBtn!: HTMLButtonElement;
 let overPanel!: HTMLElement;
 let boardList!: HTMLOListElement;
 let rematchBtn!: HTMLButtonElement;
+let toLobbyBtn!: HTMLButtonElement;
 let toMenuBtn!: HTMLButtonElement;
 let fsBtn!: HTMLButtonElement;
 let restartBtn!: HTMLButtonElement;
@@ -370,6 +371,22 @@ function hostStart(): void {
   beginMatch(rosterFromMembers());
 }
 
+/** After a round, return the whole room to its lobby (keeping it open) so the
+ *  host can start another match — and players who joined mid-match come in. */
+function hostReturnToLobby(): void {
+  if (mode !== 'online-host' || !room) return;
+  room.send('lobby', {});
+  started = false;
+  world.players = [];
+  world.status = 'waiting';
+  world.winner = null;
+  world.feed = [];
+  reportedOver = false;
+  lastShownStatus = null;
+  setStatus('🟢 Lobi açık · hazır olunca yeni turu başlat');
+  syncOverlay(true);
+}
+
 // ---- guest networking -------------------------------------------------------
 
 const netTargets = new Map<string, { x: number; z: number; yaw: number }>();
@@ -391,6 +408,21 @@ function applyStart(data: unknown): void {
   seedLook();
   reportedOver = false;
   lastShownStatus = null;
+}
+
+/** Guest side of "return to the room lobby" — the host finished a round and
+ *  wants to keep the room open for the next one. */
+function enterLobbyGuest(): void {
+  gotStart = false;
+  world.players = [];
+  world.status = 'waiting';
+  world.winner = null;
+  world.feed = [];
+  netTargets.clear();
+  reportedOver = false;
+  lastShownStatus = null;
+  setStatus('🟢 Lobiye dönüldü · kurucu yeni turu başlatacak');
+  syncOverlay(true);
 }
 
 function applySnapshot(snap: Snapshot): void {
@@ -463,6 +495,8 @@ async function joinRoomAsGuest(code: string): Promise<void> {
         if (mode !== 'online-guest') return;
         if (event === 'start') {
           applyStart(data);
+        } else if (event === 'lobby') {
+          enterLobbyGuest();
         } else if (event === 'state') {
           if (!gotStart) return;
           const snap = decodeSnapshot(data);
@@ -645,7 +679,10 @@ function showOverPanel(): void {
   show(overPanel, 'km-over--hidden');
   nameInput.style.display = 'none';
   rematchBtn.style.display = mode === 'online-host' ? '' : 'none';
-  if (mode === 'online-guest') overlayMsg.textContent += ' · kurucunun yeniden başlatması bekleniyor';
+  toLobbyBtn.style.display = mode === 'online-host' ? '' : 'none';
+  if (mode === 'online-guest') {
+    overlayMsg.textContent += ' · kurucu aynı odada yeni tur başlatabilir';
+  }
   showOverlay(overlay);
 
   if (!reportedOver && me) {
@@ -939,6 +976,7 @@ function init(): void {
   overPanel = document.querySelector<HTMLElement>('#over-panel')!;
   boardList = document.querySelector<HTMLOListElement>('#board-list')!;
   rematchBtn = document.querySelector<HTMLButtonElement>('#rematch')!;
+  toLobbyBtn = document.querySelector<HTMLButtonElement>('#to-lobby')!;
   toMenuBtn = document.querySelector<HTMLButtonElement>('#to-menu')!;
   fsBtn = document.querySelector<HTMLButtonElement>('#fs')!;
   restartBtn = document.querySelector<HTMLButtonElement>('#restart')!;
@@ -966,8 +1004,12 @@ function init(): void {
   joinBtn.addEventListener('click', joinViaPanel);
   lobbyStartBtn.addEventListener('click', hostStart);
   rematchBtn.addEventListener('click', () => {
-    if (mode === 'online-host') beginMatch(rosterFromMembers());
+    if (mode === 'online-host') {
+      started = true;
+      beginMatch(rosterFromMembers());
+    }
   });
+  toLobbyBtn.addEventListener('click', hostReturnToLobby);
   toMenuBtn.addEventListener('click', backToMenu);
   restartBtn.addEventListener('click', backToMenu);
   copyBtn.addEventListener('click', () => {
