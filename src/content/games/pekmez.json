@@ -1,0 +1,20 @@
+{
+  "title": "Pekmez",
+  "description": "Üç kavanozu kesik çizgisine kadar pekmezle doldur. İbrik kavanozun üstünde değilken döktüğün her damla ziyan; pekmez sınırlı, isabet hassasiyet ister.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "refleks", "kaynak", "tek-oyunculu", "mobil"],
+  "controls": "Fare / dokun: ibriği gez · Basılı tut / Boşluk: pekmez dök · ← → veya A/D: ibriği kaydır · R: yeniden başla",
+  "howToPlay": "Pekmez, sınırlı bir tatlı kaynağını birden fazla hedefe paylaştırma üzerine kurulu bir hassasiyet oyunudur. Sahnenin üstünde bir pekmez ibriği var; alt kısımda renkleri farklı üç cam kavanoz duruyor ve her birinin üzerinde o turda ulaşılması gereken doluluk hedefi kesik bir çizgiyle (ve aynı renkte ince bir tolerans bandıyla) işaretli — örneğin %35, %62, %88 gibi farklı seviyelerde. İbriği fareyle (ya da klavyede ← → / A/D ile) yatay olarak gezdirir, Boşluk'a basılı tutarak veya kanvasa basılı tutarak pekmezi akıtırsın. Pekmez kalın ve viskoz: stream ibrik ağzından çıkıp aşağı düşene kadar kısa bir gecikme var, bu yüzden kavanozu son anda terk edersen bile bir damla daha düşer — erken bırakmayı öğrenmen gerekir. İbrik bir kavanozun tam üstündeyse altın renkli çerçeveyle parlar ve akan pekmez o kavanoza dolar; iki kavanoz arasındayken döktüğün her damla tezgâha akar ve ziyan listesine eklenir. Skorun şöyle hesaplanır: her kavanozun final doluluğu hedef çizgisinin tolerans bandı içindeyse 100 puan (üç kavanoz birden tam isabet bonus +60); bant dışı ama yakınsa puan azalır; hedefi aşarsan (taşırırsan) o kavanoz 0 puana düşer çünkü pekmez geri alınamaz. Tur biter çünkü ya pekmez tükenir ya da her kavanoz tolerans bandına oturur. Her tur sonunda ibriğe biraz daha pekmez koyulur ama tolerans bandı bir tık daralır, yani üst seviyelerde çok daha hassas pour kontrolü ister. Strateji: önce düşük hedefli kavanozu (en az pekmez ister) bitir; üst seviyelerdeki yüksek hedef kavanozlara yaklaşırken stream'in atalet gecikmesini hesaba kat ve hedef bandının BAŞINDA bırak, çünkü düşen son damla ortalama %2-3 daha dolduracaktır. Skorun ve en iyi toplam puanın tarayıcıda saklanır.",
+  "scoring": {
+    "storageKey": "pekmez.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Molasses Pour",
+    "description": "Fill three jars exactly to their dashed target lines. Every drop poured between jars is wasted; the molasses is limited and the bands are tight.",
+    "controls": "Mouse / touch: move the pitcher · Hold / Space: pour · ← → or A/D: nudge · R: restart",
+    "howToPlay": "Molasses Pour is a precision game built around sharing a limited sweet resource among multiple targets. At the top of the stage you control a molasses pitcher; at the bottom sit three glass jars in different colours, each marked with a dashed target line and a faint tolerance band — for example 35%, 62% and 88%. Move the pitcher horizontally with the mouse (or ← → / A/D on the keyboard) and pour by holding Space or holding the canvas. The molasses is viscous: there's a short delay before the stream reaches the jar, so even if you leave at the last instant one more drop will land — you have to learn to release early. When the pitcher is centred over a jar it gets a golden highlight and the stream fills that jar; pour between two jars and every drop becomes waste on the counter. Scoring: each jar's final fill within the tolerance band scores 100 (three perfect jars pay a +60 bonus); near the band you score less; overshoot a jar and it drops to 0, because molasses can't be taken back. A round ends when either the molasses runs out or every jar lands in its tolerance band. Each round refills the pitcher slightly more, but the tolerance band tightens a notch, so later rounds need much finer control. Strategy: clear the lowest-target jar first (it needs the least), and account for the stream's inertia at the highest targets — release at the START of the band, because the trailing drop will add ~2-3% more. Your score and best total are kept in your browser."
+  }
+}
