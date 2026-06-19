@@ -1,0 +1,109 @@
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.touch {
+  display: none;
+  gap: 10px;
+  justify-content: center;
+  user-select: none;
+  margin-top: 10px;
+}
+
+.touch__btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 14px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.touch__btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: flex;
+  }
+}

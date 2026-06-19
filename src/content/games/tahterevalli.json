@@ -1,0 +1,22 @@
+{
+  "title": "Tahterevalli",
+  "description": "Düşen ağırlıkları kompanse etmek için pivotu kaydır — tahtayı dengede tut.",
+  "dateAdded": "2026-06-19",
+  "tags": ["fizik", "refleks", "puzzle"],
+  "controls": "← / → veya A / D: pivotu kaydır · Boşluk: başla/duraklat · R: yeniden başla · Mobil: sol/sağ butonlar",
+  "howToPlay": "Tahterevallinin üzerine yukarıdan rastgele konumlarda 1–4 kütleli ağırlıklar düşüyor; her ağırlık tahtaya değdiği yerde sabitleniyor ve pivot noktasına olan mesafesi kadar tork uyguluyor. Senin görevin pivotun (üçgen destek) konumunu sol/sağ ok tuşları veya A/D ile kaydırarak iki taraftaki toplam torku eşitlemek ve tahtanın eğimini ±32 dereceyi geçirmeden mümkün olduğunca uzun süre ayakta tutmak. Boşluk tuşu oyunu başlatır ve oyun sırasında duraklatır; R tuşu veya 'Yeniden başla' düğmesi her şeyi sıfırlar. Üstteki sarı/kırmızı eğim göstergesi anlık eğimi gösterir — kırmızı bölgeye girince saniyen var, tahta devrilirse oyun biter. Tahta eğildikçe üzerindeki ağırlıklar yavaşça aşağı doğru kayar; yeterince eğim olursa kenardan tamamen düşerek tahtayı rahatlatır, ama bu zamanla riskli bir kurtarma stratejisidir. Skor = ayakta kaldığın saniye sayısı; oyun ilerledikçe ağırlıklar daha sık düşer ve pivotu önceden konumlandırma alışkanlığı kritik hale gelir. İpucu: ağır tarafa pivotu agresif şekilde götür, hafifletmek için karşı tarafa düşen ağırlıkları bekle; tahta düz dururken pivotu fazla oynatma, yoksa yeni düşen ağırlıkları yanlış tarafa yığarsın.",
+  "thumbnail": "tahterevalli.svg",
+  "scoring": {
+    "storageKey": "tahterevalli.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Seesaw",
+    "description": "Slide the pivot to compensate for falling weights — keep the beam balanced.",
+    "controls": "← / → or A / D: slide pivot · Space: start/pause · R: restart · Mobile: left/right buttons",
+    "howToPlay": "Weights of mass 1–4 fall from random positions above the seesaw; each one sticks where it lands and applies torque proportional to its distance from the pivot. Your job is to slide the pivot (the triangular support) left or right with the arrow keys or A/D to balance the torques on both sides and keep the beam's tilt under ±32 degrees for as long as possible. Space starts the game and pauses it during play; R or the Restart button resets everything. The yellow/red gauge at the top shows the current tilt — once the indicator enters the red zone you only have seconds before the beam topples and the game ends. As the beam tilts, the weights on it slowly slide downhill; with enough tilt they fall off the end and give you relief, but relying on this is risky as time goes on. Score = seconds survived; weights fall more often the longer you play, so anticipating the next landing and pre-positioning the pivot becomes critical. Tip: move the pivot aggressively toward the heavy side and let new weights drop on the light side to even things out; don't twitch the pivot when the beam is flat or you'll bias the next landings against yourself."
+  }
+}

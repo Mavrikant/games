@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tahterevalli">
+  <defs>
+    <linearGradient id="tt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#241a4a" />
+      <stop offset="100%" stop-color="#0d0a22" />
+    </linearGradient>
+    <linearGradient id="tt-beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c794ff" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#tt-bg)" />
+  <g transform="translate(180 0)" opacity="0.85">
+    <circle cx="-30" cy="22" r="11" fill="#34e89e" stroke="#0d0a22" stroke-width="2" />
+    <text x="-30" y="26" font-family="Inter, system-ui" font-size="12" font-weight="700" fill="#0d0a22" text-anchor="middle">1</text>
+    <circle cx="40" cy="44" r="15" fill="#ff8a4c" stroke="#0d0a22" stroke-width="2" />
+    <text x="40" y="49" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="#0d0a22" text-anchor="middle">3</text>
+  </g>
+  <g transform="translate(160 124) rotate(-14)">
+    <rect x="-130" y="-8" width="260" height="14" rx="3" fill="url(#tt-beam)" stroke="#ff79c6" stroke-width="1.2" />
+    <rect x="-1" y="-8" width="2" height="14" fill="#f9f7ff" opacity="0.55" />
+    <circle cx="-95" cy="-22" r="13" fill="#ffd166" stroke="#0d0a22" stroke-width="2" />
+    <text x="-95" y="-17" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="#0d0a22" text-anchor="middle">2</text>
+    <circle cx="-45" cy="-22" r="13" fill="#ffd166" stroke="#0d0a22" stroke-width="2" />
+    <text x="-45" y="-17" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="#0d0a22" text-anchor="middle">2</text>
+    <circle cx="60" cy="-25" r="17" fill="#ff6b81" stroke="#0d0a22" stroke-width="2" />
+    <text x="60" y="-20" font-family="Inter, system-ui" font-size="14" font-weight="700" fill="#0d0a22" text-anchor="middle">4</text>
+  </g>
+  <polygon points="142,168 178,168 160,124" fill="#ff79c6" stroke="#f9f7ff" stroke-width="1.5" />
+  <rect x="80" y="172" width="160" height="4" rx="2" fill="#352f63" />
+  <g transform="translate(160 32)">
+    <rect x="-70" y="-5" width="140" height="10" rx="3" fill="#2a2557" stroke="#534a98" />
+    <rect x="-1" y="-9" width="2" height="18" fill="#bcb4e6" />
+    <rect x="40" y="-12" width="8" height="24" rx="2" fill="#ff6b81" />
+  </g>
+  <text x="20" y="194" font-family="Inter, system-ui" font-size="14" font-weight="700" fill="#f9f7ff">Tahterevalli</text>
+</svg>
