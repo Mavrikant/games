@@ -25,7 +25,19 @@ function round2(v: number): number {
   return Math.round(v * 100) / 100;
 }
 
-const KINDS = new Set<PropKind>(['crate', 'barrel', 'plant', 'rock', 'lamp']);
+const KINDS = new Set<PropKind>([
+  'crate',
+  'barrel',
+  'plant',
+  'rock',
+  'lamp',
+  'bush',
+  'column',
+  'shelf',
+  'urn',
+  'statue',
+  'table',
+]);
 
 // ---- host → guests: world snapshot -----------------------------------------
 
@@ -46,6 +58,7 @@ export function encodeSnapshot(world: World): Snapshot {
         vi: round2(p.visible),
         sc: Math.round(p.score),
       };
+      if (p.catches > 0) n.ct = p.catches; // seekers' tally for the scoreboard
       if (p.tongue) {
         n.tx = round2(p.tongue.dx);
         n.tz = round2(p.tongue.dz);

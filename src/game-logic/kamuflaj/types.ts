@@ -116,6 +116,7 @@ export interface NetPlayer {
   ca: 0 | 1; // caught
   vi: number; // visibility (hiders)
   sc: number;
+  ct?: number; // catches (seekers) — for the end-of-match scoreboard
   // tongue (absent when none): direction + length + optional victim
   tx?: number;
   tz?: number;
