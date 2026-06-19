@@ -1,0 +1,21 @@
+{
+  "title": "İz Sürdür",
+  "description": "Gizli matematiksel eğri boyunca hareket eden noktayı izle; iz kaybolduğunda hedef çizgisini geçeceği yüksekliği tahmin et.",
+  "dateAdded": "2026-06-19",
+  "tags": ["puzzle", "özgün", "tahmin", "matematik", "tek-tuş"],
+  "controls": "Fare/dokunma: hedef çizgisinde tahmin için tıkla · Boşluk/Enter: yeni tur · R: yeniden başla",
+  "thumbnail": "iz-surdur.svg",
+  "howToPlay": "İz Sürdür, bir noktanın gizli bir matematiksel eğri boyunca hareketini gözlemleyip görünmez kısmın nereye gideceğini sezdirme oyunudur. Her tur ekranın solundan bir nokta çıkar ve sabit yatay hızla sağa doğru ilerler; y koordinatı gizli bir fonksiyon (doğru, parabol, sinüs, sönen salınım veya bunların bileşimi) tarafından belirlenir. Noktanın ilk birkaç saniyesi (görünüm penceresi) ekran üzerinde belirgin bir iz olarak çizilir — bu pencerede iz hem sana eğrinin biçimini öğretir hem de devamını tahmin etmek için ipucudur. Pencere bitince iz griye düşer ve nokta görünmez olur; ardından ekranın sağ tarafında dikey bir HEDEF ÇİZGİSİ vurgulanır. Görevin, noktanın o hedef çizgisini hangi yükseklikte (y) keseceğini tahmin edip o noktaya tıklamak. Tahminin gerçek konumdan ne kadar yakınsa skorun o kadar yüksektir: ±8 px → 100 puan (mükemmel), ±20 px → 70, ±50 px → 30, daha uzak → 0. Tahminden sonra eğrinin gizli bölümü canlandırılır, gerçek varış noktası işaretlenir ve sapma kadar puan eklenir. Yanlış üst üste 3 tur (0 puan) gelirse oyun biter; iyi performans göstererek seviyeleri çoğaltırsın — her seviyede görünüm penceresi kısalır, hedef çizgisi daha sağa kayar, eğri daha karmaşık (bileşik sinüs/parabol) hale gelir. R ile baştan, Boşluk/Enter ile bir sonraki tur. İpucu: ilk yarıda eğrinin eğimi ve kıvrımı sana fonksiyon türünü söyler — yumuşak ve simetrik mi (sinüs), tek yöne ivmelenmiş mi (parabol), düz mü (doğru), sönüyor mu (azalan dalga)? Türü tahmin ettikten sonra son hızı ve son yönü ekstrapole et.",
+  "scoring": {
+    "storageKey": "iz-surdur.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Trace the Curve",
+    "description": "Watch a dot ride along a hidden mathematical curve, then guess where it will cross the target line after the trail goes dark.",
+    "controls": "Mouse/touch: click on the target line to guess · Space/Enter: next round · R: restart",
+    "howToPlay": "Trace the Curve is a pattern-extrapolation game where you watch a dot ride a hidden mathematical curve, then predict where its trajectory will cross a vertical target line once the visible portion of the path goes dark. Each round a dot enters from the left, moving rightward at a constant horizontal speed; its vertical position follows a secret function (line, parabola, sine wave, damped oscillation, or a combination). For the first few seconds — the visibility window — its path is drawn as a bright trail and the dot is visible. When the window ends the trail fades to grey, the dot disappears, and a vertical TARGET LINE on the right is highlighted. Your job is to predict the y at which the dot will cross that line and click there. The closer your guess to the true crossing, the more points: ±8 px → 100 (perfect), ±20 px → 70, ±50 px → 30, farther → 0. After your guess, the hidden segment animates and the true landing point is revealed. Three consecutive zero-point rounds end the game. Levels get harder — the visibility window shrinks, the target line shifts further right, and the curve grows more complex. R restarts, Space/Enter starts the next round. Tip: the visible portion telegraphs the function type — smooth and symmetric (sine), accelerating one way (parabola), straight (line), decaying (damped wave). Identify the family, then extrapolate from the final visible slope."
+  }
+}
