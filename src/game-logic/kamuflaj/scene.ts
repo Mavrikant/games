@@ -306,7 +306,7 @@ export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean
     scene.background = bg ?? new THREE.Color(SKY);
     scene.fog = new THREE.Fog(0x10141c, FOG_NEAR, FOG_FAR);
 
-    camera = new THREE.PerspectiveCamera(72, 1, 0.05, 320);
+    camera = new THREE.PerspectiveCamera(72, 1, 0.12, 320);
     camera.position.set(0, 30, 30);
     camera.lookAt(0, 0, 0);
 
@@ -422,18 +422,6 @@ function jitter(seed: number): () => number {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
-}
-
-function addBlob(group: THREE.Group, r: number): void {
-  const tex = getBlobTexture();
-  if (!tex) return;
-  const blob = new THREE.Mesh(
-    new THREE.PlaneGeometry(r * 2.6, r * 2.6),
-    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.5 }),
-  );
-  blob.rotation.x = -Math.PI / 2;
-  blob.position.y = 0.03;
-  group.add(blob);
 }
 
 function shadeMesh(mesh: THREE.Mesh, cast: boolean, receive: boolean): THREE.Mesh {
@@ -578,7 +566,8 @@ function makeProp(p: PropSpec): THREE.Object3D {
     ped.position.y = p.h * 0.12;
     grp.add(ped);
     const robe = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(p.r * 0.72, p.h * 0.58, 12), stoneMat), true, true);
-    robe.position.y = p.h * 0.24 + p.h * 0.29;
+    // Tuck the cone base into the pedestal so the two faces aren't coplanar.
+    robe.position.y = p.h * 0.24 + p.h * 0.29 - 0.08;
     grp.add(robe);
     const headS = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(p.r * 0.34, 14, 12), stoneMat), true, false);
     headS.position.y = p.h * 0.24 + p.h * 0.58 + p.r * 0.28;
@@ -602,14 +591,16 @@ function makeProp(p: PropSpec): THREE.Object3D {
     grp.add(box);
     const frameMat = new THREE.MeshStandardMaterial({ color: hsl(p.hue, 0.45, 0.32), roughness: 0.75, flatShading: true });
     const w = p.r * 1.74;
-    for (const fy of [0.08, p.h - 0.08]) {
+    // Bottom frame raised so its underside clears the floor plane (no z-tie).
+    for (const fy of [0.14, p.h - 0.08]) {
       const f = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(w, 0.14, w), frameMat), true, false);
       f.position.y = fy;
       grp.add(f);
     }
   }
 
-  addBlob(grp, p.r * 1.1);
+  // No fake AO blob: props cast a real shadow, and overlapping transparent
+  // contact-quads were the main flicker source (pitfall: coplanar-decal-sort).
   return grp;
 }
 
@@ -803,11 +794,22 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
   body.scale.setScalar(FIG_SCALE);
   group.add(body);
 
-  // Contact shadow sits on the unscaled group, sized to the scaled footprint.
+  // Contact shadow (figures don't cast a real shadow, to keep the shadow map
+  // static). polygonOffset pulls the decal's tested depth toward the camera so
+  // it resolves cleanly over the floor without a z-tie (pitfall: decal-z-tie).
   const blobTex = getBlobTexture();
   const shadow = new THREE.Mesh(
     new THREE.PlaneGeometry(1.5 * FIG_SCALE, 1.5 * FIG_SCALE),
-    new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.42, depthWrite: false }),
+    new THREE.MeshBasicMaterial({
+      map: blobTex ?? undefined,
+      color: 0x000000,
+      transparent: true,
+      opacity: 0.42,
+      depthWrite: false,
+      polygonOffset: true,
+      polygonOffsetFactor: -2,
+      polygonOffsetUnits: -2,
+    }),
   );
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.03;
