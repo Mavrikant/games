@@ -1,0 +1,21 @@
+{
+  "title": "Salıncak",
+  "description": "Park salıncağını fazına uygun basışlarla pompala, ağaca asılı elmaları toplayarak yükseklik kazan — fazla pompalarsan zincir kopar.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "fizik", "zamanlama", "tek-tuş", "tek-oyunculu"],
+  "controls": "Boşluk / ↑ / Tıkla / Dokun: pompala · R: yeniden başla",
+  "thumbnail": "salincak.svg",
+  "howToPlay": "Salıncak gerçek bir sarkaç fiziğiyle salınan bir çocuk salıncağıdır. Yön tuşları yok — tek aksiyon pompalamak. Salıncak aşağıdan hızla geçerken Boşluk, ↑, ekrana tıklama veya dokunma ile bir kez pompala; her başarılı pompa salıncağın genliğini artırır. Önemli kural: yarım turun başında (aşağıdan geçerken) yalnız BİR pompa sayılır. Aynı yarım turda ikinci kez basarsan ya da apex'e (en yüksek noktaya) yakın basarsan FREN devreye girer ve enerji azalır — istemediğin bir hızlanmayı geri almak için bunu bilerek de kullanabilirsin. Sol alt köşedeki halka size hangi durumdasınız söyler: yeşil 'BAS' iyi pompa zamanı, sarı 'BAS' verimi düşük ama hâlâ pompa, kırmızı 'FREN' bastığında enerji yiyecek demektir. Sağ alttaki açıklık çubuğu mevcut genliğinizi gösterir; sarı tik bir sonraki elmanın istediği açıyı, kırmızı çizgi 90° tehlike sınırını işaretler. Çocuğun ayağı salıncağın yayı üzerinde dolaşırken, ağaca asılı kırmızı elmaları yakaladığı tarafta o açıya ulaşınca toplar; her elma +1 puan ve yeni bir elma daha yüksek bir açıda belirir (20°, 30°, 40°, 50°, 60°, 70°, 80°, sonra rastgele yüksekler). 95°'yi aşarsan zincir kopar ve oyun biter — yüksek genliklerde 'FREN' ile soluk almayı öğrenmen gerekir. İpucu: yarım turun başında, salıncak gerçekten 'sıyrılarak' aşağıdan geçerken bas; apex'e yakın basmak hem boş geçer hem de zaman zaman fren olur.",
+  "scoring": {
+    "storageKey": "salincak.best",
+    "label": "Elma",
+    "direction": "higher",
+    "labelEn": "Apples"
+  },
+  "en": {
+    "title": "Swing",
+    "description": "Pump a playground swing with phase-correct presses and snatch apples hung at growing heights — push too far and the chains snap.",
+    "controls": "Space / ↑ / Click / Tap: pump · R: restart",
+    "howToPlay": "Swing is a children's playground swing modeled with real pendulum physics. There is no left/right control — your only verb is 'pump'. As the swing whooshes through the bottom of its arc, tap Space, ↑, click or touch the screen to pump once; a well-timed pump grows the amplitude. Key rule: only ONE pump counts per half-cycle (one bottom crossing). A second press in the same half-cycle, or a press near the apex (top), becomes a BRAKE that bleeds energy — useful when you've overshot your target. The ring on the bottom-left tells you what your press will do: green 'BAS' (PUMP) is the sweet spot, yellow 'BAS' is reduced-efficiency pump, red 'FREN' (BRAKE) means pressing now will cost you energy. The bar on the bottom-right shows your current amplitude; a yellow tick marks the next apple's required angle and a red marker shows the 90° danger line. As the kid's feet sweep the arc, they grab the red apples hanging on the tree on the matching side once the swing reaches that angle. Each apple is +1, then a new apple spawns higher (20°, 30°, 40°, 50°, 60°, 70°, 80°, then random highs). Crossing 95° snaps the chain and ends the run — at high amplitudes you must learn to coast and brake. Tip: pump exactly when the swing is whipping through the bottom; pressing near the apex either wastes the input or brakes."
+  }
+}

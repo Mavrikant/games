@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Elma<span id="score">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <div class="hud__stat">Açı<span id="angle">0°</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Salıncak oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Salıncak</h2>
+      <p id="overlay-msg">Boşluk veya tıkla → pompala.
+Her yarım turda BİR KEZ, aşağıdan hızla geçerken bas.
+Elmaları topla — çok yükselme, zincir kopar.</p>
+    </div>
+  </div>
+</div>

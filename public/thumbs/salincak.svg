@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Salıncak">
+  <defs>
+    <linearGradient id="slc-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5fa3d6" />
+      <stop offset="100%" stop-color="#c8dcef" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#slc-sky)" />
+
+  <!-- Sun -->
+  <circle cx="262" cy="42" r="34" fill="rgba(255,235,150,0.35)" />
+  <circle cx="262" cy="42" r="20" fill="#ffd966" />
+
+  <!-- Clouds -->
+  <g fill="rgba(255,255,255,0.85)">
+    <ellipse cx="50" cy="40" rx="20" ry="8" />
+    <ellipse cx="70" cy="44" rx="14" ry="6" />
+    <ellipse cx="35" cy="46" rx="12" ry="5" />
+    <ellipse cx="170" cy="30" rx="18" ry="7" />
+    <ellipse cx="188" cy="34" rx="13" ry="5" />
+  </g>
+
+  <!-- Ground -->
+  <rect x="0" y="166" width="320" height="34" fill="#3f8a3f" />
+  <rect x="0" y="166" width="320" height="3" fill="#2c6a2c" />
+
+  <!-- Swing frame: A-frame -->
+  <g stroke="#6b4a2e" stroke-linecap="round">
+    <line x1="80" y1="166" x2="148" y2="62" stroke-width="7" />
+    <line x1="240" y1="166" x2="172" y2="62" stroke-width="7" />
+    <line x1="138" y1="60" x2="182" y2="60" stroke-width="9" />
+  </g>
+  <circle cx="160" cy="60" r="4" fill="#1b1c20" />
+
+  <!-- Chains at ~25° swing -->
+  <g stroke="#c0c4cc" stroke-width="1.6" stroke-linecap="round">
+    <line x1="148" y1="60" x2="203" y2="170" />
+    <line x1="172" y1="60" x2="227" y2="170" />
+  </g>
+
+  <!-- Seat -->
+  <g transform="translate(215 170) rotate(25)">
+    <rect x="-22" y="-3" width="44" height="6" fill="#4a3a1f" />
+    <rect x="-22" y="-3" width="44" height="1.5" fill="#2a1f10" />
+  </g>
+
+  <!-- Kid -->
+  <g transform="translate(215 170) rotate(25)">
+    <!-- legs -->
+    <line x1="-4" y1="-2" x2="-5" y2="14" stroke="#1e3a8a" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="4" y1="-2" x2="5" y2="14" stroke="#1e3a8a" stroke-width="3.5" stroke-linecap="round" />
+    <rect x="-8" y="13" width="5" height="3" fill="#1f2937" />
+    <rect x="3" y="13" width="5" height="3" fill="#1f2937" />
+    <!-- torso -->
+    <ellipse cx="0" cy="-16" rx="7" ry="12" fill="#ef4444" />
+    <!-- arms -->
+    <line x1="-5" y1="-19" x2="-12" y2="-12" stroke="#f6c89d" stroke-width="3" stroke-linecap="round" />
+    <line x1="5" y1="-19" x2="12" y2="-12" stroke="#f6c89d" stroke-width="3" stroke-linecap="round" />
+    <!-- head -->
+    <circle cx="0" cy="-32" r="7" fill="#f6c89d" />
+    <path d="M -7 -32 a 7 7 0 0 1 14 0 z" fill="#4b3621" />
+  </g>
+
+  <!-- Apple on left side -->
+  <g transform="translate(95 150)">
+    <circle cx="0" cy="0" r="11" fill="#dc2626" />
+    <circle cx="-3" cy="-4" r="2.4" fill="rgba(255,255,255,0.55)" />
+    <line x1="0" y1="-9" x2="2" y2="-15" stroke="#4a2f1a" stroke-width="2" stroke-linecap="round" />
+    <ellipse cx="6" cy="-13" rx="4" ry="2" transform="rotate(20 6 -13)" fill="#2e7d32" />
+  </g>
+
+  <!-- Faint arc path -->
+  <path d="M 65 145 A 113 113 0 0 1 255 145" stroke="rgba(255,255,255,0.18)" stroke-width="1" stroke-dasharray="3 5" fill="none" />
+</svg>

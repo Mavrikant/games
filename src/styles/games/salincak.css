@@ -1,0 +1,118 @@
+:root {
+  --slc-sky-top: #5fa3d6;
+  --slc-sky-bot: #c8dcef;
+  --slc-sun: #ffd966;
+  --slc-cloud: rgba(255, 255, 255, 0.85);
+  --slc-grass: #3f8a3f;
+  --slc-grass-dark: #2c6a2c;
+  --slc-frame: #6b4a2e;
+  --slc-pivot: #1b1c20;
+  --slc-chain: #c0c4cc;
+  --slc-seat: #4a3a1f;
+  --slc-seat-edge: #2a1f10;
+  --slc-shirt: #ef4444;
+  --slc-pants: #1e3a8a;
+  --slc-shoe: #1f2937;
+  --slc-skin: #f6c89d;
+  --slc-hair: #4b3621;
+  --slc-apple: #dc2626;
+  --slc-apple-stem: #4a2f1a;
+  --slc-apple-leaf: #2e7d32;
+  --slc-good: #86efac;
+  --slc-bad: #fca5a5;
+  --slc-warn: #fde68a;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__stat {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 340px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+@media (max-width: 420px) {
+  .hud__stat {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .hud__stat span {
+    font-size: 18px;
+  }
+}
