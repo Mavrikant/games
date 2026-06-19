@@ -207,10 +207,11 @@
   width: 18px;
   transform: translateY(-50%);
 }
-/* While a match is live: show the crosshair and hide the system cursor. */
-.km-root--play .km-crosshair {
+/* First-person (seekers): show the crosshair. */
+.km-root--fpv .km-crosshair {
   display: block;
 }
+/* While a match is live (either view): hide the system cursor. */
 .km-root--play #gl {
   cursor: none;
 }

@@ -16,7 +16,6 @@ import * as THREE from 'three';
 import {
   DOOR_H,
   DOOR_W,
-  EYE_H,
   FLOOR_HUE,
   FOG_FAR,
   FOG_NEAR,
@@ -24,6 +23,7 @@ import {
   GRID_ROWS,
   MAP_HD,
   MAP_HW,
+  MOVE_SPEED,
   PROP_HUES,
   ROOM,
   SKY,
@@ -49,14 +49,22 @@ let motes: THREE.Points | null = null;
 interface ActorView {
   group: THREE.Group;
   skin: THREE.MeshStandardMaterial;
-  body: THREE.Mesh;
-  tail: THREE.Group;
-  eyes: THREE.Group[];
+  torso: THREE.Mesh; // breathing / bob
+  legs: THREE.Group[]; // 2 hip-pivot groups (walk swing)
+  arms: THREE.Group[]; // 2 shoulder-pivot groups
   shadow: THREE.Mesh;
   tongue: THREE.Mesh;
   tongueTip: THREE.Mesh;
   phase: number;
   isSeeker: boolean;
+  // render-side smoothing + walk animation state
+  rx: number;
+  rz: number;
+  ryaw: number;
+  prevX: number;
+  prevZ: number;
+  walk: number;
+  init: boolean;
 }
 
 let actorViews = new Map<string, ActorView>();
@@ -69,6 +77,13 @@ const MAX_LAMP_LIGHTS = 6;
 const BASEBOARD_H = 0.55;
 const CORNICE_H = 0.4;
 const PILLAR_T = WALL_T * 1.9;
+
+// First/third-person camera + render-smoothing tuning.
+const TP_DIST = 4.6; // third-person follow distance (hiders)
+const TP_PIVOT_Y = 1.4; // height the follow camera orbits / looks at
+const TAU_POS = 0.05; // render position smoothing time-constant (s)
+const TAU_YAW = 0.07; // render yaw smoothing time-constant (s)
+const FIG_EYE = 1.55; // first-person eye height (seekers)
 
 export function isWebglOk(): boolean {
   return webglOk;
@@ -678,12 +693,16 @@ function makeLintel(group: THREE.Group, x: number, z: number, horizontal: boolea
   group.add(beam);
 }
 
-function makeChameleon(hue: number, isSeeker: boolean): ActorView {
+// A stylised mini-figure person ~1.6u tall. The whole outfit (head, torso,
+// limbs) shares the recolouring `skin` material so a hider blends/fades as one;
+// only the eyes (and the seeker's red cap) stay fixed. Limbs hang from pivot
+// groups so the render loop can drive a walk cycle.
+function makeFigure(hue: number, isSeeker: boolean): ActorView {
   const group = new THREE.Group();
   const bump = getScaleBump();
   const skin = new THREE.MeshStandardMaterial({
     color: hsl(hue, 0.6, 0.52),
-    roughness: 0.5,
+    roughness: 0.55,
     metalness: 0.04,
     transparent: true,
     opacity: 1,
@@ -691,126 +710,150 @@ function makeChameleon(hue: number, isSeeker: boolean): ActorView {
     // inner faces blend through (pitfall: transparent-self-overlap).
     depthWrite: true,
     bumpMap: bump ?? null,
-    bumpScale: 0.015,
+    bumpScale: 0.01,
   });
 
-  // Smoothly-shaded tapered body (single mesh — no seams).
-  const body = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.5, 20, 16), skin), false, true);
-  body.scale.set(0.95, 0.82, 1.52);
-  body.position.y = 0.52;
-  group.add(body);
-  // belly fill so legs meet the body with no gap
-  const belly = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.42, 16, 12), skin), false, true);
-  belly.scale.set(1, 0.7, 1.3);
-  belly.position.y = 0.4;
-  group.add(belly);
+  const legH = 0.72;
+  const hipY = 0.78;
+  const shoulderY = 1.22;
 
-  // Dorsal crest — a serrated ridge of thin overlapping fins hugging the spine.
-  const crestMat = isSeeker ? new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5, flatShading: true }) : skin;
-  const FINS = 14;
-  for (let i = 0; i < FINS; i++) {
-    const t = i / (FINS - 1);
-    const z = 0.55 - t * 1.32;
-    const bodyTop = 0.9 - Math.abs(t - 0.25) * 0.28; // follow the body's arc
-    const fin = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.11 - t * 0.05, 0.2 - t * 0.1, 4), crestMat), false, false);
-    fin.scale.x = 0.32; // flatten into a fin
-    fin.position.set(0, bodyTop, z);
-    group.add(fin);
-  }
+  // Pelvis + torso (slightly tapered).
+  const pelvis = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.26, 0.3), skin), false, true);
+  pelvis.position.y = hipY + 0.04;
+  group.add(pelvis);
+  const torso = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.23, 0.5, 12), skin), false, true);
+  torso.scale.z = 0.78;
+  torso.position.y = 1.02;
+  group.add(torso);
+  const chest = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.14, 0.32), skin), false, true);
+  chest.position.y = shoulderY - 0.04;
+  group.add(chest);
+  const collar = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.12, 10), skin), false, false);
+  collar.position.y = shoulderY + 0.05;
+  group.add(collar);
 
-  // Neck + head, overlapping the body.
-  const neck = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12), skin), false, true);
-  neck.scale.set(0.9, 0.85, 1);
-  neck.position.set(0, 0.6, 0.7);
-  group.add(neck);
-  const head = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.36, 18, 14), skin), false, true);
-  head.scale.set(1, 0.95, 1.16);
-  head.position.set(0, 0.68, 0.92);
+  // Head + face.
+  const head = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.22, 18, 16), skin), false, true);
+  head.scale.set(1, 1.08, 1);
+  head.position.y = 1.55;
   group.add(head);
-  const snout = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), skin), false, true);
-  snout.scale.set(0.9, 0.8, 1.2);
-  snout.position.set(0, 0.6, 1.18);
-  group.add(snout);
-  const casque = shadeMesh(new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.4, 6), skin), false, false);
-  casque.position.set(0, 0.96, 0.78);
-  casque.rotation.x = -0.55;
-  group.add(casque);
-
-  // Turret eyes (independently swivel).
-  const eyes: THREE.Group[] = [];
-  const eyeMat = new THREE.MeshStandardMaterial({ color: '#15181f', roughness: 0.35 });
-  const pupilMat = new THREE.MeshBasicMaterial({ color: isSeeker ? '#fca5a5' : '#fde68a' });
+  const eyeMat = new THREE.MeshBasicMaterial({ color: '#15181f' });
   for (const sx of [-1, 1]) {
-    const eg = new THREE.Group();
-    eg.position.set(0.27 * sx, 0.8, 0.86);
-    const turret = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), skin), false, false);
-    eg.add(turret);
-    const ball = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), eyeMat);
-    ball.position.set(0.11 * sx, 0, 0.02);
-    eg.add(ball);
-    const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), pupilMat);
-    pupil.position.set(0.17 * sx, 0, 0.03);
-    eg.add(pupil);
-    group.add(eg);
-    eyes.push(eg);
+    const eye = new THREE.Mesh(new THREE.SphereGeometry(0.038, 8, 8), eyeMat);
+    eye.position.set(sx * 0.082, 1.57, 0.2);
+    group.add(eye);
+  }
+  if (isSeeker) {
+    const capMat = new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5 });
+    const cap = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.235, 16, 10, 0, Math.PI * 2, 0, Math.PI * 0.5), capMat), true, false);
+    cap.position.y = 1.6;
+    group.add(cap);
+    const brim = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.05, 0.22), capMat), true, false);
+    brim.position.set(0, 1.59, 0.2);
+    group.add(brim);
   }
 
-  // Curled prehensile tail — one smooth tube along a spiral curve (no beads),
-  // pivoting at its base so it can sway.
-  const tail = new THREE.Group();
-  tail.position.set(0, 0.5, -0.72);
-  const tailCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0, 0, 0.06),
-    new THREE.Vector3(0, -0.04, -0.34),
-    new THREE.Vector3(0.07, -0.04, -0.62),
-    new THREE.Vector3(0.2, 0.06, -0.74),
-    new THREE.Vector3(0.27, 0.24, -0.64),
-    new THREE.Vector3(0.17, 0.36, -0.46),
-    new THREE.Vector3(0.03, 0.36, -0.34),
-  ]);
-  const tube = shadeMesh(new THREE.Mesh(new THREE.TubeGeometry(tailCurve, 44, 0.12, 9, false), skin), false, true);
-  tail.add(tube);
-  group.add(tail);
+  // Arms — shoulder-pivot groups so they swing.
+  const arms: THREE.Group[] = [];
+  for (const sx of [-1, 1]) {
+    const sh = new THREE.Group();
+    sh.position.set(sx * 0.34, shoulderY, 0);
+    const upper = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.075, 0.42, 8), skin), false, false);
+    upper.position.y = -0.21;
+    sh.add(upper);
+    const fore = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.065, 0.36, 8), skin), false, false);
+    fore.position.y = -0.55;
+    sh.add(fore);
+    const hand = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.085, 10, 8), skin), false, false);
+    hand.position.y = -0.74;
+    sh.add(hand);
+    sh.rotation.z = sx * 0.12;
+    group.add(sh);
+    arms.push(sh);
+  }
 
-  // Legs: thigh + shin + gripping foot, tucked under the body (no gaps).
-  for (const [lx, lz, sgn] of [[-0.34, 0.46, -1], [0.34, 0.46, 1], [-0.34, -0.32, -1], [0.34, -0.32, 1]] as const) {
-    const thigh = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.075, 0.4, 8), skin), false, true);
-    thigh.position.set(lx, 0.36, lz);
-    thigh.rotation.z = sgn * 0.42;
-    group.add(thigh);
-    const shin = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.32, 8), skin), false, true);
-    shin.position.set(lx + sgn * 0.15, 0.13, lz);
-    shin.rotation.z = sgn * -0.34;
-    group.add(shin);
-    const foot = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), skin), false, true);
-    foot.scale.set(1.5, 0.55, 1.25);
-    foot.position.set(lx + sgn * 0.22, 0.045, lz);
-    group.add(foot);
+  // Legs — hip-pivot groups so they stride.
+  const legs: THREE.Group[] = [];
+  for (const sx of [-1, 1]) {
+    const hip = new THREE.Group();
+    hip.position.set(sx * 0.15, hipY, 0);
+    const thigh = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.1, legH * 0.55, 8), skin), false, true);
+    thigh.position.y = -legH * 0.27;
+    hip.add(thigh);
+    const calf = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.08, legH * 0.5, 8), skin), false, true);
+    calf.position.y = -legH * 0.74;
+    hip.add(calf);
+    const foot = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.12, 0.3), skin), false, true);
+    foot.position.set(0, -legH + 0.02, 0.06);
+    hip.add(foot);
+    group.add(hip);
+    legs.push(hip);
   }
 
   const blobTex = getBlobTexture();
   const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.9, 1.9),
-    new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.45, depthWrite: false }),
+    new THREE.PlaneGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.42, depthWrite: false }),
   );
   shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = 0.04;
+  shadow.position.y = 0.03;
   group.add(shadow);
 
+  // Seeker's "tag" reach (kept from the tongue mechanic), thrown from the chest.
   const tongue = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.06, 0.06, 1, 6),
+    new THREE.CylinderGeometry(0.05, 0.05, 1, 6),
     new THREE.MeshBasicMaterial({ color: '#f43f5e' }),
   );
   tongue.visible = false;
   group.add(tongue);
   const tongueTip = new THREE.Mesh(
-    new THREE.SphereGeometry(0.15, 10, 10),
+    new THREE.SphereGeometry(0.14, 10, 10),
     new THREE.MeshStandardMaterial({ color: '#fb7185', emissive: '#f43f5e', emissiveIntensity: 0.5 }),
   );
   tongueTip.visible = false;
   group.add(tongueTip);
 
-  return { group, skin, body, tail, eyes, shadow, tongue, tongueTip, phase: Math.random() * Math.PI * 2, isSeeker };
+  return {
+    group,
+    skin,
+    torso,
+    legs,
+    arms,
+    shadow,
+    tongue,
+    tongueTip,
+    phase: Math.random() * Math.PI * 2,
+    isSeeker,
+    rx: 0,
+    rz: 0,
+    ryaw: 0,
+    prevX: 0,
+    prevZ: 0,
+    walk: 0,
+    init: false,
+  };
+}
+
+/** Distance from (px,pz) along a unit ray (dx,dz) to the nearest wall, for the
+ *  third-person camera to avoid clipping through walls. Infinity if clear. */
+function rayWallDist(world: World, px: number, pz: number, dx: number, dz: number): number {
+  let best = Infinity;
+  for (const w of world.walls) {
+    if (w.ax === w.bx) {
+      if (dx === 0) continue;
+      const t = (w.ax - px) / dx;
+      if (t <= 0) continue;
+      const zh = pz + dz * t;
+      if (zh >= Math.min(w.az, w.bz) - WALL_T && zh <= Math.max(w.az, w.bz) + WALL_T) best = Math.min(best, t);
+    } else {
+      if (dz === 0) continue;
+      const t = (w.az - pz) / dz;
+      if (t <= 0) continue;
+      const xh = px + dx * t;
+      if (xh >= Math.min(w.ax, w.bx) - WALL_T && xh <= Math.max(w.ax, w.bx) + WALL_T) best = Math.min(best, t);
+    }
+  }
+  return best;
 }
 
 export function buildArena(world: World): void {
@@ -860,7 +903,7 @@ export function buildArena(world: World): void {
   disposeGroup(actorsGroup);
   actorViews = new Map();
   for (const p of world.players) {
-    const view = makeChameleon(p.bodyHue, p.role === 'seeker');
+    const view = makeFigure(p.bodyHue, p.role === 'seeker');
     actorsGroup.add(view.group);
     actorViews.set(p.id, view);
   }
@@ -885,33 +928,67 @@ export function render(
   const now = performance.now() / 1000;
   if (motes) motes.rotation.y += dt * 0.012;
 
-  const fpv = (world.status === 'prep' || world.status === 'hunt') && actorViews.has(myId);
-
+  const playing = world.status === 'prep' || world.status === 'hunt';
   let me: Player | null = null;
+  let meView: ActorView | null = null;
+  for (const p of world.players) if (p.id === myId) me = p;
+  const fpvSelf = playing && !!me && me.role === 'seeker';
+
+  const aPos = 1 - Math.exp(-dt / TAU_POS);
+  const aYaw = 1 - Math.exp(-dt / TAU_YAW);
+
   for (const p of world.players) {
     const view = actorViews.get(p.id);
     if (!view) continue;
     const isMe = p.id === myId;
-    if (isMe) me = p;
+    if (isMe) meView = view;
 
-    const hideSelf = isMe && fpv;
+    // Initialise / advance the smoothed render transform (frame-rate
+    // independent) so motion stays fluid on any refresh rate and remote
+    // players glide between sparse snapshots (pitfall: stepped-remote-motion).
+    if (!view.init) {
+      view.rx = p.x;
+      view.rz = p.z;
+      view.ryaw = p.yaw;
+      view.prevX = p.x;
+      view.prevZ = p.z;
+      view.init = true;
+    }
+    view.rx += (p.x - view.rx) * aPos;
+    view.rz += (p.z - view.rz) * aPos;
+    const dyaw = ((p.yaw - view.ryaw + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+    view.ryaw += dyaw * aYaw;
+
+    const hideSelf = isMe && fpvSelf;
     view.group.visible = !hideSelf;
-    if (hideSelf) continue;
+    if (hideSelf) {
+      view.prevX = view.rx;
+      view.prevZ = view.rz;
+      continue;
+    }
 
-    view.group.position.set(p.x, 0, p.z);
-    view.group.rotation.y = p.yaw;
+    // Walk cycle driven by actual (rendered) speed → arms/legs swing, body bobs.
+    const spd = Math.hypot(view.rx - view.prevX, view.rz - view.prevZ) / Math.max(dt, 1e-3);
+    view.prevX = view.rx;
+    view.prevZ = view.rz;
+    const moveAmt = Math.min(1, spd / MOVE_SPEED);
+    view.walk += (0.9 + moveAmt * 9) * dt;
+    const swing = Math.sin(view.walk) * (0.15 + 0.55 * moveAmt);
+    view.legs[0]!.rotation.x = swing;
+    view.legs[1]!.rotation.x = -swing;
+    view.arms[0]!.rotation.x = -swing * 0.8;
+    view.arms[1]!.rotation.x = swing * 0.8;
+    const bob = Math.abs(Math.sin(view.walk)) * 0.06 * moveAmt;
+    view.torso.scale.y = 1 + (1 - moveAmt) * Math.sin((now + view.phase) * 2) * 0.03;
 
-    const t = now + view.phase;
-    view.body.scale.y = 0.82 + Math.sin(t * 2.4) * 0.025;
-    view.tail.rotation.y = Math.sin(t * 1.3) * 0.25;
-    const dart = Math.sin(t * 0.7) * 0.5;
-    view.eyes[0]!.rotation.y = dart;
-    view.eyes[1]!.rotation.y = -dart;
+    view.group.position.set(view.rx, p.caught ? 0.1 : bob, view.rz);
+    view.group.rotation.y = view.ryaw;
+    view.group.rotation.z = p.caught ? Math.PI * 0.42 : 0;
 
-    view.skin.color.copy(hsl(p.bodyHue, p.role === 'seeker' ? 0.55 : 0.62, p.caught ? 0.3 : 0.54));
+    view.skin.color.copy(hsl(p.bodyHue, p.role === 'seeker' ? 0.5 : 0.62, p.caught ? 0.3 : 0.52));
     if (p.role === 'hider' && !p.caught) {
       view.skin.emissive.copy(hsl(p.bodyHue, 0.7, 0.5));
-      view.skin.emissiveIntensity = 0.04 + Math.max(0, 0.12 * (1 - p.visible)) * (0.6 + 0.4 * Math.sin(t * 5));
+      view.skin.emissiveIntensity = 0.03 + Math.max(0, 0.1 * (1 - p.visible)) * (0.6 + 0.4 * Math.sin((now + view.phase) * 5));
     } else {
       view.skin.emissiveIntensity = 0;
     }
@@ -919,37 +996,44 @@ export function render(
     let opacity = 1;
     if (p.role === 'hider' && !p.caught) opacity = Math.max(0.12, p.visible);
     view.skin.opacity = opacity;
-    view.group.rotation.z = p.caught ? Math.PI * 0.12 : 0;
-    view.body.position.y = p.caught ? 0.37 : 0.52;
-    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.42 * Math.max(0.25, opacity);
+    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.4 * Math.max(0.25, opacity);
 
     if (view.isSeeker && p.tongue && !p.caught) {
       const len = Math.max(0.01, p.tongue.len);
-      const ang = Math.atan2(p.tongue.dx, p.tongue.dz) - p.yaw;
+      const ang = Math.atan2(p.tongue.dx, p.tongue.dz) - view.ryaw;
       const cx = Math.sin(ang);
       const cz = Math.cos(ang);
       view.tongue.visible = true;
-      view.tongue.position.set(cx * (len / 2), 0.66, cz * (len / 2));
+      view.tongue.position.set(cx * (len / 2), 1.1, cz * (len / 2));
       view.tongue.scale.set(1, len, 1);
       view.tongue.rotation.set(Math.PI / 2, 0, -ang);
       view.tongueTip.visible = true;
-      view.tongueTip.position.set(cx * len, 0.66, cz * len);
+      view.tongueTip.position.set(cx * len, 1.1, cz * len);
     } else {
       view.tongue.visible = false;
       view.tongueTip.visible = false;
     }
   }
 
-  if (fpv && me) {
-    const cy = Math.cos(look.pitch);
-    scratchEye.set(me.x, EYE_H, me.z);
-    scratchLook.set(
-      me.x + Math.sin(look.yaw) * cy,
-      EYE_H + Math.sin(look.pitch),
-      me.z + Math.cos(look.yaw) * cy,
-    );
+  const cp = Math.cos(look.pitch);
+  if (playing && me && me.role === 'seeker') {
+    // First-person: camera at the seeker's eye.
+    scratchEye.set(me.x, FIG_EYE, me.z);
+    scratchLook.set(me.x + Math.sin(look.yaw) * cp, FIG_EYE + Math.sin(look.pitch), me.z + Math.cos(look.yaw) * cp);
     camera.position.copy(scratchEye);
     camera.lookAt(scratchLook);
+    camInit = true;
+  } else if (playing && me && meView) {
+    // Third-person: follow the hider from behind, pulling in past walls.
+    const px = meView.rx;
+    const pz = meView.rz;
+    const fx = Math.sin(look.yaw) * cp;
+    const fy = Math.sin(look.pitch);
+    const fz = Math.cos(look.yaw) * cp;
+    const backHit = rayWallDist(world, px, pz, -Math.sin(look.yaw), -Math.cos(look.yaw));
+    const dist = Math.min(TP_DIST, Math.max(1.6, backHit - 0.4));
+    camera.position.set(px - fx * dist, Math.max(0.5, TP_PIVOT_Y - fy * dist + 0.25), pz - fz * dist);
+    camera.lookAt(px + fx * 1.4, TP_PIVOT_Y + fy * 1.4, pz + fz * 1.4);
     camInit = true;
   } else {
     menuAngle += dt * 0.09;

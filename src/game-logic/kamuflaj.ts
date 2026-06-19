@@ -16,7 +16,6 @@ import {
   MIN_PLAYERS,
   SIM_DT,
   SNAP_MS,
-  seekerCountFor,
 } from './kamuflaj/constants';
 import {
   buildWalls,
@@ -180,40 +179,34 @@ function seedLook(): void {
   if (me) input.setLook(me.yaw, 0);
 }
 
-function assignRoster(humans: { id: string; name: string; prefer: Role }[]): Seat[] {
+// Roles are split RANDOMLY and as EQUALLY as possible each match: shuffle the
+// players, make floor(n/2) of them seekers (so 2→1·1, 4→2·2, 6→3·3, odd → one
+// extra hider). Player preference is ignored — every match is a fresh draw.
+function assignRoster(humans: { id: string; name: string }[]): Seat[] {
   const n = humans.length;
-  const need = seekerCountFor(n);
-  const roles: (Role | null)[] = humans.map(() => null);
-  let s = 0;
-  for (let i = 0; i < n && s < need; i++) {
-    if (humans[i]!.prefer === 'seeker') {
-      roles[i] = 'seeker';
-      s++;
-    }
+  const order = humans.map((_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i]!, order[j]!] = [order[j]!, order[i]!];
   }
-  for (let i = 0; i < n && s < need; i++) {
-    if (roles[i] === null) {
-      roles[i] = 'seeker';
-      s++;
-    }
-  }
+  const seekers = Math.max(1, Math.floor(n / 2));
+  const role: Role[] = humans.map(() => 'hider');
+  for (let k = 0; k < seekers && k < n; k++) role[order[k]!] = 'seeker';
   return humans.map((h, i) => ({
     id: h.id,
     name: h.name,
-    role: roles[i] ?? 'hider',
+    role: role[i]!,
     hue: PALETTE[i % PALETTE.length]!,
   }));
 }
 
 function rosterFromMembers(): Seat[] {
-  if (!room) return assignRoster([{ id: myId, name: myName, prefer: chosenRole }]);
+  if (!room) return assignRoster([{ id: myId, name: myName }]);
   const ids = room.members();
-  const humans: { id: string; name: string; prefer: Role }[] = [
-    { id: myId, name: myName, prefer: chosenRole },
-  ];
+  const humans: { id: string; name: string }[] = [{ id: myId, name: myName }];
   for (const id of ids) {
     if (id === myId) continue;
-    humans.push({ id, name: guestNames.get(id) ?? 'Misafir', prefer: 'hider' });
+    humans.push({ id, name: guestNames.get(id) ?? 'Misafir' });
   }
   return assignRoster(humans.slice(0, MAX_HUMANS));
 }
@@ -556,11 +549,10 @@ function showMenuPanels(): void {
   show(menuActions, 'km-actions--hidden');
   nameInput.style.display = '';
   const joining = pendingJoinCode !== '';
-  // Guests joining a link choose only a name; the host assigns roles.
-  roleToggle.classList.toggle('km-role--hidden', joining);
+  // Roles are drawn randomly each match, so there is no role preference to pick.
+  hide(roleToggle, 'km-role--hidden');
   createBtn.style.display = joining ? 'none' : '';
   joinBtn.style.display = joining ? '' : 'none';
-  syncRoleToggle();
 }
 
 function syncLobby(): void {
@@ -589,7 +581,7 @@ function syncOverlay(force = false): void {
     overlayTitle.textContent =
       pendingJoinCode !== '' ? 'Odaya Katıl' : overlayTitle.textContent || 'Kamuflaj';
     if (pendingJoinCode !== '') {
-      overlayMsg.textContent = 'Adını gir ve odaya katıl. Kurucu maçı başlatınca FPV olarak oynarsın.';
+      overlayMsg.textContent = 'Adını gir ve odaya katıl. Kurucu maçı başlatınca rolün (avcı/saklanan) rastgele belirlenir.';
     }
     showMenuPanels();
     showOverlay(overlay);
@@ -852,6 +844,8 @@ function tick(dt: number): void {
 
   const me = myPlayer();
   kmRoot.classList.toggle('km-root--play', playing && !!me);
+  // Crosshair only in first-person (seekers); hiders play third-person.
+  kmRoot.classList.toggle('km-root--fpv', playing && me?.role === 'seeker');
   renderScene(world, dt, myId, { yaw: input.lookYaw(), pitch: input.lookPitch() });
 }
 
@@ -887,7 +881,7 @@ function backToMenu(): void {
   startAttract();
   overlayTitle.textContent = 'Kamuflaj';
   overlayMsg.textContent = channelEnabled()
-    ? 'Birinci şahıs bukalemun saklambacı. Odalardan oluşan haritada saklan, boyan ve avcının dilinden kaç. Bir oda kur ve arkadaşlarını çağır.'
+    ? 'Minik karakterlerle kamuflaj saklambacı. Odalardan oluşan haritada saklan, boyan ve avcılardan kaç. Roller rastgele dağılır; avcılar FPV, saklananlar üçüncü şahıs görür. Bir oda kur ve arkadaşlarını çağır.'
     : 'Kamuflaj çok oyunculu bir saklambaçtır ve çevrimiçi bir sunucu gerektirir.';
   bannerKey = '';
   banner.classList.add('km-banner--hidden');
