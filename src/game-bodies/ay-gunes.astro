@@ -1,0 +1,53 @@
+---
+---
+
+<header class="hud">
+  <div class="ag-meta">
+    <div class="ag-meta__item" title="Hamle">
+      <span class="ag-meta__icon" aria-hidden="true">✎</span>
+      <span id="moves">0</span>
+    </div>
+    <div class="ag-meta__item" title="En iyi (en az hamle)">
+      <span class="ag-meta__icon" aria-hidden="true">🏆</span>
+      <span id="best">—</span>
+    </div>
+  </div>
+  <div class="ag-actions">
+    <label class="ag-diff">
+      <span class="ag-diff__label">Zorluk</span>
+      <select id="difficulty" class="hud__btn" aria-label="Zorluk seç">
+        <option value="easy">Kolay</option>
+        <option value="medium">Orta</option>
+        <option value="hard">Zor</option>
+      </select>
+    </label>
+    <button id="restart" class="hud__btn" type="button" title="Sıfırla (R)">Sıfırla</button>
+    <button id="new-board" class="hud__btn" type="button" title="Yeni puzzle (N)">Yeni puzzle</button>
+  </div>
+</header>
+
+<div class="ag-board-wrap">
+  <div
+    id="board"
+    class="ag-board"
+    role="grid"
+    aria-label="Ay-Güneş 6 çarpı 6 tahtası"
+  ></div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tebrikler!</h2>
+      <p id="overlay-msg">Bulmacayı çözdün.</p>
+      <button id="overlay-new" class="hud__btn hud__btn--accent" type="button">
+        Yeni puzzle
+      </button>
+    </div>
+  </div>
+</div>
+
+<p class="ag-legend">
+  Tıkla: boş → ☀ → ☾ döngüsü ·
+  <span class="ag-leg ag-leg--eq">=</span> aynı olmalı ·
+  <span class="ag-leg ag-leg--ne">×</span> farklı olmalı ·
+  satır/sütun = 3 güneş + 3 ay ·
+  üç komşu aynı olamaz
+</p>

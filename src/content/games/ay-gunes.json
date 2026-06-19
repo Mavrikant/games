@@ -1,0 +1,21 @@
+{
+  "title": "Ay-Güneş",
+  "description": "6×6 ızgarayı ay ve güneşle doldur: üç komşu hücre aynı olmasın, her satır/sütun dengeli olsun, kenardaki ipuçlarına uy.",
+  "dateAdded": "2026-06-19",
+  "tags": ["puzzle", "mantık", "tek-oyunculu"],
+  "controls": "Tıkla: boş → ☀ → ☾ döngüsü · R: sıfırla · N: yeni puzzle",
+  "howToPlay": "Amacın 6×6 tahtadaki her hücreye ya bir güneş (☀) ya da bir ay (☾) yerleştirmek; sadece üç basit kuralla. (1) Aynı sembol yan yana veya alt alta üç hücreden fazla tekrar edemez — bir satır ya da sütunda asla üç güneş veya üç ay yan yana göremezsin. (2) Her satırda ve her sütunda tam olarak üç güneş ile üç ay olmalı; sayılar mutlaka eşit. (3) İki hücre arasındaki küçük işaretlere uy: '=' iki komşu hücrenin aynı sembolde olmasını ister, '×' farklı olmasını ister. Hücrelere tıkladıkça boş → ☀ → ☾ → boş döngüsünden geçerler; başlangıçta koyu zeminli kilitli hücreler ipucudur, onlara dokunamazsın. Kural ihlali oluştuğunda ihlale yol açan hücreler ve işaretler kırmızıyla yanar; bu uyarılar canlı, değiştirdiğin anda kaybolur. Tahta tamamen dolduğunda ve hiçbir kırmızı uyarı kalmadığında bulmacayı çözmüş olursun. Sağ üstte üç zorluk vardır: Kolay (20 ipucu, az kısıt), Orta (15 ipucu, daha çok kısıt), Zor (10 ipucu, çok kısıt). 'Sıfırla' (R) hamlelerini siler ipuçlarına geri döner; 'Yeni puzzle' (N) tamamen yeni bir tahta üretir. Hamle sayın takip edilir ve her zorluk için en az hamleyle çözdüğün rekorun tarayıcında saklanır. İpucu: önce '×' işaretlerini avla — iki komşu farklıysa içlerinden birinin değeri diğerini doğrudan belirler. Sonra bir hücrenin iki yanındaki yan komşularını incele: iki güneş yan yana ise üçüncüsü zorunlu olarak ay'dır; aynı şekilde satır/sütunda üç güneş tamamlandıysa kalan üç hücre kesin ay'dır. Bu üç ilkeyi (3'lü yasağı, satır-sütun dengesi, kenar kısıtları) sırayla tarayarak çıkarımları zincirle.",
+  "thumbnail": "ay-gunes.svg",
+  "scoring": {
+    "storageKey": "ay-gunes.best-easy",
+    "label": "Hamle (kolay)",
+    "direction": "lower",
+    "labelEn": "Moves (easy)"
+  },
+  "en": {
+    "title": "Sun & Moon",
+    "description": "Fill a 6×6 grid with suns and moons: never three of the same in a row, every row/column balanced, and edge hints satisfied.",
+    "controls": "Click: empty → ☀ → ☾ cycle · R: reset · N: new puzzle",
+    "howToPlay": "Fill every cell of a 6×6 board with either a sun (☀) or a moon (☾) following just three rules. (1) No three identical symbols may be adjacent horizontally or vertically — you'll never see three suns or three moons in a row. (2) Each row and each column must contain exactly three suns and three moons; the counts must be equal. (3) Honour the small marks between cells: '=' demands the two neighbouring cells share the same symbol, while '×' demands they differ. Clicking a cell cycles it through empty → ☀ → ☾ → empty; cells with a darker background are locked clues you can't change. The moment any rule is broken, the offending cells and marks light up red — these warnings are live and disappear as soon as you fix them. When the board is completely filled and no red warnings remain, you've solved the puzzle. Three difficulties are offered top-right: Easy (20 clues, few constraints), Medium (15 clues, more constraints), Hard (10 clues, many constraints). 'Reset' (R) clears your moves back to the clues; 'New puzzle' (N) generates a fresh board. Your move count is tracked and your fewest-moves record per difficulty is kept in the browser. Tip: hunt the '×' marks first — when two neighbours must differ, fixing one immediately fixes the other. Then scan triples: if two neighbours are already suns, the third must be a moon; once a row/column has all three suns placed, the remaining three cells are certainly moons. Chain these three principles (the no-triple rule, the row/column balance, and the edge constraints) to deduce one cell at a time."
+  }
+}
