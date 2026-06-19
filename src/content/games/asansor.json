@@ -1,0 +1,21 @@
+{
+  "title": "Asansör",
+  "description": "Beş katlı bir kuyuda asansör operatörü ol — yolcuları sabırları tükenmeden doğru kata bırak.",
+  "dateAdded": "2026-06-19",
+  "tags": ["yonetim", "zaman", "strateji"],
+  "controls": "1-5: kata git · ↑/↓: kat değiştir · Tıkla: kata gönder · Boşluk: duraklat · R: yeniden başla",
+  "howToPlay": "Beş katlı bir binada tek asansörün operatörüsün. Yolcular rastgele katlarda belirir; her birinin renkli rozetindeki rakam (1-5) gitmek istediği katı söyler. Etraflarındaki halka sabırlarıdır — saat yönünde tükenirken önce gri, sonra sarı, en sonunda kırmızı olur. Sabır sıfırlanırsa yolcu öfkeyle ayrılır ve bir can kaybedersin (toplam üç can vardır). Asansörü 1-5 tuşlarıyla, ok tuşlarıyla, ekranın altındaki kat düğmeleriyle veya doğrudan oyun alanındaki katı tıklayarak hedef kata gönder. Asansör hedefe vardığında önce iniş olur — kabin içindeki yolculardan rakamı o kata uyanlar otomatik iner ve skor kazanırsın (yolcu başına 10 puan; bir durakta 2 inişte +5, 3 inişte +15 kombo bonusu). Sonra biniş olur — o katta bekleyenler asansör boş yere kadar kabine alınır (kapasite 3). Strateji: en uzun bekleyene değil, sabrı en kritik olana öncelik ver; aynı yöne giden yolcuları biriktirip kombo yap. Skor arttıkça yeni yolcuların spawn aralığı kısalır ve sabırları azalır, yani her doğru karar bir sonraki turu daha zorlaştırır. Üç canını da kaybedince oyun biter; en yüksek skorun tarayıcında saklanır. R tuşu veya 'Yeniden başla' düğmesi yeni bir tur açar.",
+  "thumbnail": "asansor.svg",
+  "scoring": {
+    "storageKey": "asansor.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Elevator",
+    "description": "Be the elevator operator in a five-floor shaft — drop passengers off at the right floor before their patience runs out.",
+    "controls": "1-5: go to floor · ↑/↓: step floor · Click: dispatch · Space: pause · R: restart",
+    "howToPlay": "You are the operator of the single elevator in a five-floor building. Passengers appear on random floors; the number on each one's coloured badge (1-5) is the floor they want to reach. The ring around them is their patience — it shrinks clockwise, turning grey, then yellow, then red. If it hits zero the passenger storms off and you lose one of your three lives. Send the elevator to a target floor with the 1-5 keys, the up/down arrows, the floor buttons below the canvas, or by clicking directly on a floor in the play area. When the elevator arrives, drop-offs happen first — every onboard passenger whose number matches the current floor exits and scores you 10 points (with a +5 combo bonus on 2 drop-offs at the same stop, +15 on 3). Then waiting passengers board until the cabin is full (capacity 3). Strategy: prioritise critical patience over longest wait, and batch passengers heading the same direction to chain combos. As your score climbs, spawn intervals shrink and patience drains faster, so every correct decision makes the next round harder. Game over when all three lives are gone; the browser remembers your best run. Press R or the Restart button to start a new run."
+  }
+}
