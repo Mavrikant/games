@@ -1,0 +1,21 @@
+{
+  "title": "Köprü Bekçisi",
+  "description": "Açılır köprünün operatörüsün — arabalar köprüden geçerken tekneler de altından geçmeli. Yanlış zamanda bir araç gelirse kaza olur.",
+  "dateAdded": "2026-06-19",
+  "tags": ["arcade", "zamanlama", "tek-tuş", "refleks", "tek-oyunculu"],
+  "controls": "Boşluk / Enter / Tıkla / Dokun: köprüyü çevir · R: yeniden başla",
+  "howToPlay": "Sen iki yakayı birleştiren bir açılır köprünün bekçisisin. Üstte yoldan iki şeritte arabalar (sağa giden üst şerit, sola giden alt şerit) sürekli geliyor; altta nehirde tekneler iki yönden yaklaşıyor. Köprü iki durumdan birinde olabilir: KAPALI (yatay deck), bu durumda arabalar köprüyü kullanarak karşıya geçer ama tekneler altından geçemez; AÇIK (deck yukarı kalkmış), bu durumda tekneler altından rahatça süzülür ama yoldaki arabalar yarıyı atlayamaz. Boşluk, Enter, köprüye tıklama veya 'Köprüyü Çevir' düğmesi durumu değiştirir; açılma ve kapanma 0.6 saniye sürer, bu süre içinde köprü ne tam açık ne tam kapalı sayılır — geçiş anında ne araba ne de tekne köprü açıklığına girmemeli. Yanlış zamanda bir araç köprü boşluğuna varırsa kaza olur ve oyun biter. Skor, ekrandan kazasız çıkan her araba veya tekne için +1 artar; oyun ilerledikçe araçlar daha sık ve hızlı gelir. İpucu: yaklaşan araçları erken oku, köprüyü gereksiz yere çevirme (her çevirme 0.6 sn savunmasız bırakır); bir tekne yaklaşırken hâlâ yola giren bir araba varsa önce arabayı geçir, sonra hızla aç. İki yönden aynı anda farklı türler geliyorsa, hangisinin daha yakın olduğuna göre öncelik ver.",
+  "thumbnail": "kopru-bekcisi.svg",
+  "scoring": {
+    "storageKey": "kopru-bekcisi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Drawbridge Keeper",
+    "description": "You operate a drawbridge — cars must cross on top while boats pass underneath. The wrong vehicle at the wrong moment ends the game.",
+    "controls": "Space / Enter / Click / Tap: toggle bridge · R: restart",
+    "howToPlay": "You operate a drawbridge connecting two banks. On the road above, cars come in two lanes (right-going on top, left-going below); below in the river, boats arrive from both directions. The bridge has two states: CLOSED (deck horizontal) lets cars cross but blocks boats; OPEN (deck raised) lets boats pass underneath but breaks the road. Space, Enter, clicking the bridge or the 'Toggle Bridge' button switches state; opening and closing take 0.6 seconds during which the bridge counts as neither fully open nor fully closed — no vehicle should be in the gap during the transition. A vehicle in the wrong state crashes and ends the game. Score +1 per car or boat that exits the screen safely; vehicles arrive faster as the score climbs. Tip: read the incoming traffic early, don't toggle unnecessarily (each toggle leaves you exposed for 0.6 s); if a car is already on the road while a boat is approaching, let the car cross first, then raise. When two opposite vehicles are racing the gap, prioritize the closer one."
+  }
+}

@@ -1,0 +1,135 @@
+:root {
+  --kbk-sky: #1f2a3a;
+  --kbk-road: #3d3f48;
+  --kbk-road-edge: #2a2c33;
+  --kbk-lane: #f0d97a;
+  --kbk-bank: #2a3528;
+  --kbk-bank-edge: #1d271c;
+  --kbk-water: #1b3a52;
+  --kbk-water-line: rgba(160, 200, 230, 0.35);
+  --kbk-pillar: #5b6068;
+  --kbk-pillar-edge: #2e3137;
+  --kbk-pillar-cap: #767c84;
+  --kbk-bridge-truss: rgba(0, 0, 0, 0.35);
+  --kbk-bridge-tip: #c87a3a;
+  --kbk-bridge-frame: #1f2128;
+  --kbk-car-1: #ef4444;
+  --kbk-car-2: #facc15;
+  --kbk-car-3: #34d399;
+  --kbk-car-4: #c084fc;
+  --kbk-boat-1: #e2e8f0;
+  --kbk-boat-2: #fcd34d;
+  --kbk-boat-rim: #1f2937;
+  --kbk-boat-cabin: #4b5563;
+  --kbk-boat-flag: #f87171;
+  --kbk-hud-bg: #15171c;
+  --kbk-state-stable: #1f6f3d;
+  --kbk-state-stable-fg: #c8f5d3;
+  --kbk-state-trans: #b45309;
+  --kbk-state-trans-fg: #ffe7b8;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__stat {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__btn--primary {
+  background: var(--accent);
+  color: #0a0b0e;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.hud__btn--primary:hover {
+  filter: brightness(1.08);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 340px;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+@media (max-width: 420px) {
+  .hud__stat {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .hud__stat span {
+    font-size: 18px;
+  }
+}
