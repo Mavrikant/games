@@ -1,0 +1,21 @@
+{
+  "title": "İtfaiyeci",
+  "description": "Bir merdiven aracında itfaiyecisin: hortumu doğru açıyla nişanla, rüzgarı hesapla, alevleri bina küle dönmeden söndür.",
+  "dateAdded": "2026-06-19",
+  "tags": ["arcade", "fizik", "refleks", "özgün", "tek-oyunculu"],
+  "controls": "↑/↓: nişan açısı · Boşluk: su püskürt · R: yeniden başla",
+  "thumbnail": "itfaiyeci.svg",
+  "howToPlay": "Karanlık bir caddenin sonunda beş katlı bir bina alev aldı; merdiven aracın hortumunun ucundasın ve bina küle dönmeden müdahale etmen gerekiyor. Hortumun çıkışı sabit, ama ↑/↓ tuşlarıyla nişan açısını 18° ile 80° arasında değiştirebilirsin — ekranın üst kısmındaki noktalı eğri, mevcut açının nereye varacağını rüzgar yokken gösterir. Boşluk'a (ya da mobilde 💦 düğmesine) bastığında bir su damlası yörüngeye fırlar; yerçekimi onu öne doğru sürükler, ama ekranın tepesindeki RÜZGAR oku yatay hızını saptırır. Oklu çubuk ne kadar uzun ve hangi yönü gösteriyorsa, damlanı o yönde aynı oranda kaydırır — uzak köşe pencereyi vurmak için açıyı rüzgara doğru biraz fazla aç. Damla bir pencereye düştüğünde, eğer içinde küçük bir alev varsa şiddetini bir kademe düşürür (+1 puan); alev tamamen sönerse +5 puan ve pencere temizlenir. Damla pencereyi ıskalayıp bina cephesine çarptığında sönüp gider; rüzgarda kayan damla için ikinci bir atışla düzelt. Sahada hiç durmadan yeni yangınlar çıkar; ilk alev küçük, müdahale etmezsen birkaç saniye içinde büyür, ardından pencere tamamen yanar (sayaç 'Yanık X/3' artar). Üçüncü yanık pencerede bina düşer; o ana kadar topladığın puan turun sonucudur ve tarayıcında en yüksek olarak saklanır. Zaman geçtikçe yangın çıkış sıklığı artar ve rüzgar daha sert eser; pratikte üst sıra pencereler en kötü hedeftir, çünkü açıyı maksimuma çıkarman ve rüzgarı saymanı zorlar. İpuçları: alttaki yangınlar küçük açılarla (≈30°) anında söndürülebilir, üst kattaki yangınları 65°-75° civarı bir parabolle vur; iki yangın yan yana büyüdüyse ortalarındaki çizgiye nişanla, rüzgar bir tarafa kaydırırken etkili olur; cephe yenilmez, yani küçük açıyla çatıdan geçirmeye çalışma — damla iner inmez vurur. R tuşu turu sıfırlar.",
+  "scoring": {
+    "storageKey": "itfaiyeci.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Firefighter",
+    "description": "You're the firefighter on the ladder truck: aim the hose, account for the wind, douse the flames before the building burns down.",
+    "controls": "↑/↓: aim angle · Space: fire water · R: restart",
+    "howToPlay": "At the end of a dark street a five-story building is on fire, and you're at the tip of the ladder truck's hose — you have to act before it collapses. The hose stays in place, but ↑/↓ adjusts the aim angle between 18° and 80°; the dotted arc on screen previews where the current angle would land in still air. Press Space (or the 💦 button on mobile) to spit a water droplet into the trajectory: gravity drags it forward, but the WIND arrow at the top of the screen shifts its horizontal speed — the longer and the more directional the arrow, the more the droplet drifts that way. To hit a far corner window you have to over-aim slightly into the wind. When a droplet lands in a window with a small flame it knocks the intensity down one notch (+1 point); fully extinguish a flame for +5 and the window clears. Misses splatter on the façade and vanish; correct on the next shot. New fires keep spawning; the first flame is small, but if you ignore it for a few seconds it grows and then the window burns out entirely (the 'Burnt X/3' counter goes up). The third burnt window collapses the building and ends the run; the score so far is your final, and the highest is saved in your browser. Over time fires spawn faster and the wind blows harder; in practice top-row windows are the hardest targets because they push the angle to its maximum and amplify the wind. Tips: bottom-row fires fall instantly at a shallow ≈30° angle; aim the top row with a steep 65°-75° parabola; if two fires grow side by side, aim between them so the wind drift still catches one; the façade is impenetrable, so don't try to skim a low arc over the roof — the drop hits the wall the moment it lands. Press R to reset the run."
+  }
+}
