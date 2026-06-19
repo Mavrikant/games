@@ -1,0 +1,21 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Tur<span id="round">1</span></div>
+  <div class="hud__score">Tepsi<span id="tray">0/5</span></div>
+  <div class="hud__score">Süre<span id="time">40</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="540" aria-label="Mantı tezgâhı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mantı</h2>
+      <p id="overlay-msg">Her hamurun dört köşesini, ortasındaki parlak kapanış noktasına sürükle. Boşluk veya tıklamayla başla.</p>
+    </div>
+  </div>
+</div>

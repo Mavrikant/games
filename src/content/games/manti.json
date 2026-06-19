@@ -1,0 +1,21 @@
+{
+  "title": "Mantı",
+  "description": "Hamur karelerini dört köşesinden katlayıp kayık-mantı dik — kapanış noktasına ne kadar yakın çakıştırırsan o kadar zarif.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "refleks", "sanat", "türk"],
+  "controls": "Sürükle: köşeyi kapanış noktasına ata · Boşluk/Enter: başla · R: yeniden başla",
+  "thumbnail": "manti.svg",
+  "howToPlay": "Mantı, Anadolu mutfağının ince işçiliğini bir refleks oyununa çeviren özgün bir mekaniktir. Tezgâhın ortasında bir hamur karesi belirir; tam göbeğinde minik bir kıyma dolgusu ve hamurun üstünde parlayan bir 'kapanış noktası' vardır. Görevin: hamurun dört köşesini sırayla kapanış noktasına sürükleyip mantıyı kapatmak. Bir köşeyi kavrayıp sürüklediğinde köşeyle kapanış noktası arasında beyaz kesik çizgi belirir; bıraktığın yer kapanışa ne kadar yakınsa o köşe o kadar 'temiz' katlanır. Dört köşe de bağlandığında mantı küçülüp tepsiye düşer ve sıradakine geçersin. Tek mantının kalitesi dört köşenin ortalamasıyla belirlenir: tam kapanış altın 'Şef mantısı' (+150), yakın yeşil 'İyi' (+100), idare eder sarı 'Olur' (+60), uzak köşe gri 'Çiğ' (+20) olarak puanlanır. Her turda 5 mantı vardır; turu süre dolmadan tamamlarsan bir sonraki tur açılır — kapanış noktası her tur biraz küçülür, zaman daralır ve sonraki turlarda kapanış kareyi tam orta yerine değil, kayık şeklinde hafif ofsetli bir noktada bekler; köşeleri farklı bir hedefe ışınlaman gerekir. Sürede mantı tamamlayamazsan oyun biter; toplam skor en yüksek geçmişinle karşılaştırılır ve rekor saklanır. Klavye/dokunma alternatifi: 1-4 tuşları sırayla mevcut köşeyi en yakın hızlı-bağlama yapar (kalite yine fareye göre düşüktür — 'acil' moddur). Boşluk/Enter ile başla, R ile her an sıfırla. İpucu: önce hamurda hangi köşenin kapanışa en uzakta olduğunu seç ve onu yavaş-temiz sürükle — kısa mesafeli köşelerde aceleci hareketler bile yüksek kalite verir, uzun mesafelerde küçük titreşim bile sapma yaratır. Sürüklerken ekranın üst orta kısmında köşenin 'anlık kalite halkası' canlı yanıp söner; halkanın altın olduğu anda bırak.",
+  "scoring": {
+    "storageKey": "manti.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Manti",
+    "description": "Fold dough squares from all four corners to seal Turkish dumplings — the closer you snap each corner to the seal point, the more elegant the pinch.",
+    "controls": "Drag: bring a corner to the seal point · Space/Enter: start · R: restart",
+    "howToPlay": "Manti turns the delicate craft of Anatolian dumpling making into a reflex game. A square of dough appears on the counter with a tiny mince filling at its centre and a glowing 'seal point' floating above it. Your job: drag each of the four corners of the dough onto the seal point to close the dumpling. Grab a corner and a white dashed line traces from it to the seal point; the closer to the seal you release, the cleaner that corner folds. Once all four corners are pinched, the manti shrinks and tumbles into the tray and the next one appears. The quality of a single manti is the average of the four corners: a perfect close earns a gold 'Chef's manti' (+150), a near close earns green 'Nice' (+100), a sloppy close earns yellow 'Acceptable' (+60), and a missed corner earns gray 'Raw' (+20). Each round holds 5 manti; finish before the clock runs out and the next round opens, with a smaller seal point, less time, and from round three a 'boat-shape' offset seal that you must aim each corner to a slightly different target. Run out of time and the game ends; your total is compared to your saved best. Keyboard/touch alternative: keys 1-4 quick-snap the current corner to the closest seal (quality is reduced compared to a careful drag — it's the emergency button). Space/Enter starts the game, R resets at any time. Tip: scan the dough for which corner is farthest from the seal and drag that one slowly and cleanly — short corners survive sloppy moves, long ones punish even tiny tremors. While you drag, a 'live quality ring' pulses at the top of the screen — release when it goes gold."
+  }
+}
