@@ -1,0 +1,21 @@
+{
+  "title": "Karahindiba",
+  "description": "Karahindiba sapını eğ, üfle, rüzgârı oku; tohumları renkli tarhlara düşürerek 30 saniyede en çok çiçeği açtır.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "fizik", "zamanlama", "gözlem", "tek-tuş"],
+  "controls": "Boşluk / Tıkla basılı tut: gücü topla · Bırak: tohumları üfle · ← / → veya A / D: sapı eğ · R: yeniden başla · Mobil: ekrana basılı tut/bırak (sol/sağ yarısı sapı eğer)",
+  "thumbnail": "karahindiba.svg",
+  "scoring": {
+    "storageKey": "karahindiba.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Karahindiba bir karahindibanın saçaklı tohumlarını rüzgâra karşı renkli çiçek tarhlarına yönlendirmen üstüne 30 saniyelik bir aim-and-blow oyunudur. Sap ekranın alt orta noktasında durur, üstünde tüy gibi tohum kümesi vardır. Sol/Sağ ok tuşlarıyla (veya A/D ile) sapı sola/sağa eğebilirsin — eğim, üflediğin tohum konisinin merkez yönünü belirler. BOŞLUK'u (veya canvas üstüne parmağını) BASILI TUT — sapın altındaki çubuk dolar, üfleme gücü ve tohum sayısı artar. Bırakınca tohumlar (4–9 adet, güce göre) tepedeki koniye fanlanarak savrulur. Ekranın üstündeki ok ve sayı, o anki rüzgârın yön ve şiddetini gösterir; rüzgâr yatay olarak tohumları sürükler ve birkaç saniyede bir yumuşak biçimde değişir. Tohumlar yerçekimi + sürtünmeyle aşağıya süzülür; düşerken bir tarhın halkasına değdiklerinde içeri ekilirler — tarhın dış halkasındaki üç küçük nokta dolduğunda tarh çiçek açar (+5 bonus puan) ve ekrandaki konumu kenarlarına başka bir renkli tarh kayar. Açılmış tarhlar dekorasyon kalır, artık hedef değildir. Skor = ekilen her tohum (+1) ve açılan her tarh (+5). 30 saniye dolduğunda en iyi skor tarayıcına kaydedilir. İpucu: tek bir tarha 3 tohum tek bir geniş üflemeyle düşerse sıkça başarısız olur — çoğunda dar koni (kısa şarj) + doğru eğim daha verimlidir; rüzgâr şiddetlendiğinde sapı rüzgâra karşı eğ ki tohumlar dairesel bir yay çizip yine de hedefine düşsün.",
+  "en": {
+    "title": "Dandelion",
+    "description": "Tilt the stem, charge a puff, read the wind; drop floating seeds on the colored beds to bloom as many flowers as you can in 30 seconds.",
+    "controls": "Space / Click hold: charge · Release: puff seeds · ← / → or A / D: tilt the stem · R: restart · Mobile: hold on the canvas (left/right half tilts the stem)",
+    "howToPlay": "Dandelion is a 30-second aim-and-blow game where you scatter the feathery seeds of a dandelion against a shifting wind onto colored flower beds. The stem stands at the bottom-center, the white puff on top. Use ← / → (or A / D) to lean the stem left or right — that sets the central direction of the seed cone you'll release. HOLD SPACE (or hold a finger on the canvas) and the charge bar fills; longer holds release more seeds at higher initial speed (4–9 seeds, fanned in a cone). The arrow at the top of the canvas shows the current wind direction and strength; wind drifts seeds horizontally and changes smoothly every few seconds. Seeds drift down under gentle gravity and drag; when a falling seed enters a bed's ring it gets planted — three plants fill the ring's three slots and the bed blooms into a flower (+5 bonus) while a new colored bed appears at a different spot. Bloomed beds remain as decoration; only unbloomed beds are valid targets. Score = +1 per seed planted, +5 per bloomed bed. The browser stores your best. Tip: a wide puff often misses; a short charge with the right tilt is more reliable, and when wind is strong you should tilt INTO the wind so seeds arc onto the bed instead of being swept past it."
+  }
+}
