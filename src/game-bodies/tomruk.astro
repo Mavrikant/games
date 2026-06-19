@@ -1,0 +1,31 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Süre<span id="time">0</span></div>
+  <div class="hud__stat">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="480"
+    aria-label="Tomruk denge alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Tomruk</h2>
+      <p id="overlay-msg">
+        Su üstünde dönen kütüğün üzerinde ayakta kal. Sol/Sağ ok ile adım at —
+        tomruk altından kayar, dalga gelir, dengeyi bul.
+        Başlamak için Boşluk'a bas ya da bir yöne adım at.
+      </p>
+      <button id="overlay-start" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+
+<p class="touch-hint" aria-hidden="true">
+  Mobilde: tomruğun sol/sağ yarısına dokunarak adım at.
+</p>

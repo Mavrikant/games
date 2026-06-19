@@ -1,0 +1,22 @@
+{
+  "title": "Tomruk",
+  "description": "Su üstünde yüzen tomruğun üzerinde dengende kal — kütük döner, dalga gelir, sen adım atarak tepeyi bul.",
+  "dateAdded": "2026-06-19",
+  "tags": ["denge", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "Sol/Sağ ok veya A/D: adım at · Mobilde: tomruğun sol/sağ yarısına dokun · Boşluk: başlat/yeniden · R: yeniden başla",
+  "thumbnail": "tomruk.svg",
+  "howToPlay": "Tomruk, su üstünde yüzen yuvarlak bir kütüğün üzerinde ayakta kalmaya çalıştığın bir denge oyunudur. Oduncu kütüğün tepesinde durur — sen onun ayak basıp yer değiştirmesini yönetirsin. Sol/Sağ ok tuşlarına (ya da A/D'ye, mobilde tomruğun sol veya sağ yarısına dokunarak) basarak adım atarsın. Her adım iki şey yapar: (1) oduncuyu kütüğün üst noktasına göre o yana doğru kısa bir mesafe taşır, (2) bir karşı-itki olarak kütüğe ters yönde küçük bir dönüş ekler (Newton'un üçüncü yasası — yürüyen ayak kütüğü altından kaydırır). Yani sadece doğru yöne basmak yetmez; basışın zamanlaması da önemli. Eğer oduncu tepe noktasından sapmışsa, yer çekimi tomruğu o yönde döndürmeye başlar ve bu dönüş seni daha da kenara taşır — pozitif geri besleme. Tomruğun dönüşü ise seni yüzeyinde sürükleyerek konumunu kaydırır; yani tomruk hızlı dönüyorsa adım atıp atmadığına bakmaksızın konumun değişir. Adımlar arasında 200 ms'lik kısa bir bekleme vardır, bu yüzden spam'ı işe yaramaz; ölçülü ve zamanında vurman gerekir. Her birkaç saniyede bir dalga gelir: bir uyarı kabarması ekranın bir kenarında belirir (yaklaşık 1.4 sn önce), ardından kütüğe sert bir itki uygulanır. Uyarıyı görür görmez ters yöne adım atıp sapma birikmeden dengelemek en iyi çare. Geçen her saniye yer çekimi kazancı az miktarda artar, bu yüzden oyun sertleşir. Skor saniye cinsindendir ve en iyi süren tarayıcında saklanır. İpucu: tomruğun yüzeyindeki halkalar (yıl halkaları) referansındır — eğer yıl halkaları hızlı dönüyor görüyorsan kütüğün dönüş ivmesi yüksek demektir, bunu görmek dengeni kaybetmeden tepki vermeni sağlar. Ayrıca her zaman tepedeki ışıltıya bakarak oduncunun ne kadar tepeden saptığını anla — küçük sapmalar düzeltilebilir, büyük sapmalar (sarı çerçeveye girmiş gibi) acil müdahale gerektirir.",
+  "scoring": {
+    "storageKey": "tomruk.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Log Roll",
+    "description": "Stay upright on a spinning floating log — the log rolls, the waves hit, you step in time to crown the top.",
+    "controls": "Left/Right arrow or A/D: step · On mobile: tap the left or right half of the log · Space: start/restart · R: restart",
+    "howToPlay": "Tomruk (Log Roll) is a balance game where you try to stay standing on a round log floating in water. The lumberjack starts at the top of the log — you control his footwork. Press the Left/Right arrow (or A/D, or tap the left or right half of the log on mobile) to take a step. Every step does two things: (1) it shifts the lumberjack a small angular distance on the log surface in that direction, and (2) by Newton's third law it adds a small counter-spin to the log in the opposite direction (the walking foot kicks the log out from under). So pressing the right key is not enough on its own; your timing matters too. If the lumberjack drifts off the top, gravity starts rolling the log that way and the roll carries you further off-center — positive feedback. The log's angular velocity itself also slides your position along its surface; if the log is spinning fast, your position changes even when you don't step. There is a short 200 ms cooldown between steps, so spamming buys nothing; you must hit a measured rhythm. Every few seconds a wave arrives: a warning swell appears at one edge of the screen (about 1.4 s before), and then a sharp impulse is applied to the log. The cure is to step against the incoming impulse as soon as you see the swell, before the offset compounds. The gravity gain ramps up a little every second, so the game slowly stiffens. The score is in seconds and your best time is saved in your browser. Tip: the annual rings on the log surface are your reference — if they're spinning fast, the log has accelerated and you should expect more drift; reading that lets you preempt instead of chase. Also keep an eye on the glow at the top of the log — small drifts are recoverable, but once the warning frame turns yellow you need to step now."
+  }
+}
