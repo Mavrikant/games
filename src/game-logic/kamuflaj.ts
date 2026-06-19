@@ -420,6 +420,7 @@ function applySnapshot(snap: Snapshot): void {
     c.caught = np.ca === 1;
     c.visible = np.vi;
     c.score = np.sc;
+    c.catches = np.ct ?? 0; // keep the scoreboard's catch tally in sync
     netTargets.set(np.id, { x: np.x, z: np.z, yaw: np.yw });
     if (typeof np.tx === 'number' && typeof np.tz === 'number' && typeof np.tl === 'number') {
       c.tongue = { dx: np.tx, dz: np.tz, len: np.tl, max: np.tl, retract: false, hitId: np.tv ?? null };
