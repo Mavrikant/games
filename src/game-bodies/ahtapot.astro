@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">90</span></div>
+  <div class="hud__score">Sersem<span id="stuns">0/3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Ahtapot oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Ahtapot</h2>
+      <p id="overlay-msg">W / A / S / D ile dört kolu bağımsız uzat. Boşluk: başla.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn touch__btn--w" data-arm="up" type="button" aria-label="Yukarı kol">▲</button>
+  <button class="touch__btn touch__btn--a" data-arm="left" type="button" aria-label="Sol kol">◀</button>
+  <button class="touch__btn touch__btn--s" data-arm="down" type="button" aria-label="Aşağı kol">▼</button>
+  <button class="touch__btn touch__btn--d" data-arm="right" type="button" aria-label="Sağ kol">▶</button>
+</div>

@@ -1,0 +1,21 @@
+{
+  "title": "Ahtapot",
+  "description": "Sekiz değil dört kol — W/A/S/D ile her kolu bağımsız uzat. Balıkları kap, köpekbalıklarına değme; aynı anda dört yönü koordine et.",
+  "dateAdded": "2026-06-19",
+  "tags": ["refleks", "özgün", "çoklu-tuş", "koordinasyon", "tek-oyunculu"],
+  "controls": "W/A/S/D: dört kolu bağımsız uzat — basılı tut: uzat, bırak: geri çek · Boşluk: başla / duraklat · R: yeniden başla · Mobil: dört yön butonu",
+  "howToPlay": "Sahnenin merkezindeki ahtapotun gövdesinden dört kol uzanır: yukarı, sol, aşağı ve sağ. Her kol için bir tuş vardır — W yukarıyı, A solu, S aşağıyı, D sağı kontrol eder. İlgili tuşu basılı tuttuğun sürece o kol kendi yönünde uzar; bıraktığında yumuşakça gövdeye geri çekilir. Suda küçük balıklar (1 puan) ve nadir karidesler (3 puan) süzülür; bir kolun ucu bir balığa değdiğinde balık yenir ve skor artar. Aynı anda farklı yönlerdeki birkaç balığı kovalamak için iki ya da üç tuşa birlikte basman gerekir — oyunun esas zorluğu burada: parmaklarını birbirinden bağımsız çalıştır. Ekranda yatay süzülen köpekbalıkları da vardır; kolun ucu bir köpekbalığına dokunursa o kol birkaç saniye sersemler, o sırada hiç uzayamaz. Üç sersemlemeden sonra oyun biter — ya da süreyi 90 saniye boyunca tutabilirsen kendi rekorunu kovalayabilirsin. Oyun ilerledikçe balıklar daha hızlı süzülür ve köpekbalıkları daha sık geçer. İpuçları: kolların maksimum uzunluğu sınırlıdır, bu yüzden gövdenin kenarına gelen balıklar çok daha kolay yakalanır; aceleyle uzun mesafeye uzatıp aynı yönden gelen köpekbalığını ıskalama. Yakın bir balıkla uzak bir balık arasında seçim yapman gerekirse yakını al; balıklar zaten kenara doğru drift eder.",
+  "thumbnail": "ahtapot.svg",
+  "scoring": {
+    "storageKey": "ahtapot.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Octopus",
+    "description": "Four arms, not eight — extend each independently with W/A/S/D. Grab fish, avoid sharks; coordinate four directions at once.",
+    "controls": "W/A/S/D: extend the four arms independently — hold to reach, release to retract · Space: start / pause · R: restart · Mobile: four directional buttons",
+    "howToPlay": "An octopus sits at the center of the scene with four arms reaching up, left, down and right. Each arm has its own key — W for the upper arm, A for the left, S for the lower, D for the right. While you hold a key the matching arm extends in its direction; release it and the arm springs back to the body. Little fish (1 pt) and rare shrimp (3 pt) drift through the water; when an arm tip touches one it gets eaten and your score rises. To chase fish in several directions at once you'll need to press two or three keys simultaneously — that finger independence is the real challenge of the game. Sharks also patrol horizontally; if an arm tip touches a shark, that arm is stunned for a few seconds and cannot extend during that time. Three stuns ends the game, otherwise survive for 90 seconds and beat your high score. Over time fish drift faster and sharks pass more often. Tips: each arm has a maximum reach, so fish that drift close to the body are much easier to grab; don't overextend in the same direction as an oncoming shark. When you can grab either a near fish or a far one, take the near one — fish drift outward anyway."
+  }
+}

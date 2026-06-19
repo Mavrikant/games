@@ -1,0 +1,138 @@
+/*
+ * Ahtapot — multi-tentacle reflex/coordination game.
+ * Per-game CSS. Required by @shared/overlay: .overlay--hidden hides the
+ * overlay visually (pitfall: missing-overlay-css).
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 5;
+  cursor: pointer;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__score {
+  flex: 1 1 70px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.touch {
+  display: none;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 8px;
+  margin: 12px auto 0;
+  max-width: 280px;
+  user-select: none;
+}
+
+.touch__btn {
+  padding: 14px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.touch__btn--w {
+  grid-area: up;
+}
+.touch__btn--a {
+  grid-area: left;
+}
+.touch__btn--s {
+  grid-area: down;
+}
+.touch__btn--d {
+  grid-area: right;
+}
+
+.touch__btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: grid;
+  }
+}
