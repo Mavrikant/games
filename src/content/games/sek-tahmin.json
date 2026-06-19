@@ -1,0 +1,21 @@
+{
+  "title": "Sek Tahmin",
+  "description": "Top kutuya girer, K kez duvardan sektikten sonra çıkar — sadece girişi ve yönü görüyorsun; çıkış noktasını zihninde bul ve tıkla.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "tahmin", "geometri", "hızlı", "puzzle"],
+  "controls": "Fare/dokunma: kenar boyunca tıklayarak çıkış noktasını işaretle · Enter/Boşluk: turu başlat veya sonraki tura geç · R: tüm partiyi sıfırla",
+  "howToPlay": "Sek Tahmin saf bir zihinsel ışın-takip oyunudur: bir top dikdörtgen kutuya kenarından girer, duvarlardan tam yansıma açısıyla sektikten sonra kenardan çıkar. Sen, top hareket etmeden önce yalnızca giriş noktasını (yeşil işaret) ve ilk yönü (oktan oluşan kısa vektör) ile kaç kez sekeceği (HUD'da gösterilen 'Sekme' sayısı) görürsün. Görevin, kafanda gerçek yansıma geometrisini izleyerek topun perimetrede tam olarak hangi noktadan çıkacağını bulmak ve oraya tıklamaktır. Tıkladığında imleç o kenara en yakın perimetre noktasına oturur ve top gerçek yörüngeyi izlemeye başlar; gerçek çıkış konumu kırmızı bir çarpı ile gösterilir. Aradaki uzaklığa göre puan alırsın: 12 pikselden yakın 'tam isabet' +20, 30 pikselden yakın +10, 60 pikselden yakın +4, daha uzak 0. Her tur otomatik olarak zorlaşır — ilk turlarda 1 sekme, sonra 2, 3, 5'e kadar çıkar; kutu ebatları sabit kalır, açılar daha kapalı hale gelir. Tek bir parti 10 turdur; partinin sonunda toplam puanın yerel rekorla karşılaştırılır ve daha iyiyse kaydedilir. Strateji: yansıma açısı her zaman geliş açısına eşittir; topun yatay hız işaretini her yan duvar (sol/sağ), dikey hız işaretini her tavan/taban (üst/alt) çevirir. Açı 45° ise diyagonal düşün; gerçek bir bilardo masasında 'aynalama' tekniğini uygula — yani sektirme yerine kutuyu zihninde açılan bir şerit olarak düşün ve düz çizginin nereye düştüğüne bak. İpucu: HUD'da yön vektörünün eğimine bak (örn. dx:1, dy:-1 ise eşit eğim, çubuk net 45°'dir); top alanın yarısına geldiğinde yarıyı geçeceğin duvar bellidir.",
+  "thumbnail": "sek-tahmin.svg",
+  "scoring": {
+    "storageKey": "sek-tahmin.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Bounce Predict",
+    "description": "A ball enters the box, bounces K times off the walls and exits — you only see the entry and direction; figure out the exit and tap it.",
+    "controls": "Mouse/touch: click the edge to mark the predicted exit point · Enter/Space: start round or advance · R: reset the whole match",
+    "howToPlay": "Bounce Predict is a pure mental ray-tracing game: a ball enters a rectangular box from an edge point, bounces off the walls with exact reflection angles, and exits back through the edge. Before the ball moves, you only see the entry point (green marker), the initial direction (a short arrow vector) and the number of bounces in the HUD. Your job is to trace the reflections in your head and click the exact point on the perimeter where the ball will exit. When you click, the cursor snaps to the nearest perimeter point on that wall and the ball begins travelling along the true path; the real exit is shown with a red cross. Your score depends on how close your guess was: within 12 px is a 'bullseye' worth +20, within 30 px is +10, within 60 px is +4, beyond that 0. Difficulty ramps automatically — early rounds have 1 bounce, later rounds 2, 3, up to 5; the box size is fixed but the angles get tighter. A match is 10 rounds; at the end your total is compared with your local best and saved if higher. Strategy: angle of reflection equals angle of incidence; each side wall flips the sign of horizontal velocity, each top/bottom wall flips the vertical sign. For 45° angles think diagonally; use the classic billiards 'unfolding' trick — imagine the box unfolded into a strip and trace where the straight line lands. Tip: read the direction vector in the HUD (e.g., dx:1, dy:-1 = equal slope, bar is exactly 45°); once the ball reaches the half-line, the wall it will cross next is decided."
+  }
+}

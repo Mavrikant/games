@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Tur<span id="round">0/10</span></div>
+  <div class="hud__score">Sekme<span id="bounces">—</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="540" height="420" aria-label="Sek Tahmin alanı"></canvas>
+  <div id="overlay" class="overlay" role="status" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sek Tahmin</h2>
+      <p id="overlay-body">Yeşil noktadan giren topun, oka göre <strong>K sekme</strong> sonra perimetreden çıkacağı noktayı kenara tıklayarak işaretle. Enter/Boşluk: başla.</p>
+    </div>
+  </div>
+</div>
+
+<p class="vec" aria-live="polite">
+  <span class="vec__pill">Yön: <span id="dir">—</span></span>
+  <span class="vec__pill">Giriş: <span id="entry">—</span></span>
+</p>
