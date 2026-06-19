@@ -79,11 +79,13 @@ const CORNICE_H = 0.4;
 const PILLAR_T = WALL_T * 1.9;
 
 // First/third-person camera + render-smoothing tuning.
-const TP_DIST = 4.6; // third-person follow distance (hiders)
-const TP_PIVOT_Y = 1.4; // height the follow camera orbits / looks at
+const FIG_SCALE = 0.7; // overall mini-figure size (smaller relative to the rooms)
+const TP_DIST = 3.8; // third-person follow distance (hiders)
+const TP_PIVOT_Y = 1.0; // height the follow camera orbits / looks at
 const TAU_POS = 0.05; // render position smoothing time-constant (s)
 const TAU_YAW = 0.07; // render yaw smoothing time-constant (s)
-const FIG_EYE = 1.55; // first-person eye height (seekers)
+const FIG_EYE = 1.1; // first-person eye height (seekers), matched to FIG_SCALE
+const TONGUE_Y = 0.85; // chest height the seeker's reach is thrown from
 
 export function isWebglOk(): boolean {
   return webglOk;
@@ -693,12 +695,14 @@ function makeLintel(group: THREE.Group, x: number, z: number, horizontal: boolea
   group.add(beam);
 }
 
-// A stylised mini-figure person ~1.6u tall. The whole outfit (head, torso,
-// limbs) shares the recolouring `skin` material so a hider blends/fades as one;
-// only the eyes (and the seeker's red cap) stay fixed. Limbs hang from pivot
-// groups so the render loop can drive a walk cycle.
+// A stylised mini-figure person. All body parts live in a `body` sub-group
+// scaled by FIG_SCALE so the whole figure is small relative to the rooms; the
+// tongue/tag reach stays on the unscaled group so its length still matches the
+// simulation. The outfit shares the recolouring `skin` material so a hider
+// blends/fades as one; only the eyes (and the seeker's red cap) stay fixed.
 function makeFigure(hue: number, isSeeker: boolean): ActorView {
   const group = new THREE.Group();
+  const body = new THREE.Group();
   const bump = getScaleBump();
   const skin = new THREE.MeshStandardMaterial({
     color: hsl(hue, 0.6, 0.52),
@@ -720,37 +724,37 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
   // Pelvis + torso (slightly tapered).
   const pelvis = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.26, 0.3), skin), false, true);
   pelvis.position.y = hipY + 0.04;
-  group.add(pelvis);
+  body.add(pelvis);
   const torso = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.23, 0.5, 12), skin), false, true);
   torso.scale.z = 0.78;
   torso.position.y = 1.02;
-  group.add(torso);
+  body.add(torso);
   const chest = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.14, 0.32), skin), false, true);
   chest.position.y = shoulderY - 0.04;
-  group.add(chest);
+  body.add(chest);
   const collar = shadeMesh(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.12, 10), skin), false, false);
   collar.position.y = shoulderY + 0.05;
-  group.add(collar);
+  body.add(collar);
 
   // Head + face.
   const head = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.22, 18, 16), skin), false, true);
   head.scale.set(1, 1.08, 1);
   head.position.y = 1.55;
-  group.add(head);
+  body.add(head);
   const eyeMat = new THREE.MeshBasicMaterial({ color: '#15181f' });
   for (const sx of [-1, 1]) {
     const eye = new THREE.Mesh(new THREE.SphereGeometry(0.038, 8, 8), eyeMat);
     eye.position.set(sx * 0.082, 1.57, 0.2);
-    group.add(eye);
+    body.add(eye);
   }
   if (isSeeker) {
     const capMat = new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5 });
     const cap = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.235, 16, 10, 0, Math.PI * 2, 0, Math.PI * 0.5), capMat), true, false);
     cap.position.y = 1.6;
-    group.add(cap);
+    body.add(cap);
     const brim = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.05, 0.22), capMat), true, false);
     brim.position.set(0, 1.59, 0.2);
-    group.add(brim);
+    body.add(brim);
   }
 
   // Arms — shoulder-pivot groups so they swing.
@@ -768,7 +772,7 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
     hand.position.y = -0.74;
     sh.add(hand);
     sh.rotation.z = sx * 0.12;
-    group.add(sh);
+    body.add(sh);
     arms.push(sh);
   }
 
@@ -786,20 +790,25 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
     const foot = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.12, 0.3), skin), false, true);
     foot.position.set(0, -legH + 0.02, 0.06);
     hip.add(foot);
-    group.add(hip);
+    body.add(hip);
     legs.push(hip);
   }
 
+  body.scale.setScalar(FIG_SCALE);
+  group.add(body);
+
+  // Contact shadow sits on the unscaled group, sized to the scaled footprint.
   const blobTex = getBlobTexture();
   const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.5, 1.5),
+    new THREE.PlaneGeometry(1.5 * FIG_SCALE, 1.5 * FIG_SCALE),
     new THREE.MeshBasicMaterial({ map: blobTex ?? undefined, color: 0x000000, transparent: true, opacity: 0.42, depthWrite: false }),
   );
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.03;
   group.add(shadow);
 
-  // Seeker's "tag" reach (kept from the tongue mechanic), thrown from the chest.
+  // Seeker's "tag" reach (kept from the tongue mechanic) — stays at world scale
+  // so its length matches the simulation's reach.
   const tongue = new THREE.Mesh(
     new THREE.CylinderGeometry(0.05, 0.05, 1, 6),
     new THREE.MeshBasicMaterial({ color: '#f43f5e' }),
@@ -1004,11 +1013,11 @@ export function render(
       const cx = Math.sin(ang);
       const cz = Math.cos(ang);
       view.tongue.visible = true;
-      view.tongue.position.set(cx * (len / 2), 1.1, cz * (len / 2));
+      view.tongue.position.set(cx * (len / 2), TONGUE_Y, cz * (len / 2));
       view.tongue.scale.set(1, len, 1);
       view.tongue.rotation.set(Math.PI / 2, 0, -ang);
       view.tongueTip.visible = true;
-      view.tongueTip.position.set(cx * len, 1.1, cz * len);
+      view.tongueTip.position.set(cx * len, TONGUE_Y, cz * len);
     } else {
       view.tongue.visible = false;
       view.tongueTip.visible = false;
