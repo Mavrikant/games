@@ -10,6 +10,23 @@
   gap: 12px;
 }
 
+/* This game wants a big play area — widen the standard game column (this CSS is
+   inlined only on Kamuflaj's page, so it doesn't affect other games). The text
+   blocks stay capped at a readable width while the board fills the column. */
+.stage:has(#km-root) {
+  max-width: min(1160px, 96vw);
+}
+.stage:has(#km-root) .stage__intro {
+  max-width: 720px;
+  margin-inline: auto;
+}
+.km-hud,
+.km-status {
+  max-width: 880px;
+  width: 100%;
+  margin-inline: auto;
+}
+
 .km-status {
   text-align: center;
   font-size: 12.5px;
@@ -21,15 +38,19 @@
 .board-wrap {
   position: relative;
   width: 100%;
-  max-width: 560px;
+  max-width: 700px;
   margin: 0 auto;
-  aspect-ratio: 4 / 5;
+  /* Fill the available height instead of a fixed aspect so the play area is as
+     large as the column / viewport allow (the 3D camera adapts to any shape). */
+  height: 68vh;
+  max-height: 620px;
 }
 
 @media (min-width: 720px) {
   .board-wrap {
-    max-width: 820px;
-    aspect-ratio: 16 / 10;
+    max-width: 1180px;
+    height: 78vh;
+    max-height: 820px;
   }
 }
 
@@ -47,30 +68,46 @@
 }
 
 /* ---- HUD chips ---- */
-.hud {
+.hud,
+.km-hud {
   flex-wrap: wrap;
+  gap: 6px;
+  align-items: stretch;
 }
 
 .hud__score {
-  flex: 1;
-  min-width: 64px;
+  flex: 1 1 0;
+  min-width: 76px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 8px 12px;
-  font-size: 10.5px;
+  padding: 6px 10px;
+  font-size: 9.5px;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   color: var(--text-dim);
+  overflow: hidden;
 }
 
 .hud__score span {
   display: block;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
   font-variant-numeric: tabular-nums;
-  margin-top: 2px;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The role chip holds the longest value — give it a touch more room. */
+.km-hud .km-role-chip {
+  flex: 1.4 1 0;
+}
+
+.km-hud .hud__btn {
+  flex: 0 0 auto;
 }
 
 .km-role-chip span {

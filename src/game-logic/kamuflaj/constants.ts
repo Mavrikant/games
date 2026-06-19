@@ -47,14 +47,14 @@ export const MOVE_SPEED = 7.6; // hider top speed (u/s)
 export const SEEKER_SPEED = 8.4; // seekers a touch faster
 export const ACCEL = 60; // approach speed quickly (responsive)
 export const STILL_SPEED = 0.6; // below this counts as "standing still"
-export const STILL_TIME = 0.5; // seconds of stillness to be "frozen"
+export const STILL_TIME = 0.4; // seconds of stillness to fade out
 
 // ---- camouflage / visibility ------------------------------------------------
 export const SAMPLE_RANGE = 4.2; // eyedropper reach to a prop/wall
 export const BLEND_RANGE = 5.0; // surface considered for blend scoring
 export const HUE_TOLERANCE = 50; // hue degrees that still read as a match
 export const PAINT_EASE = 4.0; // body hue eases to sampled hue at this rate
-export const VIS_MIN = 0.07; // floor visibility for a perfect hide
+export const VIS_MIN = 0.04; // floor visibility for a perfect hide
 export const REVEAL_DIST = 7.5; // a near, facing seeker forces a hider visible
 export const REVEAL_FOV = 0.6; // dot(view, toHider) above this = "looking at"
 

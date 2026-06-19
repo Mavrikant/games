@@ -549,7 +549,10 @@ export function step(world: World, dt: number): void {
       const surf = surfaceFor(world, p.x, p.z);
       p.blend = blendOf(p.bodyHue, surf.hue, surf.proximity);
       const still = Math.max(0, Math.min(1, p.stillFor / STILL_TIME));
-      const hidden = p.blend * still;
+      // Stillness is the dominant driver: standing still fades you out almost
+      // entirely (colour match only sharpens it); the moment you move you snap
+      // back to full, vivid visibility.
+      const hidden = still * (0.9 + 0.1 * p.blend);
       p.visible = VIS_MIN + (1 - VIS_MIN) * (1 - hidden);
       if (hunting) p.score += BLEND_RATE * hidden * dt;
     } else {

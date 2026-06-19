@@ -48,6 +48,7 @@ let motes: THREE.Points | null = null;
 
 interface ActorView {
   group: THREE.Group;
+  bodyGroup: THREE.Group; // scaled body; hidden for the local seeker (FPV)
   skin: THREE.MeshStandardMaterial;
   torso: THREE.Mesh; // breathing / bob
   legs: THREE.Group[]; // 2 hip-pivot groups (walk swing)
@@ -294,7 +295,11 @@ export function initScene(canvas: HTMLCanvasElement, isCoarse: boolean): boolean
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.05;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    // PCF (not the deprecated PCFSoft) + a static shadow map: only the
+    // environment (walls/props/pillars) casts shadows and it never moves, so the
+    // map is rendered once per arena build instead of every frame — far cheaper.
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.shadowMap.autoUpdate = false;
 
     scene = new THREE.Scene();
     const bg = makeGradientTexture('#1b2740', '#222a3a', '#0a0d14');
@@ -749,10 +754,11 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
   }
   if (isSeeker) {
     const capMat = new THREE.MeshStandardMaterial({ color: '#ef4444', roughness: 0.5 });
-    const cap = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.235, 16, 10, 0, Math.PI * 2, 0, Math.PI * 0.5), capMat), true, false);
+    // Figures don't cast shadows (keeps the shadow map static → cheap).
+    const cap = shadeMesh(new THREE.Mesh(new THREE.SphereGeometry(0.235, 16, 10, 0, Math.PI * 2, 0, Math.PI * 0.5), capMat), false, false);
     cap.position.y = 1.6;
     body.add(cap);
-    const brim = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.05, 0.22), capMat), true, false);
+    const brim = shadeMesh(new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.05, 0.22), capMat), false, false);
     brim.position.set(0, 1.59, 0.2);
     body.add(brim);
   }
@@ -824,6 +830,7 @@ function makeFigure(hue: number, isSeeker: boolean): ActorView {
 
   return {
     group,
+    bodyGroup: body,
     skin,
     torso,
     legs,
@@ -916,6 +923,9 @@ export function buildArena(world: World): void {
     actorsGroup.add(view.group);
     actorViews.set(p.id, view);
   }
+
+  // The environment changed — rebuild the (otherwise static) shadow map once.
+  if (renderer) renderer.shadowMap.needsUpdate = true;
 }
 
 // ---- per-frame sync ---------------------------------------------------------
@@ -968,13 +978,37 @@ export function render(
     const dyaw = ((p.yaw - view.ryaw + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
     view.ryaw += dyaw * aYaw;
 
-    const hideSelf = isMe && fpvSelf;
-    view.group.visible = !hideSelf;
-    if (hideSelf) {
+    if (isMe && fpvSelf) {
+      // Local seeker (FPV): hide the body but KEEP the group so the player can
+      // see their own grab/lash shoot forward from the camera.
+      view.group.visible = true;
+      view.bodyGroup.visible = false;
+      view.shadow.visible = false;
+      view.group.position.set(me!.x, 0, me!.z);
+      view.group.rotation.set(0, look.yaw, 0);
+      if (p.tongue) {
+        const len = Math.max(0.01, p.tongue.len);
+        const ang = Math.atan2(p.tongue.dx, p.tongue.dz) - look.yaw;
+        const cx = Math.sin(ang);
+        const cz = Math.cos(ang);
+        const y = FIG_EYE - 0.22;
+        view.tongue.visible = true;
+        view.tongue.position.set(cx * (len / 2), y, cz * (len / 2));
+        view.tongue.scale.set(1, len, 1);
+        view.tongue.rotation.set(Math.PI / 2, 0, -ang);
+        view.tongueTip.visible = true;
+        view.tongueTip.position.set(cx * len, y, cz * len);
+      } else {
+        view.tongue.visible = false;
+        view.tongueTip.visible = false;
+      }
       view.prevX = view.rx;
       view.prevZ = view.rz;
       continue;
     }
+    view.group.visible = true;
+    view.bodyGroup.visible = true;
+    view.shadow.visible = true;
 
     // Walk cycle driven by actual (rendered) speed → arms/legs swing, body bobs.
     const spd = Math.hypot(view.rx - view.prevX, view.rz - view.prevZ) / Math.max(dt, 1e-3);
@@ -994,18 +1028,17 @@ export function render(
     view.group.rotation.y = view.ryaw;
     view.group.rotation.z = p.caught ? Math.PI * 0.42 : 0;
 
-    view.skin.color.copy(hsl(p.bodyHue, p.role === 'seeker' ? 0.5 : 0.62, p.caught ? 0.3 : 0.52));
-    if (p.role === 'hider' && !p.caught) {
-      view.skin.emissive.copy(hsl(p.bodyHue, 0.7, 0.5));
-      view.skin.emissiveIntensity = 0.03 + Math.max(0, 0.1 * (1 - p.visible)) * (0.6 + 0.4 * Math.sin((now + view.phase) * 5));
-    } else {
-      view.skin.emissiveIntensity = 0;
-    }
+    // Moving hiders read bolder (more saturated + brighter); still ones mute.
+    const moving = p.role === 'hider' && !p.caught ? moveAmt : 0;
+    const sat = p.role === 'seeker' ? 0.5 : 0.52 + 0.28 * moving;
+    const lit = p.caught ? 0.3 : 0.48 + 0.1 * moving;
+    view.skin.color.copy(hsl(p.bodyHue, sat, lit));
+    view.skin.emissiveIntensity = 0;
 
     let opacity = 1;
-    if (p.role === 'hider' && !p.caught) opacity = Math.max(0.12, p.visible);
+    if (p.role === 'hider' && !p.caught) opacity = Math.max(0.06, p.visible);
     view.skin.opacity = opacity;
-    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.4 * Math.max(0.25, opacity);
+    (view.shadow.material as THREE.MeshBasicMaterial).opacity = 0.4 * Math.max(0.2, opacity);
 
     if (view.isSeeker && p.tongue && !p.caught) {
       const len = Math.max(0.01, p.tongue.len);

@@ -2,12 +2,10 @@
 ---
 
 <div id="km-root" class="km-root">
-  <header class="hud">
+  <header class="hud km-hud">
     <div class="hud__score km-role-chip">Rol<span id="role">Saklanan 🦎</span></div>
     <div class="hud__score">Aşama<span id="phase">Menü</span></div>
     <div class="hud__score">Süre<span id="time">1:20</span></div>
-    <div class="hud__score">Skor<span id="score">0</span></div>
-    <div class="hud__score">Rekor<span id="best">0</span></div>
     <button id="fs" class="hud__btn" type="button" aria-label="Tam ekran">⛶</button>
     <button id="restart" class="hud__btn" type="button">Menü</button>
   </header>
@@ -82,9 +80,8 @@
           <button id="lobby-start" class="km-btn km-btn--primary" type="button">Başlat</button>
         </div>
 
-        <!-- Match-end scoreboard -->
+        <!-- Match-end result -->
         <div id="over-panel" class="km-over km-over--hidden">
-          <ol id="board-list" class="km-board"></ol>
           <div id="over-actions" class="km-actions">
             <button id="rematch" class="km-btn km-btn--primary" type="button">Aynı Odada Tekrar Oyna</button>
             <button id="to-lobby" class="km-btn" type="button">Lobiye Dön</button>
