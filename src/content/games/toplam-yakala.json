@@ -1,0 +1,21 @@
+{
+  "title": "Toplam Yakala",
+  "description": "Düşen sayıları yakalayıp sepetini hedef toplama tam ulaştır — aşarsan can götürür, eksiyle aşımı toparlayabilirsin.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "matematik", "arcade", "refleks"],
+  "controls": "Sayıya tıkla/dokun · 1-4: ilgili kolondaki en alttaki sayıyı yakala · Boşluk/Enter: başla · R: yeniden başla",
+  "howToPlay": "Toplam Yakala, hızlı zihinsel aritmetik ile refleksi birleştiren özgün bir arcade-puzzle hibridi. Ekranın üstünde her turda yeni bir HEDEF sayı belirir (örn. 12); 4 kolondan rastgele rastgele düşen sayı karelerini (çoğunlukla 1–9 arası pozitif, oyun ilerledikçe ara sıra -1, -2, -3 negatifler) tıklayarak veya dokunarak SEPETİNE eklersin. Sepet hedefe tam eşit olduğu anda 1 puan kazanırsın, sepet sıfırlanır ve yeni bir hedef oluşur. Sepet hedefi AŞARSA bir can yanar, sepet sıfırlanır — bu yüzden ekrandaki sayıları seçmeden önce zihninde toparlama yapmalısın. Negatif sayılar, yanlışlıkla aştığında sepeti geri çekmen için (örn. sepet 13, hedef 12 → bir '-1' yakala) ya da büyük hedefe daha esnek yol bulman için işine yarar; ama gereksiz negatif sepeti uzaklaştırır. Kolon başına klavye kısayolu vardır: 1–4 tuşları o kolondaki en alttaki (yere en yakın) sayıyı yakalar — mobilde dokunmak daha hızlıdır. Bir sayı ekrandan düşüp giderse ceza yoktur, sadece fırsatı kaçırırsın. Skor arttıkça hem düşme hızı hem de spawn yoğunluğu yükselir; 6 puandan sonra negatifler de katılır. Üç canın da bitince oyun biter ve yerel rekorla karşılaştırılır. Strateji: küçük hedef için (4–8) tek bir doğru sayıyı bekle, büyük hedef için (15+) önce orta büyüklük (5-6) yakalayıp sonra tam tamamlayan rakamı seç; eli boş bekleme — yarım bıraktığın sepet hedefe yakın oldukça aşma riskin artar.",
+  "thumbnail": "toplam-yakala.svg",
+  "scoring": {
+    "storageKey": "toplam-yakala.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Catch the Sum",
+    "description": "Catch the falling numbers and bring your basket to the exact target — overshooting costs a life, negatives can pull you back.",
+    "controls": "Click/tap a number · 1-4: catch the lowest number in that column · Space/Enter: start · R: restart",
+    "howToPlay": "Catch the Sum is an original arcade-puzzle hybrid that blends quick mental arithmetic with reflex. A new TARGET number (e.g. 12) appears at the top of the screen each round; falling number tiles drop in 4 columns (mostly 1–9 positives, plus occasional -1, -2, -3 negatives as the game speeds up) and you ADD them to your BASKET by clicking or tapping. The moment the basket exactly equals the target you score 1 point, the basket resets and a fresh target appears. If the basket OVERSHOOTS the target you lose a life and the basket resets — so think before you grab. Negative tiles are useful when you accidentally overshoot (basket 13, target 12 → grab a '-1' to recover) or when you want flexibility on a big target; grabbing a negative for no reason only pushes you further from the goal. Each column has a keyboard shortcut: 1–4 catches the lowest (closest to the floor) tile in that column — on mobile tapping is faster. A tile that falls off the screen is not penalised, you just miss the chance. As your score grows tiles fall faster and spawn denser; negatives join in after score 6. When all three lives are gone the run ends and your local best is updated. Strategy: for a small target (4–8) wait for one perfect tile, for a big target (15+) grab a medium piece (5–6) first then look for the exact finisher; don't sit idle — the closer your half-full basket is to the target, the higher your overshoot risk."
+  }
+}

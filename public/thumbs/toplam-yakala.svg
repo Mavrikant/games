@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Toplam Yakala">
+  <rect width="480" height="300" fill="#0e1016"/>
+  <g font-family="system-ui, sans-serif" font-weight="700" text-anchor="middle">
+    <rect x="36" y="32" width="408" height="48" rx="10" fill="#1c2030"/>
+    <text x="240" y="64" font-size="22" fill="#e7e9ee">HEDEF · 12</text>
+    <g>
+      <circle cx="100" cy="150" r="32" fill="#4ea1ff"/>
+      <text x="100" y="159" font-size="28" fill="#06080c">7</text>
+    </g>
+    <g>
+      <circle cx="200" cy="100" r="32" fill="#4ea1ff"/>
+      <text x="200" y="109" font-size="28" fill="#06080c">3</text>
+    </g>
+    <g>
+      <circle cx="300" cy="180" r="32" fill="#e76a52"/>
+      <text x="300" y="189" font-size="28" fill="#06080c">-2</text>
+    </g>
+    <g>
+      <circle cx="400" cy="120" r="32" fill="#4ea1ff"/>
+      <text x="400" y="129" font-size="28" fill="#06080c">5</text>
+    </g>
+    <rect x="36" y="220" width="408" height="14" rx="7" fill="#181d2b"/>
+    <rect x="36" y="220" width="240" height="14" rx="7" fill="#4ea1ff"/>
+    <text x="240" y="278" font-size="26" fill="#e7e9ee">Toplam Yakala</text>
+  </g>
+</svg>

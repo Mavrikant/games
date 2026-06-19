@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Hedef<span id="target">—</span></div>
+  <div class="hud__score">Sepet<span id="basket">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="360"
+    height="540"
+    aria-label="Toplam Yakala tahtası — düşen sayılar"></canvas>
+
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Toplam Yakala</h2>
+      <p id="overlay-msg">
+        Düşen sayıları tıkla. Sepetin hedefe eşit olunca puan. Aşarsan can
+        gider; negatifle aşımı toparla.
+      </p>
+      <button id="start" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
