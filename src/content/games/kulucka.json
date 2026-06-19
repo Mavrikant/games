@@ -1,0 +1,21 @@
+{
+  "title": "Kuluçka",
+  "description": "Dört yumurtanın sıcaklık bandını ısı düğmesiyle koru, hepsini sırayla çatlat — fazla ısıt yakar, ihmal et donar.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "zamanlama", "sıcaklık", "paralel", "tek-oyunculu"],
+  "controls": "1-4 tut: ilgili yumurtayı ısıt · Yumurtaya bas/dokun: ısıt · R: yeniden başla",
+  "thumbnail": "kulucka.svg",
+  "howToPlay": "Kuluçka, dört yumurtayı paralel olarak doğru sıcaklık bandında tutmaya çalıştığın özgün bir paralel-yönetim oyunudur. Sahnede 2x2 düzeninde dört yumurta görürsün; her yumurtanın yanında dikey bir termometre vardır. Termometrenin üzerindeki yeşil dilim o yumurtaya özgü hedef bandı (örn. 35-39°C) gösterir — bant her yumurta için farklıdır ve oyun boyunca değişmez. Termometredeki kırmızı işaret yumurtanın anlık iç sıcaklığıdır; doğa gereği her saniye yavaş yavaş düşer (yaklaşık 4°C/sn). Yumurtayı ısıtmak için altındaki numara (1, 2, 3 veya 4) tuşunu basılı tut ya da yumurtanın üzerine bas/dokun ve bırakma; basılı olduğun sürece sıcaklık yaklaşık 9°C/sn yükselir. Birden fazla yumurtayı aynı anda ısıtabilirsin, ama her yumurtanın bandı farklı olduğundan iyi koordinasyon gerekir. Her yumurtanın altındaki uzun yatay bar onun 'çatlama ilerlemesidir': sıcaklık yeşil bantta olduğu sürece bar dolar (yaklaşık 25%/sn), bant dışındayken yavaşça boşalır (10%/sn). Bar %100'e ulaşınca yumurta çatlar, +10 puan kazanırsın ve yerine yeni bant değeriyle taze bir yumurta gelir. Tehlike iki uçtadır: sıcaklık bant minimumunun 8°C altına düşerse yumurta donar, bant maksimumunun 8°C üstüne çıkarsa yumurta yanar — her iki durumda da yumurta kaybedilir ve -5 puan alırsın; yine taze biriyle değiştirilir. Üst HUD'da kalan süre, anlık skor ve rekor görünür; süre 90 saniyedir. Strateji: bandı geniş olan yumurtaya küçük ısı darbeleri ver, bandı dar olanı sürekli takip et; en zoru aynı anda iki yumurtanın da bant kenarına dayandığı an — birini bırakıp diğerine geçmek için kısa bir ısı dokunuşu kullanmak işe yarar. Tüm yumurtaları aynı seferde ısıtırsan biri kesin yanar; sıralı yönetim her zaman daha verimlidir. R tuşu turu sıfırlar.",
+  "scoring": {
+    "storageKey": "kulucka.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Hatchery",
+    "description": "Keep four eggs inside their unique warm bands — heat them with a press, but overcooking burns and neglect freezes.",
+    "controls": "Hold 1-4: warm the matching egg · Press/tap an egg: warm it · R: restart",
+    "howToPlay": "Hatchery is a parallel-management game where you must keep four eggs inside their personal temperature bands at the same time. The stage shows four eggs in a 2x2 grid; next to every egg sits a vertical thermometer. The green slice on each thermometer is that egg's target window (e.g., 35-39°C) — every egg has a different window and it does not change during play. The red marker is the egg's current internal temperature; left alone it cools by roughly 4°C/s. To heat an egg, hold its number key (1, 2, 3, or 4) or press/tap the egg itself and keep holding; while held the temperature rises about 9°C/s. You may heat multiple eggs simultaneously, but because each band is different you'll need careful rotation. Each egg has a long horizontal 'hatch progress' bar underneath: while the temperature stays inside the green band, the bar fills at about 25%/s; outside the band it slowly drains at 10%/s. When the bar reaches 100%, the egg hatches, you score +10 points, and a fresh egg with a new random band takes its place. Danger comes from both ends: if the temperature falls 8°C below the band's minimum the egg freezes; if it climbs 8°C above the band's maximum it burns. Either way the egg is lost, you lose 5 points, and a fresh egg replaces it. The top HUD shows the remaining time, current score, and best score; a round lasts 90 seconds. Strategy: give wide-banded eggs short heat pulses and watch narrow-banded eggs continuously; the hardest moment is when two eggs are both at the edge of their bands — release the one already hatching and short-tap the other. Heating everything at once almost always burns one egg; sequential management is more efficient. Press R to reset the round."
+  }
+}

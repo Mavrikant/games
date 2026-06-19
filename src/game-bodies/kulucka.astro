@@ -1,0 +1,98 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">
+    Süre<span id="time">90</span>
+  </div>
+  <div class="hud__stat">
+    Skor<span id="score">0</span>
+  </div>
+  <div class="hud__stat">
+    En iyi<span id="best">0</span>
+  </div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<section class="board" aria-label="Kuluçka tahtası">
+  <div id="grid" class="kgrid" role="group" aria-label="Dört yumurta">
+    <button id="egg-0" class="egg" data-idx="0" type="button" aria-label="Birinci yumurta">
+      <span class="egg__key" aria-hidden="true">1</span>
+      <div class="egg__therm" aria-hidden="true">
+        <div class="egg__band" data-role="band"></div>
+        <div class="egg__needle" data-role="needle"></div>
+      </div>
+      <div class="egg__shell" data-role="shell">
+        <svg viewBox="0 0 100 130" class="egg__svg" aria-hidden="true">
+          <path data-role="egg-path" d="M50,8 C76,8 88,55 88,82 C88,108 72,124 50,124 C28,124 12,108 12,82 C12,55 24,8 50,8 Z" fill="#e9c97a" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+          <path data-role="crack" d="" fill="none" stroke="#2a1d05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+      </div>
+      <div class="egg__progress" aria-hidden="true">
+        <div class="egg__progressFill" data-role="progress"></div>
+      </div>
+      <div class="egg__label" data-role="label">35-39°C</div>
+    </button>
+    <button id="egg-1" class="egg" data-idx="1" type="button" aria-label="İkinci yumurta">
+      <span class="egg__key" aria-hidden="true">2</span>
+      <div class="egg__therm" aria-hidden="true">
+        <div class="egg__band" data-role="band"></div>
+        <div class="egg__needle" data-role="needle"></div>
+      </div>
+      <div class="egg__shell" data-role="shell">
+        <svg viewBox="0 0 100 130" class="egg__svg" aria-hidden="true">
+          <path data-role="egg-path" d="M50,8 C76,8 88,55 88,82 C88,108 72,124 50,124 C28,124 12,108 12,82 C12,55 24,8 50,8 Z" fill="#e9c97a" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+          <path data-role="crack" d="" fill="none" stroke="#2a1d05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+      </div>
+      <div class="egg__progress" aria-hidden="true">
+        <div class="egg__progressFill" data-role="progress"></div>
+      </div>
+      <div class="egg__label" data-role="label">35-39°C</div>
+    </button>
+    <button id="egg-2" class="egg" data-idx="2" type="button" aria-label="Üçüncü yumurta">
+      <span class="egg__key" aria-hidden="true">3</span>
+      <div class="egg__therm" aria-hidden="true">
+        <div class="egg__band" data-role="band"></div>
+        <div class="egg__needle" data-role="needle"></div>
+      </div>
+      <div class="egg__shell" data-role="shell">
+        <svg viewBox="0 0 100 130" class="egg__svg" aria-hidden="true">
+          <path data-role="egg-path" d="M50,8 C76,8 88,55 88,82 C88,108 72,124 50,124 C28,124 12,108 12,82 C12,55 24,8 50,8 Z" fill="#e9c97a" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+          <path data-role="crack" d="" fill="none" stroke="#2a1d05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+      </div>
+      <div class="egg__progress" aria-hidden="true">
+        <div class="egg__progressFill" data-role="progress"></div>
+      </div>
+      <div class="egg__label" data-role="label">35-39°C</div>
+    </button>
+    <button id="egg-3" class="egg" data-idx="3" type="button" aria-label="Dördüncü yumurta">
+      <span class="egg__key" aria-hidden="true">4</span>
+      <div class="egg__therm" aria-hidden="true">
+        <div class="egg__band" data-role="band"></div>
+        <div class="egg__needle" data-role="needle"></div>
+      </div>
+      <div class="egg__shell" data-role="shell">
+        <svg viewBox="0 0 100 130" class="egg__svg" aria-hidden="true">
+          <path data-role="egg-path" d="M50,8 C76,8 88,55 88,82 C88,108 72,124 50,124 C28,124 12,108 12,82 C12,55 24,8 50,8 Z" fill="#e9c97a" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+          <path data-role="crack" d="" fill="none" stroke="#2a1d05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+      </div>
+      <div class="egg__progress" aria-hidden="true">
+        <div class="egg__progressFill" data-role="progress"></div>
+      </div>
+      <div class="egg__label" data-role="label">35-39°C</div>
+    </button>
+  </div>
+
+  <p class="kuluTip">Yumurtanın üzerine bas (veya 1-4) ve <strong>bırakma</strong> — yeşil bandın içinde tutarsan çatlar.</p>
+
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Süre doldu</h2>
+      <p id="overlay-msg">Skor: 0</p>
+      <button id="overlay-restart" class="overlay__btn" type="button">Tekrar oyna</button>
+    </div>
+  </div>
+</section>

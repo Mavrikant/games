@@ -1,0 +1,308 @@
+:root {
+  --kulu-egg-warm: #c98d3a;
+  --kulu-ok: #22c55e;
+  --kulu-cold: #38bdf8;
+  --kulu-hot: #f97316;
+  --kulu-burn: #b91c1c;
+  --kulu-freeze: #0ea5e9;
+  --kulu-band-bg: rgba(34, 197, 94, 0.22);
+  --kulu-band-border: rgba(34, 197, 94, 0.55);
+}
+
+/* HUD durum kartları */
+.hud {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hud__stat {
+  flex: 1;
+  min-width: 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+.hud__stat span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* Board */
+.board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.kgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(10px, 2.4vw, 18px);
+  width: 100%;
+}
+
+/* Egg button (yumurta + termometre + progress) */
+.egg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas:
+    'therm shell'
+    'therm progress'
+    'therm label';
+  gap: 8px;
+  padding: 10px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  font: inherit;
+  color: var(--text);
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+  touch-action: manipulation;
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s,
+    transform 0.08s;
+  min-height: 180px;
+}
+.egg:hover {
+  border-color: var(--border-strong);
+}
+.egg--heating {
+  border-color: var(--kulu-hot);
+  box-shadow:
+    0 0 0 2px rgba(249, 115, 22, 0.28),
+    0 0 22px rgba(249, 115, 22, 0.22);
+}
+.egg--hatch {
+  border-color: var(--kulu-ok);
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.45),
+    0 0 26px rgba(34, 197, 94, 0.4);
+}
+.egg--burn {
+  border-color: var(--kulu-burn);
+  box-shadow:
+    0 0 0 3px rgba(185, 28, 28, 0.55),
+    0 0 26px rgba(185, 28, 28, 0.5);
+}
+.egg--freeze {
+  border-color: var(--kulu-freeze);
+  box-shadow:
+    0 0 0 3px rgba(14, 165, 233, 0.55),
+    0 0 26px rgba(14, 165, 233, 0.5);
+}
+
+.egg__key {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: rgba(10, 11, 14, 0.55);
+  border-radius: 6px;
+  padding: 2px 7px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* Termometre — sol kolon, dikey */
+.egg__therm {
+  grid-area: therm;
+  position: relative;
+  width: 32px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1c2230, #0f141c);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  align-self: stretch;
+  min-height: 140px;
+}
+.egg__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--kulu-band-bg);
+  border-top: 1px solid var(--kulu-band-border);
+  border-bottom: 1px solid var(--kulu-band-border);
+  pointer-events: none;
+}
+.egg__needle {
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  height: 4px;
+  border-radius: 3px;
+  background: #f8fafc;
+  box-shadow: 0 0 8px rgba(248, 250, 252, 0.55);
+  transform: translateY(50%);
+  transition: bottom 0.12s linear;
+}
+.egg__needle--ok {
+  background: var(--kulu-ok);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+}
+.egg__needle--cold {
+  background: var(--kulu-cold);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}
+.egg__needle--hot {
+  background: var(--kulu-hot);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
+}
+
+/* Shell (yumurta svg konteyner) */
+.egg__shell {
+  grid-area: shell;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.egg__svg {
+  width: clamp(56px, 18vw, 88px);
+  height: auto;
+  display: block;
+  transition: transform 0.18s ease;
+}
+.egg--heating .egg__svg {
+  transform: scale(1.04);
+}
+
+/* Progress bar — çatlama */
+.egg__progress {
+  grid-area: progress;
+  height: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.egg__progressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #f59e0b, var(--kulu-ok));
+  transition: width 0.12s linear;
+}
+.egg__progressFill--ready {
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+}
+
+/* Etiket */
+.egg__label {
+  grid-area: label;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Tip */
+.kuluTip {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.kuluTip strong {
+  color: var(--text);
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.86);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 0.22s,
+    transform 0.22s;
+  z-index: 4;
+}
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+.overlay__inner {
+  text-align: center;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  max-width: 90%;
+}
+.overlay__inner h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.overlay__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--accent);
+  color: #0a0b0e;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    background 0.15s;
+}
+.overlay__btn:hover {
+  transform: translateY(-1px);
+}
+.overlay__btn:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 380px) {
+  .egg {
+    grid-template-columns: 28px 1fr;
+    min-height: 160px;
+    padding: 8px;
+  }
+  .egg__therm {
+    width: 24px;
+    min-height: 120px;
+  }
+}
