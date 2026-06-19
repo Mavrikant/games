@@ -1,0 +1,21 @@
+{
+  "title": "Ay Yürüyüşü",
+  "description": "Düşük yerçekiminde astronotu kontrol et; gücü tut-bırak ile platodan platoya zıpla, kristalleri topla, oksijen bitmeden gidebildiğin kadar git.",
+  "dateAdded": "2026-06-19",
+  "tags": ["fizik", "refleks", "özgün", "uzay"],
+  "controls": "Boşluk basılı tut: zıplama gücünü doldur · Bırak: zıpla · ← / →: havada yön düzelt · Boşluk havada: jet boost · R: yeniden başla · Mobil: tahtaya basılı tut/bırak",
+  "thumbnail": "ay-yuruyusu.svg",
+  "scoring": {
+    "storageKey": "ay-yuruyusu.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Ay Yürüyüşü, düşük yerçekimi (≈1/6 g) altında bir astronotu plato plato zıplatarak ne kadar uzağa gidebildiğini ölçen bir refleks-fizik oyunudur. Astronot her zaman bir kratere bakan platoda durur; aşağıdaki uçurum boşlukları (vakum çatlakları) düşersen oyunu bitirir. Zıplamak için BOŞLUK tuşunu (veya ekrana parmağını) BASILI TUT — sağ üstteki güç çubuğu yarım saniyede dolar, hem yüksekliği hem yatay menzili kontrol eder. Bırakınca astronot otomatik olarak sağa doğru parabol çizerek havalanır; havadayken SOL/SAĞ ok tuşlarıyla (veya tahtanın sol/sağ yarısına dokunarak) küçük yatay düzeltmeler yapabilirsin — moonpack zayıftır ama yere düşmeden yetersiz bir zıplamayı kurtarabilir. Her zıplamada bir kez BOŞLUK'a havada basarsan jet boost devreye girer, dikey hızı yukarı doğru iter ve yere düşmeni geciktirir; bu bonus zıplama başına bir kez kullanılabilir ve oksijenden 4 saniye harcar. Üst HUD'da oksijen sayacı (sn) sürekli azalır; her platoya başarıyla iniş +1 skor + 3 sn O₂ verir, plato üstündeki mavi kristalleri toplamak +5 skor + 8 sn O₂ getirir. Oksijen 0'a inerse veya boşluğa düşersen oyun biter. Plato genişlikleri ve aralıkları kademeli zorlaşır; ilk 8 zıplama 'eğitim' aralığındadır, sonra mesafeler çeşitlenir ve nadir kristal platoları belirir. Skorun = inilen toplam plato sayısı + kristal bonusları; rekorun tarayıcında saklanır. İpucu: güç çubuğunu sonuna kadar doldurma — birçok plato 60-70% güçte 'tam' iner; aşırı güç astronotu hedef platoyu geçirip uçuruma düşürür. Açı düzeltmesini ve jet boost'u son çare olarak sakla; alıştıkça 30+ platoya çıkmak mümkündür.",
+  "en": {
+    "title": "Moonwalk",
+    "description": "Control the astronaut in low gravity; charge and release to leap from plateau to plateau, collect crystals, go as far as you can before oxygen runs out.",
+    "controls": "Space hold: charge jump · Release: leap · ← / →: in-air drift · Space in air: jet boost · R: restart · Mobile: hold/release the board",
+    "howToPlay": "Moonwalk is a reflex-physics game where you bounce an astronaut from plateau to plateau under low gravity (≈1/6 g) and see how far you can go. The astronaut always stands on a plateau over a crater; the gaps below are vacuum fissures and falling in ends the game. To jump, HOLD the SPACE key (or press and hold the board on touch) — the power bar in the top-right fills in half a second and controls both height and horizontal range. When you release, the astronaut launches in a rightward parabola; while airborne, LEFT/RIGHT arrows (or taps on the left/right half of the board) apply small horizontal drift corrections — the moonpack is weak but can rescue a slightly short jump. Once per jump you can press SPACE again in mid-air to fire a jet boost that pushes you upward and delays your fall; it costs 4 seconds of oxygen. The HUD shows oxygen (seconds) ticking down constantly; each successful plateau landing gives +1 score and 3 seconds of O₂, and collecting the blue crystals that sit on some plateaus gives +5 score and 8 seconds of O₂. Hit zero oxygen or fall into the void and the game ends. Plateau widths and gaps escalate gradually; the first 8 jumps are training distances, then ranges diversify and rarer crystal plateaus appear. Score = total plateaus landed + crystal bonuses; your best is stored in your browser. Tip: do not max the power bar — most plateaus land cleanly at 60-70% power; overshooting carries the astronaut past the target plateau into the void. Save your drift correction and your jet boost for emergencies; with practice reaching 30+ plateaus becomes possible."
+  }
+}
