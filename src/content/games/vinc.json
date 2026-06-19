@@ -1,0 +1,21 @@
+{
+  "title": "Vinç",
+  "description": "Liman vinci işlet — salınan kabini frenle, renkli kasaları doğru yuvaya bırak. Çok sallanırsa kasa kırılır.",
+  "dateAdded": "2026-06-19",
+  "tags": ["fizik", "özgün", "refleks", "arcade"],
+  "controls": "← → trolley · ↑ ↓ ip uzat/kısalt · Boşluk: tut/bırak · R: yeniden başla",
+  "howToPlay": "Bir liman vincinin operatörüsün. Üstteki troley sağa-sola hareket eder, aşağıya doğru bir ip ve onun ucunda bir kanca sarkar. Sol-sağ ok ile troleyi kaydır, yukarı-aşağı ok ile ipi uzatıp kısalt, Boşluk ile kancayı kapat/aç. Sol taraftaki istif alanında bekleyen renkli kasaları sağ taraftaki eşleşen renk yuvalarına teslim etmelisin. İşin püf noktası: troley her hızlandığında veya frenlendiğinde kancanın salınımı artar; kasayı kavradıktan sonra troleyi yumuşak kullan. Yuvaya çok salınırken bırakırsan kasa kırılır (-1 hata, kasa bir sonraki turda yeniden gelir). Üç hata = oyun biter. Bir seviyedeki tüm kasaları doğru yuvalara koyunca bir sonraki seviyeye geçersin: daha çok kasa, daha sert salınım, bazı seviyelerde rüzgâr esmeye başlar. Skor = doğru teslimat × 100 − kırık kasa × 40, en yüksek skorun saklanır. İpucu: hedef yuvanın üstüne tam geldiğinde değil, salınımın diğer ucuna ulaştığı an Boşluk'a bas — kasa o anda neredeyse durağandır.",
+  "thumbnail": "vinc.svg",
+  "scoring": {
+    "storageKey": "vinc.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Crane",
+    "description": "Run a harbour crane — tame the swinging hook and drop colour-coded crates into matching bays. Drop while swinging and the crate breaks.",
+    "controls": "← → trolley · ↑ ↓ rope length · Space: grab/release · R: restart",
+    "howToPlay": "You operate a harbour crane. A trolley moves along the top rail; a rope hangs from it with a hook at the tip. Use ←/→ to slide the trolley, ↑/↓ to pay out or reel in the rope, and Space to close or open the hook. Pick coloured crates from the loading area on the left and place each one into the matching colour bay on the right. The catch: every time the trolley accelerates or brakes, the hook starts to swing. After you grab a crate, move smoothly — if you release while it is swinging the crate smashes (–1 miss). Three misses and the game ends. Clear all crates on a level to advance: more crates, sharper swing, and from level three an unpredictable wind starts to push the rope sideways. Score = correct deliveries × 100 − broken crates × 40, and your best is saved. Tip: don't release when the crate is directly over the bay — release at the far end of the swing, where it momentarily stands still."
+  }
+}

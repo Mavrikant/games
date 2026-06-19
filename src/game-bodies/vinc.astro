@@ -1,0 +1,28 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Hata<span id="misses">0/3</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="540" aria-label="Vinç oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Vinç</h2>
+      <p id="overlay-msg">Troleyi ← → ile kaydır, ↑ ↓ ile ipi uzat, Boşluk ile kancayı tut/bırak. Hazır olduğunda Boşluk.</p>
+    </div>
+  </div>
+</div>
+
+<div class="vinc-touch" aria-hidden="true">
+  <button class="vinc-touch__btn" data-act="left" type="button">◀</button>
+  <button class="vinc-touch__btn" data-act="up" type="button">▲</button>
+  <button class="vinc-touch__btn vinc-touch__grab" data-act="grab" type="button">TUT / BIRAK</button>
+  <button class="vinc-touch__btn" data-act="down" type="button">▼</button>
+  <button class="vinc-touch__btn" data-act="right" type="button">▶</button>
+</div>
