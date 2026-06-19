@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="score">1</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Katlama<span id="folds">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="540" aria-label="Origami katlama alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Origami</h2>
+      <p id="overlay-msg">Ok tuşları veya WASD ile katla. Bütün yıldızları tek hücrede topla.<br/>Boşluk: başla.</p>
+    </div>
+  </div>
+</div>
+<div class="touch" aria-hidden="true">
+  <button class="touch__btn touch__btn--blank" type="button" disabled aria-hidden="true"></button>
+  <button class="touch__btn" data-fold="up" type="button" aria-label="Aşağıyı yukarı katla">▲</button>
+  <button class="touch__btn touch__btn--blank" type="button" disabled aria-hidden="true"></button>
+  <button class="touch__btn" data-fold="left" type="button" aria-label="Sağı sola katla">◀</button>
+  <button class="touch__btn touch__btn--center" id="touch-reset" type="button" aria-label="Bölümü sıfırla">R</button>
+  <button class="touch__btn" data-fold="right" type="button" aria-label="Solu sağa katla">▶</button>
+  <button class="touch__btn touch__btn--blank" type="button" disabled aria-hidden="true"></button>
+  <button class="touch__btn" data-fold="down" type="button" aria-label="Yukarıyı aşağı katla">▼</button>
+  <button class="touch__btn touch__btn--blank" type="button" disabled aria-hidden="true"></button>
+</div>

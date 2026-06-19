@@ -1,0 +1,21 @@
+{
+  "title": "Origami",
+  "description": "Kağıdı dört yöne katla — her katlama yıldızları aynalar; hepsini tek hücrede topla.",
+  "dateAdded": "2026-06-19",
+  "tags": ["puzzle", "özgün", "uzamsal", "strateji", "tek-oyunculu"],
+  "controls": "← ↑ → ↓ veya WASD: katla · R: bölümü sıfırla · N: yeni bölüm · Boşluk: başla",
+  "thumbnail": "origami.svg",
+  "howToPlay": "Origami uzamsal bir katlama bulmacasıdır: önünde kare bir kağıt var ve üzerine birkaç yıldız serpilmiş; amacın katlamalarla bütün yıldızları tek bir hücreye toplamak. Dört yönde katlayabilirsin — ← Sol Ok kağıdın sağ yarısını sol yarısının üstüne katlar, → Sağ Ok tam tersini yapar, ↑ alt yarısı yukarı, ↓ üst yarısı aşağı katlanır. Katlanan tarafta kalan yıldızlar katlama eksenine göre simetrik biçimde aynaya alınır ve sabit yarıya 'düşer'; aynı hücreye düşen yıldızlar üst üste yığılır, sayıları küçük rozet olarak görünür. Her katlamadan sonra kağıt yarıya iner; o yön artık daha fazla bölünemez bir hücreye kadar tekrar tekrar katlanabilir. Eğer doğru sırayla katlarsan tüm yıldızlar tek hücrede buluşur ve bölüm biter. Hatalı bir katlama yıldızları yanlış yarıda bırakırsa R ile bölümü sıfırla; çözdüğün her bölüm için bir sonrakine geçersin ve katlama bütçen artmazken yıldız sayısı artar. Skorun bir seansta art arda çözdüğün bölüm sayısıdır ve en iyi skorun tarayıcına saklanır. İpucu: yıldızları ortak bir merkez aramak yerine, geriye doğru düşün — kağıt tamamen toplandığında yıldızlar nerede olacak? Hangi yarı 'sabit' kalmalı? Önce uçtaki yıldızı içeri taşıyan katlamayı seç, ortaya yakın olanlar sona kalsın.",
+  "scoring": {
+    "storageKey": "origami.best",
+    "label": "Bölüm",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Origami",
+    "description": "Fold the paper in four directions — every fold mirrors the stars; gather them all into a single cell.",
+    "controls": "← ↑ → ↓ or WASD: fold · R: reset level · N: new level · Space: start",
+    "howToPlay": "Origami is a spatial folding puzzle: in front of you is a square sheet of paper sprinkled with stars; your goal is to fold it until every star lands in the same single cell. You can fold in four directions — ← folds the right half over the left, → does the opposite, ↑ folds the bottom half upward, ↓ folds the top half downward. Stars on the folded half are mirrored across the crease and land on the stationary half; stars that land on the same cell stack and show a small badge with their count. Each fold halves the paper in that direction, and you keep folding until the paper is a single cell wide in both directions. If you fold correctly, all stars end up on the same cell and the level is solved. A wrong fold can scatter stars onto the wrong half — press R to reset the level. Each solved level advances you to the next, with one more star to bring together. Your score is the streak of levels you solve in one session, saved locally. Tip: instead of looking for a common center, think backwards — when the paper is fully gathered, where will the stars be? Which half should stay 'fixed'? Pull edge stars inward first, leave centrally placed stars for the final folds."
+  }
+}

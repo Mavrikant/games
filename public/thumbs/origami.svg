@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Origami">
+  <defs>
+    <linearGradient id="bgOrigami" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1815" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <linearGradient id="paperGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7f0e0" />
+      <stop offset="100%" stop-color="#e8dec5" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bgOrigami)" />
+  <g transform="translate(160 100)">
+    <polygon points="-60,-40 60,-40 60,40 -60,40" fill="url(#paperGrad)" stroke="#b59a6a" stroke-width="2" />
+    <line x1="0" y1="-40" x2="0" y2="40" stroke="#b59a6a" stroke-width="1" stroke-dasharray="3 3" opacity="0.55" />
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="#b59a6a" stroke-width="1" stroke-dasharray="3 3" opacity="0.55" />
+    <polygon points="60,-40 60,40 30,40 30,-40" fill="#d8c39a" opacity="0.55" />
+    <g fill="#ef9a3a">
+      <polygon points="-40,-20 -36,-8 -24,-8 -34,0 -30,12 -40,4 -50,12 -46,0 -56,-8 -44,-8" />
+      <polygon points="20,15 24,27 36,27 26,35 30,47 20,39 10,47 14,35 4,27 16,27" />
+      <polygon points="-22,18 -18,30 -6,30 -16,38 -12,50 -22,42 -32,50 -28,38 -38,30 -26,30" />
+    </g>
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#f7f0e0">Origami</text>
+  <text x="20" y="180" font-family="ui-sans-serif, system-ui" font-size="11" fill="#aab" opacity="0.7">katla · birleştir</text>
+</svg>
