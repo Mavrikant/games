@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Torna">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a2030"/>
+      <stop offset="1" stop-color="#0a0d14"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c98a4b"/>
+      <stop offset="0.5" stop-color="#a86a36"/>
+      <stop offset="1" stop-color="#6f4520"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <!-- Headstock & tailstock -->
+  <rect x="20" y="55" width="16" height="90" fill="#2a3142"/>
+  <rect x="284" y="55" width="16" height="90" fill="#2a3142"/>
+  <line x1="36" y1="100" x2="284" y2="100" stroke="#3a4250" stroke-width="1"/>
+  <!-- Wood silhouette: vase shape -->
+  <path d="M 40 100
+           C 50 70, 90 50, 130 55
+           C 160 58, 175 80, 175 100
+           C 175 120, 160 142, 130 145
+           C 90 150, 50 130, 40 100 Z"
+        transform="translate(0,0) scale(1,1)"
+        fill="url(#wood)"/>
+  <!-- Mirror bottom -->
+  <path d="M 40 100
+           C 60 105, 100 105, 130 105
+           C 160 105, 200 105, 230 105
+           C 250 105, 270 105, 284 100
+           L 284 105
+           C 270 110, 250 113, 230 113
+           C 200 116, 160 118, 130 117
+           C 100 116, 60 110, 40 105 Z"
+        fill="#5b3a1c" opacity="0.7"/>
+  <!-- Carved profile (vase silhouette on right) -->
+  <path d="M 36 100
+           C 50 80, 90 70, 110 75
+           C 140 80, 155 90, 155 100
+           C 155 110, 140 120, 110 125
+           C 90 130, 50 120, 36 100 Z"
+        fill="url(#wood)"/>
+  <path d="M 155 100
+           C 170 95, 200 78, 210 70
+           C 215 65, 220 65, 230 70
+           C 245 78, 270 90, 284 100
+           C 270 110, 245 122, 230 130
+           C 220 135, 215 135, 210 130
+           C 200 122, 170 105, 155 100 Z"
+        fill="url(#wood)"/>
+  <!-- Target dashed outline (cyan) -->
+  <path d="M 36 78
+           C 60 60, 100 52, 130 56
+           C 160 58, 175 80, 175 100
+           C 175 120, 160 142, 130 144
+           C 100 148, 60 140, 36 122"
+        fill="none" stroke="#5fd0ff" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+  <path d="M 175 100
+           C 195 80, 230 60, 260 58
+           C 275 57, 285 60, 290 64
+           C 296 70, 296 130, 290 136
+           C 285 140, 275 143, 260 142
+           C 230 140, 195 120, 175 100"
+        fill="none" stroke="#5fd0ff" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+  <!-- Chisel -->
+  <polygon points="160,168 152,182 168,182" fill="#e8ecf2"/>
+  <rect x="155" y="182" width="10" height="14" fill="#7a5a32"/>
+  <!-- Title -->
+  <text x="160" y="32" text-anchor="middle"
+        font-family="ui-sans-serif, -apple-system, Segoe UI, Roboto, sans-serif"
+        font-size="20" font-weight="700" fill="#e8ecf2"
+        letter-spacing="0.04em">TORNA</text>
+</svg>

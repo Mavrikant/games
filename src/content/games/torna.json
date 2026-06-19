@@ -1,0 +1,21 @@
+{
+  "title": "Torna",
+  "description": "Dönen ahşap silindiri keski ile yontup hedef silüete getir — mavi çizginin altına inersen parça çatlar.",
+  "dateAdded": "2026-06-19",
+  "tags": ["özgün", "zanaat", "hassasiyet", "tek-oyunculu", "mobil"],
+  "controls": "Fare/dokunuş: keskiyi yatay konumlandır, bas-tut ile oy · ← →: keski sola/sağa · ↓ veya boşluk: oy (oyun sırasında) · R: yeniden",
+  "thumbnail": "torna.svg",
+  "howToPlay": "Torna, geleneksel ahşap tornacılığını canvas üzerinde minimalist bir hassasiyet oyununa çeviren özgün bir tarayıcı oyunudur. Sahnenin ortasında, başlangıçta düzgün bir silindir olarak duran bir ahşap parça, iki başlık (headstock + tailstock) arasında yatay eksende sürekli döner; sen üstüne bindirilmiş mavi kesik çizgi olarak hedef silüeti — bir vazonun, iğ, kum saati veya şamdan profili — görürsün. Görevin tek: silindirin yarıçapını her kesitte hedef çizgiye getirecek şekilde keski ile yontmak. Fareyi ya da parmağını yatayda kaydırarak silindirin altındaki üçgen keskiyi istediğin noktaya götürür, sonra basılı tutarak o noktada ahşabı incelmeye başlatırsın; klavyede sol/sağ ok keskiyi tek hücre oynatır, aşağı ok veya boşluk basılı tutmak da kesimi yapar. Keskinin etkisi sadece tek bir noktayı değil, etrafındaki birkaç hücreyi azalan şiddetle etkiler — gerçek bir keski gibi yuvarlak bir profil çıkarır. Her hücre üç renkten biri olur: hâlâ kalın bölgeler ahşap kahverengisi, mavi tolerans bandının tam içinde olanlar yeşil, hedef çizgisinin altına geçenler kırmızıdır. Tek bir hücre bile kırmızıya kayarsa parça hurda olur ve tur biter; tüm hücreler yeşile döndüğünde turu kazanır ve skorun bir artar. Her yeni tur, döngüsel olarak farklı bir hedef şekli (vazo / iğ / üç-bilezikli / konik / kum saati / şamdan) seçer ve tolerans bandı ufalır — başta 9 piksellik bir nefes payı ile başlarsın, ilerleyen turlarda 4 piksele kadar daralır. Strateji: keskiyi uzun süre tek bir noktada tutma; kısa, kontrollü dokunuşlarla aşamalı incelt ve her bölgenin yeşile dönüşünü gör. Yeşil bir kesim noktasından sonra etrafa kaymak yumuşak geçişler sağlar; yanıp parlayan sarı kıvılcımlar kesimin gerçekten ilerlediğini doğrular. Skorun, tamamladığın tur sayısıdır ve tarayıcında saklanır; bir sonraki seansa rekorunu aşmak üzere dönersin.",
+  "scoring": {
+    "storageKey": "torna.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Rounds"
+  },
+  "en": {
+    "title": "Lathe",
+    "description": "Shape a spinning wooden cylinder with a chisel to match the target silhouette — drop below the blue line and the piece cracks.",
+    "controls": "Mouse/touch: slide the chisel, press-and-hold to carve · ← →: nudge chisel · ↓ or Space: carve (in play) · R: restart",
+    "howToPlay": "Lathe turns traditional woodturning into a minimalist precision game on a single canvas. At the center of the stage, a wooden blank — initially a clean cylinder — spins continuously between a headstock and a tailstock; overlaid on it you see a dashed blue target silhouette: a vase, spindle, hourglass, or candle-stand profile. Your one job is to shape the cylinder so its radius at every position matches that target curve. Slide the mouse or finger horizontally to place the triangular chisel under the blank, then press-and-hold to start shaving wood at that spot; on the keyboard left/right arrow nudges the chisel, and down arrow or Space carves. The chisel affects not only the exact column but several neighboring ones with falling intensity — like a real chisel, it leaves a smooth round cut. Each column is colored by state: brown if still too thick, green if inside the blue tolerance band, red if you carved past the target. Even a single red column means the piece is scrap and the round ends; turn every column green to clear the round and add to your score. Each round cycles to a different target shape (vase / spindle / triple-band / cone / hourglass / candle-stand) and the tolerance band shrinks — you start with 9 pixels of breathing room and it tightens down to 4 over time. Strategy: don't park the chisel on one spot for long; tap and slide in short controlled strokes, watching each region snap to green. Yellow sparks confirm wood is actually coming off. Your score is the number of rounds completed and persists in your browser, so you come back to beat your record."
+  }
+}
