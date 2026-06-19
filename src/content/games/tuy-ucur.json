@@ -1,0 +1,21 @@
+{
+  "title": "Tüy Uçur",
+  "description": "Düşmekte olan bir tüyü puflarla yönlendir; rüzgâr sürüklerken duvarlardaki boşluklardan kayarak geç.",
+  "dateAdded": "2026-06-19",
+  "tags": ["fizik", "refleks", "arcade", "özgün"],
+  "controls": "Tıkla: pufla (tüy uzaklaşır) · ← → veya A/D: yatay it · Boşluk: başla · R: yeniden başla",
+  "thumbnail": "tuy-ucur.svg",
+  "howToPlay": "Tüy Uçur bir hassasiyet ve sezgi oyunudur: ekranın üstünde belirip aşağıya doğru yavaşça düşmeye başlayan bir tüyü, aşağıdan yukarıya doğru kayan duvarların rastgele yerleşmiş boşluklarından geçirmen gerekir. Yer çekimi tüyü sürekli aşağı çekerken, alttaki rüzgâr göstergesinin yön ve şiddeti tüyü yatayda sürükler — gösterge sağa kayarsa tüy sağa, sola kayarsa sola sürüklenir. Düzeltme için iki yöntem var: birincisi, oyun alanına tıklamak, tıkladığın noktadan dışa doğru genişleyen bir hava puffu yaratır ve tüyü o noktadan UZAKLAŞTIRIR; yani tüyün altına tıkladığında yukarı kalkar, soluna tıkladığında sağa savrulur. İkincisi, sol/sağ ok tuşları (veya A/D) tüye sürekli yatay bir itme uygular ve uzun süreli ince ayar için idealdir; mobilde altta beliren İt butonları aynı işi görür. Skor, içinden geçtiğin her duvar için 1 puandır; oyun ilerledikçe duvarlar daha hızlı kayar ve boşluklar daralır. Tüy ekranın yan kenarlarından hafifçe geri sıçrar — bu kasıtlıdır, böylece kuvvetli bir rüzgâr seni anında öldürmez; ama tabanı geçersen veya bir duvarın dolu kısmına çarparsan oyun biter ve en iyi skorun tarayıcına kaydedilir. Strateji: tüyü merkezde tutmaya çalış, çünkü kenara yapışık dururken yan rüzgâra karşı koymak için daha az hareket alanın olur. Boşluğa hizalanırken birkaç küçük puf yerine tek bir geniş yelpazeli puf vur — tüyün momentumu birikir ve son anda dönmek genelde imkânsızdır. Rüzgâr göstergesi yön değiştirdiğinde dengeleyici bir puf erkenden vur; tüy rüzgâr peşinden sürüklenmeden önce karşı yöne sapma yarat.",
+  "scoring": {
+    "storageKey": "tuy-ucur.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Float the Feather",
+    "description": "Guide a slowly-falling feather through scrolling gap-walls using air puffs while a shifting wind drags it sideways.",
+    "controls": "Click: puff (feather is blown away) · ← → or A/D: lateral push · Space: start · R: restart",
+    "howToPlay": "Float the Feather is a precision-and-anticipation game: a feather drifts down from the top of the field while randomly-placed gap-walls scroll up from below — your job is to steer through every gap. Gravity constantly pulls the feather down, and the wind meter at the bottom shows a shifting lateral breeze that drags it sideways: indicator to the right means the feather drifts right, left means left. You have two ways to push back. First, clicking anywhere on the board creates an expanding puff at the click point that pushes the feather AWAY from that spot — click below it to lift it up, click to its left to send it right. Second, the left/right arrow keys (or A/D) apply a steady horizontal force, perfect for fine-tuning over time; on mobile the on-screen Push buttons do the same. Each wall you slip through scores one point; as the run continues, the scroll speed ramps and the gap narrows. The feather bounces softly off the side walls — that's deliberate, so a strong gust isn't an instant loss; but if you fall off the bottom or hit a wall's solid section, the run ends and your best score is saved locally. Strategy: keep the feather near the middle — pinned against a side wall you have less room to fight a crossing breeze. When you're lining up a gap, prefer one well-placed puff over a flurry of tiny ones; the feather builds momentum and last-second turns are usually impossible. The moment the wind indicator flips direction, get a counter-puff in early to push the feather against the new drift before it picks up speed."
+  }
+}
