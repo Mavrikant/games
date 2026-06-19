@@ -1,0 +1,21 @@
+{
+  "title": "Nazar",
+  "description": "Sekiz yönden açılan kem gözleri nazar muskasını çevirerek savuştur — şarj dolmadan önce yetiş.",
+  "dateAdded": "2026-06-19",
+  "tags": ["arcade", "refleks", "kültür", "tek-oyunculu"],
+  "controls": "1-8: yöne bak · ←/→: muskayı 45° döndür · Tıkla/dokun: o yöne bak · Boşluk: başla · R: yeniden başla",
+  "howToPlay": "Sekiz farklı yönden seni süzen kem gözlere karşı nazar boncuğu muskasını döndürerek savunma yaparsın. Ekranın ortasında muskan duruyor; göstergesi şu an hangi yöne baktığını söyler. Çember üzerindeki sekiz pusula noktasında rastgele kem gözler açılır ve her birinin etrafındaki halka yavaş yavaş dolar — halka tamamlandığında nazar değer ve bir can kaybedersin. Üç canın bitince oyun biter. Muskayı bir gözle aynı yöne çevirdiğin anda göz savuşur ve skor +1 olur. Klavyede 1-8 tuşları doğrudan ilgili yöne döndürür (1=yukarı, sonra saat yönünde); ←/→ ya da A/D ise muskayı 45° adımlarla döndürür. Mouse veya dokunmatik kullanıyorsan tahtanın istediğin yönüne tıkla — musk otomatik o yöne bakar ve oradaki açık göz varsa hemen savuşur. Boşluk veya Enter oyunu başlatır, R yeniden başlatır. Skor arttıkça gözler daha sık açılır ve şarjları kısalır — birden fazla göz aynı anda açıkken halkası en kırmızıya yakın olana öncelik ver. Yeşil halka rahat, sarı uyarı, kırmızı acil; üzerinde durduğunda iris bile koyulaşır. İpucu: muskayı boşa savurma — yön değişikliği bile bir aksiyon sayılır, açık olmayan yöne dönmek can yakmaz ama dikkati dağıtır. Yan yana iki göz açıldığında ←/→ ile arada zikzak gitmek 1-8 atlamasından bazen daha hızlıdır.",
+  "thumbnail": "nazar.svg",
+  "scoring": {
+    "storageKey": "nazar.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Nazar",
+    "description": "Evil eyes glare at you from eight directions — rotate the nazar amulet to deflect each one before its glare completes.",
+    "controls": "1-8: face direction · ←/→: rotate 45° · Click/tap: face that direction · Space: start · R: restart",
+    "howToPlay": "You defend yourself with a nazar boncuğu (Turkish evil-eye amulet) against glares opening from eight compass points around you. The amulet sits in the center; its pointer shows which direction it faces. Evil eyes randomly open at the eight points and a charge ring fills around each one — if a ring completes, that glare lands and costs you a life. Three lives and you're out. Turning the amulet to face an open eye instantly deflects it (+1 score). On the keyboard, 1–8 jump directly to a direction (1 = up, then clockwise); ←/→ or A/D rotate the amulet by 45°. With mouse or touch, click anywhere on the board in the direction you want — the amulet snaps to face that way and deflects any open eye there. Space or Enter starts the game; R restarts. As your score climbs, eyes open more often and their charges shorten — when several are open at once, prioritize whichever ring is closest to red. Green ring = safe, yellow = warning, red = imminent; the iris itself darkens as danger rises. Tip: don't waste rotations on empty directions; a wasted swing buys nothing but the distraction. When two adjacent eyes are open, zig-zagging with ←/→ can sometimes beat a 1–8 jump."
+  }
+}

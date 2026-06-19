@@ -1,0 +1,141 @@
+:root {
+  --nazar-bg: #0a0d18;
+  --nazar-ring: #1d2638;
+  --nazar-amulet: #0ea5e9;
+  --nazar-amulet-glow: #22d3ee;
+  --nazar-danger: #ef4444;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  background: var(--nazar-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 13, 24, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--nazar-amulet-glow);
+  letter-spacing: -0.01em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.hud__score,
+.hud__best,
+.hud__lives {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span,
+.hud__lives span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.hud__score span {
+  color: var(--nazar-amulet-glow);
+}
+
+.hud__lives span {
+  color: var(--nazar-danger);
+  letter-spacing: 0.1em;
+}
+
+.touch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  max-width: 280px;
+  margin: 16px auto 0;
+}
+
+.touch__btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+  padding: 14px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.touch__btn:active {
+  background: var(--nazar-amulet);
+  border-color: var(--nazar-amulet-glow);
+  color: #fff;
+}
+
+.touch__btn--center {
+  background: linear-gradient(135deg, #0c4a6e, #0ea5e9);
+  border-color: var(--nazar-amulet-glow);
+  color: #f0f9ff;
+  font-size: 26px;
+}
+
+@media (hover: hover) {
+  .touch {
+    display: none;
+  }
+}
