@@ -1,0 +1,21 @@
+{
+  "title": "Sahaf",
+  "description": "Müşterinin tarif ettiği kitabı raftan zamanında bul.",
+  "dateAdded": "2026-06-20",
+  "tags": ["dikkat", "hız", "arama"],
+  "controls": "Tıkla / dokun · Boşluk veya Enter: başla · R: yeniden başla",
+  "howToPlay": "Sahaf tezgâhının başındasın; her müşteri sana üç ayrı özelliğiyle (kapağın rengi, üstündeki sembol ve sırt numarası) bir kitap tarif ediyor. Raftaki 16 kitabın hepsi birbirine benziyor; aranan tek bir tanesi bu üç özelliğin tamamını birden taşıyor, diğerleri bir veya iki ortak özellik paylaşıyor olabilir. Müşterinin isteği yukarıdaki üç rozette yazılı çıkar; ince ilerleme çubuğu süreni gösterir. Doğru kitabı tıklarsan skor bir artar ve yeni müşteri gelir; süre dolarsa veya yanlış kitabı seçersen bir can gider, aranan kitap kısa süre yeşil yanar. Üç canın bitince tezgâh kapanır. Her tur biraz daha kısa süre verir (8 saniyeden başlayıp 3 saniyeye kadar düşer), bu yüzden kapak rengini, sembolünü ve numarayı zihninde aynı anda tutmaya alışmak gerekir. İpucu: önce renge göre rafı tara, sonra sembol filtresi uygula, en son numarayı oku — üç eksende ayrı ayrı eleme yapmak ‘hepsini birden ara’ tan çok daha hızlı.",
+  "thumbnail": "sahaf.svg",
+  "scoring": {
+    "storageKey": "sahaf.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "The Bookseller",
+    "description": "Find the exact book the customer describes — before time runs out.",
+    "controls": "Click / tap · Space or Enter: start · R: restart",
+    "howToPlay": "You're running a used-book stall. Each customer describes a single book by three attributes — cover colour, the symbol on the spine, and the spine number. Sixteen books sit on the shelf; only one matches all three attributes, while the rest share one or two as red herrings. The customer's request appears as three pills at the top, and the thin bar shows your remaining time. Tap the right book and your score climbs as the next customer arrives; pick wrong or let the timer expire and you lose a life — the correct book briefly flashes green so you can recalibrate. You have three lives; when they run out, the stall closes. Each round trims a little off the timer (8 seconds down to 3), so you'll need to keep colour, shape, and number in mind at once. Tip: scan by colour first, then filter by symbol, and read the number last — three quick passes beat trying to match everything at once."
+  }
+}

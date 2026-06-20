@@ -1,0 +1,252 @@
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 14px;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score,
+.hud__best,
+.hud__lives {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span,
+.hud__lives span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.hud__lives span {
+  color: #e15a5a;
+  letter-spacing: 0.18em;
+}
+
+.request {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.request__head {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.request__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
+.pill--color {
+  background: #666;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.pill--emblem,
+.pill--number {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.pill--number {
+  font-variant-numeric: tabular-nums;
+}
+
+.request__time {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.request__time-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--accent, #6cc);
+  border-radius: 999px;
+  transition: background 0.18s ease-out;
+}
+
+.request__time-bar--low {
+  background: #e15a5a;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.book {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px 4px 2px 2px;
+  background: #888;
+  color: #fff;
+  aspect-ratio: 5 / 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    transform 0.1s ease-out,
+    box-shadow 0.15s ease-out,
+    filter 0.15s ease-out;
+  position: relative;
+  box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.book:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25),
+    0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.book:focus-visible {
+  outline: 3px solid var(--accent, #6cc);
+  outline-offset: 2px;
+}
+
+.book:disabled {
+  cursor: default;
+  filter: brightness(0.95);
+}
+
+.book__emblem {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.book__number {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.book--right {
+  box-shadow:
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25),
+    0 0 0 3px #3e9d5f,
+    0 0 14px rgba(62, 157, 95, 0.55);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.book--wrong {
+  box-shadow:
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25),
+    0 0 0 3px #e15a5a;
+  animation: sahaf-shake 0.28s ease-out;
+}
+
+@keyframes sahaf-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 380px) {
+  .shelf {
+    gap: 6px;
+  }
+  .book {
+    padding: 8px 3px;
+  }
+  .book__number {
+    font-size: 22px;
+  }
+  .book__emblem {
+    font-size: 15px;
+  }
+}

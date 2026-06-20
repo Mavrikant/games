@@ -1,0 +1,33 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__best">Rekor<span id="best">0</span></div>
+  <div class="hud__lives">Can<span id="lives" aria-label="kalan can">♥ ♥ ♥</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <section class="request" aria-live="polite">
+    <div class="request__head">Müşteri istiyor</div>
+    <div class="request__pills">
+      <span id="want-color" class="pill pill--color">—</span>
+      <span id="want-emblem" class="pill pill--emblem">—</span>
+      <span id="want-number" class="pill pill--number">—</span>
+    </div>
+    <div class="request__time" aria-hidden="true">
+      <div id="time-bar" class="request__time-bar"></div>
+    </div>
+  </section>
+
+  <div id="shelf" class="shelf" role="grid" aria-label="Kitap rafı"></div>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sahaf</h2>
+      <p id="overlay-msg">Müşterinin tarif ettiği kitabı raftan bul. Üç canın var; süre dolarsa veya yanlış kitabı seçersen bir can gider.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
