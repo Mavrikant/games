@@ -1,0 +1,197 @@
+/*
+ * Per-game styles for Nabız (Pulse). The scaffold's board-wrap + overlay
+ * block stays untouched (pitfall: missing-overlay-css). Custom blocks
+ * below: the HUD stat boxes, the guess stepper, the feedback line, and the
+ * overlay button that the body re-uses from aci-gözü's pattern.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  border-radius: 12px;
+  background: var(--surface, #13151a);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.82);
+  border-radius: 12px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0 0 16px;
+  color: var(--text-dim, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.overlay__btn {
+  background: var(--accent, #fbbf24);
+  color: #0b0c10;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.overlay__btn:hover {
+  filter: brightness(1.06);
+}
+
+.hud__stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__stat span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.guess {
+  margin: 14px auto 0;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.guess__row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.guess__display {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+}
+
+.guess__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.guess__val {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+
+.guess__unit {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.guess__nudge {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 26px;
+  font-weight: 700;
+  width: 56px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.guess__nudge:hover:not(:disabled) {
+  border-color: var(--accent, #fbbf24);
+}
+
+.guess__nudge:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.guess__submit {
+  background: var(--accent, #fbbf24);
+  color: #0b0c10;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.guess__submit:disabled {
+  background: var(--surface);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin: 12px auto 0;
+  max-width: 480px;
+  min-height: 1.4em;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}

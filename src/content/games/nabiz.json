@@ -1,0 +1,15 @@
+{
+  "title": "Nabız",
+  "description": "Hastanın nabız penceresini izle, kaç darbe attığını gözle say — son tur düzensiz ritim, sayım zorlaşır.",
+  "dateAdded": "2026-06-20",
+  "tags": ["tahmin", "dikkat", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk / Enter: başla, onayla · ←/→ veya +/−: tahmini ±1 · Shift+←/→: ±5 · R: yeniden başla",
+  "thumbnail": "nabiz.svg",
+  "howToPlay": "Nabız, klasik tahmin oyunlarının ritim çevirimi: ekranda küçük bir EKG monitörü açılır ve hastanın nabzı sağdan sola kayan bir yeşil dalga olarak çizilmeye başlar. Her kalp atışında dalgada keskin bir 'R sivrisi' ve sağ üst köşede bir kırmızı kalp parıltısı belirir — iki ipucundan herhangi birini kullanarak atışları say. Pencere kapanınca (turun süresi dolunca) çizim durur ve aşağıdaki sayaçla kaç tane darbe gördüğünü gir, Enter ile onayla. Skor her turda hata farkına göre verilir: 0 sapma = 100 puan, lineer olarak azalır ve 6+ sapmada sıfıra düşer (kuralı: 100 − 15 × |fark|). Beş tur boyunca tempolar ve süreler artar — birinci turda yavaş ve rahat 60 BPM ile 10 saniye verirken son turda 150 BPM hızda, 18 saniye boyunca ve ±%30 zamanlama düzensizliğiyle aritmik bir nabız sayman gerekir; bu son turda göz bir an dalsa bile birkaç atışı kaçırırsın. Toplam 500 üzerinden puanlanan oyunun en iyi skoru tarayıcında saklanır. İpucu: gözün aynı anda hem dalganın sivrisini hem kalp parıltısını izlemek için fokus kaybeder; tek bir sinyale (en kolayı kalp pulsasyonu) sabitlen, 'yedi sekiz dokuz' gibi sesli sayım yap, yalnızca son turda dalganın aritmisini takip etmek için EKG'ye geç — kalp puls intensitesi atış başına aynıdır ama dalga sivrisinin yüksekliği aşamayı netleştirir.",
+  "en": {
+    "title": "Pulse",
+    "description": "Watch the patient's pulse window and count the beats — the final round adds arrhythmia.",
+    "controls": "Space / Enter: start, confirm · ←/→ or +/−: adjust guess ±1 · Shift+←/→: ±5 · R: restart",
+    "howToPlay": "Pulse is the rhythm cousin of classic estimation games: a small ECG monitor opens on screen and the patient's heartbeat is drawn as a green wave scrolling from right to left. Each beat appears as a sharp 'R spike' on the wave and a red heart flash in the top-right corner — use either cue to keep your count. When the round window ends the trace freezes; enter the number of beats you saw using the stepper below and confirm with Enter. Scoring is linear in deviation: 0 off = 100 points, dropping to 0 at 6 or more off (formula: 100 − 15 × |error|). Five rounds escalate in tempo and length — round 1 is a calm 60 BPM over 10 seconds, round 5 cranks to 150 BPM over 18 seconds with ±30% timing jitter, so even a brief glance away costs you several beats. Total cap is 500 and your best is saved in the browser. Tip: trying to track both the spike and the heart pulse splits your focus; lock onto one channel (the heart flash is easiest), count out loud — only switch to the ECG in the final round to lean on its sharper amplitude when the rhythm jitters."
+  }
+}

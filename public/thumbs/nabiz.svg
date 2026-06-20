@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Nabız">
+  <defs>
+    <linearGradient id="bgNabiz" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1a16" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bgNabiz)" />
+  <g stroke="#1f3a30" stroke-width="1" opacity="0.6">
+    <path d="M0 50 H320 M0 100 H320 M0 150 H320" />
+    <path d="M40 0 V200 M80 0 V200 M120 0 V200 M160 0 V200 M200 0 V200 M240 0 V200 M280 0 V200" />
+  </g>
+  <path
+    d="M0 110 L60 110 L70 108 L80 112 L88 110 L95 80 L100 140 L106 105 L118 108 L160 108 L168 106 L178 110 L186 108 L195 50 L200 170 L208 102 L218 108 L260 108 L270 106 L280 110 L320 110"
+    fill="none"
+    stroke="#34d399"
+    stroke-width="2.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <g fill="#ef4444" opacity="0.95">
+    <path d="M270 44 c-7 -10 -23 -6 -23 6 c0 11 13 19 23 28 c10 -9 23 -17 23 -28 c0 -12 -16 -16 -23 -6 z" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">Nabız</text>
+</svg>
