@@ -1,0 +1,27 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bağlantı<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Seri<span id="streak">0</span></div>
+  <div class="hud__score">Can<span id="lives" aria-label="kalan can">♥ ♥ ♥</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="720"
+    height="420"
+    aria-label="Telefon santrali tahtası"
+  ></canvas>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Santral</h2>
+      <p id="overlay-msg">Bir hat çaldığında üstteki jak titreşir; küçük balonda bağlanmak istediği numara yazar. Önce arayan jakı, sonra hedef jakı tıkla — kabloyu çek. Sabır şeridi tükenmeden ya da yanlış hedef seçmeden üç can yetsin.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

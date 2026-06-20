@@ -1,0 +1,21 @@
+{
+  "title": "Santral",
+  "description": "Eski tip telefon santralinde gelen aramaları doğru hatla kabloyla eşle — sıra birikmeden, sabırlar tükenmeden.",
+  "dateAdded": "2026-06-20",
+  "tags": ["puzzle", "zamanlama", "özgün", "beceri", "tek-oyunculu"],
+  "controls": "Tıklama: önce arayan hat, sonra hedef hat · 1-8: arayan hat seç · Shift+1-8: hedef hat · Esc: seçimi iptal · R: yeniden başla",
+  "howToPlay": "Santral, eski PTT manuel telefon santrali operatörünü canlandıran özgün bir hassasiyet/zamanlama oyunudur. Üst sırada sekiz 'arayan' hat (1-8), alt sırada sekiz 'hedef' hat (1-8) var. Bir hattan arama gelince üst kenardaki jak titreşir, üzerinde küçük bir balon hangi numaraya bağlanmak istediğini gösterir ve altında daralan bir sabır şeridi belirir. Önce arayan jakı tıklarsın (klavyede 1-8): seçimini turuncu bir kablo ucu izlemeye başlar. Sonra alt sıradan istenen hedef jakı tıklarsın (Shift+1-8): kabloya tıklı şekilde eğri bir bezier çizilir, arama 4-10 saniye sürer ve otomatik kapanır. Yanlış hedef seçersen kablo kırmızı parlar, bağlantı kurulmaz ve bir can gider. Sabır şeridi dolar (yaklaşık 7 saniye) ve sen bağlamamışsan müşteri kapatır, bir can daha gider. Üç canın bitince santral kapanır. Her başarılı bağlantı için skorun bir artar; üst üste hatasız bağladığın her arama 'streak' sayacını büyütür ve 3'lük her artı çarpan verir (3, 6, 9 ... streak'te +2/+3/+4 puan). Tur ilerledikçe yeni aramaların geliş hızı artar, sabır penceresi daralır ve aynı anda en fazla 4 hat çalabilir. Esc tuşu mevcut seçimi iptal eder, R oyunu sıfırlar. İpucu: bir arama geldiğinde önce balonu oku, arayan jakı seçmeden önce gözünle hedef jakı bul — yanlış jak seçmenin maliyeti, bir saniye geç seçmenin maliyetinden büyük.",
+  "thumbnail": "santral.svg",
+  "scoring": {
+    "storageKey": "santral.best",
+    "label": "Bağlantı",
+    "direction": "higher",
+    "labelEn": "Connections"
+  },
+  "en": {
+    "title": "Switchboard",
+    "description": "Plug incoming calls into the right outgoing line on an old-school telephone switchboard — before patience runs out.",
+    "controls": "Click: caller first, then destination · 1-8: pick caller · Shift+1-8: destination · Esc: cancel · R: restart",
+    "howToPlay": "Switchboard puts you in the seat of a mid-century manual phone operator. Eight 'caller' jacks line the top row; eight 'destination' jacks line the bottom. When a call comes in, the caller jack glows and a small bubble shows the number the customer wants; a thin patience bar underneath shrinks while they wait. First click the caller (or press 1-8); an orange cable end follows your cursor. Then click the destination (or Shift+1-8); a curved bezier cable is drawn between the two jacks and the connection holds for 4-10 seconds before auto-clearing. Pick the wrong destination and the cable flashes red, the connection never lands, and you lose a life. Let the patience bar empty and the customer hangs up — another life lost. Three lives and the board closes. Each correct connection scores one; consecutive errorless connections build a 'streak' multiplier (every third connection gives a bonus). The game ramps up: calls arrive faster, patience windows shrink, and up to four lines may ring at once. Esc cancels the current selection, R restarts. Tip: read the bubble first, mentally find the destination, then click the caller — picking the wrong jack costs more than picking it one second late."
+  }
+}
