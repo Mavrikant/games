@@ -1,0 +1,21 @@
+{
+  "title": "Buz Adası",
+  "description": "Penguenler buz adasında rastgele dolaşır, ağırlık merkezi kayınca ada eğilir. Tıkla, pengueni ortaya yürüt, devrilmeden uzun süre dengede tut.",
+  "dateAdded": "2026-06-20",
+  "tags": ["fizik", "denge", "özgün", "tek-oyunculu"],
+  "controls": "Pengueni tıkla / dokun: ortaya yürüsün · Boşluk / Enter: başla · R: yeniden başla",
+  "howToPlay": "Buz Adası, yan görünümlü bir denge oyunudur: suya yüzen kare bir buz parçasının üzerinde küçük penguenler sağa-sola yürür, her birinin ağırlığı adayı çekiştirir. Adanın eğim açısı **tüm penguenlerin ağırlık merkezine** göre belirlenir — penguenler ortaya yakınken ada düz durur, çoğunluk bir tarafa toplanınca o yana yatar. Üstteki çubuk şu anki ağırlık merkezini gösterir (yeşil bant güvenli bölgedir; nokta kenara yaklaştıkça ada devrilmeye yaklaşır). Tek müdahale yolun pengueni tıklamak: tıklanan penguen başının üstünde yeşil bir halka belirir ve **doğrudan adanın orta noktasına** yürür, oraya varınca tekrar serbest dolaşmaya başlar. Ada belli bir eğimi (≈6°) aşarsa serbest penguenler **iniş yönüne kaymaya** başlar — bu pozitif geri besleme oyunu hızlandırır; eğim 28°'yi aşarsa ada devrilir ve oyun biter. Her saniye **+10 puan** kazanırsın; her ~9 saniyede bir yeni penguen iniş yapar (en fazla 9'a kadar), denge giderek zorlaşır. Penguen kenara çarparsa zıplayıp geri döner, kimse adadan düşmez — kaybetmenin tek yolu ağırlık merkezinin güvenli bölgenin dışına çıkıp adayı devirmesidir. İpuçları: (1) Ada düz dururken **uzaktaki** pengueni değil, ağırlık merkezini en çok kaydıran (en kenardaki) pengueni geri çağır — orta yön ne kadar dengelenirse o kadar zaman kazanırsın. (2) Eğim kritik renge dönmeden önce iki penguen art arda merkeze çağır; tek seferde dönen bir penguen yeterli olmayabilir. (3) Yeni penguen her zaman ağırlık merkezinin **karşı tarafına** iner, bu kısa bir rahatlama anıdır — onu kullan. Skor tarayıcında saklanır.",
+  "thumbnail": "buz-adasi.svg",
+  "scoring": {
+    "storageKey": "buz-adasi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Ice Island",
+    "description": "Penguins wander randomly on a floating ice slab; when their centre of mass shifts, the island tilts. Tap a penguin to walk it back to the centre and keep the slab from flipping.",
+    "controls": "Click / tap a penguin: it walks to the centre · Space / Enter: start · R: restart",
+    "howToPlay": "Ice Island is a side-view balance game: small penguins waddle left and right on a floating chunk of ice, and each one's weight pulls the slab. The slab's tilt is set by the **collective centre of mass** of all penguins — when they're spread near the middle the slab sits flat, when most cluster on one side it tips that way. The bar at the top shows where the centre of mass sits (the green band is safe; once the dot drifts toward an edge the slab is close to capsizing). Your only intervention is to click a penguin: a green halo lights up over it and it walks **straight toward the slab's centre point**, then resumes free wandering once it arrives. If the slab tilts past about 6°, free-walking penguins start **sliding downhill** — positive feedback that makes the game accelerate; if the tilt ever exceeds 28°, the slab capsizes and the run ends. You earn **+10 points per second** alive; every ~9 seconds a new penguin lands (up to 9 total), making balance progressively harder. Penguins bounce gently off the slab edges — nobody falls off, the only way to lose is to let the centre of mass push the slab past the danger angle. Tips: (1) Don't pull back the closest penguin to the centre — pull back the one **furthest out** that's dragging the centre of mass. (2) When the warning tint kicks in, recall two penguins back-to-back; a single one often isn't enough to recover. (3) Newcomers always land on the side opposite the current centre of mass; use that brief breathing room to set up. Your best score is saved in your browser."
+  }
+}

@@ -1,0 +1,29 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Penguen<span id="count">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="480"
+    aria-label="Buz Adası sahası"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Buz Adası</h2>
+      <p id="overlay-msg">
+        Pengueni tıkla, ortaya yürüsün. Adanın ağırlık merkezi kayarsa devrilir.
+        <br /><small>Tıkla / dokun · Boşluk / Enter ile başla</small>
+      </p>
+      <button id="overlay-btn" class="hud__btn hud__btn--primary" type="button">
+        Başla
+      </button>
+    </div>
+  </div>
+</div>
