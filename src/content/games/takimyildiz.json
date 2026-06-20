@@ -1,0 +1,21 @@
+{
+  "title": "Takımyıldız",
+  "description": "Gece göğüne saçılı yıldızları sırayla bağlayarak takımyıldız desenini çiz; her round adı vahşi bir burç.",
+  "dateAdded": "2026-06-20",
+  "tags": ["puzzle", "gözlem", "tek-oyunculu"],
+  "controls": "Tıklama / dokunma: yıldızlara sırayla bas · Z: son adımı geri al · R: yeniden başla",
+  "thumbnail": "takimyildiz.svg",
+  "howToPlay": "Her round başında karanlık gökyüzüne N adet numaralı yıldız saçılır ve onları '1, 2, 3 … N' sırasıyla bağlamaya çalışırsın. Doğru sıradaki yıldıza tıklarsan bir önceki yıldızla arasına gümüş bir çizgi çekilir; round tamamlandığında çizilen şekil bir takımyıldız olarak parıldar ve Türkçe burç adı belirir. Yanlış yıldıza tıklarsan kırmızı bir titreşim olur ve bir canını kaybedersin — başlangıçta üç canın vardır. Üst kısımdaki sayaç her saniye azalır; round'u erken bitirirsen kalan saniyelerin bonus puana dönüşür ve bir sonraki turda yıldız sayısı bir artar. Z tuşu (veya 'Geri al' düğmesi) son tıkladığın yıldızı serbest bırakır; R ile baştan başlayabilirsin. Strateji: önce bütün yıldızları gözünle tara, rakamların yerini ezberle, sonra hızlıca çizgini çek — yıldızlar uzakta sönük olabilir ama paniğe kapılma; çizginin kesişmesi cezasız ama daha temiz desen oyunsal tatmin verir.",
+  "scoring": {
+    "storageKey": "takimyildiz.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Constellation",
+    "description": "Connect the scattered stars in order to draw the night-sky constellation — each round a wild zodiac name.",
+    "controls": "Click / tap: hit stars in order · Z: undo last step · R: restart",
+    "howToPlay": "Each round drops N numbered stars onto the dark sky and you must connect them in order from 1 to N. Tapping the correct next star draws a silver line back to the previous one; completing the round makes the figure flash as a constellation and shows a Turkish zodiac name. A wrong star flashes red and costs one of your three lives. The countdown at the top ticks down every second; finishing early converts the remaining seconds into bonus points and adds one more star to the next round. Press Z (or the Undo button) to release the last star you clicked, R to restart. Strategy: scan all the stars first and memorise the digit positions before drawing — the digits stay faint, but the lines themselves never penalise you for crossing, so prioritise speed over a clean shape."
+  }
+}
