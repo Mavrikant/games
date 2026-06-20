@@ -1,0 +1,15 @@
+{
+  "title": "Sığırcık",
+  "description": "Atmaca dalışlarından kaçırarak sığırcık sürüsünü mümkün olduğunca uzun süre yaşat — boids kurallarıyla uçan kuşları işaretçinle yönlendir, son anda dağıt.",
+  "dateAdded": "2026-06-20",
+  "tags": ["arcade", "refleks", "tek-oyunculu"],
+  "controls": "Fare/dokunma: sürüyü cezbet · Boşluk veya tıkla: dağılma darbesi · R: yeniden başla",
+  "howToPlay": "Ekrandaki sığırcık sürüsünü mümkün olduğunca uzun yaşat. Kuşlar Reynolds boids kurallarına uyar: birbirlerinin hızıyla hizalanır (alignment), komşularına yaklaşır (cohesion) ve çok yakına gelirse uzaklaşır (separation). Fareyi/parmağını oyun alanında hareket ettirdiğinde sürü senin işaretçine doğru hafif çekilir; böylece flok'u istediğin yöne sürüklersin. Birkaç saniyede bir kenardan bir atmaca süzülür ve sürünün merkezine doğru düz bir hatla dalar; uçuş hattının yakınında kalan kuşlar yakalanır ve sürüden düşer. Bunu önlemenin tek yolu: atmaca yaklaşırken Boşluk tuşuna bas veya ekrana tıkla — kısa bir dağılma darbesi kuşları işaretçinden tersine fırlatır ve atmacanın hattını bozar. Skor saniyede bir artar; sürü 2 kuşa düşünce oyun biter ve en yüksek skor tarayıcında saklanır. Strateji ipucu: sürüyü kenardan uzakta, ekran ortasında dolaştır; atmaca tarafına doğru darbeyi ZAMANINDA bas — çok erken yaparsan flok yeniden toplanmaya zaman bulamaz, çok geç yaparsan kayıp verirsin.",
+  "thumbnail": "sigircik.svg",
+  "scoring": {
+    "storageKey": "sigircik.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher"
+  }
+}

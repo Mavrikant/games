@@ -1,0 +1,20 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Sürü<span id="flock-count">12</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Sığırcık sürüsü oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sığırcık</h2>
+      <p id="overlay-msg">Sürüyü işaretçine doğru çek, atmaca dalarken tıkla veya boşluğa basıp dağıt.</p>
+      <button id="start-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<p class="hint">İpucu: Sürü senin işaretçini izler. Atmaca yaklaşırken Boşluk veya tıklama dağılma darbesi yapar.</p>

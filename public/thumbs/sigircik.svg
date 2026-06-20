@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sığırcık">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161a2c" />
+      <stop offset="100%" stop-color="#2a2746" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <g fill="#f4f6fb">
+    <polygon points="80,90 70,86 70,94" />
+    <polygon points="100,82 90,78 90,86" />
+    <polygon points="120,96 110,92 110,100" />
+    <polygon points="140,86 130,82 130,90" />
+    <polygon points="160,94 150,90 150,98" />
+    <polygon points="180,84 170,80 170,88" />
+    <polygon points="120,110 110,106 110,114" />
+    <polygon points="140,118 130,114 130,122" />
+    <polygon points="100,120 90,116 90,124" />
+    <polygon points="160,114 150,110 150,118" />
+    <polygon points="180,124 170,120 170,128" />
+  </g>
+  <polygon points="265,52 245,46 250,56 245,64" fill="#d6442e" />
+  <line x1="245" y1="55" x2="200" y2="85" stroke="#d6442e" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5" />
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Sığırcık</text>
+</svg>
