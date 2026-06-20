@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Karagöz">
+  <defs>
+    <linearGradient id="kgbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10131a" />
+      <stop offset="100%" stop-color="#06070a" />
+    </linearGradient>
+    <radialGradient id="kgglow" cx="0.18" cy="0.55" r="0.6">
+      <stop offset="0%" stop-color="rgba(255,210,130,0.7)" />
+      <stop offset="60%" stop-color="rgba(255,180,90,0.18)" />
+      <stop offset="100%" stop-color="rgba(255,180,90,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#kgbg)" />
+  <rect width="320" height="200" fill="url(#kgglow)" />
+
+  <!-- Perde (screen) -->
+  <rect x="248" y="0" width="40" height="200" fill="#e6c882" opacity="0.92" />
+  <rect x="248" y="0" width="40" height="200" fill="none" stroke="#785020" stroke-width="2" />
+
+  <!-- Target outline on perde -->
+  <g stroke="#284a86" stroke-width="1.5" fill="none" stroke-dasharray="3 3">
+    <path d="M 254 70
+             L 251 76
+             L 258 70
+             L 274 64
+             L 282 70
+             L 283 78
+             L 285 96
+             L 280 110
+             L 286 130
+             L 282 142
+             L 278 158
+             L 268 158
+             L 264 142
+             L 256 130
+             L 252 110
+             L 250 96
+             Z" />
+  </g>
+
+  <!-- Candle -->
+  <rect x="34" y="108" width="8" height="40" fill="#3a2814" />
+  <rect x="30" y="146" width="16" height="4" fill="#5a3a1a" />
+  <ellipse cx="38" cy="100" rx="3.5" ry="7" fill="#ffd06a" />
+  <ellipse cx="38" cy="98" rx="2" ry="4" fill="#fff2c2" />
+
+  <!-- Puppet -->
+  <g fill="#1a1410">
+    <path d="M 150 78
+             L 144 78
+             L 148 74
+             L 154 70
+             L 160 72
+             L 162 76
+             L 164 78
+             L 165 82
+             L 162 84
+             L 167 88
+             L 159 89
+             L 167 92
+             L 162 110
+             L 158 116
+             L 156 130
+             L 150 130
+             L 150 122
+             L 146 122
+             L 146 130
+             L 140 130
+             L 138 116
+             L 134 110
+             L 129 92
+             L 137 89
+             L 129 88
+             L 134 84
+             L 131 82
+             L 132 78
+             Z" />
+  </g>
+  <line x1="148" y1="130" x2="148" y2="180" stroke="#b48240" stroke-width="2" />
+
+  <!-- Shadow on perde -->
+  <g fill="rgba(20,18,14,0.85)">
+    <path d="M 268 60
+             L 261 60
+             L 266 54
+             L 274 48
+             L 282 50
+             L 285 54
+             L 286 58
+             L 284 64
+             L 290 70
+             L 281 72
+             L 290 76
+             L 285 110
+             L 280 116
+             L 278 140
+             L 272 140
+             L 272 130
+             L 268 130
+             L 268 140
+             L 262 140
+             L 260 116
+             L 255 110
+             L 250 76
+             L 259 72
+             L 250 70
+             L 256 64
+             L 253 58
+             L 255 54
+             Z" />
+  </g>
+
+  <text x="16" y="34" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#ead7a8">Karagöz</text>
+</svg>

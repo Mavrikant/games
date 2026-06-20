@@ -1,0 +1,21 @@
+{
+  "title": "Karagöz",
+  "description": "Sopadaki kuklayı mum ile perde arasında dolaştır — gölgesinin boyu ve dikey yeri perdedeki kesik silueti tutturana kadar sabit kal.",
+  "dateAdded": "2026-06-20",
+  "tags": ["özgün", "zekâ", "hassasiyet", "tek-oyunculu", "kültür", "mobil"],
+  "controls": "Fare / dokunma: kuklayı dolaştır (yatay = gölge boyu, dikey = gölge yeri) · Boşluk veya Enter: başla / tekrar · R: yeniden başla",
+  "howToPlay": "Karagöz Gölge Tiyatrosu, geleneksel deri-kukla sahnesinin geometrisini canvas üzerinde küçük bir hassasiyet bulmacasına çeviren özgün bir oyundur. Sahnenin solunda titrek bir mum, sağında ise sarımsı bir gerili perde vardır; aralarında bir sopayla taşıdığın küçük bir kukla durur. Fareyi ya da parmağını sürükledikçe kuklayı yatay ve dikey olarak hareket ettirir, sahnenin merkezi alanında istediğin gibi konumlandırırsın. Mumun ışığı kuklayı geçip perdeye düştüğü için kuklanın perdede bir gölgesi belirir: kuklayı muma yaklaştırırsan gölge büyür ve aşağı-yukarı kayar, perdeye yaklaştırırsan ufalır ve neredeyse kuklanın gerçek boyuna yaklaşır. Görevin tek: perdede mavi kesik çizgilerle gösterilen hedef silüetin tam üstüne, doğru boy ve doğru dikey konumla kuklanın gölgesini bindirmek. Hem yükseklik hem de dikey merkez tolerans bandının içine girdiğinde aşağıdaki yeşil kilit çubuğu dolmaya başlar; çubuk dolduğu anda o tur tamamlanır, skorun 1 artar ve yeni bir hedef belirir. Sapma olursa kilit çubuğu hızla geri biner — kararsız tutuş zincir kırar. Bir tur 60 saniye sürer; bu süre içinde ne kadar çok hedef tutturursan skorun o kadar yükselir, en yüksek skorun tarayıcında saklanır. Strateji: önce yatay ekseni hedef boyutu tutturacak şekilde sabitle (büyük hedef → muma yakın, küçük hedef → perdeye yakın), sonra dikey ekseni hedefin tam ortasına oturt. Iki eksen birbirinden bağımsız değildir — yatay hareket ettiğinde gölgenin dikey konumu da kayar, çünkü tüm projeksiyon ışık-kaynağından gelir. Bu yüzden büyük hedeflerde dikey hassasiyet kolaydır, küçük hedeflerde her piksel bir gölge piksel daha uzağa taşır; küçük hedefte mikro-hareketlerle bitir.",
+  "thumbnail": "karagoz.svg",
+  "scoring": {
+    "storageKey": "karagoz.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Karagöz Shadow Theatre",
+    "description": "Move the puppet on its stick between the candle and the screen — line up its shadow with the dashed target silhouette and hold steady.",
+    "controls": "Mouse / touch: move puppet (horizontal = shadow size, vertical = shadow position) · Space or Enter: start / retry · R: restart",
+    "howToPlay": "Karagöz Shadow Theatre turns the geometry of the traditional Turkish leather-puppet stage into a small precision puzzle on a single canvas. On the left of the stage is a flickering candle, on the right a stretched cream-coloured screen; between them you hold a tiny puppet on a stick. As you drag the mouse or your finger, the puppet moves horizontally and vertically within the central play area. The candle's light passes the puppet and lands on the screen, so the puppet casts a shadow on the screen: pull it closer to the candle and the shadow grows and sweeps up or down, push it closer to the screen and the shadow shrinks back toward the puppet's real size. Your one task: align the puppet's shadow with the dashed blue target silhouette on the screen, matching both height and vertical centre. When both height and centre are inside their tolerance bands, the green lock bar at the bottom starts to fill; when it fills, the round completes, your score goes up by 1 and a new target appears. If you drift out the lock bar rapidly drains — a shaky hold breaks the chain. A run lasts 60 seconds; complete as many targets as you can, and your best score is saved in your browser. Strategy: first lock the horizontal axis to match the target size (big target → near the candle, small target → near the screen), then settle the vertical axis on the target's centre. The two axes are not independent — moving horizontally also shifts the shadow vertically, because the whole projection radiates from the light source. That makes vertical precision easy on large targets and tricky on small ones, where every pixel of puppet movement moves the shadow by many more; on a small target, finish with micro-adjustments."
+  }
+}

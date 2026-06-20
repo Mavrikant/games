@@ -1,0 +1,24 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap kg-wrap">
+  <canvas id="stage" width="720" height="480" aria-label="Karagöz gölge tiyatrosu sahnesi"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Karagöz Gölge Tiyatrosu</h2>
+      <p id="overlay-msg">Soldaki mum ile sağdaki perde arasında kuklayı dolaştır.
+Işığa yaklaştırırsan gölge büyür, perdeye yaklaştırırsan küçülür.
+Perdedeki kesik silueti boy ve dikey konumla tutturup yakın kalırsan tamamlanır.
+
+Başlamak için Boşluk'a bas veya Başla'ya tıkla.</p>
+      <button id="action-btn" class="hud__btn overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
