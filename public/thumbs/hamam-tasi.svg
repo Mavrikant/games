@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Hamam Tası">
+  <defs>
+    <linearGradient id="ht-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#28181c" />
+      <stop offset="60%" stop-color="#3a2126" />
+      <stop offset="100%" stop-color="#1b1014" />
+    </linearGradient>
+    <radialGradient id="ht-dome" cx="50%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ffe2b3" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="ht-water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+    <linearGradient id="ht-bowl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e3b54a" />
+      <stop offset="100%" stop-color="#8a6420" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ht-bg)" />
+  <rect width="320" height="120" fill="url(#ht-dome)" />
+
+  <!-- chain -->
+  <g fill="#9aa3ad">
+    <circle cx="160" cy="14" r="2" />
+    <circle cx="160" cy="22" r="2" />
+    <circle cx="160" cy="30" r="2" />
+    <circle cx="160" cy="38" r="2" />
+    <circle cx="160" cy="46" r="2" />
+  </g>
+
+  <!-- bowl rim -->
+  <ellipse cx="160" cy="58" rx="42" ry="11" fill="#c89a3d" stroke="#6b4a10" stroke-width="2" />
+  <!-- bowl body -->
+  <path d="M118 58 Q124 100 160 102 Q196 100 202 58 Z" fill="url(#ht-bowl)" stroke="#6b4a10" stroke-width="2" />
+  <!-- water inside -->
+  <path d="M122 66 Q128 96 160 98 Q192 96 198 66 Z" fill="url(#ht-water)" />
+  <!-- steam -->
+  <g fill="#ffe5cc" opacity="0.35">
+    <circle cx="142" cy="46" r="6" />
+    <circle cx="156" cy="38" r="7" />
+    <circle cx="172" cy="44" r="6" />
+  </g>
+
+  <!-- cold tap (left) -->
+  <rect x="6" y="46" width="44" height="10" fill="#b8862e" stroke="#5e3f12" />
+  <circle cx="32" cy="38" r="9" fill="#7dd3fc" stroke="#1a1014" stroke-width="2" />
+  <text x="32" y="42" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="800" fill="#1a1014">S</text>
+
+  <!-- hot tap (right) -->
+  <rect x="270" y="46" width="44" height="10" fill="#b8862e" stroke="#5e3f12" />
+  <circle cx="288" cy="38" r="9" fill="#fb7185" stroke="#1a1014" stroke-width="2" />
+  <text x="288" y="42" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="800" fill="#1a1014">H</text>
+
+  <!-- marble basin / kurna -->
+  <ellipse cx="60" cy="172" rx="46" ry="14" fill="#f3e3c4" stroke="#a98856" />
+  <ellipse cx="60" cy="170" rx="38" ry="9" fill="#7dd3fc" opacity="0.55" />
+  <ellipse cx="260" cy="172" rx="46" ry="14" fill="#f3e3c4" stroke="#a98856" />
+  <ellipse cx="260" cy="170" rx="38" ry="9" fill="#fda4af" opacity="0.55" />
+
+  <!-- title -->
+  <text x="160" y="190" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="800" fill="#fbbf24" letter-spacing="0.04em">HAMAM TASI</text>
+</svg>

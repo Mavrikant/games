@@ -1,0 +1,14 @@
+{
+  "title": "Hamam Tası",
+  "description": "Hamam tellakı ol: hararet ve soğuk musluğunu karıştırıp tası tam istenen sıcaklığa getir, müşterinin başına dök. Yanlış hararet hiddet, doğru hararet bahşiş.",
+  "dateAdded": "2026-06-20",
+  "tags": ["ozgun", "refleks", "strateji"],
+  "controls": "Sol musluk (H) → soğuk doldur · Sağ musluk (J) → sıcak doldur · 1/2/3 ya da müşteriye tıkla → tası dök · Boşalt (B) · R: yeniden başla",
+  "howToPlay": "Eski usul bir hamamın göbektaşı önündesin. Üç müşteri kurnanın başında oturup ısınmak için tas suyu bekliyor; her birinin başının üstünde küçük bir termometre var ve istediği hararet aralığını gösteriyor (mavi = soğuk, sarı = ılık, kızıl = çok sıcak). Sahne ortasında pirinç bir hamam tası asılı; sol kurnanın soğuk, sağ kurnanın sıcak musluğunu basılı tutarak tasa su doldurursun. Tas dolarken hem seviye yükselir hem de iki suyun karışımına göre hararet kayar — soğuk akıtırken termometre düşer, sıcak akıtırken yükselir. Bir müşteriye tıklayınca taştaki bütün su o anki hararetiyle başına dökülür ve tas boşalır. Doğru hararet ±6 derecede +10 puan ve uzun bir bahşiş alkışı; ±14 derecede +5 ılımlı teşekkür; daha sapkınsa müşteri buz tutar ya da haşlanır, sabır barı sarsılır, −5 puan. Tas boşken bayağı dökersen müşteri 'tellak yok mu burda?' der ve −2. Müşteri sabır barını tüketirse havluyu fırlatıp gider, −8 ceza ve yeni biri gelir. Boşaltma (B) tuşu yanlış karışımı zayıf bir kayıpla göbek taşına atmana izin verir. 60 saniyede en yüksek bahşişi topla; süre ilerledikçe müşteriler daha sık gelir, hararet toleransı daralır ve altın kese taşıyan VIP misafirler özel hararet ister — onları memnun edersen +25, sinirlendirirsen büyük kayıp. İpucu: musluğu kısa nabız halinde aç-kapa, hararet damlasıyla son hassas ayarı yap; tası ortalama 60-70% dolu tut ki gelen istek değişince hızlı tekrar karıştırabilesin.",
+  "thumbnail": "hamam-tasi.svg",
+  "scoring": {
+    "storageKey": "hamam-tasi.best",
+    "label": "Bahşiş",
+    "direction": "higher"
+  }
+}
