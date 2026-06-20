@@ -1,0 +1,8 @@
+{
+  "title": "Cemre",
+  "description": "Gökten düşen üç cemreyi — hava, su, toprak — doğru havuza yönlendir; siyahtan kaç, altını her havuza yolla. 60 saniyede baharı getir.",
+  "dateAdded": "2026-06-20",
+  "tags": ["ozgun", "refleks", "strateji"],
+  "controls": "Cemreye tıkla → seç. Havuza tıkla → yolla. Klavye: 1/2/3 ya da ←/↓/→. R: yeniden başla.",
+  "howToPlay": "Anadolu inancına göre kışın son haftalarında üç cemre (sıcaklık parçası) gökten düşer: havaya, suya, toprağa. Her cemreyi tıklayıp doğru havuza yönlendir. Doğru yön +10, yanlış yön −5, yere düşen cemre −3. Siyah cemre tuzaktır — yönlendirme −8, görmezden gelmek ücretsiz. Altın cemre her havuza +25 verir. Üç havuzun da eşiği geçmesi: Bahar Geldi!"
+}
