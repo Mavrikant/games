@@ -1,0 +1,21 @@
+{
+  "title": "Çubuk Dengele",
+  "description": "Arabayı sağa-sola kaydır, tepedeki ağır çubuğun düşmesini engelle.",
+  "dateAdded": "2026-06-20",
+  "tags": ["fizik", "refleks", "tek-oyunculu"],
+  "controls": "← / → veya A / D: arabayı kaydır · Mouse / parmak sürükle: araba pointer'ı takip eder · R: yeniden başla · Boşluk / Enter: oyna",
+  "howToPlay": "Sahnenin altında yatay olarak hareket eden küçük bir araba var; arabanın üzerine dik bir çubuk pivotlanmış ve çubuğun tepesinde ağır bir ağırlık duruyor. Yerçekimi çubuğu sürekli yana yatırmaya çalışır; senin işin arabayı çubuğun **yattığı yöne** doğru kaydırarak pivot noktasını çubuğun altına geri sokup düşmesini önlemek. Klavyede sol/sağ ok (veya A/D) tuşlarına basılı tut, ya da sahaya parmak/mouse ile dokunup yatayda sürükle — araba pointer'ı takip eder. Çubuk dik kaldıkça her saniye **+10 puan**, üst üste 5 saniye sallanmadan kalırsan bonus. Belli aralıklarla rüzgar esiyor: sahnenin kenarındaki ok rüzgarın yönünü ve şiddetini gösterir; rüzgar çubuğa açısal itki uygular, hazırlıklı ol. Skor yükseldikçe çubuk uzar, ağırlaşır ve rüzgar sertleşir. Çubuk dikten ±70° uzaklaşırsa düşer ve raunt biter. Mini ipucu: tepki vermek yerine **önden** hareket et — çubuk yattığı zaman pivotu altına kaydır, dikleştiğinde durmaya başla.",
+  "thumbnail": "cubuk-dengele.svg",
+  "scoring": {
+    "storageKey": "cubuk-dengele.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Balance the Rod",
+    "description": "Slide the cart to keep a tall, top-heavy rod from toppling.",
+    "controls": "← / → or A / D: slide the cart · Mouse / touch drag: cart follows the pointer · R: restart · Space / Enter: play",
+    "howToPlay": "A small cart can slide left and right at the bottom of the scene. A tall rod is pivoted on the cart, with a heavy weight perched on top — gravity constantly wants to tip it over. Your job is to slide the cart **toward the side the rod is leaning**, sliding the pivot back under the rod before it falls. Hold the left/right arrow keys (or A/D), or tap and drag inside the scene with mouse or finger — the cart will chase the pointer. Each second the rod stays upright is **+10 points**, and a 5-second streak without wild wobble gives a bonus. Every few seconds a wind gust kicks the rod: the arrow on the edge of the scene shows its direction and strength. As your score climbs the rod grows longer and heavier and the wind hits harder. If the rod tilts more than ±70° from vertical, it falls and the round ends. Tip: don't just react — **lead** the rod by sliding the pivot under it before it commits to a fall."
+  }
+}

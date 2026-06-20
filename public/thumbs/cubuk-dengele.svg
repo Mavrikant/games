@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çubuk Dengele">
+  <defs>
+    <linearGradient id="cd-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d1730" />
+      <stop offset="100%" stop-color="#0d1117" />
+    </linearGradient>
+    <linearGradient id="cd-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(124,92,255,0.35)" />
+      <stop offset="100%" stop-color="rgba(124,92,255,0)" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cd-sky)" />
+  <rect width="320" height="200" fill="url(#cd-glow)" />
+
+  <!-- ground line -->
+  <line x1="0" y1="160" x2="320" y2="160" stroke="#3a3f55" stroke-width="2" />
+  <!-- ground ticks -->
+  <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
+    <line x1="20" y1="160" x2="12" y2="170" />
+    <line x1="60" y1="160" x2="52" y2="170" />
+    <line x1="100" y1="160" x2="92" y2="170" />
+    <line x1="140" y1="160" x2="132" y2="170" />
+    <line x1="180" y1="160" x2="172" y2="170" />
+    <line x1="220" y1="160" x2="212" y2="170" />
+    <line x1="260" y1="160" x2="252" y2="170" />
+    <line x1="300" y1="160" x2="292" y2="170" />
+  </g>
+
+  <!-- wind arrow at top -->
+  <g stroke="rgba(56,189,248,0.9)" stroke-width="3" stroke-linecap="round" fill="none">
+    <line x1="120" y1="22" x2="200" y2="22" />
+    <polyline points="200,22 188,14" />
+    <polyline points="200,22 188,30" />
+  </g>
+  <text x="160" y="12" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="9" font-weight="700" fill="rgba(255,255,255,0.6)">RÜZGAR</text>
+
+  <!-- cart + tilted rod with weight (pendulum mid-fall, leaning right) -->
+  <g transform="translate(170 148)">
+    <!-- pivot rotation; rod tilted ~ -22° -->
+    <g transform="rotate(22)">
+      <line x1="0" y1="0" x2="0" y2="-100" stroke="#a78bfa" stroke-width="7" stroke-linecap="round" />
+      <line x1="0" y1="0" x2="0" y2="-100" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+      <circle cx="0" cy="-100" r="17" fill="#facc15" stroke="rgba(0,0,0,0.35)" stroke-width="1.5" />
+    </g>
+    <!-- cart -->
+    <rect x="-32" y="0" width="64" height="14" fill="#38bdf8" />
+    <rect x="-32" y="10" width="64" height="4" fill="rgba(0,0,0,0.28)" />
+    <!-- wheels -->
+    <circle cx="-19" cy="14" r="5" fill="#1c1f2e" />
+    <circle cx="19" cy="14" r="5" fill="#1c1f2e" />
+    <!-- pivot dot -->
+    <circle cx="0" cy="0" r="3" fill="#0d1117" />
+  </g>
+
+  <!-- title -->
+  <text x="20" y="190" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" fill="#e4e4ed">Çubuk Dengele</text>
+</svg>
