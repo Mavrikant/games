@@ -1,0 +1,150 @@
+/*
+ * Per-game styles. The scaffold ships with the standard board-wrap +
+ * overlay positioning that @shared/overlay's helpers expect; do not
+ * delete these unless your game has no overlay at all. The helper sets
+ * the `.overlay--hidden` class and aria-hidden, but the visual effect
+ * (opacity 0 + pointer-events none) comes from CSS — without these
+ * rules, hideOverlay() does nothing visible.  pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#stage {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  background: #0a0b0e;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.pedals {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 480px;
+  margin: 12px auto 0;
+}
+
+.pedal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.08s ease-out, transform 0.08s ease-out;
+}
+
+.pedal:active,
+.pedal[data-active='true'] {
+  transform: translateY(1px);
+}
+
+.pedal--gas {
+  background: linear-gradient(180deg, #1b3a1b, #0f2210);
+  color: #b3f5b3;
+  border-color: #2d5a2d;
+}
+
+.pedal--gas:active,
+.pedal--gas[data-active='true'] {
+  background: linear-gradient(180deg, #2d6a2d, #1b3a1b);
+}
+
+.pedal--brake {
+  background: linear-gradient(180deg, #3a1b1b, #220f0f);
+  color: #f5b3b3;
+  border-color: #5a2d2d;
+}
+
+.pedal--brake:active,
+.pedal--brake[data-active='true'] {
+  background: linear-gradient(180deg, #6a2d2d, #3a1b1b);
+}
+
+.pedal--gear {
+  font-size: 22px;
+}
+
+.pedal--readout {
+  font-size: 28px;
+  color: var(--accent, #f9d24c);
+  background: #11131a;
+  cursor: default;
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

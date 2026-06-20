@@ -1,0 +1,22 @@
+{
+  "title": "Vites",
+  "description": "Düz vites kullan: motoru istenen devirde tut, doğru anda vites yükselt; 60 saniyede en uzak mesafeyi kat et.",
+  "dateAdded": "2026-06-20",
+  "tags": ["araç", "sürüş", "özgün", "beceri", "klavye"],
+  "controls": "↑/W: gaz · ↓/S: fren · 1-5: vitese geç · Q/E: vites indir/yükselt · 0: boş · R: yeniden",
+  "thumbnail": "vites.svg",
+  "howToPlay": "Vites, düz vitesli bir aracı sadece gösterge panelinden sürdüğün özgün bir beceri oyunudur. Ekrandaki büyük yarım daire devir saatidir (RPM × 1000); ortasındaki sarı rakam aracın hızını (km/h) gösterir. Devir saatinin altındaki şerit hangi vitesin takılı olduğunu söyler — N (boş), 1, 2, 3, 4, 5. En altta yatay bir devir göstergesi vardır; yeşil bant ideal çalışma aralığı, sarı bant 'şimdi vites yükselt' işareti, kırmızı bant ise redline'dır. Beyaz kesik çizgi 5500 devre işaret eder — peak torque ve en verimli vites değiştirme noktası buradadır. Oyun 60 saniye sürer; amacın o sürede mümkün olduğunca uzağa gitmektir. Önce + düğmesine (veya 1 tuşuna) basıp birinci vitese geçersin, sonra GAZ pedalına basıp aracı hareket ettirirsin. Devir 5500'e yaklaştığında + ile bir üst vitese geç; çok beklersen redline'a dayanırsın ve 2 saniye orada kalırsan motor patlar. Çok erken vites atarsan motor zorlanır (sarı uyarı), tork düşer, ivme yavaşlar. Her vitesin kendi maksimum hızı var: 1. (28 km/h), 2. (58), 3. (98), 4. (150), 5. (220). Çok yüksek bir vitese erken atlayamazsın — devir saatinde olmayacak kadar yükselecekse oyun atlatmaz. Çok düşük bir vitese yüksek hızda inmek de aynı şekilde reddedilir (motor parçalanır). Optimum strateji: her viteste sarı banda (~5500 devir) ulaşınca yukarı vites at, 5. viteste yaklaşık 170 km/h sabit hızda kruvaziyer yap. FREN pedalı veya ↓/S aracı yavaşlatır, devri düşürür. Klavyede sayı tuşları (1-5) doğrudan o vitese atlar, 0 ise boş vites; Q/E sırasıyla bir vites indirir/yükseltir. R tuşu oyunu sıfırlar. Rekorun tarayıcının yerel depolamasında saklanır. İpucu: en uzun mesafe, redline'a dokunmadan 5. vitese çabuk geçip orada akıcı kalmaktan gelir — fren ve aşağı vites kullanma!",
+  "scoring": {
+    "storageKey": "vites.best",
+    "label": "Mesafe",
+    "unit": "m",
+    "direction": "higher",
+    "labelEn": "Distance"
+  },
+  "en": {
+    "title": "Gear Shift",
+    "description": "Drive a manual transmission — hold the engine in the power band and upshift at the right moment to cover the most ground in 60 seconds.",
+    "controls": "↑/W: throttle · ↓/S: brake · 1-5: gear · Q/E: shift down/up · 0: neutral · R: restart",
+    "howToPlay": "Gear Shift is a dashboard-only manual transmission game. The big half-circle is the tachometer (RPM × 1000); the yellow digit in the middle is your speed in km/h. The strip below shows the current gear — N (neutral), 1, 2, 3, 4, 5. The horizontal bar at the bottom is a redundant rev gauge; the green band is the normal working range, the yellow band means 'shift up soon', and the red band is redline. The white dashed mark sits at 5500 rpm — that's peak torque and the sweet spot for upshifting. You have 60 seconds to cover as much distance as possible. Tap + (or press 1) to engage first gear, then hold GAZ (throttle) to launch. As the needle climbs toward 5500 rpm, tap + to upshift. If you wait too long the engine hits redline; hold it there for 2 seconds and the motor blows. Shifting too early lugs the engine (yellow warning), torque drops, acceleration slows to a crawl. Each gear has its own top speed: 1st (28 km/h), 2nd (58), 3rd (98), 4th (150), 5th (220). You can't jump to a gear that would over-rev the engine — the game blocks it. Optimal strategy: hit ~5500 rpm in every gear, upshift, settle into 5th around 170 km/h. The brake pedal (or ↓/S) slows the car and drops the revs. Number keys 1-5 set the gear directly, 0 is neutral; Q/E step down/up one gear. R restarts. Your best distance is saved in your browser. Hint: the longest run comes from getting into 5th gear quickly without ever touching redline — no brakes, no downshifts."
+  }
+}

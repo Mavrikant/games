@@ -1,0 +1,35 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Mesafe<span id="score">0 m</span></div>
+  <div class="hud__score">Süre<span id="time">60.0</span></div>
+  <div class="hud__score">Rekor<span id="best">0 m</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="stage"
+    width="480"
+    height="380"
+    aria-label="Gösterge paneli"
+  ></canvas>
+  <div id="overlay" class="overlay" role="dialog" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Vites</h2>
+      <p id="overlay-msg">
+        Manuel vites — gaza basıp motoru çalıştır, devir 5500'e yaklaşınca
+        E ile vites yükselt. Yanlış viteste motor zorlanır; redline'da
+        2 saniye kalırsan motor patlar. 60 saniyede en uzak yolu kat et.
+      </p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
+<div class="pedals" aria-hidden="false">
+  <button id="btn-brake" class="pedal pedal--brake" type="button" aria-label="Fren">FREN</button>
+  <button id="btn-down" class="pedal pedal--gear" type="button" aria-label="Vites indir">−</button>
+  <div class="pedal pedal--gear pedal--readout"><span id="gear-readout">N</span></div>
+  <button id="btn-up" class="pedal pedal--gear" type="button" aria-label="Vites yükselt">+</button>
+  <button id="btn-gas" class="pedal pedal--gas" type="button" aria-label="Gaz">GAZ</button>
+</div>
