@@ -1,0 +1,21 @@
+{
+  "title": "Telsiz",
+  "description": "Dönen anteninle ufuktaki saklı sinyalleri bul — şiddet şeridi yeşillenince kilitle. Tur ilerledikçe pencere daralır.",
+  "dateAdded": "2026-06-20",
+  "tags": ["puzzle", "özgün", "refleks", "mantık", "tek-oyunculu"],
+  "controls": "Fare/dokunma: anten yönü · Boşluk veya sol tık: kilitle · A·D veya ←/→: ince ayar · R: yeniden başla",
+  "howToPlay": "Telsiz, görünmeyen sinyallerin yönünü tek bir anten ile bulduğun özgün bir hassasiyet oyunudur. Ekranın merkezindeki dönen dish anten, fareyi (ya da parmağını) merkeze göre konumlandırdığın yönü gösterir; ufuk halkasında bir yere sabitlenmiş ama görünmeyen sinyallerden geliyor olabilirler. Üst kenardaki yatay şerit anlık sinyal şiddetini gösterir: hizan bir sinyale yaklaştıkça doluluk artar, açı tam üstüne geldiğinde tepe yapar; doluluk şeridin %85 işaretine ulaştığında (üzerinde dikey küçük çentik var) artık kilitleme mesafesindesin. Bu noktada BOŞLUK tuşuna bas, sol tıkla veya parmağını kaldır: anten o yöne kısa bir 'ping' yollar, isabetliyse sinyal ufukta renkli bir nokta olarak görünür ve skorun bir artar. Kilitlerken anten yönü gerçek sinyal yönünden tolerans payı kadar saparsa kilit boşa düşer ve süreden 3,5 saniye eksilir, yani her atış maliyetli; önce şeridi dolduracak ince ayara çalış, sonra at. Saniyede üç-dört kez kontrol edebilirsin (anti-spam cooldown). Bir turun tüm sinyallerini bulduğunda bir sonraki tura geçersin: sinyal sayısı (3 → 7'ye kadar) artar, tolerans penceresi daralır (±10° → ±3,5°) ve aynı yönde iki sinyal kalmaması için aralarındaki minimum boşluk küçülür. 60 saniye boyunca kilitleyebildiğin toplam sinyal sayısı skorundur; en yüksek skor tarayıcında saklanır. Klavye ile ince ayar isteyenler için A/D veya sol/sağ ok tuşları anten yönünü 2,5° döndürür. Strateji ipucu: önce kuzey-doğu-güney-batı (K-D-G-B) arasında geniş tarama yap, şerit en az %20 dolduğunda yavaşla, %50'yi gördüğünde yön değişimini durdurup tek tek ileri-geri salla — şeridin tepe noktasını dakikalardan değil derecelerden okumayı öğreneceksin. Yanlış kilit cezası yüksek olduğu için 'şerit yeşil olmadan ateşleme' kuralını ihlal etme.",
+  "thumbnail": "telsiz.svg",
+  "scoring": {
+    "storageKey": "telsiz.best",
+    "label": "Sinyal",
+    "direction": "higher",
+    "labelEn": "Signals"
+  },
+  "en": {
+    "title": "Bearing Hunt",
+    "description": "Sweep your antenna to find hidden signals on the horizon — lock when the strength bar peaks. The tolerance window shrinks every round.",
+    "controls": "Mouse/touch: aim antenna · Space or left-click: lock · A·D or ←/→: fine tune · R: restart",
+    "howToPlay": "Bearing Hunt is an original precision game where you find the direction of invisible radio signals using a single rotating dish antenna at the centre of the screen. Move your mouse (or finger) and the dish points toward your cursor's bearing from the centre. Signals are pinned at unknown bearings on the perimeter ring; they don't emit a visible mark until you find them. The horizontal bar at the top shows your current signal strength: it climbs as your aim approaches a real signal and peaks exactly on it. When the fill crosses the small tick at 85% you're inside the lock tolerance — press Space, left-click, or release a tap to fire a 'lock ping' along the current bearing. A successful lock plants a coloured dot at the signal and bumps your score; a miss costs 3.5 seconds, so each shot is expensive. Anti-spam cooldown limits you to a few locks per second. Find all signals in a round to advance: the signal count grows from 3 up to 7, the tolerance window shrinks from ±10° down to ±3.5°, and the minimum gap between signals tightens so neighbouring peaks won't merge. Your score over 60 seconds is the total number of signals you lock; your local best is saved. For keyboard fine-tuning, A/D or arrow left/right rotates the antenna by 2.5°. Strategy: sweep widely between the four cardinal points first (N-E-S-W shown around the ring), slow down when the bar exceeds 20% fill, and once it crosses 50% start nudging back and forth — you'll learn to read the peak in degrees, not seconds. Don't fire while the bar is in the grey zone; missing penalties stack fast."
+  }
+}
