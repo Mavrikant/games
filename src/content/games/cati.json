@@ -1,0 +1,22 @@
+{
+  "title": "Çatı",
+  "description": "Yağmur damlatan çatı deliklerini yamala — oda su altında kalmadan dayan. Yamalar süreyle eskir, leke büyür.",
+  "dateAdded": "2026-06-20",
+  "tags": ["refleks", "zamanlama", "strateji", "özgün", "tek-oyunculu"],
+  "controls": "Fare / dokunma: deliğe bas — yama yapıştır · R: yeniden başla",
+  "thumbnail": "cati.svg",
+  "howToPlay": "Çatı, sağanak yağmurda evin tavanından sızan delikleri yamalayarak odanın su basmasını engellediğin bir refleks + önceliklendirme oyunudur. Üstte 8×5'lik bir kiremit ızgarası görürsün; alttaki kesik kesik gri zemin odan, en dipte yükselen turkuaz seviye ise tank/havuza dökülen yağmur suyu. Her birkaç saniyede bir kiremit rastgele yarılır ve siyah bir delik açılır — delikten düzenli aralıklarla bir damla kopar, ekrandan aşağı düşer ve tanka çarpınca su seviyesini biraz yükseltir. Delik üstüne (veya damla üstüne değil) tıkladığında oraya sarımtırak bir yama yapıştırılır; yama 12 saniye boyunca delikten damla kopmasını engeller ama bu süre sonunda kıvrılıp düşer, delik yeniden sızmaya başlar. Stratejin: aynı anda 3+ delik açıldığında hepsini yamayamazsın; öncelik daha eski (çok damla biriktirmiş, yıkım derecesi yüksek) ve daha çok damlamış olanlara verilir. Oyun başladığında tek delik yavaş açılır, ama 30 saniye sonra delik açılma sıklığı ikiye katlanır ve bir dakika sonra her saniyede yeni delik açılabilir — refleks ve dikkat hızla sınanır. Skor sağ kaldığın saniye sayısıdır; tank %100'e ulaşınca oyun biter. En yüksek skorun tarayıcına kaydedilir. R tuşu veya Yeniden başla düğmesiyle her an sıfırlayabilirsin. İpucu: damlayı değil deliği hedefle — tıklama küçük dairesel delik üstünde olmalı.",
+  "scoring": {
+    "storageKey": "cati.best",
+    "label": "Süre",
+    "unit": "sn",
+    "direction": "higher",
+    "labelEn": "Time"
+  },
+  "en": {
+    "title": "Roof",
+    "description": "Patch the leaking roof tiles before the room floods — patches wear off, leaks multiply over time.",
+    "controls": "Mouse / tap: hit the hole to apply a patch · R: restart",
+    "howToPlay": "Roof is a reflex + prioritisation game where you keep your house from flooding by patching every leak as a downpour eats through the ceiling. The top of the screen shows an 8×5 tile grid; the dashed grey band underneath is your room, and the rising teal pool at the bottom is the water tank collecting whatever falls in. Every few seconds a random tile cracks open and a black hole appears — that hole releases a drop at a steady cadence; each drop falls down the screen and pushes the water level up when it lands. Tap (or click) directly on a hole — not on a drop — to slap a yellow patch over it. The patch keeps that hole sealed for 12 seconds, then it peels off and the leak comes back. Strategy: once 3+ holes are open at once you can't patch them all in time, so prioritise the oldest, most-dripping holes first. The first hole opens slowly, but after 30 seconds the spawn rate doubles, and after a minute a fresh leak can show up every second — reflex and attention scale with the storm. Your score is the number of seconds you survive; the game ends when the tank hits 100%. The best run is kept in localStorage. Press R or the Restart button at any time to reset. Tip: aim at the hole itself, not the falling drop — the click must land on the small dark circle on the tile."
+  }
+}

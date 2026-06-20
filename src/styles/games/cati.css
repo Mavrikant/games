@@ -1,0 +1,99 @@
+/*
+ * Per-game styles for Çatı. Standard board-wrap + overlay rules retained
+ * from scaffold — @shared/overlay relies on .overlay--hidden's visual
+ * collapse, do not delete (pitfall: missing-overlay-css).
+ */
+
+:root {
+  --cati-sky: #0c1828;
+  --cati-tile: #6b3a23;
+  --cati-tile-2: #5a2f1c;
+  --cati-tile-line: #2b160c;
+  --cati-hole: #06080c;
+  --cati-patch: #f5c451;
+  --cati-patch-edge: #b88410;
+  --cati-room: #2a3140;
+  --cati-water: #34b6c8;
+  --cati-water-edge: #6dd5e2;
+  --cati-drop: #79c8e0;
+  --cati-rain: rgba(140, 200, 255, 0.45);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: var(--cati-sky);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 14, 26, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

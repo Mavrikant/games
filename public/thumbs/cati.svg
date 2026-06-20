@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çatı oyun küçük resmi">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c1828"/>
+      <stop offset="1" stop-color="#13243a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#46c4d4"/>
+      <stop offset="1" stop-color="#1f7e8d"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sky)"/>
+
+  <!-- rain streaks -->
+  <g stroke="#8cc8ff" stroke-opacity=".45" stroke-width="1.2">
+    <line x1="30" y1="6" x2="28" y2="22"/>
+    <line x1="60" y1="14" x2="58" y2="32"/>
+    <line x1="90" y1="2" x2="88" y2="18"/>
+    <line x1="120" y1="18" x2="118" y2="34"/>
+    <line x1="150" y1="6" x2="148" y2="22"/>
+    <line x1="180" y1="14" x2="178" y2="32"/>
+    <line x1="210" y1="2" x2="208" y2="20"/>
+    <line x1="240" y1="20" x2="238" y2="36"/>
+    <line x1="270" y1="8" x2="268" y2="24"/>
+    <line x1="300" y1="16" x2="298" y2="32"/>
+  </g>
+
+  <!-- roof tiles (8x3 for thumb) -->
+  <g>
+    <rect x="0" y="40" width="40" height="22" fill="#6b3a23"/>
+    <rect x="40" y="40" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="80" y="40" width="40" height="22" fill="#6b3a23"/>
+    <rect x="120" y="40" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="160" y="40" width="40" height="22" fill="#6b3a23"/>
+    <rect x="200" y="40" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="240" y="40" width="40" height="22" fill="#6b3a23"/>
+    <rect x="280" y="40" width="40" height="22" fill="#5a2f1c"/>
+
+    <rect x="0" y="62" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="40" y="62" width="40" height="22" fill="#6b3a23"/>
+    <rect x="80" y="62" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="120" y="62" width="40" height="22" fill="#6b3a23"/>
+    <rect x="160" y="62" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="200" y="62" width="40" height="22" fill="#6b3a23"/>
+    <rect x="240" y="62" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="280" y="62" width="40" height="22" fill="#6b3a23"/>
+
+    <rect x="0" y="84" width="40" height="22" fill="#6b3a23"/>
+    <rect x="40" y="84" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="80" y="84" width="40" height="22" fill="#6b3a23"/>
+    <rect x="120" y="84" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="160" y="84" width="40" height="22" fill="#6b3a23"/>
+    <rect x="200" y="84" width="40" height="22" fill="#5a2f1c"/>
+    <rect x="240" y="84" width="40" height="22" fill="#6b3a23"/>
+    <rect x="280" y="84" width="40" height="22" fill="#5a2f1c"/>
+  </g>
+  <!-- eaves shadow -->
+  <rect x="0" y="106" width="320" height="6" fill="#1c2435"/>
+
+  <!-- open hole + patch -->
+  <circle cx="62" cy="73" r="10" fill="#06080c" stroke="#000" stroke-opacity=".7"/>
+  <circle cx="58" cy="69" r="2.5" fill="#79c8e0" fill-opacity=".5"/>
+
+  <g transform="translate(220,73) rotate(6)">
+    <rect x="-12" y="-12" width="24" height="24" fill="#f5c451" stroke="#b88410" stroke-width="1.4"/>
+    <path d="M-9 -9 L9 9 M9 -9 L-9 9" stroke="#000" stroke-opacity=".35"/>
+  </g>
+
+  <!-- falling drops -->
+  <g fill="#79c8e0">
+    <circle cx="62" cy="120" r="4"/>
+    <circle cx="62" cy="140" r="4"/>
+  </g>
+
+  <!-- room -->
+  <rect x="0" y="112" width="320" height="88" fill="#2a3140"/>
+  <line x1="0" y1="113" x2="320" y2="113" stroke="rgba(200,210,230,.25)" stroke-width="1.4" stroke-dasharray="10 6"/>
+
+  <!-- water level -->
+  <rect x="0" y="160" width="320" height="40" fill="url(#water)"/>
+  <path d="M0 160 Q40 156 80 160 T160 160 T240 160 T320 160" stroke="#6dd5e2" stroke-width="2" fill="none"/>
+</svg>
