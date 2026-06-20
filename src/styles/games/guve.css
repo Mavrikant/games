@@ -1,0 +1,94 @@
+:root {
+  --guve-sky-top: #060614;
+  --guve-sky-bot: #1c1742;
+  --guve-table: #2a1b12;
+  --guve-wax: #ead9b8;
+  --guve-flame-outer: #ff9a3a;
+  --guve-flame-inner: #ffe28a;
+  --guve-target-wax: #90a8d8;
+  --guve-target-flame-outer: #6e9dff;
+  --guve-target-flame-inner: #cfe1ff;
+  --guve-moth: #e6dcc1;
+  --guve-moth-wing: #bfb59a;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: var(--guve-sky-top);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+#start-btn {
+  margin-top: 14px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Güve",
+  "description": "Güve karanlık sahnede en parlak yanan muma uçar. Hedef mavi mum dışındakileri tıklayıp söndür, güveyi doğru muma yönlendir — eleyerek yönlendirme oyunu.",
+  "dateAdded": "2026-06-20",
+  "tags": ["özgün", "puzzle", "refleks", "zamanlama", "tek-oyunculu"],
+  "controls": "Tıkla/dokun: muma üfle (söndür) · Boşluk veya Enter: başla / sonraki seviye · R: yeniden başla",
+  "howToPlay": "Güve, gece sahnesinde yanan mumlar arasında dolaşan bir güveyi tek bir hedef muma yönlendirme oyunudur. Sahnenin alttaki tahta masada turuncu yanan birkaç beyaz mum ve bir tane mavi alevli mum vardır — mavi mum o turun hedefi. Üst kenardan içeri süzülen güve, gerçek güveler gibi anlık olarak görüş alanındaki en parlak yanan muma çekilir; uzaklık arttıkça çekim zayıflar, yakındaki bir mum uzaktan bir hedefe baskın çıkar. Senin elindeki tek araç: yanan bir muma tıklayıp (mobilde dokunup) söndürmektir. Söndürülen mum o tur boyunca artık güveyi çekmez ve dumanı yukarı doğru savrulur. Görevin, güvenin yörüngesini okuyup onu yanlış bir muma doğru çekeni zamanında elemek, böylece güveyi mavi muma kondurmaktır. Güve mavi muma konarsa skor bir artar ve sonraki seviyeye geçersin; her seviyede mum sayısı ve güvenin hızı yükselir. Güve yanlış bir muma kondu mu, ya da tüm mumları söndürürsen ve güve karanlıkta yön bulamadan kaybolursa oyun biter. En iyi skorun tarayıcında saklanır. Strateji ipucu: güvenin anlık konumuna değil, hızının yönüne bak — en yakın yanan mumu kafanda hesapla, eğer mavi değilse o mumu söndür. Geç söndürmek yetmez; güve hızı yüksekken son ana kadar bekleyince yön düzeltmeden çarpar. Birden fazla aday mum varsa zincirleme düşün: önce en yakındakini söndür, sonra güvenin yeni hedefini izle. Mavi mumu sakın söndürme — geriye yanan mum kalmazsa güve yön bulamaz ve seansı kaybedersin.",
+  "thumbnail": "guve.svg",
+  "scoring": {
+    "storageKey": "guve.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Moth",
+    "description": "A moth flies toward the brightest candle in a night scene. Click candles to blow them out and guide the moth onto the blue target — a steering-by-elimination puzzle.",
+    "controls": "Click/tap: blow out a candle · Space or Enter: start / next level · R: restart",
+    "howToPlay": "Moth is a puzzle about steering a single moth toward one specific candle on a night-time table. A handful of orange candles and one blue-flamed candle sit on a dark wooden table — the blue candle is the round's target. A moth drifts in from the edge and, like a real moth, is constantly pulled toward the brightest lit candle in view; closer candles outweigh far ones in the attraction calculation. Your only tool is to click (or tap) any lit candle to blow it out. An extinguished candle stops drawing the moth for the rest of the round and puffs a small trail of smoke. Your job is to read the moth's trajectory and put out whichever candle is about to mislead it, so the moth lands on the blue target. Land on the target and you score a point and move to the next level; each level adds candles and a touch of moth speed. Land on a wrong candle, or let the moth get lost when every candle is dark, and the run ends. Your best score is saved in the browser. Strategy tip: don't look at where the moth IS, look at the direction it's HEADING — work out the candle it's currently pulled toward, and if that candle isn't blue, snuff it. Snuff too late and the moth, at higher speeds, can't course-correct in time. With multiple candidate candles, think in chains: put out the nearest distractor first, then watch the moth re-pick. Never blow out the blue candle — if no candle is lit the moth drifts into the dark and you lose the round."
+  }
+}
