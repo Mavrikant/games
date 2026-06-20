@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Halka Geçidi">
+  <defs>
+    <radialGradient id="hg-bg" cx="0.55" cy="0.55" r="0.7">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0d12" />
+    </radialGradient>
+    <radialGradient id="hg-glow" cx="0.55" cy="0.55" r="0.4">
+      <stop offset="0%" stop-color="rgba(99,102,241,0.35)" />
+      <stop offset="100%" stop-color="rgba(99,102,241,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#hg-bg)" />
+  <rect width="320" height="200" fill="url(#hg-glow)" />
+  <!-- center coords (176, 110) -->
+  <g transform="translate(176 110)" fill="none" stroke-width="6" stroke-linecap="butt">
+    <!-- outer ring (rose), gap at top-right -->
+    <path d="M 0 -78 A 78 78 0 1 0 55 -55" stroke="#fb7185" />
+    <!-- middle ring (green), gap at bottom-right -->
+    <path d="M 56 0 A 56 56 0 1 0 40 40" stroke="#34d399" />
+    <!-- inner ring (violet), gap at left -->
+    <path d="M -34 0 A 34 34 0 1 1 -24 24" stroke="#a78bfa" />
+  </g>
+  <!-- ball trail -->
+  <g transform="translate(176 110)">
+    <circle cx="20" cy="-20" r="3" fill="rgba(250,204,21,0.25)" />
+    <circle cx="14" cy="-14" r="3.5" fill="rgba(250,204,21,0.4)" />
+    <circle cx="8" cy="-8" r="4" fill="rgba(250,204,21,0.6)" />
+    <circle cx="0" cy="0" r="5" fill="#facc15" />
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Halka Geçidi</text>
+</svg>

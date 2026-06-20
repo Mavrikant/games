@@ -1,0 +1,21 @@
+{
+  "title": "Halka Geçidi",
+  "description": "Üç dönen halkanın boşluklarından topu sırayla geçir.",
+  "dateAdded": "2026-06-20",
+  "tags": ["arcade", "refleks", "tek-oyunculu"],
+  "controls": "Tıkla / dokun: topu o yöne fırlat · R: yeniden başla · Boşluk / Enter: oyna",
+  "howToPlay": "Merkezdeki sarı top çevresinde üç eş merkezli halka farklı hızlarda ve farklı yönlerde döner. Her halkada tek bir boşluk vardır; topun üçünden de sırayla geçmesi gerekir. Sahanın herhangi bir noktasına tıkla veya dokun — top o yöne doğru sabit hızda fırlatılır. İç halkayı boşluktan geçer, orta halkayı boşluktan geçer ve en sonunda dış halkayı boşluktan terk ederse +1 puan kazanırsın; aynı anda halkalar rastgele yeni açılarla resetlenir ve hepsi biraz hızlanır. Bir halkanın duvarına çarparsan bir can kaybedersin (3 candan). Tüm canları kaybedince oyun biter. İpucu: en yavaş halka iç halkadır, fırlatışı boşlukları aynı anda yakalayacak şekilde **önden kestirerek** zamanla — dış halkanın boşluğu top oraya ulaşana kadar dönüp gelecek, bunu hesaba kat.",
+  "thumbnail": "halka-gecidi.svg",
+  "scoring": {
+    "storageKey": "halka-gecidi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Ring Passage",
+    "description": "Thread a ball through the gaps of three spinning concentric rings.",
+    "controls": "Click / tap: launch the ball that way · R: restart · Space / Enter: play",
+    "howToPlay": "A yellow ball waits at the center, ringed by three concentric walls that spin at different speeds and directions. Each ring has a single gap; you must thread the ball through all three in order. Click or tap anywhere on the field — the ball launches in that direction at a fixed speed. Cross the inner ring's gap, then the middle, then exit through the outer ring's gap to score +1; the gaps reseed to random angles and every ring speeds up a little. Hit a wall and you lose a life (3 lives). Lose all lives and the round ends. Tip: the inner ring is the slowest, so plan your shot by **leading** the gaps — by the time the ball reaches the outer ring, its gap has spun a long way."
+  }
+}
