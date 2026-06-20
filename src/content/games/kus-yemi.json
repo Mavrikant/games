@@ -1,0 +1,8 @@
+{
+  "title": "Kuş Yemi",
+  "description": "Aç kuş bahçede dolaşıyor; sen onu kontrol etmiyorsun, sadece yem atarak çekiyorsun. Altın çekirdekleri yedirmek için en kısa yolu kuş için yemle döşe.",
+  "dateAdded": "2026-06-20",
+  "tags": ["özgün", "strateji", "tek-oyunculu"],
+  "controls": "Tıkla / dokun: yem at · Boşluk: başla veya duraklat · R: yeniden başla",
+  "howToPlay": "Bahçenin ortasında aç bir serçe dolaşıyor. Sen kuşu doğrudan yönetemezsin; tek aracın bir avuç yemdir. Bahçenin herhangi bir yerine tıkladığında oraya bir kahverengi yem tanesi düşer. Kuşun yakınında (yaklaşık dört kare içinde) en az bir yem varsa kuş en yakın yeme doğru yönelir; yem yoksa rastgele dolanmaya devam eder. Yemi yediğinde 1 puan, ekrandaki nadiren beliren altın çekirdeği yediğinde 6 puan kazanırsın. Elindeki yem stoku sınırlıdır (turun başında 24 yem); aynı zamanda her tur 60 saniye sürer. Hedef, stok ve süre bitmeden mümkün olduğunca fazla altın çekirdek ve normal yem yedirmektir. Altın çekirdek 8 saniyede bir farklı bir noktada belirir ve sadece 6 saniye orada kalır; kuşu altına yöneltmek için ara ara onun önüne, bir çizgi halinde dizilmiş 2-3 yem 'patika' bırakmak en verimli stratejidir. Kuş yön değiştirirken ağır dönüş yarıçapına sahiptir — kuşun tam burnunun dibine yem atmak çoğu zaman geç kalır; bir-iki kare ileriye, dönüş yarıçapını hesaba katarak at. Boşluk turun başlangıcında oyunu başlatır, oyun sırasında duraklatır; R her an sıfırlar. En iyi skorun tarayıcında saklanır. İpucu: yem yağmuruna tutmak yerine altın çekirdek belirdiği anda kuşla altın arasına 3-4 yemlik kısa bir köprü kur; uzun yol için yem boşa harcanır."
+}
