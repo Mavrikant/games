@@ -1,0 +1,22 @@
+{
+  "title": "Helva Çekme",
+  "description": "Sıcak helva hamurunu kancalar arasında çek ve katla — havayı içine al, beyazlat, soğumadan.",
+  "dateAdded": "2026-06-20",
+  "tags": ["tek-oyunculu", "beceri", "türk", "zamanlama"],
+  "controls": "Boşluk basılı tut veya canvas'a bas: çek · Bırak: katla · R: yeniden başla",
+  "howToPlay": "Amacın iki kanca arasındaki amber renkli helva hamurunu peş peşe çekip katlayarak içine hava katmak ve %100 beyazlığa ulaşmaktır. BOŞLUK tuşunu (ya da fareyi tezgâhta basılı) tut: kancalar dışarı kayar, hamur uzar ve incelir. Tuşu bırak: hamur tekrar ortaya katlanır, içine bir kat hava daha sıkışır. Her başarılı katlama Hava sayacını yükseltir; en büyük artışı kopma sınırına çok yakın (kırmızı parlamanın hemen öncesi) gerip bıraktığında alırsın. Ama dikkat: hamuru kopma sınırına kadar gerersen kopar ve tezgâh boşalır. Üst çubuk hamurun ısısını gösterir — zaman geçtikçe soğur; tamamen soğursa hamur kırılır ve tur biter. Çekerken daha az, dinlenirken daha hızlı soğur, katlamalar küçük bir ısı geri verir, yani hareketsiz kalma. Kırmızı ısı çentiğinin altına düştüğünde hamur kırılganlaşır ve daha düşük gerginlikte kopar. Rekor sayısı tarayıcında saklanır; her seansın en iyi hava yüzdesini yendiğinde güncellenir.",
+  "thumbnail": "helva-cekme.svg",
+  "scoring": {
+    "storageKey": "helva-cekme.best",
+    "label": "Hava",
+    "unit": "%",
+    "direction": "higher",
+    "labelEn": "Air"
+  },
+  "en": {
+    "title": "Halva Pull",
+    "description": "Pull and fold the warm halva paste between two hooks — work air into it, whiten it, before it cools.",
+    "controls": "Hold Space or press on the canvas: pull · Release: fold · R: restart",
+    "howToPlay": "Pull and fold a strand of warm halva paste between two hooks to whip air into it until it whitens to 100%. Hold SPACE (or press on the canvas) to slide the hooks outward — the strand stretches and thins. Release to let it fold back into the center, trapping a layer of air. Each fold raises the Air gauge; the biggest gains come when you release just before the red snap warning. Pull past the snap line, though, and the strand breaks — the round ends. The top bar is temperature: the strand cools over time, and if it goes cold it shatters. It cools more slowly while you're pulling and a little less so during rest, and folding gives back a touch of heat — so don't sit idle. Once the temperature drops past the red brittle tick, the strand snaps at a lower stretch. Your best Air percentage is saved in the browser."
+  }
+}

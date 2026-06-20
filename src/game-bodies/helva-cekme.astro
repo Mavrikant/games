@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Hava<span id="score">%0</span></div>
+  <div class="hud__score">Rekor<span id="best">%0</span></div>
+  <div class="hud__score">Isı<span id="temp">100°</span></div>
+  <div class="hud__score">Katlama<span id="folds">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="720" height="420" aria-label="Helva Çekme tezgâhı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Helva Çekme</h2>
+      <p id="overlay-msg">BOŞLUK basılı tut: helvayı kancalardan dışarı çek.
+Bırak: helva ortaya katlanır, hava içeri girer.
+Hedef: %100 hava — soğumadan ve kopmadan.</p>
+      <button id="start" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
