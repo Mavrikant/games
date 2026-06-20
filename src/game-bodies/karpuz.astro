@@ -1,0 +1,22 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Olgun<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="540" height="380" aria-label="Karpuz tezgâhı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Karpuz</h2>
+      <p id="overlay-body">Karpuza tıkla, parmağınla şıklat.<br/>Olgununu seç, sepete koy.<br/>Başlamak için Boşluk veya dokunma.</p>
+    </div>
+  </div>
+</div>
+<div class="kp-actions">
+  <button id="take" class="kp-btn kp-btn--take" type="button" disabled>Sepete koy (Boşluk)</button>
+  <button id="reject" class="kp-btn kp-btn--reject" type="button" disabled>Gözden çıkar (A)</button>
+</div>

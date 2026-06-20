@@ -1,0 +1,21 @@
+{
+  "title": "Karpuz",
+  "description": "Tezgâhtaki karpuzları parmağınla şıklat, çıkan derin ya da boğuk tını seni yanıltabilir — sepete sadece olgununu koy.",
+  "dateAdded": "2026-06-20",
+  "tags": ["özgün", "tahmin", "kültürel", "sezgi"],
+  "controls": "Fare / dokunma · 1-2-3: karpuzu şıklat · S veya Boşluk: seçili karpuzu sepete koy · A: gözden çıkar · R: tezgâhı yenile",
+  "howToPlay": "Karpuz, klasik bir 'olgun mu?' kararını sezgisel bir dalga okuma minigame'ine çeviren özgün bir oyundur. Tezgâhta her tur üç karpuz görürsün; her birinin gizli bir olgunluk değeri vardır (0-100). Bir karpuza tıkladığında parmağınla şıklatmış olursun ve içinde 1.8 saniyelik bir tını dalgası başlar: olgun bir karpuz derin, geniş, yavaş bir dalga verir (kabuk içinin çoğunluğu su ve yumuşak iç dokudur); ham bir karpuz yüzeyden seken keskin, dar, hızlı bir dalga üretir (içi sıkı doludur); aşırı olgunsa dalga kararsız, parçalanmış, asimetrik çıkar (iç dokunun pulpalaşmış olması rezonansı bozar). Karpuzları sırayla şıklat, dalgaları kıyasla, en olgun gördüğüne tıklayıp 'Sepete koy' tuşuna bas (ya da Boşluk/S). Doğru olursa +1 olgun puan kazanırsın; aşırı olgun seçersen 0 puan ama oyun devam eder; ham seçersen -1 puan ve tezgâh yenilenir. Aynı turda istediğin kadar şıklatabilirsin; her şıklatma yeni bir okuma verir ama kararını ertelemenin maliyeti süredir — bir parti 60 saniyedir. Süre dolunca toplam olgun karpuz sayın puanın olur ve yerel rekorla karşılaştırılır. İpucu: ilk dalga zirvelerini değil yavaşlık ve süre algısını oku — yarış kulaklarla değil gözle veriliyor olsa da olgun karpuzun dalgası nefesin yavaşladığı gibi yavaşlar.",
+  "thumbnail": "karpuz.svg",
+  "scoring": {
+    "storageKey": "karpuz.best",
+    "label": "Olgun",
+    "direction": "higher",
+    "labelEn": "Ripe"
+  },
+  "en": {
+    "title": "Watermelon",
+    "description": "Thump the watermelons on the stall — a deep, slow ring means ripe; a sharp, tight one means unripe. Pick wisely.",
+    "controls": "Mouse / touch · 1-2-3: thump a melon · S or Space: take selected · A: reject · R: refresh stall",
+    "howToPlay": "Watermelon turns the classic 'is it ripe?' decision into a wave-reading minigame. Each round you see three melons on the stall; each has a hidden ripeness from 0 to 100. Click one to thump it with your finger and a 1.8-second resonance ripple starts inside: a ripe melon gives a deep, wide, slow wave (most of the inside is water and soft pulp); an unripe one snaps a tight, fast, surface wave (firm flesh); an overripe one returns a jagged, asymmetric wave (the pulp is breaking down and ruining resonance). Thump each in turn, compare the ripples, click the most ripe candidate and press 'Take' (Space/S). A correct pick scores +1 ripe; an overripe pick scores 0 but the game continues; an unripe pick costs you 1 ripe and the stall refreshes. You may thump as many times as you want; the only cost of dithering is the round timer — a match is 60 seconds. When time runs out your total ripe count becomes the score and is compared with the local best. Tip: don't read the peak amplitude — read the slowness. A ripe melon's wave breathes slow even when the height is similar."
+  }
+}

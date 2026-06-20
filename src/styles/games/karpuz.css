@@ -1,0 +1,131 @@
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  aspect-ratio: 540 / 380;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #0a0b0e;
+  border: 1px solid var(--border);
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.kp-actions {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin: 12px auto 0;
+}
+
+.kp-btn {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.12s ease-out,
+    border-color 0.12s ease-out,
+    opacity 0.12s ease-out;
+}
+
+.kp-btn:hover:not(:disabled) {
+  background: #1f2228;
+  border-color: #3a3d44;
+}
+
+.kp-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.kp-btn--take {
+  background: #1a4a25;
+  border-color: #2d6f3a;
+  color: #d6f0d8;
+}
+
+.kp-btn--take:hover:not(:disabled) {
+  background: #226034;
+  border-color: #46a162;
+}
+
+.kp-btn--reject {
+  background: #2a1f24;
+  border-color: #5a3a45;
+  color: #e8c8c8;
+}
+
+.kp-btn--reject:hover:not(:disabled) {
+  background: #3a2730;
+  border-color: #7a4f5e;
+}

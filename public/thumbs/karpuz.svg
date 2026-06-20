@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Karpuz">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c2418" />
+      <stop offset="100%" stop-color="#0a0e08" />
+    </linearGradient>
+    <radialGradient id="melon" cx="0.4" cy="0.35" r="0.8">
+      <stop offset="0%" stop-color="#3aa758" />
+      <stop offset="60%" stop-color="#1f7a3a" />
+      <stop offset="100%" stop-color="#114b22" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)" />
+  <ellipse cx="160" cy="170" rx="120" ry="10" fill="rgba(0,0,0,0.45)" />
+  <ellipse cx="160" cy="110" rx="100" ry="72" fill="url(#melon)" />
+  <g stroke="#0a3a1a" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M 80 60 Q 160 110 80 160" />
+    <path d="M 130 45 Q 160 110 130 175" />
+    <path d="M 180 45 Q 160 110 180 175" />
+    <path d="M 240 60 Q 160 110 240 160" />
+  </g>
+  <path d="M 110 75 Q 130 55 175 60" stroke="rgba(255,255,255,0.28)" stroke-width="5" stroke-linecap="round" fill="none" />
+  <g fill="none" stroke-linecap="round">
+    <ellipse cx="160" cy="110" rx="42" ry="30" stroke="#ffb88a" stroke-width="2" opacity="0.85" />
+    <ellipse cx="160" cy="110" rx="64" ry="46" stroke="#ffb88a" stroke-width="2" opacity="0.55" />
+    <ellipse cx="160" cy="110" rx="86" ry="62" stroke="#ffb88a" stroke-width="2" opacity="0.25" />
+  </g>
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Karpuz</text>
+  <text x="20" y="52" font-family="ui-sans-serif, system-ui" font-size="11" fill="#9aa1a8">şıklat · dinle · sepete koy</text>
+</svg>
