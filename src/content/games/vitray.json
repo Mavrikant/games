@@ -1,0 +1,21 @@
+{
+  "title": "Vitray",
+  "description": "Renkli camları üst üste yerleştirerek hedef vitray desenini birebir kopyala. Kırmızı, yeşil ve mavi katmanlar üst üste binince karışır.",
+  "dateAdded": "2026-06-20",
+  "tags": ["puzzle", "renk", "mantık", "tek-oyunculu"],
+  "controls": "Tıkla: cama renk ekle · 1/2/3: Kırmızı/Yeşil/Mavi seç · 0 veya X: silgi · R: yeni desen",
+  "howToPlay": "Vitray, üç temel renkli cam katmanını (Kırmızı, Yeşil, Mavi) üst üste koyarak hedef desenle aynı vitrayı oluşturma bulmacasıdır. Sol üstteki küçük \"Hedef\" panelinde kopyalanacak desen vardır; ortadaki büyük 4×4 ızgara senin çalışma vitrayındır. Alttaki paletten bir renk seç ve ızgaradaki bir hücreye tıkla — o hücreye seçili rengin cam katmanı eklenir. Renkler toplamsaldır (RGB ışık): Kırmızı + Yeşil = Sarı, Kırmızı + Mavi = Mor, Yeşil + Mavi = Cam göbeği, Kırmızı + Yeşil + Mavi = Beyaz. Bir hücrede zaten o renk varsa tekrar eklenmez (hamle harcanmaz); böylece yanlışlıkla tıklamak seni cezalandırmaz. Bir hücreyi tamamen temizlemek için palette \"Sil\" (X) butonunu seç ve hücreye tıkla. Tüm hücreler hedefle birebir uyduğunda vitray tamamlanır; o ana kadar yaptığın hamle sayısı skorundur ve daha azıyla bitirdiğin her tur en iyi skorunu günceller. Klavyeden 1, 2, 3 ile renkleri, 0 veya X ile silgiyi seçebilir, R tuşuyla istediğin an yeni bir desen üretebilirsin. Strateji ipucu: önce hedefteki karma renklere bak — sarı bir hücreyi kırmızı + yeşil olarak iki hamlede yapabilirsin, ama önce kırmızıyı koyduğun bir hücreyi yanlışlıkla sarı yapmamak için palet sırasını düşün. Karışık renkleri üretmenin en kısa yolu, paletten her rengi sırayla seçip o renge ihtiyaç duyan tüm hücreleri tek seferde dolaşmak (önce tüm kırmızı katmanları yerleştir, sonra tüm yeşilleri vb.) — bu zihinsel olarak da kolaydır ve gereksiz palet değiştirmesini azaltır.",
+  "thumbnail": "vitray.svg",
+  "scoring": {
+    "storageKey": "vitray.best",
+    "label": "Hamle",
+    "direction": "lower",
+    "labelEn": "Moves"
+  },
+  "en": {
+    "title": "Stained Glass",
+    "description": "Stack coloured glass layers to copy the target stained-glass pattern exactly. Red, green and blue mix when stacked.",
+    "controls": "Click: add colour to glass · 1/2/3: Red/Green/Blue · 0 or X: eraser · R: new pattern",
+    "howToPlay": "Stained Glass is a puzzle where you stack three primary glass layers (Red, Green, Blue) to reproduce a target stained-glass pattern. The small \"Target\" panel shows the pattern to copy; the big 4×4 grid in the middle is your working glass. Pick a colour from the palette and click a cell — that colour's layer is added to the cell. Colours combine additively (light): Red + Green = Yellow, Red + Blue = Magenta, Green + Blue = Cyan, all three = White. Clicking with a colour the cell already has does nothing and doesn't waste a move, so accidental double-clicks aren't punished. To wipe a cell, pick the \"Erase\" (X) tool and click the cell. The puzzle is solved the moment every cell matches the target; your move count is the score, and a lower count beats your record. Use 1/2/3 for the colours, 0 or X for the eraser, and R for a fresh pattern. Tip: look at the mixed colours in the target first — a yellow cell takes red + green (two moves), so plan a single sweep per colour (apply all reds, then all greens, then all blues) to minimise palette switches."
+  }
+}

@@ -1,0 +1,65 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__stat">Hamle<span id="moves">0</span></div>
+  <div class="hud__stat">En az<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeni desen</button>
+</header>
+
+<div class="vt-stage">
+  <div class="vt-panel">
+    <div class="vt-panel__label">Hedef</div>
+    <div id="target" class="vt-grid vt-grid--target" aria-label="Hedef vitray deseni"></div>
+  </div>
+
+  <div class="vt-board-wrap">
+    <div
+      id="board"
+      class="vt-grid vt-grid--play"
+      role="grid"
+      aria-label="Çalışma vitrayı 4×4"
+    ></div>
+
+    <div id="overlay" class="vt-overlay overlay overlay--hidden" aria-hidden="true">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Vitray tamamlandı!</h2>
+        <p id="overlay-msg">—</p>
+        <button id="overlay-next" class="hud__btn hud__btn--accent" type="button">
+          Yeni desen
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="vt-palette" role="toolbar" aria-label="Renk paleti">
+    <button
+      type="button"
+      class="vt-tool vt-tool--r"
+      data-tool="r"
+      aria-pressed="true"
+      aria-label="Kırmızı cam (1)"
+    ><span class="vt-tool__chip"></span><span class="vt-tool__name">Kırmızı</span><span class="vt-tool__key">1</span></button>
+    <button
+      type="button"
+      class="vt-tool vt-tool--g"
+      data-tool="g"
+      aria-pressed="false"
+      aria-label="Yeşil cam (2)"
+    ><span class="vt-tool__chip"></span><span class="vt-tool__name">Yeşil</span><span class="vt-tool__key">2</span></button>
+    <button
+      type="button"
+      class="vt-tool vt-tool--b"
+      data-tool="b"
+      aria-pressed="false"
+      aria-label="Mavi cam (3)"
+    ><span class="vt-tool__chip"></span><span class="vt-tool__name">Mavi</span><span class="vt-tool__key">3</span></button>
+    <button
+      type="button"
+      class="vt-tool vt-tool--x"
+      data-tool="x"
+      aria-pressed="false"
+      aria-label="Silgi (0)"
+    ><span class="vt-tool__chip"></span><span class="vt-tool__name">Sil</span><span class="vt-tool__key">0</span></button>
+  </div>
+</div>
