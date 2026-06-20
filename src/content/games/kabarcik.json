@@ -1,0 +1,21 @@
+{
+  "title": "Kabarcık",
+  "description": "Yükselen kabarcıkları gökkuşağı sırasıyla patlat: kırmızı, turuncu, sarı, yeşil, mavi, lacivert, mor — yanlış renge dokunursan can kaybedersin.",
+  "dateAdded": "2026-06-20",
+  "tags": ["refleks", "renk", "özgün", "zamanlama", "mobil"],
+  "controls": "Tıkla/dokun: kabarcığı patlat · Boşluk/Enter: başlat · R: yeniden başla",
+  "howToPlay": "Kabarcık, gökkuşağı sırasıyla kabarcık patlatma refleks oyunudur. Tüpün dibinden farklı renklerde kabarcıklar (kırmızı, turuncu, sarı, yeşil, mavi, lacivert, mor) yükselir ve bir süre sonra üst kenardan kaçarlar. HUD'un altındaki 'Sıradaki' kutusu o an hangi rengin patlatılması gerektiğini büyük bir renk noktası ile gösterir. Tek görevin: ekrandaki kabarcıklardan o renkte olanı bulup üstüne dokunmak. Doğru patlatınca skor +1 olur ve sıradaki renk otomatik olarak bir adım ilerler — kırmızıdan sonra turuncu, sonra sarı … mor patlatılınca tekrar kırmızıya döner. Yanlış renkli bir kabarcığa dokunursan bir can kaybedersin; toplam 3 canın var. Hiçbir kabarcığa dokunmadan tepeden kaçan kabarcıklar ceza yazmaz, yalnızca kaybolur — yani panik yapma, doğru rengi bekle. Kabarcıklar yana doğru hafifçe sallandığı için isabet etmek ısrar ister; dokunduğun nokta merkezine en yakın olan kabarcık seçilir. Oyun seviyeleri her 7 başarılı patlama sonunda (bir gökkuşağı turu tamamlandığında) bir basamak yükselir: kabarcıklar daha hızlı yükselir, spawn aralığı kısalır ve aynı anda ekranda daha çok kabarcık olabilir. Üç can biterse oyun biter, en yüksek skor tarayıcına kaydedilir. İpucu: kabarcıklar yukarı çıkarken renkleri net kalır; tepede arka plana karışmasın diye en alttaki sıraya bak — patlatmak için en uygun olanlar oradadır, daha çok zamanın var. R tuşu her zaman sıfırlar; Boşluk/Enter overlay'lerdeki Başla ve Yeniden başla butonlarına eşittir.",
+  "thumbnail": "kabarcik.svg",
+  "scoring": {
+    "storageKey": "kabarcik.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Bubble Rainbow",
+    "description": "Pop rising bubbles in rainbow order: red, orange, yellow, green, blue, indigo, violet — tap the wrong colour and you lose a life.",
+    "controls": "Click/tap: pop a bubble · Space/Enter: start · R: restart",
+    "howToPlay": "Bubble Rainbow is a colour-order reaction game. Bubbles of seven rainbow colours (red, orange, yellow, green, blue, indigo, violet) rise from the bottom of the tube and eventually escape through the top edge. The 'Next' panel just below the HUD shows the colour you have to pop right now as a big dot. Your only job: find a bubble of that colour on screen and tap it. A correct pop scores +1 and the required colour advances by one step — red → orange → yellow → … → violet → back to red. Tap the wrong colour and you lose one of your 3 lives. Bubbles that drift off the top without being touched are neutral; they just disappear, no penalty. The bubbles wobble sideways a bit so aiming asks for some persistence; the nearest bubble centre to your tap is the one that pops. Every 7 correct pops (one full rainbow round) the level steps up: bubbles rise faster, spawn more often, and crowd the tube more. When all 3 lives are gone the run ends and your best score is saved locally. Tip: look at the bottom of the tube first — those bubbles are youngest, easiest to read at a glance, and you have the most time to act on them. R always resets; Space/Enter mirror the Start and Restart overlay buttons."
+  }
+}
