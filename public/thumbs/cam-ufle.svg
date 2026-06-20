@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Cam Üfle">
+  <defs>
+    <linearGradient id="cubg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0b0e" />
+      <stop offset="100%" stop-color="#1a1410" />
+    </linearGradient>
+    <radialGradient id="cuglow" cx="0.42" cy="0.45" r="0.6">
+      <stop offset="0%" stop-color="#ffe6b8" stop-opacity="0.85" />
+      <stop offset="40%" stop-color="#ffb15c" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#d84320" stop-opacity="0.6" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cubg)" />
+  <rect x="8" y="8" width="304" height="184" fill="none" stroke="#2a2d33" stroke-width="2" rx="4" />
+  <g stroke="rgba(170,180,200,0.06)" stroke-width="1">
+    <path d="M8 80 L312 80 M8 116 L312 116 M8 152 L312 152" />
+  </g>
+  <line x1="30" y1="170" x2="118" y2="118" stroke="#7a6b5b" stroke-width="6" stroke-linecap="round" />
+  <circle cx="135" cy="110" r="38" fill="url(#cuglow)" stroke="rgba(255,220,170,0.75)" stroke-width="1.5" />
+  <g fill="none" stroke="rgba(170,200,240,0.55)" stroke-width="2" stroke-dasharray="6 4">
+    <circle cx="240" cy="110" r="48" />
+  </g>
+  <text x="240" y="50" font-family="ui-sans-serif, system-ui" font-size="11" fill="rgba(170,200,240,0.75)" text-anchor="middle">hedef</text>
+  <text x="14" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Cam Üfle</text>
+</svg>

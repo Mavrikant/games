@@ -1,0 +1,21 @@
+{
+  "title": "Cam Üfle",
+  "description": "Camcı atölyesinde eriyik camı tam doğru boyuta üfle — kısa kal ham, fazla üfle patlar; sıcaklık tükenirse cam donar.",
+  "dateAdded": "2026-06-20",
+  "tags": ["özgün", "timing", "zanaat", "hızlı", "fizik"],
+  "controls": "Boşluk veya canvas'a basılı tut: üfle · bırak: dondur · Enter/Boşluk: turu başlat veya sonraki tura geç · R: tüm partiyi sıfırla",
+  "howToPlay": "Cam Üfle bir zanaat-timing oyunudur: eriyik bir cam küre boruda asılı duruyor; sen üflemeye başladığında küre büyür, üflemeyi bıraktığında o boyutta donar. Hedef her turda farklı bir hayalet halka olarak gösterilir — küreyi tam o halkanın çapına denk getirmeye çalışırsın. Üfleme bedeli sıcaklıktır: HUD'daki sıcaklık çubuğu üfledikçe azalır; çubuk biterse cam soğur, küre büyümeyi durdurur ve olduğu boyutta donar — bu durumda dilediğinden küçük kalmış olabilir. Hedefe yaklaşmak puan kazandırır: tam isabet (±6 px) +25, yakın (±14 px) +12, kabul (±24 px) +4; çok ham veya çok şişkin biterse puan 0'dır. Hedefi 26 pikselden fazla aşarsan cam basınca dayanamaz ve patlar; her patlama bir can götürür. Üç can ile 10 tur oynarsın; canlar bitince parti sıcağı sıcağına sona erer ve sonuç rekorla karşılaştırılır. Strateji: üfleme hızı sabit (saniyede ~70 piksel yarıçap) olduğundan kürenin hedef çapına ulaşma süresi kolayca tahmin edilebilir — gözünü hayalet halkaya kilitle ve refleksle bırak; ama küçük hedeflerde gözünü kürenin kenarına, büyük hedeflerde halkanın sınırına ver. Üflemeyi tek seferde bitirmek zorunda değilsin; serbest bırakıp bir süre soluklan, sonra tekrar bas — sıcaklık idle'da hızla geri yüklenir, fakat tur içi üfleme süresi sıcaklık tarafından sınırlandığından küçük büyütmeyi parça parça yapmak kâr getirir. Zorluk turla artar: erken turlarda hedefler 70–130 px aralığındadır; geç turlar 60–150 px ile hem küçük hem de büyük uçlara ulaşır.",
+  "thumbnail": "cam-ufle.svg",
+  "scoring": {
+    "storageKey": "cam-ufle.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Glass Blow",
+    "description": "Blow the molten glass bubble to match the target ring — too small stays raw, too big shatters; let the heat run out and the glass freezes.",
+    "controls": "Hold Space or press-and-hold the canvas: blow · release: freeze · Enter/Space: start round or advance · R: reset the match",
+    "howToPlay": "Glass Blow is a craft-timing game: a molten bubble hangs from the blowpipe; while you blow it grows, when you release it freezes at that size. Each round shows a ghost target ring of a specific radius — your job is to grow the bubble to match that ring. Blowing costs heat: the heat bar drains while you blow and refills while idle; if it runs out mid-blow the glass cools and the bubble locks at whatever size it reached. Scoring rewards precision: bullseye (±6 px) +25, close (±14 px) +12, acceptable (±24 px) +4; outside that the round scores 0. Overshooting by more than 26 px pops the bubble and costs a life — you have three. A match is 10 rounds; the final tally is saved if it beats the local best. Strategy: blow speed is fixed (~70 px/s of radius) so time-to-target is predictable — lock your eyes on the ring and release on reflex; for tight hits, eye the bubble's edge, for big targets eye the ring's inside. You can blow in pulses: heat refills fast when idle, so pacing helps on larger targets. Difficulty ramps: rounds 1–3 stay between 70–130 px, later rounds widen to 60–150 px."
+  }
+}

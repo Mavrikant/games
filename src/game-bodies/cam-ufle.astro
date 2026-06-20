@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Tur<span id="round">0/10</span></div>
+  <div class="hud__score">Can<span id="lives">●●●</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="540" height="420" aria-label="Cam Üfle atölyesi"></canvas>
+  <div id="overlay" class="overlay" role="status" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Cam Üfle</h2>
+      <p id="overlay-body">Hedef kürenin boyutuna ulaş, ama camı patlatma. <strong>Boşluk</strong> veya ekrana <strong>basılı tut</strong> → üfle. Bırakınca dondur. Çok büyük → patlar. Çok küçük → ham kalır.</p>
+    </div>
+  </div>
+</div>
+
+<p class="cu-bars" aria-live="polite">
+  <span class="cu-bar">Sıcaklık <span id="heat-bar" class="cu-bar__track"><span id="heat-fill" class="cu-bar__fill cu-bar__fill--heat"></span></span></span>
+  <span class="cu-bar">Hedef <span id="target-label">—</span></span>
+</p>
