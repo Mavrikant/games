@@ -1,0 +1,21 @@
+{
+  "title": "Kapan",
+  "description": "Tavşanı bariyer dik ile kenara ulaşmadan köşeye sıkıştır — ama her bariyer 6 turda çürür, planlamayı durmadan tazelemen gerek.",
+  "dateAdded": "2026-06-20",
+  "tags": ["puzzle", "strateji", "özgün", "tek-oyunculu", "mobil"],
+  "controls": "Boş hücreye tıkla / dokun: bariyer koy · R: yeniden başla",
+  "howToPlay": "Kapan, klasik 'tavşanı kuşat' bulmacasına zamanla erimi olan bir bariyer mekaniği ekler. 11×11 ızgaranın merkezinde duran tavşan, her hamlende kenara doğru bir adım yaklaşır; senin tek silahın koyabileceğin bariyerlerdir. Boş bir hücreye tıkla → o hücreye taze bir bariyer dikilir ve ömrü 6 olarak başlar. Her bariyerin ömrü her sonraki turda 1 azalır; sıfıra düşünce çürüyüp ortadan kaybolur — yani sadece duvar örmek yetmez, **eskiyen** bariyerleri sürekli yenilemek zorundasın. Tavşan AI'ı her turda kalan açık hücrelerden geçerek en yakın kenara doğru bir BFS yapar ve o yoldaki ilk adımı atar; tıkanmış görse en boş yöne kaçar. Kazanmak için tavşanın kenara çıkan tüm yollarını eş zamanlı kapatman gerek — o anda 'kapan' kapanır, skorun bir artar ve grid taze bariyerlerle sıfırlanır. Tavşan kenar hücreye basarsa kaçar ve oyun biter. İpucu: tavşanın yakınına bariyer koyma — onlar erken çürür ve tavşan tam o anda boşluğa girer. Bunun yerine 2-3 hücre uzaklığa ön-örgü kur; tavşan oraya varıncaya kadar bariyerler hâlâ taze olur. Köşelere doğru sıkıştırmak (köşede sadece iki kaçış yönü kalır) en güvenli stratejidir. Skor en yüksek üst üste kapana getirdiğin tavşan sayısıdır; yerel rekorun saklanır.",
+  "thumbnail": "kapan.svg",
+  "scoring": {
+    "storageKey": "kapan.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Rounds"
+  },
+  "en": {
+    "title": "Trapped",
+    "description": "Cage the rabbit before it reaches the edge — but every barrier you plant crumbles in 6 turns, so you must keep replanting as you plan.",
+    "controls": "Click / tap an empty cell: plant a barrier · R: restart",
+    "howToPlay": "Trapped is the classic 'corner the rabbit' puzzle with a time-decay barrier mechanic. The rabbit stands at the center of an 11×11 grid and takes one step toward the edge each turn; barriers are your only tool. Click an empty cell → a fresh barrier is planted there with a lifespan of 6. Every turn each existing barrier's lifespan ticks down by 1 and crumbles when it hits zero — so wall-building isn't enough; you must keep refreshing the ones that are about to expire. The rabbit's AI runs a BFS through the remaining open cells each turn and steps onto the first cell along the shortest path to the nearest edge; if completely blocked, it slides into the most open neighbouring cell. To win the round you need to seal every edge path simultaneously — at that moment the trap closes, your score goes up, and the grid resets with fresh barriers. If the rabbit reaches an edge cell, it escapes and the run ends. Tip: don't place barriers right next to the rabbit — they decay before they help and the rabbit walks past anyway. Instead, pre-weave a fence 2–3 cells out; by the time the rabbit arrives, those barriers will still be fresh. Funnelling the rabbit toward a corner (which leaves only two escape directions) is the safest strategy. Your score is the number of consecutive rabbits you trap; your local best is saved."
+  }
+}
