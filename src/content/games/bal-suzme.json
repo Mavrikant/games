@@ -1,0 +1,22 @@
+{
+  "title": "Bal Süzme",
+  "description": "Petekleri tambura dengeli yerleştir, kolu çevir — dengesizlik titreşim yapar, hızlı dönersen tambur kırılır.",
+  "dateAdded": "2026-06-20",
+  "tags": ["beceri", "denge", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "Fare / dokunma: yuva — boşsa yükle, doluysa boşalt · Boşluk (basılı tut): kolu hızlandır · R: yeniden başla",
+  "thumbnail": "bal-suzme.svg",
+  "howToPlay": "Bal Süzme, eski tip bir bal süzme makinasını (santrifüj) işlettiğin bir denge + ekonomi oyunudur. Ekranın ortasında dönen yuvarlak bir tambur ve onun içinde dört yuva var: üst, sağ, alt, sol. Altta dolu petek çerçeveleri kuyrukta bekliyor; her petek üzerinde dolu yüzdesi yazıyor (60-100 arası). Boş bir yuvaya dokunduğunda kuyruktaki ilk petek o yuvaya yerleşir; dolu yuvaya dokunursan petek dışarı atılır (içindeki bal kaybolur). Tambur sürekli dönüyor; her dolu yuvada petekten bal süzülür ve sağ tarafta toplam bal sayacın artar. Süzme hızı baz değerindedir; **Boşluk** tuşunu basılı tutarsan kol hızlanır ve bal akışı ikiye katlanır. Ama bir şartla: tamburun karşılıklı yuvaları (üst–alt, sol–sağ) dengeli olmalı — yani karşılıklı petek doluluk seviyeleri arasındaki fark az olmalı. Sağdaki sarı titreşim göstergesi imbalans × hız² kadar dolmaya başlar; tepeye ulaşırsa rastgele bir yuvadaki petek kırılır (bal kaybedersin) ve titreşim sıfırlanır. Üç kırıkta oyun biter. Strateji: önce dolulukları eş iki peteği karşılıklı yuvalara yerleştir, sonra ikinci çifti diğer iki yuvaya koy. Bir petek diğerinden önce biterse karşıyı hemen boşalt veya kuyruktaki en yakın doluluk eşinden yeni petek tak. Boşluk'a dengeliyken bas, dengesizken bırak. Skorun süzdüğün toplam baldır; en yüksek skorun tarayıcına kaydedilir.",
+  "scoring": {
+    "storageKey": "bal-suzme.best",
+    "label": "Bal",
+    "unit": "kg",
+    "direction": "higher",
+    "labelEn": "Honey"
+  },
+  "en": {
+    "title": "Honey Spin",
+    "description": "Load honeycomb frames into a spinning extractor — keep opposite slots balanced or the drum will crack.",
+    "controls": "Mouse / tap: slot — load if empty, eject if loaded · Space (hold): speed up · R: restart",
+    "howToPlay": "Honey Spin is a balance + economy game where you run an old-style honey extractor (centrifuge). A spinning drum sits in the centre with four slots (top, right, bottom, left); a queue of full honeycomb frames waits at the bottom of the screen, each labelled with its fill percentage (60-100). Tap an empty slot to load the next frame from the queue; tap a loaded slot to eject it (the remaining honey is lost). The drum spins continuously and every loaded slot drains honey into your total. Hold **Space** to spin faster — output doubles, but with a catch: opposite slots (top-bottom, left-right) must stay balanced, meaning the fill difference between facing frames must stay small. The vibration meter on the right rises with imbalance × speed²; if it reaches the top, a random loaded frame cracks (you lose its honey) and the meter resets. Three cracks ends the run. Strategy: place two frames of similar fill in opposite slots first, then the second pair on the remaining axis. When one frame empties before its partner, immediately eject the partner or load a similarly-filled frame from the queue. Boost only while balanced; release when not. Your score is total honey extracted; the best run is kept in localStorage."
+  }
+}
