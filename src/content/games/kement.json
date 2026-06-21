@@ -1,0 +1,9 @@
+{
+  "title": "Kement",
+  "description": "Halkayı şişir, doğru anda bırak. Tek atışta yakaladığın hedef sayısı kareye yükselir.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "aim", "timing", "tek-oyunculu"],
+  "controls": "Fare: basılı tut şişir, bırakınca at · Ok tuşları: nişanı oynat · Boşluk: şişir/bırak · R: yeniden başla",
+  "howToPlay": "Amacın 60 saniyede kementi atarak ekranda dolaşan hedeflerden olabildiğince çoğunu yakalamak ve yüksek skor toplamak. Nişan halkası fareni takip eder; sol tuşu basılı tuttuğun sürece halka büyür ve doğru anda bıraktığında o anlık çapıyla kementi sabitler. Halka içine düşen hedeflerin tamamı tek atışta yakalanır ve verilen puan yakaladığın sayının karesi olarak hesaplanır: bir hedef bir puan, iki hedef dört, üç hedef dokuz puan getirir. Bu yüzden tek tek koşmak yerine hedeflerin kümelendiği anı bekleyip büyük halkayla birden fazla yakalamak çok daha kazançlıdır. Her atıştan sonra kısa bir bekleme süresi vardır; bu sürede halka büyümez. Klavyeyle de oynayabilirsin: ok tuşları nişanı kaydırır, boşluk tuşu şişirir ve bırakınca atar; R tuşu turu sıfırlar. Strateji ipucu: küçük halkayla acele etmek yerine hedefler ekranda birikene kadar bekleyip büyük halka için şarj et; alt şeritteki yavaş hedefler doğal birikim noktalarıdır.",
+  "thumbnail": "kement.svg"
+}

@@ -1,0 +1,96 @@
+:root {
+  --kement-aim: #fbbf24;
+}
+
+.hud {
+  flex-wrap: wrap;
+}
+
+.hud__score,
+.hud__best,
+.hud__time {
+  flex: 1 1 90px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span,
+.hud__best span,
+.hud__time span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
+
+.hud__score span {
+  color: var(--kement-aim);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 480 / 600;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+  z-index: 5;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}

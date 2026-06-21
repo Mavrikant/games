@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Kement">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0" stop-color="#1c2435"/>
+      <stop offset="1" stop-color="#0a0b14"/>
+    </radialGradient>
+    <radialGradient id="ring" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.78" stop-color="#fbbf24" stop-opacity="0"/>
+      <stop offset="0.92" stop-color="#fbbf24" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+
+  <!-- moving targets (the cluster the player is about to lasso) -->
+  <g>
+    <circle cx="160" cy="100" r="12" fill="#f87171"/>
+    <circle cx="155.5" cy="95.5" r="3.6" fill="#fecaca" opacity="0.75"/>
+    <circle cx="188" cy="86" r="11" fill="#60a5fa"/>
+    <circle cx="184" cy="82" r="3.4" fill="#dbeafe" opacity="0.75"/>
+    <circle cx="146" cy="124" r="13" fill="#34d399"/>
+    <circle cx="142" cy="120" r="3.8" fill="#d1fae5" opacity="0.75"/>
+    <circle cx="180" cy="120" r="10" fill="#c084fc"/>
+    <circle cx="177" cy="116" r="3.2" fill="#ede9fe" opacity="0.75"/>
+  </g>
+
+  <!-- distant uncaught targets -->
+  <circle cx="60" cy="70" r="7" fill="#f472b6" opacity="0.65"/>
+  <circle cx="276" cy="142" r="6" fill="#fb923c" opacity="0.65"/>
+  <circle cx="74" cy="146" r="6" fill="#a3e635" opacity="0.6"/>
+
+  <!-- the lasso loop closing in -->
+  <circle cx="166" cy="106" r="46" fill="url(#ring)"/>
+  <circle cx="166" cy="106" r="40" fill="none" stroke="#fbbf24" stroke-width="3" stroke-dasharray="3 5"/>
+  <circle cx="166" cy="106" r="2.5" fill="#fbbf24"/>
+
+  <!-- title -->
+  <text x="20" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#fef3c7" letter-spacing="2">KEMENT</text>
+  <text x="20" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8" letter-spacing="3">ŞİŞİR · BIRAK · KÜMEYİ YAKALA</text>
+</svg>
