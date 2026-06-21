@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mengene">
+  <defs>
+    <linearGradient id="mn-bench" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#28201a" />
+      <stop offset="55%" stop-color="#1e1814" />
+      <stop offset="100%" stop-color="#14100c" />
+    </linearGradient>
+    <linearGradient id="mn-steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a4a52" />
+      <stop offset="50%" stop-color="#9aa2ad" />
+      <stop offset="100%" stop-color="#4a4a52" />
+    </linearGradient>
+    <linearGradient id="mn-piece" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0c958" />
+      <stop offset="55%" stop-color="#d3a83a" />
+      <stop offset="100%" stop-color="#7a5b18" />
+    </linearGradient>
+  </defs>
+
+  <!-- Bench background -->
+  <rect width="320" height="200" fill="url(#mn-bench)" />
+
+  <!-- Wood grain -->
+  <g stroke="#ffffff" stroke-opacity="0.03" fill="none" stroke-width="1">
+    <path d="M0 30 Q 80 32 160 28 T 320 31" />
+    <path d="M0 60 Q 80 58 160 62 T 320 60" />
+    <path d="M0 90 Q 80 92 160 88 T 320 91" />
+    <path d="M0 120 Q 80 118 160 122 T 320 120" />
+    <path d="M0 150 Q 80 154 160 148 T 320 152" />
+    <path d="M0 180 Q 80 178 160 182 T 320 180" />
+  </g>
+
+  <!-- Vise base / bench top -->
+  <rect x="40" y="138" width="240" height="14" rx="3" fill="#0e0a07" />
+  <rect x="48" y="128" width="224" height="20" rx="5" fill="#2a2a30" />
+  <rect x="48" y="128" width="224" height="6" rx="5" fill="#3a3a40" />
+
+  <!-- Static jaw (left) -->
+  <rect x="70" y="78" width="22" height="58" rx="3" fill="url(#mn-steel)" stroke="#000" stroke-opacity="0.5" />
+  <g stroke="#000" stroke-opacity="0.4" stroke-width="0.7">
+    <line x1="73" y1="86" x2="89" y2="86" />
+    <line x1="73" y1="94" x2="89" y2="94" />
+    <line x1="73" y1="102" x2="89" y2="102" />
+    <line x1="73" y1="110" x2="89" y2="110" />
+    <line x1="73" y1="118" x2="89" y2="118" />
+    <line x1="73" y1="126" x2="89" y2="126" />
+  </g>
+
+  <!-- Moving jaw (right) -->
+  <rect x="218" y="78" width="22" height="58" rx="3" fill="url(#mn-steel)" stroke="#000" stroke-opacity="0.5" />
+  <g stroke="#000" stroke-opacity="0.4" stroke-width="0.7">
+    <line x1="221" y1="86" x2="237" y2="86" />
+    <line x1="221" y1="94" x2="237" y2="94" />
+    <line x1="221" y1="102" x2="237" y2="102" />
+    <line x1="221" y1="110" x2="237" y2="110" />
+    <line x1="221" y1="118" x2="237" y2="118" />
+    <line x1="221" y1="126" x2="237" y2="126" />
+  </g>
+
+  <!-- Brass piece clamped between -->
+  <rect x="92" y="92" width="126" height="32" rx="3" fill="url(#mn-piece)" stroke="#000" stroke-opacity="0.45" />
+  <g fill="#000" fill-opacity="0.18">
+    <circle cx="105" cy="100" r="1" />
+    <circle cx="118" cy="108" r="1" />
+    <circle cx="138" cy="102" r="1" />
+    <circle cx="155" cy="115" r="1" />
+    <circle cx="174" cy="106" r="1" />
+    <circle cx="190" cy="112" r="1" />
+    <circle cx="205" cy="100" r="1" />
+  </g>
+
+  <!-- Red edge markers (file targets) -->
+  <rect x="104" y="86" width="3" height="6" fill="#d04a2a" />
+  <rect x="104" y="124" width="3" height="6" fill="#d04a2a" />
+  <rect x="203" y="86" width="3" height="6" fill="#d04a2a" />
+  <rect x="203" y="124" width="3" height="6" fill="#d04a2a" />
+
+  <!-- File (above piece) -->
+  <g transform="translate(155 78)">
+    <rect x="-44" y="-5" width="88" height="9" fill="#3a3a40" />
+    <rect x="-44" y="-6" width="88" height="2" fill="#5a5a62" />
+    <g stroke="#000" stroke-opacity="0.55" stroke-width="0.6">
+      <line x1="-40" y1="-4" x2="-36" y2="4" />
+      <line x1="-32" y1="-4" x2="-28" y2="4" />
+      <line x1="-24" y1="-4" x2="-20" y2="4" />
+      <line x1="-16" y1="-4" x2="-12" y2="4" />
+      <line x1="-8" y1="-4" x2="-4" y2="4" />
+      <line x1="0" y1="-4" x2="4" y2="4" />
+      <line x1="8" y1="-4" x2="12" y2="4" />
+      <line x1="16" y1="-4" x2="20" y2="4" />
+      <line x1="24" y1="-4" x2="28" y2="4" />
+      <line x1="32" y1="-4" x2="36" y2="4" />
+    </g>
+    <rect x="44" y="-7" width="22" height="14" fill="#7a4a22" />
+    <rect x="44" y="-7" width="4" height="14" fill="#5a3414" />
+  </g>
+
+  <!-- Crank rod and handle -->
+  <line x1="240" y1="107" x2="276" y2="107" stroke="#bfbfc6" stroke-width="3" />
+  <g transform="translate(280 107)">
+    <rect x="-2" y="-16" width="4" height="32" fill="#cfcfd6" />
+    <circle cx="0" cy="-16" r="4" fill="#8a8a90" />
+    <circle cx="0" cy="16" r="4" fill="#8a8a90" />
+  </g>
+
+  <!-- Force gauge along bottom -->
+  <rect x="40" y="166" width="240" height="14" rx="3" fill="#0c0a08" stroke="#ffffff" stroke-opacity="0.08" />
+  <!-- Green band (target zone) -->
+  <rect x="148" y="166" width="48" height="14" rx="2" fill="#5fb672" fill-opacity="0.55" />
+  <rect x="148" y="166" width="48" height="14" rx="2" fill="none" stroke="#5fb672" stroke-width="1" />
+  <!-- Needle inside the band -->
+  <rect x="170" y="160" width="2" height="26" fill="#fff" />
+  <polygon points="171,158 167,152 175,152" fill="#fff" />
+
+  <!-- Title corner -->
+  <text x="14" y="22" fill="#cfb98a" font-family="system-ui, sans-serif" font-size="11" font-weight="700">MENGENE</text>
+  <text x="14" y="36" fill="#cfb98a" fill-opacity="0.6" font-family="system-ui, sans-serif" font-size="9">SIK · EĞELE · TESLİM ET</text>
+</svg>

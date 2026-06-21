@@ -1,0 +1,31 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Puan<span id="score">0</span></div>
+  <div class="hud__score">Can<span id="lives">●●●</span></div>
+  <div class="hud__score">Parça<span id="round">1/12</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="360"
+    aria-label="Mengene atölyesi"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mengene</h2>
+      <p id="overlay-msg">
+        Boşluk: mengeneyi sık, ibre yeşil banttayken bırak.
+        Sürükle: eğeyi parçanın bir kenarından diğerine çek.
+        Başlamak için tıkla veya Enter.
+      </p>
+    </div>
+  </div>
+</div>
+<p class="mn-hint">
+  Boşluk basılı tut → ibre yeşil banttayken bırak · Fare/dokun: eğeyi parça
+  üstünde sağa-sola, iki kırmızı işarete değecek kadar çek · Enter sıfırla
+</p>
