@@ -1,0 +1,19 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bütçe<span id="budget">30</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="720" height="380" aria-label="Sokak Lambası oyun alanı"></canvas>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Sokak Lambası</h2>
+      <p id="overlay-msg">Lambalara dokunarak aç/kapat. Bisikletli karanlık çukura düşmesin. Açık her lamba saniyede 1 birim elektrik tüketir.&#10;Başlamak için tıkla ya da Boşluk'a bas.</p>
+    </div>
+  </div>
+</div>
+<p class="hint">Lambalara tıkla · Boşluk: başla/duraklat · R: yeniden başla · Bisikletli her saniye bir adım ilerler, açık lambanın ışık konisindeki çukurlardan zarar görmez.</p>

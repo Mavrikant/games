@@ -1,0 +1,8 @@
+{
+  "title": "Sokak Lambası",
+  "description": "Sisli bir sokakta bisikletliyi karanlıkta bırakma — lambaları tam zamanında aç, elektrik bütçesini boşa harcama.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "zamanlama", "yönetim", "tek-oyunculu"],
+  "controls": "Lambalara tıkla: aç/kapat · Boşluk: başla/duraklat · R: yeniden başla",
+  "howToPlay": "Sisli bir sokağın elektrik operatörüsün; bisikletli her seviyenin başında sol kenardan çıkıp sabit hızla sağdaki yeşil bitiş çizgisine doğru ilerler. Yol üzerinde gizlenmiş birkaç çukur vardır ve karanlıkta bunlardan birinin üzerinden geçen bisikletli düşer; oysa açık bir sokak lambasının ışık konisi içine giren çukur turuncu uyarı rengine boyanır ve geçtiğinde zararsızdır. Tek görevin lambaları doğru anlarda açıp kapatmak: her açık lamba saniyede 1 birim elektrik harcar, üst HUD'daki bütçe sıfırlandığında tüm lambalar zorla söner ve bisikletli ilk karanlık çukurda kaza yapar. Stratejin bisikletlinin yakınındaki tehlikeli noktayı önceden hesaplayıp, yalnızca o anda gerekli lambayı kısa süre yakmak, geri kalan zaman tüm sokağı karanlık bırakmaktır. Seviye tamamlandığında kalan bütçenin her birimi 10 puan + seviye bonusu olarak skoruna eklenir; seviye atladıkça çukur sayısı ve toplam bütçe birlikte büyür. Boşluk tuşu oyunu duraklatır (bütçe akmaz), R tuşu ya da Yeniden başla düğmesi 1. seviyeden taze bir oyun başlatır. İpucu: lambayı çukur henüz iki adım uzakken yak, bisikletli geçer geçmez söndür — bir karelik fazla aydınlatma uzun vadede onlarca puana mal olur."
+}
