@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mancınık">
+  <defs>
+    <linearGradient id="mn-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c1424" />
+      <stop offset="100%" stop-color="#23344f" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#mn-sky)" />
+  <!-- Stars -->
+  <g fill="#ffffff" fill-opacity="0.32">
+    <rect x="32" y="22" width="1.4" height="1.4" />
+    <rect x="78" y="48" width="1.4" height="1.4" />
+    <rect x="148" y="30" width="1.4" height="1.4" />
+    <rect x="206" y="64" width="1.4" height="1.4" />
+    <rect x="262" y="40" width="1.4" height="1.4" />
+    <rect x="290" y="76" width="1.4" height="1.4" />
+  </g>
+  <!-- Far mountains -->
+  <path d="M0 170 L60 130 L130 150 L210 120 L280 145 L320 130 L320 175 L0 175 Z" fill="#1a2335" />
+  <!-- Ground -->
+  <rect x="0" y="170" width="320" height="30" fill="#3c2a18" />
+  <rect x="0" y="170" width="320" height="2" fill="#5b7a3e" />
+
+  <!-- Trajectory arc (dotted) -->
+  <g fill="#ffe1a0" fill-opacity="0.55">
+    <circle cx="74" cy="122" r="1.8" />
+    <circle cx="98" cy="100" r="1.8" />
+    <circle cx="128" cy="84" r="1.8" />
+    <circle cx="162" cy="76" r="1.8" />
+    <circle cx="198" cy="80" r="1.8" />
+    <circle cx="232" cy="94" r="1.8" />
+    <circle cx="262" cy="120" r="1.8" />
+    <circle cx="282" cy="148" r="1.8" />
+  </g>
+
+  <!-- Castle (right) -->
+  <rect x="232" y="135" width="76" height="35" fill="#2c2d35" />
+  <g fill="#2c2d35">
+    <rect x="232" y="128" width="9" height="7" />
+    <rect x="246" y="128" width="9" height="7" />
+    <rect x="260" y="128" width="9" height="7" />
+    <rect x="274" y="128" width="9" height="7" />
+    <rect x="288" y="128" width="9" height="7" />
+  </g>
+  <!-- Flag -->
+  <rect x="268" y="106" width="2" height="22" fill="#444" />
+  <rect x="270" y="106" width="12" height="7" fill="#c0392b" />
+
+  <!-- Target band -->
+  <rect x="252" y="166" width="36" height="6" fill="#f59e0b" />
+  <rect x="262" y="164" width="16" height="8" fill="#ef4444" />
+  <rect x="269" y="160" width="2" height="12" fill="#ffffff" />
+
+  <!-- Trebuchet base (A-frame) -->
+  <polygon points="22,170 44,140 66,170" fill="#6b4a26" stroke="#3a2614" stroke-width="1.5" />
+  <line x1="18" y1="158" x2="70" y2="158" stroke="#3a2614" stroke-width="2" />
+  <!-- Arm rotated about pivot (44,140) at ~55° -->
+  <line x1="32" y1="156" x2="62" y2="106" stroke="#8a6233" stroke-width="5" stroke-linecap="round" />
+  <!-- Counterweight (back end) -->
+  <rect x="26" y="148" width="14" height="14" fill="#3c3f47" stroke="#1c1e24" />
+  <!-- Projectile on sling -->
+  <circle cx="62" cy="106" r="4.6" fill="#d9c290" stroke="#000" stroke-opacity="0.4" />
+  <!-- Pivot dot -->
+  <circle cx="44" cy="140" r="3" fill="#d68845" />
+
+  <!-- Wind arrow (top) -->
+  <g stroke="#f59e0b" stroke-width="2" fill="#f59e0b">
+    <line x1="142" y1="14" x2="180" y2="14" />
+    <polygon points="180,14 174,10 174,18" />
+  </g>
+  <text x="120" y="17" fill="#cfd6e2" font-family="system-ui, sans-serif" font-size="10" text-anchor="end">RÜZGÂR</text>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "title": "Mancınık",
+  "description": "Karşı ağırlığı seç, mancınık kolu salınırken doğru anda bırak — taş rüzgârın altında parabol çizerek hedef bandına düşer. 10 atışta toplam isabet.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "fizik", "nişan", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "1-2-3: karşı ağırlık (Hafif/Orta/Ağır) · Boşluk / Enter / Tıkla: ateş · R: yeniden başla",
+  "howToPlay": "Mancınık, ekranın sol tarafına kurulu ahşap bir kuşatma silahıyla, karşı kıyıya rastgele yerleşen hedef bandını vurmaya çalıştığın 10 atışlık bir nişan oyunudur. Mancınık kolu sahnedeki pivot noktasının çevresinde sürekli ileri-geri salınır; kolun ucu o anki fırlatma açısını gösterir ve alt limit ile üst limit arasında otomatik ping-pong yapar. Her atış için iki kararın var. Birincisi karşı ağırlık: sahnenin altındaki Hafif/Orta/Ağır butonları (veya 1-2-3 sayı tuşları) taşın çıkış hızını belirler. Hafif kısa menzilli ve nazik, ağır uzağa savurur ama küçük bir açı hatası bile taşı kalenin arkasına düşürür. İkincisi bırakma anı: kol istediğin açıyı süpürdüğü an Boşluk, Enter, sahaya tıklama veya kırmızı ATEŞ düğmesine dokunma — kol o anlık açıda kilitlenir ve taş parabolik yörüngeye girer. Üst şeritte rüzgâr okunun yönü ve uzunluğu o atışın yatay sürüklenmesini özetler; sağa esiyorsa taş havadayken sağa kayar, sola esiyorsa tersine. Hedef bandı her atıştan önce farklı bir uzaklıkta belirir: orta dar bullseye'a denk düşersen +3 puan, dış banda denk düşersen +1, ıskaladığında 0 puan; toplam 30 puan tavandır. 10 atış sonunda toplam skorun tarayıcında saklanır ve aynı oturumda yeni rekorunu görürsün. İpucu: yakın hedefte hafif ağırlık + yüksek açı işe yarar; orta menzilde Orta + 40-50° dolayı; uzak hedefte ağır ağırlık + alçak-orta açı isabet eder. Rüzgâr sağa eserken bandın biraz solunu nişanla; sola eserken tersini yap.",
+  "thumbnail": "mancinik.svg",
+  "scoring": {
+    "storageKey": "mancinik.best",
+    "label": "Skor",
+    "direction": "higher"
+  }
+}

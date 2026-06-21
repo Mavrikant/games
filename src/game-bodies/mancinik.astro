@@ -1,0 +1,37 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Atış<span id="shots">10</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="320"
+    aria-label="Mancınık atış sahası"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mancınık</h2>
+      <p id="overlay-msg">Karşı ağırlığı seç. Kol salınırken doğru anda ATEŞ et.</p>
+    </div>
+  </div>
+</div>
+<section class="mn-controls" aria-label="Mancınık kontrolleri">
+  <div class="mn-row">
+    <span class="mn-label">Karşı ağırlık</span>
+    <div class="mn-powers">
+      <button class="mn-power" data-power="0" type="button">Hafif</button>
+      <button class="mn-power is-active" data-power="1" type="button">Orta</button>
+      <button class="mn-power" data-power="2" type="button">Ağır</button>
+    </div>
+  </div>
+  <div class="mn-row">
+    <span class="mn-label">Seçili: <strong id="power-label">Orta</strong></span>
+    <button id="fire" class="mn-fire" type="button">ATEŞ</button>
+  </div>
+  <p class="mn-hint">Boşluk/Enter veya sahaya tıkla → ateş · 1-2-3 → ağırlık · R → sıfırla</p>
+</section>
