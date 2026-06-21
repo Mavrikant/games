@@ -1,0 +1,44 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Puan<span id="score">0</span></div>
+  <div class="hud__score">Mihir<span id="lives">●●●</span></div>
+  <div class="hud__score">Müşteri<span id="round">1/12</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="480"
+    height="320"
+    aria-label="Mihenk taşı tezgâhı"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Mihenk</h2>
+      <p id="overlay-msg">
+        Takıyı tut, mihenk taşına sürt.
+        Yumuşak kanarya iz: SAF.
+        Lekeli, turuncu, gri veya boya pulları: SAHTE.
+        Başlamak için tıkla veya Enter.
+      </p>
+    </div>
+  </div>
+</div>
+<section class="mh-controls" aria-label="Mihenk kararları">
+  <div class="mh-row">
+    <button id="accept" class="mh-btn mh-btn--accept" type="button">
+      <span class="mh-btn__key">A</span>
+      <span class="mh-btn__label">SAF</span>
+    </button>
+    <button id="reject" class="mh-btn mh-btn--reject" type="button">
+      <span class="mh-btn__key">R</span>
+      <span class="mh-btn__label">SAHTE</span>
+    </button>
+  </div>
+  <p class="mh-hint">
+    Takıyı sürükle → siyah taşta iz oluştur · A/← kabul · R/→ red · Boşluk
+    ikinci sürme · Enter sıfırla
+  </p>
+</section>

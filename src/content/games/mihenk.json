@@ -1,0 +1,14 @@
+{
+  "title": "Mihenk",
+  "description": "Tezgâha gelen sarı parıltılı her takı altın değildir. Mihenk taşına sürt, bıraktığı sürmeyi oku, 'Saf' veya 'Sahte' diye karar ver — 12 müşteride en yüksek puana ulaş.",
+  "dateAdded": "2026-06-21",
+  "tags": ["gözlem", "karar", "zamanlama", "özgün", "tek-oyunculu"],
+  "controls": "Tıkla/dokun: takıyı tut ve mihenk taşının üzerinde sürt · A / ←: Saf altın (kabul) · R / →: Sahte (red) · Boşluk: tekrar sürt · Enter: yeniden başla",
+  "howToPlay": "Mihenk, Osmanlı kuyumcusu mihenk taşıyla altın ayar etme oyunudur — sarı parlayan her takıyı kabul edemezsin, çünkü pirinç, kaplama ve boyalı sahteler de aynı parıltıyla gelir. Oyun, sırayla 12 müşterinin getirdiği yüzük/sikke/madalyonu sınamandan oluşur. Tezgâhın ortasındaki siyah mihenk taşına takıyı sürtmek için takıyı işaret ile tutup taşın üzerinde sağa-sola çek — sürttüğün her piksel taşta bir 'sürme' (izli çizgi) bırakır. Sürmenin rengi ve dokusu metalin gerçek kimliğini ele verir: saf altın yumuşak ve tek tonda kanarya sarısı bir iz bırakır; pirinç pasını turuncuya, gümüş soğuk griye, altın kaplama yüzeyden kazınınca alttan bronz lekeler verir, boyalı sahteler ise iz yerine küçük boya pulları kopararak süslüsünü ele verir. İz oluştuktan sonra alttaki SAF (yeşil) düğmesine veya A/sol-ok tuşuna basıp takıyı kabul edersin (sadece saf altın); diğer her metale R/sağ-ok ile veya SAHTE düğmesiyle red verirsin. Her karar başına süre kısıtlıdır: üst banttaki kum saati boşaldığında reddedilmiş sayılır. Doğru karar +1 puan, yanlış karar bir mihir (can) götürür — üç mihir yitirince usta seni kovar ve oyun biter. Müşteri sırası ilerledikçe sahteler ustalaşır: kaplamalar daha kalın, boyalar daha düzgün; aynı taş üzerinde aceleyle çekilen kısa sürmede ayrım zorlaşır, bu yüzden taşa daha uzun bir sürtüş bırakmak ipuçlarını çoğaltır. Boşluk tuşuyla mevcut müşterinin takısını taştan ikinci kez çekebilirsin — ama süre saymaya devam eder. İpucu: sürmenin tek bir uçtaki rengine değil, ortasına ve kenarlarındaki dokuya bak — gerçek altın 'sürme' boyunca aynı, sahteler kenarlarında çatlar.",
+  "thumbnail": "mihenk.svg",
+  "scoring": {
+    "storageKey": "mihenk.best",
+    "label": "Puan",
+    "direction": "higher"
+  }
+}
