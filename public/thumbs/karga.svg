@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1f2e"/>
+      <stop offset="0.4" stop-color="#0c0e16"/>
+      <stop offset="1" stop-color="#0a0b10"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5ea8e0"/>
+      <stop offset="1" stop-color="#265c96"/>
+    </linearGradient>
+    <radialGradient id="pebble" cx="0.32" cy="0.3">
+      <stop offset="0" stop-color="#dcc4a0"/>
+      <stop offset="0.6" stop-color="#8c7048"/>
+      <stop offset="1" stop-color="#2a1d0d"/>
+    </radialGradient>
+    <radialGradient id="cork" cx="0.3" cy="0.3">
+      <stop offset="0" stop-color="#e0a55c"/>
+      <stop offset="1" stop-color="#a86826"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <line x1="0" y1="186" x2="320" y2="186" stroke="#3a4255" stroke-width="1.5"/>
+
+  <!-- Tube: hourglass-ish profile -->
+  <path d="M 130 24 L 138 24 L 138 70 L 130 96 L 130 140 L 142 184 L 178 184 L 190 140 L 190 96 L 182 70 L 182 24 L 190 24 L 190 16 L 130 16 Z"
+        fill="rgba(110,140,170,0.08)" stroke="#2a2d33" stroke-width="2"/>
+  <!-- inner profile path so water clips nicely -->
+  <clipPath id="tube-inner">
+    <path d="M 138 22 L 138 70 L 130 96 L 130 140 L 142 184 L 178 184 L 190 140 L 190 96 L 182 70 L 182 22 Z"/>
+  </clipPath>
+
+  <g clip-path="url(#tube-inner)">
+    <!-- Target band (green) -->
+    <rect x="124" y="92" width="72" height="32" fill="rgba(125,216,122,0.18)"/>
+    <line x1="124" y1="92" x2="196" y2="92" stroke="#7dd87a" stroke-width="1.2" stroke-dasharray="4,5"/>
+    <line x1="124" y1="124" x2="196" y2="124" stroke="#7dd87a" stroke-width="1.2" stroke-dasharray="4,5"/>
+
+    <!-- Water -->
+    <rect x="120" y="108" width="80" height="80" fill="url(#water)"/>
+    <line x1="124" y1="108" x2="196" y2="108" stroke="rgba(200,230,250,0.7)" stroke-width="1"/>
+
+    <!-- Pebbles in water -->
+    <circle cx="146" cy="172" r="9" fill="url(#pebble)"/>
+    <circle cx="172" cy="176" r="6" fill="url(#pebble)"/>
+    <circle cx="158" cy="160" r="5" fill="url(#pebble)"/>
+    <circle cx="166" cy="166" r="4" fill="url(#pebble)"/>
+  </g>
+
+  <!-- Cork sitting on water surface (inside band = winning state) -->
+  <rect x="142" y="98" width="36" height="14" rx="4" fill="url(#cork)" stroke="#7dd87a" stroke-width="1.6"/>
+  <line x1="146" y1="103" x2="174" y2="103" stroke="rgba(58,36,14,0.55)" stroke-width="1"/>
+  <line x1="146" y1="107" x2="174" y2="107" stroke="rgba(58,36,14,0.55)" stroke-width="1"/>
+
+  <!-- Falling pebble above tube -->
+  <circle cx="160" cy="14" r="6" fill="url(#pebble)"/>
+  <line x1="160" y1="22" x2="160" y2="32" stroke="rgba(200,170,130,0.45)" stroke-width="1.5" stroke-dasharray="2,2"/>
+
+  <!-- Crow perched on rim -->
+  <g transform="translate(208,22)">
+    <ellipse cx="0" cy="0" rx="14" ry="9" transform="rotate(-10)" fill="#0c0d12"/>
+    <circle cx="-11" cy="-6" r="6" fill="#0c0d12"/>
+    <polygon points="-17,-5 -25,-4 -17,-2" fill="#d3a64b"/>
+    <circle cx="-12" cy="-7" r="1.4" fill="#f4f4f6"/>
+    <polygon points="12,-1 22,-6 22,4" fill="#0c0d12"/>
+  </g>
+</svg>

@@ -1,0 +1,41 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Bölüm<span id="level">1/8</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="480" height="540" aria-label="Karga — çakıl ve tüp bulmacası"></canvas>
+  <div id="overlay" class="overlay" role="status" aria-live="polite">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Karga</h2>
+      <p id="overlay-body">
+        Karga susamış: kuyunun dibindeki suya gagası yetişmiyor. Çakıl atarak suyu mantarın
+        yeşil bandına kadar yükselt. Eksik bırakırsan susuz kalır, taşırırsan boğulur.
+        <br /><br />
+        Boşluk veya tıkla: başla.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="kg-tray" role="group" aria-label="Çakıl taşları">
+  <button id="pebble-small" class="kg-pebble-btn" type="button" aria-label="Küçük çakıl at">
+    <span class="kg-pebble-icon small" aria-hidden="true"></span>
+    <span class="kg-pebble-label">Küçük</span>
+    <span class="kg-pebble-count" id="count-small">0</span>
+  </button>
+  <button id="pebble-medium" class="kg-pebble-btn" type="button" aria-label="Orta çakıl at">
+    <span class="kg-pebble-icon medium" aria-hidden="true"></span>
+    <span class="kg-pebble-label">Orta</span>
+    <span class="kg-pebble-count" id="count-medium">0</span>
+  </button>
+  <button id="pebble-large" class="kg-pebble-btn" type="button" aria-label="Büyük çakıl at">
+    <span class="kg-pebble-icon large" aria-hidden="true"></span>
+    <span class="kg-pebble-label">Büyük</span>
+    <span class="kg-pebble-count" id="count-large">0</span>
+  </button>
+</div>
