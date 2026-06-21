@@ -1,0 +1,20 @@
+{
+  "title": "Civata",
+  "description": "Motor plakasındaki civataları çapraz sırayla ve hedef tork bölgesinde sık. Yanlış sıra ya da fazla tork plakayı eğer.",
+  "dateAdded": "2026-06-21",
+  "tags": ["beceri", "hassasiyet", "puzzle"],
+  "controls": "Tıkla → civatayı seç. Tıkla → tork ibresini hedef yeşil bölgede durdur. R: yeniden başla.",
+  "thumbnail": "civata.svg",
+  "howToPlay": "Plaka üzerindeki 8 civata, motor başlığı gibi çapraz sırada sıkılmalıdır. Sıradaki civatayı yanıp sönen halka gösterir. Onu tıkladığında alt taraftaki gösterge ileri-geri salınmaya başlar — yeşil hedef bölgede yeniden tıkla. Tam ortada durdurmak en yüksek puanı verir; bölgenin dışı plakayı eğer. Sırayı atlamak da eğme cezasıdır. 8 civata tamamlandığında seviye biter; sonraki seviyede hedef bölge daralır ve ibre hızlanır.",
+  "scoring": {
+    "storageKey": "civata.best",
+    "label": "Seviye",
+    "direction": "higher"
+  },
+  "en": {
+    "title": "Bolt-Up",
+    "description": "Tighten engine bolts in the correct cross pattern at precise torque. Off-order or over-torque warps the plate.",
+    "controls": "Click → pick the highlighted bolt. Click → stop the swinging gauge inside the green band. R: restart.",
+    "howToPlay": "The eight bolts on the plate must be tightened in a star pattern, just like an engine head. The next correct bolt pulses. Click it; a torque gauge swings under the plate. Click again to lock in — landing dead-center on the green target scores best. Misses warp the plate. Skipping the order also warps it. Finish all eight to clear the level; next level shrinks the target band and speeds the gauge."
+  }
+}

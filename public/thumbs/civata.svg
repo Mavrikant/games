@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Civata">
+  <defs>
+    <linearGradient id="cv-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1f2a" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <linearGradient id="cv-plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4150" />
+      <stop offset="100%" stop-color="#21262f" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cv-bg)" />
+  <rect x="80" y="40" width="160" height="120" rx="18" fill="url(#cv-plate)" stroke="#11151b" stroke-width="2" />
+  <circle cx="160" cy="100" r="22" fill="#171b22" stroke="#0a0b0e" stroke-width="2" />
+
+  <g transform="translate(160 100)">
+    <g id="cv-bolt-on" fill="#34d399" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(0 -54)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+      <polygon transform="translate(47 -27)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+    </g>
+    <g fill="#a3e635" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(47 27)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+    </g>
+    <g fill="#fbbf24" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(0 54)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+    </g>
+    <g fill="#4b5563" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(-47 27)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+      <polygon transform="translate(-47 -27)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+    </g>
+    <g fill="#7dd3fc" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(54 0)" points="0,-10 8.7,-5 8.7,5 0,10 -8.7,5 -8.7,-5" />
+      <circle r="14" fill="none" stroke="#7dd3fc" stroke-width="2" opacity="0.45" transform="translate(54 0)" />
+    </g>
+    <g fill="#f87171" stroke="#0a0b0e" stroke-width="1.5">
+      <polygon transform="translate(-54 0)" points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" />
+    </g>
+  </g>
+
+  <rect x="60" y="172" width="200" height="10" rx="5" fill="#0a0b0e" />
+  <rect x="140" y="172" width="40" height="10" rx="5" fill="#16a34a" />
+  <polygon points="155,168 165,168 160,176" fill="#fafafa" />
+
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Civata</text>
+</svg>
