@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Şamdan">
+  <defs>
+    <linearGradient id="sbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1a18" />
+      <stop offset="100%" stop-color="#0a0709" />
+    </linearGradient>
+    <radialGradient id="sglow" cx="0.5" cy="0.18" r="0.5">
+      <stop offset="0%" stop-color="rgba(244,201,93,0.32)" />
+      <stop offset="100%" stop-color="rgba(244,201,93,0)" />
+    </radialGradient>
+    <radialGradient id="flame1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="rgba(255,215,130,0.85)" />
+      <stop offset="100%" stop-color="rgba(255,140,60,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sbg)" />
+  <rect width="320" height="200" fill="url(#sglow)" />
+
+  <!-- floor strip -->
+  <rect y="166" width="320" height="34" fill="rgba(70,45,30,0.92)" />
+  <rect y="164" width="320" height="2" fill="rgba(0,0,0,0.55)" />
+  <g stroke="rgba(20,10,8,0.55)" stroke-width="0.6">
+    <line x1="0" y1="174" x2="320" y2="174" />
+    <line x1="0" y1="182" x2="320" y2="182" />
+    <line x1="0" y1="190" x2="320" y2="190" />
+  </g>
+
+  <!-- distant tables -->
+  <g>
+    <rect x="38" y="148" width="44" height="18" fill="#5a3c25" />
+    <rect x="38" y="148" width="44" height="6" fill="#7a4a26" />
+    <!-- highlighted table (glow under) -->
+    <ellipse cx="240" cy="170" rx="36" ry="8" fill="rgba(244,201,93,0.28)" />
+    <rect x="216" y="144" width="48" height="22" fill="#7a4a26" />
+    <rect x="216" y="144" width="48" height="6" fill="#5a3c25" transform="translate(0,16)" />
+    <rect x="216" y="152" width="48" height="12" fill="#f7d987" />
+  </g>
+
+  <!-- waiter silhouette -->
+  <g>
+    <ellipse cx="148" cy="172" rx="14" ry="3" fill="rgba(0,0,0,0.45)" />
+    <rect x="138" y="120" width="20" height="46" fill="#1c1820" />
+    <circle cx="148" cy="110" r="8" fill="#d8b079" />
+    <rect x="139" y="100" width="18" height="5" fill="#3a2a18" />
+    <!-- arm raised -->
+    <line x1="148" y1="130" x2="148" y2="100" stroke="#1c1820" stroke-width="6" stroke-linecap="round" />
+    <!-- legs (mid stride) -->
+    <line x1="143" y1="156" x2="138" y2="170" stroke="#1a1418" stroke-width="4" stroke-linecap="round" />
+    <line x1="153" y1="156" x2="160" y2="170" stroke="#1a1418" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- candelabra with slight tilt -->
+  <g transform="rotate(-7 148 100)">
+    <!-- pole -->
+    <rect x="146" y="40" width="4" height="60" fill="#bcc4d4" />
+    <rect x="146" y="40" width="1.5" height="60" fill="#7d8696" />
+    <!-- bulb -->
+    <circle cx="148" cy="46" r="5" fill="#d2dae8" />
+    <rect x="139" y="50" width="18" height="3" fill="#7d8696" />
+    <!-- cross bar -->
+    <rect x="108" y="36" width="80" height="5" fill="#bcc4d4" />
+    <rect x="108" y="36" width="80" height="1.5" fill="#7d8696" />
+    <!-- candle cups + candles + flames -->
+    <g>
+      <!-- 5 candles -->
+      <g>
+        <rect x="111" y="32" width="14" height="4" fill="#a8b1c3" />
+        <rect x="115" y="14" width="6" height="18" fill="#f4e1c0" />
+        <circle cx="118" cy="9" r="9" fill="url(#flame1)" />
+        <path d="M115,14 Q112,9 118,2 Q124,9 121,14 Z" fill="#ffd680" />
+      </g>
+      <g>
+        <rect x="131" y="32" width="14" height="4" fill="#a8b1c3" />
+        <rect x="135" y="11" width="6" height="21" fill="#f4e1c0" />
+        <circle cx="138" cy="6" r="9" fill="url(#flame1)" />
+        <path d="M135,11 Q132,6 138,-1 Q144,6 141,11 Z" fill="#ffd680" />
+      </g>
+      <g>
+        <rect x="151" y="32" width="14" height="4" fill="#a8b1c3" />
+        <rect x="155" y="14" width="6" height="18" fill="#f4e1c0" />
+        <circle cx="158" cy="9" r="9" fill="url(#flame1)" />
+        <path d="M155,14 Q152,9 158,2 Q164,9 161,14 Z" fill="#ffd680" />
+      </g>
+      <g>
+        <!-- one extinguished candle showing smoke -->
+        <rect x="171" y="32" width="14" height="4" fill="#a8b1c3" />
+        <rect x="175" y="18" width="6" height="14" fill="#f4e1c0" />
+        <circle cx="178" cy="12" r="1.6" fill="rgba(180,180,180,0.6)" />
+        <circle cx="180" cy="8" r="2" fill="rgba(180,180,180,0.35)" />
+      </g>
+      <g>
+        <rect x="191" y="32" width="14" height="4" fill="#a8b1c3" />
+        <rect x="195" y="15" width="6" height="17" fill="#f4e1c0" />
+        <circle cx="198" cy="10" r="9" fill="url(#flame1)" />
+        <path d="M195,15 Q192,10 198,3 Q204,10 201,15 Z" fill="#ffd680" />
+      </g>
+    </g>
+  </g>
+
+  <!-- tilt-meter mini illustration on the right edge -->
+  <g>
+    <rect x="296" y="60" width="6" height="100" fill="rgba(255,255,255,0.06)" />
+    <rect x="296" y="98" width="6" height="22" fill="rgba(120,220,140,0.22)" />
+    <polygon points="290,82 308,82 304,78 304,86" fill="#f59c4c" />
+  </g>
+
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#f4e1c0">Şamdan</text>
+</svg>

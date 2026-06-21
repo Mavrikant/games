@@ -1,0 +1,21 @@
+{
+  "title": "Şamdan",
+  "description": "Yanan mumlarla yüklü bir şamdan taşıyarak kalabalık salonda ilerle — ivmen şamdanı eğer, aşırı eğim mumları söndürür, mumlar zamanla erir; vazgeçemediğin tek sınır el titremesindir.",
+  "dateAdded": "2026-06-21",
+  "tags": ["denge", "fizik", "özgün", "refleks", "tek-oyunculu"],
+  "controls": "← → veya A/D: yürü · Boşluk: parlayan masaya servis · R: yeniden başla",
+  "thumbnail": "samdan.svg",
+  "scoring": {
+    "storageKey": "samdan.best",
+    "label": "Servis",
+    "direction": "higher",
+    "labelEn": "Served"
+  },
+  "howToPlay": "Şamdan, kalabalık bir Osmanlı sofrasında elinde tepesi mumlu bir gümüş şamdanla masadan masaya servis yapmaya çalıştığın küçük bir denge oyunudur. Aşağıda silüet halinde bir garson görürsün; başının üstünde uzun saplı şamdan dimdik durur. Sol/sağ ok (veya A/D) tuşlarıyla yürürsün; ivmen ve hızındaki ani değişimler şamdanın iki yana sallanmasına neden olur. Şamdanın üstündeki açıyı sağ kenardaki dikey 'Eğim' göstergesinden takip edebilirsin; ortada beyaz olduğu sürece güvendesin, sarıdan turuncuya doğru gittiğinde mumlar damlamaya başlar, kırmızıya dönerse mumlardan biri sönüverir. Aynı anda her mumun balmumu sürekli erir; başlığın altındaki ince çubuktan kalan boyu görebilirsin — boy biterse o mum söner. Salonun zemininde sıralı masalar var, biri sürekli sarı bir hâle ile parlar: hizmet sırası ondadır. O masanın hizasına gelip 1.5 saniye sabit dur, ya da Boşluk tuşuna bas; o anda yanan her mum sana +1 servis puanı kazandırır ve sıra yeni bir masaya geçer; mumların boyu kısmen tazelenir (yanan mum sayısı kadar). Mumların hepsi sönerse oyun biter; rekorun en yüksek servis sayısıdır ve tarayıcına kaydedilir. İpucu: ani durmak ani başlamak kadar tehlikelidir — ivmenin sıfıra doğru yavaş inmesi şamdanın salınımını söndürür, ters yöne basıp tutmak ise eğimi katlar. Yön değiştirmeden önce kısa bir 'duraklama' bırak; uzun parkurlarda sabit hızla kayar gibi git. Hedef masa uzaktaysa erken kalkıp birikim yapmak yerine adım adım ilerle: bir mum bile diğerlerini ısıtmak için yeter, panikleme.",
+  "en": {
+    "title": "Candelabra",
+    "description": "Carry a candelabra of lit candles across a crowded hall — your acceleration tilts it, hard tilts blow out flames, and wax burns down on its own. Steady hands serve more tables.",
+    "controls": "← → or A/D: walk · Space: serve the glowing table · R: restart",
+    "howToPlay": "Candelabra is a small balance game: you play a waiter at an Ottoman banquet hall, carrying a tall silver candelabra topped with lit candles, trying to serve table after table without snuffing them out. The walker is shown as a silhouette at the bottom; the candelabra stands straight above. Left/right arrows (or A/D) walk you across the floor; your acceleration and sudden velocity changes tilt the candelabra sideways. A vertical 'Tilt' gauge on the right tracks the angle: white is safe, yellow→orange means wax drips, red snuffs a flame outright. Each candle also burns down over time — the thin bar under every flame is the wax left; when it hits zero that candle dies. The floor has a row of tables and one glows gold: that's the order to serve. Park yourself in front of it for 1.5 s or press Space to serve; each still-lit candle earns +1, the order rotates to a new table, and your remaining candles get a partial wax refill (proportional to how many are still lit). When every candle is out the run ends; your record is the highest serve count and is stored in your browser. Tip: stopping abruptly is as dangerous as starting — let your acceleration decay before reversing, otherwise the tilt doubles. Pause briefly between direction changes, and for long crossings glide at constant speed instead of pumping the keys. Even one surviving candle keeps the others warm — don't panic-restart when you drop to two."
+  }
+}
