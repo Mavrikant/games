@@ -1,0 +1,21 @@
+{
+  "title": "Ayıraç",
+  "description": "Renk eşleyen santrifüj — diski döndür ve gelen tanecikleri kendi renk yuvasına yönlendir.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "refleks", "renk"],
+  "controls": "Sol/Sağ ok veya A/D: diski döndür · Boşluk: başlat/duraklat · R: yeniden başla",
+  "thumbnail": "ayirac.svg",
+  "howToPlay": "Ekranın merkezinde dört renkli (kırmızı, yeşil, mavi, sarı) bir santrifüj döner. Dışarıdan rastgele yönlerden aynı dört renkten birinde küçük tanecikler merkeze doğru süzülür. Görevin, her tanecik diskin kenarına ulaşmadan önce diskini öyle döndürmek ki çarptığı dilimin rengi tanecik rengiyle aynı olsun. Doğru eşleşmede tanecik dilime emilir ve skorun bir artar; renk yanlışsa tanecik geri seker ve bir can kaybedersin. Üç can bitince tur sona erer. Disk sol/sağ ok tuşları veya A/D ile döndürülür; Boşluk turu başlatır, oyun sırasında duraklatır ve bitiş ekranında yeniden başlatır, R tuşu ise her durumda turu sıfırlar. Mobilde diske dokunup parmağını kavis çizerek çevirebilirsin. İlerleyen saniyelerde tanecikler hem daha hızlı gelir hem de daha sık doğar; en yüksek skor tarayıcında saklanır. İpucu: aynı anda birden çok tanecik havadayken sıralarını saatten gözle takip et, diski tek bir dilim oynatmak yerine ihtiyaca göre kısa çevirimler yap ve değişen rotasyonu kafanda her zaman 'kırmızı = saat 12' gibi sabit bir referansa göre güncel tut.",
+  "scoring": {
+    "storageKey": "ayirac.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Ayıraç (Separator)",
+    "description": "Color-matching centrifuge — spin the disc so each incoming particle hits its matching colored slot.",
+    "controls": "Left/Right arrows or A/D: rotate · Space: start/pause · R: restart",
+    "howToPlay": "A four-colored disc (red, green, blue, yellow) spins at the center of the screen. Particles in those four colors drift in from random directions toward the center. Before each one reaches the rim, rotate the disc so the particle's color lines up with the wedge it's heading for. A correct match absorbs the particle and scores a point; a mismatch bounces the particle back and costs one of your three lives. The disc rotates with the Left/Right arrow keys or A/D; Space starts a round, pauses mid-play and restarts on game-over, while R always restarts. On touch devices you can drag the disc directly. As seconds pass particles get faster and spawn more often, and your best score is kept in the browser. Tip: when several particles are in flight at once, treat one of the wedges (say, red = twelve o'clock) as your mental anchor and steer in short rotations toward the next incoming color rather than the closest one."
+  }
+}
