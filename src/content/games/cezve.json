@@ -1,0 +1,21 @@
+{
+  "title": "Cezve",
+  "description": "Türk kahvesi cezvede pişerken köpük yükselir; tam taşma anından önce ocaktan al. Erken alırsan kahve çiğ kalır, geç kalırsan taşar.",
+  "dateAdded": "2026-06-21",
+  "tags": ["tempo", "refleks", "tek-tuş", "tek-oyunculu", "özgün"],
+  "controls": "Boşluk / tıklama: ocaktan al · R: yeniden başla",
+  "thumbnail": "cezve.svg",
+  "howToPlay": "Cezve, klasik bir Türk kahvesi pişirme refleks oyunudur. Ekranda ocakta tek bir cezve durur ve içinde köpük yavaşça yükselir. Cezvenin sağ tarafında iki işaret vardır: yeşil bant 'pişti' aralığını, kırmızı kesik çizgi 'taşma' eşiğini gösterir. Köpük yeşil bandın içine geldiğinde Boşluk tuşuna basarak (veya cezveye tıklayarak) cezveyi ocaktan al — kahve mükemmel pişer, +1 puan kazanırsın. Çok erken alırsan kahve çiğdir (ÇİĞ! — can kaybı). Çok bekleyip köpüğün taşmasına izin verirsen veya kırmızı çizgiye gelince hâlâ basmamışsan ocak söner ve kahve taşar (TAŞTI! — can kaybı). 3 can ile başlarsın. Her başarılı kahveden sonra yeni cezve gelir, ocak biraz daha hızlı ısınır ve yeşil bant biraz daralır — refleksin ve sabrın denenir. Rekorların tarayıcında saklanır.",
+  "scoring": {
+    "storageKey": "cezve.best",
+    "label": "Kahve",
+    "direction": "higher",
+    "labelEn": "Coffees"
+  },
+  "en": {
+    "title": "Cezve",
+    "description": "Turkish coffee foam rises in the cezve; lift it from the heat just before it overflows. Too early and the coffee is raw, too late and it spills.",
+    "controls": "Space / tap: lift from heat · R: restart",
+    "howToPlay": "Cezve is a classic Turkish-coffee timing reflex game. A single cezve sits on the stove and foam slowly rises inside it. Two markers appear to the right: a green band marks the 'done' zone, and a dashed red line marks the 'overflow' threshold. When the foam climbs into the green band, press Space (or tap the cezve) to lift it off the heat — the coffee is perfect and you earn +1. Lift too early and the brew is raw (ÇİĞ! — life lost). Wait too long and the foam overruns the red line — the coffee boils over (TAŞTI! — life lost). You start with 3 lives. After each successful pour a fresh cezve appears, the flame burns a little hotter and the green band narrows a little — your reflex and patience are tested. Records are stored in your browser."
+  }
+}

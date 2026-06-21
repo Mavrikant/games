@@ -1,0 +1,18 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Kahve<span id="score">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="600" aria-label="Cezve — Türk kahvesi pişirme oyunu"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Cezve</h2>
+      <p id="overlay-msg">Başlamak için tıkla.</p>
+    </div>
+  </div>
+</div>
