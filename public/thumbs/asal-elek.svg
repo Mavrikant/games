@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Asal Elek">
+  <rect width="480" height="300" fill="#0e1016"/>
+  <g font-family="system-ui, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="32" y="44" font-size="14" fill="#7a8190" text-anchor="start" font-weight="500">ASAL ELEK</text>
+    <g>
+      <circle cx="90" cy="92" r="28" fill="#3b6dd6"/>
+      <text x="90" y="101" font-size="24" fill="#06080c">9</text>
+    </g>
+    <g>
+      <circle cx="200" cy="60" r="28" fill="#3b6dd6"/>
+      <text x="200" y="69" font-size="24" fill="#06080c">7</text>
+    </g>
+    <g>
+      <circle cx="310" cy="100" r="28" fill="#3b6dd6"/>
+      <text x="310" y="109" font-size="24" fill="#06080c">15</text>
+    </g>
+    <g>
+      <circle cx="412" cy="70" r="28" fill="#3b6dd6"/>
+      <text x="412" y="79" font-size="24" fill="#06080c">11</text>
+    </g>
+    <g>
+      <circle cx="145" cy="160" r="28" fill="#3b6dd6"/>
+      <text x="145" y="169" font-size="24" fill="#06080c">21</text>
+    </g>
+    <g>
+      <circle cx="262" cy="170" r="28" fill="#3b6dd6"/>
+      <text x="262" y="179" font-size="24" fill="#06080c">4</text>
+    </g>
+    <g>
+      <circle cx="370" cy="172" r="28" fill="#3b6dd6"/>
+      <text x="370" y="181" font-size="24" fill="#06080c">25</text>
+    </g>
+    <line x1="0" y1="222" x2="480" y2="222" stroke="#4ea1ff" stroke-opacity="0.55" stroke-width="2"/>
+    <g stroke="#4ea1ff" stroke-opacity="0.55" stroke-width="1.5" fill="none">
+      <line x1="0" y1="230" x2="14" y2="216"/>
+      <line x1="20" y1="230" x2="34" y2="216"/>
+      <line x1="40" y1="230" x2="54" y2="216"/>
+      <line x1="60" y1="230" x2="74" y2="216"/>
+      <line x1="80" y1="230" x2="94" y2="216"/>
+      <line x1="100" y1="230" x2="114" y2="216"/>
+      <line x1="120" y1="230" x2="134" y2="216"/>
+      <line x1="140" y1="230" x2="154" y2="216"/>
+      <line x1="160" y1="230" x2="174" y2="216"/>
+      <line x1="180" y1="230" x2="194" y2="216"/>
+      <line x1="200" y1="230" x2="214" y2="216"/>
+      <line x1="220" y1="230" x2="234" y2="216"/>
+      <line x1="240" y1="230" x2="254" y2="216"/>
+      <line x1="260" y1="230" x2="274" y2="216"/>
+      <line x1="280" y1="230" x2="294" y2="216"/>
+      <line x1="300" y1="230" x2="314" y2="216"/>
+      <line x1="320" y1="230" x2="334" y2="216"/>
+      <line x1="340" y1="230" x2="354" y2="216"/>
+      <line x1="360" y1="230" x2="374" y2="216"/>
+      <line x1="380" y1="230" x2="394" y2="216"/>
+      <line x1="400" y1="230" x2="414" y2="216"/>
+      <line x1="420" y1="230" x2="434" y2="216"/>
+      <line x1="440" y1="230" x2="454" y2="216"/>
+      <line x1="460" y1="230" x2="474" y2="216"/>
+    </g>
+    <text x="240" y="278" font-size="28" fill="#e7e9ee">Asal Elek</text>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Asal<span id="primes">0</span></div>
+  <div class="hud__score">Can<span id="lives">3</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="400"
+    height="560"
+    aria-label="Asal Elek tahtası — düşen sayılar"></canvas>
+
+  <div id="overlay" class="overlay" aria-hidden="false">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Asal Elek</h2>
+      <p id="overlay-msg">
+        Sayılar yukarıdan düşer. Bileşik sayılara tıkla (4, 6, 9, 15…) —
+        her doğru tıklama puan kazandırır. Asal sayıları (2, 3, 5, 7…)
+        tıklarsan ya da bileşik bir sayı altına sızarsa can kaybedersin.
+        Asalın alta düşmesi serbest — süzgeç onları geçirmeli.
+      </p>
+      <button id="start" class="overlay__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

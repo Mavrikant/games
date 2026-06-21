@@ -1,0 +1,21 @@
+{
+  "title": "Asal Elek",
+  "description": "Düşen sayıları süz: bileşik olanları tıkla, asallar süzgeçten geçsin — kaçırırsan veya asalı yakalarsan can yanar.",
+  "dateAdded": "2026-06-21",
+  "tags": ["özgün", "matematik", "arcade", "eğitici"],
+  "controls": "Sayıya tıkla/dokun · 1-5: ilgili kolondaki en alttaki sayıyı yakala · Boşluk/Enter: başla · R: yeniden başla",
+  "thumbnail": "asal-elek.svg",
+  "howToPlay": "Asal Elek, zihinden hızlı asallık kontrolünü refleksle birleştiren özgün bir arcade. Ekranın üst kısmında 5 kolondan yavaş yavaş yukarıdan aşağıya sayı diskleri (2'den başlayarak, oyun ilerledikçe 99'a kadar) düşer. Görevin gerçek bir 'asal eleği' (Eratosthenes elek mantığı) gibi çalışmak: BİLEŞİK (yani 1 ve kendisinden başka böleni olan) sayıları tıklayarak ya da dokunarak yakala — örneğin 4, 6, 8, 9, 10, 12, 15, 16, 21, 25, 27, 33, 49, 51, 77, 91. Her doğru yakalama +1 puan, ekranda kısa bir yeşil parıltı verir. ASAL sayıları (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43…) tıklarsan süzgecin doğru çalışmadığı için bir can yanar; bunlar süzgeçten doğal olarak geçmeli, yani alta varıp ekrandan düşmelidir. Bir BİLEŞİK sayı alta varırsa süzgeç delindi sayılır ve yine bir can yanar. Üç can başlangıçta verilir; üçü de tükendiğinde oyun biter ve rekorun tarayıcına kaydedilir. Klavye kısayolu: 1-5 tuşları sırasıyla o kolondaki en alttaki diski yakalar — masaüstünde tıklama, mobilde dokunma da çalışır. Yarış süresince hem düşme hızı hem spawn sıklığı puanla birlikte artar, üst sınırın oyun ilerledikçe iki haneli sayılara genişlemesi de tempoyu sertleştirir. Strateji: kararsız kaldığın anda dokunma — bekleyip altta gözlemlemek bedavaya geçen asalı kazandırır; emin olduğun bileşikleri (özellikle 2 ve 5'in katlarını) önce ele alıp yığını seyrek tut; karekök eşik mantığı (örn. 91 = 7×13) için 7, 11, 13 katları en sık tuzaktır.",
+  "scoring": {
+    "storageKey": "asal-elek.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Prime Sieve",
+    "description": "Sieve falling numbers — tap the composites, let the primes drop through. Catch a prime or miss a composite and you lose a life.",
+    "controls": "Click/tap a number · 1-5: catch the lowest number in that column · Space/Enter: start · R: restart",
+    "howToPlay": "Prime Sieve is an original arcade that blends fast mental primality checking with reflex. Number discs fall from the top in 5 columns (starting from 2, ranging up to 99 as the run progresses). Your job is to act as a literal prime sieve (Sieve of Eratosthenes): catch the COMPOSITE numbers by clicking or tapping — e.g. 4, 6, 8, 9, 10, 12, 15, 16, 21, 25, 27, 33, 49, 51, 77, 91. Each correct catch is +1 score with a brief green pulse. Tapping a PRIME (2, 3, 5, 7, 11, 13, 17, 19, 23, 29…) is a sieve fault and costs a life — primes are supposed to fall through naturally. If a COMPOSITE makes it to the floor, the sieve leaked and you lose a life too. You start with three lives; when they're gone the run ends and your local best is saved. Keyboard shortcut: keys 1–5 catch the lowest disc in that column — clicking on desktop and tapping on mobile also work. Fall speed and spawn density rise with your score, and the value range grows into two-digit numbers as you progress. Strategy: when in doubt, don't tap — letting an unclear disc drop costs nothing if it's prime; deal with obvious multiples of 2 and 5 first to keep the playfield sparse; the trickiest composites are multiples of 7, 11 and 13 hiding near the √n threshold (think 49, 77, 91)."
+  }
+}
