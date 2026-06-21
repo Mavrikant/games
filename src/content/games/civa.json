@@ -1,0 +1,21 @@
+{
+  "title": "Cıva",
+  "description": "Tepsiyi eğ, dağılmış cıva damlalarını birleştirerek tek büyük bir küre topla.",
+  "dateAdded": "2026-06-21",
+  "tags": ["fizik", "puzzle", "tek-oyunculu"],
+  "controls": "Ok tuşları veya WASD: tepsiyi eğ · Fare/parmak sürükle: eğim · Boşluk/Enter: oyna · R: yeniden başla",
+  "howToPlay": "Sahnedeki düz metal tepsinin üzerinde birden çok cıva damlası dağılmış halde. Senin işin tepsiyi eğerek damlaları bir araya getirmek; birbirine değen iki damla anında birleşip daha büyük bir küre olur (toplam alan korunur, momentum aktarılır). Klavyede ok tuşları veya WASD ile tepsiyi tut: bastığın yön kütleçekiminin yönüdür, bırakınca tepsi yavaşça yatay konuma döner. Mobilde sahaya parmakla dokunup sürükle — merkezden ne kadar uzaklaşırsan eğim o kadar sert olur. Tepsinin üzerinde kara delikler vardır: damlalar onlara değdikçe küçülür, çok küçük damlalar ise sessizce çekilir gider. Tepsinin kenarı bariyer; damlalar duvardan seker. Sahnede sadece tek bir damla kaldığında raunt biter ve bir sonraki seviye açılır — her seviyede damla sayısı ve delik sayısı artar, başlangıçtaki toplam kütle skoruna eklenir. Skor = korunan kütle yüzdesi × seviye bonusu. Tüm damlalar tükenirse oyun biter. Strateji: agresif eğim yerine ufak dürtmelerle damlaları aynı yöne yönlendir; deliklerden kaçınmak için tepsiyi köşeden köşeye salla — momentum birleştikten sonra daha kolay yönetilir. Geniş bir damla küçük damlaları kendine çekme avantajı yapar, bu yüzden önce iki orta kütleyi birleştir, sonra geri kalanı toplamasına izin ver.",
+  "thumbnail": "civa.svg",
+  "scoring": {
+    "storageKey": "civa.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Mercury",
+    "description": "Tilt the tray to merge scattered mercury droplets into a single shimmering sphere.",
+    "controls": "Arrow keys or WASD: tilt the tray · Mouse/touch drag: tilt · Space/Enter: play · R: restart",
+    "howToPlay": "A flat metal tray holds several mercury droplets scattered across it. Tilt the tray to slide the droplets around; when two touch, they merge instantly into one bigger sphere (total area is conserved, momentum transfers). Hold arrow keys or WASD on a keyboard — the direction you press is the direction of gravity. Release to let the tray return to flat. On mobile, touch and drag inside the scene; distance from center sets tilt strength. The tray has dark sinkholes that drain mercury on contact, and a droplet that shrinks too far gets silently absorbed. The tray edge is a wall and droplets bounce off it. The round ends when only one droplet remains, opening the next level — droplet count and sinkhole count grow each level, and your starting mass is added to your score. Score = preserved mass percentage × level bonus. If all droplets vanish, the game ends. Strategy: use small nudges instead of full-tilt slams; rock the tray corner-to-corner to keep moving past sinkholes; merge two medium droplets first so the resulting giant can chase the rest."
+  }
+}
