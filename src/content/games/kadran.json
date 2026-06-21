@@ -1,0 +1,21 @@
+{
+  "title": "Kadran",
+  "description": "Eski model çevirmeli telefonun kadranını sürükleyerek numaraları çevir; yüksek rakamlar daha uzun yay-geri-dönüşü ile zaman kaybettirir.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "reflex", "orijinal"],
+  "controls": "Fare/dokunma: deliği parmakla yakala, durdurucuya kadar saat yönünde sürükle, bırak · R: yeniden başla",
+  "howToPlay": "Karşında 1960'ların çevirmeli telefon kadranı var. Üstte 5 haneli bir numara görünür; ilk hanesini yanıp sönerek vurgular. O haneye karşılık gelen deliği imleçle yakala (parmağını içine sok), kadranı saat yönünde sürükleyerek metal durdurucuya kadar getir ve bırak. Kadran yay-geri-dönüşle başlangıç konumuna döner — bu dönüş sırasında ekrana yeni darbe gönderilmez, beklemen gerekir. 1 deliği durdurucuya en yakındır, az sürükleme ister; 0 ise tam ters tarafta, neredeyse tam tur. Numaranın her hanesini sırayla çevir; tamamlanan numara için 5 puan kazanır ve yeni numara açılır. Yanlış deliği yakalarsan kadran yine döner ama hane kabul edilmez ve 1 saniye süre cezası alırsın. Süre 60 saniye; sayaç dolduğunda toplam puanın ve doğru çevirdiğin hane sayısı kaydedilir. Strateji: Hızlı haneleri (1, 2, 3) önceden gör, hangi delikte parmağının duracağını seç; yay-geri-dönüşü bekliyorken sonraki haneye bakarak deliği görsel olarak hedefle.",
+  "thumbnail": "kadran.svg",
+  "scoring": {
+    "storageKey": "kadran.best",
+    "label": "Puan",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Rotary Dial",
+    "description": "Drag the dial of a vintage rotary phone to call the displayed numbers — higher digits take a longer spring-back and cost more time.",
+    "controls": "Mouse/touch: catch the hole, drag clockwise to the metal stop, release · R: restart",
+    "howToPlay": "You're sitting in front of a 1960s rotary phone. A 5-digit number appears at the top; its first digit blinks. Catch the matching hole on the dial with your cursor (slide your finger into it), drag the dial clockwise until it hits the metal stop, then release. The dial spring-returns to home — no new pulses can be sent during that return, so you must wait. Hole 1 sits right next to the stop and barely needs any travel; hole 0 is the farthest, demanding almost a full turn. Dial each digit in order; completing a number earns 5 points and a new number appears. Catch the wrong hole and the dial still rotates, but the digit is rejected and you lose 1 second. The clock runs for 60 seconds; when it hits zero your total points and the count of correctly dialed digits are saved. Strategy: look ahead at small digits (1, 2, 3) before catching, and aim your next hole visually while waiting for the spring-back."
+  }
+}

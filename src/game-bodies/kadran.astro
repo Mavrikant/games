@@ -1,0 +1,23 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Puan<span id="score">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="phone">
+  <div class="phone__display" aria-label="Çevrilecek numara">
+    <span id="number" class="phone__number">— — — — —</span>
+  </div>
+  <div class="board-wrap">
+    <canvas id="board" width="480" height="480" aria-label="Çevirmeli kadran"></canvas>
+    <div id="overlay" class="overlay">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Kadran</h2>
+        <p id="overlay-msg">Başlamak için bir deliği yakala ve durdurucuya kadar sürükle.</p>
+      </div>
+    </div>
+  </div>
+</div>
