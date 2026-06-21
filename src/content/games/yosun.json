@@ -1,0 +1,21 @@
+{
+  "title": "Yosun",
+  "description": "Çorak bahçede yosun büyüt — kuru hücreleri sula, komşulara yayılsın; nem sıfıra inerse o leke kalıcı çöl olur.",
+  "dateAdded": "2026-06-21",
+  "tags": ["strateji", "özgün", "bahce", "sabır", "tek-oyunculu"],
+  "controls": "Tıkla/Dokun: hücreyi sula (+30 nem) · R: yeniden başla",
+  "howToPlay": "Yosun, 6x6'lık çorak bir bahçede tek bir tutam yosunu olabildiğince büyütmen gereken yavaş-tempolu bir strateji oyunudur. Tur 60 saniye sürer. Başlangıçta tahtanın ortasında iki canlı yosun lekesi bulursun; geri kalan tüm hücreler boş topraktır ve her hücrenin görünmez bir 'nem' değeri vardır (hücrenin rengi sana ne kadar nemli olduğunu söyler — koyu = ıslak, açık/sarımsı = kuru). Her saniye tüm hücrelerin nemi yavaşça düşer. Canlı yosun lekeleri komşu boş hücrelere yayılmaya çalışır, ama bunu yalnızca komşunun nemi 25'in üstündeyse yapabilir — yani kuru topraklara yosun atlayamaz. Bir yosun lekesinin nemi sıfıra düşerse o hücre **kalıcı olarak ölür**: gri kalır, bir daha asla yeşermez ve oyun sonu skorundan ceza alır. Senin tek aracın suyundur: bir hücreye tıkladığında (ölü hücreler hariç) o hücreye +30 nem ekler, en fazla 100'e kadar doldurursun. Aynı hücreyi 600 ms içinde iki kez sulayamazsın — bu kısıtlama tüm suyu tek noktaya boşaltmanı engeller; dikkatini yaymalısın. Strateji iki cepheden geçer: (1) yayılmayı hızlandırmak için yosunun **kuru komşularını** öne sula — yosun nemli komşulara çok daha hızlı atlar; (2) zaten yosunla kaplı ama nemi 20'nin altına düşmeye başlamış hücreleri kurtarmak için **acil bakım** yap. Tur bitiminde skor = canlı yosun hücresi sayısı × 10 − ölü hücre sayısı × 15. Bir tek ölü hücre 1.5 sağlam hücreyi yer; bu yüzden 'biraz daha bekleyim' demek pahalıya patlayabilir. En yüksek skorun tarayıcına saklanır. İpucu: Bir yosun lekesini sulamak komşulara yayılmasını kolaylaştırmaz — sadece kendi hayatını uzatır; yayılmayı tetikleyen şey **komşunun nemidir**. İlk hamlelerini orta hücrenin etrafındaki boş halkaya yatır, koridor açıldıktan sonra dış kenarlara doğru tek tek koy.",
+  "thumbnail": "yosun.svg",
+  "scoring": {
+    "storageKey": "yosun.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Moss",
+    "description": "Grow moss in a barren plot — water dry cells so the patch spreads; if moisture hits zero a cell goes permanently dead.",
+    "controls": "Click/tap: water cell (+30 moisture) · R: restart",
+    "howToPlay": "Moss is a slow, strategic gardening game played on a 6x6 plot of barren ground. A round lasts 60 seconds. You start with two living moss patches near the centre; every other cell is empty soil with a hidden 'moisture' value (the colour of the cell tells you how wet it is — darker means wetter, pale or yellowish means dry). Every second all cells lose a small amount of moisture. Living moss tries to spread to its neighbours, but only into cells whose moisture is above 25 — bone-dry soil rejects new growth. If a moss cell's moisture ever falls to zero, that tile dies **permanently**: it stays grey, never regrows, and costs you points at the end. Your only tool is watering: click any non-dead cell to pour +30 moisture into it (capped at 100). The same cell has a 600 ms cooldown so you can't dump all your attention on one square — you must spread the love. Strategy splits in two: (1) speed up spread by watering **dry neighbours** of healthy moss so the patch jumps faster; (2) emergency-water moss tiles whose moisture is creeping under 20 to keep them alive. Final score = living moss cells × 10 − dead cells × 15. A single dead tile costs you the equivalent of 1.5 healthy ones, so 'I'll get to it' is expensive. Your best score is saved locally. Tip: watering a moss tile itself does not help it spread — it only extends its own life; spreading is triggered by the **neighbour's** moisture. Pour your first drops onto the empty ring around the centre to open a corridor, then push outward one tile at a time."
+  }
+}

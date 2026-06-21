@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Yosun">
+  <defs>
+    <linearGradient id="ys-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a1d12" />
+      <stop offset="100%" stop-color="#0f0a06" />
+    </linearGradient>
+    <radialGradient id="ys-moss-h" cx="0.3" cy="0.3" r="0.9">
+      <stop offset="0%" stop-color="#7fc06b" />
+      <stop offset="100%" stop-color="#2d5a2e" />
+    </radialGradient>
+    <radialGradient id="ys-moss-m" cx="0.3" cy="0.3" r="0.9">
+      <stop offset="0%" stop-color="#9fb35a" />
+      <stop offset="100%" stop-color="#3a5a2a" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ys-bg)" />
+  <g transform="translate(120 30)">
+    <!-- 6x6 mini board -->
+    <g shape-rendering="crispEdges">
+      <!-- Row 0 -->
+      <rect x="0"   y="0"   width="22" height="22" rx="3" fill="#a3784f" />
+      <rect x="24"  y="0"   width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="48"  y="0"   width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="72"  y="0"   width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="96"  y="0"   width="22" height="22" rx="3" fill="#a3784f" />
+      <rect x="120" y="0"   width="22" height="22" rx="3" fill="#b08560" />
+      <!-- Row 1 -->
+      <rect x="0"   y="24"  width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="24"  y="24"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="48"  y="24"  width="22" height="22" rx="3" fill="url(#ys-moss-m)" />
+      <rect x="72"  y="24"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="96"  y="24"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="120" y="24"  width="22" height="22" rx="3" fill="#8a623f" />
+      <!-- Row 2 -->
+      <rect x="0"   y="48"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="24"  y="48"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="48"  y="48"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="72"  y="48"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="96"  y="48"  width="22" height="22" rx="3" fill="url(#ys-moss-m)" />
+      <rect x="120" y="48"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <!-- Row 3 -->
+      <rect x="0"   y="72"  width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="24"  y="72"  width="22" height="22" rx="3" fill="url(#ys-moss-m)" />
+      <rect x="48"  y="72"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="72"  y="72"  width="22" height="22" rx="3" fill="#3a3a3a" />
+      <rect x="96"  y="72"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="120" y="72"  width="22" height="22" rx="3" fill="#8a623f" />
+      <!-- Row 4 -->
+      <rect x="0"   y="96"  width="22" height="22" rx="3" fill="#a3784f" />
+      <rect x="24"  y="96"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="48"  y="96"  width="22" height="22" rx="3" fill="url(#ys-moss-m)" />
+      <rect x="72"  y="96"  width="22" height="22" rx="3" fill="url(#ys-moss-h)" />
+      <rect x="96"  y="96"  width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="120" y="96"  width="22" height="22" rx="3" fill="#a3784f" />
+      <!-- Row 5 -->
+      <rect x="0"   y="120" width="22" height="22" rx="3" fill="#b08560" />
+      <rect x="24"  y="120" width="22" height="22" rx="3" fill="#a3784f" />
+      <rect x="48"  y="120" width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="72"  y="120" width="22" height="22" rx="3" fill="#6c4a2c" />
+      <rect x="96"  y="120" width="22" height="22" rx="3" fill="#8a623f" />
+      <rect x="120" y="120" width="22" height="22" rx="3" fill="#a3784f" />
+    </g>
+    <!-- dead-cell X marker -->
+    <text x="83" y="89" font-size="14" font-weight="700" text-anchor="middle" fill="#555">✕</text>
+  </g>
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700" fill="#cfe8c5">Yosun</text>
+  <!-- water droplet -->
+  <g transform="translate(38 90)">
+    <path d="M 0 0 C 12 -8 12 -16 0 -22 C -12 -16 -12 -8 0 0 Z" fill="#7fc4ff" opacity="0.85" />
+  </g>
+</svg>

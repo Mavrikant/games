@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="ys-meters">
+  <div class="ys-meter">
+    <span class="ys-meter__label">Canlı</span>
+    <span class="ys-meter__value" id="alive">2</span>
+  </div>
+  <div class="ys-meter ys-meter--dead">
+    <span class="ys-meter__label">Ölü</span>
+    <span class="ys-meter__value" id="dead">0</span>
+  </div>
+  <div class="ys-meter">
+    <span class="ys-meter__label">Kaplama</span>
+    <span class="ys-meter__value" id="coverage">6%</span>
+  </div>
+</div>
+<div class="board-wrap" id="board-wrap">
+  <div id="board" class="ys-board" role="grid" aria-label="Yosun bahçesi"></div>
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Yosun</h2>
+      <p id="overlay-msg">
+        Çorak bir bahçede iki yosun lekesi var. Hücrelere tıklayarak nem ekle,
+        yosunun komşulara yayılmasını sağla. Nemi sıfıra düşen yosun kalıcı çöl olur.
+      </p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
