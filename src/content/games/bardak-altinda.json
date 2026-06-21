@@ -1,0 +1,21 @@
+{
+  "title": "Bardak Altında",
+  "description": "Üç bardak, bir bilye. Karıştırma bitince bilyenin kaldığı bardağı seç. Her tur biraz daha hızlı, biraz daha kalabalık.",
+  "dateAdded": "2026-06-21",
+  "tags": ["konsantrasyon", "gozlem", "tek-oyunculu"],
+  "controls": "Fare/dokunma: bardağı seç · R: yeniden başla",
+  "howToPlay": "Önce bardaklar kalkar ve sarı bilyenin hangi bardağın altında olduğunu görürsün. Bardaklar yere oturur, ardından çiftler hâlinde yer değiştirerek karışırlar. Karıştırma bittiğinde 'Bilye hangi bardakta?' sorusu çıkar — bilyenin altında olduğunu düşündüğün bardağa tıkla veya dokun. Doğru tahmin: skor +1, bir sonraki tur başlar; daha çok ve daha hızlı yer değişimi seni bekler. Birkaç turda bir bardak sayısı artar (3→4→5→6). Yanlış tahmin: oyun biter, skoru kaydedilir, ekrana tıklayarak yeniden başlatabilirsin. R tuşu veya 'Yeniden başla' düğmesi her zaman sıfırdan başlatır. İpucu: bardağa değil, bardağın geçtiği yola odaklan — bilye sahibinin yörüngesini takip etmek, bardağı 'sayıklamaktan' kolaydır.",
+  "thumbnail": "bardak-altinda.svg",
+  "scoring": {
+    "storageKey": "bardak-altinda.best",
+    "label": "Tur",
+    "direction": "higher",
+    "labelEn": "Round"
+  },
+  "en": {
+    "title": "Under the Cup",
+    "description": "Three cups, one ball. Track the ball as the cups shuffle, then pick the right one. Each round adds speed and cups.",
+    "controls": "Mouse/touch: pick a cup · R: restart",
+    "howToPlay": "First the cups lift and reveal which one hides the yellow ball. The cups settle back down, then start swapping positions in pairs. When the shuffling stops, you'll be asked 'Which cup hides the ball?' — click or tap the cup you think it's under. A correct guess scores a point and a new, faster round begins with more swaps; every few rounds the cup count grows (3→4→5→6). A wrong guess ends the run and saves your best score; click the screen to start over. R or the Restart button restarts from scratch at any time. Tip: don't watch the cup, watch its path — following the trajectory is easier than memorizing labels."
+  }
+}
