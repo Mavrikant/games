@@ -1,0 +1,25 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">00:00</span></div>
+  <div class="hud__score">Rekor<span id="best">—</span></div>
+  <div class="hud__score">Tur<span id="round">1</span></div>
+  <button id="new-puzzle" class="hud__btn" type="button">Yeni bulmaca</button>
+  <button id="restart" class="hud__btn" type="button">Sil</button>
+</header>
+
+<div class="board-wrap">
+  <canvas id="board" width="520" height="520" aria-label="Gökdelen bulmacası ızgarası"></canvas>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Gökdelen</h2>
+      <p id="overlay-msg"></p>
+      <button id="start" class="hud__btn" type="button" style="margin-top:14px">Başla</button>
+    </div>
+  </div>
+</div>
+
+<p class="gd-legend">
+  Kenardaki sayı o yönden bakınca görünen bina sayısıdır; yüksek bina arkasındakileri saklar. Her satır ve sütunda 1-5 yükseklikleri birer kez bulunmalı.
+</p>
