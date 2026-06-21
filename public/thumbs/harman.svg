@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Harman">
+  <defs>
+    <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1c2a" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(110,140,200,0.18)" />
+      <stop offset="100%" stop-color="rgba(120,90,60,0.0)" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#hbg)" />
+  <rect width="320" height="160" fill="url(#sky)" />
+  <!-- ground -->
+  <rect y="160" width="320" height="40" fill="rgba(120,85,50,0.35)" />
+  <rect y="160" width="320" height="2.4" fill="rgba(60,45,30,0.7)" />
+  <!-- yaba (pitchfork) -->
+  <g stroke-linecap="round">
+    <line x1="92" y1="172" x2="92" y2="106" stroke="rgba(180,130,80,0.95)" stroke-width="5" />
+    <line x1="92" y1="106" x2="80" y2="80" stroke="rgba(220,170,110,0.95)" stroke-width="2.4" />
+    <line x1="92" y1="106" x2="92" y2="78" stroke="rgba(220,170,110,0.95)" stroke-width="2.4" />
+    <line x1="92" y1="106" x2="104" y2="80" stroke="rgba(220,170,110,0.95)" stroke-width="2.4" />
+  </g>
+  <!-- airborne grains (gold) arcing right-down toward basket -->
+  <g fill="#f4c95d" stroke="rgba(120,80,30,0.55)" stroke-width="0.6">
+    <ellipse cx="120" cy="70" rx="3.4" ry="2" />
+    <ellipse cx="142" cy="58" rx="3.4" ry="2" transform="rotate(20 142 58)" />
+    <ellipse cx="166" cy="60" rx="3.4" ry="2" transform="rotate(-15 166 60)" />
+    <ellipse cx="186" cy="76" rx="3.4" ry="2" transform="rotate(35 186 76)" />
+    <ellipse cx="208" cy="102" rx="3.4" ry="2" />
+    <ellipse cx="226" cy="128" rx="3.4" ry="2" transform="rotate(20 226 128)" />
+    <ellipse cx="237" cy="146" rx="3.4" ry="2" />
+  </g>
+  <!-- chaff (lighter brown) drifting further right -->
+  <g fill="rgba(195,165,120,0.85)">
+    <rect x="148" y="48" width="7" height="1.5" transform="rotate(-10 151 48)" />
+    <rect x="178" y="42" width="7" height="1.5" transform="rotate(15 181 42)" />
+    <rect x="212" y="48" width="7" height="1.5" transform="rotate(-5 215 48)" />
+    <rect x="244" y="58" width="7" height="1.5" transform="rotate(20 247 58)" />
+    <rect x="270" y="76" width="7" height="1.5" transform="rotate(35 273 76)" />
+    <rect x="288" y="100" width="7" height="1.5" transform="rotate(45 291 100)" />
+  </g>
+  <!-- wind arrow -->
+  <g stroke="rgba(110,180,240,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <line x1="22" y1="40" x2="56" y2="40" />
+    <polyline points="50,34 58,40 50,46" />
+    <line x1="22" y1="56" x2="44" y2="56" />
+    <polyline points="38,52 46,56 38,60" />
+  </g>
+  <!-- basket -->
+  <g>
+    <rect x="220" y="156" width="64" height="14" fill="rgba(125,80,45,0.95)" />
+    <rect x="217" y="153" width="70" height="3" fill="rgba(180,120,70,0.95)" />
+    <g stroke="rgba(60,35,20,0.7)" stroke-width="0.9">
+      <line x1="232" y1="156" x2="232" y2="170" />
+      <line x1="244" y1="156" x2="244" y2="170" />
+      <line x1="256" y1="156" x2="256" y2="170" />
+      <line x1="268" y1="156" x2="268" y2="170" />
+      <line x1="220" y1="163" x2="284" y2="163" />
+    </g>
+  </g>
+  <text x="20" y="186" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#e4e4ed">Harman</text>
+</svg>

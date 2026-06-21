@@ -1,0 +1,21 @@
+{
+  "title": "Harman",
+  "description": "Yabayla buğdayı havaya savur, rüzgar samanı uçursun, taneler sepete düşsün — Anadolu harman tekniği üzerine bir savurma-fizik oyunu.",
+  "dateAdded": "2026-06-21",
+  "tags": ["fizik", "özgün", "refleks", "tek-oyunculu"],
+  "controls": "Boşluk (basılı tut): yabayı dolduru savur · ←/→ veya A/D: sepeti taşı · R: yeniden başla",
+  "thumbnail": "harman.svg",
+  "scoring": {
+    "storageKey": "harman.best",
+    "label": "Tane",
+    "direction": "higher",
+    "labelEn": "Grain"
+  },
+  "howToPlay": "Harman, başağı taneden ayırmaya çalıştığın küçük bir fizik oyunudur: ortadaki yabaya buğday yığını yüklenir, sol üstte o tur için sabit bir rüzgar gösterilir (yönü ve şiddeti); senin görevin yabayı yeterince yükseğe savurmak ve aşağıdaki sepeti rüzgarın taneleri düşüreceği yere doğru zamanında konumlandırmaktır. Boşluk tuşunu (veya mobilde 'Savur' butonunu) basılı tutarak yabaya yüklenir, bırakırsan savrulur — ne kadar uzun tuttuysan o kadar yükseğe çıkar ve havada o kadar uzun süre kalır; bu yükseklik aynı zamanda samanın ne kadar uzağa savrulacağını da belirler. Havada iki tür parçacık vardır: ağır altın sarısı taneler az saparak parabol çizer, hafif samolu kavuz ise rüzgara doğru sürüklenir. Sepete düşen her tane +2, sepete düşen her saman -1 puan; sepetin dışına düşenler sayılmaz. Her tur 30 parçacık savrulur ve oyun 8 turdan oluşur; rüzgar her turda yeniden seçilir. Strateji: rüzgar sağa esiyorsa sepeti yaba'nın sağına ama tane'nin nispeten az saptığı bölgeye koy; rüzgar şiddetliyse daha kısa savur ki saman daha az ileri gitsin, rüzgar zayıfsa yüksek savur ki taneler iyice ayrılsın. Yarıştığın şey toplam tane puanıdır; tarayıcında en iyi skorun saklanır. R tuşu her an oyunu sıfırlar.",
+  "en": {
+    "title": "Winnowing",
+    "description": "Toss the wheat into the air with a pitchfork; the wind blows the chaff away while the grain lands in your basket — a physics-tossing game on the Anatolian winnowing technique.",
+    "controls": "Space (hold): charge & toss · ←/→ or A/D: move basket · R: restart",
+    "howToPlay": "Winnowing is a small physics game about separating grain from chaff: a pile of wheat is loaded onto a pitchfork in the middle, the top-left shows a steady wind for the round (direction and strength), and your job is to toss the pitchfork high enough and to position the basket below where the wind will drop the grain. Hold the Space key (or the 'Toss' button on mobile) to charge the toss; release to launch — the longer you hold, the higher it goes and the longer the particles stay airborne, which also affects how far the chaff is blown. Two kinds of particle fly: heavy golden grains arc with a small drift, while light brown chaff is carried by the wind. Each grain that lands in the basket scores +2, each chaff that lands in the basket subtracts 1; anything that misses the basket is ignored. Every round tosses 30 particles and a game is 8 rounds; the wind is rerolled each round. Strategy: if the wind blows right, set the basket to the right of the pitchfork but near where grain arcs land; with strong wind, toss low so chaff drifts less far; with weak wind, toss high to fully separate. Your total grain points are your score and the best is saved in the browser. Press R any time to reset."
+  }
+}
