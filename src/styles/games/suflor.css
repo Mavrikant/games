@@ -1,0 +1,241 @@
+/*
+ * Suflör — DOM-tabanlı: 3 aktör kartı + repliki gösteren cue paneli.
+ * Overlay layer: standard board-wrap pattern.
+ * pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #11101a 0%, #1b1530 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 360px;
+}
+
+.lineup {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 6px;
+}
+
+.actor {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 6px 12px;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+  min-width: 0;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.actor:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.actor:active {
+  transform: translateY(1px);
+}
+
+.actor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.actor__cue {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #f8d57c;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  min-width: 64px;
+  text-align: center;
+  border: 1px solid rgba(248, 213, 124, 0.25);
+}
+
+.actor__fig {
+  width: 64px;
+  height: 84px;
+}
+
+.actor__fig svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(255, 255, 255, 0.72);
+}
+
+.actor__name {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim, #aab);
+}
+
+.actor__bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.actor__bar-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+.actor.card--good {
+  background: rgba(34, 197, 94, 0.22);
+  border-color: rgba(34, 197, 94, 0.55);
+}
+
+.actor.card--bad {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+.actor.card--miss {
+  background: rgba(250, 204, 21, 0.2);
+  border-color: rgba(250, 204, 21, 0.5);
+}
+
+.cue {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.cue__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim, #aab);
+  margin-bottom: 4px;
+}
+
+.cue__num {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.cue__bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.cue__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+.cue:not(.cue--active) .cue__num {
+  opacity: 0.35;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.86);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+@media (max-width: 520px) {
+  .actor__cue {
+    font-size: 22px;
+    min-width: 52px;
+    padding: 3px 10px;
+  }
+  .actor__fig {
+    width: 52px;
+    height: 70px;
+  }
+  .cue__num {
+    font-size: 36px;
+  }
+}
