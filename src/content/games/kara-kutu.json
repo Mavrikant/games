@@ -1,0 +1,21 @@
+{
+  "title": "Kara Kutu",
+  "description": "Karanlık kutuya ışın gönder; sekme, yutulma ve yansıma izlerinden 4 gizli atomu bul. En az atışla çöz.",
+  "dateAdded": "2026-06-21",
+  "tags": ["puzzle", "mantık", "dedüksiyon", "özgün", "tek-oyunculu"],
+  "controls": "Kenar portlarına tıkla: ışın gönder · İç hücreye tıkla: tahmin işaretle/sil · Çöz · R: yeni oyun",
+  "howToPlay": "8×8'lik karanlık bir kutuya 4 atom rastgele yerleştirilmiştir; sen onları doğrudan göremezsin. Kutunun dört kenarındaki 32 porttan birine tıklayarak içeri düz bir ışın gönderebilirsin. Işın gittiği hücreyi inceler ve şu kurallarla davranır: önündeki hücrede atom varsa yutulur (H, hit); önündeki hücrenin köşegen komşusunda atom varsa atomdan uzağa 90° sapar; her iki köşegen komşusunda da atom varsa olduğu yerde geri döner; girdiği portun hemen yan komşusunda atom varsa kutuya girmeden aynı kapıdan yansır (R, reflection). Işın kutudan çıkarsa giriş ve çıkış portlarına aynı harf yazılır — bu eşli işaret 'aynı ışın iki kapıyı bağlar' demektir. Atışlar sayılır; her atış bir puandır. Atomları nerede sandığını iç hücrelere tıklayarak işaretlersin (tekrar tıklama işareti siler). Tam 4 işaret koyduğunda 'Çöz' butonu açılır; doğru bastıysan tur biter ve kullandığın atış sayısı kaydedilir — düşük rekor için tekrar tekrar oyna. Yanlışta kutudaki gerçek atomlar görünür ve yanlış işaretlerin kırmızıya döner; oradan ya yeni oyun aç (R) ya da işaretlerini düzelt. İpucu: önce kutunun bir kenarındaki tüm portlardan birer ışın at — eşli çıkışlar (aynı harfli iki port) sapma geometrisini hemen ele verir; H/R işaretleri ise atomu birkaç hücreye sıkıştırır.",
+  "thumbnail": "kara-kutu.svg",
+  "scoring": {
+    "storageKey": "kara-kutu.best",
+    "label": "Atış",
+    "direction": "lower",
+    "labelEn": "Shots"
+  },
+  "en": {
+    "title": "Black Box",
+    "description": "Fire rays into a dark box and deduce the 4 hidden atoms from the hit / reflection / deflection trails. Solve in as few shots as possible.",
+    "controls": "Click edge ports: fire ray · Click inner cell: toggle guess · Solve · R: new game",
+    "howToPlay": "Four atoms are randomly placed inside an 8×8 dark box — you cannot see them directly. Click any of the 32 ports on the four edges to send a straight ray inwards. The ray follows these rules: if the cell in front contains an atom, it's absorbed (H, hit); if a single diagonal neighbour of that cell contains an atom, the ray deflects 90° away from it; if both diagonal neighbours hold atoms, the ray reverses on the spot; if an atom sits next to the entry cell on either side, the ray bounces straight back through the entry port (R, reflection). If the ray exits, both its entry and exit ports get the same letter — that pair marks 'one ray connects these two doors'. Each shot counts as one point. Mark where you think the atoms are by clicking interior cells (click again to erase). Once exactly 4 marks are placed, the 'Solve' button activates; on a correct guess the round ends and your shot count is saved — try again for a lower best. On a wrong guess the true atoms are revealed and your wrong marks turn red; from there start a new round (R) or adjust your marks. Tip: open with one ray from every port on a single edge — paired exits (two ports sharing a letter) instantly reveal deflection geometry; H/R markers pin atoms down to just a handful of cells."
+  }
+}

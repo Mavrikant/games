@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kara Kutu">
+  <defs>
+    <linearGradient id="kk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15151f" />
+      <stop offset="100%" stop-color="#06060c" />
+    </linearGradient>
+    <radialGradient id="kk-atom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6ee7b7" stop-opacity="1" />
+      <stop offset="60%" stop-color="#34d399" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#kk-bg)" />
+
+  <!-- 5x5 mini box centered, with edge ports as small squares -->
+  <g transform="translate(150 30)">
+    <!-- box outline -->
+    <rect x="0" y="0" width="125" height="125" rx="6" fill="#0a0b12" stroke="#2a2d35" stroke-width="1" />
+
+    <!-- grid lines -->
+    <g stroke="#1a1d25" stroke-width="0.5">
+      <line x1="25" y1="0" x2="25" y2="125" />
+      <line x1="50" y1="0" x2="50" y2="125" />
+      <line x1="75" y1="0" x2="75" y2="125" />
+      <line x1="100" y1="0" x2="100" y2="125" />
+      <line x1="0" y1="25" x2="125" y2="25" />
+      <line x1="0" y1="50" x2="125" y2="50" />
+      <line x1="0" y1="75" x2="125" y2="75" />
+      <line x1="0" y1="100" x2="125" y2="100" />
+    </g>
+
+    <!-- ports: top -->
+    <g fill="#22262e">
+      <rect x="0"   y="-14" width="20" height="10" rx="2" />
+      <rect x="25"  y="-14" width="20" height="10" rx="2" />
+      <rect x="50"  y="-14" width="20" height="10" rx="2" />
+      <rect x="75"  y="-14" width="20" height="10" rx="2" />
+      <rect x="100" y="-14" width="20" height="10" rx="2" />
+    </g>
+    <!-- highlight entry port -->
+    <rect x="50" y="-14" width="20" height="10" rx="2" fill="#fde68a" opacity="0.9" />
+
+    <!-- ports: right -->
+    <g fill="#22262e">
+      <rect x="129" y="0"   width="10" height="20" rx="2" />
+      <rect x="129" y="25"  width="10" height="20" rx="2" />
+      <rect x="129" y="50"  width="10" height="20" rx="2" />
+      <rect x="129" y="75"  width="10" height="20" rx="2" />
+      <rect x="129" y="100" width="10" height="20" rx="2" />
+    </g>
+    <!-- exit port -->
+    <rect x="129" y="75" width="10" height="20" rx="2" fill="#fde68a" opacity="0.9" />
+
+    <!-- ports: bottom -->
+    <g fill="#22262e">
+      <rect x="0"   y="129" width="20" height="10" rx="2" />
+      <rect x="25"  y="129" width="20" height="10" rx="2" />
+      <rect x="50"  y="129" width="20" height="10" rx="2" />
+      <rect x="75"  y="129" width="20" height="10" rx="2" />
+      <rect x="100" y="129" width="20" height="10" rx="2" />
+    </g>
+    <!-- ports: left -->
+    <g fill="#22262e">
+      <rect x="-14" y="0"   width="10" height="20" rx="2" />
+      <rect x="-14" y="25"  width="10" height="20" rx="2" />
+      <rect x="-14" y="50"  width="10" height="20" rx="2" />
+      <rect x="-14" y="75"  width="10" height="20" rx="2" />
+      <rect x="-14" y="100" width="10" height="20" rx="2" />
+    </g>
+
+    <!-- ray path: enters top center column, hits atom diagonal, deflects right, exits right -->
+    <g stroke="#fde68a" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3">
+      <polyline points="60,-4 60,75 129,75 " opacity="0.85" />
+    </g>
+
+    <!-- atom (the deflector) -->
+    <circle cx="87.5" cy="62.5" r="11" fill="url(#kk-atom)" />
+    <circle cx="87.5" cy="62.5" r="5" fill="#6ee7b7" />
+
+    <!-- a hidden atom hint (faint) -->
+    <circle cx="37.5" cy="37.5" r="3" fill="#6ee7b7" opacity="0.25" />
+  </g>
+
+  <text x="20" y="36" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" fill="#e4e4ed">Kara Kutu</text>
+  <text x="20" y="56" font-family="ui-sans-serif, system-ui" font-size="11" fill="#9ca3af">Işın izleriyle gizli atomları bul</text>
+</svg>
