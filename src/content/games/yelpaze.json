@@ -1,0 +1,21 @@
+{
+  "title": "Yelpaze",
+  "description": "Yelpazeyi salla, yukarıdan süzülen kıvılcımı numaralı mum fitillerine sırayla yönlendir; yanlış muma değme, kıvılcımı yere düşürme.",
+  "dateAdded": "2026-06-21",
+  "tags": ["fizik", "zamanlama", "özgün", "refleks"],
+  "controls": "Fare / dokunma: yelpazeyi gezdir, sürüklediğin yöne göre rüzgâr üretir · Boşluk / Enter: başla · R: yeniden başla",
+  "howToPlay": "Yelpaze, fareni gerçek bir el yelpazesi gibi kullanarak kıvılcımları yönlendirdiğin özgün bir hassasiyet oyunudur. Ekranın sol üst köşesinde turuncu bir ateş çanağı durur ve sırayla tek bir kıvılcım üretir; kıvılcım yerçekimiyle aşağı süzülürken yelpazenin etkisi altında savrulur. Aşağıda 3 ile 7 arası mum dizilidir, hepsi numaralıdır. Görevin: kıvılcımı her zaman üzerindeki rakama denk gelen sıradaki muma değdirip yakmak. Yelpaze fareni takip eder; etrafındaki ince halka etki alanını gösterir. Fareyi hareket ettirdiğin anda hareket yönünde bir hava akımı oluşur ve sadece halkanın içindeki kıvılcımı sürükler — ne kadar hızlı sallarsan o kadar güçlü esersin, ama yön kontrolün bozulur. Yelpazeyi sabit tutarsan kıvılcım sadece yerçekimi ve sahne rüzgârıyla hareket eder; yalnız ararsen kıvılcım yere düşer ve bir can gider. Üç can ile başlarsın. Yanlış numaralı muma değdirmek de can götürür; doğru muma değdirmek mumu yakar (+5 puan) ve ekranda bir sonraki numaralı mumu yeşil halkayla işaretler. Bölümdeki son mum yandığında bonus alırsın: 10 × bölüm + 5 × kalan can. Beş bölüm var; her bölümde mum sayısı, yerçekimi ve sahne rüzgârı artar: 'Sakin gece' (3 mum, rüzgârsız), 'Hafif esinti' (4), 'Esinti' (5), 'Rüzgâr' (6), 'Fırtına' (7). Strateji: kıvılcımı tek bir uzun, yumuşak strok yerine kısa ve sık vuruşlarla dürtmek daha kontrollü; yelpazeyi kıvılcımın gideceği değil, geldiği yönden vurmak onu bir sonraki muma doğru süpürür. Yerçekimine karşı koymak için fareyi tam kıvılcımın altından yukarı sürersin — kısa bir kaldırma kıvılcımı havada tutar. Rekor tarayıcına otomatik kaydedilir.",
+  "thumbnail": "yelpaze.svg",
+  "scoring": {
+    "storageKey": "yelpaze.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Hand Fan",
+    "description": "Wave a hand fan to steer drifting embers onto numbered candle wicks in order — wrong wick or a dropped ember costs a life.",
+    "controls": "Mouse / touch: glide the fan; movement direction creates a gust · Space / Enter: start · R: restart",
+    "howToPlay": "Hand Fan is an original precision game where you use the mouse like a real folding fan to steer falling embers. An ember pot at the top-left releases one ember at a time; it drifts down under gravity while a sideways stage breeze nudges it. At the bottom sits a row of 3 to 7 numbered candles. Your job is to land each ember on the candle whose number matches the ember — in order. The fan follows your cursor; a faint ring around it shows its area of effect. The moment you move the mouse, a gust spawns in the direction of motion and only pushes the ember inside the ring — move fast, push hard but lose precision; hold still and the ember only obeys gravity and the stage breeze (and drops to the floor, costing a life). You start with three lives. Touching the wrong-numbered candle also costs a life; touching the right one lights it (+5 points) and the next required candle pulses green. Clearing the level grants a bonus: 10 × level + 5 × remaining lives. Five levels ramp the candle count, gravity and breeze: 'Calm night' (3, no wind), 'Light breeze' (4), 'Breeze' (5), 'Wind' (6), 'Gale' (7). Strategy: short, repeated taps steer better than one long swing; fan the ember from behind, not from where it's going, to sweep it toward the next wick. To fight gravity, swipe upward directly below the ember — a quick lift keeps it aloft. The best score is saved locally."
+  }
+}

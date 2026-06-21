@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Yelpaze">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13182a"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffc878" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffc878" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flame" cx="0.5" cy="0.6" r="0.55">
+      <stop offset="0" stop-color="#fff4d6"/>
+      <stop offset="0.55" stop-color="#ffa64a"/>
+      <stop offset="1" stop-color="#ffa64a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6c98b"/>
+      <stop offset="1" stop-color="#8a6a32"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <!-- floor -->
+  <rect x="0" y="158" width="320" height="42" fill="#1a1612" opacity="0.7"/>
+  <line x1="0" y1="158" x2="320" y2="158" stroke="#ffffff" stroke-opacity="0.05"/>
+
+  <!-- ember pot -->
+  <g transform="translate(40,52)">
+    <ellipse cx="0" cy="0" rx="32" ry="32" fill="url(#glow)"/>
+    <rect x="-18" y="2" width="36" height="14" fill="#3a2a1a" stroke="#7a4a1a" stroke-width="2"/>
+    <circle cx="0" cy="4" r="3" fill="#ffb04a"/>
+  </g>
+
+  <!-- spark trail (ember in flight) -->
+  <g>
+    <circle cx="120" cy="100" r="22" fill="url(#glow)"/>
+    <circle cx="120" cy="100" r="6" fill="#ffe1a0"/>
+    <text x="120" y="103" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#0a0d14" text-anchor="middle">2</text>
+  </g>
+
+  <!-- fan icon (hand fan) -->
+  <g transform="translate(195,90) rotate(-22)">
+    <path d="M0,0 L48,-30 A56,56 0 0 1 48,30 Z" fill="url(#fan)" stroke="#3a2a14" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="48" y2="-30" stroke="#5a3a14" stroke-width="1"/>
+    <line x1="0" y1="0" x2="56" y2="-12" stroke="#5a3a14" stroke-width="1"/>
+    <line x1="0" y1="0" x2="56" y2="12" stroke="#5a3a14" stroke-width="1"/>
+    <line x1="0" y1="0" x2="48" y2="30" stroke="#5a3a14" stroke-width="1"/>
+    <circle cx="0" cy="0" r="3" fill="#1a1408"/>
+  </g>
+
+  <!-- candles row -->
+  <g>
+    <!-- lit candle 1 -->
+    <g transform="translate(58,158)">
+      <rect x="-11" y="-66" width="22" height="66" fill="#f3e8c4" stroke="#2a2018" stroke-width="1.2"/>
+      <line x1="0" y1="-66" x2="0" y2="-78" stroke="#2a2018" stroke-width="2"/>
+      <ellipse cx="0" cy="-90" rx="6" ry="11" fill="url(#flame)"/>
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff4d6" text-anchor="middle">1</text>
+    </g>
+    <!-- unlit candle 2 highlighted (next target) -->
+    <g transform="translate(140,158)">
+      <rect x="-11" y="-66" width="22" height="66" fill="#c8bd9a" stroke="#2a2018" stroke-width="1.2"/>
+      <line x1="0" y1="-66" x2="0" y2="-78" stroke="#2a2018" stroke-width="2"/>
+      <circle cx="0" cy="-78" r="13" fill="none" stroke="#8cf0c8" stroke-width="2" opacity="0.85"/>
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#dcdce6" text-anchor="middle">2</text>
+    </g>
+    <!-- unlit candle 3 -->
+    <g transform="translate(222,158)">
+      <rect x="-11" y="-66" width="22" height="66" fill="#c8bd9a" stroke="#2a2018" stroke-width="1.2"/>
+      <line x1="0" y1="-66" x2="0" y2="-78" stroke="#2a2018" stroke-width="2"/>
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#dcdce6" text-anchor="middle">3</text>
+    </g>
+    <!-- unlit candle 4 -->
+    <g transform="translate(290,158)">
+      <rect x="-11" y="-66" width="22" height="66" fill="#c8bd9a" stroke="#2a2018" stroke-width="1.2"/>
+      <line x1="0" y1="-66" x2="0" y2="-78" stroke="#2a2018" stroke-width="2"/>
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#dcdce6" text-anchor="middle">4</text>
+    </g>
+  </g>
+
+  <!-- wind arrow from fan -->
+  <g stroke="#bcd9ff" stroke-width="2" fill="none" opacity="0.7">
+    <path d="M170,86 C152,82 138,90 130,100" />
+    <polyline points="138,96 130,100 134,108" />
+  </g>
+</svg>
