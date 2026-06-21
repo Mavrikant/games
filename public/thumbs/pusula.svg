@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Pusula">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0b0e"/>
+      <stop offset="1" stop-color="#15171c"/>
+    </linearGradient>
+    <radialGradient id="face" cx="0.5" cy="0.5" r="0.65">
+      <stop offset="0" stop-color="#1a1f2a"/>
+      <stop offset="1" stop-color="#080a0e"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <g transform="translate(160 100)">
+    <!-- compass face -->
+    <circle r="84" fill="url(#face)" stroke="#2a2f3a" stroke-width="2"/>
+    <!-- tick marks -->
+    <g stroke="#8a93a4" stroke-width="1.5">
+      <line x1="0" y1="-80" x2="0" y2="-72"/>
+      <line x1="0" y1="72" x2="0" y2="80"/>
+      <line x1="-80" y1="0" x2="-72" y2="0"/>
+      <line x1="72" y1="0" x2="80" y2="0"/>
+    </g>
+    <g fill="#dfe5f2" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+      <text x="0" y="-58">N</text>
+      <text x="0" y="68">S</text>
+      <text x="-62" y="4">W</text>
+      <text x="62" y="4">E</text>
+    </g>
+    <!-- red target arc (toward NE) -->
+    <path d="M 70.7 -29.3 A 76 76 0 0 1 76.0 -5.0" fill="none" stroke="#ef4444" stroke-width="9" stroke-linecap="butt"/>
+    <!-- blue target arc (toward SW) -->
+    <path d="M -53.7 53.7 A 68 68 0 0 1 -67.5 5.0" fill="none" stroke="#3b82f6" stroke-width="9" stroke-linecap="butt"/>
+    <!-- blue needle (behind, smaller, pointing SW-ish) -->
+    <g transform="rotate(-130)">
+      <polygon points="0,-3 0,3 -28,0" fill="#1e3a8a"/>
+      <polygon points="0,-3 0,3 62,0" fill="#3b82f6"/>
+    </g>
+    <!-- red needle (front, larger, pointing NE-ish) -->
+    <g transform="rotate(60)">
+      <polygon points="0,-4 0,4 -32,0" fill="#7f1d1d"/>
+      <polygon points="0,-4 0,4 74,0" fill="#ef4444"/>
+    </g>
+    <!-- hub -->
+    <circle r="8" fill="#161a23" stroke="#2a2f3a" stroke-width="1.5"/>
+    <circle r="3" fill="#dfe5f2"/>
+  </g>
+</svg>

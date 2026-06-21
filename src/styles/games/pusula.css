@@ -1,0 +1,199 @@
+/*
+ * Per-game styles. The scaffold ships with the standard board-wrap +
+ * overlay positioning that @shared/overlay's helpers expect; do not
+ * delete these unless your game has no overlay at all.
+ *   pitfall: missing-overlay-css.
+ */
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  background: radial-gradient(circle at center, #15171e 0%, #0a0b0e 70%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 14, 0.78);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: var(--text-muted, #aab);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.hud__score span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.hud--meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.hud__pill {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hud__pill-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hud__pill-value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.hud__pill--red {
+  border-left: 3px solid #ef4444;
+}
+
+.hud__pill--blue {
+  border-left: 3px solid #3b82f6;
+}
+
+.hud__pill--sync {
+  border-left: 3px solid #10b981;
+}
+
+.touch {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin: 14px auto 4px;
+  flex-wrap: wrap;
+}
+
+.touch__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.touch__lbl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.touch__lbl--red {
+  color: #ef4444;
+}
+
+.touch__lbl--blue {
+  color: #3b82f6;
+}
+
+.touch__row {
+  display: flex;
+  gap: 6px;
+}
+
+.touch__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.touch__btn:active {
+  background: #2a2f3a;
+  transform: translateY(1px);
+}
+
+.touch__btn--red {
+  border-color: #7f1d1d;
+  color: #ef4444;
+}
+
+.touch__btn--blue {
+  border-color: #1e3a8a;
+  color: #3b82f6;
+}
+
+@media (hover: hover) {
+  .touch {
+    display: none;
+  }
+}

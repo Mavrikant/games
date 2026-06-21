@@ -1,0 +1,21 @@
+{
+  "title": "Pusula",
+  "description": "İki bağımsız iğneyi farklı yönlerde sabit tut — rastgele manyetik darbeler her ikisini de bozmaya çalışırken aynı anda iki kontrolü yönet.",
+  "dateAdded": "2026-06-21",
+  "tags": ["arcade", "refleks", "denge", "özgün", "iki-el"],
+  "controls": "← / →: kırmızı iğneye karşı kuvvet · ↑ / ↓: mavi iğneye karşı kuvvet · R: yeniden başla",
+  "thumbnail": "pusula.svg",
+  "scoring": {
+    "storageKey": "pusula.best",
+    "label": "Puan",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "howToPlay": "Pusula iki bağımsız iğneyi aynı anda yönetmen gereken 60 saniyelik bir denge oyunudur. Ekranda büyük bir pusula yüzü var; ortasından dışarı iki iğne uzanır: uzun KIRMIZI iğne ve daha kısa MAVİ iğne. Her iğnenin pusula yüzünde kendi renginde bir HEDEF DİLİMİ vardır (renkli bir yay) ve görevin iğnenin ucunu o dilim içinde tutmaktır. İğneler kendi başlarına sabit durmaz: zaman zaman görünmez manyetik darbeler iğnelere açısal hız verir — kırmızı iğne sola/sağa savrulur, mavi iğne yukarı/aşağı yönde savrulur. Bu darbeleri Ok tuşlarıyla karşılarsın: ← / → kırmızı iğneye saat-yönüne karşı veya saat yönünde küçük bir tork uygular; ↑ / ↓ mavi iğneye aynı şekilde tork verir. WASD aynı işlevi sağlar (A/D=kırmızı, W/S=mavi). Her saniye, bir iğnenin ucu kendi hedef diliminin içindeyse 1 puan kazanırsın; her iki iğne aynı anda hedefinin içindeyse 2 puan kazanırsın (bonus tick). Üst HUD'da sapma açıların (kırmızı: ¶R, mavi: ¶B) ve birikmiş 'eş-zamanlı stabil' süren gerçek zamanlı görünür. Hedef dilimler 15 saniyede bir yumuşak geçişle yeni bir açıya kayar — radyo dinler gibi her ikisini birden takip etmek zorundasın. Süre ilerledikçe darbeler daha sık ve daha şiddetli gelir, tolerans dilimi daralır. 60 saniye sonunda toplam puanın kaydedilir. İpucu: tuşa basılı tutmak sürekli tork uygular ve iğneyi aşırı savurur; kısa, ritmik basışlar daha kararlı tutar — iğneyi hedefin TAM ortasına değil, biraz darbenin tersi yönüne yatırırsan sonraki darbeyi yarıdan karşılarsın.",
+  "en": {
+    "title": "Compass",
+    "description": "Hold two independent needles on different bearings — random magnetic pulses knock both off course while you steer two controls at once.",
+    "controls": "← / →: torque the red needle · ↑ / ↓: torque the blue needle · R: restart",
+    "howToPlay": "Compass is a 60-second dual-control balance game. The screen shows a large compass face with two needles radiating from the centre: a long RED needle and a shorter BLUE needle. Each needle has a colored TARGET ARC on the compass face, and your job is to keep that needle's tip inside its target arc. The needles don't sit still: invisible magnetic pulses periodically kick each needle, giving it angular velocity — the red needle drifts clockwise/counter-clockwise from your perspective, and so does the blue. You counter the pulses with the arrow keys: ← / → applies a small counter-clockwise / clockwise torque to the red needle; ↑ / ↓ does the same for the blue needle. WASD works the same way (A/D=red, W/S=blue). Every game tick, you score +1 for each needle whose tip currently lies inside its target arc; if both needles are inside simultaneously you score +2 instead (synchrony bonus). The top HUD shows live deviation angles and the accumulating 'both in tolerance' streak. The target arcs gently rotate to a new bearing every 15 seconds — you have to track both simultaneously like tuning two radios. As the round progresses, pulses come more often and harder, and the tolerance arcs narrow. After 60 seconds your total score is saved. Tip: holding a key applies continuous torque and over-swings the needle; short rhythmic taps stay calmer — and leaning the needle slightly to the opposite side of an incoming pulse means it'll already be halfway home when the pulse hits."
+  }
+}
