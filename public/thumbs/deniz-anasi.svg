@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Deniz Anası">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#062338" />
+      <stop offset="55%" stop-color="#04122a" />
+      <stop offset="100%" stop-color="#020817" />
+    </linearGradient>
+    <radialGradient id="ring" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8cdcff" stop-opacity="0" />
+      <stop offset="65%" stop-color="#8cdcff" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#c8f5ff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="bell" cx="0.5" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="#ffe6ff" stop-opacity="0.95" />
+      <stop offset="70%" stop-color="#c8a8ff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#8c6edc" stop-opacity="0.7" />
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="200" fill="url(#sea)" />
+
+  <!-- light beams -->
+  <g opacity="0.10" fill="#6ec3ff">
+    <polygon points="20,0 60,0 90,200 -10,200" />
+    <polygon points="140,0 180,0 220,200 110,200" />
+    <polygon points="260,0 300,0 330,200 230,200" />
+  </g>
+
+  <!-- bubbles -->
+  <g fill="#aaddff" opacity="0.25">
+    <circle cx="40" cy="40" r="2" />
+    <circle cx="220" cy="30" r="1.6" />
+    <circle cx="280" cy="120" r="2.4" />
+    <circle cx="60" cy="160" r="1.8" />
+    <circle cx="160" cy="180" r="2" />
+    <circle cx="190" cy="70" r="1.4" />
+  </g>
+
+  <!-- stun ring around jellyfish -->
+  <circle cx="120" cy="100" r="70" fill="url(#ring)" />
+  <circle cx="120" cy="100" r="70" fill="none" stroke="#c8f5ff" stroke-opacity="0.55" stroke-width="1.5" />
+
+  <!-- stunned fish (left/right of jelly), turn blue -->
+  <g transform="translate(60,80)">
+    <ellipse cx="0" cy="0" rx="13" ry="8" fill="#78d2ff" />
+    <polygon points="11,0 21,-6 21,6" fill="#78d2ff" />
+    <circle cx="-6" cy="-2" r="2" fill="#fff" />
+    <circle cx="-6" cy="-2" r="1" fill="#101822" />
+  </g>
+  <g transform="translate(190,130) scale(-1,1)">
+    <ellipse cx="0" cy="0" rx="13" ry="8" fill="#78d2ff" />
+    <polygon points="11,0 21,-6 21,6" fill="#78d2ff" />
+    <circle cx="-6" cy="-2" r="2" fill="#fff" />
+    <circle cx="-6" cy="-2" r="1" fill="#101822" />
+  </g>
+
+  <!-- jellyfish glow -->
+  <circle cx="120" cy="100" r="40" fill="#c8e5ff" opacity="0.18" />
+
+  <!-- jellyfish tentacles -->
+  <g stroke="#dcc8ff" stroke-opacity="0.7" stroke-width="1.6" fill="none">
+    <path d="M108,112 Q106,120 110,128 Q112,136 108,144 Q106,152 110,158" />
+    <path d="M114,114 Q112,122 116,130 Q118,138 114,146 Q112,154 116,160" />
+    <path d="M120,114 Q118,122 122,130 Q124,138 120,146 Q118,154 122,160" />
+    <path d="M126,114 Q128,122 124,130 Q122,138 126,146 Q128,154 124,160" />
+    <path d="M132,112 Q134,120 130,128 Q128,136 132,144 Q134,152 130,158" />
+  </g>
+
+  <!-- jellyfish bell -->
+  <path d="M90,100 A30,22 0 0 1 150,100 L146,108 L130,110 L110,110 L94,108 Z" fill="url(#bell)" stroke="#ffe6ff" stroke-opacity="0.85" stroke-width="1.5" />
+
+  <!-- krill on the right -->
+  <g fill="#fff0b4">
+    <circle cx="250" cy="60" r="2.4" />
+    <circle cx="270" cy="90" r="2.4" />
+    <circle cx="240" cy="150" r="2.4" />
+  </g>
+</svg>

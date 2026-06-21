@@ -1,0 +1,21 @@
+{
+  "title": "Deniz Anası",
+  "description": "Akıntıya kapılan deniz anasıyla nabız at: her atış hem yukarı iter hem de etrafa biyoluminesans halka yayar, yakındaki balıkları kısa süreliğine dondurup yenecek ödüle çevirir.",
+  "dateAdded": "2026-06-21",
+  "tags": ["refleks", "arcade", "deniz", "tek-tus"],
+  "controls": "Boşluk / Yukarı ok / W / Tıklama / Dokunma: nabız at · R: yeniden başla",
+  "howToPlay": "Karanlık bir okyanusta yer çekimine kapılmış bir deniz anasısın. Tek bir tuşun var ama o tuş aynı anda iki iş görüyor: bedenin küçük bir kasılmayla yukarı fırlar ve aynı anda etrafına biyoluminesans bir halka yayılır. Halkanın menzilindeki balıklar 1.2 saniye boyunca donar, mavi renge bürünür ve aşağıya doğru yavaşça süzülür — donmuş balığa çarpmak seni öldürmez, aksine onu yutarsın ve +5 puan kazanırsın. Donmamış balığa dokunursan oyun biter. Sağdan sürekli akan ufak krill (sarı parıltılı planktonlar) ise serbestçe yenebilir ve +1 puan getirir. Nabız atışları arasında yaklaşık yarım saniyelik bir soğuma var; bu sürede tekrar tıklarsan sahne kırmızıya titrer ama yine de hareket edersin sadece halka çıkmaz. Strateji: tek bir balığı kaçırmak yerine birkaç balığın aynı anda yaklaştığı noktayı bekle, oraya nabız at; hem kendini yukarı taşırsın hem de hepsini birden konserveye çevirip beslenirsin. Krill için fazla iniş yapma — alt tarafta zaman geçirmek seni daha hızlı, daha öngörülemez balıklara açar. Süre geçtikçe balıklar daha sık ve daha hızlı gelir; rekorun tarayıcında saklanır.",
+  "thumbnail": "deniz-anasi.svg",
+  "scoring": {
+    "storageKey": "deniz-anasi.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Jellyfish",
+    "description": "Pulse to swim and to stun: one tap pushes the jellyfish up AND releases a bioluminescent ring that briefly freezes nearby fish — and lets you eat them for +5.",
+    "controls": "Space / Up / W / Click / Tap: pulse · R: restart",
+    "howToPlay": "You are a jellyfish drifting in a dark sea, slowly pulled down by gravity. You have a single button, but it does two things at once: a quick bell contraction propels you upward, and at the same moment a bioluminescent ring spreads around you. Fish caught in the ring freeze for 1.2 seconds, turn cool blue, and gently sink — colliding with a frozen fish doesn't kill you; you swallow it for +5. Touching an unfrozen fish ends the run. Tiny yellow krill drifting in from the right are always safe to eat and give +1. There is a short cooldown between pulses (~½ second); pressing during cooldown flashes the screen red and skips the stun but still won't propel you with full strength. Strategy: don't waste pulses on a single fish — wait until two or three converge, then pulse to lift away AND turn them all into prey at once. Spending too long near the bottom exposes you to faster, less predictable fish. Difficulty ramps as time passes; your best score is saved in the browser."
+  }
+}
