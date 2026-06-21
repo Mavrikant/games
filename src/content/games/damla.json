@@ -1,0 +1,9 @@
+{
+  "title": "Damla",
+  "description": "Tavandaki sarkıt sallanırken damlayı doğru anda bırak — yedi sütunun her birini hedef yüksekliğine getir, taşırma.",
+  "dateAdded": "2026-06-21",
+  "tags": ["puzzle", "zamanlama", "fizik", "özgün", "tek-oyunculu"],
+  "controls": "Boşluk veya tıkla: damla bırak · R: yeni bulmaca",
+  "thumbnail": "damla.svg",
+  "howToPlay": "Mağaranın tavanında, sağa-sola yumuşak bir yay çizerek sallanan bir sarkıt var; tabanda ise yedi sütun ve her birinin üzerine kesik çizgi ile işaretlenmiş bir hedef yükseklik (2-6 birim) duruyor. Görevin damlaları öyle bir zamanlamayla bırakmak ki, her sütundaki dikit tam o hedef çizgisine ulaşsın — eksik bırakırsan o sütun matlaşmaz, taşırırsan kırmızıya boyanır ve o tur kaybedilir. Boşluk tuşuna basarak ya da oyun alanına tıklayarak damla bırakırsın; damla, sarkıtın O ANDA bulunduğu sütuna düşer (sarkıttan inen kesik gölge çizgisi hangi sütuna düşeceğini gösterir). Yere ulaştığında o sütunun dikiti bir birim uzar; rengi mavi (henüz hedefe uzak), yeşil (hedefe oturdu) veya kırmızı (taşırdın, kayıp) olur. Tüm yedi sütunu aynı anda yeşil yaparsan kazanırsın; herhangi birini taşırırsan ya da elindeki 35 damla biterse oyun biter. Skor = (kazandıysan) 7×100 + arta kalan damla×10; daha az damla harcayarak çözdüğün her tur rekorunu günceller. R tuşu veya 'Yeniden başla' düğmesi yeni rastgele hedeflerle taze bir bulmaca açar. İpucu: önce orta sütunlara odaklan; sarkıt yön değiştirirken kenarlardaki sütunlar daha öngörülebilir olur. Hedefe iki damla kalan sütunlarda hızlı tepki gerekir — sarkıt zaten o sütunun üstünde değilse iki periyot bekle. En tehlikelisi sarkıtın hedefli sütundan henüz yeni geçtiği an: bir damla daha gelirse taşar; bu yüzden sarkıt bir sütunun üstünden ayrılmak üzereyken o sütuna damla bırakma."
+}

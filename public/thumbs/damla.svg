@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1f2e"/>
+      <stop offset="0.35" stop-color="#0c0e16"/>
+      <stop offset="1" stop-color="#0a0b10"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <polygon points="148,0 172,0 167,38 162,46 158,46 153,38" fill="#94a3b8"/>
+  <circle cx="160" cy="48" r="2.5" fill="#cbd5e1"/>
+  <ellipse cx="160" cy="78" rx="4" ry="6" fill="#38bdf8"/>
+  <ellipse cx="159" cy="76.5" rx="1" ry="1.6" fill="rgba(255,255,255,0.5)"/>
+  <ellipse cx="160" cy="118" rx="4" ry="6" fill="#38bdf8"/>
+  <ellipse cx="159" cy="116.5" rx="1" ry="1.6" fill="rgba(255,255,255,0.5)"/>
+  <line x1="0" y1="178" x2="320" y2="178" stroke="#3a4255" stroke-width="2"/>
+  <polygon points="34,178 74,178 60,138 48,138" fill="#60a5fa"/>
+  <polygon points="96,178 144,178 127,116 113,116" fill="#22c55e"/>
+  <polygon points="176,178 212,178 200,96 188,96" fill="#60a5fa"/>
+  <polygon points="232,178 280,178 264,142 248,142" fill="#dc2626"/>
+  <line x1="40" y1="138" x2="68" y2="138" stroke="#facc15" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <line x1="100" y1="116" x2="140" y2="116" stroke="#22c55e" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <line x1="180" y1="76" x2="208" y2="76" stroke="#facc15" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <line x1="236" y1="156" x2="276" y2="156" stroke="#dc2626" stroke-dasharray="4,3" stroke-width="1.5"/>
+</svg>
