@@ -1,0 +1,21 @@
+{
+  "title": "Misket",
+  "description": "Geleneksel sokak oyunu — halkadaki rakip misketleri nişancı misketinle vurup dışarı uçur, ama nişancın halkanın içinde durursa elin biter.",
+  "dateAdded": "2026-06-22",
+  "tags": ["geleneksel", "fizik", "nişan", "tek-oyunculu", "özgün"],
+  "controls": "Fare/dokunma sürükle: nişan al ve gücü ayarla · Bırak: at · Boşluk/Enter: başla/yeniden · R: sıfırla",
+  "thumbnail": "misket.svg",
+  "scoring": {
+    "storageKey": "misket.best",
+    "label": "Vurulan",
+    "direction": "higher",
+    "labelEn": "Knocked out"
+  },
+  "howToPlay": "Misket, mahallenin tozlu sokağına çizilmiş halkayla oynanan klasik Türk çocuk oyununun dijital halidir. Halkanın içine 8 renkli rakip misket dizilir; sen halkanın altındaki nişancı (krem rengi, biraz büyükçe) misketi sürükleyip bırakarak içeriye atarsın. Nişancını mouseyle veya parmağınla yakala ve gitmesini istediğin yöne doğru sürükle — ekrana çizilen oklu, kesik çizgi yönü, başlangıçtaki kısa mesafeyle uzun mesafe arası ise gücü gösterir (yeşilden kırmızıya kayan renk düşük güçten yüksek güce geçişi anlatır). Bıraktığın anda nişancı o yöne fırlar; halkadaki misketlerle çarpışır, fizik gerçekçi sürtünmeyle yavaşlar. Bir rakip misketin merkezi halkanın dışına çıkarsa onu vurmuş sayılırsın ve skorun artar. Asıl risk şudur: tüm hareket durduğunda nişancın hâlâ halkanın **içinde** kaldıysa misketini kaptırırsın ve el biter — bu yüzden gerçek mahalle oyununda olduğu gibi atışını ya halkanın bir kenarından öbürüne kestirme geçecek, ya da bir dış-iç-dış sektirmeyle bitecek şekilde planlamalısın. Hem çok yumuşak atmak (içeride kalırsın) hem de hedefi ıskalayıp halkadan dışarı çıkmak (eline atış sayılır ama puan yok) ceza taşır. 10 atış hakkın var; halkayı tamamen temizlersen kalan atış başına +2 bonus puan alırsın. Halkayı temizleyemeden 10 atışı tüketirsen ya da bir an önce nişancın halka içinde durursa oyun biter. Skorun toplam vurduğun misket sayısıdır, en iyi sonucun tarayıcına kaydedilir. İpucu: kuvvet düşükken çizgi yeşil, yüksekken kırmızıdır — yeşil-sarı bölgede atış yapmaya çalış; aşırı sert atışlar nişancını duvara çarptırıp halkanın içine geri savurabilir. Misketler birbirine de çarpar, kümeyi köşesinden vurursan zincirleme reaksiyon yakalayabilirsin.",
+  "en": {
+    "title": "Marbles",
+    "description": "Classic Turkish street game — knock the rival marbles out of the ring with your shooter, but if your shooter stops inside the ring you lose your turn.",
+    "controls": "Mouse/touch drag: aim and set power · Release: shoot · Space/Enter: start · R: reset",
+    "howToPlay": "Marbles (Misket) is the digital take on the dusty-street kid's game where you draw a circle in the dirt, line up rival marbles inside, and try to knock them out with your shooter. Eight colourful target marbles are placed inside the ring; your cream-coloured shooter sits at the bottom edge, slightly bigger. Drag the shooter with your mouse or finger toward where you want it to fly — the dashed arrow shows the direction and the short-to-long distance shows the power (a colour gradient from green for soft to red for strong). When you release, the shooter rockets in that direction, colliding with realistic friction-driven physics. A rival marble whose centre crosses the ring boundary counts as knocked out and your score increases. The real risk is this: when everything comes to rest, if your shooter is still **inside** the ring, you lose your shooter and the round ends — so just like the real street game, plan each shot to either dart across the ring and exit the far side, or to ricochet out, out-in-out. Both undershooting (you stop inside) and missing a target (the shot just sails through) cost you. You have 10 shots; clearing the entire ring earns +2 bonus per remaining shot. If you exhaust the 10 shots without clearing, or if your shooter ever stops inside the ring, the game ends. Your score is the total marbles knocked out, with the best saved in your browser. Tip: the arrow turns green at low power and red at high — aim for the green-yellow band; too hard and you'll bounce off the wall back into the ring. Marbles also collide with each other; clip a cluster from the edge and you can trigger a chain reaction."
+  }
+}

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Misket">
+  <defs>
+    <radialGradient id="mbg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#3d2f1f" />
+      <stop offset="100%" stop-color="#15100a" />
+    </radialGradient>
+    <radialGradient id="mshoot" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fdf5dc" />
+      <stop offset="100%" stop-color="#9b8a5a" />
+    </radialGradient>
+    <radialGradient id="mr" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f6a36a" />
+      <stop offset="100%" stop-color="#7a3a18" />
+    </radialGradient>
+    <radialGradient id="mg" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#8fcf6f" />
+      <stop offset="100%" stop-color="#345f25" />
+    </radialGradient>
+    <radialGradient id="mb" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#5ec0e8" />
+      <stop offset="100%" stop-color="#1c5374" />
+    </radialGradient>
+    <radialGradient id="my" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f7d569" />
+      <stop offset="100%" stop-color="#7a5a14" />
+    </radialGradient>
+    <radialGradient id="mp" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#b48cff" />
+      <stop offset="100%" stop-color="#3b1f6b" />
+    </radialGradient>
+    <radialGradient id="mc" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ef6f99" />
+      <stop offset="100%" stop-color="#7a1f3e" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#mbg)" />
+  <circle cx="170" cy="100" r="74" fill="none" stroke="rgba(255,250,235,0.78)"
+          stroke-width="2.5" stroke-dasharray="6 5" />
+  <circle cx="170" cy="100" r="74" fill="none" stroke="rgba(255,245,220,0.12)"
+          stroke-width="7" />
+  <circle cx="148" cy="78" r="11" fill="url(#mr)" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="190" cy="80" r="11" fill="url(#mg)" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="158" cy="112" r="11" fill="url(#mb)" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="196" cy="120" r="11" fill="url(#my)" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="170" cy="96" r="11" fill="url(#mp)" stroke="rgba(0,0,0,0.4)" />
+  <circle cx="130" cy="100" r="11" fill="url(#mc)" stroke="rgba(0,0,0,0.4)" />
+  <g stroke="#f6c552" stroke-width="2" stroke-dasharray="6 4" fill="none" opacity="0.9">
+    <path d="M 64 170 L 130 110" />
+  </g>
+  <polygon points="138,104 126,108 130,118" fill="#f6c552" />
+  <circle cx="60" cy="174" r="13" fill="url(#mshoot)" stroke="rgba(0,0,0,0.35)" />
+  <text x="18" y="34" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="700"
+        fill="#e9e3d2">Misket</text>
+</svg>
