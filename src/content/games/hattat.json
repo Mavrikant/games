@@ -1,0 +1,21 @@
+{
+  "title": "Hattat",
+  "description": "Yeşil noktadan başla, parmağını kaldırmadan koridor içinde yaldız noktaya akıcı bir hatla ulaş — yedi farklı meşk, daralan koridor, hat kalitesine göre puan.",
+  "dateAdded": "2026-06-22",
+  "tags": ["ozgun", "zanaat", "hassasiyet", "sanat", "tek-oyunculu", "mobil"],
+  "controls": "Fare/parmak: yeşil noktadan başlayıp koridor boyunca sürükle · Bırak: meşki bitir · Boşluk/Enter: başla veya sonraki meşk · R: yeniden başla",
+  "howToPlay": "Hattat, Osmanlı meşk talimi geleneğinden esinlenmiş bir kaligrafi hassasiyet oyunudur. Her turda ekranda silik bir koridor şeridi belirir — koridorun bir ucunda yeşil bir başlangıç noktası, diğer ucunda altın renkli bir bitiş noktası vardır. Görevin, parmağını veya farenin sol tuşunu yeşil noktadan başlayarak basılı tutmak, koridordan dışarı çıkmadan altın noktaya kadar tek nefeste sürüklemek ve orada bırakmaktır. Sürükledikçe parmağının arkasında siyah mürekkebin akar; kalemin koridor içindeyken mürekkep berrak ve simli, koridor dışına taştığında matlaşır ve hata olarak işaretlenir. Skor üç bileşenden gelir: KAPSAMA — koridorun yüzde kaçına sırayla değdiğin (en yüksek 60 puan); SADIK KALMA — kalemin koridor içinde geçirdiği zaman oranı (en yüksek 30 puan); TAMAMLAMA — bitiş noktasına yeterince yaklaştıysan ek bonus (en yüksek 10 puan). Toplam meşk başına 100 puana kadar. Bir tur yedi meşkten oluşur: önce basit tek-eğri, sonra S-yayı, halka, çift-bumbar, taç eğrisi, sülüs sweep ve tuğra hattı. Her meşk biraz daha karmaşık ve koridor biraz daha dar gelir; son iki meşkte koridor 14 piksele kadar incelir. Kapsama %40'ın altına düşerse meşk başarısız sayılır ama kalan meşklere devam edebilirsin; tüm yedisi bittiğinde toplam skor kişisel rekorunla karşılaştırılır. İpucu: Hızlı sürükle ile mürekkep koridoru atlayabilir; orta hızda, sabit ritimle hareket et. Bir meşke başlamadan önce gözle koridorun şeklini takip et — bezier kavislerinin merkezinden geç, köşelere yapışma. Eğer parmağını koridor dışına götürürsen geri girebilirsin, ceza sadece dışarıda geçen zaman içindir. Yeniden başlamak için R tuşu, sonraki meşke geçmek için Boşluk veya Enter.",
+  "thumbnail": "hattat.svg",
+  "scoring": {
+    "storageKey": "hattat.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Calligrapher",
+    "description": "Start at the green dot, glide through the corridor without lifting your pen, finish at the gold dot — seven strokes, narrowing corridor, scored on craft.",
+    "controls": "Mouse/finger: start at green, drag along the corridor · Release: finish stroke · Space/Enter: start or next stroke · R: restart",
+    "howToPlay": "Calligrapher is a precision tracing game inspired by Ottoman calligraphic 'meşk' practice. Each round a faded corridor strip appears on screen — one end marked with a green start dot, the other with a gold finish dot. Your job is to press your finger or hold the mouse button on the green dot, drag through the corridor without straying outside it, and release on the gold dot in a single continuous motion. Black ink flows behind your stylus; when the pen stays inside the corridor the ink runs crisp and glossy, when it strays it dulls and counts as a fault. Score has three components: COVERAGE — how much of the corridor you swept in order (up to 60 points); ADHERENCE — the fraction of time your pen stayed inside (up to 30); COMPLETION — bonus if you reached the gold dot (up to 10). Up to 100 points per stroke. A round consists of seven strokes: a simple arc, then an S-curve, a loop, a double bump, a crown sweep, a sülüs flourish, and a tughra-style hat. Each stroke is a little more complex and the corridor narrows a notch; on the final two strokes the corridor is just 14 px wide. If coverage falls below 40%, the stroke is failed but you continue to the rest; after all seven, your total compares against your personal best. Tip: dragging too fast can make the ink jump past the corridor — keep a steady mid-pace. Trace the corridor with your eye before you start; favour the centre of each Bezier, avoid the inner edges. If your pen leaves the corridor you can re-enter; the penalty only applies to time spent outside. R restarts the whole round; Space or Enter starts a round and advances between strokes."
+  }
+}

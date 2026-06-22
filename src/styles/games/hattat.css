@@ -1,0 +1,95 @@
+:root {
+  --hat-ink: #1a1410;
+  --hat-paper: #f4e9cf;
+  --hat-paper-dim: #d8c79e;
+  --hat-corridor: #c4a86a;
+  --hat-corridor-edge: #8a6f3c;
+  --hat-start: #34d399;
+  --hat-end: #f59e0b;
+  --hat-good: #34d399;
+  --hat-bad: #ef4444;
+  --hat-gold: #d4af37;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--hat-paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 12, 6, 0.82);
+  border-radius: 14px;
+  z-index: 5;
+  transition: opacity 0.18s ease-out;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90%;
+}
+
+.overlay__inner h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--hat-gold);
+}
+
+.overlay__inner p {
+  margin: 0;
+  color: #e5d6a8;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.hud__score {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+  min-width: 0;
+}
+
+.hud__score span {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  letter-spacing: -0.01em;
+}
