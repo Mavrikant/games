@@ -1,0 +1,21 @@
+{
+  "title": "Çekül",
+  "description": "Rüzgarda salınan çekülün gerçek dikey çizgisini oku, duvarın eğri mi düz mü olduğuna karar ver — sinyali gürültüden süzme oyunu.",
+  "dateAdded": "2026-06-22",
+  "tags": ["gözlem", "karar", "fizik", "özgün", "tek-oyunculu"],
+  "controls": "← / A: sola eğik · ↑ / Boşluk: düz · → / D: sağa eğik · R: yeniden başla",
+  "thumbnail": "cekul.svg",
+  "howToPlay": "Çekül, gözünü rüzgardan süzülen bir sinyale alıştıran bir karar oyunudur. Sahne basit: bir duvarcı çırağı olarak duvarın yanına bir çekül (ağırlıklı ip) astın, rüzgar onu sallıyor. Fizikteki temel kural: çekülün salınımı ne kadar geniş olursa olsun, ortalama (zaman içindeki orta) konumu gerçek dikey çizgidir. Senin görevin o ortalamayı gözle yakalayıp arkasındaki duvarın bu dikey çizgiye paralel mi (düz) yoksa hafifçe sola/sağa eğik mi olduğunu söylemek. Her turda duvarın tilti çok küçük (yaklaşık ±1°-3°), rüzgar ise çekülü dikeyden 10-50 piksel sallayacak kadar güçlü — yani salınımın ham anlık konumuna güvenirsen yanılırsın; salınımın merkezini bulman gerekir. Üç buton var: ← (Sola Eğik), ↑ (Düz), → (Sağa Eğik); klavyede aynısı için ok tuşları veya A/S/D'yi kullan, Boşluk 'Düz' verir. Her doğru karar +60 puan ve kalan süreden orantılı bonus + üst üste seri bonusu kazandırır; her yanlış karar bir mihir (can) götürür ve üst üste serini sıfırlar. Üç mihir bitince çıraklığın sona erer ve en yüksek puanın tarayıcında saklanır. Her dört doğru kararda bir seviye atlarsın: bir sonraki seviyede rüzgar daha güçlü ve gürültülü, duvar tiltleri daha küçük (ayrım daha zor), ve karar süren biraz daha kısa olur. İpucu: çekül sallanırken iki dönüş noktası ortaya çıkar — onların TAM ORTASI gerçek dikeydir. Tek bir an ekrana bakmak yetmez; en az iki tam salınımı izle, sonra bakışını duvarın üst kenarına çevirip 'merkez çizgi duvarın hangi yanından geçiyor?' diye sor. Rüzgar göstergesi sağa-sola gidiyor; en güçlü rüzgar anında bile gerçek dikey değişmez, sadece anlık çekül konumu değişir.",
+  "scoring": {
+    "storageKey": "cekul.best",
+    "label": "Puan",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Plumb-line",
+    "description": "Read the true vertical of a wind-swayed plumb-line and judge whether the wall behind it is plumb or leaning — a signal-from-noise puzzle.",
+    "controls": "← / A: leans left · ↑ / Space: plumb · → / D: leans right · R: restart",
+    "howToPlay": "Plumb-line is a decision game that trains your eye to find a signal hidden in noise. The scene is simple: as a stonemason's apprentice you've hung a plumb-bob next to a wall, and the wind is swinging it. The physics is the key: however wide its swing, the time-average position of a plumb-line is the true vertical. Your job is to spot that average by eye and decide whether the wall behind it is parallel to that vertical (plumb) or leaning slightly to one side. Each round the wall's tilt is tiny (about ±1°-3°) while the wind sways the bob 10-50 pixels away from vertical — trusting the bob's momentary position will mislead you; you have to find the centre of its swing. There are three buttons: ← (Leans Left), ↑ (Plumb), → (Leans Right); the keyboard equivalents are the arrow keys or A/S/D, and Space submits 'Plumb'. A correct call awards +60 points plus a time bonus from the seconds you had left plus a streak bonus; a wrong call costs one apprentice mark (life) and resets the streak. Three lost marks ends your apprenticeship, and your best run is saved in the browser. Every four correct calls bumps you to the next level: stronger and noisier wind, smaller wall tilts (harder to discriminate), and a slightly shorter time window. Tip: as the bob swings, two extreme turn-points appear — their midpoint is the true vertical. A single glance won't do it; watch at least two full swings, then shift your eyes to the top of the wall and ask 'which side of the midpoint does the wall pass on?'. The wind gauge sways left-right; even at peak wind the true vertical doesn't change — only the bob's momentary position does."
+  }
+}

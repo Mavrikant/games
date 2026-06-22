@@ -1,0 +1,26 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <div class="hud__score">Mihir<span id="lives">3</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas id="board" width="480" height="480" aria-label="Çekül oyun alanı"></canvas>
+  <div class="vote" role="group" aria-label="Karar">
+    <button id="btn-left" class="vote__btn" type="button" aria-keyshortcuts="ArrowLeft a">← Sola Eğik</button>
+    <button id="btn-plumb" class="vote__btn vote__btn--plumb" type="button" aria-keyshortcuts="Space">Düz</button>
+    <button id="btn-right" class="vote__btn" type="button" aria-keyshortcuts="ArrowRight d">Sağa Eğik →</button>
+  </div>
+  <div id="hint" class="cekul-hint">Çekülün ortalama dikeyini oku, duvarın eğri mi düz mü söyle.</div>
+  <div id="overlay" class="overlay overlay--hidden" aria-hidden="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Çekül</h2>
+      <p id="overlay-msg">Sen duvarcı çırağısın. Rüzgarda salınan çekülün ortalama konumu gerçek dikey çizgidir. Duvarın eğri mi düz mü olduğuna karar ver — üç mihir hakkın var.</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çekül">
+  <defs>
+    <linearGradient id="cekulBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2030" />
+      <stop offset="100%" stop-color="#0a0c14" />
+    </linearGradient>
+    <linearGradient id="cekulWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a3a2a" />
+      <stop offset="100%" stop-color="#2a2018" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cekulBg)" />
+  <!-- ground -->
+  <line x1="20" y1="184" x2="300" y2="184" stroke="#5a6878" stroke-width="1" opacity="0.5" />
+
+  <!-- Wall, tilted slightly to the right (positive rotation) -->
+  <g transform="rotate(2.6 200 184)">
+    <rect x="186" y="32" width="28" height="152" fill="url(#cekulWall)" stroke="#5c4a36" stroke-width="1.5" />
+    <g stroke="rgba(0,0,0,0.4)" stroke-width="1" fill="none">
+      <line x1="186" y1="56" x2="214" y2="56" />
+      <line x1="186" y1="80" x2="214" y2="80" />
+      <line x1="186" y1="104" x2="214" y2="104" />
+      <line x1="186" y1="128" x2="214" y2="128" />
+      <line x1="186" y1="152" x2="214" y2="152" />
+      <line x1="200" y1="56" x2="200" y2="80" />
+      <line x1="200" y1="104" x2="200" y2="128" />
+      <line x1="200" y1="152" x2="200" y2="170" />
+    </g>
+  </g>
+
+  <!-- Plumb: anchor + string + bob (string straight down — wind in a snapshot) -->
+  <g>
+    <!-- Anchor -->
+    <polygon points="124,28 138,28 134,34 128,34" fill="#9aa6b7" />
+    <!-- String (with a small horizontal offset suggesting wind) -->
+    <line x1="131" y1="34" x2="148" y2="156" stroke="#f1f4f8" stroke-width="1.4" />
+    <!-- Bob (diamond shape) -->
+    <polygon points="148,150 140,160 148,178 156,160" fill="#d33f2c" stroke="#6b1b10" stroke-width="1.2" />
+    <ellipse cx="145" cy="156" rx="2" ry="3" fill="rgba(255,255,255,0.4)" />
+  </g>
+
+  <!-- Dashed reference: true vertical from anchor straight down -->
+  <line x1="131" y1="34" x2="131" y2="178" stroke="rgba(52,211,153,0.55)" stroke-width="1" stroke-dasharray="4 4" />
+
+  <!-- Wind indicator -->
+  <g transform="translate(50 80)" opacity="0.8">
+    <text x="-22" y="-10" font-family="ui-sans-serif, system-ui" font-size="10" fill="#aab5c4">Rüzgar</text>
+    <line x1="-22" y1="0" x2="22" y2="0" stroke="rgba(180,200,230,0.25)" stroke-width="2" />
+    <line x1="0" y1="0" x2="18" y2="0" stroke="rgba(180,200,230,0.85)" stroke-width="2" />
+    <polygon points="18,0 12,-4 12,4" fill="rgba(180,200,230,0.85)" />
+  </g>
+
+  <text x="20" y="34" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="800" fill="#e4e4ed">Çekül</text>
+  <text x="20" y="178" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="500" fill="#8a96a8" letter-spacing="1">SİNYALİ GÜRÜLTÜDEN SÜZ</text>
+</svg>
