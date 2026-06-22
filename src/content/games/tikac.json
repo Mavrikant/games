@@ -1,0 +1,8 @@
+{
+  "title": "Tıkaç",
+  "description": "Su deposunu doldur, açılan delikleri tıkaçla — taşma ile boşalma arasında dengede kal.",
+  "dateAdded": "2026-06-22",
+  "tags": ["arcade","unique","reflex"],
+  "controls": "Boşluk: musluğu aç · Fare: deliği tıkla",
+  "thumbnail": "tikac.svg"
+}
