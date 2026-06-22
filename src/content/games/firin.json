@@ -1,0 +1,20 @@
+{
+  "title": "Fırın",
+  "description": "Dört raflı fırında ekmekleri tam kıvamında çıkar — alt raflar hızlı yakar, üst raflar yavaş pişirir. Rafları sürükleyip dolaştır, mükemmel anı yakala.",
+  "dateAdded": "2026-06-22",
+  "tags": ["özgün", "zaman", "yönetim", "tek-oyunculu"],
+  "controls": "Tıkla: ekmeği çıkar · Sürükle: ekmeği başka rafa taşı · 1-4: rafı çıkar · Boşluk: başla / duraklat · R: yeniden başla",
+  "howToPlay": "Fırın, dört yatay raflı bir taş fırını yöneten bir zaman-yönetimi oyunudur. Alttaki ateş tüm rafları aynı kuvvetle ısıtmaz: en alt raf en hızlı (1.7×), en üst raf en yavaş (0.5×) pişirir; ara raflar arada bir hızda gider. Ekmekler raflara kendiliğinden gelir; her ekmeğin türüne göre (sade beyaz, çavdar, susamlı) küçük bir 'mükemmel kıvam penceresi' vardır ve bu pencere ekmeğin yan tarafındaki çubukta yeşil bir bant olarak görünür. Görevin ekmeği o yeşil bandın içindeyken çıkarmaktır: ekmeğe tıklamak onu çıkarır. Doğru anda çıkardığın ekmek +1 puan, erken (ham) ya da geç (yanmış) çıkarmak veya rafta unutup tamamen yakman bir can kaybettirir; üç canın da bittiğinde oyun biter. Mekaniğin özü: bir ekmeği başka bir rafa sürükleyerek iki ekmeği takas edebilirsin — yakına gelmiş bir susamlı ekmeği alt raftan üste alıp pişme hızını yavaşlatabilir, henüz ham bir beyaz ekmeği aşağı atıp hızlandırabilirsin. Her altı mükemmel çıkarışta seviye atlar; üst seviyelerde tüm raflar hızlanır ve mükemmel pencere daralır, böylece sürükle-bırak takasları kritikleşir. R tuşu oyunu sıfırlar, Boşluk duraklatır ya da başlatır; 1-4 tuşları doğrudan o raftan çıkarma için kısayoldur. Rekorun tarayıcında saklanır.",
+  "scoring": {
+    "storageKey": "firin.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Oven",
+    "description": "Pull loaves from a four-shelf stone oven at the perfect moment — bottom shelves bake fast and burn fast, top shelves bake slow.",
+    "controls": "Click: pull a loaf · Drag: move a loaf to another shelf · 1-4: pull from that shelf · Space: start / pause · R: restart",
+    "howToPlay": "Oven is a time-management game built around a four-shelf stone oven. The fire below does not heat every shelf equally: the bottom shelf bakes fastest (1.7×), the top shelf slowest (0.5×), with the middle shelves in between. Loaves arrive on their own; each kind (plain white, rye, sesame) has a small 'perfect window' shown as a green band on the side gauge. Your job is to pull each loaf out while its current bake sits inside that green band: click a loaf to remove it. A perfect pull scores +1; pulling too early (raw) or too late (burnt), or leaving a loaf until it fully burns, costs a life — three lives lost ends the game. The twist: drag any loaf onto another shelf to swap the two loaves. Move a nearly-done sesame loaf up to slow it down; drop a still-pale white loaf to the bottom to speed it up. Every six perfect pulls levels you up; higher levels speed every shelf and narrow the perfect window, so the swap dance becomes essential. R restarts, Space starts or pauses, 1-4 are direct shortcuts for each shelf. Your best score is stored in the browser."
+  }
+}
