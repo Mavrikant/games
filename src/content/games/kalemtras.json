@@ -1,0 +1,21 @@
+{
+  "title": "Kalemtıraş",
+  "description": "Kalemi yontmak için tuşu basılı tut, doğru anda bırak — fazla bastırırsan uç kırılır, çok kısa tutarsan körelir.",
+  "dateAdded": "2026-06-22",
+  "tags": ["arcade", "timing", "tek-tus"],
+  "controls": "Space veya tıkla (basılı tut, doğru anda bırak) · R: yeniden başla",
+  "howToPlay": "Önünde bir kalem ve bir kalemtıraş var; 60 saniyede olabildiğince çok ucu sivriltmen gerekiyor. Tuşu (Space veya fareyi) basılı tuttuğunda kalemtıraşın kolu döner, kalemin ucundan talaş çıkar ve ekranın altındaki 'yontma çubuğu' dolmaya başlar. Çubuk üzerinde yeşil bir 'ideal' bandı vardır; tuşu bu banttayken bırakırsan ucu sivrilttin sayılır ve skor +1 olur. Bandın altında bırakırsan kalem körelir, ucu yontulmaz, skor değişmez ama o kalem ziyan olur. Bandı aşıp kırmızı bölgeye girersen aşırı bastırmışsındır: uç kırılır, skor -1 olur ve kalem yenisiyle değişir. Her başarılı yontmada yeni bir kalem konveyörden gelir; oyun ilerledikçe yeşil bant daralır ve dolma hızı artar, yani timing pencerene güvenmek zorlaşır. Strateji: ilk turlarda bandın geniş olmasına aldanma, refleksini ayarla; çubuğun nasıl ivmelendiğini izle ve bırakma anını sayma değil, görme alışkanlığı geliştir. Tek tuşlu olduğu için telefonda da rahatça oynanır — uzun bas, kısa bas, ne olduğunu öğren.",
+  "scoring": {
+    "storageKey": "kalemtras.best",
+    "label": "Yontulan",
+    "direction": "higher",
+    "labelEn": "Sharpened"
+  },
+  "en": {
+    "title": "Pencil Sharpener",
+    "description": "Hold the key while the sharpener turns, release in the green band — push too far and the tip snaps, let go too soon and it stays dull.",
+    "controls": "Space or tap (hold and release on cue) · R: restart",
+    "howToPlay": "A pencil and a sharpener sit in front of you; you have 60 seconds to sharpen as many as you can. While you hold the key (Space or pointer), the sharpener's handle turns, shavings curl off the tip, and the 'sharpen bar' at the bottom fills. A green ideal band sits along the bar — release inside it to score +1 and queue the next pencil. Release before it and the pencil ends up dull: no points, but that pencil is gone. Push past the band into the red and you've overdone it: the tip snaps, you lose a point, and a fresh pencil rolls in. Each round the green band narrows and the bar fills faster, so timing it by counting won't last; you have to learn to see the bar's acceleration and let go on sight. One key, mobile-friendly: experiment with short and long holds, find the feel.",
+    "labelEn": "Sharpened"
+  }
+}
