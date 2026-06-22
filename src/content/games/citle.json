@@ -1,0 +1,21 @@
+{
+  "title": "Çitle",
+  "description": "Tarladaki tavşanları çitle çevrele — sahaya dal, izini geri kıyıya bağla. Tavşanlar izini kemirirse can gider.",
+  "dateAdded": "2026-06-22",
+  "tags": ["puzzle", "strateji", "özgün", "arcade"],
+  "controls": "Ok tuşları / WASD: ilerle · Boşluk/Enter: başla · R: yeniden başla",
+  "howToPlay": "Çitle, tarlanın etrafında bir kıyıdan başlayıp ızgaranın içine ördüğün çit izini geri kıyıya bağlayarak alan kazandığın bir çevreleme oyunudur. Sahanın kenarındaki gri taş çit güvenlidir — üzerinde özgürce yürüyebilirsin. Ok tuşlarıyla (veya WASD ile) içeriye, tarlanın koyu zeminine adım atarsan her bastığın hücre senin turuncu ipin olur. Bu ip açık olduğu sürece kırılgan: hem kendi izine girersen oyun seni durdurur, hem de tarlada koşan tavşanlar açık ipe değerse ipi kemirirler, bir canını ve o ana kadar ördüğün ipi alırlar. Güvenliğin tek yolu içeride bir kavis çizip geri taş kıyıya — eski çite veya az önce kazandığın yeşil bölgenin kenarına — çıkmak: ip kapandığı an çevrelediğin tarafın içinde tavşan yoksa o bölge cam göbeği yeşilinde 'çit' olur. Skor, çevrelediğin her hücre için +10, izinin her adımı için +1, ve çit alanı büyüdükçe karesel bonus kazandırır. Eğer ipi tavşanlı taraftan kapatırsan o tarafta kalan tavşanlar yüzünden bölge çevrelenmez (her iki tarafta da tavşan varsa puansız tur). Hedef tarlanın %75'ini çevirmek — başarırsan bir sonraki seviyeye geçersin, tarla yenilenir, sürüye bir tavşan daha katılır, tavşanlar biraz daha hızlanır. 3 canın bittiğinde tur biter; en yüksek skor tarayıcında saklanır. Strateji: önce sahanın kenarından dar şeritler kes — küçük ısırıklar düşük risklidir ve yeşil alanın kenarını ileri taşır. Tavşanları takip et: izini, gözlemlediğin koşum yörüngesinden uzak yerden kıvır. Aceleyle uzun ipler örme — her ekstra hücre ipi kemirilme riskini büyütür. Mobilde alttaki yönler tablası ile aynı kontroller çalışır.",
+  "thumbnail": "citle.svg",
+  "scoring": {
+    "storageKey": "citle.best",
+    "label": "Skor",
+    "direction": "higher",
+    "labelEn": "Score"
+  },
+  "en": {
+    "title": "Fence Off",
+    "description": "Fence off the field by carving loops from the safe perimeter — rabbits inside get walled in, but bite your open trail and you lose a life.",
+    "controls": "Arrow keys / WASD: move · Space/Enter: start · R: restart",
+    "howToPlay": "Fence Off is a grid-based territory game: you start on the safe stone perimeter and step inward into the open field, leaving an orange trail behind you. While the trail is open it's fragile — running into your own trail stops you, and the rabbits roaming the field will bite the open line if they touch it, costing you a life and erasing your progress on that loop. The only way to bank your work is to draw a curve through the field and return to a safe edge (the original perimeter or a previously-captured green region). When the loop closes, every interior cell with no rabbit inside turns into a cyan fence; you score +10 per fenced cell, +1 per trail step, and a quadratic bonus for big enclosures. Fence off enough to cover 75% of the field and you level up: a fresh field, one more rabbit, and a slightly faster herd. If a rabbit is trapped on the side you closed, that side stays open as the 'rabbit side' and the other side is captured instead — so closing both regions with rabbits awards nothing. You have three lives; your best score persists in the browser. Strategy: nibble small strips along the edge instead of drawing one giant loop — every extra trail cell adds risk, and quick captures push the safe edge further into the field for the next loop. Read the rabbits' wandering before you commit, and curve away from their path."
+  }
+}
