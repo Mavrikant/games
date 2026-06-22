@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Hatip">
+  <defs>
+    <linearGradient id="ht-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10131c" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="ht-podium" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b1f12" />
+      <stop offset="100%" stop-color="#1a1208" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" rx="14" fill="url(#ht-bg)" />
+  <rect x="1" y="1" width="318" height="198" rx="13" stroke="#1b2030" fill="none" />
+
+  <!-- spotlight cone -->
+  <path d="M160,8 L240,200 L80,200 Z" fill="rgba(251,191,36,0.07)" />
+
+  <!-- audience meters -->
+  <g transform="translate(28,42)">
+    <rect x="0"  y="0"   width="180" height="9" rx="4.5" fill="#1d2331" />
+    <rect x="0"  y="0"   width="125" height="9" rx="4.5" fill="#38bdf8" />
+    <text x="0"  y="-4"  font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#9aa3b5" letter-spacing="0.1em">MANTIK</text>
+
+    <rect x="0"  y="22"  width="180" height="9" rx="4.5" fill="#1d2331" />
+    <rect x="0"  y="22"  width="92"  height="9" rx="4.5" fill="#fb7185" />
+    <text x="0"  y="18"  font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#9aa3b5" letter-spacing="0.1em">DUYGU</text>
+
+    <rect x="0"  y="44"  width="180" height="9" rx="4.5" fill="#1d2331" />
+    <rect x="0"  y="44"  width="148" height="9" rx="4.5" fill="#fbbf24" />
+    <text x="0"  y="40"  font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#9aa3b5" letter-spacing="0.1em">OTORİTE</text>
+
+    <rect x="0"  y="66"  width="180" height="9" rx="4.5" fill="#1d2331" />
+    <rect x="0"  y="66"  width="55"  height="9" rx="4.5" fill="#a78bfa" />
+    <text x="0"  y="62"  font-family="ui-sans-serif, system-ui" font-size="8" font-weight="700" fill="#9aa3b5" letter-spacing="0.1em">MİZAH</text>
+  </g>
+
+  <!-- speaker silhouette at podium -->
+  <g transform="translate(248,86)">
+    <circle cx="0" cy="-12" r="10" fill="#e5d3b3" />
+    <path d="M-14,4 q14,-10 28,0 l0,30 l-28,0 z" fill="#c7b48f" />
+    <!-- raised arm -->
+    <path d="M14,8 q12,-6 22,-18" stroke="#e5d3b3" stroke-width="5" fill="none" stroke-linecap="round" />
+    <!-- podium -->
+    <rect x="-22" y="34" width="44" height="22" rx="3" fill="url(#ht-podium)" stroke="#5a3f1f" />
+    <rect x="-22" y="34" width="44" height="3" fill="#7c5530" />
+  </g>
+
+  <!-- action chips along bottom -->
+  <g transform="translate(28,156)" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700">
+    <rect x="0"   y="0"  width="56" height="22" rx="6" fill="#0e1422" stroke="#38bdf8" />
+    <text x="28"  y="14" text-anchor="middle" fill="#38bdf8">1 Veri</text>
+    <rect x="64"  y="0"  width="62" height="22" rx="6" fill="#0e1422" stroke="#fb7185" />
+    <text x="95"  y="14" text-anchor="middle" fill="#fb7185">2 Hikâye</text>
+    <rect x="134" y="0"  width="54" height="22" rx="6" fill="#0e1422" stroke="#fbbf24" />
+    <text x="161" y="14" text-anchor="middle" fill="#fbbf24">3 İlke</text>
+    <rect x="196" y="0"  width="62" height="22" rx="6" fill="#0e1422" stroke="#a78bfa" />
+    <text x="227" y="14" text-anchor="middle" fill="#a78bfa">4 Espri</text>
+  </g>
+
+  <!-- title + tag -->
+  <text x="20" y="28" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="800" fill="#f5f1e6">Hatip</text>
+  <text x="300" y="194" text-anchor="end" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600" fill="#5b6478" letter-spacing="0.08em">RETORİK · DENGELE</text>
+</svg>

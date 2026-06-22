@@ -1,0 +1,88 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Süre<span id="time">1:30</span></div>
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+
+<div id="board-wrap" class="board-wrap">
+  <div id="podium">
+    <div class="meters" role="group" aria-label="Dinleyici ölçerleri">
+      <div class="meter" data-meter="mantik">
+        <div class="meter__row">
+          <span class="meter__icon" aria-hidden="true">⚖</span>
+          <span class="meter__label">Mantık</span>
+          <span class="meter__val" id="val-mantik">60</span>
+        </div>
+        <div class="meter__bar"><div class="meter__fill" id="bar-mantik"></div></div>
+      </div>
+      <div class="meter" data-meter="duygu">
+        <div class="meter__row">
+          <span class="meter__icon" aria-hidden="true">❤</span>
+          <span class="meter__label">Duygu</span>
+          <span class="meter__val" id="val-duygu">60</span>
+        </div>
+        <div class="meter__bar"><div class="meter__fill" id="bar-duygu"></div></div>
+      </div>
+      <div class="meter" data-meter="otorite">
+        <div class="meter__row">
+          <span class="meter__icon" aria-hidden="true">⚜</span>
+          <span class="meter__label">Otorite</span>
+          <span class="meter__val" id="val-otorite">60</span>
+        </div>
+        <div class="meter__bar"><div class="meter__fill" id="bar-otorite"></div></div>
+      </div>
+      <div class="meter" data-meter="mizah">
+        <div class="meter__row">
+          <span class="meter__icon" aria-hidden="true">✨</span>
+          <span class="meter__label">Mizah</span>
+          <span class="meter__val" id="val-mizah">60</span>
+        </div>
+        <div class="meter__bar"><div class="meter__fill" id="bar-mizah"></div></div>
+      </div>
+    </div>
+
+    <div class="actions" role="group" aria-label="Retorik araçları">
+      <button class="action" data-action="veri" type="button">
+        <span class="action__key">1</span>
+        <span class="action__name">Veri</span>
+        <span class="action__hint">+Mantık · −Mizah</span>
+        <span class="action__cd" aria-hidden="true"></span>
+      </button>
+      <button class="action" data-action="hikaye" type="button">
+        <span class="action__key">2</span>
+        <span class="action__name">Hikâye</span>
+        <span class="action__hint">+Duygu · −Mantık</span>
+        <span class="action__cd" aria-hidden="true"></span>
+      </button>
+      <button class="action" data-action="ilke" type="button">
+        <span class="action__key">3</span>
+        <span class="action__name">İlke</span>
+        <span class="action__hint">+Otorite · −Duygu</span>
+        <span class="action__cd" aria-hidden="true"></span>
+      </button>
+      <button class="action" data-action="espri" type="button">
+        <span class="action__key">4</span>
+        <span class="action__name">Espri</span>
+        <span class="action__hint">+Mizah · −Otorite</span>
+        <span class="action__cd" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div id="heckler" class="heckler heckler--hidden" aria-hidden="true">
+      <span class="heckler__bubble">“Saçma!”</span>
+      <button id="heckler-btn" class="heckler__btn" type="button">Yanıtla · Boşluk</button>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Hatip</h2>
+      <p id="overlay-msg">Dört dinleyici ölçeri var: Mantık, Duygu, Otorite, Mizah. Her ölçer zamanla düşer. Dört aracın her biri birini güçlendirir ama diğerini zayıflatır. 90 saniye boyunca hiçbir ölçer sıfıra inmesin.</p>
+      <button id="overlay-start" type="button">Kürsüye çık</button>
+    </div>
+  </div>
+</div>
