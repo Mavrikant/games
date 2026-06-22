@@ -1,0 +1,8 @@
+{
+  "title": "Aşure",
+  "description": "Yedi tatlı malzeme — her birinin kazana atılması gereken bir zaman penceresi var. Hangi sırayla, hangi anda atacağına sen karar ver.",
+  "dateAdded": "2026-06-22",
+  "tags": ["ritim", "zamanlama", "türk-mutfağı"],
+  "controls": "1–7 / Tıkla: malzemeyi at · Boşluk: başla / yeniden",
+  "howToPlay": "Aşure kazanı kaynamakta. 7 malzemenin her biri farklı bir anda olgunlaşır: ikon parladığında o malzemeye tıkla (ya da klavyede 1–7'ye bas). Tam pencerenin ortasında atarsan 100 puan; kıyısında 60 puan; pencere dışında 10 puan ve aşure ekşir. Pencereyi tamamen kaçırırsan o malzeme yok. Aynı malzemeyi iki kez atamazsın."
+}
