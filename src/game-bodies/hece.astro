@@ -1,0 +1,32 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">En İyi<span id="best">0</span></div>
+  <div class="hud__score">Süre<span id="time">60</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden</button>
+</header>
+
+<div class="he-stage">
+  <div class="he-target" aria-live="polite">
+    <div class="he-target__label">Hedef Kelime</div>
+    <div id="word-boxes" class="he-boxes" aria-label="Hedef heceleri"></div>
+  </div>
+
+  <div class="he-frog-strip" aria-hidden="true">
+    <span id="frog" class="he-frog">🐸</span>
+  </div>
+
+  <div id="pads" class="he-pads" role="group" aria-label="Hece yaprakları"></div>
+
+  <p class="he-hint">Hedef kelimenin hecelerini soldan sağa, doğru sırada seç. Yanlış seçim süreden 2 saniye yer; her tamamlanan kelime +3 saniye verir.</p>
+
+  <div id="overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Hece</h2>
+      <p id="overlay-msg">Türkçe kelimelerin hecelerini sırayla bul. 60 saniye!</p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
