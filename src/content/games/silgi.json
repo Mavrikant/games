@@ -1,0 +1,21 @@
+{
+  "title": "Silgi",
+  "description": "Dağınık noktaları dairesel silgiyle kaldır — her seviyede klik bütçen sınırlı.",
+  "dateAdded": "2026-06-22",
+  "tags": ["bulmaca", "strateji", "tıklama", "tek-oyunculu", "özgün"],
+  "controls": "Fare/dokunma: tıkla — silgi dairesini bastır · Boşluk/Enter: başlat · R: yeniden başla",
+  "thumbnail": "silgi.svg",
+  "howToPlay": "Silgi, alan-örtme (set-cover) sezgisini test eden minimal bir bulmacadır. Tahtada dağınık koyu noktalar belirir. Fareyle veya parmağınla tahtaya dokun — her dokunuş dokunduğun yerin etrafında sabit yarıçaplı bir silgi dairesi bastırır ve dairenin içinde kalan tüm noktaları aynı anda yok eder. Fareyi hareket ettirdiğinde silgi dairesinin önizlemesi takip eder; basmadan önce hangi noktaları temizleyeceğini görürsün. Hedef: tahtadaki bütün noktaları seviye için ayrılan klik bütçesi dolmadan temizlemek. Bütçe HUD'da 'Klik X/Y' biçiminde gösterilir — X bu seviyede şimdiye dek kullandığın klik, Y ise üst sınır. Bütçe tükenmeden son nokta da silinirse bir sonraki seviyeye geçersin; her yeni seviye daha çok nokta, sadece biraz daha fazla klik anlamına gelir. Bütçe dolup tahtada hâlâ nokta varsa oyun biter ve son tamamladığın seviye skorun olur. Kümeler rastgele yerleşir; iyi konum seçersen tek bir silgi bastırışıyla 4-5 noktayı birden kaldırabilirsin, kötü seçersen kenarda yalnız kalmış tek bir noktayı temizlemek için bir koca klik harcarsın. Klavye: Boşluk/Enter ile başlat; R ile baştan başla. Mobilde dokunma da aynı şekilde çalışır.",
+  "scoring": {
+    "storageKey": "silgi.best",
+    "label": "Seviye",
+    "direction": "higher",
+    "labelEn": "Level"
+  },
+  "en": {
+    "title": "Eraser",
+    "description": "Wipe scattered dots with a circular eraser — each level your click budget is tight.",
+    "controls": "Mouse/touch: tap — press the eraser circle · Space/Enter: start · R: restart",
+    "howToPlay": "Eraser is a minimal puzzle that tests your set-cover intuition. Dark dots scatter across the board. Tap anywhere with mouse or finger — each tap presses a fixed-radius eraser circle centered on the tap, removing every dot inside it at once. Moving the cursor previews the eraser circle so you can plan which dots a tap will catch. Goal: clear every dot before the level's click budget runs out. The HUD shows 'Clicks X/Y' — X is clicks used this level, Y the limit. Clear the last dot in budget and you advance; each new level adds more dots while the budget grows only slightly. Run out of budget with dots remaining and the game ends — your score is the last level you finished. Clusters are placed randomly: a well-aimed tap can wipe 4-5 dots at once, a careless one wastes a whole click on a single stray dot near the edge. Keyboard: Space/Enter to start, R to reset. Touch works the same way on mobile."
+  }
+}
