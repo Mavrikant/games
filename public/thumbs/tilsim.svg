@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tılsım">
+  <defs>
+    <radialGradient id="tlsBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1a1d2b"/>
+      <stop offset="70%" stop-color="#0a0c14"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="#0a0b0e"/>
+  <g transform="translate(160 104)">
+    <circle r="92" fill="url(#tlsBg)"/>
+    <!-- outer ring 8 wedges -->
+    <g transform="rotate(22)">
+      <path d="M 0 0 L 86 0 A 86 86 0 0 1 60.81 60.81 Z" fill="#ef4444"/>
+      <path d="M 0 0 L 60.81 60.81 A 86 86 0 0 1 0 86 Z" fill="#f97316"/>
+      <path d="M 0 0 L 0 86 A 86 86 0 0 1 -60.81 60.81 Z" fill="#eab308"/>
+      <path d="M 0 0 L -60.81 60.81 A 86 86 0 0 1 -86 0 Z" fill="#22c55e"/>
+      <path d="M 0 0 L -86 0 A 86 86 0 0 1 -60.81 -60.81 Z" fill="#06b6d4"/>
+      <path d="M 0 0 L -60.81 -60.81 A 86 86 0 0 1 0 -86 Z" fill="#3b82f6"/>
+      <path d="M 0 0 L 0 -86 A 86 86 0 0 1 60.81 -60.81 Z" fill="#a855f7"/>
+      <path d="M 0 0 L 60.81 -60.81 A 86 86 0 0 1 86 0 Z" fill="#ec4899"/>
+      <circle r="56" fill="#0a0c14"/>
+    </g>
+    <!-- middle ring 8 wedges, different rotation -->
+    <g transform="rotate(-35)">
+      <path d="M 0 0 L 56 0 A 56 56 0 0 1 39.6 39.6 Z" fill="#22c55e"/>
+      <path d="M 0 0 L 39.6 39.6 A 56 56 0 0 1 0 56 Z" fill="#06b6d4"/>
+      <path d="M 0 0 L 0 56 A 56 56 0 0 1 -39.6 39.6 Z" fill="#3b82f6"/>
+      <path d="M 0 0 L -39.6 39.6 A 56 56 0 0 1 -56 0 Z" fill="#a855f7"/>
+      <path d="M 0 0 L -56 0 A 56 56 0 0 1 -39.6 -39.6 Z" fill="#ec4899"/>
+      <path d="M 0 0 L -39.6 -39.6 A 56 56 0 0 1 0 -56 Z" fill="#ef4444"/>
+      <path d="M 0 0 L 0 -56 A 56 56 0 0 1 39.6 -39.6 Z" fill="#f97316"/>
+      <path d="M 0 0 L 39.6 -39.6 A 56 56 0 0 1 56 0 Z" fill="#eab308"/>
+      <circle r="32" fill="#0a0c14"/>
+    </g>
+    <!-- inner ring 8 wedges -->
+    <g transform="rotate(70)">
+      <path d="M 0 0 L 32 0 A 32 32 0 0 1 22.63 22.63 Z" fill="#ec4899"/>
+      <path d="M 0 0 L 22.63 22.63 A 32 32 0 0 1 0 32 Z" fill="#ef4444"/>
+      <path d="M 0 0 L 0 32 A 32 32 0 0 1 -22.63 22.63 Z" fill="#f97316"/>
+      <path d="M 0 0 L -22.63 22.63 A 32 32 0 0 1 -32 0 Z" fill="#eab308"/>
+      <path d="M 0 0 L -32 0 A 32 32 0 0 1 -22.63 -22.63 Z" fill="#22c55e"/>
+      <path d="M 0 0 L -22.63 -22.63 A 32 32 0 0 1 0 -32 Z" fill="#06b6d4"/>
+      <path d="M 0 0 L 0 -32 A 32 32 0 0 1 22.63 -22.63 Z" fill="#3b82f6"/>
+      <path d="M 0 0 L 22.63 -22.63 A 32 32 0 0 1 32 0 Z" fill="#a855f7"/>
+      <circle r="14" fill="#0a0c14" stroke="#2a2f36" stroke-width="2"/>
+    </g>
+    <!-- top arrow indicator -->
+    <polygon points="0,-100 -8,-112 8,-112" fill="#a78bfa"/>
+  </g>
+  <text x="20" y="32" font-family="ui-monospace, monospace" font-size="11" fill="#a78bfa">TILSIM</text>
+  <text x="20" y="46" font-family="ui-monospace, monospace" font-size="9" fill="#a78bfa" opacity="0.65">döndür · hizala</text>
+</svg>

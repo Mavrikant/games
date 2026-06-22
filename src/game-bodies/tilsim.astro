@@ -1,0 +1,36 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Hamle<span id="moves">0</span></div>
+  <div class="hud__score">Seviye<span id="level">1</span></div>
+  <div class="hud__score">Toplam<span id="total">0</span></div>
+  <div class="hud__score">En iyi<span id="best">—</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden</button>
+</header>
+
+<div class="ti-stage">
+  <div class="ti-board-wrap">
+    <canvas id="board" width="480" height="480" aria-label="Tılsım halka bulmacası"></canvas>
+    <div id="overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+      <div class="overlay__inner">
+        <h2 id="overlay-title">Tılsım</h2>
+        <p id="overlay-msg">Bir halka seç, ←/→ ile döndür. Aynı renkler tepe okunda hizalansın.</p>
+        <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ti-controls" aria-label="Halka kontrolleri">
+    <div class="ti-row">
+      <button class="ti-btn" data-act="ring-prev" type="button" aria-label="Önceki halka">◂ Halka</button>
+      <span id="ring-label" class="ti-label">Halka 1</span>
+      <button class="ti-btn" data-act="ring-next" type="button" aria-label="Sonraki halka">Halka ▸</button>
+    </div>
+    <div class="ti-row">
+      <button class="ti-btn ti-btn--accent" data-act="rotate-left" type="button" aria-label="Sola döndür">⟲ Sol</button>
+      <button class="ti-btn ti-btn--ghost" data-act="undo" type="button" aria-label="Geri al">↶ Geri</button>
+      <button class="ti-btn ti-btn--accent" data-act="rotate-right" type="button" aria-label="Sağa döndür">Sağ ⟳</button>
+    </div>
+  </div>
+</div>
