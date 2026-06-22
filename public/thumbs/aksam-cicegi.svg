@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Akşam Çiçeği">
+  <defs>
+    <linearGradient id="ac-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e1d" />
+      <stop offset="55%" stop-color="#1c1239" />
+      <stop offset="100%" stop-color="#2b1740" />
+    </linearGradient>
+    <radialGradient id="ac-moon" cx="0.82" cy="0.22" r="0.45">
+      <stop offset="0%" stop-color="#ffefcd" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ffefcd" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="ac-halo-open" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffc2ec" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#ffc2ec" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="ac-pink" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#ffd6ee" />
+      <stop offset="100%" stop-color="#d258a7" />
+    </radialGradient>
+    <radialGradient id="ac-violet" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#dccaff" />
+      <stop offset="100%" stop-color="#8a5cd6" />
+    </radialGradient>
+    <radialGradient id="ac-amber" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#fff0c2" />
+      <stop offset="100%" stop-color="#e3a445" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#ac-bg)" />
+  <rect width="320" height="200" fill="url(#ac-moon)" />
+
+  <!-- Stars -->
+  <g fill="#fff0c0" opacity="0.7">
+    <circle cx="32" cy="22" r="0.9" />
+    <circle cx="78" cy="14" r="0.7" />
+    <circle cx="120" cy="34" r="1.0" />
+    <circle cx="200" cy="18" r="0.6" />
+    <circle cx="250" cy="40" r="0.8" />
+    <circle cx="290" cy="60" r="0.7" />
+    <circle cx="48" cy="55" r="0.5" />
+    <circle cx="172" cy="50" r="0.6" />
+  </g>
+
+  <!-- Bud (closed) flower bottom-left -->
+  <g>
+    <line x1="56" y1="150" x2="56" y2="180" stroke="#3a8050" stroke-width="2.4" />
+    <ellipse cx="50" cy="166" rx="6" ry="2.6" fill="#3a8050" transform="rotate(-28 50 166)" />
+    <ellipse cx="62" cy="170" rx="6" ry="2.6" fill="#3a8050" transform="rotate(28 62 170)" />
+    <circle cx="56" cy="148" r="6.5" fill="#3a5a40" />
+    <ellipse cx="56" cy="146" rx="3.5" ry="2" fill="#5a8a60" opacity="0.85" />
+  </g>
+
+  <!-- Half-open flower middle-back -->
+  <g>
+    <line x1="116" y1="150" x2="116" y2="186" stroke="#3a8050" stroke-width="2.4" />
+    <ellipse cx="110" cy="170" rx="6" ry="2.6" fill="#3a8050" transform="rotate(-28 110 170)" />
+    <g transform="translate(116 142)">
+      <circle r="10" fill="url(#ac-violet)" opacity="0.85" />
+      <circle r="3" fill="#e3a445" />
+    </g>
+  </g>
+
+  <!-- Fully open flower center-back (hero) -->
+  <g>
+    <line x1="170" y1="130" x2="170" y2="190" stroke="#3a8050" stroke-width="2.6" />
+    <ellipse cx="162" cy="168" rx="7" ry="3.2" fill="#3a8050" transform="rotate(-28 162 168)" />
+    <ellipse cx="178" cy="170" rx="7" ry="3.2" fill="#3a8050" transform="rotate(28 178 170)" />
+    <circle cx="170" cy="118" r="34" fill="url(#ac-halo-open)" />
+    <g transform="translate(170 118)">
+      <g>
+        <ellipse cx="0" cy="-12" rx="10" ry="14" fill="url(#ac-pink)" />
+        <ellipse cx="11" cy="-3" rx="10" ry="14" fill="url(#ac-pink)" transform="rotate(72 11 -3)" />
+        <ellipse cx="7" cy="11" rx="10" ry="14" fill="url(#ac-pink)" transform="rotate(144 7 11)" />
+        <ellipse cx="-7" cy="11" rx="10" ry="14" fill="url(#ac-pink)" transform="rotate(216 -7 11)" />
+        <ellipse cx="-11" cy="-3" rx="10" ry="14" fill="url(#ac-pink)" transform="rotate(288 -11 -3)" />
+      </g>
+      <circle r="6.4" fill="url(#ac-amber)" />
+      <circle cy="-1.4" r="2.6" fill="#fff4c0" opacity="0.85" />
+    </g>
+  </g>
+
+  <!-- Half-open flower right -->
+  <g>
+    <line x1="228" y1="150" x2="228" y2="186" stroke="#3a8050" stroke-width="2.4" />
+    <ellipse cx="234" cy="170" rx="6" ry="2.6" fill="#3a8050" transform="rotate(28 234 170)" />
+    <g transform="translate(228 142)">
+      <circle r="11" fill="url(#ac-amber)" opacity="0.8" />
+      <circle r="3.2" fill="#e3a445" />
+    </g>
+  </g>
+
+  <!-- Bud right-most -->
+  <g>
+    <line x1="276" y1="150" x2="276" y2="180" stroke="#3a8050" stroke-width="2.4" />
+    <circle cx="276" cy="150" r="5.5" fill="#3a5a40" />
+    <ellipse cx="276" cy="148.5" rx="3" ry="1.6" fill="#5a8a60" opacity="0.85" />
+  </g>
+</svg>

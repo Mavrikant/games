@@ -1,0 +1,30 @@
+---
+---
+
+<header class="hud">
+  <div class="hud__score">Skor<span id="score">0</span></div>
+  <div class="hud__score">Rekor<span id="best">0</span></div>
+  <button id="restart" class="hud__btn" type="button">Yeniden başla</button>
+</header>
+<div class="board-wrap">
+  <canvas
+    id="board"
+    width="640"
+    height="480"
+    aria-label="Akşam çiçeği bahçesi tahtası"
+    role="img"></canvas>
+  <div class="timebar" aria-hidden="true">
+    <div id="timebar-fill" class="timebar__fill"></div>
+  </div>
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true">
+    <div class="overlay__inner">
+      <h2 id="overlay-title">Akşam Çiçeği</h2>
+      <p id="overlay-msg">
+        Çiçekler kendi ritimlerinde açıp kapanıyor. Sadece <strong>tam açıkken</strong> tıkla.<br
+        />
+        <span class="muted">+3 tam açık · −1 yarı açık · −2 tomurcuk · 60 saniye</span>
+      </p>
+      <button id="overlay-btn" class="hud__btn" type="button">Başla</button>
+    </div>
+  </div>
+</div>
