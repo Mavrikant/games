@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Çıngırak">
+  <defs>
+    <linearGradient id="cg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1422" />
+      <stop offset="100%" stop-color="#050a14" />
+    </linearGradient>
+    <linearGradient id="cg-bell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7a1818" />
+      <stop offset="100%" stop-color="#a82828" />
+    </linearGradient>
+    <linearGradient id="cg-halo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb47a" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ff7a50" stop-opacity="0.15" />
+    </linearGradient>
+    <radialGradient id="cg-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffe0a0" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#ffe0a0" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#cg-bg)" />
+
+  <!-- faint grid -->
+  <g stroke="#1a2a40" stroke-width="0.6" opacity="0.55">
+    <path d="M40 0V200 M80 0V200 M120 0V200 M160 0V200 M200 0V200 M240 0V200 M280 0V200" />
+    <path d="M0 40H320 M0 80H320 M0 120H320 M0 160H320" />
+  </g>
+
+  <!-- halo blobs around bells -->
+  <rect x="80" y="40" width="120" height="120" fill="url(#cg-halo)" rx="60" />
+  <rect x="160" y="80" width="120" height="120" fill="url(#cg-halo)" rx="60" />
+
+  <!-- player pawn (top) -->
+  <circle cx="160" cy="32" r="11" fill="#ffffff" />
+  <circle cx="160" cy="32" r="14" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="2" />
+
+  <!-- bells -->
+  <g transform="translate(140 100)">
+    <rect x="-18" y="-18" width="36" height="36" rx="8" fill="url(#cg-bell)" stroke="#ff8080" stroke-width="1.5" />
+    <text x="0" y="6" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#ffd166">◉</text>
+    <text x="13" y="-7" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#ffe9a8">2</text>
+  </g>
+
+  <g transform="translate(220 140)">
+    <rect x="-18" y="-18" width="36" height="36" rx="8" fill="url(#cg-bell)" stroke="#ff8080" stroke-width="1.5" />
+    <text x="0" y="6" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#ffd166">◉</text>
+    <text x="13" y="-7" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#ffe9a8">1</text>
+  </g>
+
+  <!-- goal flag bottom -->
+  <g transform="translate(80 170)">
+    <rect x="-16" y="-16" width="32" height="32" rx="6" fill="#3a4a18" stroke="#ffd166" stroke-width="2" />
+    <text x="0" y="6" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#ffd166">⚑</text>
+  </g>
+
+  <!-- title strip -->
+  <rect x="0" y="0" width="320" height="22" fill="#000000" opacity="0.45" />
+  <text x="14" y="15" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffd166" letter-spacing="1">ÇINGIRAK</text>
+</svg>
